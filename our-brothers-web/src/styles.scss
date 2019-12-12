@@ -1,0 +1,83 @@
+@font-face {
+  font-family: Arbel;
+  src: url(assets/fonts/Arbel-Bold_0.otf);
+}
+
+@font-face {
+  font-family: Heebo;
+  src: url(assets/fonts/Heebo-Regular.ttf);
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  direction: rtl;
+}
+
+body {
+  font-family: 'Heebo';
+  font-size: 18px;
+}
+
+.site-button {
+  font-family: 'Arbel';
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  cursor: pointer;
+}
+
+.site-hr {
+  background-color: rgb(219, 219, 219);
+  height: 1px;
+  width: calc(100% - 750px);
+  min-width: 570px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 70px;
+}
+
+.site-divider {
+  background-color: rgb(55, 135, 177);
+  width: 65px;
+  height: 2px;
+  margin: auto;
+  margin-bottom: 40px;
+}
+
+.small-heading {
+  font-size: 22px;
+  color: rgb(153, 153, 153);
+  text-align: center;
+  font-family: 'Arbel';
+  margin-bottom: 25px;
+}
+
+.medium-heading {
+  color: rgb(55, 135, 177);
+  font-size: 36px;
+  text-align: center;
+  font-family: 'Arbel';
+  letter-spacing: 5px;
+  margin-bottom: 50px;
+}
+
+.big-heading {
+  font-size: 71px;
+  font-family: Arbel;
+  color: rgb(0, 115, 109);
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.site-text {
+  text-align: center;
+  color: rgb(129, 129, 129);
+  width: 610px;
+  margin: auto;
+  line-height: 30px;
+}
