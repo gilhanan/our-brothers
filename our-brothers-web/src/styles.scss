@@ -15,11 +15,16 @@
   padding: 0;
   box-sizing: border-box;
   direction: rtl;
+  position: relative;
 }
 
 body {
   font-family: 'Heebo';
   font-size: 18px;
+}
+
+.card-container {
+  font-family: 'Arbel';
 }
 
 .site-button {
