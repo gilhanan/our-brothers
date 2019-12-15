@@ -34,6 +34,7 @@ body {
   align-items: center;
   color: white;
   cursor: pointer;
+  background-color: rgb(0, 160, 153);
 }
 
 .site-hr {
@@ -85,4 +86,55 @@ body {
   width: 610px;
   margin: auto;
   line-height: 30px;
+}
+
+.site-quote {
+  background-color: rgb(0, 160, 153);
+  padding: 110px 0 65px 0;
+  text-align: center;
+  font-size: 39px;
+  font-family: 'Arbel';
+  color: rgb(255, 255, 255);
+  line-height: 1.1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .site-quote-text {
+    width: 1000px;
+  }
+
+  &::before {
+    position: absolute;
+    content: '';
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 44px;
+    height: 32px;
+    background-image: url(assets/img/quote.png);
+  }
+}
+
+input.form-field,
+textarea.form-field {
+  border: 1px solid rgb(229, 229, 229);
+  background-color: rgb(255, 255, 255);
+  width: 375px;
+  height: 56px;
+  padding: 15px;
+  font-size: 18px;
+  font-family: 'Heebo';
+  color: black;
+}
+
+textarea.form-field {
+  width: 774px;
+  height: 233px;
+  resize: none;
+}
+
+.footer {
+  height: 100px;
+  box-shadow: 0px 20px 30px 30px #00000040;
 }

@@ -11,10 +11,47 @@
     ואותנטית. כל מפגש מכיל מינימום 15 אנשים, כאשר המארח מזמין מראש ויכול לאפשר אופציה גם לקהל נוסף להשתתף במפגש.
 </div>
 <div class="flip-cards">
-    <app-flip-card [frontImage]="'/assets/img/cardImgParticipant.png'" [frontTitle]="'אני רוצה להשתתף'">
+    <app-flip-card [frontImage]="'/assets/img/cardImgParticipant.png'" [frontTitle]="'אני רוצה להשתתף'"
+        [backText]="'מעוניין להתארח באחד המפגשים?'" [backButtonText]="'לפרטים נוספים'" [backButtonUrl]="">
     </app-flip-card>
-    <app-flip-card [frontImage]="'/assets/img/cardImgTeller.png'" [frontTitle]="'אני רוצה לספר'">
+    <app-flip-card [frontImage]="'/assets/img/cardImgTeller.png'" [frontTitle]="'אני רוצה לספר'"
+        [backText]="'אח/אחות שכולים? מעוניינים לספר את ספורכם האישי?'" [backButtonText]="'לפרטים נוספים'"
+        [backButtonUrl]="">
     </app-flip-card>
-    <app-flip-card [frontImage]="'/assets/img/cardImgHost.png'" [frontTitle]="'אני רוצה לארח'">
+    <app-flip-card [frontImage]="'/assets/img/cardImgHost.png'" [frontTitle]="'אני רוצה לארח'"
+        [backText]="'מעוניין לפתוח את ביתך ולארח מפגש?'" [backButtonText]="'לפרטים נוספים'" [backButtonUrl]="">
     </app-flip-card>
+</div>
+<div class="see-more">
+    <a>ראה עוד >></a>
+</div>
+<div class="site-quote mettings-quote">
+    <div class="site-quote-text">
+        המפגשים מאפשרים הצצה נדירה וייחודית להתמודדות האחים עם נפילת יקיריהם ומאפשרים לשמוע סיפור שמעלם לא סופר בצורה
+        נרחבת
+        ורשמית
+    </div>
+</div>
+<div class="mettings-gallery">
+    <div class="mettings-gallery-images">
+        <img src="../../../assets/img/gallery_right.png" alt="Metting Gallery Image 1">
+        <img src="../../../assets/img/gallery_left.png" alt="Metting Gallery Image 1">
+        <img src="../../../assets/img/gallery_bottom.png" alt="Metting Gallery Image 1">
+    </div>
+    <img src="../../../assets/img/gallery_top_right_circle.png" alt="" class="circle-top-right">
+    <img src="../../../assets/img/gallery_middle_left_circle.png" alt="" class="circle-middle-left">
+    <img src="../../../assets/img/gallery_bottom_right_circle.png" alt="" class="circle-bottom-right">
+</div>
+<div class="contact-form">
+    <div class="site-divider"></div>
+    <div class="small-heading our-brothers-heading">צור קשר</div>
+    <div class="medium-heading">הזכרון שלנו - השאירו פרטים</div>
+    <div class="contact-form-fields">
+        <input class="form-field" placeholder="שם פרטי*" />
+        <input class="form-field" placeholder="שם משפחה*" />
+        <input class="form-field" placeholder="טלפון*" />
+        <input class="form-field" placeholder="אימייל" />
+        <textarea class="form-field" placeholder="תוכן הודעה"></textarea>
+    </div>
+    <div class="site-button contact-send-button">שלח</div>
 </div>

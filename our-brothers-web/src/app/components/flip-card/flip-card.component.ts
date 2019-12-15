@@ -10,6 +10,7 @@ export class FlipCardComponent implements OnInit {
   @Input() frontTitle: string;
   @Input() backText: string;
   @Input() backButtonText: string;
+  @Input() backButtonUrl: string;
 
   constructor() {}
 

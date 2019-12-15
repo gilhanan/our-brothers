@@ -30,3 +30,97 @@
     margin-right: 33px;
   }
 }
+
+.see-more {
+  margin: 0 380px;
+  display: flex;
+  justify-content: flex-end;
+  font-size: 20px;
+  color: rgb(42, 47, 53);
+  text-decoration: underline;
+  margin-bottom: 70px;
+
+  a {
+    cursor: pointer;
+  }
+}
+
+.mettings-quote {
+  margin-bottom: 50px;
+}
+
+.mettings-gallery {
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: center;
+
+  .mettings-gallery-images {
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 50px;
+
+    img {
+      margin-left: 13px;
+      margin-right: 13px;
+      margin-bottom: 26px;
+      max-width: 100%;
+    }
+  }
+
+  .circle-top-right {
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%) translateX(515px);
+  }
+
+  .circle-middle-left {
+    position: absolute;
+    top: 210px;
+    z-index: -1;
+    left: 50%;
+    transform: translateX(-50%) translateX(-435px);
+  }
+
+  .circle-bottom-right {
+    position: absolute;
+    bottom: 55px;
+    z-index: -1;
+    left: 50%;
+    transform: translateX(-50%) translateX(420px);
+  }
+}
+
+.contact-form {
+  padding: 85px 0;
+  background-color: rgb(248, 248, 248);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .contact-form-fields {
+    width: 1000px;
+    padding: 0 50px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    .form-field {
+      margin-left: 15px;
+      margin-right: 15px;
+      margin-bottom: 25px;
+    }
+  }
+
+  .contact-send-button {
+    width: 250px;
+    height: 55px;
+    font-size: 36px;
+    font-family: 'Arbel';
+    margin-top: 15px;
+  }
+}
