@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "our-brothers"
+  },
+  "targets": {
+    "our-brothers": {
+      "hosting": {
+        "beta": [
+          "our-brothers-beta"
+        ]
+      }
+    }
+  }
+}

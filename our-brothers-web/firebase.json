@@ -1,0 +1,19 @@
+{
+  "hosting": [
+    {
+      "target": "beta",
+      "public": "dist/our-brothers-web",
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ],
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ]
+    }
+  ]
+}
