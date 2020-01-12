@@ -23,6 +23,10 @@ body {
   font-size: 18px;
 }
 
+.hidden {
+  visibility: hidden;
+}
+
 .card-container {
   font-family: 'Arbel';
 }
@@ -35,13 +39,18 @@ body {
   color: white;
   cursor: pointer;
   background-color: rgb(0, 160, 153);
+
+  &.disabled {
+    background-color: rgb(146, 177, 175);
+    cursor: auto;
+  }
 }
 
 .site-hr {
   background-color: rgb(219, 219, 219);
   height: 1px;
-  width: calc(100% - 750px);
-  min-width: 570px;
+  width: calc(100% - 20%);
+  max-width: 570px;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 70px;
@@ -61,6 +70,7 @@ body {
   text-align: center;
   font-family: 'Arbel';
   margin-bottom: 25px;
+  letter-spacing: 15px;
 }
 
 .medium-heading {
@@ -83,7 +93,8 @@ body {
 .site-text {
   text-align: center;
   color: rgb(129, 129, 129);
-  width: 610px;
+  max-width: 570px;
+  width: calc(100% - 20%);
   margin: auto;
   line-height: 30px;
 }
@@ -101,7 +112,10 @@ body {
   align-items: center;
 
   .site-quote-text {
-    width: 1000px;
+    max-width: 1000px;
+    width: 100%;
+    padding-left: 40px;
+    padding-right: 40px;
   }
 
   &::before {
@@ -120,18 +134,38 @@ input.form-field,
 textarea.form-field {
   border: 1px solid rgb(229, 229, 229);
   background-color: rgb(255, 255, 255);
-  width: 375px;
+  width: 100%;
+  max-width: 375px;
   height: 56px;
   padding: 15px;
   font-size: 18px;
   font-family: 'Heebo';
   color: black;
+
+  &.invalid {
+    border: 1px solid red;
+  }
 }
 
 textarea.form-field {
-  width: 774px;
+  width: 100%;
+  max-width: 774px;
   height: 233px;
   resize: none;
+}
+
+.flip-cards {
+  margin-top: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+
+  app-flip-card {
+    margin-bottom: 25px;
+    margin-left: 33px;
+    margin-right: 33px;
+  }
 }
 
 .footer {

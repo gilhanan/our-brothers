@@ -1,10 +1,12 @@
 <div class="slide-show">
+    <div class="slide-show-content">
 
+    </div>
 </div>
 <div class="heading-talking big-heading">מדברים <span class="talking-life">חיים</span></div>
 <div class="site-hr"></div>
 <div class="site-divider"></div>
-<div class="small-heading our-brothers-heading">האחים שלנו !</div>
+<div class="small-heading">האחים שלנו !</div>
 <div class="medium-heading">איך נראים המפגשים שלנו?</div>
 <div class="site-text">לקראת יום הזכרון, אחים ואחיות שכולים יספרו את סיפורם האישי והייחודי במקומות שונים: סלון הבית,
     תנועות נוער, ארגונים שונים, מוסדות חינוך וכו' וזאת במטרה לספק לקהל השומעים זווית ראיה מנקודתת מבט אישית
@@ -44,14 +46,17 @@
 </div>
 <div class="contact-form">
     <div class="site-divider"></div>
-    <div class="small-heading our-brothers-heading">צור קשר</div>
-    <div class="medium-heading">הזכרון שלנו - השאירו פרטים</div>
-    <div class="contact-form-fields">
-        <input class="form-field" placeholder="שם פרטי*" />
-        <input class="form-field" placeholder="שם משפחה*" />
-        <input class="form-field" placeholder="טלפון*" />
-        <input class="form-field" placeholder="אימייל" />
-        <textarea class="form-field" placeholder="תוכן הודעה"></textarea>
-    </div>
-    <div class="site-button contact-send-button">שלח</div>
+    <div class="small-heading">צור קשר</div>
+    <div class="medium-heading">השאירו פרטים</div>
+    <form [formGroup]="contactForm" class="contact-form-fields">
+        <input formControlName="firstName" class="form-field" placeholder="שם פרטי*"
+            [class.invalid]="!firstName.valid && firstName.touched" />
+        <input formControlName="lastName" class="form-field" placeholder="שם משפחה*"
+            [class.invalid]="!lastName.valid && lastName.touched" />
+        <input formControlName="phone" class="form-field" placeholder="טלפון*"
+            [class.invalid]="!phone.valid && phone.touched" />
+        <input formControlName="email" class="form-field" placeholder="אימייל" />
+        <textarea formControlName="message" class="form-field" placeholder="תוכן הודעה"></textarea>
+    </form>
+    <div class="site-button contact-send-button" [class.disabled]="!contactForm.valid">שלח</div>
 </div>

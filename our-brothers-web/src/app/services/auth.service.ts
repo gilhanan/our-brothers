@@ -3,12 +3,17 @@ import { Observable } from 'rxjs';
 import { auth } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 
+export enum UserType {
+  BROTHER,
+  GUEST,
+  HOST
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
-  constructor(public angularFireAuth: AngularFireAuth) { }
+  constructor(public angularFireAuth: AngularFireAuth) {}
 
   public getAuthState(): Observable<firebase.User> {
     return this.angularFireAuth.authState;
@@ -31,8 +36,7 @@ export class AuthService {
   private async socialSignIn(provider): Promise<auth.UserCredential> {
     try {
       return this.angularFireAuth.auth.signInWithPopup(provider);
-    }
-    catch (error) {
+    } catch (error) {
       console.log(error);
       throw error;
     }

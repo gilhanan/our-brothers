@@ -1,0 +1,58 @@
+<img
+  class="meetings-image-header"
+  src="../../../assets/img/meetingsHeader.png"
+  alt="Meetings Page Header Image"
+/>
+<div class="site-divider"></div>
+<div class="small-heading">האחים שלנו !</div>
+<div class="medium-heading">איך נראים המפגשים שלנו?</div>
+<div class="site-text">
+  ביום ראשון ה-05/05/2019 בשעה 20:00, ולקראת יום הזיכרון לחללי מערכות ישראל
+  ונפגעי פעולות האיבה, יתארחו אחים ואחיות שכולים במוקדים שונים ברחבי הארץ ויספרו
+  לנו את סיפורם שהוא בעצם - הסיפור של כולנו.
+  <br /><br />
+  אנחנו מזמינים אתכם לפתוח את ביתכם ולארח אח/ות שכולים ולשמוע את סיפורם - סיפור
+  של התמודדות, אהבה, חברות וכאב או להיות חלק מקהל השומעים ולתת מקום לזכרון
+  ולהנצחה ביום הזכרון הקרוב.
+  <br /><br />
+  ואם אתם אח/ות שכולים - תהיו הקול בעבור עצמכם ובעבור האחים שלכם, ספרו את
+  סיפורכם המשותף.
+</div>
+<div class="flip-cards">
+  <app-flip-card
+    [frontImage]="'/assets/img/cardImgParticipant.png'"
+    [frontTitle]="'אני רוצה להשתתף'"
+    [backText]="'מעוניין להתארח באחד המפגשים?'"
+    [backButtonText]="'לפרטים נוספים'"
+    [backButtonUrl]=""
+  >
+  </app-flip-card>
+  <app-flip-card
+    [frontImage]="'/assets/img/cardImgTeller.png'"
+    [frontTitle]="'אני רוצה לספר'"
+    [backText]="'אח/אחות שכולים? מעוניינים לספר את ספורכם האישי?'"
+    [backButtonText]="'לפרטים נוספים'"
+    [backButtonUrl]=""
+  >
+  </app-flip-card>
+  <app-flip-card
+    [frontImage]="'/assets/img/cardImgHost.png'"
+    [frontTitle]="'אני רוצה לארח'"
+    [backText]="'מעוניין לפתוח את ביתך ולארח מפגש?'"
+    [backButtonText]="'לפרטים נוספים'"
+    [backButtonUrl]=""
+  >
+  </app-flip-card>
+</div>
+
+<!-- Here is the start of the Meetings Component -->
+
+<div class="map-container">
+  <!-- This should be the inner map Component -->
+  <div class="map-content"></div>
+</div>
+<!-- This is the Meetings Table Component -->
+<!-- Please make it un-hardcoded -->
+<div class="meetings-list-container">
+  <app-meetings-list> </app-meetings-list>
+</div>

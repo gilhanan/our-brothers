@@ -3,36 +3,26 @@
   margin-right: 100px;
   margin-left: 100px;
   margin-top: 15px;
-  height: 880px;
-  background-image: url(../../../assets/img/slide1.png);
-  background-size: 100%;
+  padding-top: 44.56%;
   margin-bottom: 40px;
+
+  .slide-show-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(../../../assets/img/slide1.png);
+    background-size: cover;
+  }
 }
 
 .talking-life {
   color: rgb(55, 135, 177);
 }
 
-.our-brothers-heading {
-  letter-spacing: 15px;
-}
-
-.flip-cards {
-  margin-top: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-
-  app-flip-card {
-    margin-bottom: 25px;
-    margin-left: 33px;
-    margin-right: 33px;
-  }
-}
-
 .see-more {
-  margin: 0 380px;
+  // padding: 0 380px;
   display: flex;
   justify-content: flex-end;
   font-size: 20px;
@@ -42,6 +32,8 @@
 
   a {
     cursor: pointer;
+    min-width: 100px;
+    margin-left: 200px;
   }
 }
 
@@ -53,6 +45,7 @@
   margin-bottom: 50px;
   display: flex;
   justify-content: center;
+  overflow: hidden;
 
   .mettings-gallery-images {
     max-width: 1200px;
@@ -103,7 +96,8 @@
   align-items: center;
 
   .contact-form-fields {
-    width: 1000px;
+    max-width: 1000px;
+    width: calc(100% - 50px);
     padding: 0 50px;
     display: flex;
     justify-content: center;

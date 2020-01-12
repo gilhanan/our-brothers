@@ -1,0 +1,31 @@
+.meetings-image-header {
+  width: 100%;
+  border-bottom: solid rgb(0, 160, 153) 6px;
+  margin-bottom: 123px;
+}
+
+.map-container {
+  margin-top: 80px;
+  width: calc(100% - 200px);
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 51.4%;
+  background-color: red;
+  margin-bottom: 84px;
+
+  .map-content {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
+.meetings-list-container {
+  max-width: calc(100% - 200px);
+  width: 1170px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 85px;
+}
