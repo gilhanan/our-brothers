@@ -11,6 +11,8 @@
   },
   "private": true,
   "dependencies": {
+    "@agm/core": "~1.1.0",
+    "@agm/js-marker-clusterer": "^1.1.0",
     "@angular/animations": "~8.2.14",
     "@angular/common": "~8.2.14",
     "@angular/compiler": "~8.2.14",

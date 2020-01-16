@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AgmCoreModule } from '@agm/core';
 
 import { environment } from '../environments/environment';
 
@@ -17,6 +18,7 @@ import { AccountPageComponent } from './account-page/account-page.component';
 import { MeetingsPageComponent } from './pages/meetings-page/meetings-page.component';
 import { MeetingsListComponent } from './components/meetings-list/meetings-list.component';
 import { LoginComponent } from './components/login/login.component';
+import { MeetingsMapComponent } from './components/meetings-map/meetings-map.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { LoginComponent } from './components/login/login.component';
     AccountPageComponent,
     MeetingsPageComponent,
     MeetingsListComponent,
-    LoginComponent
+    LoginComponent,
+    MeetingsMapComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,12 @@ import { LoginComponent } from './components/login/login.component';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBIQyGmuHzizv-MNxX4plVBLoErVopOEiE',
+      language: 'iw',
+      libraries: ['places']
+    }),
   ],
   providers: [AuthService, DataService],
   bootstrap: [AppComponent]

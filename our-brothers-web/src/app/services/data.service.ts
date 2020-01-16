@@ -3,13 +3,15 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable, of, from, throwError } from 'rxjs';
 import { switchMap, tap, map, catchError } from 'rxjs/operators';
 
-import { User } from '../model';
+import { User, Meeting } from '../model';
 import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
+
+  memorialYear = 2019;
 
   constructor(
     private angularFireDatabase: AngularFireDatabase,
@@ -51,6 +53,15 @@ export class DataService {
           console.log(error);
           return throwError(error);
         })
+      );
+  }
+
+  public getMeetings(year = this.memorialYear): Observable<Meeting[]> {
+    return this.angularFireDatabase
+      .list<Meeting>(`events/${year}`)
+      .snapshotChanges()
+      .pipe(
+        map((events) => events.slice(-100).map((event) => ({ id: event.key, year, ...event.payload.val() }))), // TODO: Remove .slice(-100) (Used for faster development)
       );
   }
 }

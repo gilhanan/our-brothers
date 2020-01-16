@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Meeting } from '../../model';
+import { DataService } from '../../services/data.service';
+
 @Component({
   selector: 'app-meetings-page',
   templateUrl: './meetings-page.component.html',
@@ -7,9 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MeetingsPageComponent implements OnInit {
 
-  constructor() { }
+  meetings: Meeting[];
+
+  constructor(
+    private dataService: DataService
+  ) { }
 
   ngOnInit() {
+    this.dataService.getMeetings()
+      .subscribe((meetings) => {
+        this.meetings = meetings;
+      });
   }
-
 }
