@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
@@ -45,7 +45,11 @@ import { MeetingsMapComponent } from './components/meetings-map/meetings-map.com
       libraries: ['places']
     }),
   ],
-  providers: [AuthService, DataService],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'he-IL' },
+    AuthService,
+    DataService
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
