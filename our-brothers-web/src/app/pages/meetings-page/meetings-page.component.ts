@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Meeting } from '../../model';
 import { DataService } from '../../services/data.service';
+import { ViewOptions } from 'src/app/components/view-toggle/view-toggle.component';
 
 @Component({
   selector: 'app-meetings-page',
@@ -10,6 +11,7 @@ import { DataService } from '../../services/data.service';
 })
 export class MeetingsPageComponent implements OnInit {
 
+  view: ViewOptions = 'list';
   meetings: Meeting[];
 
   constructor(

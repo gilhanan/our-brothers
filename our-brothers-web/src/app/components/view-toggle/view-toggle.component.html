@@ -1,0 +1,4 @@
+<div class="view-toggle-container">
+  <div [ngClass]="{'view-button': true, 'active': view === 'map'}" (click)="viewChange.emit('map')">מפה</div>
+  <div [ngClass]="{'view-button': true, 'active': view === 'list'}" (click)="viewChange.emit('list')">טבלה</div>
+</div>

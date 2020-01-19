@@ -1,0 +1,19 @@
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ViewOptions } from '../view-toggle/view-toggle.component';
+
+@Component({
+  selector: 'app-meetings-filters',
+  templateUrl: './meetings-filters.component.html',
+  styleUrls: ['./meetings-filters.component.scss']
+})
+export class MeetingsFiltersComponent implements OnInit {
+
+  @Input() view: ViewOptions;
+  @Output() viewChange = new EventEmitter<ViewOptions>();
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}

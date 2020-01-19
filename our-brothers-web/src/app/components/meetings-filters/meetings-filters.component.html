@@ -1,0 +1,13 @@
+<div class="search-bar">
+  <input class="search-input" placeholder="מילת חיפוש" />
+  <div class="search-button">חפש</div>
+</div>
+<div class="filter-header">סנן לפי:</div>
+<div class="filters-bar">
+  <div class="filter-select"></div>
+  <div class="filter-select"></div>
+  <div class="filter-select"></div>
+  <div class="filter-select"></div>
+  <div class="filter-select"></div>
+  <app-view-toggle [view]="view" (viewChange)="viewChange.emit($event)"></app-view-toggle>
+</div>

@@ -45,14 +45,18 @@
   </app-flip-card>
 </div>
 
-<!-- Here is the start of the Meetings Component -->
+<div class="meetings-filters-container">
+  <app-meetings-filters [(view)]="view"></app-meetings-filters>
+</div>
 
-<div class="map-container">
-  <!-- This should be the inner map Component -->
-  <app-meetings-map [meetings]="meetings"></app-meetings-map>
-</div>
-<!-- This is the Meetings Table Component -->
-<!-- Please make it un-hardcoded -->
-<div class="meetings-list-container">
-  <app-meetings-list> </app-meetings-list>
-</div>
+<ng-template [ngIf]="view === 'map'" [ngIfElse]="meetingsList">
+  <div class="map-container">
+    <app-meetings-map [meetings]="meetings"></app-meetings-map>
+  </div>
+</ng-template>
+
+<ng-template #meetingsList>
+  <div class="meetings-list-container">
+    <app-meetings-list> </app-meetings-list>
+  </div>
+</ng-template>

@@ -4,6 +4,14 @@
   margin-bottom: 123px;
 }
 
+.meetings-filters-container {
+  max-width: calc(100% - 200px);
+  width: 1170px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 85px;
+}
+
 .map-container {
   margin-top: 80px;
   width: calc(100% - 200px);
@@ -11,14 +19,6 @@
   margin-right: auto;
   padding-top: 51.4%;
   margin-bottom: 84px;
-
-  .map-content {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
 }
 
 .meetings-list-container {
