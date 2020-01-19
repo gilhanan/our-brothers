@@ -1,79 +1,90 @@
 :host {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: unset;
 
-    .container {
-        font-family: "Arbel";
-        font-size: 22px;
-        text-align: center;
-        border-radius: 10px;
-        border: 10px solid rgb(255, 255, 255);
+    .blocker {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1;
 
-        .stages {
-            width: 360px;
-            padding: 30px 25px;
-            background-color: rgb(255, 255, 255);
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
 
-            .title {
-                color: rgb(0, 160, 153);
-                letter-spacing: 5px;
-            }
+            font-family: "Arbel";
+            font-size: 22px;
+            text-align: center;
+            border-radius: 10px;
+            border: 10px solid rgb(255, 255, 255);
 
-            .stage {
-                margin-top: 20px;
-                color: rgb(129, 129, 129);
-                letter-spacing: 5px;
-            }
-        }
-
-        .indicators {
-            margin-top: 20px;
-
-            .next,
-            .previous {
-                cursor: pointer;
-                position: absolute;
-                color: rgb(129, 129, 129);
-                font-size: 17px;
-                letter-spacing: 1px;
-                border-bottom: 1px solid rgb(129, 129, 129);
-            }
-
-            .next {
-                left: 15px;
-            }
-
-            .previous {
-                right: 15px;
-            }
-
-            .indicator {
-                display: inline-block;
-                width: 10px;
-                height: 10px;
-                margin: 0 5px;
-                border: 1px solid rgb(0, 160, 153);
-                border-radius: 50%;
+            .stages {
+                width: 360px;
+                padding: 30px 25px;
                 background-color: rgb(255, 255, 255);
 
-                &.active {
-                    background-color: rgb(0, 160, 153);
+                .title {
+                    color: rgb(0, 160, 153);
+                    letter-spacing: 5px;
+                }
+
+                .stage {
+                    margin-top: 20px;
+                    color: rgb(129, 129, 129);
+                    letter-spacing: 5px;
                 }
             }
-        }
 
-        .start-button {
-            cursor: pointer;
-            padding: 5px 40px;
-            position: absolute;
-            bottom: -75px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: rgb(255, 255, 255);
-            background-color: rgb(0, 160, 153);
-            letter-spacing: 5px;
+            .indicators {
+                margin-top: 20px;
+
+                .next,
+                .previous {
+                    cursor: pointer;
+                    position: absolute;
+                    color: rgb(129, 129, 129);
+                    font-size: 17px;
+                    letter-spacing: 1px;
+                    border-bottom: 1px solid rgb(129, 129, 129);
+                }
+
+                .next {
+                    left: 15px;
+                }
+
+                .previous {
+                    right: 15px;
+                }
+
+                .indicator {
+                    display: inline-block;
+                    width: 10px;
+                    height: 10px;
+                    margin: 0 5px;
+                    border: 1px solid rgb(0, 160, 153);
+                    border-radius: 50%;
+                    background-color: rgb(255, 255, 255);
+
+                    &.active {
+                        background-color: rgb(0, 160, 153);
+                    }
+                }
+            }
+
+            .start-button {
+                cursor: pointer;
+                padding: 5px 40px;
+                position: absolute;
+                bottom: -75px;
+                left: 50%;
+                transform: translateX(-50%);
+                color: rgb(255, 255, 255);
+                background-color: rgb(0, 160, 153);
+                letter-spacing: 5px;
+            }
         }
     }
 }

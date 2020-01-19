@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-type GuideStage = 'first' | 'second' | 'third';
-
 @Component({
   selector: 'app-meetings-map-guide',
   templateUrl: './meetings-map-guide.component.html',
