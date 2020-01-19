@@ -2,8 +2,7 @@
   טוען..
 </div>
 <agm-map class="map" [latitude]="mapLatitude" [longitude]="mapLongitude" [zoom]="mapZoom" [minZoom]="7"
-  [restriction]="restriction"
-  [gestureHandling]="'cooperative'">
+  [restriction]="restriction" [gestureHandling]="'cooperative'">
   <ng-template ngFor let-event [ngForOf]="meetings" let-i="index" [ngForTrackBy]="trackByFn">
     <agm-marker [latitude]="event.address.latitude" [longitude]="event.address.longitude" [label]="''"
       [markerDraggable]="false">
@@ -22,3 +21,4 @@
     </agm-marker>
   </ng-template>
 </agm-map>
+<app-meetings-map-guide></app-meetings-map-guide>

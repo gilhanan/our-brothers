@@ -21,6 +21,7 @@ import { LoginComponent } from './components/login/login.component';
 import { MeetingsMapComponent } from './components/meetings-map/meetings-map.component';
 import { ViewToggleComponent } from './components/view-toggle/view-toggle.component';
 import { MeetingsFiltersComponent } from './components/meetings-filters/meetings-filters.component';
+import { MeetingsMapGuideComponent } from './components/meetings-map-guide/meetings-map-guide.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { MeetingsFiltersComponent } from './components/meetings-filters/meetings
     LoginComponent,
     MeetingsMapComponent,
     ViewToggleComponent,
-    MeetingsFiltersComponent
+    MeetingsFiltersComponent,
+    MeetingsMapGuideComponent
   ],
   imports: [
     BrowserModule,

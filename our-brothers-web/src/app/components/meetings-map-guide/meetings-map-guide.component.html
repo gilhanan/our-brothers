@@ -1,0 +1,16 @@
+<div class="container" *ngIf="!started">
+  <div class="stages">
+    <div class="title">
+      לפניך מפה של המקומות בהם מתקיימים מפגשים:
+    </div>
+    <div class="stage">
+      {{stages[stage]}}
+    </div>
+    <div class="indicators">
+      <div class="next" *ngIf="stage < stages.length - 1" (click)="next()">הבא >></div>
+      <div class="previous" *ngIf="stage > 0" (click)="prev()"><< הקודם</div>
+      <div *ngFor="let item of stages; index as i" [ngClass]="{'indicator': true, 'active': i === stage}"></div>
+    </div>
+  </div>
+  <div class="start-button" (click)="started = true;">התחל</div>
+</div>
