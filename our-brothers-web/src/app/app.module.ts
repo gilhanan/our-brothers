@@ -5,6 +5,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AgmCoreModule } from '@agm/core';
+import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 
 import { environment } from '../environments/environment';
 
@@ -22,6 +23,8 @@ import { MeetingsMapComponent } from './components/meetings-map/meetings-map.com
 import { ViewToggleComponent } from './components/view-toggle/view-toggle.component';
 import { MeetingsFiltersComponent } from './components/meetings-filters/meetings-filters.component';
 import { MeetingsMapGuideComponent } from './components/meetings-map-guide/meetings-map-guide.component';
+import { MeetingsMapLegendComponent } from './components/meetings-map-legend/meetings-map-legend.component';
+import { MeetingsMapMeetingComponent } from './components/meetings-map-meeting/meetings-map-meeting.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,9 @@ import { MeetingsMapGuideComponent } from './components/meetings-map-guide/meeti
     MeetingsMapComponent,
     ViewToggleComponent,
     MeetingsFiltersComponent,
-    MeetingsMapGuideComponent
+    MeetingsMapGuideComponent,
+    MeetingsMapLegendComponent,
+    MeetingsMapMeetingComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +55,7 @@ import { MeetingsMapGuideComponent } from './components/meetings-map-guide/meeti
       language: 'iw',
       libraries: ['places']
     }),
+    AgmJsMarkerClustererModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'he-IL' },

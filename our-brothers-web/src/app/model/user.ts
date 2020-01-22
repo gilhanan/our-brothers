@@ -3,6 +3,7 @@ import { ParticipateParticipation, HostParticipation, BereavedParticipation } fr
 export interface User {
   id?: string;
   profile?: UserProfile;
+  role?: UserRole;
   photoURL?: string;
   isAdmin?: boolean;
   participateParticipation?: UserParticipation<ParticipateParticipation>;
@@ -15,6 +16,12 @@ export interface UserProfile {
   lastName: string;
   phoneNumber?: string;
   email?: string;
+}
+
+export enum UserRole {
+  bereaved = 'bereaved',
+  participate = 'participate',
+  host = 'host'
 }
 
 export interface UserParticipation<T> {

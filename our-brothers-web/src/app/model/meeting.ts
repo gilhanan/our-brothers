@@ -15,7 +15,7 @@ export interface Meeting {
   accessibility: boolean;
   media: boolean;
   reviewable: boolean;
-  audience?: string[];
+  audience?: MeetingAudience[];
 }
 
 export interface MeetingAddress {
@@ -23,4 +23,22 @@ export interface MeetingAddress {
   longitude: number;
   formattedAddress: string;
   notes?: string;
+}
+
+export enum MeetingAudience {
+  all = "all",
+  schoolStudents = "schoolStudents",
+  youthMovement = "youthMovement",
+  militaryPreparation = "militaryPreparation",
+  soldiers = "soldiers",
+  students = "students"
+}
+
+export const MeetingAudienceLabels: {[audience in MeetingAudience]: string} = {
+  all: 'כולם',
+  schoolStudents: 'תלמידים',
+  youthMovement: 'תנועות נוער',
+  militaryPreparation: 'מכינות',
+  soldiers: 'חיילים',
+  students: 'סטודנטים'
 }

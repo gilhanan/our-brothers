@@ -1,24 +1,21 @@
 <div *ngIf="!meetings" class="loading">
   טוען..
 </div>
-<app-meetings-map-guide></app-meetings-map-guide>
+<app-meetings-map-legend *ngIf="meetings"></app-meetings-map-legend>
+<app-meetings-map-guide *ngIf="meetings"></app-meetings-map-guide>
 <agm-map class="map" [latitude]="mapLatitude" [longitude]="mapLongitude" [zoom]="mapZoom" [minZoom]="7"
   [restriction]="restriction" [gestureHandling]="'cooperative'">
-  <ng-template ngFor let-event [ngForOf]="meetings" let-i="index" [ngForTrackBy]="trackByFn">
-    <agm-marker [latitude]="event.address.latitude" [longitude]="event.address.longitude" [label]="''"
-      [markerDraggable]="false">
-      <agm-info-window #infoWindow>
-        <div>
-          <div>
-            <strong>כותרת: </strong>
-            <span>{{event.title}}</span>
-          </div>
-          <div>
-            <strong>כתובת: </strong>
-            <span>{{event.address.formattedAddress}}</span>
-          </div>
-        </div>
-      </agm-info-window>
-    </agm-marker>
-  </ng-template>
+  <agm-marker-cluster [styles]="[{url:'/assets/img/map/meetings-map-cluster.svg',width:50,height:50,backgroundPosition:'0 5px'},
+{url:'/assets/img/map/meetings-map-cluster.svg',width:75,height:75,backgroundPosition:'0 8px'},
+{url:'/assets/img/map/meetings-map-cluster.svg',width:100,height:100,backgroundPosition:'0 11px'}]">
+    <ng-template ngFor let-meeting [ngForOf]="meetings" let-i="index" [ngForTrackBy]="trackByFn">
+      <agm-marker [latitude]="meeting.address.latitude" [longitude]="meeting.address.longitude" [label]="''"
+        [iconUrl]='{"url": getMeetingIconUrl(meeting),"scaledSize": {"height": 40, "width": 40}}'
+        [markerDraggable]="false" (markerClick)="lastOpenMarker?.close(); lastOpenMarker = infoWindow">
+        <agm-info-window #infoWindow>
+          <app-meetings-map-meeting [meeting]="meeting"></app-meetings-map-meeting>
+        </agm-info-window>
+      </agm-marker>
+    </ng-template>
+  </agm-marker-cluster>
 </agm-map>
