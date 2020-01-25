@@ -61,7 +61,23 @@ export class DataService {
       .list<Meeting>(`events/${year}`)
       .snapshotChanges()
       .pipe(
-        map((events) => events.map((event) => ({ id: event.key, year, ...event.payload.val() })))
+        map((events) => events
+          .slice(0, 50)
+          .map((event) => ({ id: event.key, year, ...event.payload.val() }))
+          .map((event) => {
+            if (event.bereaveds) {
+              event.bereaveds = Array.from(Object.entries(event.bereaveds))
+                .map((bereaved) => {
+                  if (bereaved[1].slain) {
+                    bereaved[1].slain = Array
+                      .from(Object.entries(bereaved[1].slain))
+                      .map((slain) => Object.assign(slain[1], { id: slain[0] }));
+                  }
+                  return Object.assign(bereaved[1], { id: bereaved[0] });
+                });
+            }
+            return event;
+          }))
       );
   }
 }

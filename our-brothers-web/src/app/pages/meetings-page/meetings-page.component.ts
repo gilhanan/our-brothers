@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
-import { Meeting } from '../../model';
 import { DataService } from '../../services/data.service';
 import { ViewOptions } from 'src/app/components/view-toggle/view-toggle.component';
 
@@ -9,19 +8,14 @@ import { ViewOptions } from 'src/app/components/view-toggle/view-toggle.componen
   templateUrl: './meetings-page.component.html',
   styleUrls: ['./meetings-page.component.scss']
 })
-export class MeetingsPageComponent implements OnInit {
+export class MeetingsPageComponent {
 
   view: ViewOptions = 'list';
-  meetings: Meeting[];
+  user$ = this.dataService.getCurrentUser();
+  meetings$ = this.dataService.getMeetings();
+
 
   constructor(
     private dataService: DataService
   ) { }
-
-  ngOnInit() {
-    this.dataService.getMeetings()
-      .subscribe((meetings) => {
-        this.meetings = meetings;
-      });
-  }
 }

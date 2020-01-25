@@ -9,11 +9,23 @@
     </div>
     <div class="row">
       <strong>כמות משתתפים: </strong>
-      <span>{{meeting.count}}</span>
+      <span>{{meeting.capacity}}</span>
     </div>
     <div class="row" *ngIf="meeting.audience?.length">
       <strong>קהל יעד: </strong>
       <span>{{getAudienceLabel(meeting.audience)}}</span>
+    </div>
+    <div *ngFor="let bereaved of meeting.bereaveds">
+      <div class="row">
+        <strong>שם האח/ות: </strong>
+        <span>{{bereaved.firstName + ' ' + bereaved.lastName}}</span>
+      </div>
+      <div *ngFor="let slain of bereaved.slain">
+        <div class="row">
+          <strong>שם החלל: </strong>
+          <span>{{slain.firstName + ' ' + slain.lastName + ' ז"ל'}}</span>
+        </div>
+      </div>
     </div>
   </div>
 </div>

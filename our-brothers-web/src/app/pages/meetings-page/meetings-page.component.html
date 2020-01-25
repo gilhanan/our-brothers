@@ -51,7 +51,7 @@
 
 <ng-template [ngIf]="view === 'map'" [ngIfElse]="meetingsList">
   <div class="map-container">
-    <app-meetings-map [meetings]="meetings"></app-meetings-map>
+    <app-meetings-map [user]="user$ | async" [meetings]="meetings$ | async"></app-meetings-map>
   </div>
 </ng-template>
 

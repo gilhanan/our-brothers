@@ -1,7 +1,7 @@
 <div *ngIf="!meetings" class="loading">
   טוען..
 </div>
-<app-meetings-map-legend *ngIf="meetings"></app-meetings-map-legend>
+<app-meetings-map-legend *ngIf="meetings" [user]="user"></app-meetings-map-legend>
 <app-meetings-map-guide *ngIf="meetings"></app-meetings-map-guide>
 <agm-map class="map" [latitude]="mapLatitude" [longitude]="mapLongitude" [zoom]="mapZoom" [minZoom]="7"
   [restriction]="restriction" [gestureHandling]="'cooperative'">
