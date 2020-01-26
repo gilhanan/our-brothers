@@ -1,136 +1,26 @@
-<div class="meeting-item">
-    <div class="meeting-item-col meeting-name">משפחת מנור</div>
-    <div class="meeting-item-col meeting-address">שדרות ירושלים 8, חולון</div>
+<cdk-virtual-scroll-viewport itemSize="50" class="meeting-list">
+  <div class="meeting-item" *ngFor="let meeting of meetings">
+    <div class="meeting-item-col meeting-name">{{meeting.title}}</div>
+    <div class="meeting-item-col meeting-address">{{meeting.address.formattedAddress}}</div>
     <div class="meeting-item-col meeting-date">
-        <div class="meeting-date-text">
-            03.04.2019
-        </div>
+      <div class="meeting-date-text">
+        03.04.2019
+      </div>
     </div>
-    <div class="meeting-item-col meeting-participant">כמות משתתפים: 7/30</div>
-    <div class="meeting-item-col meeting-brother">אח/ות: ____________</div>
+    <div class="meeting-item-col meeting-participant">
+      <span class="meeting-label">כמות משתתפים: </span>
+      <span>{{meeting.capacity}}</span>
+    </div>
+    <div class="meeting-item-col meeting-bereaved">
+      <span class="meeting-label">אח/ות: </span>
+      <span *ngFor="let bereaved of meeting.bereaveds">
+        {{bereaved.firstName + ' ' + bereaved.lastName}}
+      </span>
+    </div>
     <div class="meeting-item-col meeting-button">
-        <div class="join-button">
-            שיבוץ
-        </div>
+      <div class="join-button">
+        שיבוץ
+      </div>
     </div>
-</div>
-<div class="meeting-item-line"></div>
-<div class="meeting-item">
-    <div class="meeting-item-col meeting-name">משפחת כהן</div>
-    <div class="meeting-item-col meeting-address">יוחנן הסנדלר, 42, ראשון לציון</div>
-    <div class="meeting-item-col meeting-date">
-        <div class="meeting-date-text">
-            03.04.2019
-        </div>
-    </div>
-    <div class="meeting-item-col meeting-participant">מוזמנים בלבד (35)</div>
-    <div class="meeting-item-col meeting-brother">אח/ות: אורית שטרק הראל</div>
-    <div class="meeting-item-col meeting-button">
-        <div class="join-button">
-            שיבוץ
-        </div>
-    </div>
-</div>
-<div class="meeting-item-line"></div>
-<div class="meeting-item">
-    <div class="meeting-item-col meeting-name">משפחת אלחרר</div>
-    <div class="meeting-item-col meeting-address">שדרות ירושלים 8, חולון</div>
-    <div class="meeting-item-col meeting-date">
-        <div class="meeting-date-text">
-            03.04.2019
-        </div>
-    </div>
-    <div class="meeting-item-col meeting-participant">כמות משתתפים: 7/30</div>
-    <div class="meeting-item-col meeting-brother">אח/ות: ____________</div>
-    <div class="meeting-item-col meeting-button">
-        <div class="join-button">
-            שיבוץ
-        </div>
-    </div>
-</div>
-<div class="meeting-item-line"></div>
-<div class="meeting-item">
-    <div class="meeting-item-col meeting-name">משפחת רבינוביץ</div>
-    <div class="meeting-item-col meeting-address">שדרות ירושלים 8, חולון</div>
-    <div class="meeting-item-col meeting-date">
-        <div class="meeting-date-text">
-            03.04.2019
-        </div>
-    </div>
-    <div class="meeting-item-col meeting-participant">מוזמנים בלבד (35)</div>
-    <div class="meeting-item-col meeting-brother">אח/ות: ____________</div>
-    <div class="meeting-item-col meeting-button">
-        <div class="join-button">
-            שיבוץ
-        </div>
-    </div>
-</div>
-<div class="meeting-item-line"></div>
-<div class="meeting-item">
-    <div class="meeting-item-col meeting-name">משפחת מנור</div>
-    <div class="meeting-item-col meeting-address">שדרות ירושלים 8, חולון</div>
-    <div class="meeting-item-col meeting-date">
-        <div class="meeting-date-text">
-            03.04.2019
-        </div>
-    </div>
-    <div class="meeting-item-col meeting-participant">כמות משתתפים: 7/30</div>
-    <div class="meeting-item-col meeting-brother">אח/ות: ____________</div>
-    <div class="meeting-item-col meeting-button">
-        <div class="join-button">
-            שיבוץ
-        </div>
-    </div>
-</div>
-<div class="meeting-item-line"></div>
-<div class="meeting-item">
-    <div class="meeting-item-col meeting-name">משפחת כהן</div>
-    <div class="meeting-item-col meeting-address">יוחנן הסנדלר, 42, ראשון לציון</div>
-    <div class="meeting-item-col meeting-date">
-        <div class="meeting-date-text">
-            03.04.2019
-        </div>
-    </div>
-    <div class="meeting-item-col meeting-participant">מוזמנים בלבד (35)</div>
-    <div class="meeting-item-col meeting-brother">אח/ות: אורית שטרק הראל</div>
-    <div class="meeting-item-col meeting-button">
-        <div class="join-button">
-            שיבוץ
-        </div>
-    </div>
-</div>
-<div class="meeting-item-line"></div>
-<div class="meeting-item">
-    <div class="meeting-item-col meeting-name">משפחת אלחרר</div>
-    <div class="meeting-item-col meeting-address">שדרות ירושלים 8, חולון</div>
-    <div class="meeting-item-col meeting-date">
-        <div class="meeting-date-text">
-            03.04.2019
-        </div>
-    </div>
-    <div class="meeting-item-col meeting-participant">כמות משתתפים: 7/30</div>
-    <div class="meeting-item-col meeting-brother">אח/ות: ____________</div>
-    <div class="meeting-item-col meeting-button">
-        <div class="join-button">
-            שיבוץ
-        </div>
-    </div>
-</div>
-<div class="meeting-item-line"></div>
-<div class="meeting-item">
-    <div class="meeting-item-col meeting-name">משפחת רבינוביץ</div>
-    <div class="meeting-item-col meeting-address">שדרות ירושלים 8, חולון</div>
-    <div class="meeting-item-col meeting-date">
-        <div class="meeting-date-text">
-            03.04.2019
-        </div>
-    </div>
-    <div class="meeting-item-col meeting-participant">מוזמנים בלבד (35)</div>
-    <div class="meeting-item-col meeting-brother">אח/ות: ____________</div>
-    <div class="meeting-item-col meeting-button">
-        <div class="join-button">
-            שיבוץ
-        </div>
-    </div>
-</div>
-<div class="meeting-item-line"></div>
+  </div>
+</cdk-virtual-scroll-viewport>
