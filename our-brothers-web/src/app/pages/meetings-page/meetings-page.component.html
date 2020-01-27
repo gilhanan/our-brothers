@@ -28,18 +28,18 @@
 </div>
 
 <div class="meetings-filters-container">
-  <app-meetings-filters [(view)]="view"></app-meetings-filters>
+  <app-meetings-filters [(view)]="view" (filterChange)="filterMeetings($event)"></app-meetings-filters>
 </div>
 
 <div class="meetings-container">
-  <div *ngIf="!(meetings$ | async)?.length" class="loading">
+  <div *ngIf="!meetings?.length" class="loading">
     טוען..
   </div>
   <ng-template [ngIf]="view === 'map'" [ngIfElse]="meetingsList">
-    <app-meetings-map [user]="user$ | async" [meetings]="meetings$ | async"></app-meetings-map>
+    <app-meetings-map [user]="user$ | async" [meetings]="filteredMeetings"></app-meetings-map>
   </ng-template>
 
   <ng-template #meetingsList>
-    <app-meetings-list [user]="user$ | async" [meetings]="meetings$ | async"> </app-meetings-list>
+    <app-meetings-list [user]="user$ | async" [meetings]="filteredMeetings"> </app-meetings-list>
   </ng-template>
 </div>

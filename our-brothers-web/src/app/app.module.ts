@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { registerLocaleData } from '@angular/common';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ScrollingModule } from '@angular/cdk/scrolling';
@@ -26,6 +27,10 @@ import { MeetingsFiltersComponent } from './components/meetings-filters/meetings
 import { MeetingsMapGuideComponent } from './components/meetings-map-guide/meetings-map-guide.component';
 import { MeetingsMapLegendComponent } from './components/meetings-map-legend/meetings-map-legend.component';
 import { MeetingsMapMeetingComponent } from './components/meetings-map-meeting/meetings-map-meeting.component';
+
+import localeHe from '@angular/common/locales/he';
+
+registerLocaleData(localeHe);
 
 @NgModule({
   declarations: [

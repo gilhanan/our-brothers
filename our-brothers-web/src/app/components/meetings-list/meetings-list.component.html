@@ -1,18 +1,47 @@
-<cdk-virtual-scroll-viewport itemSize="50" class="meeting-list">
-  <div class="meeting-item" *ngFor="let meeting of meetings">
-    <div class="meeting-item-col meeting-name">{{meeting.title}}</div>
-    <div class="meeting-item-col meeting-address">{{meeting.address.formattedAddress}}</div>
+<div class="meeting-headers">
+  <div class="meeting-header-col" (click)="onColumnClick('title')">
+    שם מפגש
+    <span class="sorting-indicator" [ngClass]="sortedDirectionClass('title')"></span>
+  </div>
+  <div class="meeting-header-col" (click)="onColumnClick('address')">
+    כתובת
+    <span class="sorting-indicator" [ngClass]="sortedDirectionClass('address')"></span>
+  </div>
+  <div class="meeting-header-col" (click)="onColumnClick('date')">
+    תאריך
+    <span class="sorting-indicator" [ngClass]="sortedDirectionClass('date')"></span>
+  </div>
+  <div class="meeting-header-col" (click)="onColumnClick('capacity')">
+    כמות משתתפים
+    <span class="sorting-indicator" [ngClass]="sortedDirectionClass('capacity')"></span>
+  </div>
+  <div class="meeting-header-col" (click)="onColumnClick('bereaveds')">
+    אח/ות
+    <span class="sorting-indicator" [ngClass]="sortedDirectionClass('bereaveds')"></span>
+  </div>
+  <div class="meeting-header-col">
+  </div>
+</div>
+<cdk-virtual-scroll-viewport itemSize="50" class="meeting-items">
+  <div class="meeting-item" *ngFor="let meeting of sortedMeetings">
+    <div class="meeting-item-col meeting-name">
+      {{meeting.title}}
+    </div>
+    <div class="meeting-item-col meeting-address">
+      {{meeting.address.formattedAddress}}
+    </div>
     <div class="meeting-item-col meeting-date">
       <div class="meeting-date-text">
-        03.04.2019
+        {{meeting.date | date: 'dd.MM.yyyy'}}
       </div>
     </div>
     <div class="meeting-item-col meeting-participant">
-      <span class="meeting-label">כמות משתתפים: </span>
-      <span>{{meeting.capacity}}</span>
+      {{meeting.capacity}}
+      <span *ngIf="meeting.invited" style="margin-right: 2px;">
+        - מוזמנים בלבד
+      </span>
     </div>
     <div class="meeting-item-col meeting-bereaved">
-      <span class="meeting-label">אח/ות: </span>
       <span *ngFor="let bereaved of meeting.bereaveds">
         {{bereaved.firstName + ' ' + bereaved.lastName}}
       </span>

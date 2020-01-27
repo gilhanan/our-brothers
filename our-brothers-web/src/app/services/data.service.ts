@@ -62,7 +62,7 @@ export class DataService {
       .snapshotChanges()
       .pipe(
         map((events) => events
-          .slice(0, 50)
+          // .slice(0, 50)
           .map((event) => ({ id: event.key, year, ...event.payload.val() }))
           .map((event) => {
             if (event.bereaveds) {

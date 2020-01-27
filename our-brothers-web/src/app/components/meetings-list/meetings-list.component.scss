@@ -1,3 +1,5 @@
+$textColor: rgb(129, 129, 129);
+
 :host {
     position: absolute;
     top: 0;
@@ -5,7 +7,56 @@
     left: 0;
     right: 0;
 
-    .meeting-list {
+    .meeting-headers {
+        display: flex;
+        flex-flow: row;
+        margin-right: 25px;
+        border-bottom: 1px solid rgb(227, 229, 231);
+
+        .meeting-header-col {
+            flex: 1;
+            margin: 45px 5px;
+            font-size: 18px;
+            text-align: center;
+            color: $textColor;
+            cursor: pointer;
+
+            .sorting-indicator {
+                &::before,
+                &::after {
+                    content: "";
+                    position: absolute;
+                    border-right: 5px solid transparent;
+                    border-left: 5px solid transparent;
+                    right: 3px;
+                }
+
+                &::before {
+                    border-top: 5px solid $textColor;
+                    border-bottom: 5px solid transparent;
+                    top: 15px;
+                }
+                &::after {
+                    border-top: 5px solid transparent;
+                    border-bottom: 5px solid $textColor;
+                    top: 3px;
+                }
+
+                &.sorted-asc {
+                    &::before {
+                        border-top: 5px solid transparent;
+                    }
+                }
+                &.sorted-desc {
+                    &::after {
+                        border-bottom: 5px solid transparent;
+                    }
+                }
+            }
+        }
+    }
+
+    .meeting-items {
         height: 100%;
         direction: ltr;
 
@@ -21,7 +72,7 @@
                 align-items: flex-start;
                 margin: 45px 5px;
                 font-size: 18px;
-                color: rgb(129, 129, 129);
+                color: $textColor;
 
                 &:first-child {
                     margin-right: 0;
