@@ -1,7 +1,8 @@
 <app-meetings-map-legend *ngIf="meetings" [user]="user"></app-meetings-map-legend>
 <app-meetings-map-guide *ngIf="meetings"></app-meetings-map-guide>
 <agm-map class="map" [latitude]="mapLatitude" [longitude]="mapLongitude" [zoom]="mapZoom" [minZoom]="7"
-  [restriction]="restriction" [gestureHandling]="'cooperative'">
+  [styles]="[{featureType: 'poi', stylers: [{visibility: 'off'}]}]" [restriction]="restriction"
+  [gestureHandling]="'cooperative'">
   <agm-marker-cluster
     [styles]="[{url:'/assets/img/map/meetings-map-cluster.svg',width:50,height:50,textSize:1,textColor:'#ffffff',backgroundPosition:'0 5px'},
 {url:'/assets/img/map/meetings-map-cluster.svg',width:75,height:75,textSize:1,textColor:'#ffffff',backgroundPosition:'0 8px'},
