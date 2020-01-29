@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Meeting, MeetingAudience, MeetingAudienceLabels } from 'src/app/model';
+import { Meeting, MeetingAudience, MeetingAudienceLabels } from '../../../app/model';
 
 @Component({
   selector: 'app-meetings-map-meeting',

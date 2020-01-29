@@ -27,6 +27,7 @@ import { MeetingsFiltersComponent } from './components/meetings-filters/meetings
 import { MeetingsMapGuideComponent } from './components/meetings-map-guide/meetings-map-guide.component';
 import { MeetingsMapLegendComponent } from './components/meetings-map-legend/meetings-map-legend.component';
 import { MeetingsMapMeetingComponent } from './components/meetings-map-meeting/meetings-map-meeting.component';
+import { AdminBereavedsPageComponent } from './pages/admin-bereaveds-page/admin-bereaveds-page.component';
 
 import localeHe from '@angular/common/locales/he';
 
@@ -47,7 +48,8 @@ registerLocaleData(localeHe);
     MeetingsFiltersComponent,
     MeetingsMapGuideComponent,
     MeetingsMapLegendComponent,
-    MeetingsMapMeetingComponent
+    MeetingsMapMeetingComponent,
+    AdminBereavedsPageComponent
   ],
   imports: [
     BrowserModule,

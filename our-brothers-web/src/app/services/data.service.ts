@@ -56,17 +56,29 @@ export class DataService {
       );
   }
 
+  public getBereaveds(): Observable<User[]> {
+    return this.angularFireDatabase
+      .list<User>(`users`)
+      .snapshotChanges()
+      .pipe(
+        map((usersSnapshot) => usersSnapshot
+          .filter((user) => user.payload.val().role === 'bereaved')
+          .map((user) => ({ id: user.key, ...user.payload.val() }))
+        )
+      );
+  }
+
   public getMeetings(year = MEMORIAL_YEAR): Observable<Meeting[]> {
     return this.angularFireDatabase
       .list<Meeting>(`events/${year}`)
       .snapshotChanges()
       .pipe(
-        map((events) => events
+        map((meetingsSnapshot) => meetingsSnapshot
           // .slice(0, 50)
-          .map((event) => ({ id: event.key, year, ...event.payload.val() }))
-          .map((event) => {
-            if (event.bereaveds) {
-              event.bereaveds = Array.from(Object.entries(event.bereaveds))
+          .map((meetingSnapshot) => ({ id: meetingSnapshot.key, year, ...meetingSnapshot.payload.val() }))
+          .map((meeting) => {
+            if (meeting.bereaveds) {
+              meeting.bereaveds = Array.from(Object.entries(meeting.bereaveds))
                 .map((bereaved) => {
                   if (bereaved[1].slain) {
                     bereaved[1].slain = Array
@@ -76,7 +88,7 @@ export class DataService {
                   return Object.assign(bereaved[1], { id: bereaved[0] });
                 });
             }
-            return event;
+            return meeting;
           }))
       );
   }

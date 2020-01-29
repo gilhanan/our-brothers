@@ -1,17 +1,21 @@
 export interface ParticipateParticipation {
-  events: Array<{
-    event: string;
+  meetings: Array<{
+    id: string;
     accompanies: number;
   }>;
 }
 
 export interface HostParticipation {
-  event: string;
+  meetings: Array<{
+    id: string;
+    title: string;
+  }>;
 }
 
 export interface BereavedParticipation {
-  events: Array<{
-    event: string;
+  meetings: Array<{
+    id: string;
+    title: string;
   }>;
   guidance: BereavedGuidance;
   notes: string;

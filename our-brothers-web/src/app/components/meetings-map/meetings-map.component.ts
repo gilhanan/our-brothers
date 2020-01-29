@@ -2,8 +2,8 @@ import { Component, Input, TrackByFunction, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Meeting, User, UserRole } from '../../model';
 import { MapRestriction } from '@agm/core/services/google-maps-types';
-import { ParticipationsService } from 'src/app/services/participations.service';
-import { MEMORIAL_YEAR } from 'src/app/services/data.service';
+import { ParticipationsService } from '../../../app/services/participations.service';
+import { MEMORIAL_YEAR } from '../../../app/services/data.service';
 
 @Component({
   selector: 'app-meetings-map',

@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { AccountPageComponent } from './account-page/account-page.component';
 import { MeetingsPageComponent } from './pages/meetings-page/meetings-page.component';
+import { AdminBereavedsPageComponent } from './pages/admin-bereaveds-page/admin-bereaveds-page.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,11 @@ const routes: Routes = [
   {
     path: 'account',
     component: AccountPageComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'admin-bereaveds',
+    component: AdminBereavedsPageComponent,
     pathMatch: 'full'
   },
   {

@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { User, Meeting } from 'src/app/model';
+import { User, Meeting } from '../../../app/model';
 
 interface SortedColumn {
   column: string;
