@@ -11,23 +11,19 @@
 
     .map-icon,
     .list-icon {
-      width: 37px;
-      height: 33px;
+      width: 45px;
+      height: 45px;
       background-size: 100%;
       background-repeat: no-repeat;
       display: inline-block;
     }
 
     .map-icon {
-      background-image: url(../../../assets/img/list.svg); // TODO: Change to map icon
+      background-image: url(../../../assets/img/map.svg);
     }
 
     .list-icon {
       background-image: url(../../../assets/img/list.svg);
-    }
-
-    .label {
-      line-height: 0;
     }
   }
 }
