@@ -28,6 +28,10 @@ import { MeetingsMapGuideComponent } from './components/meetings-map-guide/meeti
 import { MeetingsMapLegendComponent } from './components/meetings-map-legend/meetings-map-legend.component';
 import { MeetingsMapMeetingComponent } from './components/meetings-map-meeting/meetings-map-meeting.component';
 import { AdminBereavedsPageComponent } from './pages/admin-bereaveds-page/admin-bereaveds-page.component';
+import { FreeTextFilterComponent } from './components/free-text-filter/free-text-filter.component';
+import { BereavedsListComponent } from './components/bereaveds-list/bereaveds-list.component';
+import { ListHeaderComponent } from './components/list-header/list-header.component';
+import { ListColumnComponent } from './components/list-column/list-column.component';
 
 import localeHe from '@angular/common/locales/he';
 
@@ -49,7 +53,11 @@ registerLocaleData(localeHe);
     MeetingsMapGuideComponent,
     MeetingsMapLegendComponent,
     MeetingsMapMeetingComponent,
-    AdminBereavedsPageComponent
+    AdminBereavedsPageComponent,
+    FreeTextFilterComponent,
+    BereavedsListComponent,
+    ListHeaderComponent,
+    ListColumnComponent
   ],
   imports: [
     BrowserModule,

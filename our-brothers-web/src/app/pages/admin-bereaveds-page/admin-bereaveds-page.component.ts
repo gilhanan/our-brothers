@@ -34,14 +34,14 @@ export class AdminBereavedsPageComponent implements OnInit {
             bereaved.id.includes(keyword) ||
             (bereaved.profile &&
               (
-                bereaved.profile.firstName.includes(keyword) ||
-                bereaved.profile.lastName.includes(keyword) ||
-                bereaved.profile.email.includes(keyword) ||
-                bereaved.profile.phoneNumber.includes(keyword)
+                bereaved.profile.firstName && bereaved.profile.firstName.includes(keyword) ||
+                bereaved.profile.lastName && bereaved.profile.lastName.includes(keyword) ||
+                bereaved.profile.email && bereaved.profile.email.includes(keyword) ||
+                bereaved.profile.phoneNumber && bereaved.profile.phoneNumber.includes(keyword)
               )
-            ) ||
-            bereaved.bereavedProfile && bereaved.bereavedProfile.slain.some(slain => slain.firstName.includes(keyword) || slain.lastName.includes(keyword)) ||
-            bereaved.bereavedParticipation && bereaved.bereavedParticipation[MEMORIAL_YEAR].meetings.some((meeting) => meeting.id.includes(keyword) || meeting.title.includes(keyword))
+            ) /* ||
+            bereaved.bereavedProfile && bereaved.bereavedProfile.slain && bereaved.bereavedProfile.slain.some(slain => slain.firstName.includes(keyword) || slain.lastName.includes(keyword)) ||
+            bereaved.bereavedParticipation && bereaved.bereavedParticipation[MEMORIAL_YEAR].meetings.some((meeting) => meeting.id.includes(keyword) || meeting.title.includes(keyword)) */
           )
         ));
     }

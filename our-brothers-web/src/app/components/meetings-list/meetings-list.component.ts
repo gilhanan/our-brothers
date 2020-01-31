@@ -17,33 +17,24 @@ export class MeetingsListComponent implements OnChanges {
   @Input() user: User;
 
   sortedMeetings: Meeting[] = [];
-  sortedColumn: SortedColumn;
+  sortedColumn: SortedColumn = {
+    column: 'title',
+    direction: 'asc'
+  };
 
   constructor() { }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.meetings) {
       this.meetings = this.meetings || [];
-      this.sortedMeetings = this.meetings.slice();
-      this.sortedColumn = null;
-    }
-  }
-
-  onColumnClick(column: string) {
-    this.upateSortedColumn(column);
-    this.sort();
-  }
-
-  sortedDirectionClass(column: string) {
-    if (this.sortedColumn && this.sortedColumn.column === column) {
-      return `sorted-${this.sortedColumn.direction}`;
+      this.sort();
     }
   }
 
   sort() {
     this.sortedMeetings = this.meetings.slice();
 
-    if (this.sortedColumn) {
+    if (this.sortedColumn.column) {
       const column = this.sortedColumn.column;
 
       this.sortedMeetings.sort((a, b) => {
@@ -67,22 +58,6 @@ export class MeetingsListComponent implements OnChanges {
 
         return aValue.toString().localeCompare(bValue);
       });
-    }
-  }
-
-  upateSortedColumn(column: string) {
-    if (!this.sortedColumn) {
-      this.sortedColumn = {
-        column,
-        direction: 'asc'
-      };
-    } else if (this.sortedColumn.direction === 'asc') {
-      this.sortedColumn = {
-        column,
-        direction: 'desc'
-      };
-    } else {
-      this.sortedColumn = null;
     }
   }
 }

@@ -1,0 +1,12 @@
+<app-list-header [(sort)]="sortedColumn" (sortChange)="sort()">
+  <app-list-column [field]="'name'">
+    שם מלא
+  </app-list-column>
+</app-list-header>
+<cdk-virtual-scroll-viewport itemSize="50" class="bereaved-items">
+  <div class="bereaved-item" *ngFor="let bereaved of sortedBereaveds">
+    <div class="bereaved-item-col bereaved-name">
+      {{bereaved.profile?.firstName + ' ' + bereaved.profile?.lastName}}
+    </div>
+  </div>
+</cdk-virtual-scroll-viewport>

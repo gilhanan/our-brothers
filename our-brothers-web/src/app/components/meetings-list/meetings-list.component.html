@@ -1,27 +1,21 @@
-<div class="meeting-headers">
-  <div class="meeting-header-col" (click)="onColumnClick('title')">
+<app-list-header [(sort)]="sortedColumn" (sortChange)="sort()">
+  <app-list-column [field]="'title'">
     שם מפגש
-    <span class="sorting-indicator" [ngClass]="sortedDirectionClass('title')"></span>
-  </div>
-  <div class="meeting-header-col" (click)="onColumnClick('address')">
+  </app-list-column>
+  <app-list-column [field]="'address'">
     כתובת
-    <span class="sorting-indicator" [ngClass]="sortedDirectionClass('address')"></span>
-  </div>
-  <div class="meeting-header-col" (click)="onColumnClick('date')">
+  </app-list-column>
+  <app-list-column [field]="'date'">
     תאריך
-    <span class="sorting-indicator" [ngClass]="sortedDirectionClass('date')"></span>
-  </div>
-  <div class="meeting-header-col" (click)="onColumnClick('capacity')">
+  </app-list-column>
+  <app-list-column [field]="'capacity'">
     כמות משתתפים
-    <span class="sorting-indicator" [ngClass]="sortedDirectionClass('capacity')"></span>
-  </div>
-  <div class="meeting-header-col" (click)="onColumnClick('bereaveds')">
+  </app-list-column>
+  <app-list-column [field]="'bereaveds'">
     אח/ות
-    <span class="sorting-indicator" [ngClass]="sortedDirectionClass('bereaveds')"></span>
-  </div>
-  <div class="meeting-header-col">
-  </div>
-</div>
+  </app-list-column>
+  <app-list-column></app-list-column>
+</app-list-header>
 <cdk-virtual-scroll-viewport itemSize="50" class="meeting-items">
   <div class="meeting-item" *ngFor="let meeting of sortedMeetings">
     <div class="meeting-item-col meeting-name">

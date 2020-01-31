@@ -1,0 +1,5 @@
+<div class="title">
+  <ng-content></ng-content>
+</div>
+<span *ngIf="!!field" class="sorting-indicator"
+  [ngClass]="{'sorted-asc': sorted === 'asc', 'sorted-desc': sorted === 'desc' }"></span>
