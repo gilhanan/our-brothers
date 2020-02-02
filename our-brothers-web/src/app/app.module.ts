@@ -34,6 +34,7 @@ import { ListHeaderComponent } from './components/list-header/list-header.compon
 import { ListColumnComponent } from './components/list-column/list-column.component';
 
 import localeHe from '@angular/common/locales/he';
+import { PhonePipe } from './pipes/phone.pipe';
 
 registerLocaleData(localeHe);
 
@@ -57,7 +58,8 @@ registerLocaleData(localeHe);
     FreeTextFilterComponent,
     BereavedsListComponent,
     ListHeaderComponent,
-    ListColumnComponent
+    ListColumnComponent,
+    PhonePipe
   ],
   imports: [
     BrowserModule,

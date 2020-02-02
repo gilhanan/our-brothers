@@ -29,7 +29,7 @@
     <div class="bereaved-item-col bereaved-communications">
       <div class="bereaved-phone" *ngIf="bereaved.profile?.phoneNumber">
         <div class="phone-number">
-          {{bereaved.profile.phoneNumber}}
+          {{bereaved.profile.phoneNumber | phone}}
         </div>
         <div class="phone-icon"></div>
       </div>
