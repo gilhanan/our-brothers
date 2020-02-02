@@ -33,7 +33,7 @@ export class MeetingsPageComponent implements OnInit {
     if (!query || !query.trim()) {
       this.filteredMeetings = this.meetings.slice();
     } else {
-      const keywords = query.split(/( )+/);
+      const keywords = query.match(/([^\s]+)/g) || [];
       this.filteredMeetings = this.meetings.filter(meeting =>
         keywords.every(keyword =>
           (meeting.title.includes(keyword) ||

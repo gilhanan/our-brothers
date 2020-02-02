@@ -27,14 +27,15 @@ export class AdminBereavedsPageComponent implements OnInit {
     if (!query || !query.trim()) {
       this.filteredBereaveds = this.bereaveds.slice();
     } else {
-      const keywords = query.split(/( )+/);
+      const keywords = query.match(/([^\s]+)/g) || [];
+      console.log(keywords);
       this.filteredBereaveds = this.bereaveds.filter(bereaved =>
         keywords.every(keyword =>
           (
             bereaved.id.includes(keyword) ||
             (bereaved.profile &&
               (
-                ((bereaved.profile.firstName) || '' + (bereaved.profile.lastName || '')).includes(keyword) ||
+                ((bereaved.profile.firstName || '') + (bereaved.profile.lastName || '')).includes(keyword) ||
                 bereaved.profile.email && bereaved.profile.email.includes(keyword) ||
                 bereaved.profile.phoneNumber && bereaved.profile.phoneNumber.includes(keyword)
               )
