@@ -1,4 +1,11 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  ViewChild,
+  Output,
+  EventEmitter
+} from '@angular/core';
 import { ProfileFormComponent } from '../../forms/profile-form/profile-form.component';
 import { startWith } from 'rxjs/operators';
 
@@ -11,6 +18,8 @@ export class ProfilePopupComponent implements OnInit, AfterViewInit {
   @ViewChild(ProfileFormComponent, { static: false })
   profileFormComponent: ProfileFormComponent;
 
+  @Output() profileUpdated = new EventEmitter<void>();
+
   constructor() {}
 
   ngOnInit() {}
@@ -18,6 +27,10 @@ export class ProfilePopupComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {}
 
   updateProfileData() {
-    this.profileFormComponent.saveProfile();
+    this.profileFormComponent.saveProfile().subscribe(res => {
+      if (res) {
+        this.profileUpdated.emit();
+      }
+    });
   }
 }

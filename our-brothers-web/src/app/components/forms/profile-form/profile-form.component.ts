@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { of } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-profile-form',
@@ -61,9 +63,16 @@ export class ProfileFormComponent implements OnInit {
       userData.profile.birthDate = new Date(
         userData.profile.birthDate
       ).getTime();
-      this.dataService.updateUserData(this.authService.userId, userData);
+      return this.dataService
+        .updateUserData(this.authService.userId, userData)
+        .pipe(
+          map(() => {
+            return true;
+          })
+        );
     } else {
       this.profileForm.markAllAsTouched();
+      return of(false);
     }
   }
 }

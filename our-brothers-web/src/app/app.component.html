@@ -55,5 +55,8 @@
 
 <ng-container *ngIf="needLogin">
   <app-login-popup *ngIf="!(authService.user | async)"></app-login-popup>
-  <app-profile-popup *ngIf="authService.user | async"></app-profile-popup>
+  <app-profile-popup
+    (profileUpdated)="needLogin = false"
+    *ngIf="authService.user | async"
+  ></app-profile-popup>
 </ng-container>
