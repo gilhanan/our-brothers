@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'arbel';
+  src: url(assets/fonts/Arbel-Bold_0.otf);
+}
+
 *,
 *::before,
 *::after {
@@ -18,11 +23,11 @@ body {
 }
 
 .card-container {
-  font-family: 'ArbelMF';
+  font-family: 'arbel';
 }
 
 .site-button {
-  font-family: 'ArbelMF';
+  font-family: 'arbel';
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -59,7 +64,7 @@ body {
   font-size: 22px;
   color: rgb(153, 153, 153);
   text-align: center;
-  font-family: 'ArbelMF';
+  font-family: 'arbel';
   margin-bottom: 25px;
   letter-spacing: 15px;
 }
@@ -68,14 +73,14 @@ body {
   color: rgb(55, 135, 177);
   font-size: 36px;
   text-align: center;
-  font-family: 'ArbelMF';
+  font-family: 'arbel';
   letter-spacing: 5px;
   margin-bottom: 50px;
 }
 
 .big-heading {
   font-size: 71px;
-  font-family: 'ArbelMF';
+  font-family: 'arbel';
   color: rgb(0, 115, 109);
   text-align: center;
   margin-bottom: 40px;
@@ -95,7 +100,7 @@ body {
   padding: 110px 0 65px 0;
   text-align: center;
   font-size: 39px;
-  font-family: 'ArbelMF';
+  font-family: 'arbel';
   color: rgb(255, 255, 255);
   line-height: 1.1;
   display: flex;
@@ -167,7 +172,7 @@ textarea.form-field {
 
 .form-title {
   font-size: 36px;
-  font-family: 'ArbelMF';
+  font-family: 'arbel';
   color: rgb(55, 135, 177);
   letter-spacing: 6px;
   margin-bottom: 20px;
@@ -296,7 +301,7 @@ input.login-form-input {
           border: 1px solid rgb(0, 160, 153);
           background-color: white;
           font-size: 36px;
-          font-family: 'ArbelMF';
+          font-family: 'arbel';
           color: rgb(0, 160, 153);
           letter-spacing: 6px;
 
@@ -322,7 +327,7 @@ input.login-form-input {
       flex: 0 0 90px;
       background-color: rgb(0, 160, 153);
       font-size: 36px;
-      font-family: 'ArbelMF';
+      font-family: 'arbel';
       color: white;
       display: flex;
       justify-content: center;
