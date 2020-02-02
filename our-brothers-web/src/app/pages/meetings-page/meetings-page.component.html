@@ -1,8 +1,4 @@
-<img
-  class="meetings-image-header"
-  src="../../../assets/img/meetingsHeader.png"
-  alt="Meetings Page Header Image"
-/>
+<img class="meetings-image-header" src="../../../assets/img/meetingsHeader.png" alt="Meetings Page Header Image" />
 <div class="site-divider"></div>
 <div class="small-heading">האחים שלנו !</div>
 <div class="medium-heading">איך נראים המפגשים שלנו?</div>
@@ -19,44 +15,31 @@
   סיפורכם המשותף.
 </div>
 <div class="flip-cards">
-  <app-flip-card
-    [frontImage]="'/assets/img/cardImgParticipant.png'"
-    [frontTitle]="'אני רוצה להשתתף'"
-    [backText]="'מעוניין להתארח באחד המפגשים?'"
-    [backButtonText]="'לפרטים נוספים'"
-    [backButtonUrl]=""
-  >
+  <app-flip-card [frontImage]="'/assets/img/cardImgParticipant.png'" [frontTitle]="'אני רוצה להשתתף'"
+    [backText]="'מעוניין להתארח באחד המפגשים?'" [backButtonText]="'לפרטים נוספים'" [backButtonUrl]="">
   </app-flip-card>
-  <app-flip-card
-    [frontImage]="'/assets/img/cardImgTeller.png'"
-    [frontTitle]="'אני רוצה לספר'"
-    [backText]="'אח/אחות שכולים? מעוניינים לספר את ספורכם האישי?'"
-    [backButtonText]="'לפרטים נוספים'"
-    [backButtonUrl]=""
-  >
+  <app-flip-card [frontImage]="'/assets/img/cardImgTeller.png'" [frontTitle]="'אני רוצה לספר'"
+    [backText]="'אח/אחות שכולים? מעוניינים לספר את ספורכם האישי?'" [backButtonText]="'לפרטים נוספים'"
+    [backButtonUrl]="">
   </app-flip-card>
-  <app-flip-card
-    [frontImage]="'/assets/img/cardImgHost.png'"
-    [frontTitle]="'אני רוצה לארח'"
-    [backText]="'מעוניין לפתוח את ביתך ולארח מפגש?'"
-    [backButtonText]="'לפרטים נוספים'"
-    [backButtonUrl]=""
-  >
+  <app-flip-card [frontImage]="'/assets/img/cardImgHost.png'" [frontTitle]="'אני רוצה לארח'"
+    [backText]="'מעוניין לפתוח את ביתך ולארח מפגש?'" [backButtonText]="'לפרטים נוספים'" [backButtonUrl]="">
   </app-flip-card>
 </div>
 
 <div class="meetings-filters-container">
-  <app-meetings-filters [(view)]="view"></app-meetings-filters>
+  <app-meetings-filters [(view)]="view" (filterChange)="filterMeetings($event)"></app-meetings-filters>
 </div>
 
-<ng-template [ngIf]="view === 'map'" [ngIfElse]="meetingsList">
-  <div class="map-container">
-    <app-meetings-map [meetings]="meetings"></app-meetings-map>
+<div class="meetings-container">
+  <div *ngIf="!meetings?.length" class="loading">
+    טוען..
   </div>
-</ng-template>
+  <ng-template [ngIf]="view === 'map'" [ngIfElse]="meetingsList">
+    <app-meetings-map [user]="user$ | async" [meetings]="filteredMeetings"></app-meetings-map>
+  </ng-template>
 
-<ng-template #meetingsList>
-  <div class="meetings-list-container">
-    <app-meetings-list> </app-meetings-list>
-  </div>
-</ng-template>
+  <ng-template #meetingsList>
+    <app-meetings-list [user]="user$ | async" [meetings]="filteredMeetings"> </app-meetings-list>
+  </ng-template>
+</div>

@@ -1,0 +1,72 @@
+:host {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  .bereaved-items {
+    height: 100%;
+    direction: ltr;
+
+    .bereaved-item {
+      display: flex;
+      flex-flow: row;
+      margin-right: 10px;
+      border-bottom: 1px solid rgb(227, 229, 231);
+
+      .bereaved-item-col {
+        flex: 1;
+        display: flex;
+        align-items: flex-start;
+        margin: 45px 5px;
+        font-size: 18px;
+        color: rgb(129, 129, 129);
+
+        &:first-child {
+          margin-right: 0;
+        }
+
+        &:last-child {
+          margin-left: 0;
+        }
+
+        &.bereaved-name {
+          font-size: 24px;
+          font-family: 'ArbelMF';
+          color: rgb(0, 115, 109);
+        }
+
+        &.bereaved-communications {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+
+          .phone-icon,
+          .email-icon {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            margin-right: 10px;
+            vertical-align: middle;
+            background-size: 100%;
+            background-repeat: no-repeat;
+          }
+
+          .phone-icon {
+            background-image: url(../../../assets/img/phone.png);
+          }
+          .email-icon {
+            background-image: url(../../../assets/img/mail.png);
+          }
+
+          .email-address,
+          .phone-number {
+            display: inline-block;
+            vertical-align: middle;
+          }
+        }
+      }
+    }
+  }
+}

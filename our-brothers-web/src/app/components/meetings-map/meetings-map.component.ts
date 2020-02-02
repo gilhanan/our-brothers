@@ -1,7 +1,9 @@
 import { Component, Input, TrackByFunction, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Meeting } from '../../model';
+import { Meeting, User, UserRole } from '../../model';
 import { MapRestriction } from '@agm/core/services/google-maps-types';
+import { ParticipationsService } from '../../../app/services/participations.service';
+import { MEMORIAL_YEAR } from '../../../app/services/data.service';
 
 @Component({
   selector: 'app-meetings-map',
@@ -11,6 +13,7 @@ import { MapRestriction } from '@agm/core/services/google-maps-types';
 export class MeetingsMapComponent implements OnInit {
 
   @Input() meetings: Meeting[];
+  @Input() user: User;
   @Input() isCenterCurrentLocation = true;
 
   mapLatitude = 31.672600;
@@ -24,8 +27,9 @@ export class MeetingsMapComponent implements OnInit {
       west: 34
     }
   }
+  lastOpenMarker;
 
-  constructor() {
+  constructor(private participationsService: ParticipationsService) {
   }
 
   trackByFn: TrackByFunction<Meeting> = (index, item) => {
@@ -50,6 +54,26 @@ export class MeetingsMapComponent implements OnInit {
     }, () => {
       // Failed to get current location
     });
+  }
+
+  getMeetingIconUrl(meeting: Meeting) {
+    let url: string;
+
+    const isBereaved = this.user && this.user.role === UserRole.bereaved;
+
+    if (this.participationsService.isUserParticipatingEvent(this.user, MEMORIAL_YEAR, meeting.id)) {
+      url = '/assets/img/map/meetings-map-blue.svg';
+    } else if (!isBereaved && meeting.invited) {
+      url = '/assets/img/map/meetings-map-grey.svg';
+    } else if (!isBereaved && meeting.count >= meeting.capacity) {
+      url = '/assets/img/map/meetings-map-red.svg';
+    } else if (isBereaved && meeting.bereaveds && meeting.bereaveds.length) {
+      url = '/assets/img/map/meetings-map-red.svg';
+    } else {
+      url = '/assets/img/map/meetings-map-open.svg';
+    }
+
+    return url;
   }
 
   private getLocation(): Observable<{ latitude: number, longitude: number }> {

@@ -1,18 +1,29 @@
 .view-toggle-container {
-    border: 1px solid rgb(0, 160, 153);
+  border: 10px solid rgb(0, 160, 153);
+  border-radius: 10px;
 
-    .view-button {
-        display: inline-block;
-        width: 60px;
-        padding: 16px 10px;
-        cursor: pointer;
-        border: 1px solid rgb(0, 160, 153);
-        background-color: rgb(255, 255, 255);
+  .view-button {
+    display: inline-block;
+    width: 60px;
+    cursor: pointer;
+    background-color: rgb(255, 255, 255);
+    text-align: center;
 
-        &.active {
-            color: rgb(255, 255, 255);
-            background-color: rgb(0, 160, 153);
-            font-weight: bold;
-        }
+    .map-icon,
+    .list-icon {
+      width: 45px;
+      height: 45px;
+      background-size: 100%;
+      background-repeat: no-repeat;
+      display: inline-block;
     }
+
+    .map-icon {
+      background-image: url(../../../assets/img/map.svg);
+    }
+
+    .list-icon {
+      background-image: url(../../../assets/img/list.svg);
+    }
+  }
 }

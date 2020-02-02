@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Meeting } from '../../model';
+import { Meeting } from '../..//model';
 import { DataService } from '../../services/data.service';
-import { ViewOptions } from 'src/app/components/view-toggle/view-toggle.component';
+import { ViewOptions } from '../../components/view-toggle/view-toggle.component';
+import { Observable, Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-meetings-page',
@@ -12,16 +14,32 @@ import { ViewOptions } from 'src/app/components/view-toggle/view-toggle.componen
 export class MeetingsPageComponent implements OnInit {
 
   view: ViewOptions = 'list';
+  user$ = this.dataService.getCurrentUser();
   meetings: Meeting[];
+  filteredMeetings: Meeting[];
 
   constructor(
     private dataService: DataService
   ) { }
 
-  ngOnInit() {
-    this.dataService.getMeetings()
-      .subscribe((meetings) => {
-        this.meetings = meetings;
-      });
+  ngOnInit(): void {
+    this.dataService.getMeetings().subscribe(meetings => {
+      this.meetings = meetings;
+      this.filterMeetings('');
+    });
+  }
+
+  filterMeetings(query: string) {
+    if (!query || !query.trim()) {
+      this.filteredMeetings = this.meetings.slice();
+    } else {
+      const keywords = query.match(/([^\s]+)/g) || [];
+      this.filteredMeetings = this.meetings.filter(meeting =>
+        keywords.every(keyword =>
+          (meeting.title.includes(keyword) ||
+            meeting.address.formattedAddress.includes(keyword) ||
+            (meeting.bereaveds && meeting.bereaveds.some(bereaved => bereaved.firstName.includes(keyword) || bereaved.lastName.includes(keyword))))
+        ));
+    }
   }
 }

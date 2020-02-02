@@ -1,4 +1,4 @@
-import { UserProfile } from './user';
+import { UserProfile, Slain } from './user';
 
 export interface Meeting {
   id: string;
@@ -15,7 +15,8 @@ export interface Meeting {
   accessibility: boolean;
   media: boolean;
   reviewable: boolean;
-  audience?: string[];
+  bereaveds?: MeetingBereaved[];
+  audience?: MeetingAudience[];
 }
 
 export interface MeetingAddress {
@@ -23,4 +24,31 @@ export interface MeetingAddress {
   longitude: number;
   formattedAddress: string;
   notes?: string;
+}
+
+export interface MeetingBereaved {
+  id: string;
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  email: string;
+  slain: Slain[];
+}
+
+export enum MeetingAudience {
+  all = "all",
+  schoolStudents = "schoolStudents",
+  youthMovement = "youthMovement",
+  militaryPreparation = "militaryPreparation",
+  soldiers = "soldiers",
+  students = "students"
+}
+
+export const MeetingAudienceLabels: { [audience in MeetingAudience]: string } = {
+  all: 'כולם',
+  schoolStudents: 'תלמידים',
+  youthMovement: 'תנועות נוער',
+  militaryPreparation: 'מכינות',
+  soldiers: 'חיילים',
+  students: 'סטודנטים'
 }

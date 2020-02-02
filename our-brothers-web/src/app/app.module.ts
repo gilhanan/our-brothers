@@ -1,10 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { registerLocaleData } from '@angular/common';
 import { NgModule, LOCALE_ID } from '@angular/core';
+import localeHe from '@angular/common/locales/he';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AgmCoreModule } from '@agm/core';
+import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 
 import { environment } from '../environments/environment';
 
@@ -27,6 +31,16 @@ import { RegistrationFormComponent } from './components/forms/registration-form/
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { ProfileFormComponent } from './components/forms/profile-form/profile-form.component';
 import { ProfilePopupComponent } from './components/popups/profile-popup/profile-popup.component';
+import { MeetingsMapLegendComponent } from './components/meetings-map-legend/meetings-map-legend.component';
+import { MeetingsMapMeetingComponent } from './components/meetings-map-meeting/meetings-map-meeting.component';
+import { AdminBereavedsPageComponent } from './pages/admin-bereaveds-page/admin-bereaveds-page.component';
+import { FreeTextFilterComponent } from './components/free-text-filter/free-text-filter.component';
+import { BereavedsListComponent } from './components/bereaveds-list/bereaveds-list.component';
+import { ListHeaderComponent } from './components/list-header/list-header.component';
+import { ListColumnComponent } from './components/list-column/list-column.component';
+import { PhonePipe } from './pipes/phone.pipe';
+
+registerLocaleData(localeHe);
 
 @NgModule({
   declarations: [
@@ -46,10 +60,19 @@ import { ProfilePopupComponent } from './components/popups/profile-popup/profile
     RegistrationFormComponent,
     CheckboxComponent,
     ProfileFormComponent,
-    ProfilePopupComponent
+    ProfilePopupComponent,
+    MeetingsMapLegendComponent,
+    MeetingsMapMeetingComponent,
+    AdminBereavedsPageComponent,
+    FreeTextFilterComponent,
+    BereavedsListComponent,
+    ListHeaderComponent,
+    ListColumnComponent,
+    PhonePipe
   ],
   imports: [
     BrowserModule,
+    ScrollingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
@@ -59,7 +82,8 @@ import { ProfilePopupComponent } from './components/popups/profile-popup/profile
       apiKey: 'AIzaSyBIQyGmuHzizv-MNxX4plVBLoErVopOEiE',
       language: 'iw',
       libraries: ['places']
-    })
+    }),
+    AgmJsMarkerClustererModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'he-IL' },
