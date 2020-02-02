@@ -36,6 +36,36 @@
           font-family: "Arbel";
           color: rgb(0, 115, 109);
         }
+
+        &.bereaved-communications {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+
+          .phone-icon,
+          .email-icon {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            margin-right: 10px;
+            vertical-align: middle;
+            background-size: 100%;
+            background-repeat: no-repeat;
+          }
+
+          .phone-icon {
+            background-image: url(../../../assets/img/phone.png);
+          }
+          .email-icon {
+            background-image: url(../../../assets/img/mail.png);
+          }
+
+          .email-address,
+          .phone-number {
+            display: inline-block;
+            vertical-align: middle;
+          }
+        }
       }
     }
   }

@@ -34,8 +34,7 @@ export class AdminBereavedsPageComponent implements OnInit {
             bereaved.id.includes(keyword) ||
             (bereaved.profile &&
               (
-                bereaved.profile.firstName && bereaved.profile.firstName.includes(keyword) ||
-                bereaved.profile.lastName && bereaved.profile.lastName.includes(keyword) ||
+                ((bereaved.profile.firstName) || '' + (bereaved.profile.lastName || '')).includes(keyword) ||
                 bereaved.profile.email && bereaved.profile.email.includes(keyword) ||
                 bereaved.profile.phoneNumber && bereaved.profile.phoneNumber.includes(keyword)
               )

@@ -6,7 +6,10 @@ $textColor: rgb(129, 129, 129);
   font-size: 18px;
   text-align: center;
   color: $textColor;
-  cursor: pointer;
+
+  &.sortable {
+    cursor: pointer;
+  }
 
   .title {
     display: inline-block;
