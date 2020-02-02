@@ -1,0 +1,14 @@
+.register-footer {
+  margin-top: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+
+  .have-user-container {
+    cursor: pointer;
+    font-size: 16px;
+    font-family: 'Heebo';
+    color: rgb(0, 160, 153);
+  }
+}

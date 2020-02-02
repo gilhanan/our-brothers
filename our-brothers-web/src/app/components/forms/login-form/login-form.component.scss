@@ -1,0 +1,31 @@
+.login-footer {
+  margin-top: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+
+  .remember-me-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .login-foorter-buttons-container {
+    display: flex;
+    align-items: center;
+
+    .login-foorter-button {
+      cursor: pointer;
+      font-size: 16px;
+      font-family: 'Heebo';
+      color: rgb(0, 160, 153);
+    }
+
+    .login-foorter-divider {
+      margin: 0 10px;
+      width: 1px;
+      height: 15px;
+      background-color: gray;
+    }
+  }
+}

@@ -1,65 +1,86 @@
 .header {
   width: calc(100% - 200px);
   margin: 20px auto;
-  height: 64px;
+  // height: 64px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   overflow: hidden;
 
-  .contact-header {
+  .action-buttons {
+    flex: 0 0 auto;
     display: flex;
-    align-items: center;
 
     * {
       cursor: pointer;
     }
 
-    .contact-header-support-us {
+    .action-header-support-us {
       border-radius: 4px;
       width: 144px;
       height: 35px;
+      margin-left: 10px;
     }
 
-    .contact-header-email-us {
+    .action-header-login {
+      border-radius: 4px;
+      height: 35px;
+    }
+  }
+
+  .contact-icons {
+    flex: 0 0 auto;
+    display: flex;
+
+    * {
+      margin-left: 20px;
+      cursor: pointer;
+    }
+
+    .contact-header-whatsapp-icon {
+      width: 20px;
+      height: 20px;
+      background-image: url(../assets/img/whatsapp.png);
+      background-size: 100%;
+      background-repeat: no-repeat;
+    }
+
+    .contact-header-email-us-icon {
       width: 23px;
       height: 18px;
       background-image: url(../assets/img/email.png);
       background-size: 100%;
       background-repeat: no-repeat;
-      margin-left: 20px;
     }
 
-    .contact-header-youtube {
+    .contact-header-youtube-icon {
       width: 24px;
       height: 18px;
       background-image: url(../assets/img/youtube.png);
       background-size: 100%;
       background-repeat: no-repeat;
-      margin-left: 27px;
     }
 
-    .contact-header-facebook {
+    .contact-header-facebook-icon {
       width: 12px;
       height: 22px;
       background-image: url(../assets/img/facebook.png);
       background-size: 100%;
       background-repeat: no-repeat;
-      margin-left: 32px;
     }
 
-    .contact-header-user {
+    .contact-header-user-icon {
       width: 19px;
       height: 19px;
       background-image: url(../assets/img/user.png);
       background-size: 100%;
       background-repeat: no-repeat;
-      margin-left: 34px;
     }
   }
 
   .logo-header {
-    width: 160px;
+    cursor: pointer;
+    flex: 0 0 160px;
     height: 64px;
     background-image: url(../assets/img/logo.png);
     background-size: 100%;
@@ -68,25 +89,32 @@
   .links-header {
     display: inline-flex;
     justify-content: center;
-    margin-left: 20px;
-    margin-right: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
+    flex: 0 0 auto;
 
     .link-header {
       cursor: pointer;
       text-decoration: none;
       font-family: 'Heebo';
       color: rgb(0, 115, 109);
-      font-size: 20px;
+      font-size: 19px;
+      font-weight: 500;
 
       &:not(:last-child) {
         position: relative;
         margin-left: 45px;
       }
 
+      &.current-page {
+        font-weight: 600;
+      }
+
       &.current-page::before {
         content: '';
         background-color: rgb(0, 160, 153);
         position: absolute;
+        top: 3px;
         width: 33px;
         height: 1px;
         animation-name: currentPageBefore;
@@ -109,7 +137,7 @@
         position: absolute;
         width: 33px;
         height: 1px;
-        bottom: 0;
+        bottom: 3px;
         left: 0;
         animation-name: currentPageAfter;
         animation-duration: 1s;
@@ -124,6 +152,16 @@
           transform: translateX(0%);
         }
       }
+    }
+  }
+
+  &.medium-mode {
+    flex-wrap: wrap;
+
+    .links-header {
+      order: 2;
+      flex: 0 1 100%;
+      margin-top: 10px;
     }
   }
 }

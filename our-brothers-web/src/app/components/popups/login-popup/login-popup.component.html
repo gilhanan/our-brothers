@@ -1,0 +1,39 @@
+<div class="popup-element">
+  <div class="popup-backdrop"></div>
+  <div class="popup-container">
+    <div class="top-strip"></div>
+    <div class="tabs">
+      <div class="tabs-items">
+        <div
+          class="tab-item"
+          [class.current]="mode === 'Login'"
+          (click)="moveToLogin()"
+        >
+          התחברות
+        </div>
+        <div
+          class="tab-item"
+          [class.current]="mode === 'Register'"
+          (click)="moveToRegister()"
+        >
+          הרשמה
+        </div>
+      </div>
+    </div>
+    <div class="popup-content-container">
+      <ng-container [ngSwitch]="mode">
+        <app-login-form
+          *ngSwitchCase="'Login'"
+          (haveNoUser)="mode = 'Register'"
+        ></app-login-form>
+        <app-registration-form
+          *ngSwitchCase="'Register'"
+          (haveUser)="mode = 'Login'"
+        ></app-registration-form>
+      </ng-container>
+    </div>
+    <div class="popup-main-button" tabindex="5" (click)="LoginOrRegister()">
+      {{ mode === 'Login' ? 'התחבר' : 'הרשם' }}
+    </div>
+  </div>
+</div>

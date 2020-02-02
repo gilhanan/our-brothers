@@ -1,4 +1,14 @@
-import { ParticipateParticipation, HostParticipation, BereavedParticipation } from './participations';
+import {
+  ParticipateParticipation,
+  HostParticipation,
+  BereavedParticipation
+} from './participations';
+
+export enum UserType {
+  BROTHER,
+  GUEST,
+  HOST
+}
 
 export interface User {
   id?: string;

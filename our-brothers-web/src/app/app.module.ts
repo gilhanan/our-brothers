@@ -17,11 +17,16 @@ import { FlipCardComponent } from './components/flip-card/flip-card.component';
 import { AccountPageComponent } from './account-page/account-page.component';
 import { MeetingsPageComponent } from './pages/meetings-page/meetings-page.component';
 import { MeetingsListComponent } from './components/meetings-list/meetings-list.component';
-import { LoginComponent } from './components/login/login.component';
+import { LoginPopupComponent } from './components/popups/login-popup/login-popup.component';
 import { MeetingsMapComponent } from './components/meetings-map/meetings-map.component';
 import { ViewToggleComponent } from './components/view-toggle/view-toggle.component';
 import { MeetingsFiltersComponent } from './components/meetings-filters/meetings-filters.component';
 import { MeetingsMapGuideComponent } from './components/meetings-map-guide/meetings-map-guide.component';
+import { LoginFormComponent } from './components/forms/login-form/login-form.component';
+import { RegistrationFormComponent } from './components/forms/registration-form/registration-form.component';
+import { CheckboxComponent } from './components/checkbox/checkbox.component';
+import { ProfileFormComponent } from './components/forms/profile-form/profile-form.component';
+import { ProfilePopupComponent } from './components/popups/profile-popup/profile-popup.component';
 
 @NgModule({
   declarations: [
@@ -32,11 +37,16 @@ import { MeetingsMapGuideComponent } from './components/meetings-map-guide/meeti
     AccountPageComponent,
     MeetingsPageComponent,
     MeetingsListComponent,
-    LoginComponent,
+    LoginPopupComponent,
     MeetingsMapComponent,
     ViewToggleComponent,
     MeetingsFiltersComponent,
-    MeetingsMapGuideComponent
+    MeetingsMapGuideComponent,
+    LoginFormComponent,
+    RegistrationFormComponent,
+    CheckboxComponent,
+    ProfileFormComponent,
+    ProfilePopupComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +59,7 @@ import { MeetingsMapGuideComponent } from './components/meetings-map-guide/meeti
       apiKey: 'AIzaSyBIQyGmuHzizv-MNxX4plVBLoErVopOEiE',
       language: 'iw',
       libraries: ['places']
-    }),
+    })
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'he-IL' },
@@ -58,4 +68,4 @@ import { MeetingsMapGuideComponent } from './components/meetings-map-guide/meeti
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

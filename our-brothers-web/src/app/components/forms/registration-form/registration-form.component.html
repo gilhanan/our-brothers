@@ -1,0 +1,51 @@
+<div class="form-title">
+  הרשמה
+</div>
+<ng-container [formGroup]="registrationForm">
+  <input
+    type="text"
+    placeholder="אימייל"
+    class="login-form-input"
+    formControlName="email"
+    [class.invalid]="!email.valid && email.touched"
+  />
+  <input
+    type="password"
+    placeholder="סיסמא (לפחות 6 תווים)"
+    class="login-form-input"
+    formControlName="pass"
+    [class.invalid]="!pass.valid && pass.touched"
+  />
+  <input
+    type="password"
+    placeholder="אישור סיסמא"
+    class="login-form-input"
+    formControlName="passConfirm"
+    [class.invalid]="(!pass.valid || registrationForm.hasError('notSame')) && pass.touched"
+  />
+</ng-container>
+<div class="register-footer">
+  <div class="have-user-container" (click)="haveUser.emit()">
+    יש לי כבר משתמש
+  </div>
+</div>
+<div class="login-with-buttons">
+  <div class="login-with-button facebook" (click)="signInWithFacebook()">
+    <div class="login-with-button-icon">
+      <img src="../../../../assets/img/facebook-login-icon.png" />
+    </div>
+    <div class="login-with-button-divider"></div>
+    <div class="login-with-button-text">
+      <p>הרשם עם פייסבוק</p>
+    </div>
+  </div>
+  <div class="login-with-button google" (click)="signInWithGoogle()">
+    <div class="login-with-button-icon">
+      <img src="../../../../assets/img/google-login-icon.png" />
+    </div>
+    <div class="login-with-button-divider"></div>
+    <div class="login-with-button-text">
+      <p>הרשם עם גוגל</p>
+    </div>
+  </div>
+</div>
