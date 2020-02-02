@@ -27,8 +27,8 @@ export class AdminBereavedsPageComponent implements OnInit {
     if (!query || !query.trim()) {
       this.filteredBereaveds = this.bereaveds.slice();
     } else {
+      query = query.replace(/-/g, '');
       const keywords = query.match(/([^\s]+)/g) || [];
-      console.log(keywords);
       this.filteredBereaveds = this.bereaveds.filter(bereaved =>
         keywords.every(keyword =>
           (
@@ -37,7 +37,7 @@ export class AdminBereavedsPageComponent implements OnInit {
               (
                 ((bereaved.profile.firstName || '') + (bereaved.profile.lastName || '')).includes(keyword) ||
                 bereaved.profile.email && bereaved.profile.email.includes(keyword) ||
-                bereaved.profile.phoneNumber && bereaved.profile.phoneNumber.includes(keyword)
+                bereaved.profile.phoneNumber && (bereaved.profile.phoneNumber.replace(/^\+972/, '0').includes(keyword))
               )
             ) /* ||
             bereaved.bereavedProfile && bereaved.bereavedProfile.slain && bereaved.bereavedProfile.slain.some(slain => slain.firstName.includes(keyword) || slain.lastName.includes(keyword)) ||
