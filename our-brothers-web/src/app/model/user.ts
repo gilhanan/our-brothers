@@ -14,6 +14,7 @@ export interface User {
   participateParticipation?: UserParticipation<ParticipateParticipation>;
   hostParticipation?: UserParticipation<HostParticipation>;
   bereavedParticipation?: UserParticipation<BereavedParticipation>;
+  meetingMapGuideLastVisit?: number;
 }
 
 export interface UserProfile {

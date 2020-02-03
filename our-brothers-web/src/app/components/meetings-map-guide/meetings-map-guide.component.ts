@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-meetings-map-guide',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./meetings-map-guide.component.scss']
 })
 export class MeetingsMapGuideComponent {
+
+  @Output() guideCompleted = new EventEmitter<void>();
 
   stage = 0;
 
@@ -27,5 +29,10 @@ export class MeetingsMapGuideComponent {
     if (this.stage > 0) {
       this.stage--;
     }
+  }
+
+  onGuideCompleted() {
+    this.started = true;
+    this.guideCompleted.emit();
   }
 }

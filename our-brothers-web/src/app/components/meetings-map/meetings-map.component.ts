@@ -1,4 +1,4 @@
-import { Component, Input, TrackByFunction, OnInit } from '@angular/core';
+import { Component, Input, TrackByFunction, OnInit, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Meeting, User, UserRole } from '../../model';
 import { MapRestriction } from '@agm/core/services/google-maps-types';
@@ -15,6 +15,9 @@ export class MeetingsMapComponent implements OnInit {
   @Input() meetings: Meeting[];
   @Input() user: User;
   @Input() isCenterCurrentLocation = true;
+  @Input() showGuide = false;
+
+  @Output() guideCompleted = new EventEmitter<void>();
 
   mapLatitude = 31.672600;
   mapLongitude = 35.077028;
