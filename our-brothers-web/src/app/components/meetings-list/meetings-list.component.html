@@ -36,8 +36,8 @@
       </span>
     </div>
     <div class="meeting-item-col meeting-bereaved">
-      <span *ngFor="let bereaved of meeting.bereaveds">
-        {{bereaved.firstName + ' ' + bereaved.lastName}}
+      <span *ngIf="meeting.bereaved">
+        {{meeting.bereaved.firstName + ' ' + meeting.bereaved.lastName}}
       </span>
     </div>
     <div class="meeting-item-col meeting-button">

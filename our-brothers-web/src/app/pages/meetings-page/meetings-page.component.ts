@@ -48,12 +48,9 @@ export class MeetingsPageComponent implements OnInit {
           keyword =>
             meeting.title.includes(keyword) ||
             meeting.address.formattedAddress.includes(keyword) ||
-            (meeting.bereaveds &&
-              meeting.bereaveds.some(
-                bereaved =>
-                  bereaved.firstName.includes(keyword) ||
-                  bereaved.lastName.includes(keyword)
-              ))
+            (
+              meeting.bereaved && ((meeting.bereaved.firstName || '') + (meeting.bereaved.lastName || '')).includes(keyword)
+            )
         )
       );
     }

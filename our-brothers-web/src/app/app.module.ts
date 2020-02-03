@@ -39,6 +39,7 @@ import { BereavedsListComponent } from './components/bereaveds-list/bereaveds-li
 import { ListHeaderComponent } from './components/list-header/list-header.component';
 import { ListColumnComponent } from './components/list-column/list-column.component';
 import { PhonePipe } from './pipes/phone.pipe';
+import { SeniorityPipe } from './pipes/seniority.pipe';
 
 registerLocaleData(localeHe);
 
@@ -68,7 +69,8 @@ registerLocaleData(localeHe);
     BereavedsListComponent,
     ListHeaderComponent,
     ListColumnComponent,
-    PhonePipe
+    PhonePipe,
+    SeniorityPipe
   ],
   imports: [
     BrowserModule,

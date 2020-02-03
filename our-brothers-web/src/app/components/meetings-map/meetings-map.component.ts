@@ -70,7 +70,7 @@ export class MeetingsMapComponent implements OnInit {
       url = '/assets/img/map/meetings-map-grey.svg';
     } else if (!isBereaved && meeting.count >= meeting.capacity) {
       url = '/assets/img/map/meetings-map-red.svg';
-    } else if (isBereaved && meeting.bereaveds && meeting.bereaveds.length) {
+    } else if (isBereaved && meeting.bereaved) {
       url = '/assets/img/map/meetings-map-red.svg';
     } else {
       url = '/assets/img/map/meetings-map-open.svg';

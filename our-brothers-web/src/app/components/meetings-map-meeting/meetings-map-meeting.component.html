@@ -15,12 +15,12 @@
       <strong>קהל יעד: </strong>
       <span>{{getAudienceLabel(meeting.audience)}}</span>
     </div>
-    <div *ngFor="let bereaved of meeting.bereaveds">
+    <div *ngIf="meeting.bereaved">
       <div class="row">
         <strong>שם האח/ות: </strong>
-        <span>{{bereaved.firstName + ' ' + bereaved.lastName}}</span>
+        <span>{{meeting.bereaved.firstName + ' ' + meeting.bereaved.lastName}}</span>
       </div>
-      <div *ngFor="let slain of bereaved.slain">
+      <div *ngFor="let slain of meeting.bereaved.slains">
         <div class="row">
           <strong>שם החלל: </strong>
           <span>{{slain.firstName + ' ' + slain.lastName + ' ז"ל'}}</span>

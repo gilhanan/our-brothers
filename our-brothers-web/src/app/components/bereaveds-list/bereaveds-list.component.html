@@ -8,7 +8,7 @@
   <app-list-column>
     מקום מגורים
   </app-list-column>
-  <app-list-column>
+  <app-list-column [field]="'seniority'">
     ותק בשכול
   </app-list-column>
   <app-list-column>
@@ -21,7 +21,7 @@
     שיבוץ
   </app-list-column>
 </app-list-header>
-<cdk-virtual-scroll-viewport itemSize="50" class="bereaved-items">
+<cdk-virtual-scroll-viewport itemSize="20" class="bereaved-items">
   <div class="bereaved-item" *ngFor="let bereaved of sortedBereaveds">
     <div class="bereaved-item-col bereaved-name">
       {{bereaved.profile?.firstName + ' ' + bereaved.profile?.lastName}}
@@ -41,6 +41,11 @@
       </div>
     </div>
     <div class="bereaved-item-col">
+    </div>
+    <div class="bereaved-item-col bereaved-seniorities">
+      <div *ngFor="let slain of bereaved?.bereavedProfile?.slains" class="seniority">
+        {{slain.deathDate | seniority}}
+      </div>
     </div>
     <div class="bereaved-item-col">
     </div>

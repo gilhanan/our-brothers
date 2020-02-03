@@ -40,6 +40,9 @@ export class BereavedsListComponent implements OnChanges {
         if (column === 'name') {
           aValue = (a.profile && (a.profile.firstName + a.profile.lastName)) || '';
           bValue = (b.profile && (b.profile.firstName + b.profile.lastName)) || '';
+        } else if (column === 'seniority') {
+          aValue = a.bereavedProfile && a.bereavedProfile.slains && a.bereavedProfile.slains[0] && a.bereavedProfile.slains[0].deathDate || Number.MAX_VALUE;
+          bValue = b.bereavedProfile && b.bereavedProfile.slains && b.bereavedProfile.slains[0] && b.bereavedProfile.slains[0].deathDate || Number.MAX_VALUE;
         } else {
           aValue = a[column] || '';
           bValue = b[column] || '';
@@ -47,6 +50,10 @@ export class BereavedsListComponent implements OnChanges {
 
         if (this.sortedColumn.direction === 'desc') {
           [aValue, bValue] = [bValue, aValue];
+        }
+
+        if (typeof aValue === 'number' && typeof bValue === 'number') {
+          return aValue - bValue;
         }
 
         return aValue.toString().localeCompare(bValue);
