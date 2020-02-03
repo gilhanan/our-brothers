@@ -18,8 +18,9 @@ export class MeetingsPageComponent implements OnInit {
   user: User;
   meetings: Meeting[];
   filteredMeetings: Meeting[];
+  hideMapGuide = false;
   mapShowGuide$ = this.authService.user.pipe(
-    map(user => !(user && user.meetingMapGuideLastVisit && (Date.now() - user.meetingMapGuideLastVisit) < oneWeek))
+    map(user => !this.hideMapGuide && !(user && user.meetingMapGuideLastVisit && (Date.now() - user.meetingMapGuideLastVisit) < oneWeek))
   );
 
   constructor(
@@ -57,6 +58,7 @@ export class MeetingsPageComponent implements OnInit {
   }
 
   onMapGuideCompleted() {
+    this.hideMapGuide = true;
     if (this.user.id) {
       this.dataService.updateUserData(this.user.id, {
         meetingMapGuideLastVisit: Date.now()
