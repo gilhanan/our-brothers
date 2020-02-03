@@ -1,5 +1,5 @@
 $textColor: rgb(129, 129, 129);
-
+$small-font: 14px;
 :host {
   position: absolute;
   top: 0;
@@ -24,6 +24,9 @@ $textColor: rgb(129, 129, 129);
         margin: 45px 5px;
         font-size: 18px;
         color: $textColor;
+        @media only screen and (max-width: 600px) {
+          margin: 15px 2px;
+        }
 
         &:first-child {
           margin-right: 0;
@@ -37,7 +40,26 @@ $textColor: rgb(129, 129, 129);
           font-size: 24px;
           font-family: 'arbel';
           color: rgb(0, 115, 109);
+          @media only screen and (max-width: 600px) {
+            font-size: 16px;
+          }
         }
+
+        @media only screen and (max-width: 600px) {
+          &.meeting-participant {
+              justify-content: center;
+              font-size: $small-font;
+            }
+
+          &.meeting-bereaved {
+            font-size: $small-font;
+            width: 20px;
+            justify-content: center;
+            font-weight: bold;
+          }
+          
+        }
+
 
         .meeting-label {
           margin-left: 4px;
@@ -45,6 +67,10 @@ $textColor: rgb(129, 129, 129);
 
         &.meeting-address {
           padding-right: 10px;
+
+          @media only screen and (max-width: 600px) {
+            font-size: $small-font; 
+          }
 
           &::before {
             content: '';
@@ -61,6 +87,10 @@ $textColor: rgb(129, 129, 129);
         &.meeting-date {
           display: flex;
           justify-content: center;
+
+          @media only screen and (max-width: 600px) {
+            font-size: $small-font; 
+          }
 
           .meeting-date-text {
             flex: 0 1 auto;
@@ -93,6 +123,11 @@ $textColor: rgb(129, 129, 129);
             font-size: 20px;
             font-family: 'arbel';
             color: rgb(0, 115, 109);
+
+            @media only screen and (max-width: 600px) {
+              width: 50px; 
+              margin-left: 8px;
+            }
           }
         }
       }

@@ -4,6 +4,10 @@
 
   .free-text-filter {
     flex: 1;
+
+    @media only screen and (max-width: 600px) {
+      margin-right: 5%;
+    }
   }
 
   .view-toggle {
