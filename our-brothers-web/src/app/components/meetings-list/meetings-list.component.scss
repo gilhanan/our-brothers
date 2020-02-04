@@ -53,25 +53,13 @@ $textColor: rgb(129, 129, 129);
         .meeting-label {
           margin-left: 4px;
         }
-
-        @media only screen and (max-width: 600px) {
-          &.meeting-participant {
-            padding-right: 120px;
-            &::before {
-              content: 'כמות משתתפים:';
-              position: absolute;
-              right: 20px;
+ 
+        .mobile-label {
+            display: none;
+            @media only screen and (max-width: 600px) {
+              display: inline;
+              margin-left: 2px;
             }
-          }
-
-          &.meeting-bereaved {
-            padding-right: 65px;
-            &::before {
-              content: 'אח/ות:';
-              position: absolute;
-              right: 20px;
-            }
-          }
         }
 
         &.meeting-address {
