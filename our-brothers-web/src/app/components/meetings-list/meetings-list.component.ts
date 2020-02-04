@@ -45,8 +45,8 @@ export class MeetingsListComponent implements OnChanges {
           aValue = a.address.latitude;
           bValue = b.address.latitude;
         } else if (column === 'bereaveds') {
-          aValue = a.bereaveds && (a.bereaveds[0].firstName + a.bereaveds[0].lastName) || '';
-          bValue = b.bereaveds && (b.bereaveds[0].firstName + b.bereaveds[0].lastName) || '';
+          aValue = a.bereaved && (a.bereaved.firstName + a.bereaved.lastName) || '';
+          bValue = b.bereaved && (b.bereaved.firstName + b.bereaved.lastName) || '';
         } else {
           aValue = a[column] || '';
           bValue = b[column] || '';

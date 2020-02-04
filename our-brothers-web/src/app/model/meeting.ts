@@ -1,4 +1,4 @@
-import { UserProfile, Slain } from './user';
+import { UserProfile } from './user';
 
 export interface Meeting {
   id: string;
@@ -15,7 +15,7 @@ export interface Meeting {
   accessibility: boolean;
   media: boolean;
   reviewable: boolean;
-  bereaveds?: MeetingBereaved[];
+  bereaved?: MeetingBereaved;
   audience?: MeetingAudience[];
 }
 
@@ -32,7 +32,7 @@ export interface MeetingBereaved {
   lastName: string;
   phoneNumber: string;
   email: string;
-  slain: Slain[];
+  slains: { firstName: string; lastName: string; }[];
 }
 
 export enum MeetingAudience {

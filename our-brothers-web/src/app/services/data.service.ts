@@ -3,7 +3,7 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable, throwError, from } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
-import { User, Meeting, UserProfile } from '../model';
+import { User, Meeting } from '../model';
 
 export const MEMORIAL_YEAR = 2019;
 
@@ -11,7 +11,7 @@ export const MEMORIAL_YEAR = 2019;
   providedIn: 'root'
 })
 export class DataService {
-  constructor(private angularFireDatabase: AngularFireDatabase) {}
+  constructor(private angularFireDatabase: AngularFireDatabase) { }
 
   public getUserById(userId: string): Observable<User> {
     return this.angularFireDatabase
@@ -66,21 +66,6 @@ export class DataService {
               year,
               ...meetingSnapshot.payload.val()
             }))
-            .map(meeting => {
-              if (meeting.bereaveds) {
-                meeting.bereaveds = Array.from(
-                  Object.entries(meeting.bereaveds)
-                ).map(bereaved => {
-                  if (bereaved[1].slain) {
-                    bereaved[1].slain = Array.from(
-                      Object.entries(bereaved[1].slain)
-                    ).map(slain => Object.assign(slain[1], { id: slain[0] }));
-                  }
-                  return Object.assign(bereaved[1], { id: bereaved[0] });
-                });
-              }
-              return meeting;
-            })
         )
       );
   }

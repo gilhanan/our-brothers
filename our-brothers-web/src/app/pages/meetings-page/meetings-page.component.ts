@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { map } from 'rxjs/operators';
 
-import { Meeting } from '../..//model';
+import { Meeting, User } from '../..//model';
 import { DataService } from '../../services/data.service';
 import { ViewOptions } from '../../components/view-toggle/view-toggle.component';
-import { Observable, Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
+
+const oneWeek = 1000 * 60 * 60 * 24 * 7;
 
 @Component({
   selector: 'app-meetings-page',
@@ -14,16 +15,24 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class MeetingsPageComponent implements OnInit {
   view: ViewOptions = 'list';
-  user$ = this.authService.user;
+  user: User;
   meetings: Meeting[];
   filteredMeetings: Meeting[];
+  hideMapGuide = false;
+  mapShowGuide$ = this.authService.user.pipe(
+    map(user => !this.hideMapGuide && !(user && user.meetingMapGuideLastVisit && (Date.now() - user.meetingMapGuideLastVisit) < oneWeek))
+  );
 
   constructor(
     private dataService: DataService,
     private authService: AuthService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
+    this.authService.user.subscribe(user => {
+      this.user = user;
+    })
+
     this.dataService.getMeetings().subscribe(meetings => {
       this.meetings = meetings;
       this.filterMeetings('');
@@ -40,14 +49,20 @@ export class MeetingsPageComponent implements OnInit {
           keyword =>
             meeting.title.includes(keyword) ||
             meeting.address.formattedAddress.includes(keyword) ||
-            (meeting.bereaveds &&
-              meeting.bereaveds.some(
-                bereaved =>
-                  bereaved.firstName.includes(keyword) ||
-                  bereaved.lastName.includes(keyword)
-              ))
+            (
+              meeting.bereaved && ((meeting.bereaved.firstName || '') + (meeting.bereaved.lastName || '')).includes(keyword)
+            )
         )
       );
+    }
+  }
+
+  onMapGuideCompleted() {
+    this.hideMapGuide = true;
+    if (this.user.id) {
+      this.dataService.updateUserData(this.user.id, {
+        meetingMapGuideLastVisit: Date.now()
+      });
     }
   }
 }

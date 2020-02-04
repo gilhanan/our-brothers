@@ -39,9 +39,8 @@ export class AdminBereavedsPageComponent implements OnInit {
                 bereaved.profile.email && bereaved.profile.email.includes(keyword) ||
                 bereaved.profile.phoneNumber && (bereaved.profile.phoneNumber.replace(/^\+972/, '0').includes(keyword))
               )
-            ) /* ||
-            bereaved.bereavedProfile && bereaved.bereavedProfile.slain && bereaved.bereavedProfile.slain.some(slain => slain.firstName.includes(keyword) || slain.lastName.includes(keyword)) ||
-            bereaved.bereavedParticipation && bereaved.bereavedParticipation[MEMORIAL_YEAR].meetings.some((meeting) => meeting.id.includes(keyword) || meeting.title.includes(keyword)) */
+            ) ||
+            bereaved.bereavedProfile && bereaved.bereavedProfile.slains && bereaved.bereavedProfile.slains.some(slain => ((slain.firstName || '') + (slain.lastName || '')).includes(keyword))
           )
         ));
     }

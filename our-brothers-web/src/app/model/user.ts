@@ -14,6 +14,7 @@ export interface User {
   participateParticipation?: UserParticipation<ParticipateParticipation>;
   hostParticipation?: UserParticipation<HostParticipation>;
   bereavedParticipation?: UserParticipation<BereavedParticipation>;
+  meetingMapGuideLastVisit?: number;
 }
 
 export interface UserProfile {
@@ -31,14 +32,14 @@ export enum UserRole {
 
 export interface BereavedProfile {
   story: string;
-  slain: Slain[];
+  slains: Slain[];
 }
 
 export interface Slain {
   id: string;
   firstName: string;
   lastName: string;
-  deathDate?: string;
+  deathDate: number;
 }
 
 export interface UserParticipation<T> {
