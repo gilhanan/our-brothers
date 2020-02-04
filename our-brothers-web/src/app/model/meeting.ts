@@ -1,6 +1,7 @@
 import { UserProfile } from './user';
 
 export interface Meeting {
+  hostId: string;
   id: string;
   year: number;
   title: string;

@@ -66,15 +66,23 @@ export class DataService {
       .list<Meeting>(`events/${year}`)
       .snapshotChanges()
       .pipe(
-        map(meetingsSnapshot =>
-          meetingsSnapshot
-            // .slice(0, 50)
-            .map(meetingSnapshot => ({
-              id: meetingSnapshot.key,
-              year,
-              ...meetingSnapshot.payload.val()
-            }))
-        )
+        map(meetingsSnapshot => {
+          const meetings: Meeting[] = [];
+
+          for (const hostMeetingsSnapshot of meetingsSnapshot) {
+            const hostId = hostMeetingsSnapshot.key;
+
+            const hostMeetings = this.firebaseMapToArray<Meeting>(hostMeetingsSnapshot.payload.val());
+
+            for (const meeting of hostMeetings) {
+              meeting.hostId = hostId;
+
+              meetings.push(meeting);
+            }
+          }
+
+          return meetings;
+        })
       );
   }
 
