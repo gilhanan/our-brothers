@@ -47,8 +47,16 @@ export class DataService {
       .pipe(
         map(usersSnapshot =>
           usersSnapshot
-            .filter(user => user.payload.val().role === 'bereaved')
-            .map(user => ({ id: user.key, ...user.payload.val() }))
+            .map(usersSnapshot => ({ id: usersSnapshot.key, ...usersSnapshot.payload.val() }))
+            .filter(user => user.role === 'bereaved')
+            .map(user => {
+
+              if (user.bereavedParticipation && user.bereavedParticipation[MEMORIAL_YEAR]) {
+                user.bereavedParticipation[MEMORIAL_YEAR].meetings = this.firebaseMapToArray<Meeting>(user.bereavedParticipation[MEMORIAL_YEAR].meetings);
+              }
+
+              return user;
+            })
         )
       );
   }
@@ -68,5 +76,14 @@ export class DataService {
             }))
         )
       );
+  }
+
+  private firebaseMapToArray<T>(map: Object): T[] {
+    if (map) {
+      return Array.from(Object.entries(map)).map(([id, object]: [string, T]) => ({
+        ...object,
+        id
+      }));
+    }
   }
 }

@@ -43,7 +43,7 @@
     <div class="bereaved-item-col">
     </div>
     <div class="bereaved-item-col">
-      <div *ngFor="let slain of bereaved?.bereavedProfile?.slains" class="seniority">
+      <div *ngFor="let slain of bereaved?.bereavedProfile?.slains">
         {{slain.deathDate | seniority}}
       </div>
     </div>
@@ -54,6 +54,9 @@
       {{bereaved.bereavedParticipation && bereaved.bereavedParticipation[year]?.status}}
     </div>
     <div class="bereaved-item-col">
+      <div *ngFor="let meeting of bereaved.bereavedParticipation && bereaved.bereavedParticipation[year]?.meetings">
+        {{meeting.title}}
+      </div>
     </div>
   </div>
 </cdk-virtual-scroll-viewport>
