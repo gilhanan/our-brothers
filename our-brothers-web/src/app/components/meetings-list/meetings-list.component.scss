@@ -1,5 +1,5 @@
 $textColor: rgb(129, 129, 129);
-// $small-font: 14px;
+
 :host {
   position: absolute;
   top: 0;
@@ -52,6 +52,26 @@ $textColor: rgb(129, 129, 129);
 
         .meeting-label {
           margin-left: 4px;
+        }
+
+        @media only screen and (max-width: 600px) {
+          &.meeting-participant {
+            padding-right: 120px;
+            &::before {
+              content: 'כמות משתתפים:';
+              position: absolute;
+              right: 20px;
+            }
+          }
+
+          &.meeting-bereaved {
+            padding-right: 65px;
+            &::before {
+              content: 'אח/ות:';
+              position: absolute;
+              right: 20px;
+            }
+          }
         }
 
         &.meeting-address {
