@@ -16,6 +16,12 @@ $textColor: rgb(129, 129, 129);
       flex-flow: row;
       margin-right: 10px;
       border-bottom: 1px solid rgb(227, 229, 231);
+      @media only screen and (max-width: 600px) {
+        display: grid;
+        grid-template-rows: 50px repeat(4,25px) 45px;
+        border: 2px solid lightgray;
+        margin: 10px 20px;
+      }
 
       .meeting-item-col {
         flex: 1;
@@ -24,6 +30,11 @@ $textColor: rgb(129, 129, 129);
         margin: 45px 5px;
         font-size: 18px;
         color: $textColor;
+        @media only screen and (max-width: 600px) {
+          margin: 0 2px;
+          padding-right: 20px;
+          align-self: center;
+        }
 
         &:first-child {
           margin-right: 0;
@@ -42,9 +53,21 @@ $textColor: rgb(129, 129, 129);
         .meeting-label {
           margin-left: 4px;
         }
+ 
+        .mobile-label {
+            display: none;
+            @media only screen and (max-width: 600px) {
+              display: inline;
+              margin-left: 2px;
+            }
+        }
 
         &.meeting-address {
           padding-right: 10px;
+
+          @media only screen and (max-width: 600px) {
+            padding-right: 35px;
+          }
 
           &::before {
             content: '';
@@ -55,12 +78,20 @@ $textColor: rgb(129, 129, 129);
             background-size: cover;
             right: -5px;
             top: 6px;
+            @media only screen and (max-width: 600px) {
+              right:20px;
+              top: 3px; 
+            }
           }
         }
 
         &.meeting-date {
           display: flex;
           justify-content: center;
+
+          @media only screen and (max-width: 600px) {
+            justify-content: start;
+          }
 
           .meeting-date-text {
             flex: 0 1 auto;
@@ -75,6 +106,10 @@ $textColor: rgb(129, 129, 129);
             background-size: cover;
             margin-left: 10px;
             margin-top: 6px;
+            @media only screen and (max-width: 600px) {
+              position: relative;
+              bottom:  3px;
+            }
           }
         }
 
@@ -93,6 +128,13 @@ $textColor: rgb(129, 129, 129);
             font-size: 20px;
             font-family: 'arbel';
             color: rgb(0, 115, 109);
+
+            @media only screen and (max-width: 600px) {
+              width: 100px;
+              height: 30px;
+              margin-left: 12px;
+              margin-bottom: 8px;
+            }
           }
         }
       }

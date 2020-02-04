@@ -9,6 +9,9 @@ $textColor: rgb(129, 129, 129);
 
   &.sortable {
     cursor: pointer;
+    @media only screen and (max-width: 600px) {
+      margin: auto 20px ;
+    }
   }
 
   .title {

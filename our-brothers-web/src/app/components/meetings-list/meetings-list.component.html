@@ -30,12 +30,18 @@
       </div>
     </div>
     <div class="meeting-item-col meeting-participant">
-      {{meeting.capacity}}
+      <span class="mobile-label">
+        כמות משתתפים: 
+      </span>
+      {{meeting.capacity}} 
       <span *ngIf="meeting.invited" style="margin-right: 2px;">
         - מוזמנים בלבד
       </span>
     </div>
     <div class="meeting-item-col meeting-bereaved">
+      <span class="mobile-label">
+        אח\ות: 
+      </span>
       <span *ngIf="meeting.bereaved">
         {{meeting.bereaved.firstName + ' ' + meeting.bereaved.lastName}}
       </span>

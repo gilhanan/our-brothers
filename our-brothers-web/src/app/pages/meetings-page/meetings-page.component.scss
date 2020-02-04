@@ -9,6 +9,9 @@
   width: 1170px;
   margin-left: auto;
   margin-right: auto;
+  @media only screen and (max-width: 600px) {
+    margin-right: 0;
+  }
 }
 
 .meetings-container {
@@ -18,6 +21,12 @@
   margin-right: auto;
   padding-top: 51.4%;
   margin-bottom: 200px;
+
+  @media only screen and (max-width: 600px) {
+    max-width: 104vw;
+    margin-right: 0;
+    height: 65vh;
+  }
 
   .loading {
     position: absolute;
