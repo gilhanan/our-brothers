@@ -1,5 +1,5 @@
 $textColor: rgb(129, 129, 129);
-$small-font: 14px;
+// $small-font: 14px;
 :host {
   position: absolute;
   top: 0;
@@ -16,6 +16,12 @@ $small-font: 14px;
       flex-flow: row;
       margin-right: 10px;
       border-bottom: 1px solid rgb(227, 229, 231);
+      @media only screen and (max-width: 600px) {
+        display: grid;
+        grid-template-rows: 50px repeat(4,25px) 45px;
+        border: 2px solid lightgray;
+        margin: 10px 20px;
+      }
 
       .meeting-item-col {
         flex: 1;
@@ -25,7 +31,9 @@ $small-font: 14px;
         font-size: 18px;
         color: $textColor;
         @media only screen and (max-width: 600px) {
-          margin: 15px 2px;
+          margin: 0 2px;
+          padding-right: 20px;
+          align-self: center;
         }
 
         &:first-child {
@@ -40,26 +48,7 @@ $small-font: 14px;
           font-size: 24px;
           font-family: 'arbel';
           color: rgb(0, 115, 109);
-          @media only screen and (max-width: 600px) {
-            font-size: 16px;
-          }
         }
-
-        @media only screen and (max-width: 600px) {
-          &.meeting-participant {
-              justify-content: center;
-              font-size: $small-font;
-            }
-
-          &.meeting-bereaved {
-            font-size: $small-font;
-            width: 20px;
-            justify-content: center;
-            font-weight: bold;
-          }
-          
-        }
-
 
         .meeting-label {
           margin-left: 4px;
@@ -69,7 +58,7 @@ $small-font: 14px;
           padding-right: 10px;
 
           @media only screen and (max-width: 600px) {
-            font-size: $small-font; 
+            padding-right: 35px;
           }
 
           &::before {
@@ -81,6 +70,10 @@ $small-font: 14px;
             background-size: cover;
             right: -5px;
             top: 6px;
+            @media only screen and (max-width: 600px) {
+              right:20px;
+              top: 3px; 
+            }
           }
         }
 
@@ -89,7 +82,7 @@ $small-font: 14px;
           justify-content: center;
 
           @media only screen and (max-width: 600px) {
-            font-size: $small-font; 
+            justify-content: start;
           }
 
           .meeting-date-text {
@@ -105,6 +98,10 @@ $small-font: 14px;
             background-size: cover;
             margin-left: 10px;
             margin-top: 6px;
+            @media only screen and (max-width: 600px) {
+              position: relative;
+              bottom:  3px;
+            }
           }
         }
 
@@ -125,8 +122,10 @@ $small-font: 14px;
             color: rgb(0, 115, 109);
 
             @media only screen and (max-width: 600px) {
-              width: 50px; 
-              margin-left: 8px;
+              width: 100px;
+              height: 30px;
+              margin-left: 12px;
+              margin-bottom: 8px;
             }
           }
         }
