@@ -27,5 +27,11 @@
         </div>
       </div>
     </div>
+    <div *ngIf="!!user" class="row">
+      <button class="join-button" (click)="joinMeeting.emit({meeting: meeting, user: user})"
+        [disabled]="participationsService.isUserParticipatingEvent(user, meeting)">
+        שיבוץ
+      </button>
+    </div>
   </div>
 </div>

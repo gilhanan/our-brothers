@@ -10,7 +10,8 @@
         [iconUrl]='{"url": getMeetingIconUrl(meeting),"scaledSize": {"height": 40, "width": 40}}'
         [markerDraggable]="false" (markerClick)="lastOpenMarker?.close(); lastOpenMarker = infoWindow">
         <agm-info-window #infoWindow>
-          <app-meetings-map-meeting [meeting]="meeting"></app-meetings-map-meeting>
+          <app-meetings-map-meeting [meeting]="meeting" [user]="user" (joinMeeting)="joinMeeting.emit($event)">
+          </app-meetings-map-meeting>
         </agm-info-window>
       </agm-marker>
     </ng-template>

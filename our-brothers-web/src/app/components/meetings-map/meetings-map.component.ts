@@ -18,6 +18,7 @@ export class MeetingsMapComponent implements OnInit {
   @Input() showGuide = false;
 
   @Output() guideCompleted = new EventEmitter<void>();
+  @Output() joinMeeting = new EventEmitter<{meeting: Meeting, user: User}>();
 
   mapLatitude = 31.672600;
   mapLongitude = 35.077028;
@@ -64,7 +65,7 @@ export class MeetingsMapComponent implements OnInit {
 
     const isBereaved = this.user && this.user.role === UserRole.bereaved;
 
-    if (this.participationsService.isUserParticipatingEvent(this.user, MEMORIAL_YEAR, meeting.id)) {
+    if (this.participationsService.isUserParticipatingEvent(this.user, meeting)) {
       url = '/assets/img/map/meetings-map-blue.svg';
     } else if (!isBereaved && meeting.invited) {
       url = '/assets/img/map/meetings-map-grey.svg';
@@ -73,7 +74,7 @@ export class MeetingsMapComponent implements OnInit {
     } else if (isBereaved && meeting.bereaved) {
       url = '/assets/img/map/meetings-map-red.svg';
     } else {
-      url = '/assets/img/map/meetings-map-open.svg';
+      url = '/assets/img/map/meetings-map-green.svg';
     }
 
     return url;

@@ -29,7 +29,7 @@
         {{meeting.date | date: 'dd.MM.yyyy'}}
       </div>
     </div>
-    <div class="meeting-item-col meeting-participant">
+    <div class="meeting-item-col meeting-participants">
       <span class="mobile-label">
         כמות משתתפים:
       </span>
@@ -46,10 +46,11 @@
         {{meeting.bereaved.firstName + ' ' + meeting.bereaved.lastName}}
       </span>
     </div>
-    <div class="meeting-item-col meeting-button">
-      <div class="join-button">
+    <div class="meeting-item-col meeting-button" *ngIf="!!user">
+      <button class="join-button" (click)="joinMeeting.emit({meeting: meeting, user: user})"
+        [disabled]="participationsService.isUserParticipatingEvent(user, meeting)">
         שיבוץ
-      </div>
+      </button>
     </div>
   </div>
 </cdk-virtual-scroll-viewport>

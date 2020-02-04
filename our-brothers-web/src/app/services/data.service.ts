@@ -3,9 +3,9 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable, throwError, from } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
-import { User, Meeting } from '../model';
+import { User, Meeting, BereavedParticipation, UserParticipationMeeting } from '../model';
 
-export const MEMORIAL_YEAR = 2019;
+export const MEMORIAL_YEAR = 2020;
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +22,18 @@ export class DataService {
           id: userId,
           ...user
         })),
+        map(user => {
+
+          if (user.bereavedParticipation && user.bereavedParticipation[MEMORIAL_YEAR]) {
+            user.bereavedParticipation[MEMORIAL_YEAR].meetings = this.parseUserMeetings(user.bereavedParticipation[MEMORIAL_YEAR].meetings);
+          }
+
+          if (user.participateParticipation && user.participateParticipation[MEMORIAL_YEAR]) {
+            user.participateParticipation[MEMORIAL_YEAR].meetings = this.parseUserMeetings(user.participateParticipation[MEMORIAL_YEAR].meetings);
+          }
+
+          return user;
+        }),
         catchError(error => {
           console.log(error);
           return throwError(error);
@@ -52,7 +64,7 @@ export class DataService {
             .map(user => {
 
               if (user.bereavedParticipation && user.bereavedParticipation[MEMORIAL_YEAR]) {
-                user.bereavedParticipation[MEMORIAL_YEAR].meetings = this.firebaseMapToArray<Meeting>(user.bereavedParticipation[MEMORIAL_YEAR].meetings);
+                user.bereavedParticipation[MEMORIAL_YEAR].meetings = this.parseUserMeetings(user.bereavedParticipation[MEMORIAL_YEAR].meetings);
               }
 
               return user;
@@ -84,6 +96,54 @@ export class DataService {
           return meetings;
         })
       );
+  }
+
+  public bereavedRegisterHost(bereaved: User, meeting: Meeting, year = MEMORIAL_YEAR): Observable<boolean> {
+    const postObj = {
+      id: bereaved.id,
+      firstName: bereaved.profile.firstName,
+      lastName: bereaved.profile.lastName,
+      email: bereaved.profile.email || null,
+      phoneNumber: bereaved.profile.phoneNumber,
+      slain: bereaved.bereavedProfile && bereaved.bereavedProfile.slains || null
+    };
+
+    return from(this.angularFireDatabase
+      .object(`events/${year}/${meeting.hostId}/${meeting.id}/bereaved`)
+      .set(postObj)
+      .then(() => {
+        return this.angularFireDatabase.object(`users/${bereaved.id}/bereavedParticipation/${year}/meetings/${meeting.hostId}/${meeting.id}`)
+          .set({
+            title: meeting.title
+          })
+          .then(() => true);
+      })
+      .catch((error) => {
+        console.log(error);
+        throw error;
+      }));
+  }
+
+  private parseUserMeetings(map: Object): UserParticipationMeeting[] {
+    const participations: UserParticipationMeeting[] = [];
+
+    Array.from(Object.entries(map))
+      .forEach(([hostId, meetings]: [string, Object]) => {
+
+        Array.from(Object.entries(meetings))
+          .forEach(([id, meeting]: [string, { title: string }]) => {
+
+            participations.push({
+              id,
+              hostId,
+              title: meeting.title
+            })
+
+          });
+
+      });
+
+    return participations;
   }
 
   private firebaseMapToArray<T>(map: Object): T[] {

@@ -1,25 +1,22 @@
 export interface ParticipateParticipation {
-  meetings: Array<{
-    id: string;
-    accompanies: number;
-  }>;
+  meetings: UserParticipationMeeting[];
 }
 
 export interface HostParticipation {
-  meetings: Array<{
-    id: string;
-    title: string;
-  }>;
+  meetings: UserParticipationMeeting[];
 }
 
 export interface BereavedParticipation {
-  meetings: Array<{
-    id: string;
-    title: string;
-  }>;
+  meetings: UserParticipationMeeting[];
   status: BereavedStatus;
   guidance: BereavedGuidance;
   notes: string;
+}
+
+export interface UserParticipationMeeting {
+  hostId: string;
+  id: string;
+  title: string;
 }
 
 export type BereavedStatus = 'שובץ' | 'הושלם' | 'ממתין';

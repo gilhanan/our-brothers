@@ -1,5 +1,6 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { User, Meeting } from '../../../app/model';
+import { ParticipationsService } from 'src/app/services/participations.service';
 
 interface SortedColumn {
   column: string;
@@ -16,13 +17,15 @@ export class MeetingsListComponent implements OnChanges {
   @Input() meetings: Meeting[];
   @Input() user: User;
 
+  @Output() joinMeeting = new EventEmitter<{ meeting: Meeting, user: User }>();
+
   sortedMeetings: Meeting[] = [];
   sortedColumn: SortedColumn = {
     column: 'title',
     direction: 'asc'
   };
 
-  constructor() { }
+  constructor(public participationsService: ParticipationsService) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.meetings) {
