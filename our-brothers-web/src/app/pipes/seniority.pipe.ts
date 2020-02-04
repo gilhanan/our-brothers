@@ -7,6 +7,13 @@ export class SeniorityPipe implements PipeTransform {
 
   transform(date: number): any {
     const diff = new Date(Date.now() - date);
-    return Math.abs(diff.getUTCFullYear() - 1970);
+
+    const years = Math.abs(diff.getUTCFullYear() - 1970);
+
+    if (!years) {
+      return !diff.getMonth() ? .1 : (diff.getMonth() / 12).toFixed(1);
+    } else {
+      return years;
+    }
   }
 }

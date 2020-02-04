@@ -11,10 +11,10 @@
   <app-list-column [field]="'seniority'">
     ותק בשכול
   </app-list-column>
-  <app-list-column>
+  <app-list-column [field]="'guidance'">
     הדרכות
   </app-list-column>
-  <app-list-column>
+  <app-list-column [field]="'status'">
     סטטוס
   </app-list-column>
   <app-list-column>
@@ -22,7 +22,7 @@
   </app-list-column>
 </app-list-header>
 <cdk-virtual-scroll-viewport itemSize="20" class="bereaved-items">
-  <div class="bereaved-item" *ngFor="let bereaved of sortedBereaveds">
+  <div class="bereaved-item" *ngFor="let bereaved of sortedBereaveds; trackBy: trackByFn">
     <div class="bereaved-item-col bereaved-name">
       {{bereaved.profile?.firstName + ' ' + bereaved.profile?.lastName}}
     </div>
@@ -42,16 +42,16 @@
     </div>
     <div class="bereaved-item-col">
     </div>
-    <div class="bereaved-item-col bereaved-seniorities">
+    <div class="bereaved-item-col">
       <div *ngFor="let slain of bereaved?.bereavedProfile?.slains" class="seniority">
         {{slain.deathDate | seniority}}
       </div>
     </div>
     <div class="bereaved-item-col">
+      {{bereaved.bereavedParticipation && bereaved.bereavedParticipation[year]?.guidance?.general}}
     </div>
     <div class="bereaved-item-col">
-    </div>
-    <div class="bereaved-item-col">
+      {{bereaved.bereavedParticipation && bereaved.bereavedParticipation[year]?.status}}
     </div>
     <div class="bereaved-item-col">
     </div>

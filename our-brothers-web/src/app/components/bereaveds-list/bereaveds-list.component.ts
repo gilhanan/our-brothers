@@ -1,5 +1,6 @@
 import { Component, OnChanges, Input, SimpleChanges } from '@angular/core';
 import { User } from 'src/app/model';
+import { MEMORIAL_YEAR } from '../../../app/services/data.service';
 import { SortedColumn } from '../list-header/list-header.component';
 
 
@@ -12,6 +13,7 @@ export class BereavedsListComponent implements OnChanges {
 
   @Input() bereaveds: User[];
   sortedBereaveds: User[] = [];
+  year = MEMORIAL_YEAR;
 
   sortedColumn: SortedColumn = {
     column: 'name',
@@ -25,6 +27,10 @@ export class BereavedsListComponent implements OnChanges {
       this.bereaveds = this.bereaveds || [];
       this.sort();
     }
+  }
+
+  trackByFn(index: number, item: User) {
+    return item.id;
   }
 
   sort() {
@@ -43,6 +49,12 @@ export class BereavedsListComponent implements OnChanges {
         } else if (column === 'seniority') {
           aValue = a.bereavedProfile && a.bereavedProfile.slains && a.bereavedProfile.slains[0] && a.bereavedProfile.slains[0].deathDate || Number.MAX_VALUE;
           bValue = b.bereavedProfile && b.bereavedProfile.slains && b.bereavedProfile.slains[0] && b.bereavedProfile.slains[0].deathDate || Number.MAX_VALUE;
+        } else if (column === 'guidance') {
+          aValue = a.bereavedParticipation && a.bereavedParticipation[this.year] && a.bereavedParticipation[this.year].guidance && a.bereavedParticipation[this.year].guidance.general || '';
+          bValue = b.bereavedParticipation && b.bereavedParticipation[this.year] && b.bereavedParticipation[this.year].guidance && b.bereavedParticipation[this.year].guidance.general || '';
+        } else if (column === 'status') {
+          aValue = a.bereavedParticipation && a.bereavedParticipation[this.year] && a.bereavedParticipation[this.year].status || '';
+          bValue = b.bereavedParticipation && b.bereavedParticipation[this.year] && b.bereavedParticipation[this.year].status || '';
         } else {
           aValue = a[column] || '';
           bValue = b[column] || '';

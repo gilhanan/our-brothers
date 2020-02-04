@@ -31,6 +31,10 @@ export class MeetingsListComponent implements OnChanges {
     }
   }
 
+  trackByFn(index: number, item: Meeting) {
+    return item.id;
+  }
+
   sort() {
     this.sortedMeetings = this.meetings.slice();
 

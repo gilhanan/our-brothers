@@ -17,17 +17,16 @@ export interface BereavedParticipation {
     id: string;
     title: string;
   }>;
+  status: BereavedStatus;
   guidance: BereavedGuidance;
   notes: string;
 }
 
+export type BereavedStatus = 'שובץ' | 'הושלם' | 'ממתין';
+
 export interface BereavedGuidance {
   answered: boolean;
-  emotional: BereavedGuidanceRubric;
-  technical: BereavedGuidanceRubric;
+  general: BereavedGuidanceGeneralOptions;
 }
 
-export interface BereavedGuidanceRubric {
-  interested: boolean;
-  cities?: string[];
-}
+export type BereavedGuidanceGeneralOptions = 'ירושלים' | 'תל אביב' | 'ראשון לציון';
