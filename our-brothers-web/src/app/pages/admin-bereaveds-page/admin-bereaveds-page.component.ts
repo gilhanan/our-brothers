@@ -11,6 +11,7 @@ export class AdminBereavedsPageComponent implements OnInit {
 
   bereaveds: User[];
   filteredBereaveds: User[];
+  year = MEMORIAL_YEAR;
 
   constructor(
     private dataService: DataService
@@ -40,7 +41,12 @@ export class AdminBereavedsPageComponent implements OnInit {
                 bereaved.profile.phoneNumber && (bereaved.profile.phoneNumber.replace(/^\+972/, '0').includes(keyword))
               )
             ) ||
-            bereaved.bereavedProfile && bereaved.bereavedProfile.slains && bereaved.bereavedProfile.slains.some(slain => ((slain.firstName || '') + (slain.lastName || '')).includes(keyword))
+            bereaved.bereavedProfile && bereaved.bereavedProfile.slains && bereaved.bereavedProfile.slains.some(slain => ((slain.firstName || '') + (slain.lastName || '')).includes(keyword)) ||
+            (
+              bereaved.bereavedParticipation &&
+              bereaved.bereavedParticipation[this.year] &&
+              bereaved.bereavedParticipation[this.year].meetings &&
+              bereaved.bereavedParticipation[this.year].meetings.some(meeting => meeting.title.includes(keyword)))
           )
         ));
     }

@@ -3,9 +3,9 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable, throwError, from } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
-import { User, Meeting, BereavedParticipation, UserParticipationMeeting } from '../model';
+import { User, Meeting, UserParticipationMeeting } from '../model';
 
-export const MEMORIAL_YEAR = 2020;
+export const MEMORIAL_YEAR = 2019;
 
 @Injectable({
   providedIn: 'root'
@@ -125,25 +125,30 @@ export class DataService {
   }
 
   private parseUserMeetings(map: Object): UserParticipationMeeting[] {
-    const participations: UserParticipationMeeting[] = [];
 
-    Array.from(Object.entries(map))
-      .forEach(([hostId, meetings]: [string, Object]) => {
+    if (map) {
 
-        Array.from(Object.entries(meetings))
-          .forEach(([id, meeting]: [string, { title: string }]) => {
+      const participations: UserParticipationMeeting[] = [];
 
-            participations.push({
-              id,
-              hostId,
-              title: meeting.title
-            })
+      Array.from(Object.entries(map))
+        .forEach(([hostId, meetings]: [string, Object]) => {
 
-          });
+          Array.from(Object.entries(meetings))
+            .forEach(([id, meeting]: [string, { title: string }]) => {
 
-      });
+              participations.push({
+                id,
+                hostId,
+                title: meeting.title
+              })
 
-    return participations;
+            });
+
+        });
+
+      return participations;
+
+    }
   }
 
   private firebaseMapToArray<T>(map: Object): T[] {
