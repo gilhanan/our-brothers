@@ -1,4 +1,5 @@
 <app-meetings-map-legend *ngIf="meetings" [user]="user"></app-meetings-map-legend>
+<app-meetings-map-navigator (navigate)="navigate($event)"></app-meetings-map-navigator>
 <app-meetings-map-guide *ngIf="meetings && showGuide" (guideCompleted)="guideCompleted.emit()"></app-meetings-map-guide>
 <agm-map class="map" [latitude]="mapLatitude" [longitude]="mapLongitude" [zoom]="mapZoom" [minZoom]="7" [maxZoom]="17"
   [styles]="[{featureType: 'poi', stylers: [{visibility: 'off'}]}]" [restriction]="restriction"

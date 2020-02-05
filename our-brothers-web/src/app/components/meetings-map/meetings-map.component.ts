@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Meeting, User, UserRole } from '../../model';
 import { MapRestriction } from '@agm/core/services/google-maps-types';
 import { ParticipationsService } from '../../../app/services/participations.service';
+import { NavigationDirection } from '../meetings-map-navigator/meetings-map-navigator.component';
 
 @Component({
   selector: 'app-meetings-map',
@@ -17,7 +18,7 @@ export class MeetingsMapComponent implements OnInit {
   @Input() showGuide = false;
 
   @Output() guideCompleted = new EventEmitter<void>();
-  @Output() joinMeeting = new EventEmitter<{meeting: Meeting, user: User}>();
+  @Output() joinMeeting = new EventEmitter<{ meeting: Meeting, user: User }>();
 
   mapLatitude = 31.672600;
   mapLongitude = 35.077028;
@@ -77,6 +78,22 @@ export class MeetingsMapComponent implements OnInit {
     }
 
     return url;
+  }
+
+  navigate(direction: NavigationDirection) {
+    if (direction === 'north') {
+      this.mapLatitude = 32.84;
+      this.mapLongitude = 35.35;
+      this.mapZoom = 10;
+    } else if (direction === 'middle') {
+      this.mapLatitude = 31.93;
+      this.mapLongitude = 35.11;
+      this.mapZoom = 10;
+    } else if (direction === 'south') {
+      this.mapLatitude = 30.45;
+      this.mapLongitude = 34.93;
+      this.mapZoom = 9;
+    }
   }
 
   private getLocation(): Observable<{ latitude: number, longitude: number }> {

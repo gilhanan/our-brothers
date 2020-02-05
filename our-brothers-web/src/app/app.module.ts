@@ -33,6 +33,7 @@ import { ProfileFormComponent } from './components/forms/profile-form/profile-fo
 import { ProfilePopupComponent } from './components/popups/profile-popup/profile-popup.component';
 import { MeetingsMapLegendComponent } from './components/meetings-map-legend/meetings-map-legend.component';
 import { MeetingsMapMeetingComponent } from './components/meetings-map-meeting/meetings-map-meeting.component';
+import { MeetingsMapNavigatorComponent } from './components/meetings-map-navigator/meetings-map-navigator.component';
 import { AdminBereavedsPageComponent } from './pages/admin-bereaveds-page/admin-bereaveds-page.component';
 import { FreeTextFilterComponent } from './components/free-text-filter/free-text-filter.component';
 import { BereavedsListComponent } from './components/bereaveds-list/bereaveds-list.component';
@@ -70,7 +71,8 @@ registerLocaleData(localeHe);
     ListHeaderComponent,
     ListColumnComponent,
     PhonePipe,
-    SeniorityPipe
+    SeniorityPipe,
+    MeetingsMapNavigatorComponent
   ],
   imports: [
     BrowserModule,
