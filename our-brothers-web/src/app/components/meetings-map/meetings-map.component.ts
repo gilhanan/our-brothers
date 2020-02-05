@@ -3,7 +3,6 @@ import { Observable } from 'rxjs';
 import { Meeting, User, UserRole } from '../../model';
 import { MapRestriction } from '@agm/core/services/google-maps-types';
 import { ParticipationsService } from '../../../app/services/participations.service';
-import { MEMORIAL_YEAR } from '../../../app/services/data.service';
 
 @Component({
   selector: 'app-meetings-map',

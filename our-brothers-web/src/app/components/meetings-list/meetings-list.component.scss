@@ -6,6 +6,7 @@ $textColor: rgb(129, 129, 129);
   bottom: 0;
   left: 0;
   right: 0;
+  overflow: hidden;
 
   .meeting-items {
     height: 100%;
@@ -16,7 +17,8 @@ $textColor: rgb(129, 129, 129);
       flex-flow: row;
       margin-right: 10px;
       border-bottom: 1px solid rgb(227, 229, 231);
-      @media only screen and (max-width: 600px) {
+
+      @media only screen and (max-width: 650px) {
         display: grid;
         grid-template-rows: 50px repeat(4, 25px) 45px;
         border: 2px solid lightgray;
@@ -30,7 +32,8 @@ $textColor: rgb(129, 129, 129);
         margin: 45px 5px;
         font-size: 18px;
         color: $textColor;
-        @media only screen and (max-width: 600px) {
+
+        @media only screen and (max-width: 650px) {
           margin: 0 2px;
           padding-right: 20px;
           align-self: center;
@@ -56,7 +59,8 @@ $textColor: rgb(129, 129, 129);
 
         .mobile-label {
           display: none;
-          @media only screen and (max-width: 600px) {
+
+          @media only screen and (max-width: 650px) {
             display: inline;
             margin-left: 2px;
           }
@@ -74,10 +78,9 @@ $textColor: rgb(129, 129, 129);
         }
 
         &.meeting-date {
-          display: flex;
           justify-content: center;
 
-          @media only screen and (max-width: 600px) {
+          @media only screen and (max-width: 650px) {
             justify-content: start;
           }
 
@@ -98,16 +101,15 @@ $textColor: rgb(129, 129, 129);
         &.meeting-participants {
           justify-content: center;
 
-          @media only screen and (max-width: 600px) {
+          @media only screen and (max-width: 650px) {
             justify-content: start;
           }
         }
 
         &.meeting-button {
-          display: flex;
-          justify-content: flex-end;
+          @media only screen and (max-width: 650px) {
+            justify-content: flex-end;
 
-          @media only screen and (max-width: 600px) {
             .join-button {
               margin-left: 12px;
               margin-bottom: 8px;

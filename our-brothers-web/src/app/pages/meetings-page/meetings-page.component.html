@@ -27,19 +27,21 @@
   </app-flip-card>
 </div>
 
-<div class="meetings-filters-container">
+<div class="container meetings-filters-container">
   <app-meetings-filters [(view)]="view" (filterChange)="filterMeetings($event)"></app-meetings-filters>
 </div>
 
-<div class="meetings-container">
+<div class="container meetings-container">
   <div *ngIf="!meetings?.length" class="loading">
     טוען..
   </div>
   <ng-template [ngIf]="view === 'map'" [ngIfElse]="meetingsList">
-    <app-meetings-map [user]="user" [meetings]="filteredMeetings" [showGuide]="mapShowGuide$ | async" (joinMeeting)="onJoinMeeting($event)" (guideCompleted)="onMapGuideCompleted()"></app-meetings-map>
+    <app-meetings-map [user]="user" [meetings]="filteredMeetings" [showGuide]="mapShowGuide$ | async"
+      (joinMeeting)="onJoinMeeting($event)" (guideCompleted)="onMapGuideCompleted()"></app-meetings-map>
   </ng-template>
 
   <ng-template #meetingsList>
-    <app-meetings-list [user]="user" [meetings]="filteredMeetings" (joinMeeting)="onJoinMeeting($event)"> </app-meetings-list>
+    <app-meetings-list [user]="user" [meetings]="filteredMeetings" (joinMeeting)="onJoinMeeting($event)">
+    </app-meetings-list>
   </ng-template>
 </div>

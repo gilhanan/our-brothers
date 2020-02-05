@@ -2,15 +2,22 @@
   display: flex;
   align-items: center;
 
-  .free-text-filter {
+  .free-text-filter-col {
     flex: 1;
-
-    @media only screen and (max-width: 600px) {
-      margin-right: 5%;
-    }
+    padding: 15px;
   }
 
-  .view-toggle {
-    margin-right: 20px;
+  .view-toggle-col {
+    flex: 0;
+    padding: 15px;
+
+    .view-toggle.map {
+      @media only screen and (max-width: 650px) {
+        position: fixed;
+        z-index: 9999999;
+        bottom: 10px;
+        left: 10px;
+      }
+    }
   }
 }

@@ -1,2 +1,7 @@
-<app-free-text-filter class="free-text-filter" (filterChange)="filterChange.emit($event)"></app-free-text-filter>
-<app-view-toggle class="view-toggle" [view]="view" (viewChange)="viewChange.emit($event)"></app-view-toggle>
+<div class="free-text-filter-col">
+  <app-free-text-filter class="free-text-filter" (filterChange)="filterChange.emit($event)"></app-free-text-filter>
+</div>
+<div class="view-toggle-col">
+  <app-view-toggle class="view-toggle" [ngClass]="{'map': view === 'map'}" [view]="view"
+    (viewChange)="viewChange.emit($event)"></app-view-toggle>
+</div>

@@ -2,7 +2,7 @@
 <app-meetings-map-guide *ngIf="meetings && showGuide" (guideCompleted)="guideCompleted.emit()"></app-meetings-map-guide>
 <agm-map class="map" [latitude]="mapLatitude" [longitude]="mapLongitude" [zoom]="mapZoom" [minZoom]="7" [maxZoom]="17"
   [styles]="[{featureType: 'poi', stylers: [{visibility: 'off'}]}]" [restriction]="restriction"
-  [gestureHandling]="'cooperative'">
+  [gestureHandling]="'greedy'">
   <agm-marker-cluster [gridSize]="60" [minimumClusterSize]="4"
     [styles]="[{url:'/assets/img/map/meetings-map-cluster.svg',width:50,height:50,textSize:1,textColor:'#ffffff',backgroundPosition:'0 5px'}]">
     <ng-template ngFor let-meeting [ngForOf]="meetings" let-i="index" [ngForTrackBy]="trackByFn">
