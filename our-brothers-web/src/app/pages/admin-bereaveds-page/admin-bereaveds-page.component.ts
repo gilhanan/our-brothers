@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../../../app/model';
-import { DataService, MEMORIAL_YEAR } from '../../../app/services/data.service';
+import { User, Meeting } from '../../../app/model';
+import { DataService, MEMORIAL_YEAR, BereavedMeeting } from '../../../app/services/data.service';
+import { Subject } from 'rxjs';
+import { take } from 'rxjs/operators';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-admin-bereaveds-page',
@@ -10,46 +13,52 @@ import { DataService, MEMORIAL_YEAR } from '../../../app/services/data.service';
 export class AdminBereavedsPageComponent implements OnInit {
 
   bereaveds: User[];
+  noBerevedMeetings: Meeting[];
+  filter: string = '';
   filteredBereaveds: User[];
   year = MEMORIAL_YEAR;
 
+  selectedMeeting$ = new Subject<BereavedMeeting>();
+  selectingBereaved: User;
+
   constructor(
-    private dataService: DataService
+    private dataService: DataService,
+    private utilsService: UtilsService
   ) { }
 
   ngOnInit(): void {
     this.dataService.getBereaveds().subscribe(bereaveds => {
       this.bereaveds = bereaveds;
-      this.filterBereaveds('');
+      this.filterBereaveds();
+    });
+    this.dataService.getNoBerevedMeetings().subscribe(noBerevedMeetings => {
+      this.noBerevedMeetings = noBerevedMeetings;
     });
   }
 
-  filterBereaveds(query: string) {
-    if (!query || !query.trim()) {
-      this.filteredBereaveds = this.bereaveds.slice();
+  filterBereaveds() {
+    this.filteredBereaveds = this.utilsService.filteringBereaveds(this.bereaveds, this.filter);
+  }
+
+  joinBereved(bereaved: User) {
+    this.selectingBereaved = bereaved;
+    if (this.noBerevedMeetings && this.noBerevedMeetings.length) {
+      this.selectedMeeting$.pipe(take(1)).subscribe(({ meeting }: BereavedMeeting) => {
+        this.selectingBereaved = null;
+        if (meeting) {
+          this.dataService.bereavedRegisterHost(bereaved, meeting);
+        }
+      })
     } else {
-      query = query.replace(/-/g, '');
-      const keywords = query.match(/([^\s]+)/g) || [];
-      this.filteredBereaveds = this.bereaveds.filter(bereaved =>
-        keywords.every(keyword =>
-          (
-            bereaved.id.includes(keyword) ||
-            (bereaved.profile &&
-              (
-                ((bereaved.profile.firstName || '') + (bereaved.profile.lastName || '')).includes(keyword) ||
-                bereaved.profile.email && bereaved.profile.email.includes(keyword) ||
-                bereaved.profile.phoneNumber && (bereaved.profile.phoneNumber.replace(/^\+972/, '0').includes(keyword))
-              )
-            ) ||
-            bereaved.bereavedProfile && bereaved.bereavedProfile.slains && bereaved.bereavedProfile.slains.some(slain => ((slain.firstName || '') + (slain.lastName || '')).includes(keyword)) ||
-            (
-              bereaved.bereavedParticipation &&
-              bereaved.bereavedParticipation[this.year] &&
-              bereaved.bereavedParticipation[this.year].meetings &&
-              bereaved.bereavedParticipation[this.year].meetings.some(meeting => meeting.title.includes(keyword)))
-          )
-        ));
+      this.selectingBereaved = null;
     }
   }
 
+  leaveBereaved({ meeting, bereaved }: BereavedMeeting) {
+    if (meeting && bereaved) {
+      if (window.confirm(' האם ברצונך להסיר את' + bereaved.profile.firstName + ' ' + bereaved.profile.lastName + ' מהמפגש ' + meeting.title + '?')) {
+        this.dataService.bereavedLeaveHost(bereaved, meeting);
+      }
+    }
+  }
 }

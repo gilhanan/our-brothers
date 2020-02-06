@@ -56,7 +56,11 @@
     <div class="bereaved-item-col">
       <div *ngFor="let meeting of bereaved.bereavedParticipation && bereaved.bereavedParticipation[year]?.meetings">
         {{meeting.title}}
+        <button class="leave-button" (click)="leaveBereaved.emit({bereaved: bereaved, meeting: meeting})">פח</button>
       </div>
+      <button class="join-button" (click)="joinBereved.emit(bereaved)">
+        שיבוץ
+      </button>
     </div>
   </div>
 </cdk-virtual-scroll-viewport>

@@ -28,7 +28,7 @@
 </div>
 
 <div class="container meetings-filters-container">
-  <app-meetings-filters [(view)]="view" (filterChange)="filterMeetings($event)"></app-meetings-filters>
+  <app-meetings-filters [(view)]="view" [(filter)]="filter" (filterChange)="filterMeetings($event)"></app-meetings-filters>
 </div>
 
 <div class="container meetings-container">

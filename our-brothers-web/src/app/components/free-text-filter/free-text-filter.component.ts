@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
@@ -9,6 +9,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 })
 export class FreeTextFilterComponent implements OnInit {
 
+  @Input() filter: string;
   @Output() filterChange = new EventEmitter<string>();
 
   filterDebounce$ = new Subject<string>();

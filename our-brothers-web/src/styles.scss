@@ -364,3 +364,45 @@ input.login-form-input {
     margin-bottom: 8px;
   }
 }
+
+.cancel-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid rgb(160, 0, 0);
+  width: 125px;
+  max-width: 125px;
+  height: 40px;
+  font-size: 20px;
+  font-family: "arbel";
+  color: rgb(190, 0, 0);
+  background-color: white;
+  cursor: pointer;
+
+  &:disabled {
+    color: grey;
+    border-color: grey;
+    cursor: auto;
+  }
+
+  @media only screen and (max-width: 600px) {
+    width: 100px;
+    height: 30px;
+    margin-left: 12px;
+    margin-bottom: 8px;
+  }
+}
+
+.blocker {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.2);
+
+  &.blocker-fixed {
+    position: fixed;
+  }
+}

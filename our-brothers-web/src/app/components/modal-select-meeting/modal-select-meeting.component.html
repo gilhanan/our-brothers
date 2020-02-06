@@ -1,0 +1,21 @@
+<div class="blocker blocker-fixed">
+  <div class="modal-container">
+    <div class="modal-header">
+      שבץ את
+      {{bereaved.profile.firstName + ' ' + bereaved.profile.lastName}}
+    </div>
+    <div class="free-text-filter-container">
+      <app-free-text-filter class="free-text-filter" [(filter)]="filter" (filterChange)="filterMeetings($event)">
+      </app-free-text-filter>
+    </div>
+    <div class="meetings-list">
+      <app-meetings-list [meetings]="meetings" [user]="bereaved" (joinMeeting)="selectMeeting.emit($event)">
+      </app-meetings-list>
+    </div>
+    <div class="cancel-button-container">
+      <button class="cancel-button" (click)="selectMeeting.emit(null)">
+        ביטול
+      </button>
+    </div>
+  </div>
+</div>

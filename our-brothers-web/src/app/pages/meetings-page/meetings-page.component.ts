@@ -5,6 +5,7 @@ import { Meeting, User } from '../..//model';
 import { DataService } from '../../services/data.service';
 import { ViewOptions } from '../../components/view-toggle/view-toggle.component';
 import { AuthService } from 'src/app/services/auth.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 const oneWeek = 1000 * 60 * 60 * 24 * 7;
 
@@ -22,10 +23,12 @@ export class MeetingsPageComponent implements OnInit {
   mapShowGuide$ = this.authService.user.pipe(
     map(user => !this.hideMapGuide && !(user && user.meetingMapGuideLastVisit && (Date.now() - user.meetingMapGuideLastVisit) < oneWeek))
   );
+  filter: string = '';
 
   constructor(
     private dataService: DataService,
-    private authService: AuthService
+    private authService: AuthService,
+    private utilsService: UtilsService
   ) { }
 
   ngOnInit(): void {
@@ -35,26 +38,12 @@ export class MeetingsPageComponent implements OnInit {
 
     this.dataService.getMeetings().subscribe(meetings => {
       this.meetings = meetings;
-      this.filterMeetings('');
+      this.filterMeetings();
     });
   }
 
-  filterMeetings(query: string) {
-    if (!query || !query.trim()) {
-      this.filteredMeetings = this.meetings.slice();
-    } else {
-      const keywords = query.match(/([^\s]+)/g) || [];
-      this.filteredMeetings = this.meetings.filter(meeting =>
-        keywords.every(
-          keyword =>
-            meeting.title.includes(keyword) ||
-            meeting.address.formattedAddress.includes(keyword) ||
-            (
-              meeting.bereaved && ((meeting.bereaved.firstName || '') + (meeting.bereaved.lastName || '')).includes(keyword)
-            )
-        )
-      );
-    }
+  filterMeetings() {
+    this.filteredMeetings = this.utilsService.filteringMeetings(this.meetings, this.filter);
   }
 
   onMapGuideCompleted() {

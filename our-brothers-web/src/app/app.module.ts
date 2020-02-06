@@ -39,6 +39,7 @@ import { FreeTextFilterComponent } from './components/free-text-filter/free-text
 import { BereavedsListComponent } from './components/bereaveds-list/bereaveds-list.component';
 import { ListHeaderComponent } from './components/list-header/list-header.component';
 import { ListColumnComponent } from './components/list-column/list-column.component';
+import { ModalSelectMeetingComponent } from './components/modal-select-meeting/modal-select-meeting.component';
 import { PhonePipe } from './pipes/phone.pipe';
 import { SeniorityPipe } from './pipes/seniority.pipe';
 
@@ -72,7 +73,8 @@ registerLocaleData(localeHe);
     ListColumnComponent,
     PhonePipe,
     SeniorityPipe,
-    MeetingsMapNavigatorComponent
+    MeetingsMapNavigatorComponent,
+    ModalSelectMeetingComponent
   ],
   imports: [
     BrowserModule,
@@ -96,4 +98,4 @@ registerLocaleData(localeHe);
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

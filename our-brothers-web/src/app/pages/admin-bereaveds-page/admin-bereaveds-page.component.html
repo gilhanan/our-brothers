@@ -1,9 +1,14 @@
+<app-modal-select-meeting *ngIf="!!selectingBereaved" [meetings]="noBerevedMeetings" [bereaved]="selectingBereaved"
+  (selectMeeting)="selectedMeeting$.next($event)">
+</app-modal-select-meeting>
 <div class="bereaveds-container">
-  <app-free-text-filter class="free-text-filter" (filterChange)="filterBereaveds($event)"></app-free-text-filter>
+  <app-free-text-filter class="free-text-filter" [(filter)]="filter" (filterChange)="filterBereaveds($event)">
+  </app-free-text-filter>
   <div class="bereaveds-list-container">
     <div *ngIf="!bereaveds?.length" class="loading">
       טוען..
     </div>
-    <app-bereaveds-list [bereaveds]="filteredBereaveds"></app-bereaveds-list>
+    <app-bereaveds-list [bereaveds]="filteredBereaveds" (joinBereved)="joinBereved($event)"
+      (leaveBereaved)="leaveBereaved($event)"></app-bereaveds-list>
   </div>
 </div>

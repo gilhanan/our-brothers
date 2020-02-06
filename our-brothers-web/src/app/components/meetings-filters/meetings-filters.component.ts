@@ -11,6 +11,7 @@ export class MeetingsFiltersComponent {
   @Input() view: ViewOptions;
   @Output() viewChange = new EventEmitter<ViewOptions>();
 
+  @Input() filter: string;
   @Output() filterChange = new EventEmitter<string>();
 
   constructor() { }

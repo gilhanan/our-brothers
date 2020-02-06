@@ -7,6 +7,11 @@ import { User, Meeting, UserParticipationMeeting } from '../model';
 
 export const MEMORIAL_YEAR = 2019;
 
+export interface BereavedMeeting {
+  meeting: Meeting;
+  bereaved: User;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -60,7 +65,7 @@ export class DataService {
         map(usersSnapshot =>
           usersSnapshot
             .map(usersSnapshot => ({ id: usersSnapshot.key, ...usersSnapshot.payload.val() }))
-            .filter(user => user.role === 'bereaved')
+            .filter(user => user.role === 'bereaved' && !!user.profile)
             .map(user => {
 
               if (user.bereavedParticipation && user.bereavedParticipation[MEMORIAL_YEAR]) {
@@ -98,6 +103,12 @@ export class DataService {
       );
   }
 
+  public getNoBerevedMeetings(year = MEMORIAL_YEAR): Observable<Meeting[]> {
+    return this.getMeetings(year).pipe(
+      map((meetings: Meeting[]) => meetings.filter((meeting) => !meeting.bereaved))
+    );
+  }
+
   public bereavedRegisterHost(bereaved: User, meeting: Meeting, year = MEMORIAL_YEAR): Observable<boolean> {
     const postObj = {
       id: bereaved.id,
@@ -112,10 +123,27 @@ export class DataService {
       .object(`events/${year}/${meeting.hostId}/${meeting.id}/bereaved`)
       .set(postObj)
       .then(() => {
+        // TODO: Firebase Functions
         return this.angularFireDatabase.object(`users/${bereaved.id}/bereavedParticipation/${year}/meetings/${meeting.hostId}/${meeting.id}`)
           .set({
             title: meeting.title
           })
+          .then(() => true);
+      })
+      .catch((error) => {
+        console.log(error);
+        throw error;
+      }));
+  }
+
+  public bereavedLeaveHost(bereaved: User, meeting: Meeting, year = MEMORIAL_YEAR): Observable<boolean> {
+    return from(this.angularFireDatabase
+      .object(`events/${year}/${meeting.hostId}/${meeting.id}/bereaved`)
+      .remove()
+      .then(() => {
+        // TODO: Firebase Functions
+        return this.angularFireDatabase.object(`users/${bereaved.id}/bereavedParticipation/${year}/meetings/${meeting.hostId}/${meeting.id}`)
+          .remove()
           .then(() => true);
       })
       .catch((error) => {

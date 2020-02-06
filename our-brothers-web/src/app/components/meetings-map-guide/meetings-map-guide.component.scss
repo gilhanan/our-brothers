@@ -1,92 +1,82 @@
 :host {
   position: unset;
 
-  .blocker {
+  .container {
     position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1;
-    background: rgba(0, 0, 0, 0.2);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 
-    .container {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+    font-family: "arbel";
+    font-size: 22px;
+    text-align: center;
+    border-radius: 10px;
+    border: 10px solid rgb(255, 255, 255);
+    box-shadow: 0px 0px 20px 10px rgba(1, 1, 1, 0.15);
 
-      font-family: 'arbel';
-      font-size: 22px;
-      text-align: center;
-      border-radius: 10px;
-      border: 10px solid rgb(255, 255, 255);
-      box-shadow: 0px 0px 20px 10px rgba(1, 1, 1, 0.15);
+    .stages {
+      width: 360px;
+      padding: 30px 25px;
+      background-color: rgb(255, 255, 255);
 
-      .stages {
-        width: 360px;
-        padding: 30px 25px;
-        background-color: rgb(255, 255, 255);
-
-        .title {
-          color: rgb(0, 160, 153);
-          letter-spacing: 5px;
-        }
-
-        .stage {
-          margin-top: 20px;
-          color: rgb(129, 129, 129);
-          letter-spacing: 5px;
-        }
-      }
-
-      .indicators {
-        margin-top: 20px;
-
-        .next,
-        .previous {
-          cursor: pointer;
-          position: absolute;
-          color: rgb(129, 129, 129);
-          font-size: 17px;
-          letter-spacing: 1px;
-          border-bottom: 1px solid rgb(129, 129, 129);
-        }
-
-        .next {
-          left: 15px;
-        }
-
-        .previous {
-          right: 15px;
-        }
-
-        .indicator {
-          display: inline-block;
-          width: 10px;
-          height: 10px;
-          margin: 0 5px;
-          border: 1px solid rgb(0, 160, 153);
-          border-radius: 50%;
-          background-color: rgb(255, 255, 255);
-
-          &.active {
-            background-color: rgb(0, 160, 153);
-          }
-        }
-      }
-
-      .start-button {
-        cursor: pointer;
-        padding: 5px 40px;
-        position: absolute;
-        bottom: -75px;
-        left: 50%;
-        transform: translateX(-50%);
-        color: rgb(255, 255, 255);
-        background-color: rgb(0, 160, 153);
+      .title {
+        color: rgb(0, 160, 153);
         letter-spacing: 5px;
       }
+
+      .stage {
+        margin-top: 20px;
+        color: rgb(129, 129, 129);
+        letter-spacing: 5px;
+      }
+    }
+
+    .indicators {
+      margin-top: 20px;
+
+      .next,
+      .previous {
+        cursor: pointer;
+        position: absolute;
+        color: rgb(129, 129, 129);
+        font-size: 17px;
+        letter-spacing: 1px;
+        border-bottom: 1px solid rgb(129, 129, 129);
+      }
+
+      .next {
+        left: 15px;
+      }
+
+      .previous {
+        right: 15px;
+      }
+
+      .indicator {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        margin: 0 5px;
+        border: 1px solid rgb(0, 160, 153);
+        border-radius: 50%;
+        background-color: rgb(255, 255, 255);
+
+        &.active {
+          background-color: rgb(0, 160, 153);
+        }
+      }
+    }
+
+    .start-button {
+      cursor: pointer;
+      padding: 5px 40px;
+      position: absolute;
+      bottom: -75px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgb(255, 255, 255);
+      background-color: rgb(0, 160, 153);
+      letter-spacing: 5px;
     }
   }
 }
