@@ -1,3 +1,5 @@
+$textColor: rgb(129, 129, 129);
+
 .bereaved-item {
   display: flex;
   flex-flow: row;
@@ -10,7 +12,27 @@
     align-items: center;
     margin: 45px 5px;
     font-size: 18px;
-    color: rgb(129, 129, 129);
+    color: $textColor;
+
+    &.row-state-col {
+      flex: 0 1 30px;
+
+      .expand-button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+
+        .expand-icon {
+          &::after {
+            content: "";
+            position: absolute;
+            top: 7px;
+            border: 7px solid transparent;
+            border-top: 7px solid rgb(0, 115, 109);
+          }
+        }
+      }
+    }
 
     &.name-col {
       align-items: flex-start;
