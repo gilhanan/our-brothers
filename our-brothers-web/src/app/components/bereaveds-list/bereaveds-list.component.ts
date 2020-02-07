@@ -19,7 +19,7 @@ export class BereavedsListComponent implements OnChanges {
   year = MEMORIAL_YEAR;
 
   sortedColumn: SortedColumn = {
-    column: 'name',
+    column: '',
     direction: 'asc'
   };
 

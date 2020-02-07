@@ -21,7 +21,7 @@ export class MeetingsListComponent implements OnChanges {
 
   sortedMeetings: Meeting[] = [];
   sortedColumn: SortedColumn = {
-    column: 'title',
+    column: '',
     direction: 'asc'
   };
 
