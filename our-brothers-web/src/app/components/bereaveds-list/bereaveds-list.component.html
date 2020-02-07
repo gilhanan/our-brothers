@@ -17,7 +17,7 @@
   <app-list-column [field]="'status'">
     סטטוס
   </app-list-column>
-  <app-list-column>
+  <app-list-column [field]="'meetings'">
     שיבוץ
   </app-list-column>
 </app-list-header>
@@ -53,10 +53,14 @@
     <div class="bereaved-item-col">
       {{bereaved.bereavedParticipation && bereaved.bereavedParticipation[year]?.status}}
     </div>
-    <div class="bereaved-item-col">
+    <div class="bereaved-item-col bereaved-meetings">
       <div *ngFor="let meeting of bereaved.bereavedParticipation && bereaved.bereavedParticipation[year]?.meetings">
-        {{meeting.title}}
-        <button class="leave-button" (click)="leaveBereaved.emit({bereaved: bereaved, meeting: meeting})">פח</button>
+        <button class="leave-button" (click)="leaveBereaved.emit({bereaved: bereaved, meeting: meeting})">
+          <div class="trash-icon"></div>
+        </button>
+        <div class="bereaved-meeting-title">
+          {{meeting.title}}
+        </div>
       </div>
       <button class="join-button" (click)="joinBereved.emit(bereaved)">
         שיבוץ

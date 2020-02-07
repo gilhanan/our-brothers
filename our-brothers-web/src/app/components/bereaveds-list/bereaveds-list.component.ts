@@ -58,6 +58,9 @@ export class BereavedsListComponent implements OnChanges {
         } else if (column === 'status') {
           aValue = a.bereavedParticipation && a.bereavedParticipation[this.year] && a.bereavedParticipation[this.year].status || '';
           bValue = b.bereavedParticipation && b.bereavedParticipation[this.year] && b.bereavedParticipation[this.year].status || '';
+        } else if (column === 'meetings') {
+          aValue = a.bereavedParticipation && a.bereavedParticipation[this.year] && a.bereavedParticipation[this.year].meetings && a.bereavedParticipation[this.year].meetings.length || 0;
+          bValue = b.bereavedParticipation && b.bereavedParticipation[this.year] && b.bereavedParticipation[this.year].meetings && b.bereavedParticipation[this.year].meetings.length || 0;
         } else {
           aValue = a[column] || '';
           bValue = b[column] || '';

@@ -66,6 +66,7 @@ export class DataService {
           usersSnapshot
             .map(usersSnapshot => ({ id: usersSnapshot.key, ...usersSnapshot.payload.val() }))
             .filter(user => user.role === 'bereaved' && !!user.profile)
+            // .slice(0, 50) Development performance
             .map(user => {
 
               if (user.bereavedParticipation && user.bereavedParticipation[MEMORIAL_YEAR]) {
