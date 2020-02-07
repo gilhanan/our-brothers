@@ -1,6 +1,10 @@
 <div class="row-container">
   <div class="row">
     <div class="col col-row-state">
+      <button class="volunteering-button" *ngIf="user?.isAdmin"
+        (click)="volunteering.emit({user: bereaved, isVolunteer: !bereaved.isVolunteer})">
+        <div class="key-icon" [ngClass]="{'disabled': !bereaved.isVolunteer}"></div>
+      </button>
       <button class="expand-button" *ngIf="!expanded" (click)="expanded = true">
         <div class="expand-icon"></div>
       </button>
@@ -51,6 +55,18 @@
   </div>
   <div class="expanded-row" *ngIf="expanded">
     <div class="expanded-col col-info">
+      <div class="title">
+        מספר סידורי:
+      </div>
+      <div>
+        {{bereaved.id}}
+      </div>
+      <div class="title">
+        מתנדב:
+      </div>
+      <div>
+        בדיקה
+      </div>
       <button class="collapse-button" (click)="expanded = false">
         <div class="collapse-icon"></div>
       </button>

@@ -87,6 +87,22 @@ export const addUserToDatabase = functions.auth.user()
       });
   });
 
+export const updateUserVolunteer = functions.database.ref('/users/{userId}/isVolunteer')
+  .onWrite((event, context) => {
+
+    const { userId } = context.params;
+    const volunteer = !!event.after.val();
+
+    console.log(`Setting user {${userId}} volunteering value {${volunteer}} to claims.`);
+
+    return admin.auth().setCustomUserClaims(userId, { volunteer })
+      .then(() => {
+        console.log(`Succesfully set user {${userId}} volunteering value {${volunteer}} to claims.`);
+      }).catch((error) => {
+        console.error(`Failed to set user {${userId}} volunteering value {${volunteer}} to claims.`, error);
+      });
+  });
+
 export const smsReply = functions.database.ref('/sms/replies/{number}/{messageId}')
   .onWrite((event, context) => {
 

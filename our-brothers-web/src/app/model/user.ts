@@ -10,6 +10,7 @@ export interface User {
   role?: UserRole;
   photoURL?: string;
   isAdmin?: boolean;
+  isVolunteer?: boolean;
   bereavedProfile?: BereavedProfile;
   participateParticipation?: UserParticipation<ParticipateParticipation>;
   hostParticipation?: UserParticipation<HostParticipation>;

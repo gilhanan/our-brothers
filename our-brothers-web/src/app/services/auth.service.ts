@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, of, throwError, from } from 'rxjs';
 import { auth } from 'firebase/app';
 import { User } from '../model';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -28,6 +28,7 @@ export class AuthService {
   public user: Observable<User>;
   public userId: string;
   public currentFirebaseUser: firebase.User;
+  private firstTimeGetUser = true;
 
   constructor(
     public angularFireAuth: AngularFireAuth,
@@ -39,7 +40,18 @@ export class AuthService {
           if (authRes) {
             this.userId = authRes.uid;
             this.currentFirebaseUser = authRes;
-            return this.dataService.getUserById(authRes.uid);
+            return this.dataService
+              .getUserById(authRes.uid)
+              .pipe(
+                switchMap(user => from(authRes.getIdTokenResult(this.firstTimeGetUser))
+                  .pipe(
+                    tap(() => this.firstTimeGetUser = false),
+                    map(idTokenResult => ({
+                      ...user,
+                      isAdmin: !!idTokenResult.claims.admin,
+                      isVolunteer: !!idTokenResult.claims.volunteer
+                    })))
+                ));
           } else {
             return of(null);
           }

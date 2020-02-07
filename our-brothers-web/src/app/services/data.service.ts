@@ -12,6 +12,11 @@ export interface BereavedMeeting {
   bereaved: User;
 }
 
+export interface VolunteeringUser {
+  user: User;
+  isVolunteer: boolean;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -57,6 +62,17 @@ export class DataService {
     );
   }
 
+  public setUserVolunteer(user: User, isVolunteer: boolean) {
+    return from(
+      this.angularFireDatabase.object<boolean>(`users/${user.id}/isVolunteer`).set(isVolunteer)
+    ).pipe(
+      catchError(error => {
+        console.log(error);
+        return throwError(error);
+      })
+    );
+  }
+
   public getBereaveds(): Observable<User[]> {
     return this.angularFireDatabase
       .list<User>(`users`)
@@ -66,7 +82,7 @@ export class DataService {
           usersSnapshot
             .map(usersSnapshot => ({ id: usersSnapshot.key, ...usersSnapshot.payload.val() }))
             .filter(user => user.role === 'bereaved' && !!user.profile)
-            .slice(0, 50)
+            // .slice(0, 50)
             .map(user => {
 
               if (user.bereavedParticipation && user.bereavedParticipation[MEMORIAL_YEAR]) {
