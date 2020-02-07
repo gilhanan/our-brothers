@@ -56,7 +56,7 @@ export class AdminBereavedsPageComponent implements OnInit {
 
   leaveBereaved({ meeting, bereaved }: BereavedMeeting) {
     if (meeting && bereaved) {
-      if (window.confirm(' האם ברצונך להסיר את' + bereaved.profile.firstName + ' ' + bereaved.profile.lastName + ' מהמפגש ' + meeting.title + '?')) {
+      if (window.confirm('האם ברצונך להסיר את ' + bereaved.profile.firstName + ' ' + bereaved.profile.lastName + ' מהמפגש ' + meeting.title + '?')) {
         this.dataService.bereavedLeaveHost(bereaved, meeting);
       }
     }

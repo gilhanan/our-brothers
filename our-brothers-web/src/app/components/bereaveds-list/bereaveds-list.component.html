@@ -22,49 +22,7 @@
   </app-list-column>
 </app-list-header>
 <cdk-virtual-scroll-viewport itemSize="20" class="bereaved-items">
-  <div class="bereaved-item" *ngFor="let bereaved of sortedBereaveds; trackBy: trackByFn">
-    <div class="bereaved-item-col name-col">
-      {{bereaved.profile?.firstName + ' ' + bereaved.profile?.lastName}}
-    </div>
-    <div class="bereaved-item-col communications-col">
-      <div class="bereaved-phone" *ngIf="bereaved.profile?.phoneNumber">
-        <div class="phone-number">
-          {{bereaved.profile.phoneNumber | phone}}
-        </div>
-        <div class="phone-icon"></div>
-      </div>
-      <div class="bereaved-email" *ngIf="bereaved.profile?.email">
-        <div class="email-address">
-          {{bereaved.profile?.email}}
-        </div>
-        <div class="email-icon"></div>
-      </div>
-    </div>
-    <div class="bereaved-item-col">
-    </div>
-    <div class="bereaved-item-col seniority-col">
-      <div *ngFor="let slain of bereaved?.bereavedProfile?.slains">
-        {{slain.deathDate | seniority}}
-      </div>
-    </div>
-    <div class="bereaved-item-col guidance-col">
-      {{bereaved.bereavedParticipation && bereaved.bereavedParticipation[year]?.guidance?.general}}
-    </div>
-    <div class="bereaved-item-col status-col">
-      {{bereaved.bereavedParticipation && bereaved.bereavedParticipation[year]?.status}}
-    </div>
-    <div class="bereaved-item-col bereaved-meetings">
-      <div *ngFor="let meeting of bereaved.bereavedParticipation && bereaved.bereavedParticipation[year]?.meetings">
-        <button class="leave-button" (click)="leaveBereaved.emit({bereaved: bereaved, meeting: meeting})">
-          <div class="trash-icon"></div>
-        </button>
-        <div class="bereaved-meeting-title">
-          {{meeting.title}}
-        </div>
-      </div>
-      <button class="join-button" (click)="joinBereved.emit(bereaved)">
-        שיבוץ
-      </button>
-    </div>
+  <div *ngFor="let bereaved of sortedBereaveds; trackBy: trackByFn">
+    <app-bereaveds-list-row [bereaved]="bereaved" (joinBereved)="joinBereved.emit($event)" (leaveBereaved)="leaveBereaved.emit($event)"></app-bereaveds-list-row>
   </div>
 </cdk-virtual-scroll-viewport>
