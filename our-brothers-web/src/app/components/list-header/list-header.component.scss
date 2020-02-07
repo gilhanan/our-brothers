@@ -1,5 +1,13 @@
 :host {
-  display: flex;
-  flex-flow: row;
-  border-bottom: 1px solid rgb(227, 229, 231);
+  .sorting-title {
+    color: rgb(129, 129, 129);
+    font-size: 22px;
+    font-family: "arbel";
+  }
+
+  .columns {
+    display: flex;
+    flex-flow: row;
+    border-bottom: 1px solid rgb(227, 229, 231);
+  }
 }
