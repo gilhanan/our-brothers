@@ -1,4 +1,4 @@
-<app-list-header [(sort)]="sortedColumn" (sortChange)="sort()">
+<app-list-header [(sort)]="sortedColumn" (sortChange)="sort()" class="list-header">
   <app-list-column [field]="'name'">
     שם מלא
   </app-list-column>
@@ -8,13 +8,13 @@
   <app-list-column>
     מקום מגורים
   </app-list-column>
-  <app-list-column [field]="'seniority'">
+  <app-list-column [field]="'seniority'" class="seniority-col">
     ותק בשכול
   </app-list-column>
-  <app-list-column [field]="'guidance'">
+  <app-list-column [field]="'guidance'" class="guidance-col">
     הדרכות
   </app-list-column>
-  <app-list-column [field]="'status'">
+  <app-list-column [field]="'status'" class="status-col">
     סטטוס
   </app-list-column>
   <app-list-column [field]="'meetings'">
@@ -23,10 +23,10 @@
 </app-list-header>
 <cdk-virtual-scroll-viewport itemSize="20" class="bereaved-items">
   <div class="bereaved-item" *ngFor="let bereaved of sortedBereaveds; trackBy: trackByFn">
-    <div class="bereaved-item-col bereaved-name">
+    <div class="bereaved-item-col name-col">
       {{bereaved.profile?.firstName + ' ' + bereaved.profile?.lastName}}
     </div>
-    <div class="bereaved-item-col bereaved-communications">
+    <div class="bereaved-item-col communications-col">
       <div class="bereaved-phone" *ngIf="bereaved.profile?.phoneNumber">
         <div class="phone-number">
           {{bereaved.profile.phoneNumber | phone}}
@@ -42,15 +42,15 @@
     </div>
     <div class="bereaved-item-col">
     </div>
-    <div class="bereaved-item-col">
+    <div class="bereaved-item-col seniority-col">
       <div *ngFor="let slain of bereaved?.bereavedProfile?.slains">
         {{slain.deathDate | seniority}}
       </div>
     </div>
-    <div class="bereaved-item-col">
+    <div class="bereaved-item-col guidance-col">
       {{bereaved.bereavedParticipation && bereaved.bereavedParticipation[year]?.guidance?.general}}
     </div>
-    <div class="bereaved-item-col">
+    <div class="bereaved-item-col status-col">
       {{bereaved.bereavedParticipation && bereaved.bereavedParticipation[year]?.status}}
     </div>
     <div class="bereaved-item-col bereaved-meetings">
