@@ -1,5 +1,5 @@
 <app-list-header [(sort)]="sortedColumn" (sortChange)="sort()" class="list-header">
-  <app-list-column class="row-state-col">
+  <app-list-column class="col-row-state">
   </app-list-column>
   <app-list-column [field]="'name'">
     שם מלא
@@ -10,13 +10,13 @@
   <app-list-column>
     מקום מגורים
   </app-list-column>
-  <app-list-column [field]="'seniority'" class="seniority-col">
+  <app-list-column [field]="'seniority'" class="col-seniority">
     ותק בשכול
   </app-list-column>
-  <app-list-column [field]="'guidance'" class="guidance-col">
+  <app-list-column [field]="'guidance'" class="col-guidance">
     הדרכות
   </app-list-column>
-  <app-list-column [field]="'status'" class="status-col">
+  <app-list-column [field]="'status'" class="col-status">
     סטטוס
   </app-list-column>
   <app-list-column [field]="'meetings'">
