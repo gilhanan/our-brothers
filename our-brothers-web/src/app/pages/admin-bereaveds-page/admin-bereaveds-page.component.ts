@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User, Meeting } from '../../../app/model';
 import { AuthService } from 'src/app/services/auth.service';
-import { DataService, MEMORIAL_YEAR, BereavedMeeting, VolunteeringUser, UpdateBereavedStatus } from '../../../app/services/data.service';
+import { DataService, MEMORIAL_YEAR, BereavedMeeting, VolunteeringUser, UpdateBereavedStatus, UpdateBereavedGuidance } from '../../../app/services/data.service';
 import { Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -79,6 +79,12 @@ export class AdminBereavedsPageComponent implements OnInit {
   bereavedStatus({ bereaved, status }: UpdateBereavedStatus) {
     if (bereaved) {
       this.dataService.setBereavedStatus(bereaved, status);
+    }
+  }
+
+  bereavedGuidance({ bereaved, guidance }: UpdateBereavedGuidance) {
+    if (bereaved) {
+      this.dataService.setBereavedGuidance(bereaved, guidance);
     }
   }
 }

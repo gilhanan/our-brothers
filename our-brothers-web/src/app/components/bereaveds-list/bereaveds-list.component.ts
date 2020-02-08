@@ -1,6 +1,6 @@
 import { Component, OnChanges, Input, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { User, Meeting } from 'src/app/model';
-import { MEMORIAL_YEAR, BereavedMeeting, VolunteeringUser, UpdateBereavedStatus } from '../../../app/services/data.service';
+import { MEMORIAL_YEAR, BereavedMeeting, VolunteeringUser, UpdateBereavedStatus, UpdateBereavedGuidance } from '../../../app/services/data.service';
 import { SortedColumn } from '../list-header/list-header.component';
 
 
@@ -17,6 +17,7 @@ export class BereavedsListComponent implements OnChanges {
   @Output() leaveBereaved = new EventEmitter<BereavedMeeting>();
   @Output() volunteering = new EventEmitter<VolunteeringUser>();
   @Output() bereavedStatus = new EventEmitter<UpdateBereavedStatus>();
+  @Output() bereavedGuidance = new EventEmitter<UpdateBereavedGuidance>();
 
   sortedBereaveds: User[] = [];
   year = MEMORIAL_YEAR;

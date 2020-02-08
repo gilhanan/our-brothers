@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { User, BereavedStatus } from 'src/app/model';
-import { MEMORIAL_YEAR, BereavedMeeting, VolunteeringUser } from 'src/app/services/data.service';
+import { User, BereavedStatus, BereavedGuidance } from 'src/app/model';
+import { MEMORIAL_YEAR, BereavedMeeting } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-bereaveds-list-row',
@@ -15,6 +15,7 @@ export class BereavedsListRowComponent {
   @Output() leaveBereaved = new EventEmitter<BereavedMeeting>();
   @Output() volunteering = new EventEmitter<boolean>();
   @Output() bereavedStatus = new EventEmitter<BereavedStatus>();
+  @Output() bereavedGuidance = new EventEmitter<BereavedGuidance>();
 
   expanded = false;
   year = MEMORIAL_YEAR;

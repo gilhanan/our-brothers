@@ -3,7 +3,7 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable, throwError, from } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
-import { User, Meeting, UserParticipationMeeting, BereavedStatus } from '../model';
+import { User, Meeting, UserParticipationMeeting, BereavedStatus, BereavedGuidanceGeneral } from '../model';
 
 export const MEMORIAL_YEAR = 2019;
 
@@ -20,6 +20,11 @@ export interface VolunteeringUser {
 export interface UpdateBereavedStatus {
   bereaved: User;
   status: BereavedStatus;
+}
+
+export interface UpdateBereavedGuidance {
+  bereaved: User;
+  guidance: BereavedGuidanceGeneral;
 }
 
 @Injectable({
@@ -81,6 +86,17 @@ export class DataService {
   public setBereavedStatus(bereaved: User, status: BereavedStatus, year = MEMORIAL_YEAR) {
     return from(
       this.angularFireDatabase.object<BereavedStatus>(`users/${bereaved.id}/bereavedParticipation/${year}/status`).set(status)
+    ).pipe(
+      catchError(error => {
+        console.log(error);
+        return throwError(error);
+      })
+    );
+  }
+
+  public setBereavedGuidance(bereaved: User, guidance: BereavedGuidanceGeneral, year = MEMORIAL_YEAR) {
+    return from(
+      this.angularFireDatabase.object<BereavedGuidanceGeneral>(`users/${bereaved.id}/bereavedParticipation/${year}/guidance/general`).set(guidance)
     ).pipe(
       catchError(error => {
         console.log(error);

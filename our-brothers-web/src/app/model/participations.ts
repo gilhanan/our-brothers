@@ -27,7 +27,11 @@ export enum BereavedStatus {
 
 export interface BereavedGuidance {
   answered: boolean;
-  general: BereavedGuidanceGeneralOptions;
+  general: BereavedGuidanceGeneral;
 }
 
-export type BereavedGuidanceGeneralOptions = 'ירושלים' | 'תל אביב' | 'ראשון לציון';
+export enum BereavedGuidanceGeneral {
+  jerusalem = "jerusalem",
+  telAviv = "telAviv",
+  haifa = "haifa"
+}

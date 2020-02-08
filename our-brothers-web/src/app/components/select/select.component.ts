@@ -15,7 +15,7 @@ export class SelectComponent {
   @Input() value: string | string[];
   @Input() options: SelectOption[];
   @Input() multi: boolean = false;
-  @Input() placeholder: string;
+  @Input() placeholder: string = 'לא נבחר';
   @Input() readonly: boolean = false;
 
   @Output() valueChange = new EventEmitter<string | string[]>();
