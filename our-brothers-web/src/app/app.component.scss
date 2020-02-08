@@ -213,11 +213,11 @@
 }
 
 @media only screen and (max-width: 700px) {
-  .header-out > div {
-    justify-content: center !important;
+  .header-out {
+    justify-content: center;
   }
   .header {
-    justify-content: center !important;
+    justify-content: center;
 
     .links-header {
       display: none;
