@@ -16,10 +16,23 @@ $textColor: rgb(129, 129, 129);
       flex: 1;
     }
 
+    .remove-icon {
+      font-size: 12px;
+      margin-left: 5px;
+    }
+
     .triangle-icon {
-      border: 5px solid transparent;
-      border-top: 5px solid $textColor;
-      margin-top: 10px;
+      width: 15px;
+      display: inline-block;
+      position: relative;
+      &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        border: 5px solid transparent;
+        border-top: 5px solid $textColor;
+      }
     }
   }
 
@@ -27,7 +40,8 @@ $textColor: rgb(129, 129, 129);
     border: none;
 
     .value-container {
-      .triangle-icon {
+      .triangle-icon,
+      .remove-icon {
         display: none;
       }
     }

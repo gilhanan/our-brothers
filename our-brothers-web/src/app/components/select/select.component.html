@@ -3,7 +3,10 @@
     <span class="value">
       {{renderValue()}}
     </span>
-    <span class="triangle-icon"></span>
+    <div>
+      <span class="remove-icon" (click)="valueChange.emit('') && $event.stopPropagation()">x</span>
+      <span class="triangle-icon"></span>
+    </div>
   </div>
   <div class="options" *ngIf="isOpen">
     <div *ngFor="let option of options">
