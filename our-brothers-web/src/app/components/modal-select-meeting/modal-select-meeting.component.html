@@ -9,7 +9,7 @@
       </app-free-text-filter>
     </div>
     <div class="meetings-list">
-      <app-meetings-list [meetings]="meetings" [user]="bereaved" (joinMeeting)="selectMeeting.emit($event)">
+      <app-meetings-list [meetings]="filteredMeetings" [user]="bereaved" (joinMeeting)="selectMeeting.emit($event)">
       </app-meetings-list>
     </div>
     <div class="cancel-button-container">
