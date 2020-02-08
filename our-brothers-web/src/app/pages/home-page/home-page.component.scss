@@ -1,20 +1,20 @@
-.video-background{
-    background-image: url(../../../assets/img/mainBack.png);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: 0px -120px;
+.video-background {
+  background-image: url(../../../assets/img/mainBack.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 0px -120px;
 }
 
-.video-show{
-  video::-webkit-media-controls-panel{
-    display:none !important;
+.video-show {
+  video::-webkit-media-controls-panel {
+    display: none !important;
   }
 
-  .video-show-box{
+  .video-show-box {
     margin: auto;
     width: calc(100% - 200px);
 
-    #vid{
+    #vid {
       margin-top: -165px;
     }
   }
@@ -128,24 +128,22 @@
     width: 250px;
     height: 55px;
     font-size: 36px;
-    font-family: 'arbel';
+    font-family: "arbel";
     margin-top: 15px;
   }
 }
 
-
 @media only screen and (max-width: 700px) {
-
-  .video-background{
+  .video-background {
     background-position: -75px -120px;
   }
 
-  .video-show{
-    .video-show-box{
+  .video-show {
+    .video-show-box {
       width: calc(100% - 50px);
       overflow: hidden;
 
-      #vid{
+      #vid {
         margin-top: 0px;
         width: 245%;
         left: 50%;
@@ -153,9 +151,69 @@
     }
   }
 
-  .big-heading{
+  .big-heading {
     font-size: 40px;
     margin-top: 15px;
     margin-bottom: 15px;
+  }
+
+  .contact-form {
+    padding: 35px 0;
+    .contact-form-fields {
+      padding: 0px;
+      width: calc(100% - 10px);
+
+      .form-field {
+        width: 45%;
+        margin-left: 7px;
+        margin-right: 7px;
+        margin-bottom: 14px;
+      }
+      .message-mobile {
+        width: calc(100% - 20px);
+      }
+    }
+    .contact-send-button {
+      width: 200px;
+      height: 45px;
+      font-size: 25px;
+      margin-top: 7px;
+    }
+  }
+  .site-hr {
+    margin-bottom: 20px;
+  }
+  .site-divider {
+    margin-bottom: 20px;
+  }
+  .small-heading {
+    margin-bottom: 20px;
+  }
+  .medium-heading {
+    margin-bottom: 20px;
+  }
+  .see-more {
+    margin-bottom: 20px;
+    justify-content: center;
+    a {
+      margin-left: 0px;
+    }
+  }
+  .site-quote.mettings-quote {
+    margin-bottom: 20px;
+  }
+  .mettings-gallery {
+    margin-bottom: 0px;
+
+    .circle-top-right {
+      right: -5%;
+      left: auto;
+      transform: none;
+    }
+
+    .circle-bottom-right {
+      left: -65%;
+      transform: none;
+    }
   }
 }

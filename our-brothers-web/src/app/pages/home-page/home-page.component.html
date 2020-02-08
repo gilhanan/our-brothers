@@ -70,7 +70,7 @@
     <input formControlName="phone" class="form-field" placeholder="טלפון*"
       [class.invalid]="!phone.valid && phone.touched" />
     <input formControlName="email" class="form-field" placeholder="אימייל" />
-    <textarea formControlName="message" class="form-field" placeholder="תוכן הודעה"></textarea>
+    <textarea formControlName="message" class="form-field message-mobile" placeholder="תוכן הודעה"></textarea>
   </form>
   <div class="site-button contact-send-button" [class.disabled]="!contactForm.valid">
     שלח
