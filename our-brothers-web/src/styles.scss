@@ -1,6 +1,14 @@
+@import "~@fortawesome/fontawesome-free/css/all.css";
+
 @font-face {
   font-family: "arbel";
   src: url(assets/fonts/Arbel-Bold_0.otf);
+}
+
+/* heebo-regular */
+@font-face {
+  font-family: 'Heebo';
+  src: url('assets/fonts/Heebo-Regular.ttf');
 }
 
 *,

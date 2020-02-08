@@ -1,52 +1,29 @@
-<div #headerElm class="header">
-  <div class="logo-header" routerLink="home"></div>
-  <div class="links-header">
-    <!-- <a class="link-header" routerLink="home" routerLinkActive="current-page"
-      >דף הבית</a
-    > -->
-    <a class="link-header" routerLink="meetings" routerLinkActive="current-page"
-      >מפגשים</a
-    >
-    <a class="link-header" routerLink="about" routerLinkActive="current-page"
-      >אודותינו</a
-    >
-    <a class="link-header" routerLink="info" routerLinkActive="current-page"
-      >מבנה הערב</a
-    >
-    <a
-      class="link-header"
-      routerLink="questions"
-      routerLinkActive="current-page"
-      >שאלות</a
-    >
-    <a class="link-header" routerLink="gallery" routerLinkActive="current-page"
-      >גלריה</a
-    >
-    <a class="link-header" routerLink="contact" routerLinkActive="current-page"
-      >צור קשר</a
-    >
-  </div>
-  <div class="contact-icons">
+<div class="header-out">
+  <div #headerElm class="header">
+    <div class="logo-header" routerLink="home"></div>
+    <div class="links-header">
+      <a class="link-header" routerLink="home" routerLinkActive="current-page">דף הבית</a>
+      <a class="link-header" routerLink="meetings" routerLinkActive="current-page">מפגשים</a>
+      <a class="link-header" routerLink="about" routerLinkActive="current-page">אודותינו</a>
+      <a class="link-header" routerLink="info" routerLinkActive="current-page">מבנה הערב</a>
+      <a class="link-header" routerLink="questions" routerLinkActive="current-page">שאלות</a>
+      <a class="link-header" routerLink="gallery" routerLinkActive="current-page">גלריה</a>
+      <a class="link-header" routerLink="contact" routerLinkActive="current-page">צור קשר</a>
+    </div>
+    <!-- <div class="contact-icons">
     <div class="contact-header-whatsapp-icon"></div>
     <div class="contact-header-facebook-icon"></div>
     <div class="contact-header-youtube-icon"></div>
     <div class="contact-header-email-us-icon"></div>
-  </div>
-  <div class="action-buttons">
-    <div class="action-header-support-us site-button">תמיכה בעמותה</div>
-    <div
-      *ngIf="!isLoggedIn"
-      class="action-header-login site-button"
-      (click)="needLogin = true"
-    >
-      התחבר/הרשם
-    </div>
-    <div
-      *ngIf="isLoggedIn"
-      class="contact-header-login site-button"
-      (click)="logout()"
-    >
-      התנתק
+  </div>  -->
+    <div class="action-buttons">
+      <div class="action-header-support-us site-button">תמיכה בעמותה</div>
+      <div *ngIf="!isLoggedIn" class="action-header-login site-button" (click)="needLogin = true">
+        התחבר/הרשם
+      </div>
+      <div *ngIf="isLoggedIn" class="contact-header-login site-button" (click)="logout()">
+        התנתק
+      </div>
     </div>
   </div>
 </div>
@@ -55,8 +32,5 @@
 
 <ng-container *ngIf="needLogin">
   <app-login-popup *ngIf="!(authService.user | async)"></app-login-popup>
-  <app-profile-popup
-    (profileUpdated)="needLogin = false"
-    *ngIf="authService.user | async"
-  ></app-profile-popup>
+  <app-profile-popup (profileUpdated)="needLogin = false" *ngIf="authService.user | async"></app-profile-popup>
 </ng-container>
