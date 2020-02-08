@@ -26,6 +26,8 @@
 <cdk-virtual-scroll-viewport itemSize="20" class="bereaved-items">
   <div *ngFor="let bereaved of sortedBereaveds; trackBy: trackByFn">
     <app-bereaveds-list-row [bereaved]="bereaved" [user]="user" (joinBereved)="joinBereved.emit($event)"
-      (leaveBereaved)="leaveBereaved.emit($event)" (volunteering)="volunteering.emit($event)"></app-bereaveds-list-row>
+      (leaveBereaved)="leaveBereaved.emit($event)"
+      (volunteering)="volunteering.emit({user: bereaved, isVolunteer: $event})"
+      (bereavedStatus)="bereavedStatus.emit({bereaved: bereaved, status: $event})"></app-bereaveds-list-row>
   </div>
 </cdk-virtual-scroll-viewport>

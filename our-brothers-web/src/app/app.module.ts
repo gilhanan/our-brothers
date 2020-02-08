@@ -43,6 +43,8 @@ import { ModalSelectMeetingComponent } from './components/modal-select-meeting/m
 import { PhonePipe } from './pipes/phone.pipe';
 import { SeniorityPipe } from './pipes/seniority.pipe';
 import { BereavedsListRowComponent } from './components/bereaveds-list-row/bereaveds-list-row.component';
+import { SelectComponent } from './components/select/select.component';
+import { SelectBereavedStatusComponent } from './components/select-bereaved-status/select-bereaved-status.component';
 
 registerLocaleData(localeHe);
 
@@ -76,7 +78,9 @@ registerLocaleData(localeHe);
     SeniorityPipe,
     MeetingsMapNavigatorComponent,
     ModalSelectMeetingComponent,
-    BereavedsListRowComponent
+    BereavedsListRowComponent,
+    SelectComponent,
+    SelectBereavedStatusComponent
   ],
   imports: [
     BrowserModule,

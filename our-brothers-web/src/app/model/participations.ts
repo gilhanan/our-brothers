@@ -19,7 +19,11 @@ export interface UserParticipationMeeting {
   title: string;
 }
 
-export type BereavedStatus = 'שובץ' | 'הושלם' | 'ממתין';
+export enum BereavedStatus {
+  done = "done",
+  inactive = "inactive",
+  waiting = "waiting"
+}
 
 export interface BereavedGuidance {
   answered: boolean;

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User, Meeting } from '../../../app/model';
 import { AuthService } from 'src/app/services/auth.service';
-import { DataService, MEMORIAL_YEAR, BereavedMeeting, VolunteeringUser } from '../../../app/services/data.service';
+import { DataService, MEMORIAL_YEAR, BereavedMeeting, VolunteeringUser, UpdateBereavedStatus } from '../../../app/services/data.service';
 import { Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -49,10 +49,10 @@ export class AdminBereavedsPageComponent implements OnInit {
   joinBereved(bereaved: User) {
     this.selectingBereaved = bereaved;
     if (this.noBerevedMeetings && this.noBerevedMeetings.length) {
-      this.selectedMeeting$.pipe(take(1)).subscribe(({ meeting }: BereavedMeeting) => {
+      this.selectedMeeting$.pipe(take(1)).subscribe((value: BereavedMeeting) => {
         this.selectingBereaved = null;
-        if (meeting) {
-          this.dataService.bereavedRegisterHost(bereaved, meeting);
+        if (value && value.meeting) {
+          this.dataService.bereavedRegisterHost(bereaved, value.meeting);
         }
       })
     } else {
@@ -70,9 +70,15 @@ export class AdminBereavedsPageComponent implements OnInit {
 
   volunteering({ user, isVolunteer }: VolunteeringUser) {
     if (user) {
-      if (window.confirm('האם ברוצנך להגדיר את ' + user.profile.firstName + ' ' + user.profile.lastName + ' כמתנדב?')) {
+      if (window.confirm('האם ברוצנך ' + (isVolunteer ? 'להגדיר' : 'להסיר') + ' את ' + user.profile.firstName + ' ' + user.profile.lastName + ' כמתנדב/ת?')) {
         this.dataService.setUserVolunteer(user, isVolunteer);
       }
+    }
+  }
+
+  bereavedStatus({ bereaved, status }: UpdateBereavedStatus) {
+    if (bereaved) {
+      this.dataService.setBereavedStatus(bereaved, status);
     }
   }
 }

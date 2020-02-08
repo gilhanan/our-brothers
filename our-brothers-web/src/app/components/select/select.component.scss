@@ -1,0 +1,52 @@
+$textColor: rgb(129, 129, 129);
+
+.select-container {
+  width: 100px;
+  border: 1px solid rgb(135, 176, 173);
+  color: $textColor;
+
+  .value-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 2px;
+    cursor: pointer;
+
+    .value {
+      min-height: 1em;
+      flex: 1;
+    }
+
+    .triangle-icon {
+      border: 5px solid transparent;
+      border-top: 5px solid $textColor;
+      margin-top: 10px;
+    }
+  }
+
+  &.preview {
+    border: none;
+
+    .value-container {
+      .triangle-icon {
+        display: none;
+      }
+    }
+  }
+
+  &.readonly {
+    .value-container {
+      cursor: default;
+    }
+  }
+
+  .options {
+    position: absolute;
+    border: 1px solid $textColor;
+
+    .option {
+      padding: 0 2px 0 10px;
+      border-top: 1px solid $textColor;
+      cursor: pointer;
+    }
+  }
+}
