@@ -4,7 +4,6 @@
   top: -16px;
   z-index: 1;
   width: 100%;
-  -webkit-backface-visibility: hidden;
   background-color: white;
 }
 
@@ -32,7 +31,7 @@
   height: 74px;
   /*padding: 20px;*/
   position: sticky;
-  top: 0px;
+  top: 0;
   margin-top: -16px;
   z-index: 3;
   margin-right: auto;
@@ -244,9 +243,7 @@
   height: auto;
   float: right;
   box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  padding: 0px 20px 20px 20px;
+  padding: 0 20px 20px 20px;
 }
 .footer .col-logo {
   width: 275px;
@@ -263,14 +260,12 @@
   text-align: center;
   font-size: 12px;
   color: #999999;
+  display: flex;
 }
 .footer .col h1 {
-  margin: 0;
-  padding: 0;
-  font-family: inherit;
   font-size: 16px;
   line-height: 17px;
-  padding: 20px 0px 5px 0px;
+  padding: 20px 0 5px 0px;
   color: #00a099;
   font-family: "arbel";
 }
@@ -282,14 +277,10 @@
 .footer .col ul li {
   color: #999999;
   font-size: 14px;
-  font-family: inherit;
-  // font-weight: bold;
   line-height: 1.4em;
-  padding: 0px 0px 0px 0px;
+  padding: 0 0 0 0;
   cursor: pointer;
   transition: 0.2s;
-  -webkit-transition: 0.2s;
-  -moz-transition: 0.2s;
 }
 .social ul li {
   display: inline-block;
@@ -299,8 +290,6 @@
 .footer .col ul li:hover {
   color: #00a099;
   transition: 0.1s;
-  -webkit-transition: 0.1s;
-  -moz-transition: 0.1s;
 }
 .clearfix {
   clear: both;
@@ -319,17 +308,17 @@
 .alignright {
   float: right;
   text-align: right;
-  width: 33.33333%;
+  flex:1;
 }
 .alignleft {
   float: right;
   text-align: left;
-  width: 33.33333%;
+  flex:1;
 }
 .aligncenter {
   float: right;
   text-align: center;
-  width: 33.33333%;
+  flex:1;
 }
 @media only screen and (min-width: 1280px) {
   .contain {
@@ -343,7 +332,7 @@
     display: block;
   }
   .social h1 {
-    margin: 0px;
+    margin: 0;
   }
 }
 @media only screen and (max-width: 950px) {
