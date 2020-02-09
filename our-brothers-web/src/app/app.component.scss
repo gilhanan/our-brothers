@@ -306,19 +306,16 @@
   margin-bottom: 20px;
 }
 .alignright {
-  float: right;
   text-align: right;
-  flex:1;
+  flex: 1;
 }
 .alignleft {
-  float: right;
   text-align: left;
-  flex:1;
+  flex: 1;
 }
 .aligncenter {
-  float: right;
   text-align: center;
-  flex:1;
+  flex: 1;
 }
 @media only screen and (min-width: 1280px) {
   .contain {
