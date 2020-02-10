@@ -1,5 +1,18 @@
 :host {
-  display: flex;
-  flex-flow: row;
-  border-bottom: 1px solid rgb(227, 229, 231);
+  .sorting-title {
+    color: rgb(129, 129, 129);
+    font-size: 22px;
+    font-family: "arbel";
+
+    @media only screen and (max-width: 650px) {
+      display: none;
+    }
+  }
+
+  .columns {
+    display: flex;
+    flex-flow: row;
+    border-bottom: 1px solid rgb(227, 229, 231);
+    margin-right: 23px;
+  }
 }

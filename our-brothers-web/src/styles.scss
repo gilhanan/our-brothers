@@ -1,6 +1,14 @@
+@import "~@fortawesome/fontawesome-free/css/all.css";
+
 @font-face {
   font-family: 'arbel';
   src: url(assets/fonts/Arbel-Bold_0.otf);
+}
+
+/* heebo-regular */
+@font-face {
+  font-family: 'Heebo';
+  src: url('assets/fonts/Heebo-Regular.ttf');
 }
 
 *,
@@ -167,7 +175,7 @@ textarea.form-field {
 
 .footer {
   height: 100px;
-  box-shadow: 0px 20px 30px 30px #00000040;
+  box-shadow: 0px 20px 30px 30px #00000010;
 }
 
 .form-title {

@@ -1,6 +1,6 @@
 import { Component, OnChanges, Input, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { User, Meeting } from 'src/app/model';
-import { MEMORIAL_YEAR, BereavedMeeting } from '../../../app/services/data.service';
+import { MEMORIAL_YEAR, BereavedMeeting, VolunteeringUser, UpdateBereavedStatus, UpdateBereavedGuidance } from '../../../app/services/data.service';
 import { SortedColumn } from '../list-header/list-header.component';
 
 
@@ -11,9 +11,13 @@ import { SortedColumn } from '../list-header/list-header.component';
 })
 export class BereavedsListComponent implements OnChanges {
 
+  @Input() user: User;
   @Input() bereaveds: User[];
   @Output() joinBereved = new EventEmitter<Meeting>();
   @Output() leaveBereaved = new EventEmitter<BereavedMeeting>();
+  @Output() volunteering = new EventEmitter<VolunteeringUser>();
+  @Output() bereavedStatus = new EventEmitter<UpdateBereavedStatus>();
+  @Output() bereavedGuidance = new EventEmitter<UpdateBereavedGuidance>();
 
   sortedBereaveds: User[] = [];
   year = MEMORIAL_YEAR;
@@ -58,6 +62,9 @@ export class BereavedsListComponent implements OnChanges {
         } else if (column === 'status') {
           aValue = a.bereavedParticipation && a.bereavedParticipation[this.year] && a.bereavedParticipation[this.year].status || '';
           bValue = b.bereavedParticipation && b.bereavedParticipation[this.year] && b.bereavedParticipation[this.year].status || '';
+        } else if (column === 'meetings') {
+          aValue = a.bereavedParticipation && a.bereavedParticipation[this.year] && a.bereavedParticipation[this.year].meetings && a.bereavedParticipation[this.year].meetings.length || 0;
+          bValue = b.bereavedParticipation && b.bereavedParticipation[this.year] && b.bereavedParticipation[this.year].meetings && b.bereavedParticipation[this.year].meetings.length || 0;
         } else {
           aValue = a[column] || '';
           bValue = b[column] || '';

@@ -19,11 +19,19 @@ export interface UserParticipationMeeting {
   title: string;
 }
 
-export type BereavedStatus = 'שובץ' | 'הושלם' | 'ממתין';
+export enum BereavedStatus {
+  done = "done",
+  inactive = "inactive",
+  waiting = "waiting"
+}
 
 export interface BereavedGuidance {
   answered: boolean;
-  general: BereavedGuidanceGeneralOptions;
+  general: BereavedGuidanceGeneral;
 }
 
-export type BereavedGuidanceGeneralOptions = 'ירושלים' | 'תל אביב' | 'ראשון לציון';
+export enum BereavedGuidanceGeneral {
+  jerusalem = "jerusalem",
+  telAviv = "telAviv",
+  haifa = "haifa"
+}

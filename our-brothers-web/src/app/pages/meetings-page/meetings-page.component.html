@@ -28,7 +28,8 @@
 </div>
 
 <div class="container meetings-filters-container">
-  <app-meetings-filters [(view)]="view" [(filter)]="filter" (filterChange)="filterMeetings($event)"></app-meetings-filters>
+  <app-meetings-filters [(view)]="view" [(filter)]="filter" (filterChange)="filterMeetings($event)">
+  </app-meetings-filters>
 </div>
 
 <div class="container meetings-container">
@@ -36,8 +37,9 @@
     טוען..
   </div>
   <ng-template [ngIf]="view === 'map'" [ngIfElse]="meetingsList">
-    <app-meetings-map [user]="user" [meetings]="filteredMeetings" [showGuide]="mapShowGuide$ | async"
-      (joinMeeting)="onJoinMeeting($event)" (guideCompleted)="onMapGuideCompleted()"></app-meetings-map>
+    <app-meetings-map [user]="user" [meetings]="filteredMeetings" [showGuide]="mapShowGuide"
+      [showLegend]="mapShowLegend" (joinMeeting)="onJoinMeeting($event)" (guideCompleted)="onMapGuideCompleted()">
+    </app-meetings-map>
   </ng-template>
 
   <ng-template #meetingsList>

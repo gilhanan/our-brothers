@@ -44,6 +44,10 @@ import { PhonePipe } from './pipes/phone.pipe';
 import { SeniorityPipe } from './pipes/seniority.pipe';
 import { TellPageComponent } from './pages/tell-page/tell-page.component';
 import { RadioButtonComponent } from './components/radio-button/radio-button.component';
+import { BereavedsListRowComponent } from './components/bereaveds-list-row/bereaveds-list-row.component';
+import { SelectComponent } from './components/select/select.component';
+import { SelectBereavedStatusComponent } from './components/select-bereaved-status/select-bereaved-status.component';
+import { SelectBereavedGuidanceComponent } from './components/select-bereaved-guidance/select-bereaved-guidance.component';
 
 registerLocaleData(localeHe);
 
@@ -78,7 +82,11 @@ registerLocaleData(localeHe);
     MeetingsMapNavigatorComponent,
     ModalSelectMeetingComponent,
     TellPageComponent,
-    RadioButtonComponent
+    RadioButtonComponent,
+    BereavedsListRowComponent,
+    SelectComponent,
+    SelectBereavedStatusComponent,
+    SelectBereavedGuidanceComponent
   ],
   imports: [
     BrowserModule,
@@ -102,4 +110,4 @@ registerLocaleData(localeHe);
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

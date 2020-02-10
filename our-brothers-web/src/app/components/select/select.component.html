@@ -1,0 +1,18 @@
+<div class="select-container" [ngClass]="{'readonly': readonly, 'preview' : preview}">
+  <div class="value-container" (click)="isOpen = !readonly && !preview; preview = readonly;">
+    <span class="value">
+      {{renderValue()}}
+    </span>
+    <div>
+      <span class="remove-icon" (click)="valueChange.emit('') && $event.stopPropagation()">x</span>
+      <span class="triangle-icon"></span>
+    </div>
+  </div>
+  <div class="options" *ngIf="isOpen">
+    <div *ngFor="let option of options">
+      <div class="option" (click)="onSelectOption(option.value)">
+        {{option.label}}
+      </div>
+    </div>
+  </div>
+</div>

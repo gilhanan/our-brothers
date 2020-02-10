@@ -16,6 +16,7 @@ export class MeetingsMapComponent implements OnInit {
   @Input() user: User;
   @Input() isCenterCurrentLocation = true;
   @Input() showGuide = false;
+  @Input() showLegend = false;
 
   @Output() guideCompleted = new EventEmitter<void>();
   @Output() joinMeeting = new EventEmitter<{ meeting: Meeting, user: User }>();

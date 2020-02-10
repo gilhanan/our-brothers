@@ -1,0 +1,183 @@
+$textColor: rgb(129, 129, 129);
+
+.row-container {
+  border-bottom: 1px solid rgb(227, 229, 231);
+
+  .row {
+    display: flex;
+    flex-flow: row;
+
+    .col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 45px 5px;
+      font-size: 18px;
+      color: $textColor;
+
+      &.col-row-state {
+        flex: 0 1 30px;
+
+        .expand-button {
+          background-color: transparent;
+          border: none;
+          cursor: pointer;
+
+          .expand-icon {
+            border: 7px solid transparent;
+            border-top: 7px solid rgb(0, 115, 109);
+          }
+        }
+
+        .volunteering-button {
+          margin-bottom: 5px;
+          background-color: transparent;
+          border: none;
+          cursor: pointer;
+
+          .key-icon {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            vertical-align: middle;
+            background-image: url(../../../assets/img/key.svg);
+            background-size: 100%;
+            background-repeat: no-repeat;
+
+            &.disabled {
+              background-image: url(../../../assets/img/key-disabled.svg);
+            }
+          }
+        }
+      }
+
+      &.col-name {
+        align-items: flex-start;
+        font-size: 22px;
+        font-family: "arbel";
+        color: rgb(0, 115, 109);
+      }
+
+      &.col-communications {
+        flex-direction: column;
+        align-items: flex-end;
+
+        .phone-icon,
+        .email-icon {
+          display: inline-block;
+          width: 15px;
+          height: 15px;
+          margin-right: 10px;
+          vertical-align: middle;
+          background-size: 100%;
+          background-repeat: no-repeat;
+        }
+
+        .phone-icon {
+          background-image: url(../../../assets/img/phone.png);
+        }
+        .email-icon {
+          background-image: url(../../../assets/img/mail.png);
+        }
+
+        .email-address,
+        .phone-number {
+          display: inline-block;
+          vertical-align: middle;
+        }
+      }
+
+      &.col-seniority {
+        flex: 0 1 120px;
+      }
+
+      &.col-guidance {
+        flex: 0 1 130px;
+      }
+
+      &.col-status {
+        flex: 0 1 130px;
+      }
+
+      &.bereaved-meetings {
+        align-items: flex-start;
+
+        .leave-button {
+          vertical-align: middle;
+          background-color: transparent;
+          border: none;
+          cursor: pointer;
+
+          .trash-icon {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            background-image: url(../../../assets/img/trash.svg);
+            background-size: 100%;
+            background-repeat: no-repeat;
+          }
+        }
+        .bereaved-meeting-title {
+          margin-right: 5px;
+          display: inline-block;
+          vertical-align: middle;
+        }
+
+        .join-button {
+          align-self: center;
+        }
+      }
+    }
+  }
+
+  .expanded-row {
+    display: flex;
+    flex-flow: row;
+    background-color: rgb(244, 244, 244);
+    padding: 5px;
+
+    .expanded-col {
+      flex: 1;
+      margin: 5px;
+      padding: 10px;
+      font-size: 18px;
+      border: 1px solid rgb(55, 135, 177);
+      color: $textColor;
+
+      .title {
+        color: rgb(55, 135, 177);
+      }
+
+      .content {
+        height: 200px;
+        overflow-y: scroll;
+      }
+
+      &.col-info {
+        flex: 0 1 150px;
+      }
+
+      &.col-slains {
+        flex: 0 1 250px;
+      }
+
+      &.col-dates {
+        flex: 0 1 100px;
+      }
+
+      .collapse-button {
+        position: absolute;
+        bottom: 10px;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+
+        .collapse-icon {
+          border: 7px solid transparent;
+          border-bottom: 7px solid rgb(0, 115, 109);
+        }
+      }
+    }
+  }
+}

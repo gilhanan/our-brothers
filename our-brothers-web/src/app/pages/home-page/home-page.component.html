@@ -1,10 +1,20 @@
-<div class="slide-show">
-  <div class="slide-show-content"></div>
+<div class="video-background">
+  <div class="video-show">
+    <div class="video-show-box">
+      <video id="vid" autoplay loop muted width="100%">
+        <source src="../../../assets/video/home-page.mp4" type="video/mp4" />
+      </video>
+
+      <button id="mute-btn" (click)="muteUnmute()">
+        <i class="fas fa-volume-mute"></i>
+      </button>
+    </div>
+  </div>
+  <div class="heading-talking big-heading">
+    מדברים <span class="talking-life">חיים</span>
+  </div>
+  <div class="site-hr"></div>
 </div>
-<div class="heading-talking big-heading">
-  מדברים <span class="talking-life">חיים</span>
-</div>
-<div class="site-hr"></div>
 <div class="site-divider"></div>
 <div class="small-heading">האחים שלנו</div>
 <div class="medium-heading">המפגשים שלנו</div>
@@ -111,7 +121,7 @@
     <input formControlName="email" class="form-field" placeholder="אימייל" />
     <textarea
       formControlName="message"
-      class="form-field"
+      class="form-field message"
       placeholder="תוכן הודעה"
     ></textarea>
   </form>

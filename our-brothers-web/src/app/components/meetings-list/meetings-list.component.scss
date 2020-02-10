@@ -8,6 +8,17 @@ $textColor: rgb(129, 129, 129);
   right: 0;
   overflow: hidden;
 
+  .list-header {
+
+    .date-col {
+      flex: 0 1 130px;
+    }
+
+    .participants-col {
+      flex: 0 1 140px;
+    }
+  }
+
   .meeting-items {
     height: 100%;
     direction: ltr;
@@ -15,7 +26,6 @@ $textColor: rgb(129, 129, 129);
     .meeting-item {
       display: flex;
       flex-flow: row;
-      margin-right: 10px;
       border-bottom: 1px solid rgb(227, 229, 231);
 
       @media only screen and (max-width: 650px) {
@@ -39,16 +49,8 @@ $textColor: rgb(129, 129, 129);
           align-self: center;
         }
 
-        &:first-child {
-          margin-right: 0;
-        }
-
-        &:last-child {
-          margin-left: 0;
-        }
-
         &.meeting-name {
-          font-size: 24px;
+          font-size: 22px;
           font-family: "arbel";
           color: rgb(0, 115, 109);
         }
@@ -77,15 +79,12 @@ $textColor: rgb(129, 129, 129);
           }
         }
 
-        &.meeting-date {
+        &.date-col {
+          flex: 0 1 130px;
           justify-content: center;
 
           @media only screen and (max-width: 650px) {
             justify-content: start;
-          }
-
-          .meeting-date-text {
-            flex: 0 1 auto;
           }
 
           &::before {
@@ -98,7 +97,8 @@ $textColor: rgb(129, 129, 129);
           }
         }
 
-        &.meeting-participants {
+        &.participants-col {
+          flex: 0 1 140px;
           justify-content: center;
 
           @media only screen and (max-width: 650px) {

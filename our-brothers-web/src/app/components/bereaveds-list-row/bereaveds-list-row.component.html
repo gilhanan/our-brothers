@@ -1,0 +1,121 @@
+<div class="row-container">
+  <div class="row">
+    <div class="col col-row-state">
+      <button class="volunteering-button" *ngIf="user?.isAdmin" (click)="volunteering.emit(!bereaved.isVolunteer)">
+        <div class="key-icon" [ngClass]="{'disabled': !bereaved.isVolunteer}"></div>
+      </button>
+      <button class="expand-button" *ngIf="!expanded" (click)="expanded = true">
+        <div class="expand-icon"></div>
+      </button>
+    </div>
+    <div class="col col-name">
+      {{bereaved.profile?.firstName + ' ' + bereaved.profile?.lastName}}
+    </div>
+    <div class="col col-communications">
+      <div class="bereaved-phone" *ngIf="bereaved.profile?.phoneNumber">
+        <div class="phone-number">
+          {{bereaved.profile.phoneNumber | phone}}
+        </div>
+        <div class="phone-icon"></div>
+      </div>
+      <div class="bereaved-email" *ngIf="bereaved.profile?.email">
+        <div class="email-address">
+          {{bereaved.profile?.email}}
+        </div>
+        <div class="email-icon"></div>
+      </div>
+    </div>
+    <div class="col">
+    </div>
+    <div class="col col-seniority">
+      <div *ngFor="let slain of bereaved?.bereavedProfile?.slains">
+        {{slain.deathDate | seniority}}
+      </div>
+    </div>
+    <div class="col col-guidance">
+      <app-select-bereaved-guidance [value]="bereaved.bereavedParticipation[year]?.guidance?.general"
+        (valueChange)="bereavedGuidance.emit($event)"></app-select-bereaved-guidance>
+    </div>
+    <div class="col col-status">
+      <app-select-bereaved-status [value]="bereaved.bereavedParticipation[year]?.status"
+        (valueChange)="bereavedStatus.emit($event)"></app-select-bereaved-status>
+    </div>
+    <div class="col bereaved-meetings">
+      <div *ngFor="let meeting of bereaved.bereavedParticipation && bereaved.bereavedParticipation[year]?.meetings">
+        <button class="leave-button" (click)="leaveBereaved.emit({bereaved: bereaved, meeting: meeting})">
+          <div class="trash-icon"></div>
+        </button>
+        <div class="bereaved-meeting-title">
+          {{meeting.title}}
+        </div>
+      </div>
+      <button class="join-button" (click)="joinBereved.emit(bereaved)">
+        שיבוץ
+      </button>
+    </div>
+  </div>
+  <div class="expanded-row" *ngIf="expanded">
+    <div class="expanded-col col-info">
+      <div class="title">
+        מספר סידורי:
+      </div>
+      <div>
+        {{bereaved.id}}
+      </div>
+      <div class="title">
+        מתנדב:
+      </div>
+      <div>
+        בדיקה
+      </div>
+      <button class="collapse-button" (click)="expanded = false">
+        <div class="collapse-icon"></div>
+      </button>
+    </div>
+    <div class="expanded-col col-comments">
+      <div class="title">
+        הערות:
+      </div>
+      <div class="content">
+        <div class="scroll-container">
+          {{bereaved.bereavedParticipation && bereaved.bereavedParticipation[year]?.notes}}
+        </div>
+      </div>
+    </div>
+    <div class="expanded-col col-slains">
+      <div class="title">
+        פרטי חלל:
+      </div>
+      <div class="content">
+        <div *ngFor="let slain of bereaved.bereavedProfile?.slains">
+          <div>
+            <span>{{slain.firstName + ' ' + slain.lastName + ' ז"ל'}}</span>
+          </div>
+          <div>
+            <span>{{slain.deathDate | date:'dd.MM.yyyy'}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="expanded-col col-story">
+      <div class="title">
+        הסיפור שלי:
+      </div>
+      <div class="content">
+        <div class="scroll-container">
+          {{bereaved.bereavedProfile?.story}}
+        </div>
+      </div>
+    </div>
+    <div class="expanded-col col-dates">
+      <div>
+        <div class="title">כניסה:</div>
+        <div>{{bereaved.lastSignInDate | date:'dd.MM.yyyy'}}</div>
+      </div>
+      <div>
+        <div class="title">הרשמה:</div>
+        <div>{{bereaved.registered | date:'dd.MM.yyyy'}}</div>
+      </div>
+    </div>
+  </div>
+</div>

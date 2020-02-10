@@ -1,15 +1,15 @@
-<app-list-header [(sort)]="sortedColumn" (sortChange)="sort()">
+<app-list-header [(sort)]="sortedColumn" (sortChange)="sort()" class="list-header">
   <app-list-column [field]="'title'">
     שם מפגש
   </app-list-column>
   <app-list-column [field]="'address'">
     כתובת
   </app-list-column>
-  <app-list-column [field]="'date'">
+  <app-list-column [field]="'date'" class="date-col">
     תאריך
   </app-list-column>
   <app-list-column [field]="'capacity'">
-    כמות משתתפים
+    משתתפים
   </app-list-column>
   <app-list-column [field]="'bereaveds'">
     אח/ות
@@ -24,10 +24,8 @@
     <div class="meeting-item-col meeting-address">
       {{meeting.address.formattedAddress}}
     </div>
-    <div class="meeting-item-col meeting-date">
-      <div class="meeting-date-text">
-        {{meeting.date | date: 'dd.MM.yyyy'}}
-      </div>
+    <div class="meeting-item-col date-col">
+      {{meeting.date | date: 'dd.MM.yyyy'}}
     </div>
     <div class="meeting-item-col meeting-participants">
       <span class="mobile-label">
