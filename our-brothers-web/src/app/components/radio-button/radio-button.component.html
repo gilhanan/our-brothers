@@ -1,3 +1,4 @@
-<div class="radio-button-container">
+<div (click)="selected.emit()" class="radio-button-container">
   <div class="radio-button-circle" [class.on]="isOn"></div>
+  <div class="radio-button-text">{{text}}</div>
 </div>

@@ -1,5 +1,7 @@
 .radio-button-container {
+  cursor: pointer;
   display: flex;
+  margin-bottom: 15px;
 
   .radio-button-circle {
     width: 28px;
@@ -17,5 +19,9 @@
       border-radius: 50%;
       background-color: rgb(0, 160, 153);
     }
+  }
+
+  .radio-button-text {
+    margin-right: 10px;
   }
 }

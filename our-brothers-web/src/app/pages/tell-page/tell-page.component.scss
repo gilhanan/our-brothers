@@ -49,10 +49,11 @@
               flex-grow: 1;
               height: 12px;
               background-color: rgb(219, 219, 219);
-            }
 
-            .done .step-line {
-              background-color: rgb(10, 165, 155);
+              &.current,
+              &.done {
+                background-color: rgb(10, 165, 155);
+              }
             }
           }
 
@@ -112,15 +113,11 @@
       }
 
       .training-options {
-        .training-option {
-          display: flex;
-          margin-bottom: 15px;
-
-          .training-option-text {
-            margin-right: 10px;
-          }
-        }
       }
+    }
+
+    .step3-button {
+      margin-bottom: 40px;
     }
   }
 }

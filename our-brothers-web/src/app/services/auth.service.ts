@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, throwError, from } from 'rxjs';
+import { Observable, of, throwError, from, Subject } from 'rxjs';
 import { auth } from 'firebase/app';
 import { User } from '../model';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { switchMap, map, catchError, tap, first } from 'rxjs/operators';
+import { switchMap, map, catchError, tap, first, retry } from 'rxjs/operators';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { DataService } from './data.service';
 
@@ -29,6 +29,7 @@ export class AuthService {
   public userId: string;
   public currentFirebaseUser: firebase.User;
   private firstTimeGetUser = true;
+  public needLogin$: Subject<null> = new Subject();
 
   constructor(
     public angularFireAuth: AngularFireAuth,
@@ -40,18 +41,18 @@ export class AuthService {
           if (authRes) {
             this.userId = authRes.uid;
             this.currentFirebaseUser = authRes;
-            return this.dataService
-              .getUserById(authRes.uid)
-              .pipe(
-                switchMap(user => from(authRes.getIdTokenResult(this.firstTimeGetUser))
-                  .pipe(
-                    tap(() => this.firstTimeGetUser = false),
-                    map(idTokenResult => ({
-                      ...user,
-                      isAdmin: !!idTokenResult.claims.admin,
-                      isVolunteer: !!idTokenResult.claims.volunteer
-                    })))
-                ));
+            return this.dataService.getUserById(authRes.uid).pipe(
+              switchMap(user =>
+                from(authRes.getIdTokenResult(this.firstTimeGetUser)).pipe(
+                  tap(() => (this.firstTimeGetUser = false)),
+                  map(idTokenResult => ({
+                    ...user,
+                    isAdmin: !!idTokenResult.claims.admin,
+                    isVolunteer: !!idTokenResult.claims.volunteer
+                  }))
+                )
+              )
+            );
           } else {
             return of(null);
           }
@@ -109,6 +110,14 @@ export class AuthService {
 
   public signOut() {
     return this.angularFireAuth.auth.signOut();
+  }
+
+  public requestToLogin() {
+    if (!this.userId) {
+      this.needLogin$.next();
+    } else {
+      return true;
+    }
   }
 
   // public login(

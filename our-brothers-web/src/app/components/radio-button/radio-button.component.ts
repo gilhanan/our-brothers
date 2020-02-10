@@ -7,7 +7,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class RadioButtonComponent implements OnInit {
   @Input() isOn: boolean;
-  @Output() toggled = new EventEmitter<null>();
+  @Input() text = '';
+  @Output() selected = new EventEmitter<null>();
 
   constructor() {}
 

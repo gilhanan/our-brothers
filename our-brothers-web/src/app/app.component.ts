@@ -39,6 +39,10 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         this.isLoggedIn = false;
       }
     });
+
+    this.authService.needLogin$.subscribe(() => {
+      this.needLogin = true;
+    });
   }
 
   ngAfterViewInit() {
