@@ -7,8 +7,8 @@
 
 /* heebo-regular */
 @font-face {
-  font-family: 'Heebo';
-  src: url('assets/fonts/Heebo-Regular.ttf');
+  font-family: "Heebo";
+  src: url("assets/fonts/Heebo-Regular.ttf");
 }
 
 *,
@@ -173,11 +173,6 @@ textarea.form-field {
   }
 }
 
-.footer {
-  height: 100px;
-  box-shadow: 0px 20px 30px 30px #00000010;
-}
-
 .form-title {
   font-size: 36px;
   font-family: 'arbel';
@@ -269,6 +264,7 @@ input.login-form-input {
 
 .popup-element {
   position: fixed;
+  z-index: 1;
   height: 100vh;
   width: 100vw;
   top: 0;

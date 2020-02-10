@@ -48,6 +48,8 @@ import { BereavedsListRowComponent } from './components/bereaveds-list-row/berea
 import { SelectComponent } from './components/select/select.component';
 import { SelectBereavedStatusComponent } from './components/select-bereaved-status/select-bereaved-status.component';
 import { SelectBereavedGuidanceComponent } from './components/select-bereaved-guidance/select-bereaved-guidance.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 registerLocaleData(localeHe);
 
@@ -86,7 +88,9 @@ registerLocaleData(localeHe);
     BereavedsListRowComponent,
     SelectComponent,
     SelectBereavedStatusComponent,
-    SelectBereavedGuidanceComponent
+    SelectBereavedGuidanceComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
