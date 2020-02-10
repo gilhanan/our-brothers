@@ -11,17 +11,24 @@
   />
   <input
     type="text"
-    placeholder="שם מלא"
+    placeholder="שם פרטי"
     class="login-form-input"
-    formControlName="name"
-    [class.invalid]="!name.valid && name.touched"
+    formControlName="firstName"
+    [class.invalid]="!firstName.valid && firstName.touched"
+  />
+  <input
+    type="text"
+    placeholder="שם משפחה"
+    class="login-form-input"
+    formControlName="lastName"
+    [class.invalid]="!lastName.valid && lastName.touched"
   />
   <input
     type="text"
     placeholder="טלפון"
     class="login-form-input"
-    formControlName="phone"
-    [class.invalid]="!phone.valid && phone.touched"
+    formControlName="phoneNumber"
+    [class.invalid]="!phoneNumber.valid && phoneNumber.touched"
   />
   <input
     type="text"
@@ -34,7 +41,32 @@
     type="date"
     placeholder="תאריך לידה"
     class="login-form-input"
-    formControlName="birthDate"
-    [class.invalid]="!birthDate.valid && birthDate.touched"
+    formControlName="birthDay"
+    [value]="birthDay.value | date:'yyyy-MM-dd'"
+    [class.invalid]="!birthDay.valid && birthDay.touched"
   />
+  <app-checkbox
+    [label]="'אני מסכים לתנאי השימוש'"
+    [checked]="agree.value"
+    [invalid]="!agree.valid && agree.touched"
+    (checkedChanged)="agree.setValue($event)"
+  ></app-checkbox>
+  <div class="other-lang-input">
+    <app-checkbox
+      [label]="'אני מספר גם בשפות אחרות'"
+      [checked]="canTellInOtherLang"
+      (checkedChanged)="canTellInOtherLang = $event"
+    ></app-checkbox>
+    <select
+      class="other-lang-select"
+      [value]="otherLang.value"
+      (change)="otherLang.setValue($event.target.value)"
+    >
+      <option>אנגלית</option>
+      <option>צרפתית</option>
+      <option>רוסית</option>
+      <option>ערבית</option>
+      <option>אחר</option>
+    </select>
+  </div>
 </ng-container>

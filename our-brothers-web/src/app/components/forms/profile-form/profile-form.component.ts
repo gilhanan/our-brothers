@@ -12,6 +12,7 @@ import { map } from 'rxjs/operators';
 })
 export class ProfileFormComponent implements OnInit {
   public profileForm: FormGroup;
+  public canTellInOtherLang = false;
 
   constructor(
     private fb: FormBuilder,
@@ -20,37 +21,74 @@ export class ProfileFormComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    if (this.authService.currentUser.profile.otherLang) {
+      this.canTellInOtherLang = true;
+    }
+
     this.profileForm = this.fb.group({
       // type: ['', Validators.required],
       email: [
-        this.authService.currentFirebaseUser.email,
+        this.authService.currentUser.profile.email ||
+          this.authService.currentFirebaseUser.email,
         [Validators.required, Validators.email]
       ],
-      name: ['', Validators.required],
-      phone: ['', Validators.required],
-      address: ['', Validators.required],
-      birthDate: ['', Validators.required]
+      firstName: [
+        this.authService.currentUser.profile.firstName,
+        Validators.required
+      ],
+      lastName: [
+        this.authService.currentUser.profile.lastName,
+        Validators.required
+      ],
+      phoneNumber: [
+        this.authService.currentUser.profile.phoneNumber,
+        Validators.required
+      ],
+      address: [
+        this.authService.currentUser.profile.address,
+        Validators.required
+      ],
+      birthDay: [
+        new Date(this.authService.currentUser.profile.birthDay),
+        Validators.required
+      ],
+      otherLang: [this.authService.currentUser.profile.otherLang],
+      agree: [false, Validators.required]
     });
+
+    console.log('birthDay', this.profileForm.get('birthDay').value);
   }
 
   get email() {
     return this.profileForm.get('email');
   }
 
-  get name() {
-    return this.profileForm.get('name');
+  get firstName() {
+    return this.profileForm.get('firstName');
   }
 
-  get phone() {
-    return this.profileForm.get('phone');
+  get lastName() {
+    return this.profileForm.get('lastName');
+  }
+
+  get phoneNumber() {
+    return this.profileForm.get('phoneNumber');
   }
 
   get address() {
     return this.profileForm.get('address');
   }
 
-  get birthDate() {
-    return this.profileForm.get('birthDate');
+  get birthDay() {
+    return this.profileForm.get('birthDay');
+  }
+
+  get otherLang() {
+    return this.profileForm.get('otherLang');
+  }
+
+  get agree() {
+    return this.profileForm.get('agree');
   }
 
   public saveProfile() {
@@ -60,9 +98,7 @@ export class ProfileFormComponent implements OnInit {
         role: 'participate'
       };
 
-      userData.profile.birthDate = new Date(
-        userData.profile.birthDate
-      ).getTime();
+      userData.profile.birthDay = new Date(userData.profile.birthDay).getTime();
       return this.dataService
         .updateUserData(this.authService.userId, userData)
         .pipe(

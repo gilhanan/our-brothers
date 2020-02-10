@@ -3,7 +3,16 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable, throwError, from } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
-import { User, Meeting, UserParticipationMeeting, BereavedStatus, BereavedGuidanceGeneral } from '../model';
+import {
+  User,
+  Meeting,
+  UserParticipationMeeting,
+  BereavedStatus,
+  BereavedGuidanceGeneral,
+  BereavedGuidance,
+  Slain,
+  BereavedProfile
+} from '../model';
 
 export const MEMORIAL_YEAR = 2019;
 
@@ -31,7 +40,7 @@ export interface UpdateBereavedGuidance {
   providedIn: 'root'
 })
 export class DataService {
-  constructor(private angularFireDatabase: AngularFireDatabase) { }
+  constructor(private angularFireDatabase: AngularFireDatabase) {}
 
   public getUserById(userId: string): Observable<User> {
     return this.angularFireDatabase
@@ -43,13 +52,26 @@ export class DataService {
           ...user
         })),
         map(user => {
-
-          if (user.bereavedParticipation && user.bereavedParticipation[MEMORIAL_YEAR]) {
-            user.bereavedParticipation[MEMORIAL_YEAR].meetings = this.parseUserMeetings(user.bereavedParticipation[MEMORIAL_YEAR].meetings);
+          if (
+            user.bereavedParticipation &&
+            user.bereavedParticipation[MEMORIAL_YEAR]
+          ) {
+            user.bereavedParticipation[
+              MEMORIAL_YEAR
+            ].meetings = this.parseUserMeetings(
+              user.bereavedParticipation[MEMORIAL_YEAR].meetings
+            );
           }
 
-          if (user.participateParticipation && user.participateParticipation[MEMORIAL_YEAR]) {
-            user.participateParticipation[MEMORIAL_YEAR].meetings = this.parseUserMeetings(user.participateParticipation[MEMORIAL_YEAR].meetings);
+          if (
+            user.participateParticipation &&
+            user.participateParticipation[MEMORIAL_YEAR]
+          ) {
+            user.participateParticipation[
+              MEMORIAL_YEAR
+            ].meetings = this.parseUserMeetings(
+              user.participateParticipation[MEMORIAL_YEAR].meetings
+            );
           }
 
           return user;
@@ -74,7 +96,9 @@ export class DataService {
 
   public setUserVolunteer(user: User, isVolunteer: boolean) {
     return from(
-      this.angularFireDatabase.object<boolean>(`users/${user.id}/isVolunteer`).set(isVolunteer)
+      this.angularFireDatabase
+        .object<boolean>(`users/${user.id}/isVolunteer`)
+        .set(isVolunteer)
     ).pipe(
       catchError(error => {
         console.log(error);
@@ -83,9 +107,17 @@ export class DataService {
     );
   }
 
-  public setBereavedStatus(bereaved: User, status: BereavedStatus, year = MEMORIAL_YEAR) {
+  public setBereavedStatus(
+    bereaved: User,
+    status: BereavedStatus,
+    year = MEMORIAL_YEAR
+  ) {
     return from(
-      this.angularFireDatabase.object<BereavedStatus>(`users/${bereaved.id}/bereavedParticipation/${year}/status`).set(status)
+      this.angularFireDatabase
+        .object<BereavedStatus>(
+          `users/${bereaved.id}/bereavedParticipation/${year}/status`
+        )
+        .set(status)
     ).pipe(
       catchError(error => {
         console.log(error);
@@ -94,9 +126,49 @@ export class DataService {
     );
   }
 
-  public setBereavedGuidance(bereaved: User, guidance: BereavedGuidanceGeneral, year = MEMORIAL_YEAR) {
+  public setBereavedGuidance(
+    bereaved: User,
+    guidance: BereavedGuidanceGeneral,
+    year = MEMORIAL_YEAR
+  ) {
     return from(
-      this.angularFireDatabase.object<BereavedGuidanceGeneral>(`users/${bereaved.id}/bereavedParticipation/${year}/guidance/general`).set(guidance)
+      this.angularFireDatabase
+        .object<BereavedGuidanceGeneral>(
+          `users/${bereaved.id}/bereavedParticipation/${year}/guidance/general`
+        )
+        .set(guidance)
+    ).pipe(
+      catchError(error => {
+        console.log(error);
+        return throwError(error);
+      })
+    );
+  }
+
+  public setBereavedProfile(user: User, bereavedProfile: BereavedProfile) {
+    return from(
+      this.angularFireDatabase
+        .object<BereavedProfile>(`users/${user.id}/bereavedProfile`)
+        .set(bereavedProfile)
+    ).pipe(
+      catchError(error => {
+        console.log(error);
+        return throwError(error);
+      })
+    );
+  }
+
+  public setBereavedGuidanceAnswer(
+    bereaved: User,
+    guidance: BereavedGuidance,
+    year = MEMORIAL_YEAR
+  ) {
+    return from(
+      this.angularFireDatabase
+        .object<BereavedGuidance>(
+          `users/${bereaved.id}/bereavedParticipation/${year}/guidance`
+        )
+        .set(guidance)
     ).pipe(
       catchError(error => {
         console.log(error);
@@ -112,13 +184,22 @@ export class DataService {
       .pipe(
         map(usersSnapshot =>
           usersSnapshot
-            .map(usersSnapshot => ({ id: usersSnapshot.key, ...usersSnapshot.payload.val() }))
+            .map(usersSnapshot => ({
+              id: usersSnapshot.key,
+              ...usersSnapshot.payload.val()
+            }))
             .filter(user => user.role === 'bereaved' && !!user.profile)
             .slice(0, 20)
             .map(user => {
-
-              if (user.bereavedParticipation && user.bereavedParticipation[MEMORIAL_YEAR]) {
-                user.bereavedParticipation[MEMORIAL_YEAR].meetings = this.parseUserMeetings(user.bereavedParticipation[MEMORIAL_YEAR].meetings);
+              if (
+                user.bereavedParticipation &&
+                user.bereavedParticipation[MEMORIAL_YEAR]
+              ) {
+                user.bereavedParticipation[
+                  MEMORIAL_YEAR
+                ].meetings = this.parseUserMeetings(
+                  user.bereavedParticipation[MEMORIAL_YEAR].meetings
+                );
               }
 
               return user;
@@ -138,7 +219,9 @@ export class DataService {
           for (const hostMeetingsSnapshot of meetingsSnapshot) {
             const hostId = hostMeetingsSnapshot.key;
 
-            const hostMeetings = this.firebaseMapToArray<Meeting>(hostMeetingsSnapshot.payload.val());
+            const hostMeetings = this.firebaseMapToArray<Meeting>(
+              hostMeetingsSnapshot.payload.val()
+            );
 
             for (const meeting of hostMeetings) {
               meeting.hostId = hostId;
@@ -154,86 +237,104 @@ export class DataService {
 
   public getNoBerevedMeetings(year = MEMORIAL_YEAR): Observable<Meeting[]> {
     return this.getMeetings(year).pipe(
-      map((meetings: Meeting[]) => meetings.filter((meeting) => !meeting.bereaved))
+      map((meetings: Meeting[]) =>
+        meetings.filter(meeting => !meeting.bereaved)
+      )
     );
   }
 
-  public bereavedRegisterHost(bereaved: User, meeting: Meeting, year = MEMORIAL_YEAR): Observable<boolean> {
+  public bereavedRegisterHost(
+    bereaved: User,
+    meeting: Meeting,
+    year = MEMORIAL_YEAR
+  ): Observable<boolean> {
     const postObj = {
       id: bereaved.id,
       firstName: bereaved.profile.firstName,
       lastName: bereaved.profile.lastName,
       email: bereaved.profile.email || null,
       phoneNumber: bereaved.profile.phoneNumber,
-      slain: bereaved.bereavedProfile && bereaved.bereavedProfile.slains || null
+      slain:
+        (bereaved.bereavedProfile && bereaved.bereavedProfile.slains) || null
     };
 
-    return from(this.angularFireDatabase
-      .object(`events/${year}/${meeting.hostId}/${meeting.id}/bereaved`)
-      .set(postObj)
-      .then(() => {
-        // TODO: Firebase Functions
-        return this.angularFireDatabase.object(`users/${bereaved.id}/bereavedParticipation/${year}/meetings/${meeting.hostId}/${meeting.id}`)
-          .set({
-            title: meeting.title
-          })
-          .then(() => true);
-      })
-      .catch((error) => {
-        console.log(error);
-        throw error;
-      }));
+    return from(
+      this.angularFireDatabase
+        .object(`events/${year}/${meeting.hostId}/${meeting.id}/bereaved`)
+        .set(postObj)
+        .then(() => {
+          // TODO: Firebase Functions
+          return this.angularFireDatabase
+            .object(
+              `users/${bereaved.id}/bereavedParticipation/${year}/meetings/${meeting.hostId}/${meeting.id}`
+            )
+            .set({
+              title: meeting.title
+            })
+            .then(() => true);
+        })
+        .catch(error => {
+          console.log(error);
+          throw error;
+        })
+    );
   }
 
-  public bereavedLeaveHost(bereaved: User, meeting: Meeting, year = MEMORIAL_YEAR): Observable<boolean> {
-    return from(this.angularFireDatabase
-      .object(`events/${year}/${meeting.hostId}/${meeting.id}/bereaved`)
-      .remove()
-      .then(() => {
-        // TODO: Firebase Functions
-        return this.angularFireDatabase.object(`users/${bereaved.id}/bereavedParticipation/${year}/meetings/${meeting.hostId}/${meeting.id}`)
-          .remove()
-          .then(() => true);
-      })
-      .catch((error) => {
-        console.log(error);
-        throw error;
-      }));
+  public bereavedLeaveHost(
+    bereaved: User,
+    meeting: Meeting,
+    year = MEMORIAL_YEAR
+  ): Observable<boolean> {
+    return from(
+      this.angularFireDatabase
+        .object(`events/${year}/${meeting.hostId}/${meeting.id}/bereaved`)
+        .remove()
+        .then(() => {
+          // TODO: Firebase Functions
+          return this.angularFireDatabase
+            .object(
+              `users/${bereaved.id}/bereavedParticipation/${year}/meetings/${meeting.hostId}/${meeting.id}`
+            )
+            .remove()
+            .then(() => true);
+        })
+        .catch(error => {
+          console.log(error);
+          throw error;
+        })
+    );
   }
 
   private parseUserMeetings(map: Object): UserParticipationMeeting[] {
-
     if (map) {
-
       const participations: UserParticipationMeeting[] = [];
 
-      Array.from(Object.entries(map))
-        .forEach(([hostId, meetings]: [string, Object]) => {
-
-          Array.from(Object.entries(meetings))
-            .forEach(([id, meeting]: [string, { title: string }]) => {
-
+      Array.from(Object.entries(map)).forEach(
+        ([hostId, meetings]: [string, Object]) => {
+          Array.from(Object.entries(meetings)).forEach(
+            ([id, meeting]: [string, { title: string }]) => {
               participations.push({
                 id,
                 hostId,
                 title: meeting.title
-              })
-
-            });
-
-        });
+              });
+            }
+          );
+        }
+      );
 
       return participations;
-
     }
   }
 
   private firebaseMapToArray<T>(map: Object): T[] {
     if (map) {
-      return Array.from(Object.entries(map)).map(([id, object]: [string, T]) => ({
-        ...object,
-        id
-      }));
+      return Array.from(Object.entries(map)).map(
+        ([id, object]: [string, T]) => ({
+          ...object,
+          id
+        })
+      );
     }
   }
 }

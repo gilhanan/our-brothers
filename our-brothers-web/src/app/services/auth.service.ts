@@ -27,6 +27,7 @@ export interface LoginOptions {
 export class AuthService {
   public user: Observable<User>;
   public userId: string;
+  public currentUser: User;
   public currentFirebaseUser: firebase.User;
   private firstTimeGetUser = true;
   public needLogin$: Subject<null> = new Subject();
@@ -42,16 +43,19 @@ export class AuthService {
             this.userId = authRes.uid;
             this.currentFirebaseUser = authRes;
             return this.dataService.getUserById(authRes.uid).pipe(
-              switchMap(user =>
-                from(authRes.getIdTokenResult(this.firstTimeGetUser)).pipe(
+              switchMap(user => {
+                this.currentUser = user;
+                return from(
+                  authRes.getIdTokenResult(this.firstTimeGetUser)
+                ).pipe(
                   tap(() => (this.firstTimeGetUser = false)),
                   map(idTokenResult => ({
                     ...user,
                     isAdmin: !!idTokenResult.claims.admin,
                     isVolunteer: !!idTokenResult.claims.volunteer
                   }))
-                )
-              )
+                );
+              })
             );
           } else {
             return of(null);
@@ -113,11 +117,7 @@ export class AuthService {
   }
 
   public requestToLogin() {
-    if (!this.userId) {
-      this.needLogin$.next();
-    } else {
-      return true;
-    }
+    this.needLogin$.next();
   }
 
   // public login(

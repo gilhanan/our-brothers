@@ -110,12 +110,21 @@
             <input
               class="form-field"
               type="text"
-              placeholder="שם מלא"
-              formControlName="casualtyName"
-              [class.invalid]="!casualtyName.valid && casualtyName.touched"
+              placeholder="שם פרטי"
+              formControlName="casualtyFname"
+              [class.invalid]="!casualtyFname.valid && casualtyFname.touched"
             />
             <input
               class="form-field"
+              type="text"
+              placeholder="שם משפחה"
+              formControlName="casualtyLname"
+              [class.invalid]="!casualtyLname.valid && casualtyLname.touched"
+            />
+          </div>
+          <div class="form-items-container">
+            <input
+              class="form-field fallen-date-input"
               type="date"
               placeholder="תאריך נפילה:"
               formControlName="casualtyDate"
@@ -131,7 +140,7 @@
             ></textarea>
           </div>
           <div
-            (click)="goToStep3()"
+            (click)="(casualtyDetailsFrom.valid) ? saveBereavedProfile() : null"
             class="site-button primary-button step2-button"
           >
             המשך
@@ -164,13 +173,48 @@
           </div>
         </div>
         <div
-          (click)="goToStep4()"
+          (click)="saveTraningAnswer()"
           class="site-button primary-button step3-button"
         >
           המשך
         </div>
       </section>
     </ng-container>
-    <ng-container *ngSwitchCase="4">Meetings Component</ng-container>
+    <ng-container *ngSwitchCase="4">
+      <div class="container meetings-filters-container">
+        <app-meetings-filters
+          [(view)]="view"
+          [(filter)]="filter"
+          (filterChange)="filterMeetings($event)"
+        >
+        </app-meetings-filters>
+      </div>
+
+      <div class="container meetings-container">
+        <div *ngIf="!meetings?.length" class="loading">
+          טוען..
+        </div>
+        <ng-template [ngIf]="view === 'map'" [ngIfElse]="meetingsList">
+          <app-meetings-map
+            [user]="user"
+            [meetings]="filteredMeetings"
+            [showGuide]="mapShowGuide"
+            [showLegend]="mapShowLegend"
+            (joinMeeting)="onJoinMeeting($event)"
+            (guideCompleted)="onMapGuideCompleted()"
+          >
+          </app-meetings-map>
+        </ng-template>
+
+        <ng-template #meetingsList>
+          <app-meetings-list
+            [user]="user"
+            [meetings]="filteredMeetings"
+            (joinMeeting)="onJoinMeeting($event)"
+          >
+          </app-meetings-list>
+        </ng-template>
+      </div>
+    </ng-container>
   </ng-container>
 </section>

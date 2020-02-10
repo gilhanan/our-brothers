@@ -1,52 +1,132 @@
 import { Injectable } from '@angular/core';
 import { User, Meeting } from '../model';
 import { MEMORIAL_YEAR } from './data.service';
+import { retry } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ParticipationsService {
-
-  constructor() { }
+  constructor() {}
 
   isParticipateParticipating = (user: User, year: number) => {
-    return !!user && !!user.participateParticipation && !!user.participateParticipation[year] && !!user.participateParticipation[year].meetings &&
-      !!user.participateParticipation[year].meetings.length;
+    return (
+      !!user &&
+      !!user.participateParticipation &&
+      !!user.participateParticipation[year] &&
+      !!user.participateParticipation[year].meetings &&
+      !!user.participateParticipation[year].meetings.length
+    );
   };
 
   isBereavedParticipating = (user: User, year: number) => {
-    return !!user && !!user.bereavedParticipation && !!user.bereavedParticipation[year] && !!user.bereavedParticipation[year].meetings &&
-      !!user.bereavedParticipation[year].meetings.length;
+    return (
+      !!user &&
+      !!user.bereavedParticipation &&
+      !!user.bereavedParticipation[year] &&
+      !!user.bereavedParticipation[year].meetings &&
+      !!user.bereavedParticipation[year].meetings.length
+    );
   };
 
   isHostParticipating = (user: User, year: number) => {
-    return !!user && !!user.hostParticipation && !!user.hostParticipation[year] && !!user.hostParticipation[year].meetings &&
-      !!user.hostParticipation[year].meetings.length;;
+    return (
+      !!user &&
+      !!user.hostParticipation &&
+      !!user.hostParticipation[year] &&
+      !!user.hostParticipation[year].meetings &&
+      !!user.hostParticipation[year].meetings.length
+    );
   };
 
   isUserParticipating = (user: User, year: number) => {
-    return this.isParticipateParticipating(user, year) || this.isBereavedParticipating(user, year) || this.isHostParticipating(user, year);
+    return (
+      this.isParticipateParticipating(user, year) ||
+      this.isBereavedParticipating(user, year) ||
+      this.isHostParticipating(user, year)
+    );
   };
 
-  isParticipateParticipatingEvent = (user: User, meeting: Meeting, year = MEMORIAL_YEAR) => {
-    return !!user && !!user.participateParticipation && !!user.participateParticipation[year] && !!user.participateParticipation[year].meetings &&
-      user.participateParticipation[year].meetings.some((e) => e.id === meeting.id && e.hostId === meeting.hostId);
+  isParticipateParticipatingEvent = (
+    user: User,
+    meeting: Meeting,
+    year = MEMORIAL_YEAR
+  ) => {
+    return (
+      !!user &&
+      !!user.participateParticipation &&
+      !!user.participateParticipation[year] &&
+      !!user.participateParticipation[year].meetings &&
+      user.participateParticipation[year].meetings.some(
+        e => e.id === meeting.id && e.hostId === meeting.hostId
+      )
+    );
   };
 
-  isBereavedParticipatingEvent = (user: User, meeting: Meeting, year = MEMORIAL_YEAR) => {
-    return !!user && !!user.bereavedParticipation && !!user.bereavedParticipation[year] && !!user.bereavedParticipation[year].meetings &&
-      user.bereavedParticipation[year].meetings.some((e) => e.id === meeting.id && e.hostId === meeting.hostId);
+  isBereavedParticipatingEvent = (
+    user: User,
+    meeting: Meeting,
+    year = MEMORIAL_YEAR
+  ) => {
+    return (
+      !!user &&
+      !!user.bereavedParticipation &&
+      !!user.bereavedParticipation[year] &&
+      !!user.bereavedParticipation[year].meetings &&
+      user.bereavedParticipation[year].meetings.some(
+        e => e.id === meeting.id && e.hostId === meeting.hostId
+      )
+    );
   };
 
   // TODO: Replaced by user.id === meeting.hostId ?
-  isHostParticipatingEvent = (user: User, meeting: Meeting, year = MEMORIAL_YEAR) => {
-    return !!user && !!user.hostParticipation && !!user.hostParticipation[year] && !!user.hostParticipation[year].meetings &&
-      user.hostParticipation[year].meetings.some((e) => e.id === meeting.id);
+  isHostParticipatingEvent = (
+    user: User,
+    meeting: Meeting,
+    year = MEMORIAL_YEAR
+  ) => {
+    return (
+      !!user &&
+      !!user.hostParticipation &&
+      !!user.hostParticipation[year] &&
+      !!user.hostParticipation[year].meetings &&
+      user.hostParticipation[year].meetings.some(e => e.id === meeting.id)
+    );
   };
 
-  isUserParticipatingEvent = (user: User, meeting: Meeting, year = MEMORIAL_YEAR) => {
-    return this.isParticipateParticipatingEvent(user, meeting, year) ||
+  isUserParticipatingEvent = (
+    user: User,
+    meeting: Meeting,
+    year = MEMORIAL_YEAR
+  ) => {
+    return (
+      this.isParticipateParticipatingEvent(user, meeting, year) ||
       this.isBereavedParticipatingEvent(user, meeting, year) ||
-      this.isHostParticipatingEvent(user, meeting);
+      this.isHostParticipatingEvent(user, meeting)
+    );
+  };
+
+  isUserHaveAllDetails = (user: User) => {
+    return (
+      user.profile.address &&
+      user.profile.email &&
+      user.profile.firstName &&
+      user.profile.lastName &&
+      user.profile.phoneNumber &&
+      user.profile.birthDay
+    );
+  };
+
+  isBrotherHaveSlainDetails = (user: User) => {
+    return user.bereavedProfile;
+  };
+
+  isBrotherAnsweredTrainingMeeting = (user: User, year = MEMORIAL_YEAR) => {
+    return (
+      user.bereavedParticipation &&
+      user.bereavedParticipation[year] &&
+      user.bereavedParticipation[year].guidance &&
+      user.bereavedParticipation[year].guidance.answered
+    );
   };
 }

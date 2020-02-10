@@ -1,6 +1,7 @@
 <div
   class="site-checkbox"
   [class.checked]="checked"
+  [class.invalid]="invalid"
   (click)="checkboxClicked()"
   (keydown)="checkboxKeyup($event)"
 >

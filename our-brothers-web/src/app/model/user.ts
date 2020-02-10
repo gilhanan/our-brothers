@@ -21,10 +21,13 @@ export interface User {
 }
 
 export interface UserProfile {
+  address?: string;
   firstName: string;
   lastName: string;
   phoneNumber?: string;
   email?: string;
+  birthDay?: Date;
+  otherLang?: string;
 }
 
 export enum UserRole {
@@ -39,7 +42,7 @@ export interface BereavedProfile {
 }
 
 export interface Slain {
-  id: string;
+  id?: string;
   firstName: string;
   lastName: string;
   deathDate: number;
