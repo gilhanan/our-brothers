@@ -10,24 +10,14 @@
       <a class="link-header" routerLink="gallery" routerLinkActive="current-page">גלריה</a>
       <a class="link-header" routerLink="contact" routerLinkActive="current-page">צור קשר</a>
     </div>
-    <!-- <div class="contact-icons">
-    <div class="contact-header-whatsapp-icon"></div>
-    <div class="contact-header-facebook-icon"></div>
-    <div class="contact-header-youtube-icon"></div>
-    <div class="contact-header-email-us-icon"></div>
-  </div>  -->
     <div class="action-buttons">
       <div class="action-header-support-us site-button">תמיכה בעמותה</div>
-      <div *ngIf="!(user$ | async)" class="action-header-login site-button" (click)="needLogin = true">
+      <div *ngIf="!user" class="action-header-login site-button" (click)="logIn.emit()">
         התחבר/הרשם
       </div>
-      <div *ngIf="(user$ | async)" class="contact-header-login site-button" (click)="logout()">
+      <div *ngIf="user" class="contact-header-login site-button" (click)="logOut.emit()">
         התנתק
       </div>
     </div>
   </div>
 </div>
-<ng-container *ngIf="needLogin">
-  <app-login-popup *ngIf="!(user$ | async)"></app-login-popup>
-  <app-profile-popup (profileUpdated)="needLogin = false" *ngIf="user$ | async"></app-profile-popup>
-</ng-container>

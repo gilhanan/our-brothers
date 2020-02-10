@@ -1,3 +1,7 @@
-<app-header></app-header>
+<app-header [user]="user$ | async" (logIn)="needLogin = true" (logOut)="logOut()"></app-header>
 <router-outlet></router-outlet>
 <app-footer></app-footer>
+<ng-container *ngIf="needLogin">
+  <app-login-popup *ngIf="!(user$ | async)"></app-login-popup>
+  <app-profile-popup (profileUpdated)="needLogin = false" *ngIf="user$ | async"></app-profile-popup>
+</ng-container>

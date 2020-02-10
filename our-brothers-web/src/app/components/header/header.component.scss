@@ -66,56 +66,6 @@
     }
   }
 
-  .contact-icons {
-    flex: 0 0 auto;
-    display: flex;
-
-    * {
-      margin-left: 20px;
-      cursor: pointer;
-    }
-
-    .contact-header-whatsapp-icon {
-      width: 20px;
-      height: 20px;
-      background-image: url(../../../assets/img/whatsapp.png);
-      background-size: 100%;
-      background-repeat: no-repeat;
-    }
-
-    .contact-header-email-us-icon {
-      width: 23px;
-      height: 18px;
-      background-image: url(../../../assets/img/email.png);
-      background-size: 100%;
-      background-repeat: no-repeat;
-    }
-
-    .contact-header-youtube-icon {
-      width: 24px;
-      height: 18px;
-      background-image: url(../../../assets/img/youtube.png);
-      background-size: 100%;
-      background-repeat: no-repeat;
-    }
-
-    .contact-header-facebook-icon {
-      width: 12px;
-      height: 22px;
-      background-image: url(../../../assets/img/facebook.png);
-      background-size: 100%;
-      background-repeat: no-repeat;
-    }
-
-    .contact-header-user-icon {
-      width: 19px;
-      height: 19px;
-      background-image: url(../../../assets/img/user.png);
-      background-size: 100%;
-      background-repeat: no-repeat;
-    }
-  }
-
   .logo-header {
     cursor: pointer;
     flex: 0 0 135px;

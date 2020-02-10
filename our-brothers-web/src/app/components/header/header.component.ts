@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
-import { map } from 'rxjs/operators';
+import { Component, EventEmitter, Output, Input } from '@angular/core';
+import { User } from 'firebase';
 
 @Component({
   selector: 'app-header',
@@ -9,12 +8,14 @@ import { map } from 'rxjs/operators';
 })
 export class HeaderComponent {
 
-  public user$ = this.authService.user;
-  public needLogin = false;
+  @Input()
+  public user: User;
 
-  constructor(private authService: AuthService) { }
+  @Output()
+  public logIn = new EventEmitter<void>();
 
-  logout() {
-    this.authService.signOut();
-  }
+  @Output()
+  public logOut = new EventEmitter<void>();
+
+  constructor() { }
 }
