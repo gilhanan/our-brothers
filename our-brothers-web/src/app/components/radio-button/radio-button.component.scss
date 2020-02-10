@@ -1,0 +1,21 @@
+.radio-button-container {
+  display: flex;
+
+  .radio-button-circle {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid rgb(0, 160, 153);
+
+    &.on::before {
+      content: '';
+      width: 22px;
+      height: 22px;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      border-radius: 50%;
+      background-color: rgb(0, 160, 153);
+    }
+  }
+}

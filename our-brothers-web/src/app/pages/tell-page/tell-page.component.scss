@@ -1,0 +1,126 @@
+.tell-page-container {
+  .step0 {
+    padding-top: 40px;
+  }
+
+  .step0-button {
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+
+  /* Stepper */
+  .steps {
+    padding-top: 40px;
+    background-color: rgb(248, 248, 248);
+
+    .container {
+      width: 85%;
+      margin: 0 auto;
+
+      .progressbar-container {
+        display: flex;
+        flex-direction: row;
+
+        .progressbar-item {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          .step-circle-container {
+            width: 100%;
+            display: flex;
+            align-items: center;
+
+            .step-circle {
+              flex: 0 1 86px;
+              height: 86px;
+              border-radius: 50%;
+              background-color: rgb(10, 165, 155);
+
+              font-size: 30px;
+              color: white;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+
+            .step-line {
+              flex-grow: 1;
+              height: 12px;
+              background-color: rgb(219, 219, 219);
+            }
+
+            .done .step-line {
+              background-color: rgb(10, 165, 155);
+            }
+          }
+
+          .step-name {
+            font-size: 30px;
+            color: rgb(0, 115, 109);
+          }
+        }
+      }
+    }
+  }
+
+  .step2 {
+    padding-top: 100px;
+    background-color: rgb(248, 248, 248);
+
+    .details-form-container {
+      max-width: 770px;
+      margin: auto;
+
+      .form-items-container {
+        display: flex;
+        margin-bottom: 30px;
+
+        input {
+          flex: 1;
+          margin: 0 15px;
+        }
+
+        input:first-child {
+          margin-right: 0;
+        }
+
+        input:last-child {
+          margin-left: 0;
+        }
+      }
+    }
+
+    .step2-button {
+      margin-bottom: 40px;
+      margin-top: 40px;
+    }
+  }
+
+  .step3 {
+    padding-top: 100px;
+    background-color: rgb(248, 248, 248);
+
+    .training-container {
+      max-width: 770px;
+      margin: auto;
+      margin-bottom: 40px;
+
+      .training-text {
+        margin-bottom: 20px;
+      }
+
+      .training-options {
+        .training-option {
+          display: flex;
+          margin-bottom: 15px;
+
+          .training-option-text {
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+  }
+}

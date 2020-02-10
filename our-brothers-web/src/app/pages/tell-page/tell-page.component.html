@@ -1,0 +1,142 @@
+<section class="tell-page-container">
+  <section *ngIf="currentStep > 0" class="steps">
+    <div class="site-divider"></div>
+    <div class="small-heading">פרטים נוספים</div>
+    <div class="container">
+      <div class="progressbar-container">
+        <div class="progressbar-item done">
+          <div class="step-circle-container">
+            <div class="step-line"></div>
+            <div class="step-circle">1</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-name">התחברות</div>
+        </div>
+        <div class="progressbar-item">
+          <div class="step-circle-container">
+            <div class="step-line"></div>
+            <div class="step-circle">2</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-name">פרטי החלל</div>
+        </div>
+        <div class="progressbar-item">
+          <div class="step-circle-container">
+            <div class="step-line"></div>
+            <div class="step-circle">3</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-name">מפגשי הדרכה</div>
+        </div>
+        <div class="progressbar-item">
+          <div class="step-circle-container">
+            <div class="step-line"></div>
+            <div class="step-circle">4</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-name">שיבוץ</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ng-container [ngSwitch]="currentStep">
+    <ng-container *ngSwitchCase="0">
+      <section class="step0">
+        <div class="site-divider"></div>
+        <div class="small-heading">מפגשים</div>
+        <div class="medium-heading">איך נראים המפגשים שלנו?</div>
+        <div class="site-text">
+          אנו שמחים שאתה מעוניין לקחת חלק ולשתף את הציבור בסיפור ובחוויה האישית
+          שלך. אתה תגיע לבית המארח שלא מכיר את סיפורך עם סביבת אנשים הקרובים
+          אליו, סביבה מחבקת שרוצה לשמוע את סיפורך. המפגשים יהיו בסביבה אינטימית
+          וניתן יהיה להשתמש בעזרים שונים על מנת להעביר את הסיפור והמסר. לאחר
+          שתירשם לאתר, תוכל לעיין בבתים הרשומים לאירוח ולבחור מהו הבית המתאים לך
+          מבחינת מיקום/קהל יעד ולהשתבץ אליו.
+          <br /><br />
+          המפגשים יתקיימו בין התאריכים 22.4-28.4
+          <br />
+          כשערב השיא בו רוב המפגשים יתקיימו יהיה ב- 26.4.2020
+          <br />
+          את/ה מוזמנים לקחת חלק ולספר את סיפורכם האישי ביותר מבית מארח אחד.
+          לקראת המפגשים אנו נקיים מפגשי הכנה והדרכה בהם תוכל ללמוד כיצד לבנות את
+          סיפורכם ולספרו, המפגשים יתקיימו בתל אביב, כרמיאל, ירושלים ונתניה.
+        </div>
+        <div
+          (click)="currentStep = 2"
+          class="site-button primary-button step0-button"
+        >
+          המשך
+        </div>
+      </section>
+    </ng-container>
+    <ng-container *ngSwitchCase="1"> </ng-container>
+    <ng-container *ngSwitchCase="2">
+      <section class="step2">
+        <div class="details-form-container" [formGroup]="casualtyDetailsFrom">
+          <div class="form-items-container">
+            <input
+              class="form-field"
+              type="text"
+              placeholder="שם מלא"
+              formControlName="casualtyName"
+              [class.invalid]="!casualtyName.valid && casualtyName.touched"
+            />
+            <input
+              class="form-field"
+              type="date"
+              placeholder="תאריך נפילה:"
+              formControlName="casualtyDate"
+              [class.invalid]="!casualtyDate.valid && casualtyDate.touched"
+            />
+          </div>
+          <div class="msg">
+            <textarea
+              class="form-field"
+              placeholder="תוכן הסיפור..."
+              formControlName="casualtyStory"
+              [class.invalid]="!casualtyStory.valid && casualtyStory.touched"
+            ></textarea>
+          </div>
+          <div
+            (click)="goToStep3()"
+            class="site-button primary-button step2-button"
+          >
+            המשך
+          </div>
+        </div>
+      </section>
+    </ng-container>
+    <ng-container *ngSwitchCase="3">
+      <section class="step3">
+        <div class="training-container">
+          <div class="training-text">
+            אנו יודעים שמפגש כזה מעורר הרבה מחשבות ולכן אנו מציעים לך לקחת חלק
+            במפגשי ההדרכה שלנו.
+          </div>
+          <div class="training-options">
+            <div class="training-option">
+              <app-radio-button [isOn]="false"></app-radio-button>
+              <div class="training-option-text">
+                אני מעוניין\ת לקחת חלק במפגשי הדרכה
+              </div>
+            </div>
+            <div class="training-option">
+              <app-radio-button [isOn]="true"></app-radio-button>
+              <div class="training-option-text">
+                אינני מעוניין\ת לקחת חלק במפגשי הדרכה
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          (click)="goToStep3()"
+          class="site-button primary-button step2-button"
+        >
+          המשך
+        </div>
+      </section>
+    </ng-container>
+    <ng-container *ngSwitchCase="4"> </ng-container>
+  </ng-container>
+</section>

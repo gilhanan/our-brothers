@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-flip-card',
@@ -12,7 +13,11 @@ export class FlipCardComponent implements OnInit {
   @Input() backButtonText: string;
   @Input() backButtonUrl: string;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit() {}
+
+  moveToPage() {
+    this.router.navigate([this.backButtonUrl]);
+  }
 }

@@ -42,6 +42,8 @@ import { ListColumnComponent } from './components/list-column/list-column.compon
 import { ModalSelectMeetingComponent } from './components/modal-select-meeting/modal-select-meeting.component';
 import { PhonePipe } from './pipes/phone.pipe';
 import { SeniorityPipe } from './pipes/seniority.pipe';
+import { TellPageComponent } from './pages/tell-page/tell-page.component';
+import { RadioButtonComponent } from './components/radio-button/radio-button.component';
 
 registerLocaleData(localeHe);
 
@@ -74,7 +76,9 @@ registerLocaleData(localeHe);
     PhonePipe,
     SeniorityPipe,
     MeetingsMapNavigatorComponent,
-    ModalSelectMeetingComponent
+    ModalSelectMeetingComponent,
+    TellPageComponent,
+    RadioButtonComponent
   ],
   imports: [
     BrowserModule,

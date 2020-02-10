@@ -33,7 +33,7 @@
     [frontTitle]="'אני רוצה לספר'"
     [backText]="'אח/אחות שכולים? מעוניינים לספר את ספורכם האישי?'"
     [backButtonText]="'לפרטים נוספים'"
-    [backButtonUrl]=""
+    [backButtonUrl]="'tell'"
   >
   </app-flip-card>
   <app-flip-card
@@ -116,7 +116,7 @@
     ></textarea>
   </form>
   <div
-    class="site-button contact-send-button"
+    class="site-button primary-button contact-send-button"
     [class.disabled]="!contactForm.valid"
   >
     שלח

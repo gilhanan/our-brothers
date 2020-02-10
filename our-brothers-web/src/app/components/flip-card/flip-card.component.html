@@ -1,16 +1,19 @@
 <div class="card-container">
-    <div class="card-front">
-        <div class="card-front-img" [style.background-image]="'url(' + frontImage + ')'"></div>
-        <div class="front-title">
-            {{frontTitle}}
-        </div>
+  <div class="card-front">
+    <div
+      class="card-front-img"
+      [style.background-image]="'url(' + frontImage + ')'"
+    ></div>
+    <div class="front-title">
+      {{frontTitle}}
     </div>
-    <div class="card-back">
-        <div class="back-text">
-            {{backText}}
-        </div>
-        <a class="back-button" [attr.href]="backButtonUrl">
-            {{backButtonText}} <span class="button-arrows">>></span>
-        </a>
+  </div>
+  <div class="card-back">
+    <div class="back-text">
+      {{backText}}
     </div>
+    <a class="back-button" (click)="moveToPage()">
+      {{backButtonText}} <span class="button-arrows">>></span>
+    </a>
+  </div>
 </div>
