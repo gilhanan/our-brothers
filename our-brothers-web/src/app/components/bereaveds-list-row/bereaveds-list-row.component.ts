@@ -1,9 +1,10 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { User, BereavedStatus, BereavedGuidance } from 'src/app/model';
 import { MEMORIAL_YEAR, BereavedMeeting } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-bereaveds-list-row',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './bereaveds-list-row.component.html',
   styleUrls: ['./bereaveds-list-row.component.scss']
 })

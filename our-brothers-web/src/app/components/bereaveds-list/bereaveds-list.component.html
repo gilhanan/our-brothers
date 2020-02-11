@@ -23,7 +23,7 @@
     שיבוץ
   </app-list-column>
 </app-list-header>
-<cdk-virtual-scroll-viewport itemSize="20" class="bereaved-items">
+<cdk-virtual-scroll-viewport itemSize="10" class="bereaved-items">
   <div *ngFor="let bereaved of sortedBereaveds; trackBy: trackByFn">
     <app-bereaveds-list-row [bereaved]="bereaved" [user]="user" (joinBereved)="joinBereved.emit($event)"
       (leaveBereaved)="leaveBereaved.emit($event)"

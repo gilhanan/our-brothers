@@ -33,11 +33,11 @@
       </div>
     </div>
     <div class="col col-guidance">
-      <app-select-bereaved-guidance [value]="bereaved.bereavedParticipation[year]?.guidance?.general"
+      <app-select-bereaved-guidance [value]="bereaved.bereavedParticipation && bereaved.bereavedParticipation[year]?.guidance?.general"
         (valueChange)="bereavedGuidance.emit($event)"></app-select-bereaved-guidance>
     </div>
     <div class="col col-status">
-      <app-select-bereaved-status [value]="bereaved.bereavedParticipation[year]?.status"
+      <app-select-bereaved-status [value]="bereaved.bereavedParticipation && bereaved.bereavedParticipation[year]?.status"
         (valueChange)="bereavedStatus.emit($event)"></app-select-bereaved-status>
     </div>
     <div class="col bereaved-meetings">
@@ -61,6 +61,12 @@
       </div>
       <div>
         {{bereaved.id}}
+      </div>
+      <div class="title">
+        גיל:
+      </div>
+      <div>
+        {{bereaved.profile?.birthDay ? (bereaved.profile.birthDay | seniority) : 'אין'}}
       </div>
       <div class="title">
         מתנדב:

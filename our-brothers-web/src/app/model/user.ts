@@ -26,7 +26,7 @@ export interface UserProfile {
   lastName: string;
   phoneNumber?: string;
   email?: string;
-  birthDay?: Date;
+  birthDay?: number;
   otherLang?: string;
 }
 

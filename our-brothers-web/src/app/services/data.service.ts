@@ -40,7 +40,7 @@ export interface UpdateBereavedGuidance {
   providedIn: 'root'
 })
 export class DataService {
-  constructor(private angularFireDatabase: AngularFireDatabase) {}
+  constructor(private angularFireDatabase: AngularFireDatabase) { }
 
   public getUserById(userId: string): Observable<User> {
     return this.angularFireDatabase
@@ -189,7 +189,7 @@ export class DataService {
               ...usersSnapshot.payload.val()
             }))
             .filter(user => user.role === 'bereaved' && !!user.profile)
-            .slice(0, 20)
+            // .slice(0, 20)
             .map(user => {
               if (
                 user.bereavedParticipation &&
