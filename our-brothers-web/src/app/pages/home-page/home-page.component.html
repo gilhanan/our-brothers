@@ -14,7 +14,7 @@
 </div>
 <div class="site-divider"></div>
 <div class="small-heading">האחים שלנו</div>
-<div class="medium-heading">המפגשים שלנו</div>
+<div class="medium-heading">המפגשים</div>
 <div class="site-text">
   השנה, לקראת יום הזכרון (22.4-28.4), אתם הולכים לשמוע סיפור שעוד לא שמעתם,
   סיפורם של האחים והאחיות השכולים. על אחים שלבשו מדים ויצאו לצבא ועל אלו שנשארו
@@ -53,7 +53,7 @@
   </app-flip-card>
 </div>
 <div class="see-more">
-  <a>ראה עוד >></a>
+  <a>ראה עוד <i class="fas fa-angle-double-left"></i></a>
 </div>
 <div class="site-quote mettings-quote">
   <div class="site-quote-text">
@@ -94,20 +94,14 @@
 </div>
 <div class="contact-form">
   <div class="site-divider"></div>
-  <div class="small-heading">צור קשר</div>
+  <div class="small-heading">צרו קשר</div>
   <div class="medium-heading">השאירו פרטים</div>
   <form [formGroup]="contactForm" class="contact-form-fields">
     <input
-      formControlName="firstName"
+      formControlName="fullName"
       class="form-field"
-      placeholder="שם פרטי*"
-      [class.invalid]="!firstName.valid && firstName.touched"
-    />
-    <input
-      formControlName="lastName"
-      class="form-field"
-      placeholder="שם משפחה*"
-      [class.invalid]="!lastName.valid && lastName.touched"
+      placeholder="שם מלא*"
+      [class.invalid]="!fullName.valid && fullName.touched"
     />
     <input
       formControlName="phone"
@@ -116,6 +110,12 @@
       [class.invalid]="!phone.valid && phone.touched"
     />
     <input formControlName="email" class="form-field" placeholder="אימייל" />
+    <input
+      formControlName="subject"
+      class="form-field"
+      placeholder="נושא פנייה*"
+      [class.invalid]="!subject.valid && subject.touched"
+    />
     <textarea
       formControlName="message"
       class="form-field message"
