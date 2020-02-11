@@ -13,10 +13,10 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit() {
     this.contactForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      fullName: ['', Validators.required],
       phone: ['', Validators.required],
       email: [''],
+      subject: ['', Validators.required],
       message: ['']
     });
 
@@ -25,17 +25,17 @@ export class HomePageComponent implements OnInit {
     vid.muted = true;
   }
 
-  get firstName() {
-    return this.contactForm.get('firstName');
-  }
-  get lastName() {
-    return this.contactForm.get('lastName');
+  get fullName() {
+    return this.contactForm.get('fullName');
   }
   get phone() {
     return this.contactForm.get('phone');
   }
   get email() {
     return this.contactForm.get('email');
+  }
+  get subject() {
+    return this.contactForm.get('subject');
   }
   get message() {
     return this.contactForm.get('message');
