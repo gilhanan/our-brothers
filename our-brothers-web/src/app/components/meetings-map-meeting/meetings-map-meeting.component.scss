@@ -1,24 +1,22 @@
-.container {
-  .title {
-    font-family: "arbel";
-    font-size: 22px;
-    text-align: center;
-    color: rgb(0, 115, 109);
-  }
+.title {
+  font-family: "arbel";
+  font-size: 22px;
+  text-align: center;
+  color: rgb(0, 115, 109);
+}
 
-  .body {
-    font-family: "Heebo";
-    font-size: 18px;
-    color: rgb(129, 129, 129);
+.body {
+  font-family: "Heebo";
+  font-size: 18px;
+  color: rgb(129, 129, 129);
 
-    .row {
-      margin-top: 5px;
+  .row {
+    margin-top: 5px;
 
-      .join-button {
-        width: 100px;
-        height: 30px;
-        margin: auto;
-      }
+    .join-button {
+      width: 100px;
+      height: 30px;
+      margin: auto;
     }
   }
 }

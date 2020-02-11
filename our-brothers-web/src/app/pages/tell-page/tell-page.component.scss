@@ -17,54 +17,49 @@
     padding-top: 40px;
     background-color: rgb(248, 248, 248);
 
-    .container {
-      width: 85%;
-      margin: 0 auto;
+    .progressbar-container {
+      display: flex;
+      flex-direction: row;
 
-      .progressbar-container {
+      .progressbar-item {
+        flex: 1;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
+        align-items: center;
 
-        .progressbar-item {
-          flex: 1;
+        .step-circle-container {
+          width: 100%;
           display: flex;
-          flex-direction: column;
           align-items: center;
 
-          .step-circle-container {
-            width: 100%;
+          .step-circle {
+            flex: 0 1 86px;
+            height: 86px;
+            border-radius: 50%;
+            background-color: rgb(10, 165, 155);
+
+            font-size: 30px;
+            color: white;
             display: flex;
             align-items: center;
+            justify-content: center;
+          }
 
-            .step-circle {
-              flex: 0 1 86px;
-              height: 86px;
-              border-radius: 50%;
+          .step-line {
+            flex-grow: 1;
+            height: 12px;
+            background-color: rgb(219, 219, 219);
+
+            &.current,
+            &.done {
               background-color: rgb(10, 165, 155);
-
-              font-size: 30px;
-              color: white;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-            }
-
-            .step-line {
-              flex-grow: 1;
-              height: 12px;
-              background-color: rgb(219, 219, 219);
-
-              &.current,
-              &.done {
-                background-color: rgb(10, 165, 155);
-              }
             }
           }
+        }
 
-          .step-name {
-            font-size: 30px;
-            color: rgb(0, 115, 109);
-          }
+        .step-name {
+          font-size: 30px;
+          color: rgb(0, 115, 109);
         }
       }
     }
@@ -115,13 +110,32 @@
       .training-text {
         margin-bottom: 20px;
       }
-
-      .training-options {
-      }
     }
 
     .step3-button {
       margin-bottom: 40px;
     }
+  }
+}
+
+.meetings-container {
+  margin-bottom: 50px;
+  height: 800px;
+  position: relative;
+
+  @media only screen and (max-width: 1000px) {
+    height: 700px;
+  }
+
+  @media only screen and (max-width: 650px) {
+    height: 650px;
+  }
+
+  .loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999999;
   }
 }

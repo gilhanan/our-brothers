@@ -2,7 +2,6 @@
   <section *ngIf="currentStep > 0" class="steps">
     <div class="site-divider"></div>
     <div class="small-heading">פרטים נוספים</div>
-    <div class="container">
       <div class="progressbar-container">
         <div class="progressbar-item done">
           <div class="step-circle-container">
@@ -69,7 +68,6 @@
           <div class="step-name">שיבוץ</div>
         </div>
       </div>
-    </div>
   </section>
 
   <ng-container [ngSwitch]="currentStep">
@@ -181,7 +179,7 @@
       </section>
     </ng-container>
     <ng-container *ngSwitchCase="4">
-      <div class="container meetings-filters-container">
+      <div class="container">
         <app-meetings-filters
           [(view)]="view"
           [(filter)]="filter"
@@ -196,7 +194,7 @@
         </div>
         <ng-template [ngIf]="view === 'map'" [ngIfElse]="meetingsList">
           <app-meetings-map
-            [user]="user"
+            [user]="userSubscription | async"
             [meetings]="filteredMeetings"
             [showGuide]="mapShowGuide"
             [showLegend]="mapShowLegend"
@@ -208,7 +206,7 @@
 
         <ng-template #meetingsList>
           <app-meetings-list
-            [user]="user"
+            [user]="userSubscription | async"
             [meetings]="filteredMeetings"
             (joinMeeting)="onJoinMeeting($event)"
           >

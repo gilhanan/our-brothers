@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class HomePageComponent implements OnInit {
   public contactForm: FormGroup;
+  public videoMuted = true;
 
   constructor(private fb: FormBuilder) { }
 
@@ -19,10 +20,6 @@ export class HomePageComponent implements OnInit {
       email: [''],
       message: ['']
     });
-
-    // Set video unmute when page init
-    var vid: any = document.getElementById("vid");
-    vid.muted = true;
   }
 
   get firstName() {
@@ -39,18 +36,5 @@ export class HomePageComponent implements OnInit {
   }
   get message() {
     return this.contactForm.get('message');
-  }
-
-  muteUnmute() {
-    var vid: any = document.getElementById("vid");
-    var mutebtn: any = document.getElementById("mute-btn");
-
-    if (vid.muted) {
-      vid.muted = false;
-      mutebtn.innerHTML = "<i class='fas fa-volume-up'></i>";
-    } else {
-      vid.muted = true;
-      mutebtn.innerHTML = "<i class='fas fa-volume-mute'></i>";
-    }
   }
 }

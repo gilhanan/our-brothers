@@ -3,31 +3,36 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 0px -120px;
-}
-
-.video-show {
-  video::-webkit-media-controls-panel {
-    display: none !important;
-  }
 
   .video-show-box {
     margin: auto;
     width: calc(100% - 200px);
+    padding: 20% 0;
+    position: relative;
+    overflow: hidden;
 
-    #vid {
-      margin-top: -165px;
+    .home-page-video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      &::-webkit-media-controls-panel {
+        display: none;
+      }
     }
-  }
 
-  #mute-btn {
-    position: absolute;
-    top: 2%;
-    right: 2%;
-    background-color: transparent;
-    color: white;
-    height: 50px;
-    width: 50px;
-    border: 0px;
+    .volume-button {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background-color: transparent;
+      color: white;
+      height: 50px;
+      width: 50px;
+      border: 0;
+      cursor: pointer;
+    }
   }
 }
 
@@ -60,6 +65,7 @@
   display: flex;
   justify-content: center;
   overflow: hidden;
+  position: relative;
 
   .mettings-gallery-images {
     max-width: 1200px;
@@ -128,7 +134,7 @@
     width: 250px;
     height: 55px;
     font-size: 36px;
-    font-family: 'arbel';
+    font-family: "arbel";
     margin-top: 15px;
   }
 }

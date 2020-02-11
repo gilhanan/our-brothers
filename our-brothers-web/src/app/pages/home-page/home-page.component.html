@@ -1,14 +1,11 @@
 <div class="video-background">
-  <div class="video-show">
-    <div class="video-show-box">
-      <video id="vid" autoplay loop muted width="100%">
-        <source src="../../../assets/video/home-page.mp4" type="video/mp4" />
-      </video>
-
-      <button id="mute-btn" (click)="muteUnmute()">
-        <i class="fas fa-volume-mute"></i>
-      </button>
-    </div>
+  <div class="video-show-box">
+    <video class="home-page-video" autoplay loop width="100%" [muted]="videoMuted">
+      <source src="../../../assets/video/home-page.mp4" type="video/mp4" />
+    </video>
+    <button class="volume-button" (click)="videoMuted = !videoMuted">
+      <i class="fas" [ngClass]="{'fa-volume-mute': !videoMuted, 'fa-volume-up': videoMuted}"></i>
+    </button>
   </div>
   <div class="heading-talking big-heading">
     מדברים <span class="talking-life">חיים</span>

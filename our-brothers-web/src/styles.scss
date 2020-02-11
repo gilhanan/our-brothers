@@ -1,7 +1,7 @@
 @import "~@fortawesome/fontawesome-free/css/all.css";
 
 @font-face {
-  font-family: 'arbel';
+  font-family: "arbel";
   src: url(assets/fonts/Arbel-Bold_0.otf);
 }
 
@@ -21,7 +21,7 @@
 }
 
 body {
-  font-family: 'Heebo';
+  font-family: "Heebo";
   font-size: 18px;
 }
 
@@ -30,11 +30,11 @@ body {
 }
 
 .card-container {
-  font-family: 'arbel';
+  font-family: "arbel";
 }
 
 .site-button {
-  font-family: 'arbel';
+  font-family: "arbel";
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -71,7 +71,7 @@ body {
   font-size: 22px;
   color: rgb(153, 153, 153);
   text-align: center;
-  font-family: 'arbel';
+  font-family: "arbel";
   margin-bottom: 25px;
   letter-spacing: 15px;
 }
@@ -80,14 +80,14 @@ body {
   color: rgb(55, 135, 177);
   font-size: 36px;
   text-align: center;
-  font-family: 'arbel';
+  font-family: "arbel";
   letter-spacing: 5px;
   margin-bottom: 50px;
 }
 
 .big-heading {
   font-size: 71px;
-  font-family: 'arbel';
+  font-family: "arbel";
   color: rgb(0, 115, 109);
   text-align: center;
   margin-bottom: 40px;
@@ -107,7 +107,7 @@ body {
   padding: 110px 0 65px 0;
   text-align: center;
   font-size: 39px;
-  font-family: 'arbel';
+  font-family: "arbel";
   color: rgb(255, 255, 255);
   line-height: 1.1;
   display: flex;
@@ -123,7 +123,7 @@ body {
 
   &::before {
     position: absolute;
-    content: '';
+    content: "";
     top: 50px;
     left: 50%;
     transform: translateX(-50%);
@@ -142,7 +142,7 @@ textarea.form-field {
   height: 56px;
   padding: 15px;
   font-size: 18px;
-  font-family: 'Heebo';
+  font-family: "Heebo";
   color: black;
 }
 
@@ -174,14 +174,14 @@ textarea.form-field {
 
 .form-title {
   font-size: 36px;
-  font-family: 'arbel';
+  font-family: "arbel";
   color: rgb(55, 135, 177);
   letter-spacing: 6px;
   margin-bottom: 20px;
 }
 
 input.login-form-input {
-  font-family: 'Heebo';
+  font-family: "Heebo";
   padding: 10px;
   height: 50px;
   max-width: 490px;
@@ -239,7 +239,7 @@ input.login-form-input {
       align-items: center;
       color: white;
       font-size: 18px;
-      font-family: 'Heebo';
+      font-family: "Heebo";
     }
 
     &.google {
@@ -304,7 +304,7 @@ input.login-form-input {
           border: 1px solid rgb(0, 160, 153);
           background-color: white;
           font-size: 36px;
-          font-family: 'arbel';
+          font-family: "arbel";
           color: rgb(0, 160, 153);
           letter-spacing: 6px;
 
@@ -330,7 +330,7 @@ input.login-form-input {
       flex: 0 0 90px;
       background-color: rgb(0, 160, 153);
       font-size: 36px;
-      font-family: 'arbel';
+      font-family: "arbel";
       color: white;
       display: flex;
       justify-content: center;
@@ -349,7 +349,7 @@ input.login-form-input {
   max-width: 125px;
   height: 40px;
   font-size: 20px;
-  font-family: 'arbel';
+  font-family: "arbel";
   color: rgb(0, 115, 109);
   background-color: white;
   cursor: pointer;
@@ -377,7 +377,7 @@ input.login-form-input {
   max-width: 125px;
   height: 40px;
   font-size: 20px;
-  font-family: 'arbel';
+  font-family: "arbel";
   color: rgb(190, 0, 0);
   background-color: white;
   cursor: pointer;
@@ -414,8 +414,37 @@ input.login-form-input {
   width: 250px;
   height: 55px;
   font-size: 36px;
-  font-family: 'Arbel';
+  font-family: "Arbel";
   margin: auto;
   margin-top: 15px;
   display: flex;
+}
+
+.container {
+  max-width: calc(100% - 200px);
+  width: 1170px;
+  margin-left: auto;
+  margin-right: auto;
+
+  @media only screen and (max-width: 1000px) {
+    max-width: calc(100% - 50px);
+  }
+
+  @media only screen and (max-width: 650px) {
+    max-width: 100%;
+  }
+}
+
+.container-fluid {
+  max-width: calc(85%);
+  margin-left: auto;
+  margin-right: auto;
+
+  @media only screen and (max-width: 1600px) {
+    max-width: calc(95%);
+  }
+
+  @media only screen and (max-width: 1000px) {
+    max-width: calc(100%);
+  }
 }

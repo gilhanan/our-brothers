@@ -1,37 +1,35 @@
-<div class="container">
-  <div class="title">
-    {{meeting.title}}
+<div class="title">
+  {{meeting.title}}
+</div>
+<div class="body">
+  <div class="row">
+    <strong>כתובת: </strong>
+    <span>{{meeting.address.formattedAddress}}</span>
   </div>
-  <div class="body">
+  <div class="row">
+    <strong>כמות משתתפים: </strong>
+    <span>{{meeting.capacity}}</span>
+  </div>
+  <div class="row" *ngIf="meeting.audience?.length">
+    <strong>קהל יעד: </strong>
+    <span>{{getAudienceLabel(meeting.audience)}}</span>
+  </div>
+  <div *ngIf="meeting.bereaved">
     <div class="row">
-      <strong>כתובת: </strong>
-      <span>{{meeting.address.formattedAddress}}</span>
+      <strong>שם האח/ות: </strong>
+      <span>{{meeting.bereaved.firstName + ' ' + meeting.bereaved.lastName}}</span>
     </div>
-    <div class="row">
-      <strong>כמות משתתפים: </strong>
-      <span>{{meeting.capacity}}</span>
-    </div>
-    <div class="row" *ngIf="meeting.audience?.length">
-      <strong>קהל יעד: </strong>
-      <span>{{getAudienceLabel(meeting.audience)}}</span>
-    </div>
-    <div *ngIf="meeting.bereaved">
+    <div *ngFor="let slain of meeting.bereaved.slains">
       <div class="row">
-        <strong>שם האח/ות: </strong>
-        <span>{{meeting.bereaved.firstName + ' ' + meeting.bereaved.lastName}}</span>
-      </div>
-      <div *ngFor="let slain of meeting.bereaved.slains">
-        <div class="row">
-          <strong>שם החלל: </strong>
-          <span>{{slain.firstName + ' ' + slain.lastName + ' ז"ל'}}</span>
-        </div>
+        <strong>שם החלל: </strong>
+        <span>{{slain.firstName + ' ' + slain.lastName + ' ז"ל'}}</span>
       </div>
     </div>
-    <div *ngIf="!!user" class="row">
-      <button class="join-button" (click)="joinMeeting.emit({meeting: meeting, user: user})"
-        [disabled]="participationsService.isUserParticipatingEvent(user, meeting)">
-        שיבוץ
-      </button>
-    </div>
+  </div>
+  <div *ngIf="!!user" class="row">
+    <button class="join-button" (click)="joinMeeting.emit({meeting: meeting, user: user})"
+      [disabled]="participationsService.isUserParticipatingEvent(user, meeting)">
+      שיבוץ
+    </button>
   </div>
 </div>

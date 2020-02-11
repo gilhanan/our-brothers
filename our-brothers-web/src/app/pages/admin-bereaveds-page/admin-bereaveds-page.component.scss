@@ -1,17 +1,3 @@
-.container-fluid {
-  max-width: calc(85%);
-  margin-left: auto;
-  margin-right: auto;
-
-  @media only screen and (max-width: 1600px) {
-    max-width: calc(95%);
-  }
-
-  @media only screen and (max-width: 1000px) {
-    max-width: calc(100%);
-  }
-}
-
 .bereaveds-container {
   margin-top: 30px;
 
