@@ -1,9 +1,10 @@
-import { Component, Input, TrackByFunction, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, TrackByFunction, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Meeting, User, UserRole } from '../../model';
 import { MapRestriction } from '@agm/core/services/google-maps-types';
 import { ParticipationsService } from '../../../app/services/participations.service';
 import { NavigationDirection } from '../meetings-map-navigator/meetings-map-navigator.component';
+import { AgmMarker, AgmInfoWindow, AgmMap } from '@agm/core';
 
 @Component({
   selector: 'app-meetings-map',
@@ -32,7 +33,7 @@ export class MeetingsMapComponent implements OnInit {
       west: 34
     }
   }
-  lastOpenMarker;
+  lastOpenMarker: AgmInfoWindow;
 
   constructor(private participationsService: ParticipationsService) {
   }
@@ -95,6 +96,16 @@ export class MeetingsMapComponent implements OnInit {
       this.mapLongitude = 34.93;
       this.mapZoom = 9;
     }
+  }
+
+  clicked(marker: AgmMarker, lastOpenMarker: AgmInfoWindow) {
+    if (this.lastOpenMarker) {
+      this.lastOpenMarker.close();
+    }
+    this.lastOpenMarker = lastOpenMarker;
+
+    this.mapLongitude = marker.longitude;
+    this.mapLatitude = marker.latitude + .1;
   }
 
   private getLocation(): Observable<{ latitude: number, longitude: number }> {

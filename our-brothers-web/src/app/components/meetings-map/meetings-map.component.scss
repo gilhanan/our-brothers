@@ -7,6 +7,7 @@
 
   @media only screen and (max-width: 650px) {
     position: fixed;
+    z-index: 2;
   }
 
   .map {

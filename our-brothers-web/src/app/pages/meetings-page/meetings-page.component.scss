@@ -22,6 +22,7 @@
 .meetings-container {
   margin-bottom: 50px;
   height: 800px;
+  position: relative;
 
   @media only screen and (max-width: 1000px) {
     height: 700px;
