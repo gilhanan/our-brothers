@@ -19,6 +19,8 @@ export class AdminBereavedsPageComponent implements OnInit {
   filter: string = '';
   filteredBereaveds: User[];
   year = MEMORIAL_YEAR;
+  error = '';
+  loading = true;
 
   selectedMeeting$ = new Subject<BereavedMeeting>();
   selectingBereaved: User;
@@ -34,8 +36,12 @@ export class AdminBereavedsPageComponent implements OnInit {
       this.user = user;
     });
     this.dataService.getBereaveds().subscribe(bereaveds => {
+      this.loading = false
       this.bereaveds = bereaveds;
       this.filterBereaveds();
+    }, error => {
+      this.loading = false
+      this.error = error.toString();
     });
     this.dataService.getNoBerevedMeetings().subscribe(noBerevedMeetings => {
       this.noBerevedMeetings = noBerevedMeetings;

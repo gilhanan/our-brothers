@@ -5,11 +5,18 @@
   <app-free-text-filter class="free-text-filter" [(filter)]="filter" (filterChange)="filterBereaveds($event)">
   </app-free-text-filter>
   <div class="bereaveds-list-container">
-    <div *ngIf="!bereaveds?.length" class="loading">
+    <div *ngIf="loading" class="loading">
       טוען..
     </div>
-    <app-bereaveds-list [bereaveds]="filteredBereaveds" [user]="user" (joinBereved)="joinBereved($event)"
-      (leaveBereaved)="leaveBereaved($event)" (volunteering)="volunteering($event)"
-      (bereavedStatus)="bereavedStatus($event)" (bereavedGuidance)="bereavedGuidance($event)"></app-bereaveds-list>
+    <div *ngIf="!loading">
+      <div class="error-message" *ngIf="error">
+        {{error}}
+      </div>
+      <div *ngIf="!error">
+        <app-bereaveds-list [bereaveds]="filteredBereaveds" [user]="user" (joinBereved)="joinBereved($event)"
+          (leaveBereaved)="leaveBereaved($event)" (volunteering)="volunteering($event)"
+          (bereavedStatus)="bereavedStatus($event)" (bereavedGuidance)="bereavedGuidance($event)"></app-bereaveds-list>
+      </div>
+    </div>
   </div>
 </div>

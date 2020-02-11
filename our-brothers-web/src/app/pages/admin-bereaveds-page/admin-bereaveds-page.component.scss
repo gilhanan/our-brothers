@@ -16,9 +16,10 @@
   margin-top: 30px;
 
   .bereaveds-list-container {
-    padding-top: 51.4%;
+    height: 800px;
     margin-top: 20px;
     margin-bottom: 200px;
+    position: relative;
 
     .loading {
       position: absolute;
@@ -26,6 +27,11 @@
       left: 50%;
       transform: translate(-50%, -50%);
       z-index: 999999;
+    }
+
+    .error-message {
+      direction: ltr;
+      text-align: left;
     }
   }
 }
