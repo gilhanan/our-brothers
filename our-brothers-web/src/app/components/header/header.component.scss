@@ -89,9 +89,9 @@
       color: rgb(0, 115, 109);
       font-size: 19px;
       font-weight: 500;
+      position: relative;
 
       &:not(:last-child) {
-        position: relative;
         margin-left: 45px;
       }
 
