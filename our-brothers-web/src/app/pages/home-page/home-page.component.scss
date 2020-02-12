@@ -1,15 +1,32 @@
 .video-background {
   background-image: url(../../../assets/img/mainBack.png);
-  background-size: cover;
+  background-size: 100%;
   background-repeat: no-repeat;
-  background-position: 0px -120px;
+  background-position: 0 -20px;
+
+  @media only screen and (min-width: 768px) {
+    background-position: 0 -40px;
+  }
+
+  @media only screen and (min-width: 1024px) {
+    background-position: 0 -60px;
+  }
+
+  @media only screen and (min-width: 1440px) {
+    background-position: 0 -100px;
+  }
 
   .video-show-box {
-    margin: auto;
-    width: calc(100% - 200px);
     padding: 20% 0;
     position: relative;
     overflow: hidden;
+
+    max-width: calc(100% - 200px);
+    margin: 0 auto;
+
+    @media only screen and (max-width: 1024px) {
+      max-width: calc(100% - 75px);
+    }
 
     .home-page-video {
       position: absolute;
@@ -41,7 +58,6 @@
 }
 
 .see-more {
-  // padding: 0 380px;
   display: flex;
   justify-content: flex-end;
   font-size: 20px;
@@ -60,50 +76,61 @@
   margin-bottom: 50px;
 }
 
-.mettings-gallery {
-  margin-bottom: 50px;
-  display: flex;
-  justify-content: center;
+.gallery-container {
+  padding: 50px;
   overflow: hidden;
-  position: relative;
 
-  .mettings-gallery-images {
+  .gallery-images {
     max-width: 1200px;
-    width: 100%;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    padding: 50px;
+    margin: 0 auto;
+    position: relative;
 
-    img {
+    .gallery-image {
       margin-left: 13px;
       margin-right: 13px;
       margin-bottom: 26px;
       max-width: 100%;
     }
-  }
 
-  .circle-top-right {
-    position: absolute;
-    top: 5px;
-    left: 50%;
-    transform: translateX(-50%) translateX(515px);
-  }
+    .circle-top-right {
+      position: absolute;
+      top: 0;
+      right: 0;
+      transform: translateY(-35%);
 
-  .circle-middle-left {
-    position: absolute;
-    top: 210px;
-    z-index: -1;
-    left: 50%;
-    transform: translateX(-50%) translateX(-435px);
-  }
+      @media only screen and (max-width: 768px) {
+        transform: translate(35%, -35%);
+      }
+    }
 
-  .circle-bottom-right {
-    position: absolute;
-    bottom: 55px;
-    z-index: -1;
-    left: 50%;
-    transform: translateX(-50%) translateX(420px);
+    .circle-middle-left {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      z-index: -1;
+
+      transform: translate(-25%, -50%);
+
+      @media only screen and (max-width: 768px) {
+        display: none;
+      }
+    }
+
+    .circle-bottom-right {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      z-index: -1;
+      transform: translate(10%, 10%);
+
+      @media only screen and (max-width: 768px) {
+        right: unset;
+        left: -50%;
+      }
+    }
   }
 }
 
@@ -139,24 +166,7 @@
   }
 }
 
-@media only screen and (max-width: 700px) {
-  .video-background {
-    background-position: -75px -120px;
-  }
-
-  .video-show {
-    .video-show-box {
-      width: calc(100% - 50px);
-      overflow: hidden;
-
-      #vid {
-        margin-top: 0px;
-        width: 245%;
-        left: 50%;
-      }
-    }
-  }
-
+@media only screen and (max-width: 768px) {
   .big-heading {
     font-size: 40px;
     margin-top: 15px;
@@ -207,22 +217,8 @@
   }
   .site-quote.mettings-quote {
     margin-bottom: 20px;
-    .site-quote-text{
+    .site-quote-text {
       font-size: 30px;
-    }
-  }
-  .mettings-gallery {
-    margin-bottom: 0px;
-
-    .circle-top-right {
-      right: -5%;
-      left: auto;
-      transform: none;
-    }
-
-    .circle-bottom-right {
-      left: -65%;
-      transform: none;
     }
   }
 }
