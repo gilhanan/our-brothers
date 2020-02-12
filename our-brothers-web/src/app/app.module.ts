@@ -18,7 +18,7 @@ import { AuthService } from './services/auth.service';
 import { DataService } from './services/data.service';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { FlipCardComponent } from './components/flip-card/flip-card.component';
-import { AccountPageComponent } from './account-page/account-page.component';
+import { ContactPageComponent } from './pages/contact-page/contact-page.component';
 import { MeetingsPageComponent } from './pages/meetings-page/meetings-page.component';
 import { MeetingsListComponent } from './components/meetings-list/meetings-list.component';
 import { LoginPopupComponent } from './components/popups/login-popup/login-popup.component';
@@ -59,7 +59,7 @@ registerLocaleData(localeHe);
     FlipCardComponent,
     HomePageComponent,
     FlipCardComponent,
-    AccountPageComponent,
+    ContactPageComponent,
     MeetingsPageComponent,
     MeetingsListComponent,
     LoginPopupComponent,
