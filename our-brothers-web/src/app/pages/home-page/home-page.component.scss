@@ -66,13 +66,18 @@
   justify-content: flex-end;
   font-size: 20px;
   color: rgb(42, 47, 53);
-  text-decoration: underline;
+  text-decoration: none;
   margin-bottom: 70px;
 
   a {
     cursor: pointer;
     min-width: 100px;
     margin-left: 200px;
+    text-decoration: none;
+    color:#818181;
+  }
+  a:hover{
+    text-decoration: underline;
   }
 }
 
@@ -175,6 +180,10 @@
     font-size: 40px;
     margin-top: 15px;
     margin-bottom: 15px;
+  }
+
+  .flip-cards{
+    overflow: hidden;
   }
 
   .contact-form {
