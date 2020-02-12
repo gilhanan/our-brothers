@@ -16,8 +16,12 @@
     background-position: 0 -100px;
   }
 
+  @media only screen and (min-width: 2560px) {
+    background-position: 0 -220px;
+  }
+
   .video-show-box {
-    padding: 20% 0;
+    padding: 22% 0;
     position: relative;
     overflow: hidden;
 

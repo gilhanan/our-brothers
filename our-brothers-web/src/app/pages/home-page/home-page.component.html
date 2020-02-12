@@ -1,6 +1,6 @@
 <div class="video-background">
   <div class="video-show-box">
-    <video class="home-page-video" autoplay loop width="100%" [muted]="videoMuted">
+    <video class="home-page-video" autoplay loop width="100%" [muted]="videoMuted" playsinline>
       <source src="../../../assets/video/home-page.mp4" type="video/mp4" />
     </video>
     <button class="volume-button" (click)="videoMuted = !videoMuted">
