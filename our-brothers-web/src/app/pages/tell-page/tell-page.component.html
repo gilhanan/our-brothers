@@ -211,7 +211,7 @@
         </div>
         <ng-template [ngIf]="view === 'map'" [ngIfElse]="meetingsList">
           <app-meetings-map
-            [user]="currentUser"
+            [user]="user"
             [meetings]="filteredMeetings"
             [showGuide]="mapShowGuide"
             [showLegend]="mapShowLegend"
@@ -223,7 +223,7 @@
 
         <ng-template #meetingsList>
           <app-meetings-list
-            [user]="userSubscription | async"
+            [user]="user"
             [meetings]="filteredMeetings"
             (joinMeeting)="onJoinMeeting($event)"
           >

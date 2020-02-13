@@ -69,6 +69,7 @@ export class TellPageComponent implements OnInit {
 
   // Meetings
   public view: ViewOptions = 'list';
+  public user: User;
   public meetings: Meeting[];
   public filteredMeetings: Meeting[];
   public mapShowGuide = false;
@@ -89,6 +90,10 @@ export class TellPageComponent implements OnInit {
       casualtyLname: ['', Validators.required],
       casualtyDate: ['', Validators.required],
       casualtyStory: ['', Validators.required]
+    });
+
+    this.authService.user.subscribe(user => {
+      this.user = user;
     });
   }
 
