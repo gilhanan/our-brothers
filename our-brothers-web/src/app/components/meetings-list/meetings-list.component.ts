@@ -28,7 +28,7 @@ export class MeetingsListComponent implements OnChanges {
   constructor(public participationsService: ParticipationsService) { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.meetings) {
+    if (changes.meetings || changes.user) {
       this.meetings = this.meetings || [];
       this.sort();
     }

@@ -8,7 +8,8 @@ import {
   Meeting,
   User,
   BereavedProfile,
-  Slain
+  Slain,
+  UserRole
 } from 'src/app/model';
 import { Subject, combineLatest } from 'rxjs';
 
@@ -91,6 +92,10 @@ export class TellPageComponent implements OnInit {
 
         // Auto navigations after the first step
         if (currentStep > 0) {
+          if (user && user.role !== UserRole.bereaved) {
+            this.dataService.setUserRole(user, UserRole.bereaved);
+          }
+
           if (!user || !this.participationsService.isUserHaveAllDetails(user)) {
             this.currentStep$.next(1);
             this.authService.requestToLogin();
