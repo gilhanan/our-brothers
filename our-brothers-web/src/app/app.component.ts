@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './services/auth.service';
+import { ParticipationsService } from './services/participations.service';
+import { User } from './model';
 
 @Component({
   selector: 'app-root',
@@ -10,13 +12,22 @@ export class AppComponent implements OnInit {
   public needLogin = false;
   public isLoggedIn = false;
   public user$ = this.authService.user;
+  public currentUser: User;
+  public userHasAllDetails = false;
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private participationsService: ParticipationsService
+  ) {}
 
   ngOnInit() {
     this.authService.user.subscribe(user => {
       if (user) {
+        this.currentUser = user;
         this.isLoggedIn = true;
+        this.userHasAllDetails = this.participationsService.isUserHaveAllDetails(
+          user
+        );
       } else {
         this.isLoggedIn = false;
       }

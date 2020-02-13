@@ -1,10 +1,9 @@
 <div
   class="site-checkbox"
   [class.checked]="checked"
-  [class.invalid]="invalid"
   (click)="checkboxClicked()"
   (keydown)="checkboxKeyup($event)"
 >
-  <div class="site-checkbox-input" tabindex="0"></div>
+  <div class="site-checkbox-input" [class.invalid]="invalid" tabindex="0"></div>
   <div class="site-checkbox-label">{{label}}</div>
 </div>

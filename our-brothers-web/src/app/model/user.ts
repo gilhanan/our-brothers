@@ -28,6 +28,7 @@ export interface UserProfile {
   email?: string;
   birthDay?: number;
   otherLang?: string;
+  agree?: boolean;
 }
 
 export enum UserRole {

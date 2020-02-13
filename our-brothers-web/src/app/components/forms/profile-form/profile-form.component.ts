@@ -53,7 +53,7 @@ export class ProfileFormComponent implements OnInit {
         Validators.required
       ],
       otherLang: [this.authService.currentUser.profile.otherLang],
-      agree: [false, Validators.required]
+      agree: [false, Validators.requiredTrue]
     });
 
     console.log('birthDay', this.profileForm.get('birthDay').value);
@@ -99,6 +99,10 @@ export class ProfileFormComponent implements OnInit {
       };
 
       userData.profile.birthDay = new Date(userData.profile.birthDay).getTime();
+      if (!this.canTellInOtherLang) {
+        delete userData.profile.otherLang;
+      }
+
       return this.dataService
         .updateUserData(this.authService.userId, userData)
         .pipe(

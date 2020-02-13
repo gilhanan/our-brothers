@@ -20,18 +20,18 @@ export interface UserParticipationMeeting {
 }
 
 export enum BereavedStatus {
-  done = "done",
-  inactive = "inactive",
-  waiting = "waiting"
+  done = 'done',
+  inactive = 'inactive',
+  waiting = 'waiting'
 }
 
 export interface BereavedGuidance {
   answered: boolean;
-  general: BereavedGuidanceGeneral;
+  general: string[];
 }
 
 export enum BereavedGuidanceGeneral {
-  jerusalem = "jerusalem",
-  telAviv = "telAviv",
-  haifa = "haifa"
+  jerusalem = 'jerusalem',
+  telAviv = 'telAviv',
+  haifa = 'haifa'
 }

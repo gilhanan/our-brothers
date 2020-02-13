@@ -2,72 +2,72 @@
   <section *ngIf="currentStep > 0" class="steps">
     <div class="site-divider"></div>
     <div class="small-heading">פרטים נוספים</div>
-      <div class="progressbar-container">
-        <div class="progressbar-item done">
-          <div class="step-circle-container">
-            <div
-              class="step-line"
-              [class.done]="currentStep > 1"
-              [class.current]="currentStep === 1"
-            ></div>
-            <div class="step-circle">1</div>
-            <div
-              class="step-line"
-              [class.done]="currentStep > 1"
-              [class.current]="currentStep === 1"
-            ></div>
-          </div>
-          <div class="step-name">התחברות</div>
+    <div class="progressbar-container">
+      <div class="progressbar-item done">
+        <div class="step-circle-container">
+          <div
+            class="step-line"
+            [class.done]="currentStep > 1"
+            [class.current]="currentStep === 1"
+          ></div>
+          <div class="step-circle">1</div>
+          <div
+            class="step-line"
+            [class.done]="currentStep > 1"
+            [class.current]="currentStep === 1"
+          ></div>
         </div>
-        <div class="progressbar-item">
-          <div class="step-circle-container">
-            <div
-              class="step-line"
-              [class.done]="currentStep > 2"
-              [class.current]="currentStep === 2"
-            ></div>
-            <div class="step-circle">2</div>
-            <div
-              class="step-line"
-              [class.done]="currentStep > 2"
-              [class.current]="currentStep === 2"
-            ></div>
-          </div>
-          <div class="step-name">פרטי החלל</div>
-        </div>
-        <div class="progressbar-item">
-          <div class="step-circle-container">
-            <div
-              class="step-line"
-              [class.done]="currentStep > 3"
-              [class.current]="currentStep === 3"
-            ></div>
-            <div class="step-circle">3</div>
-            <div
-              class="step-line"
-              [class.done]="currentStep > 3"
-              [class.current]="currentStep === 3"
-            ></div>
-          </div>
-          <div class="step-name">מפגשי הדרכה</div>
-        </div>
-        <div class="progressbar-item">
-          <div class="step-circle-container">
-            <div
-              class="step-line"
-              [class.done]="currentStep > 4"
-              [class.current]="currentStep === 4"
-            ></div>
-            <div class="step-circle">4</div>
-            <div
-              class="step-line"
-              [class.done]="currentStep > 4"
-              [class.current]="currentStep === 4"
-            ></div>
-          </div>
-          <div class="step-name">שיבוץ</div>
-        </div>
+        <div class="step-name">התחברות</div>
       </div>
+      <div class="progressbar-item">
+        <div class="step-circle-container">
+          <div
+            class="step-line"
+            [class.done]="currentStep > 2"
+            [class.current]="currentStep === 2"
+          ></div>
+          <div class="step-circle">2</div>
+          <div
+            class="step-line"
+            [class.done]="currentStep > 2"
+            [class.current]="currentStep === 2"
+          ></div>
+        </div>
+        <div class="step-name">פרטי החלל</div>
+      </div>
+      <div class="progressbar-item">
+        <div class="step-circle-container">
+          <div
+            class="step-line"
+            [class.done]="currentStep > 3"
+            [class.current]="currentStep === 3"
+          ></div>
+          <div class="step-circle">3</div>
+          <div
+            class="step-line"
+            [class.done]="currentStep > 3"
+            [class.current]="currentStep === 3"
+          ></div>
+        </div>
+        <div class="step-name">מפגשי הדרכה</div>
+      </div>
+      <div class="progressbar-item">
+        <div class="step-circle-container">
+          <div
+            class="step-line"
+            [class.done]="currentStep > 4"
+            [class.current]="currentStep === 4"
+          ></div>
+          <div class="step-circle">4</div>
+          <div
+            class="step-line"
+            [class.done]="currentStep > 4"
+            [class.current]="currentStep === 4"
+          ></div>
+        </div>
+        <div class="step-name">שיבוץ</div>
+      </div>
+    </div>
   </section>
 
   <ng-container [ngSwitch]="currentStep">
@@ -154,7 +154,7 @@
             במפגשי ההדרכה שלנו.
           </div>
           <div class="training-options">
-            <div class="training-option">
+            <!-- <div class="training-option">
               <app-radio-button
                 [isOn]="trainingSession"
                 [text]="'אני מעוניין\ת לקחת חלק במפגשי הדרכה'"
@@ -167,6 +167,23 @@
                 [text]="'אינני מעוניין\ת לקחת חלק במפגשי הדרכה'"
                 (selected)="trainingSession = false"
               ></app-radio-button>
+            </div> -->
+            <div
+              *ngFor="let trainingMeeting of trainingMeetings"
+              class="training-option"
+            >
+              <app-checkbox
+                [label]="trainingMeeting.text"
+                [checked]="trainingMeeting.on"
+                (checkedChanged)="trainingMeeting.on = $event; markedTraningMetting(trainingMeeting);"
+              ></app-checkbox>
+            </div>
+            <div class="training-option">
+              <app-checkbox
+                [label]="'לא מעוניין בהדרכה'"
+                [checked]="noTrainingMeeting"
+                (checkedChanged)="noTrainingMeeting = $event; markedNoTraningMetting(noTrainingMeeting);"
+              ></app-checkbox>
             </div>
           </div>
         </div>
@@ -194,7 +211,7 @@
         </div>
         <ng-template [ngIf]="view === 'map'" [ngIfElse]="meetingsList">
           <app-meetings-map
-            [user]="userSubscription | async"
+            [user]="currentUser"
             [meetings]="filteredMeetings"
             [showGuide]="mapShowGuide"
             [showLegend]="mapShowLegend"

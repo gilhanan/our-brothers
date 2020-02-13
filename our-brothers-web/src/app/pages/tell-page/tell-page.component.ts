@@ -14,7 +14,45 @@ import {
 import { ViewOptions } from 'src/app/components/view-toggle/view-toggle.component';
 import { UtilsService } from 'src/app/services/utils.service';
 
+interface TrainingMeeting {
+  text: string;
+  on: boolean;
+  value: string;
+}
+
 const oneWeek = 1000 * 60 * 60 * 24 * 7;
+const traningMeetingsConst: TrainingMeeting[] = [
+  {
+    text: '24.3 יום שלישי, בין השעות 1700-2100, בWEWORK חיפה',
+    on: false,
+    value: 'm1'
+  },
+  {
+    text: '25.3 יום רביעי, בין השעות 1700-2100, בWEWORK ת"א',
+    on: false,
+    value: 'm2'
+  },
+  {
+    text: '26.3 יום חמישי, בין השעות 1700-2100, בWEWORK ירושלים',
+    on: false,
+    value: 'm3'
+  },
+  {
+    text: '29.3 יום ראשון, בין השעות 1700-2100, בWEWORK באר שבע ',
+    on: false,
+    value: 'm4'
+  },
+  {
+    text: '7.4 יום שלישי, 19:00-20:30 סדנה אינטרנטית',
+    on: false,
+    value: 'm5'
+  },
+  {
+    text: '18.4 יום שבת, 2030-2200 סדנה אינטרנטית',
+    on: false,
+    value: 'm6'
+  }
+];
 
 @Component({
   selector: 'app-tell-page',
@@ -26,6 +64,8 @@ export class TellPageComponent implements OnInit {
   public casualtyDetailsFrom: FormGroup;
   public trainingSession = false;
   public userSubscription: Subscription;
+  public trainingMeetings: TrainingMeeting[] = traningMeetingsConst;
+  public noTrainingMeeting = true;
 
   // Meetings
   public view: ViewOptions = 'list';
@@ -157,11 +197,41 @@ export class TellPageComponent implements OnInit {
     }
   }
 
+  markedTraningMetting(traningMeeting: TrainingMeeting) {
+    if (traningMeeting.on) {
+      this.noTrainingMeeting = false;
+    } else {
+      if (
+        !this.trainingMeetings.some(trainingMeeting => {
+          return trainingMeeting.on;
+        })
+      ) {
+        this.noTrainingMeeting = true;
+      }
+    }
+  }
+
+  markedNoTraningMetting(noTrainingMeeting) {
+    if (noTrainingMeeting) {
+      this.trainingMeetings.forEach(trainingMeeting => {
+        trainingMeeting.on = false;
+      });
+    }
+  }
+
   saveTraningAnswer() {
+    const onTrainingMeetings: string[] = [];
+    if (!this.noTrainingMeeting) {
+      this.trainingMeetings.forEach(trainingMeeting => {
+        if (trainingMeeting.on) {
+          onTrainingMeetings.push(trainingMeeting.value);
+        }
+      });
+    }
     this.dataService
       .setBereavedGuidanceAnswer(this.authService.currentUser, {
         answered: true,
-        general: BereavedGuidanceGeneral.telAviv
+        general: onTrainingMeetings
       })
       .subscribe(() => {
         this.goToStep4();

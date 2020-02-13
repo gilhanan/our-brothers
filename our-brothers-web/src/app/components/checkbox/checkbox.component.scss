@@ -8,6 +8,11 @@
     height: 18px;
     border: 1px solid rgb(180, 180, 180);
     margin: 0 5px;
+    position: relative;
+
+    &.invalid {
+      border-color: red;
+    }
   }
 
   .site-checkbox-label {

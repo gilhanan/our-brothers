@@ -108,12 +108,14 @@ export class ParticipationsService {
 
   isUserHaveAllDetails = (user: User) => {
     return (
+      user.profile &&
       user.profile.address &&
       user.profile.email &&
       user.profile.firstName &&
       user.profile.lastName &&
       user.profile.phoneNumber &&
-      user.profile.birthDay
+      user.profile.birthDay &&
+      user.profile.agree
     );
   };
 
