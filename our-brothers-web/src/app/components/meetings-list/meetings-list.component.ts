@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { User, Meeting } from '../../../app/model';
 import { ParticipationsService } from 'src/app/services/participations.service';
+import { UserMeeting } from 'src/app/services/data.service';
 
 interface SortedColumn {
   column: string;
@@ -17,7 +18,7 @@ export class MeetingsListComponent implements OnChanges {
   @Input() meetings: Meeting[];
   @Input() user: User;
 
-  @Output() joinMeeting = new EventEmitter<{ meeting: Meeting, user: User }>();
+  @Output() joinMeeting = new EventEmitter<UserMeeting>();
 
   sortedMeetings: Meeting[] = [];
   sortedColumn: SortedColumn = {
@@ -41,30 +42,38 @@ export class MeetingsListComponent implements OnChanges {
   sort() {
     this.sortedMeetings = this.meetings.slice();
 
-    if (this.sortedColumn.column) {
-      const column = this.sortedColumn.column;
+    const column = this.sortedColumn.column;
 
-      this.sortedMeetings.sort((a, b) => {
-        let aValue: any;
-        let bValue: any;
+    this.sortedMeetings.sort((a, b) => {
+      let aValue: any;
+      let bValue: any;
 
-        if (column === 'address') {
-          aValue = a.address.latitude;
-          bValue = b.address.latitude;
-        } else if (column === 'bereaveds') {
-          aValue = a.bereaved && (a.bereaved.firstName + a.bereaved.lastName) || '';
-          bValue = b.bereaved && (b.bereaved.firstName + b.bereaved.lastName) || '';
-        } else {
-          aValue = a[column] || '';
-          bValue = b[column] || '';
-        }
+      if (this.participationsService.isUserParticipatingEvent(this.user, a)) {
+        return -1;
+      } else if (this.participationsService.isUserParticipatingEvent(this.user, b)) {
+        return 1;
+      }
 
-        if (this.sortedColumn.direction === 'desc') {
-          [aValue, bValue] = [bValue, aValue];
-        }
+      if (!column) {
+        return 1;
+      }
 
-        return aValue.toString().localeCompare(bValue);
-      });
-    }
+      if (column === 'address') {
+        aValue = a.address.latitude;
+        bValue = b.address.latitude;
+      } else if (column === 'bereaveds') {
+        aValue = a.bereaved && (a.bereaved.firstName + a.bereaved.lastName) || '';
+        bValue = b.bereaved && (b.bereaved.firstName + b.bereaved.lastName) || '';
+      } else {
+        aValue = a[column] || '';
+        bValue = b[column] || '';
+      }
+
+      if (this.sortedColumn.direction === 'desc') {
+        [aValue, bValue] = [bValue, aValue];
+      }
+
+      return aValue.toString().localeCompare(bValue);
+    });
   }
 }

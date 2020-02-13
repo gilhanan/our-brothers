@@ -10,15 +10,14 @@ import {
   BereavedStatus,
   BereavedGuidanceGeneral,
   BereavedGuidance,
-  Slain,
   BereavedProfile
 } from '../model';
 
 export const MEMORIAL_YEAR = 2019;
 
-export interface BereavedMeeting {
+export interface UserMeeting {
   meeting: Meeting;
-  bereaved: User;
+  user: User;
 }
 
 export interface VolunteeringUser {

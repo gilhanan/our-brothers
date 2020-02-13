@@ -1,18 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { distinctUntilChanged } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
 import { ParticipationsService } from 'src/app/services/participations.service';
-import { Subscription } from 'rxjs';
 import { DataService } from 'src/app/services/data.service';
 import {
-  BereavedGuidanceGeneral,
   Meeting,
   User,
   BereavedProfile,
   Slain
 } from 'src/app/model';
-import { ViewOptions } from 'src/app/components/view-toggle/view-toggle.component';
-import { UtilsService } from 'src/app/services/utils.service';
+import { Subject, combineLatest } from 'rxjs';
 
 interface TrainingMeeting {
   text: string;
@@ -20,7 +18,6 @@ interface TrainingMeeting {
   value: string;
 }
 
-const oneWeek = 1000 * 60 * 60 * 24 * 7;
 const traningMeetingsConst: TrainingMeeting[] = [
   {
     text: '24.3 יום שלישי, בין השעות 1700-2100, בWEWORK חיפה',
@@ -60,29 +57,21 @@ const traningMeetingsConst: TrainingMeeting[] = [
   styleUrls: ['./tell-page.component.scss']
 })
 export class TellPageComponent implements OnInit {
-  public currentStep = 0;
-  public casualtyDetailsFrom: FormGroup;
-  public trainingSession = false;
-  public userSubscription: Subscription;
-  public trainingMeetings: TrainingMeeting[] = traningMeetingsConst;
-  public noTrainingMeeting = true;
-
-  // Meetings
-  public view: ViewOptions = 'list';
   public user: User;
   public meetings: Meeting[];
-  public filteredMeetings: Meeting[];
-  public mapShowGuide = false;
-  public mapShowLegend = false;
-  public filter = '';
+  public currentStep: number = 0;
+  public currentStep$ = new Subject<number>();
+  public casualtyDetailsFrom: FormGroup;
+  public trainingSession = false;
+  public trainingMeetings: TrainingMeeting[] = traningMeetingsConst;
+  public noTrainingMeeting = true;
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private participationsService: ParticipationsService,
-    private dataService: DataService,
-    private utilsService: UtilsService
-  ) {}
+    private dataService: DataService
+  ) { }
 
   ngOnInit() {
     this.casualtyDetailsFrom = this.fb.group({
@@ -92,24 +81,32 @@ export class TellPageComponent implements OnInit {
       casualtyStory: ['', Validators.required]
     });
 
-    this.authService.user.subscribe(user => {
-      this.user = user;
-    });
-  }
+    combineLatest(
+      this.authService.user,
+      this.currentStep$.pipe(distinctUntilChanged()))
+      .subscribe(([user, currentStep]) => {
 
-  configureMeetingsMap() {
-    if (
-      !(
-        this.authService.currentUser &&
-        this.authService.currentUser.meetingMapGuideLastVisit &&
-        Date.now() - this.authService.currentUser.meetingMapGuideLastVisit <
-          oneWeek
-      )
-    ) {
-      this.mapShowGuide = true;
-    } else {
-      this.mapShowLegend = true;
-    }
+        this.user = user;
+        this.currentStep = currentStep;
+
+        // Auto navigations after the first step
+        if (currentStep > 0) {
+          if (!user) {
+            this.currentStep$.next(1);
+            this.authService.requestToLogin();
+          } else if (!this.participationsService.isBrotherHaveSlainDetails(user)) {
+            this.currentStep$.next(2);
+          } else if (!this.participationsService.isBrotherAnsweredTrainingMeeting(user)) {
+            this.currentStep$.next(3);
+          } else {
+            this.currentStep$.next(4);
+          }
+        }
+      });
+
+    this.dataService.getMeetings().subscribe(meetings => {
+      this.meetings = meetings;
+    });
   }
 
   get casualtyFname() {
@@ -126,41 +123,6 @@ export class TellPageComponent implements OnInit {
 
   get casualtyStory() {
     return this.casualtyDetailsFrom.get('casualtyStory');
-  }
-
-  goToStep1() {
-    if (
-      this.authService.currentUser &&
-      this.participationsService.isUserHaveAllDetails(
-        this.authService.currentUser
-      )
-    ) {
-      this.configureMeetingsMap();
-      this.goToStep2();
-      return;
-    }
-
-    this.currentStep = 1;
-    this.authService.requestToLogin();
-    this.userSubscription = this.authService.user.subscribe(user => {
-      if (user && this.participationsService.isUserHaveAllDetails(user)) {
-        this.configureMeetingsMap();
-        this.goToStep2();
-        this.userSubscription.unsubscribe();
-      }
-    });
-  }
-
-  goToStep2() {
-    if (
-      this.participationsService.isBrotherHaveSlainDetails(
-        this.authService.currentUser
-      )
-    ) {
-      this.goToStep3();
-    } else {
-      this.currentStep = 2;
-    }
   }
 
   saveBereavedProfile() {
@@ -183,23 +145,8 @@ export class TellPageComponent implements OnInit {
       slains,
       story: this.casualtyDetailsFrom.get('casualtyStory').value
     };
-    this.dataService
-      .setBereavedProfile(this.authService.currentUser, bereavedProfile)
-      .subscribe(() => {
-        this.goToStep3();
-      });
-  }
 
-  goToStep3() {
-    if (
-      this.participationsService.isBrotherAnsweredTrainingMeeting(
-        this.authService.currentUser
-      )
-    ) {
-      this.goToStep4();
-    } else {
-      this.currentStep = 3;
-    }
+    this.dataService.setBereavedProfile(this.authService.currentUser, bereavedProfile);
   }
 
   markedTraningMetting(traningMeeting: TrainingMeeting) {
@@ -233,43 +180,12 @@ export class TellPageComponent implements OnInit {
         }
       });
     }
+
     this.dataService
       .setBereavedGuidanceAnswer(this.authService.currentUser, {
         answered: true,
         general: onTrainingMeetings
-      })
-      .subscribe(() => {
-        this.goToStep4();
       });
-  }
-
-  goToStep4() {
-    this.currentStep = 4;
-    this.getMeetings();
-  }
-
-  getMeetings() {
-    this.dataService.getMeetings().subscribe(meetings => {
-      this.meetings = meetings;
-      this.filterMeetings();
-    });
-  }
-
-  filterMeetings() {
-    this.filteredMeetings = this.utilsService.filteringMeetings(
-      this.meetings,
-      this.filter
-    );
-  }
-
-  onMapGuideCompleted() {
-    this.mapShowGuide = true;
-    this.mapShowLegend = true;
-    if (this.authService.currentUser && this.authService.currentUser.id) {
-      this.dataService.updateUserData(this.authService.currentUser.id, {
-        meetingMapGuideLastVisit: Date.now()
-      });
-    }
   }
 
   onJoinMeeting({ user, meeting }: { user: User; meeting: Meeting }) {

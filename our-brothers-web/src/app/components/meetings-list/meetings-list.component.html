@@ -45,10 +45,8 @@
       </span>
     </div>
     <div class="meeting-item-col meeting-button" *ngIf="!!user">
-      <button class="join-button" (click)="joinMeeting.emit({meeting: meeting, user: user})"
-        [disabled]="participationsService.isUserParticipatingEvent(user, meeting)">
-        שיבוץ
-      </button>
+      <app-join-button [user]="user" [meeting]="meeting"
+        (joinMeeting)="joinMeeting.emit({user: user, meeting: meeting})"></app-join-button>
     </div>
   </div>
 </cdk-virtual-scroll-viewport>

@@ -4,7 +4,7 @@ import { Meeting, User, UserRole } from '../../model';
 import { MapRestriction } from '@agm/core/services/google-maps-types';
 import { ParticipationsService } from '../../../app/services/participations.service';
 import { NavigationDirection } from '../meetings-map-navigator/meetings-map-navigator.component';
-import { AgmMarker, AgmInfoWindow, AgmMap } from '@agm/core';
+import { AgmMarker, AgmInfoWindow } from '@agm/core';
 
 @Component({
   selector: 'app-meetings-map',
@@ -17,7 +17,6 @@ export class MeetingsMapComponent implements OnInit {
   @Input() user: User;
   @Input() isCenterCurrentLocation = true;
   @Input() showGuide = false;
-  @Input() showLegend = false;
 
   @Output() guideCompleted = new EventEmitter<void>();
   @Output() joinMeeting = new EventEmitter<{ meeting: Meeting, user: User }>();

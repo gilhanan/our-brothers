@@ -50,6 +50,8 @@ import { SelectBereavedStatusComponent } from './components/select-bereaved-stat
 import { SelectBereavedGuidanceComponent } from './components/select-bereaved-guidance/select-bereaved-guidance.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { MeetingsComponent } from './components/meetings/meetings.component';
+import { JoinButtonComponent } from './components/join-button/join-button.component';
 
 registerLocaleData(localeHe);
 
@@ -90,7 +92,9 @@ registerLocaleData(localeHe);
     SelectBereavedStatusComponent,
     SelectBereavedGuidanceComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    MeetingsComponent,
+    JoinButtonComponent
   ],
   imports: [
     BrowserModule,
