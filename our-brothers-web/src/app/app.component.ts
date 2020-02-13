@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import * as AOS from 'aos';
+
 import { AuthService } from './services/auth.service';
 import { ParticipationsService } from './services/participations.service';
 import { User } from './model';
@@ -36,6 +38,8 @@ export class AppComponent implements OnInit {
     this.authService.needLogin$.subscribe(() => {
       this.needLogin = true;
     });
+
+    AOS.init();
   }
 
   logOut() {
