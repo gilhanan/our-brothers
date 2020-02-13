@@ -4,6 +4,7 @@ import { DataService } from 'src/app/services/data.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { of } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { UserProfile } from 'src/app/model';
 
 @Component({
   selector: 'app-profile-form',
@@ -18,41 +19,42 @@ export class ProfileFormComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private dataService: DataService
-  ) {}
+  ) { }
 
   ngOnInit() {
-    if (this.authService.currentUser.profile.otherLang) {
+    const profile: UserProfile = this.authService.currentUser.profile || {} as UserProfile;
+
+    if (profile.otherLang) {
       this.canTellInOtherLang = true;
     }
 
     this.profileForm = this.fb.group({
       // type: ['', Validators.required],
       email: [
-        this.authService.currentUser.profile.email ||
-          this.authService.currentFirebaseUser.email,
+        profile.email || this.authService.currentFirebaseUser.email,
         [Validators.required, Validators.email]
       ],
       firstName: [
-        this.authService.currentUser.profile.firstName,
+        profile.firstName,
         Validators.required
       ],
       lastName: [
-        this.authService.currentUser.profile.lastName,
+        profile.lastName,
         Validators.required
       ],
       phoneNumber: [
-        this.authService.currentUser.profile.phoneNumber,
+        profile.phoneNumber,
         Validators.required
       ],
       address: [
-        this.authService.currentUser.profile.address,
+        profile.address,
         Validators.required
       ],
       birthDay: [
-        new Date(this.authService.currentUser.profile.birthDay),
+        new Date(profile.birthDay),
         Validators.required
       ],
-      otherLang: [this.authService.currentUser.profile.otherLang],
+      otherLang: [profile.otherLang],
       agree: [false, Validators.requiredTrue]
     });
 

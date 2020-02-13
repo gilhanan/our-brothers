@@ -91,7 +91,7 @@ export class TellPageComponent implements OnInit {
 
         // Auto navigations after the first step
         if (currentStep > 0) {
-          if (!user) {
+          if (!user || !this.participationsService.isUserHaveAllDetails(user)) {
             this.currentStep$.next(1);
             this.authService.requestToLogin();
           } else if (!this.participationsService.isBrotherHaveSlainDetails(user)) {
@@ -135,8 +135,10 @@ export class TellPageComponent implements OnInit {
       slains = this.authService.currentUser.bereavedProfile.slains;
     }
 
+    const deathDate = new Date(this.casualtyDetailsFrom.get('casualtyDate').value).getTime();
+
     slains.push({
-      deathDate: this.casualtyDetailsFrom.get('casualtyDate').value,
+      deathDate,
       firstName: this.casualtyDetailsFrom.get('casualtyFname').value,
       lastName: this.casualtyDetailsFrom.get('casualtyLname').value
     });

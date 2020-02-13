@@ -42,7 +42,6 @@
     placeholder="תאריך לידה"
     class="login-form-input"
     formControlName="birthDay"
-    [value]="birthDay.value | date:'yyyy-MM-dd'"
     [class.invalid]="!birthDay.valid && birthDay.touched"
   />
   <app-checkbox
