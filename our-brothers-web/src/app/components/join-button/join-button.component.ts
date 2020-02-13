@@ -1,9 +1,10 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { Meeting, User } from 'src/app/model';
 import { ParticipationsService } from 'src/app/services/participations.service';
 
 @Component({
   selector: 'app-join-button',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './join-button.component.html',
   styleUrls: ['./join-button.component.scss']
 })

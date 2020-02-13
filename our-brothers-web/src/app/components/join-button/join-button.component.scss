@@ -12,6 +12,12 @@
   background-color: white;
   cursor: pointer;
 
+  &:disabled {
+    color: grey;
+    border-color: grey;
+    cursor: not-allowed;
+  }
+
   &.joined {
     color: white;
     background-color: rgb(0, 160, 153);

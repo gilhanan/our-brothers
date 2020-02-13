@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User, Meeting } from '../model';
+import { User, Meeting, UserRole } from '../model';
 import { MEMORIAL_YEAR } from './data.service';
 import { retry } from 'rxjs/operators';
 
@@ -7,7 +7,7 @@ import { retry } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ParticipationsService {
-  constructor() {}
+  constructor() { }
 
   isParticipateParticipating = (user: User, year: number) => {
     return (
@@ -105,6 +105,26 @@ export class ParticipationsService {
       this.isHostParticipatingEvent(user, meeting)
     );
   };
+
+  isUserCanParticipatingEvent = (
+    user: User,
+    meeting: Meeting,
+    year = MEMORIAL_YEAR
+  ) => {
+    if (!user) {
+      return false;
+    }
+
+    if (this.isUserParticipatingEvent(user, meeting)) {
+      return false;
+    }
+
+    if (user.role === UserRole.bereaved) {
+      return !meeting.bereaved;
+    }
+
+    return !meeting.invited && meeting.count <= meeting.capacity;
+  }
 
   isUserHaveAllDetails = (user: User) => {
     return (
