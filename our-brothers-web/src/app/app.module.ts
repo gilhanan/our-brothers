@@ -53,6 +53,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { MeetingsComponent } from './components/meetings/meetings.component';
 import { JoinButtonComponent } from './components/join-button/join-button.component';
 import { AboutPageComponent } from './pages/about-page/about-page.component';
+import { MeetingListRowComponent } from './components/meeting-list-row/meeting-list-row.component';
 
 registerLocaleData(localeHe);
 
@@ -96,7 +97,8 @@ registerLocaleData(localeHe);
     FooterComponent,
     MeetingsComponent,
     JoinButtonComponent,
-    AboutPageComponent
+    AboutPageComponent,
+    MeetingListRowComponent
   ],
   imports: [
     BrowserModule,

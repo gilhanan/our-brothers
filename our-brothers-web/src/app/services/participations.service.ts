@@ -99,6 +99,10 @@ export class ParticipationsService {
     meeting: Meeting,
     year = MEMORIAL_YEAR
   ) => {
+    if (!meeting) {
+      return false;
+    }
+
     return (
       this.isParticipateParticipatingEvent(user, meeting, year) ||
       this.isBereavedParticipatingEvent(user, meeting, year) ||
@@ -108,11 +112,14 @@ export class ParticipationsService {
 
   isUserCanParticipatingEvent = (
     user: User,
-    meeting: Meeting,
-    year = MEMORIAL_YEAR
+    meeting: Meeting
   ) => {
     if (!user) {
       return false;
+    }
+
+    if (!meeting) {
+      return true;
     }
 
     if (this.isUserParticipatingEvent(user, meeting)) {

@@ -44,10 +44,10 @@ export class MeetingsPageComponent implements OnInit {
     }
   }
 
-  onJoinMeeting({ user, meeting }: UserMeeting) {
+  onJoinMeeting(meeting: Meeting) {
     if (window.confirm('האם ברצונך להשתבץ למפגש?')) {
-      if (user.role === 'bereaved') {
-        this.dataService.bereavedRegisterHost(user, meeting).subscribe((result) => {
+      if (this.user.role === 'bereaved') {
+        this.dataService.bereavedRegisterHost(this.user, meeting).subscribe((result) => {
           if (result) {
             window.alert('שובצת בהצלחה!');
           }

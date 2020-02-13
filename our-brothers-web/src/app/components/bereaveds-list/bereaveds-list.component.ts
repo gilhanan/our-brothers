@@ -13,7 +13,7 @@ export class BereavedsListComponent implements OnChanges {
 
   @Input() user: User;
   @Input() bereaveds: User[];
-  @Output() joinBereved = new EventEmitter<Meeting>();
+  @Output() joinBereved = new EventEmitter<void>();
   @Output() leaveBereaved = new EventEmitter<UserMeeting>();
   @Output() volunteering = new EventEmitter<VolunteeringUser>();
   @Output() bereavedStatus = new EventEmitter<UpdateBereavedStatus>();

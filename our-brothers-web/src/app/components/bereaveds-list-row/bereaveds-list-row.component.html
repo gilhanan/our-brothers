@@ -33,25 +33,25 @@
       </div>
     </div>
     <div class="col col-guidance">
-      <app-select-bereaved-guidance [value]="bereaved.bereavedParticipation && bereaved.bereavedParticipation[year]?.guidance?.general"
+      <app-select-bereaved-guidance
+        [value]="bereaved.bereavedParticipation && bereaved.bereavedParticipation[year]?.guidance?.general"
         (valueChange)="bereavedGuidance.emit($event)"></app-select-bereaved-guidance>
     </div>
     <div class="col col-status">
-      <app-select-bereaved-status [value]="bereaved.bereavedParticipation && bereaved.bereavedParticipation[year]?.status"
+      <app-select-bereaved-status
+        [value]="bereaved.bereavedParticipation && bereaved.bereavedParticipation[year]?.status"
         (valueChange)="bereavedStatus.emit($event)"></app-select-bereaved-status>
     </div>
     <div class="col bereaved-meetings">
       <div *ngFor="let meeting of bereaved.bereavedParticipation && bereaved.bereavedParticipation[year]?.meetings">
-        <button class="leave-button" (click)="leaveBereaved.emit({bereaved: bereaved, meeting: meeting})">
+        <button class="leave-button" (click)="leaveBereaved.emit(meeting)">
           <div class="trash-icon"></div>
         </button>
         <div class="bereaved-meeting-title">
           {{meeting.title}}
         </div>
       </div>
-      <button class="join-button" (click)="joinBereved.emit(bereaved)">
-        שיבוץ
-      </button>
+      <app-join-button [user]="user" (joinMeeting)="joinBereved.emit()"></app-join-button>
     </div>
   </div>
   <div class="expanded-row" *ngIf="expanded">
