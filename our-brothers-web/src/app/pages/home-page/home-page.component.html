@@ -61,17 +61,5 @@
   <div class="site-divider"></div>
   <div class="small-heading">צרו קשר</div>
   <div class="medium-heading">השאירו פרטים</div>
-  <form [formGroup]="contactForm" class="contact-form-fields">
-    <input formControlName="fullName" class="form-field" placeholder="שם מלא*"
-      [class.invalid]="!fullName.valid && fullName.touched" />
-    <input formControlName="phone" class="form-field" placeholder="טלפון*"
-      [class.invalid]="!phone.valid && phone.touched" />
-    <input formControlName="email" class="form-field" placeholder="אימייל" />
-    <input formControlName="subject" class="form-field" placeholder="נושא פנייה*"
-      [class.invalid]="!subject.valid && subject.touched" />
-    <textarea formControlName="message" class="form-field message" placeholder="תוכן הודעה"></textarea>
-  </form>
-  <div class="site-button primary-button contact-send-button" [class.disabled]="!contactForm.valid">
-    שלח
-  </div>
+  <app-contact-form></app-contact-form>
 </div>

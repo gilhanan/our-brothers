@@ -54,6 +54,7 @@ import { MeetingsComponent } from './components/meetings/meetings.component';
 import { JoinButtonComponent } from './components/join-button/join-button.component';
 import { AboutPageComponent } from './pages/about-page/about-page.component';
 import { MeetingListRowComponent } from './components/meeting-list-row/meeting-list-row.component';
+import { ContactFormComponent } from './contact-form/contact-form.component';
 
 registerLocaleData(localeHe);
 
@@ -98,7 +99,8 @@ registerLocaleData(localeHe);
     MeetingsComponent,
     JoinButtonComponent,
     AboutPageComponent,
-    MeetingListRowComponent
+    MeetingListRowComponent,
+    ContactFormComponent
   ],
   imports: [
     BrowserModule,

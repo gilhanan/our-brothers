@@ -5,7 +5,7 @@
     "ng": "ng",
     "firebase": "firebase",
     "start": "ng serve",
-    "build": "ng build --output-hashing=all",
+    "build": "ng build --prod",
     "deploy": "npm run deploy:beta",
     "deploy:beta": "firebase deploy --only hosting:beta",
     "test": "ng test",

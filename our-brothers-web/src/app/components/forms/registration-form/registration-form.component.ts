@@ -43,11 +43,11 @@ export class RegistrationFormComponent implements OnInit {
     return this.registrationForm.get('passConfirm');
   }
 
-  registerWithGoogle() {
+  signInWithGoogle() {
     this.authService.googleLogin();
   }
 
-  registerWithFacebook() {
+  signInWithFacebook() {
     this.authService.facebookLogin();
   }
 

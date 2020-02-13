@@ -1,0 +1,46 @@
+.contact-form-fields {
+  max-width: 1000px;
+  padding: 0 50px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  @media only screen and (max-width: 768px) {
+    padding: 0;
+    width: calc(100% - 10px);
+  }
+
+  .form-field {
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 25px;
+
+    @media only screen and (max-width: 768px) {
+      width: 45%;
+      margin-left: 7px;
+      margin-right: 7px;
+      margin-bottom: 14px;
+    }
+  }
+
+  .message {
+    @media only screen and (max-width: 768px) {
+      width: calc(100% - 20px);
+    }
+  }
+}
+
+.contact-send-button {
+  width: 250px;
+  height: 55px;
+  font-size: 36px;
+  font-family: "arbel";
+  margin-top: 15px;
+
+  @media only screen and (max-width: 768px) {
+    width: 200px;
+    height: 45px;
+    font-size: 25px;
+    margin-top: 7px;
+  }
+}

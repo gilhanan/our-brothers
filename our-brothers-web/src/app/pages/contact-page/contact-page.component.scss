@@ -25,11 +25,8 @@
 
   .medium-heading {
     margin-bottom: 10px;
-    text-align: right;
-    @media only screen and (max-width: 768px) {
-      text-align: center;
-      font-size: 32px;
-      margin-bottom: 20px;
+    @media only screen and (min-width: 768px) {
+      text-align: right;
     }
   }
   .details-text {
@@ -56,73 +53,5 @@
         padding: 5px 0 5px 5px;
       }
     }
-  }
-}
-
-.contact-form {
-  padding: 85px 0;
-  background-color: rgb(248, 248, 248);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  .medium-heading {
-    @media only screen and (max-width: 768px) {
-      font-size: 32px;
-      margin-bottom: 20px;
-    }
-  }
-
-  .contact-form-fields {
-    max-width: 1000px;
-    width: calc(100% - 50px);
-    padding: 0 50px;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-
-    @media only screen and (max-width: 768px) {
-      padding: 0px;
-      width: calc(100% - 10px);
-    }
-
-    .form-field {
-      margin-left: 15px;
-      margin-right: 15px;
-      margin-bottom: 25px;
-
-      @media only screen and (max-width: 768px) {
-        width: 45%;
-        margin-left: 7px;
-        margin-right: 7px;
-        margin-bottom: 14px;
-      }
-    }
-
-    .message {
-      @media only screen and (max-width: 768px) {
-        width: calc(100% - 20px);
-      }
-    }
-  }
-
-  .contact-send-button {
-    width: 250px;
-    height: 55px;
-    font-size: 36px;
-    font-family: "arbel";
-    margin-top: 15px;
-
-    @media only screen and (max-width: 768px) {
-      width: 200px;
-      height: 45px;
-      font-size: 25px;
-      margin-top: 7px;
-    }
-  }
-
-  @media only screen and (max-width: 768px) {
-    padding: 35px 0;
   }
 }
