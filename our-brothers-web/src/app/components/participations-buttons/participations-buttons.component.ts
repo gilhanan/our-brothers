@@ -10,6 +10,7 @@ import { User } from 'src/app/model';
 export class ParticipationsButtonsComponent {
 
   @Input() user: User;
+  @Input() loading: boolean;
 
   constructor() { }
 }

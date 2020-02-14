@@ -9,15 +9,18 @@ import { User } from 'src/app/model';
 })
 export class HomePageComponent implements OnInit {
   public videoMuted = true;
-
   public user: User;
+  public loadingUser = true;
 
   constructor(
     private authService: AuthService
   ) { }
 
   ngOnInit(): void {
-    this.authService.user.subscribe(user => this.user = user);
+    this.authService.user.subscribe(user => {
+      this.user = user;
+      this.loadingUser = false;
+    });
   }
 
 }

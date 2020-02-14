@@ -1,4 +1,4 @@
-<app-flip-card [disabled]="!user || !participationService.isUserCanTell(user)"
+<app-flip-card [disabled]="loading || (user && !participationService.isUserCanTell(user))"
   [frontImage]="'/assets/img/cardImgTeller.png'" [frontTitle]="'אני רוצה לספר'"
   [backText]="'אח/אחות שכולים? מעוניינים לספר את ספורכם האישי?'" [backButtonText]="'לפרטים נוספים'"
   [backButtonUrl]="'tell'">

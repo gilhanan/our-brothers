@@ -13,6 +13,7 @@ const oneWeek = 1000 * 60 * 60 * 24 * 7;
 })
 export class MeetingsPageComponent implements OnInit {
   user: User;
+  loadingUser = true;
   meetings: Meeting[];
   mapShowGuide = false;
 
@@ -24,6 +25,7 @@ export class MeetingsPageComponent implements OnInit {
   ngOnInit(): void {
     this.authService.user.subscribe(user => {
       this.user = user;
+      this.loadingUser = false;
 
       if (!this.mapShowGuide && !(user && user.meetingMapGuideLastVisit && (Date.now() - user.meetingMapGuideLastVisit) < oneWeek)) {
         this.mapShowGuide = true;

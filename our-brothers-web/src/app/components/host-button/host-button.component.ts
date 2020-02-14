@@ -11,6 +11,7 @@ import { ParticipationsService } from 'src/app/services/participations.service';
 export class HostButtonComponent {
 
   @Input() user: User;
+  @Input() loading: boolean;
 
   constructor(public participationService: ParticipationsService) { }
 }
