@@ -1,13 +1,24 @@
 import { Injectable } from '@angular/core';
 import { User, Meeting, UserRole } from '../model';
 import { MEMORIAL_YEAR } from './data.service';
-import { retry } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ParticipationsService {
   constructor() { }
+
+  isUserCanHost = (user: User) => {
+    return user.role !== UserRole.bereaved;
+  }
+
+  isUserCanParticipate = (user: User) => {
+    return user.role !== UserRole.bereaved;
+  }
+
+  isUserCanTell = (user: User) => {
+    return user.role === UserRole.bereaved;
+  }
 
   isParticipateParticipating = (user: User, year: number) => {
     return (

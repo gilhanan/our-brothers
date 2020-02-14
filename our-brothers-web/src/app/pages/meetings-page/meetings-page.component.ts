@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Meeting, User } from '../..//model';
-import { DataService, UserMeeting } from '../../services/data.service';
+import { DataService } from '../../services/data.service';
 import { AuthService } from 'src/app/services/auth.service';
 
 const oneWeek = 1000 * 60 * 60 * 24 * 7;

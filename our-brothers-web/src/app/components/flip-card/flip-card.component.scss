@@ -4,7 +4,7 @@
   perspective: 800px;
   transform-style: preserve-3d;
 
-  &:hover {
+  &:not(.disabled):hover {
     .card-front {
       transform: rotateY(180deg);
     }
@@ -83,6 +83,17 @@
       font-size: 20px;
       color: rgb(0, 160, 153);
       padding: 8px 20px;
+    }
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+
+    .card-front {
+      border-color: grey;
+      .front-title {
+        color: grey;
+      }
     }
   }
 }

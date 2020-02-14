@@ -55,6 +55,10 @@ import { JoinButtonComponent } from './components/join-button/join-button.compon
 import { AboutPageComponent } from './pages/about-page/about-page.component';
 import { MeetingListRowComponent } from './components/meeting-list-row/meeting-list-row.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
+import { TellButtonComponent } from './components/tell-button/tell-button.component';
+import { HostButtonComponent } from './components/host-button/host-button.component';
+import { ParticipateButtonComponent } from './components/participate-button/participate-button.component';
+import { ParticipationsButtonsComponent } from './components/participations-buttons/participations-buttons.component';
 
 registerLocaleData(localeHe);
 
@@ -100,7 +104,11 @@ registerLocaleData(localeHe);
     JoinButtonComponent,
     AboutPageComponent,
     MeetingListRowComponent,
-    ContactFormComponent
+    ContactFormComponent,
+    TellButtonComponent,
+    HostButtonComponent,
+    ParticipateButtonComponent,
+    ParticipationsButtonsComponent
   ],
   imports: [
     BrowserModule,
