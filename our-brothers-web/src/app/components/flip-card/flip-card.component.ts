@@ -1,9 +1,8 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, ElementRef, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-flip-card',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './flip-card.component.html',
   styleUrls: ['./flip-card.component.scss']
 })
@@ -15,7 +14,17 @@ export class FlipCardComponent {
   @Input() backButtonUrl: string;
   @Input() disabled: boolean;
 
-  constructor(private router: Router) { }
+  @HostListener('document:click', ['$event'])
+  clickout(event) {
+    this.hover = !!this.elementRef.nativeElement.contains(event.target)
+  }
+
+  hover = false;
+
+  constructor(
+    private elementRef: ElementRef,
+    private router: Router
+  ) { }
 
   moveToPage() {
     this.router.navigate([this.backButtonUrl]);
