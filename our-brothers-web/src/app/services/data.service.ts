@@ -279,7 +279,7 @@ export class DataService {
       id: bereaved.id,
       firstName: bereaved.profile.firstName,
       lastName: bereaved.profile.lastName,
-      email: bereaved.profile.email || null,
+      email: bereaved.profile.email,
       phoneNumber: bereaved.profile.phoneNumber,
       slain:
         (bereaved.bereavedProfile && bereaved.bereavedProfile.slains) || null
@@ -294,6 +294,40 @@ export class DataService {
           return this.angularFireDatabase
             .object(
               `users/${bereaved.id}/bereavedParticipation/${year}/meetings/${meeting.hostId}/${meeting.id}`
+            )
+            .set({
+              title: meeting.title
+            })
+            .then(() => true);
+        })
+        .catch(error => {
+          console.log(error);
+          throw error;
+        })
+    );
+  }
+
+  public participateRegisterHost(
+    participate: User,
+    meeting: Meeting,
+    year = MEMORIAL_YEAR
+  ): Observable<boolean> {
+    const postObj = {
+      firstName: participate.profile.firstName,
+      lastName: participate.profile.lastName,
+      email: participate.profile.email,
+      phoneNumber: participate.profile.phoneNumber
+    };
+
+    return from(
+      this.angularFireDatabase
+        .object(`eventsParticipates/${year}/${meeting.hostId}/${meeting.id}/${participate.id}`)
+        .set(postObj)
+        .then(() => {
+          // TODO: Firebase Functions
+          return this.angularFireDatabase
+            .object(
+              `users/${participate.id}/participateParticipation/${year}/meetings/${meeting.hostId}/${meeting.id}`
             )
             .set({
               title: meeting.title

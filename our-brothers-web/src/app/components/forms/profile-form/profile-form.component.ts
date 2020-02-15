@@ -26,7 +26,7 @@ export class ProfileFormComponent implements OnInit {
   @Output()
   public submit = new EventEmitter<ProfileForm>();
 
-  public profileForm: FormGroup;
+  public form: FormGroup;
 
   constructor(
     private fb: FormBuilder
@@ -35,7 +35,7 @@ export class ProfileFormComponent implements OnInit {
   ngOnInit() {
     const profile: UserProfile = this.user.profile || {} as UserProfile;
 
-    this.profileForm = this.fb.group({
+    this.form = this.fb.group({
       email: [
         profile.email || this.firebaseUser.email,
         [Validators.required, Validators.email]
@@ -57,27 +57,27 @@ export class ProfileFormComponent implements OnInit {
   }
 
   get email() {
-    return this.profileForm.get('email');
+    return this.form.get('email');
   }
 
   get firstName() {
-    return this.profileForm.get('firstName');
+    return this.form.get('firstName');
   }
 
   get lastName() {
-    return this.profileForm.get('lastName');
+    return this.form.get('lastName');
   }
 
   get phoneNumber() {
-    return this.profileForm.get('phoneNumber');
+    return this.form.get('phoneNumber');
   }
 
   get agree() {
-    return this.profileForm.get('agree');
+    return this.form.get('agree');
   }
 
-  public saveProfile() {
-    if (this.profileForm.valid) {
+  public onSubmit() {
+    if (this.form.valid) {
       const parsedForm: ProfileForm = {
         email: this.email.value,
         firstName: this.firstName.value,
@@ -87,7 +87,7 @@ export class ProfileFormComponent implements OnInit {
 
       this.submit.emit(parsedForm);
     } else {
-      this.profileForm.markAllAsTouched();
+      this.form.markAllAsTouched();
     }
   }
 }

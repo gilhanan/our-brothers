@@ -66,6 +66,8 @@ import { BereavedIntroComponent } from './components/bereaved-intro/bereaved-int
 import { BereavedGuidanceFormComponent } from './components/forms/bereaved-guidance-form/bereaved-guidance-form.component';
 import { RegistrationProgressBarComponent } from './components/registration-progress-bar/registration-progress-bar.component';
 import { HostIntroComponent } from './components/host-intro/host-intro.component';
+import { ParticipatePageComponent } from './pages/participate-page/participate-page.component';
+import { ParticipateIntroComponent } from './participate-intro/participate-intro.component';
 
 registerLocaleData(localeHe);
 
@@ -122,7 +124,9 @@ registerLocaleData(localeHe);
     BereavedIntroComponent,
     BereavedGuidanceFormComponent,
     RegistrationProgressBarComponent,
-    HostIntroComponent
+    HostIntroComponent,
+    ParticipatePageComponent,
+    ParticipateIntroComponent
   ],
   imports: [
     BrowserModule,

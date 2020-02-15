@@ -145,7 +145,7 @@ export class ParticipationsService {
   }
 
   isBereavedCanParticipatingEvent = (user: User, meeting: Meeting) => {
-    return this.isParticipateHaveAllDetails(user) &&
+    return this.isBereavedHaveAllDetails(user) &&
       this.isBrotherHaveSlainDetails(user) &&
       this.isBrotherAnsweredTrainingMeeting(user) &&
       !meeting.bereaved

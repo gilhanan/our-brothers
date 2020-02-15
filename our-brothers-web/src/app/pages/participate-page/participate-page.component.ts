@@ -1,27 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject, combineLatest } from 'rxjs';
-import { distinctUntilChanged } from 'rxjs/operators';
-
-import {
-  Meeting,
-  User,
-  BereavedProfile,
-  Slain,
-  UserRole,
-  BereavedGuidance
-} from 'src/app/model';
+import { User, Meeting, UserRole } from 'src/app/model';
 import { AuthService } from 'src/app/services/auth.service';
 import { ParticipationsService } from 'src/app/services/participations.service';
 import { DataService } from 'src/app/services/data.service';
-import { SlainForm } from 'src/app/components/forms/slain-form/slain-form.component';
-import { BereavedProfileForm } from 'src/app/components/forms/bereaved-profile-form/bereaved-profile-form.component';
+import { distinctUntilChanged } from 'rxjs/operators';
+import { ProfileForm } from 'src/app/components/forms/profile-form/profile-form.component';
 
 @Component({
-  selector: 'app-tell-page',
-  templateUrl: './tell-page.component.html',
-  styleUrls: ['./tell-page.component.scss']
+  selector: 'app-participate-page',
+  templateUrl: './participate-page.component.html',
+  styleUrls: ['./participate-page.component.scss']
 })
-export class TellPageComponent implements OnInit {
+export class ParticipatePageComponent implements OnInit {
   public user: User;
   public firebaseUser: firebase.User;
   public meetings: Meeting[];
@@ -48,21 +39,17 @@ export class TellPageComponent implements OnInit {
 
         // Auto navigations after the first step
         if (currentStep > 0) {
-          if (user && user.role !== UserRole.bereaved) {
-            this.dataService.setUserRole(user, UserRole.bereaved);
+          if (user && user.role !== UserRole.participate) {
+            this.dataService.setUserRole(user, UserRole.participate);
           }
 
           if (!user) {
             this.currentStep$.next(1);
             this.authService.requestToLogin();
-          } else if (!this.participationsService.isBereavedHaveAllDetails(user)) {
+          } else if (!this.participationsService.isParticipateHaveAllDetails(user)) {
             this.currentStep$.next(2);
-          } else if (!this.participationsService.isBrotherHaveSlainDetails(user)) {
-            this.currentStep$.next(3);
-          } else if (!this.participationsService.isBrotherAnsweredTrainingMeeting(user)) {
-            this.currentStep$.next(4);
           } else {
-            this.currentStep$.next(5);
+            this.currentStep$.next(3);
           }
         }
       });
@@ -72,37 +59,15 @@ export class TellPageComponent implements OnInit {
     });
   }
 
-  onProfileSubmit(profileForm: BereavedProfileForm) {
+  onProfileSubmit(profileForm: ProfileForm) {
     this.dataService.setUserProfile(this.user, profileForm);
-  }
-
-  onSlainsSubmit(slainForm: SlainForm) {
-
-    const slains: Slain[] = [{
-      firstName: slainForm.firstName,
-      lastName: slainForm.lastName,
-      deathDate: slainForm.deathDate
-    }];
-
-    const story = slainForm.story;
-
-    const bereavedProfile: BereavedProfile = {
-      slains,
-      story
-    };
-
-    this.dataService.setBereavedProfile(this.user, bereavedProfile);
-  }
-
-  onGuidanceSubmit(bereavedGuidance: BereavedGuidance) {
-    this.dataService.setBereavedGuidanceAnswer(this.user, bereavedGuidance);
   }
 
   onJoinMeeting(meeting: Meeting) {
     if (window.confirm('האם ברצונך להשתבץ למפגש?')) {
-      if (this.user.role === UserRole.bereaved) {
+      if (this.user.role === UserRole.participate) {
         this.dataService
-          .bereavedRegisterHost(this.user, meeting)
+          .participateRegisterHost(this.user, meeting)
           .subscribe(result => {
             if (result) {
               window.alert('שובצת בהצלחה!');
