@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
+import { User } from 'src/app/model';
 
 @Component({
   selector: 'app-home-page',
@@ -7,34 +8,19 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent implements OnInit {
-  public contactForm: FormGroup;
   public videoMuted = true;
+  public user: User;
+  public loadingUser = true;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private authService: AuthService
+  ) { }
 
-  ngOnInit() {
-    this.contactForm = this.fb.group({
-      fullName: ['', Validators.required],
-      phone: ['', Validators.required],
-      email: [''],
-      subject: ['', Validators.required],
-      message: ['']
+  ngOnInit(): void {
+    this.authService.user.subscribe(user => {
+      this.user = user;
+      this.loadingUser = false;
     });
   }
 
-  get fullName() {
-    return this.contactForm.get('fullName');
-  }
-  get phone() {
-    return this.contactForm.get('phone');
-  }
-  get email() {
-    return this.contactForm.get('email');
-  }
-  get subject() {
-    return this.contactForm.get('subject');
-  }
-  get message() {
-    return this.contactForm.get('message');
-  }
 }

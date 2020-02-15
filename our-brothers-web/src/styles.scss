@@ -1,14 +1,14 @@
-@import '~@fortawesome/fontawesome-free/css/all.css';
+@import "~@fortawesome/fontawesome-free/css/all.css";
 
 @font-face {
-  font-family: 'arbel';
+  font-family: "arbel";
   src: url(assets/fonts/Arbel-Bold_0.otf);
 }
 
 /* heebo-regular */
 @font-face {
-  font-family: 'Heebo';
-  src: url('assets/fonts/Heebo-Regular.ttf');
+  font-family: "Heebo";
+  src: url("assets/fonts/Heebo-Regular.ttf");
 }
 
 *,
@@ -21,7 +21,7 @@
 }
 
 body {
-  font-family: 'Heebo';
+  font-family: "Heebo";
   font-size: 18px;
 }
 
@@ -30,11 +30,11 @@ body {
 }
 
 .card-container {
-  font-family: 'arbel';
+  font-family: "arbel";
 }
 
 .site-button {
-  font-family: 'arbel';
+  font-family: "arbel";
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -71,7 +71,7 @@ body {
   font-size: 22px;
   color: rgb(153, 153, 153);
   text-align: center;
-  font-family: 'arbel';
+  font-family: "arbel";
   margin-bottom: 25px;
   letter-spacing: 15px;
 }
@@ -80,14 +80,19 @@ body {
   color: rgb(55, 135, 177);
   font-size: 36px;
   text-align: center;
-  font-family: 'arbel';
+  font-family: "arbel";
   letter-spacing: 5px;
   margin-bottom: 50px;
+
+  @media only screen and (max-width: 768px) {
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
 }
 
 .big-heading {
   font-size: 71px;
-  font-family: 'arbel';
+  font-family: "arbel";
   color: rgb(0, 115, 109);
   text-align: center;
   margin-bottom: 40px;
@@ -107,7 +112,7 @@ body {
   padding: 110px 0 65px 0;
   text-align: center;
   font-size: 39px;
-  font-family: 'arbel';
+  font-family: "arbel";
   color: rgb(255, 255, 255);
   line-height: 1.1;
   display: flex;
@@ -124,7 +129,7 @@ body {
 
   &::before {
     position: absolute;
-    content: '';
+    content: "";
     top: 50px;
     left: 50%;
     transform: translateX(-50%);
@@ -143,7 +148,7 @@ textarea.form-field {
   height: 56px;
   padding: 15px;
   font-size: 18px;
-  font-family: 'Heebo';
+  font-family: "Heebo";
   color: black;
 }
 
@@ -159,30 +164,16 @@ textarea.form-field {
   resize: none;
 }
 
-.flip-cards {
-  margin-top: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-
-  app-flip-card {
-    margin-bottom: 25px;
-    margin-left: 33px;
-    margin-right: 33px;
-  }
-}
-
 .form-title {
   font-size: 36px;
-  font-family: 'arbel';
+  font-family: "arbel";
   color: rgb(55, 135, 177);
   letter-spacing: 6px;
   margin-bottom: 20px;
 }
 
 input.login-form-input {
-  font-family: 'Heebo';
+  font-family: "Heebo";
   padding: 10px;
   height: 50px;
   max-width: 490px;
@@ -241,7 +232,7 @@ input.login-form-input {
       align-items: center;
       color: white;
       font-size: 18px;
-      font-family: 'Heebo';
+      font-family: "Heebo";
     }
 
     &.google {
@@ -306,7 +297,7 @@ input.login-form-input {
           border: 1px solid rgb(0, 160, 153);
           background-color: white;
           font-size: 36px;
-          font-family: 'arbel';
+          font-family: "arbel";
           color: rgb(0, 160, 153);
           letter-spacing: 6px;
 
@@ -332,7 +323,7 @@ input.login-form-input {
       flex: 0 0 90px;
       background-color: rgb(0, 160, 153);
       font-size: 36px;
-      font-family: 'arbel';
+      font-family: "arbel";
       color: white;
       display: flex;
       justify-content: center;
@@ -351,7 +342,7 @@ input.login-form-input {
   max-width: 125px;
   height: 40px;
   font-size: 20px;
-  font-family: 'arbel';
+  font-family: "arbel";
   color: rgb(190, 0, 0);
   background-color: white;
   cursor: pointer;
@@ -388,7 +379,7 @@ input.login-form-input {
   width: 250px;
   height: 55px;
   font-size: 36px;
-  font-family: 'Arbel';
+  font-family: "Arbel";
   margin: auto;
   margin-top: 15px;
   display: flex;
@@ -420,5 +411,18 @@ input.login-form-input {
 
   @media only screen and (max-width: 1000px) {
     max-width: calc(100%);
+  }
+}
+
+.contact-form {
+  padding: 85px 0;
+  background-color: rgb(248, 248, 248);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  @media only screen and (max-width: 768px) {
+    padding: 35px 0;
   }
 }

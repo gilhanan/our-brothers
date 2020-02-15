@@ -1,0 +1,97 @@
+$textColor: rgb(129, 129, 129);
+
+.meeting-item {
+  display: flex;
+  flex-flow: row;
+  border-bottom: 1px solid rgb(227, 229, 231);
+
+  @media only screen and (max-width: 650px) {
+    display: grid;
+    grid-template-rows: 50px repeat(4, 25px) 45px;
+    border: 2px solid lightgray;
+    margin: 10px 20px;
+  }
+
+  .meeting-item-col {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    margin: 45px 5px;
+    font-size: 18px;
+    color: $textColor;
+
+    @media only screen and (max-width: 650px) {
+      margin: 0 2px;
+      padding-right: 20px;
+      align-self: center;
+    }
+
+    &.meeting-name {
+      font-size: 22px;
+      font-family: "arbel";
+      color: rgb(0, 115, 109);
+    }
+
+    .meeting-label {
+      margin-left: 4px;
+    }
+
+    .mobile-label {
+      display: none;
+
+      @media only screen and (max-width: 650px) {
+        display: inline;
+        margin-left: 2px;
+      }
+    }
+
+    &.meeting-address {
+      &::before {
+        content: "";
+        width: 12px;
+        height: 17px;
+        margin-left: 5px;
+        background-image: url(../../../assets/img/location.png);
+        background-size: cover;
+      }
+    }
+
+    &.date-col {
+      flex: 0 1 130px;
+      justify-content: center;
+
+      @media only screen and (max-width: 650px) {
+        justify-content: start;
+      }
+
+      &::before {
+        content: "";
+        width: 14px;
+        height: 14px;
+        margin-left: 5px;
+        background-image: url(../../../assets/img/calend.png);
+        background-size: cover;
+      }
+    }
+
+    &.participants-col {
+      flex: 0 1 140px;
+      justify-content: center;
+
+      @media only screen and (max-width: 650px) {
+        justify-content: start;
+      }
+    }
+
+    &.meeting-button {
+      @media only screen and (max-width: 650px) {
+        justify-content: flex-end;
+
+        .join-button {
+          margin-left: 12px;
+          margin-bottom: 8px;
+        }
+      }
+    }
+  }
+}

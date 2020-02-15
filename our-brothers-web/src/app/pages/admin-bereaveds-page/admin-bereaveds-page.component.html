@@ -2,7 +2,7 @@
   (selectMeeting)="selectedMeeting$.next($event)">
 </app-modal-select-meeting>
 <div class="container-fluid bereaveds-container">
-  <app-free-text-filter class="free-text-filter" [(filter)]="filter" (filterChange)="filterBereaveds($event)">
+  <app-free-text-filter class="free-text-filter" [(filter)]="filter" (filterChange)="filterBereaveds()">
   </app-free-text-filter>
   <div class="bereaveds-list-container">
     <div *ngIf="loading" class="loading">

@@ -9,7 +9,7 @@ export class ListColumnComponent implements OnChanges, AfterViewInit {
   @Input() field: string;
   @Output() sort = new EventEmitter<void>();
 
-  @HostListener('click', ['$event.target']) onClick() {
+  @HostListener('click') onClick() {
     if (!!this.field) {
       this.sort.emit();
     }

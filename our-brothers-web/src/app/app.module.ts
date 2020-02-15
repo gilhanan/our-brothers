@@ -54,6 +54,13 @@ import { MeetingsComponent } from './components/meetings/meetings.component';
 import { JoinButtonComponent } from './components/join-button/join-button.component';
 import { AboutPageComponent } from './pages/about-page/about-page.component';
 import { HostPageComponent } from './pages/host-page/host-page.component';
+import { MeetingListRowComponent } from './components/meeting-list-row/meeting-list-row.component';
+import { ContactFormComponent } from './contact-form/contact-form.component';
+import { DropDownMenuComponent } from './components/drop-down-menu/drop-down-menu.component';
+import { TellButtonComponent } from './components/tell-button/tell-button.component';
+import { HostButtonComponent } from './components/host-button/host-button.component';
+import { ParticipateButtonComponent } from './components/participate-button/participate-button.component';
+import { ParticipationsButtonsComponent } from './components/participations-buttons/participations-buttons.component';
 
 registerLocaleData(localeHe);
 
@@ -98,7 +105,14 @@ registerLocaleData(localeHe);
     MeetingsComponent,
     JoinButtonComponent,
     AboutPageComponent,
-    HostPageComponent
+    HostPageComponent,
+    MeetingListRowComponent,
+    ContactFormComponent,
+    DropDownMenuComponent,
+    TellButtonComponent,
+    HostButtonComponent,
+    ParticipateButtonComponent,
+    ParticipationsButtonsComponent
   ],
   imports: [
     BrowserModule,

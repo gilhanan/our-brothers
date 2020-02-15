@@ -40,37 +40,11 @@
   הכי אינטימיים ואישיים שלהם ויספרו לכם על האחים שכל כך אהבו. האחים של כולנו.
   אנחנו מזמינים אתכם לקחת חלק.
 </div>
-<div class="flip-cards">
-  <app-flip-card
-    [frontImage]="'/assets/img/cardImgParticipant.png'"
-    [frontTitle]="'אני רוצה להשתתף'"
-    [backText]="'מעוניין להתארח באחד המפגשים?'"
-    [backButtonText]="'לפרטים נוספים'"
-    [backButtonUrl]=""
-    data-aos="fade-left"
-    data-aos-duration="1000"
-  >
-  </app-flip-card>
-  <app-flip-card
-    [frontImage]="'/assets/img/cardImgTeller.png'"
-    [frontTitle]="'אני רוצה לספר'"
-    [backText]="'אח/אחות שכולים? מעוניינים לספר את ספורכם האישי?'"
-    [backButtonText]="'לפרטים נוספים'"
-    [backButtonUrl]="'tell'"
-    data-aos="fade-up"
-    data-aos-duration="1000"
-  >
-  </app-flip-card>
-  <app-flip-card
-    [frontImage]="'/assets/img/cardImgHost.png'"
-    [frontTitle]="'אני רוצה לארח'"
-    [backText]="'מעוניין לפתוח את ביתך ולארח מפגש?'"
-    [backButtonText]="'לפרטים נוספים'"
-    [backButtonUrl]="'host'"
-    data-aos="fade-right"
-    data-aos-duration="1000"
-  >
-  </app-flip-card>
+<div class="participations-buttons">
+  <app-participations-buttons
+    [user]="user"
+    [loading]="loadingUser"
+  ></app-participations-buttons>
 </div>
 <div class="see-more" data-aos="fade-left" data-aos-duration="1000">
   <a routerLink="/meetings">ראה עוד <i class="fas fa-angle-double-left"></i></a>
@@ -125,36 +99,5 @@
   <div class="site-divider"></div>
   <div class="small-heading">צרו קשר</div>
   <div class="medium-heading">השאירו פרטים</div>
-  <form [formGroup]="contactForm" class="contact-form-fields">
-    <input
-      formControlName="fullName"
-      class="form-field"
-      placeholder="שם מלא*"
-      [class.invalid]="!fullName.valid && fullName.touched"
-    />
-    <input
-      formControlName="phone"
-      class="form-field"
-      placeholder="טלפון*"
-      [class.invalid]="!phone.valid && phone.touched"
-    />
-    <input formControlName="email" class="form-field" placeholder="אימייל" />
-    <input
-      formControlName="subject"
-      class="form-field"
-      placeholder="נושא פנייה*"
-      [class.invalid]="!subject.valid && subject.touched"
-    />
-    <textarea
-      formControlName="message"
-      class="form-field message"
-      placeholder="תוכן הודעה"
-    ></textarea>
-  </form>
-  <div
-    class="site-button primary-button contact-send-button"
-    [class.disabled]="!contactForm.valid"
-  >
-    שלח
-  </div>
+  <app-contact-form></app-contact-form>
 </div>

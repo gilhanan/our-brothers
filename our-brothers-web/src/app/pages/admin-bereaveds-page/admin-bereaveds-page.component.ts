@@ -22,7 +22,7 @@ export class AdminBereavedsPageComponent implements OnInit {
   error = '';
   loading = true;
 
-  selectedMeeting$ = new Subject<UserMeeting>();
+  selectedMeeting$ = new Subject<Meeting>();
   selectingBereaved: User;
 
   constructor(
@@ -55,10 +55,10 @@ export class AdminBereavedsPageComponent implements OnInit {
   joinBereved(bereaved: User) {
     this.selectingBereaved = bereaved;
     if (this.noBerevedMeetings && this.noBerevedMeetings.length) {
-      this.selectedMeeting$.pipe(take(1)).subscribe((value: UserMeeting) => {
+      this.selectedMeeting$.pipe(take(1)).subscribe((meeting) => {
         this.selectingBereaved = null;
-        if (value && value.meeting) {
-          this.dataService.bereavedRegisterHost(bereaved, value.meeting);
+        if (meeting) {
+          this.dataService.bereavedRegisterHost(bereaved, meeting);
         }
       })
     } else {
@@ -66,8 +66,8 @@ export class AdminBereavedsPageComponent implements OnInit {
     }
   }
 
-  leaveBereaved({ meeting, user }: UserMeeting) {
-    if (meeting && user) {
+  leaveBereaved({ user, meeting }: UserMeeting) {
+    if (user && meeting) {
       if (window.confirm('האם ברצונך להסיר את ' + user.profile.firstName + ' ' + user.profile.lastName + ' מהמפגש ' + meeting.title + '?')) {
         this.dataService.bereavedLeaveHost(user, meeting);
       }
