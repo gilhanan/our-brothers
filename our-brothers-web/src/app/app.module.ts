@@ -68,6 +68,7 @@ import { RegistrationProgressBarComponent } from './components/registration-prog
 import { HostIntroComponent } from './components/host-intro/host-intro.component';
 import { ParticipatePageComponent } from './pages/participate-page/participate-page.component';
 import { ParticipateIntroComponent } from './participate-intro/participate-intro.component';
+import { HostFormComponent } from './components/forms/host-form/host-form.component';
 
 registerLocaleData(localeHe);
 
@@ -126,7 +127,8 @@ registerLocaleData(localeHe);
     RegistrationProgressBarComponent,
     HostIntroComponent,
     ParticipatePageComponent,
-    ParticipateIntroComponent
+    ParticipateIntroComponent,
+    HostFormComponent
   ],
   imports: [
     BrowserModule,

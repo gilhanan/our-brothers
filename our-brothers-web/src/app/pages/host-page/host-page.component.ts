@@ -4,6 +4,7 @@ import { Subject, combineLatest, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { DataService } from 'src/app/services/data.service';
 import { ParticipationsService } from 'src/app/services/participations.service';
+import { ProfileForm } from '../../components/forms/profile-form/profile-form.component';
 
 @Component({
   selector: 'app-host-page',
@@ -12,6 +13,7 @@ import { ParticipationsService } from 'src/app/services/participations.service';
 })
 export class HostPageComponent implements OnInit, OnDestroy {
   public user: User;
+  public firebaseUser: firebase.User;
   public currentStep = 0;
   public currentStep$ = new Subject<number>();
   public subscriptions: Subscription[] = [];
@@ -23,6 +25,10 @@ export class HostPageComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    this.authService.firebaseUser.subscribe(
+      firebaseUser => (this.firebaseUser = firebaseUser)
+    );
+
     this.subscriptions.push(
       combineLatest(this.authService.user, this.currentStep$).subscribe(
         ([user, currentStep]) => {
@@ -51,6 +57,10 @@ export class HostPageComponent implements OnInit, OnDestroy {
     );
 
     this.currentStep$.next(0);
+  }
+
+  onProfileSubmit(profileForm: ProfileForm) {
+    this.dataService.setUserProfile(this.user, profileForm);
   }
 
   ngOnDestroy() {
