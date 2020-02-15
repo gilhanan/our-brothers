@@ -1,0 +1,35 @@
+.meetings-image-header {
+  width: 100%;
+  border-bottom: solid rgb(0, 160, 153) 6px;
+  margin-bottom: 90px;
+
+  @media only screen and (max-width: 768px) {
+    margin-bottom: 20px;
+    height: 135px;
+    object-fit: cover;
+  }
+}
+
+.medium-heading {
+  margin-bottom: 90px;
+
+  @media only screen and (max-width: 768px) {
+    margin-bottom: 45px;
+  }
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  width: 60%;
+  margin: auto;
+  justify-content: space-around;
+
+  @media only screen and (max-width: 1440px) {
+    width: 75%;
+  }
+
+  @media only screen and (max-width: 768px) {
+    width: 85%;
+  }
+}
