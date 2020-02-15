@@ -55,6 +55,7 @@ import { JoinButtonComponent } from './components/join-button/join-button.compon
 import { AboutPageComponent } from './pages/about-page/about-page.component';
 import { MeetingListRowComponent } from './components/meeting-list-row/meeting-list-row.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
+import { DropDownMenuComponent } from './components/drop-down-menu/drop-down-menu.component';
 
 registerLocaleData(localeHe);
 
@@ -100,7 +101,8 @@ registerLocaleData(localeHe);
     JoinButtonComponent,
     AboutPageComponent,
     MeetingListRowComponent,
-    ContactFormComponent
+    ContactFormComponent,
+    DropDownMenuComponent
   ],
   imports: [
     BrowserModule,

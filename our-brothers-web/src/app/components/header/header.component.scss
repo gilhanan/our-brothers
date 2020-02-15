@@ -83,6 +83,12 @@
     padding-right: 40px;
     flex: 0 0 auto;
 
+    button {
+      border: none;
+      background: none;
+      outline: none;
+    }
+    
     .link-header {
       cursor: pointer;
       text-decoration: none;
