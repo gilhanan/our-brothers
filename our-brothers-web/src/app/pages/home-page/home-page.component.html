@@ -26,17 +26,8 @@
   הכי אינטימיים ואישיים שלהם ויספרו לכם על האחים שכל כך אהבו. האחים של כולנו.
   אנחנו מזמינים אתכם לקחת חלק.
 </div>
-<div class="flip-cards">
-  <app-flip-card [frontImage]="'/assets/img/cardImgParticipant.png'" [frontTitle]="'אני רוצה להשתתף'"
-    [backText]="'מעוניין להתארח באחד המפגשים?'" [backButtonText]="'לפרטים נוספים'" [backButtonUrl]="" data-aos="fade-left" data-aos-duration="1000">
-  </app-flip-card>
-  <app-flip-card [frontImage]="'/assets/img/cardImgTeller.png'" [frontTitle]="'אני רוצה לספר'"
-    [backText]="'אח/אחות שכולים? מעוניינים לספר את ספורכם האישי?'" [backButtonText]="'לפרטים נוספים'"
-    [backButtonUrl]="'tell'" data-aos="fade-up" data-aos-duration="1000">
-  </app-flip-card>
-  <app-flip-card [frontImage]="'/assets/img/cardImgHost.png'" [frontTitle]="'אני רוצה לארח'"
-    [backText]="'מעוניין לפתוח את ביתך ולארח מפגש?'" [backButtonText]="'לפרטים נוספים'" [backButtonUrl]="" data-aos="fade-right" data-aos-duration="1000">
-  </app-flip-card>
+<div class="participations-buttons">
+  <app-participations-buttons [user]="user" [loading]="loadingUser"></app-participations-buttons>
 </div>
 <div class="see-more" data-aos="fade-left" data-aos-duration="1000">
   <a routerLink="/meetings">ראה עוד <i class="fas fa-angle-double-left"></i></a>
@@ -49,9 +40,12 @@
 </div>
 <div class="gallery-container" data-aos="fade-up" data-aos-duration="1000">
   <div class="gallery-images">
-    <img class="gallery-image" src="../../../assets/img/gallery_right.png" alt="Metting Gallery Image 1" data-aos="fade-right" data-aos-duration="1000"/>
-    <img class="gallery-image" src="../../../assets/img/gallery_left.png" alt="Metting Gallery Image 1" data-aos="fade-left" data-aos-duration="1000"/>
-    <img class="gallery-image" src="../../../assets/img/gallery_bottom.png" alt="Metting Gallery Image 1" data-aos="fade-up" data-aos-duration="1000"/>
+    <img class="gallery-image" src="../../../assets/img/gallery_right.png" alt="Metting Gallery Image 1"
+      data-aos="fade-right" data-aos-duration="1000" />
+    <img class="gallery-image" src="../../../assets/img/gallery_left.png" alt="Metting Gallery Image 1"
+      data-aos="fade-left" data-aos-duration="1000" />
+    <img class="gallery-image" src="../../../assets/img/gallery_bottom.png" alt="Metting Gallery Image 1"
+      data-aos="fade-up" data-aos-duration="1000" />
     <img class="circle-top-right" src="../../../assets/img/gallery_top_right_circle.png" alt="" />
     <img class="circle-middle-left" src="../../../assets/img/gallery_middle_left_circle.png" alt="" />
     <img class="circle-bottom-right" src="../../../assets/img/gallery_bottom_right_circle.png" alt="" />

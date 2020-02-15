@@ -164,20 +164,6 @@ textarea.form-field {
   resize: none;
 }
 
-.flip-cards {
-  margin-top: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-
-  app-flip-card {
-    margin-bottom: 25px;
-    margin-left: 33px;
-    margin-right: 33px;
-  }
-}
-
 .form-title {
   font-size: 36px;
   font-family: "arbel";

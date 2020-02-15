@@ -14,17 +14,8 @@
   ואם אתם אח/ות שכולים - תהיו הקול בעבור עצמכם ובעבור האחים שלכם, ספרו את
   סיפורכם המשותף.
 </div>
-<div class="flip-cards">
-  <app-flip-card [frontImage]="'/assets/img/cardImgParticipant.png'" [frontTitle]="'אני רוצה להשתתף'"
-    [backText]="'מעוניין להתארח באחד המפגשים?'" [backButtonText]="'לפרטים נוספים'" [backButtonUrl]="">
-  </app-flip-card>
-  <app-flip-card [frontImage]="'/assets/img/cardImgTeller.png'" [frontTitle]="'אני רוצה לספר'"
-    [backText]="'אח/אחות שכולים? מעוניינים לספר את ספורכם האישי?'" [backButtonText]="'לפרטים נוספים'"
-    [backButtonUrl]="'tell'">
-  </app-flip-card>
-  <app-flip-card [frontImage]="'/assets/img/cardImgHost.png'" [frontTitle]="'אני רוצה לארח'"
-    [backText]="'מעוניין לפתוח את ביתך ולארח מפגש?'" [backButtonText]="'לפרטים נוספים'" [backButtonUrl]="">
-  </app-flip-card>
+<div class="participations-buttons">
+  <app-participations-buttons [user]="user" [loading]="loadingUser"></app-participations-buttons>
 </div>
 
 <div class="container meetings-container">
