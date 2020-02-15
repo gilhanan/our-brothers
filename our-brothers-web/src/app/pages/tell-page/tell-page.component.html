@@ -1,3 +1,8 @@
+<img
+  class="tell-image-header"
+  src="../../../assets/img/tellHeader.png"
+  alt="Meetings Page Header Image"
+/>
 <section class="tell-page-container">
   <section *ngIf="currentStep > 0" class="steps">
     <div class="site-divider"></div>
@@ -5,41 +10,65 @@
     <div class="progressbar-container">
       <div class="progressbar-item done">
         <div class="step-circle-container">
-          <div class="step-line" [class.done]="currentStep > 1"
-            [class.current]="currentStep === 1"></div>
+          <div
+            class="step-line"
+            [class.done]="currentStep > 1"
+            [class.current]="currentStep === 1"
+          ></div>
           <div class="step-circle">1</div>
-          <div class="step-line" [class.done]="currentStep > 1"
-            [class.current]="currentStep === 1"></div>
+          <div
+            class="step-line"
+            [class.done]="currentStep > 1"
+            [class.current]="currentStep === 1"
+          ></div>
         </div>
         <div class="step-name">התחברות</div>
       </div>
       <div class="progressbar-item">
         <div class="step-circle-container">
-          <div class="step-line" [class.done]="currentStep > 2"
-            [class.current]="currentStep === 2"></div>
+          <div
+            class="step-line"
+            [class.done]="currentStep > 2"
+            [class.current]="currentStep === 2"
+          ></div>
           <div class="step-circle">2</div>
-          <div class="step-line" [class.done]="currentStep > 2"
-            [class.current]="currentStep === 2"></div>
+          <div
+            class="step-line"
+            [class.done]="currentStep > 2"
+            [class.current]="currentStep === 2"
+          ></div>
         </div>
         <div class="step-name">פרטי החלל</div>
       </div>
       <div class="progressbar-item">
         <div class="step-circle-container">
-          <div class="step-line" [class.done]="currentStep > 3"
-            [class.current]="currentStep === 3"></div>
+          <div
+            class="step-line"
+            [class.done]="currentStep > 3"
+            [class.current]="currentStep === 3"
+          ></div>
           <div class="step-circle">3</div>
-          <div class="step-line" [class.done]="currentStep > 3"
-            [class.current]="currentStep === 3"></div>
+          <div
+            class="step-line"
+            [class.done]="currentStep > 3"
+            [class.current]="currentStep === 3"
+          ></div>
         </div>
         <div class="step-name">מפגשי הדרכה</div>
       </div>
       <div class="progressbar-item">
         <div class="step-circle-container">
-          <div class="step-line" [class.done]="currentStep > 4"
-            [class.current]="currentStep === 4"></div>
+          <div
+            class="step-line"
+            [class.done]="currentStep > 4"
+            [class.current]="currentStep === 4"
+          ></div>
           <div class="step-circle">4</div>
-          <div class="step-line" [class.done]="currentStep > 4"
-            [class.current]="currentStep === 4"></div>
+          <div
+            class="step-line"
+            [class.done]="currentStep > 4"
+            [class.current]="currentStep === 4"
+          ></div>
         </div>
         <div class="step-name">שיבוץ</div>
       </div>
@@ -68,7 +97,10 @@
           לקראת המפגשים אנו נקיים מפגשי הכנה והדרכה בהם תוכל ללמוד כיצד לבנות את
           סיפורכם ולספרו, המפגשים יתקיימו בתל אביב, כרמיאל, ירושלים ונתניה.
         </div>
-        <div (click)="currentStep$.next(1)" class="site-button primary-button step0-button">
+        <div
+          (click)="currentStep$.next(1)"
+          class="site-button primary-button step0-button"
+        >
           המשך
         </div>
       </section>
@@ -78,21 +110,42 @@
       <section class="step2">
         <div class="details-form-container" [formGroup]="casualtyDetailsFrom">
           <div class="form-items-container">
-            <input class="form-field" type="text" placeholder="שם פרטי" formControlName="casualtyFname"
-              [class.invalid]="!casualtyFname.valid && casualtyFname.touched" />
-            <input class="form-field" type="text" placeholder="שם משפחה" formControlName="casualtyLname"
-              [class.invalid]="!casualtyLname.valid && casualtyLname.touched" />
+            <input
+              class="form-field"
+              type="text"
+              placeholder="שם פרטי"
+              formControlName="casualtyFname"
+              [class.invalid]="!casualtyFname.valid && casualtyFname.touched"
+            />
+            <input
+              class="form-field"
+              type="text"
+              placeholder="שם משפחה"
+              formControlName="casualtyLname"
+              [class.invalid]="!casualtyLname.valid && casualtyLname.touched"
+            />
           </div>
           <div class="form-items-container">
-            <input class="form-field fallen-date-input" type="date" placeholder="תאריך נפילה:"
-              formControlName="casualtyDate" [class.invalid]="!casualtyDate.valid && casualtyDate.touched" />
+            <input
+              class="form-field fallen-date-input"
+              type="date"
+              placeholder="תאריך נפילה:"
+              formControlName="casualtyDate"
+              [class.invalid]="!casualtyDate.valid && casualtyDate.touched"
+            />
           </div>
           <div class="msg">
-            <textarea class="form-field" placeholder="תוכן הסיפור..." formControlName="casualtyStory"
-              [class.invalid]="!casualtyStory.valid && casualtyStory.touched"></textarea>
+            <textarea
+              class="form-field"
+              placeholder="תוכן הסיפור..."
+              formControlName="casualtyStory"
+              [class.invalid]="!casualtyStory.valid && casualtyStory.touched"
+            ></textarea>
           </div>
-          <div (click)="(casualtyDetailsFrom.valid) ? saveBereavedProfile() : null"
-            class="site-button primary-button step2-button">
+          <div
+            (click)="(casualtyDetailsFrom.valid) ? saveBereavedProfile() : null"
+            class="site-button primary-button step2-button"
+          >
             המשך
           </div>
         </div>
@@ -120,24 +173,41 @@
                 (selected)="trainingSession = false"
               ></app-radio-button>
             </div> -->
-            <div *ngFor="let trainingMeeting of trainingMeetings" class="training-option">
-              <app-checkbox [label]="trainingMeeting.text" [checked]="trainingMeeting.on"
-                (checkedChanged)="trainingMeeting.on = $event; markedTraningMetting(trainingMeeting);"></app-checkbox>
+            <div
+              *ngFor="let trainingMeeting of trainingMeetings"
+              class="training-option"
+            >
+              <app-checkbox
+                [label]="trainingMeeting.text"
+                [checked]="trainingMeeting.on"
+                (checkedChanged)="trainingMeeting.on = $event; markedTraningMetting(trainingMeeting);"
+              ></app-checkbox>
             </div>
             <div class="training-option">
-              <app-checkbox [label]="'לא מעוניין בהדרכה'" [checked]="noTrainingMeeting"
-                (checkedChanged)="noTrainingMeeting = $event; markedNoTraningMetting(noTrainingMeeting);">
+              <app-checkbox
+                [label]="'לא מעוניין בהדרכה'"
+                [checked]="noTrainingMeeting"
+                (checkedChanged)="noTrainingMeeting = $event; markedNoTraningMetting(noTrainingMeeting);"
+              >
               </app-checkbox>
             </div>
           </div>
         </div>
-        <div (click)="saveTraningAnswer()" class="site-button primary-button step3-button">
+        <div
+          (click)="saveTraningAnswer()"
+          class="site-button primary-button step3-button"
+        >
           המשך
         </div>
       </section>
     </ng-container>
     <ng-container *ngSwitchCase="4">
-      <app-meetings [user]="user" [meetings]="meetings" (joinMeeting)="onJoinMeeting($event)"> </app-meetings>
+      <app-meetings
+        [user]="user"
+        [meetings]="meetings"
+        (joinMeeting)="onJoinMeeting($event)"
+      >
+      </app-meetings>
     </ng-container>
   </ng-container>
 </section>

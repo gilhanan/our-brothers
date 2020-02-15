@@ -6,8 +6,14 @@ import { MeetingsPageComponent } from './pages/meetings-page/meetings-page.compo
 import { AboutPageComponent } from './pages/about-page/about-page.component';
 import { AdminBereavedsPageComponent } from './pages/admin-bereaveds-page/admin-bereaveds-page.component';
 import { TellPageComponent } from './pages/tell-page/tell-page.component';
+import { HostPageComponent } from './pages/host-page/host-page.component';
 
 const routes: Routes = [
+  {
+    path: 'host',
+    component: HostPageComponent,
+    pathMatch: 'full'
+  },
   {
     path: 'tell',
     component: TellPageComponent,

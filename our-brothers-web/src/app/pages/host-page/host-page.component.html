@@ -1,0 +1,78 @@
+<img
+  class="host-image-header"
+  src="../../../assets/img/hostHeader.png"
+  alt="Meetings Page Header Image"
+/>
+
+<section class="host-page-container">
+  <section *ngIf="currentStep > 0" class="steps">
+    <div class="site-divider"></div>
+    <div class="small-heading">פרטים נוספים</div>
+    <div class="progressbar-container">
+      <div class="progressbar-item done">
+        <div class="step-circle-container">
+          <div
+            class="step-line"
+            [class.done]="currentStep > 1"
+            [class.current]="currentStep === 1"
+          ></div>
+          <div class="step-circle">1</div>
+          <div
+            class="step-line"
+            [class.done]="currentStep > 1"
+            [class.current]="currentStep === 1"
+          ></div>
+        </div>
+        <div class="step-name">התחברות</div>
+      </div>
+      <div class="progressbar-item">
+        <div class="step-circle-container">
+          <div
+            class="step-line"
+            [class.done]="currentStep > 2"
+            [class.current]="currentStep === 2"
+          ></div>
+          <div class="step-circle">2</div>
+          <div
+            class="step-line"
+            [class.done]="currentStep > 2"
+            [class.current]="currentStep === 2"
+          ></div>
+        </div>
+        <div class="step-name">פרטי החלל</div>
+      </div>
+      <div class="progressbar-item">
+        <div class="step-circle-container">
+          <div
+            class="step-line"
+            [class.done]="currentStep > 3"
+            [class.current]="currentStep === 3"
+          ></div>
+          <div class="step-circle">3</div>
+          <div
+            class="step-line"
+            [class.done]="currentStep > 3"
+            [class.current]="currentStep === 3"
+          ></div>
+        </div>
+        <div class="step-name">מפגשי הדרכה</div>
+      </div>
+      <div class="progressbar-item">
+        <div class="step-circle-container">
+          <div
+            class="step-line"
+            [class.done]="currentStep > 4"
+            [class.current]="currentStep === 4"
+          ></div>
+          <div class="step-circle">4</div>
+          <div
+            class="step-line"
+            [class.done]="currentStep > 4"
+            [class.current]="currentStep === 4"
+          ></div>
+        </div>
+        <div class="step-name">שיבוץ</div>
+      </div>
+    </div>
+  </section>
+</section>
