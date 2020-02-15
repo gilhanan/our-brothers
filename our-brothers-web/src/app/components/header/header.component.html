@@ -3,8 +3,8 @@
     <div class="logo-header" routerLink="home"></div>
     <div class="links-header">
       <a class="link-header" routerLink="home" routerLinkActive="current-page">דף הבית</a>
-      <a class="link-header" routerLink="meetings" routerLinkActive="current-page">מפגשים</a>
-      <a class="link-header" routerLink="about" routerLinkActive="current-page">אודותינו</a>
+      <app-drop-down-menu [menuAnchor]="meetingsMenuAnchor" [menuContent]="meetingsMenuItems"></app-drop-down-menu>
+      <app-drop-down-menu [menuAnchor]="aboutMenuAnchor" [menuContent]="aboutMenuItems"></app-drop-down-menu>
       <a class="link-header" routerLink="info" routerLinkActive="current-page">מבנה הערב</a>
       <a class="link-header" routerLink="questions" routerLinkActive="current-page">שאלות</a>
       <a class="link-header" routerLink="gallery" routerLinkActive="current-page">גלריה</a>
@@ -21,3 +21,39 @@
     </div>
   </div>
 </div>
+
+<ng-template #aboutMenuItems>
+  <div class="drop-down-list">
+    <a class="drop-down-menu-item" routerLink="about">רקע</a>
+    <div class="drop-down-item-divider"></div>
+    <a class="drop-down-menu-item" routerLink="about">הצוות שלנו</a>
+    <div class="drop-down-item-divider"></div>
+    <a class="drop-down-menu-item" routerLink="about">עלינו בתקשורת</a>
+    <div class="drop-down-item-divider"></div>
+    <a class="drop-down-menu-item" routerLink="about">כותבים עלינו</a>
+  </div>
+</ng-template>
+
+<ng-template #aboutMenuAnchor>
+  <a class="link-header" style="margin-left: 20px;" routerLinkActive="current-page">
+    אודותינו <i class="fas fa-caret-down"></i>
+  </a>
+</ng-template>
+
+<ng-template #meetingsMenuItems>
+  <div class="drop-down-list">
+    <a class="drop-down-menu-item" routerLink="meetings">מפת מפגשים</a>
+    <div class="drop-down-item-divider"></div>
+    <a class="drop-down-menu-item" routerLink="meetings">אני רוצה לספר</a>
+    <div class="drop-down-item-divider"></div>
+    <a class="drop-down-menu-item" routerLink="meetings">אני רוצה לארח</a>
+    <div class="drop-down-item-divider"></div>
+    <a class="drop-down-menu-item" routerLink="meetings">אני רוצה להשתתף</a>
+  </div>
+</ng-template>
+
+<ng-template #meetingsMenuAnchor>
+  <a class="link-header" style="margin-left: 20px;" routerLinkActive="current-page">
+    מפגשים <i class="fas fa-caret-down"></i>
+  </a>
+</ng-template>

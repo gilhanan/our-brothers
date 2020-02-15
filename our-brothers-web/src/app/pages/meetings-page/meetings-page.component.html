@@ -1,25 +1,31 @@
 <img class="meetings-image-header" src="../../../assets/img/meetingsHeader.png" alt="Meetings Page Header Image" />
 <div class="site-divider"></div>
-<div class="small-heading">האחים שלנו !</div>
-<div class="medium-heading">איך נראים המפגשים שלנו?</div>
-<div class="site-text">
-  ביום ראשון ה-05/05/2019 בשעה 20:00, ולקראת יום הזיכרון לחללי מערכות ישראל
-  ונפגעי פעולות האיבה, יתארחו אחים ואחיות שכולים במוקדים שונים ברחבי הארץ ויספרו
-  לנו את סיפורם שהוא בעצם - הסיפור של כולנו.
-  <br /><br />
-  אנחנו מזמינים אתכם לפתוח את ביתכם ולארח אח/ות שכולים ולשמוע את סיפורם - סיפור
-  של התמודדות, אהבה, חברות וכאב או להיות חלק מקהל השומעים ולתת מקום לזכרון
-  ולהנצחה ביום הזכרון הקרוב.
-  <br /><br />
-  ואם אתם אח/ות שכולים - תהיו הקול בעבור עצמכם ובעבור האחים שלכם, ספרו את
-  סיפורכם המשותף.
-</div>
-<div class="participations-buttons">
+<h1 class="small-heading">האחים שלנו !</h1>
+<h2 class="medium-heading">איך נראים המפגשים שלנו?</h2>
+<section class="site-text">
+  <p>
+    ביום ראשון ה-05/05/2019 בשעה 20:00, ולקראת יום הזיכרון לחללי מערכות ישראל
+    ונפגעי פעולות האיבה, יתארחו אחים ואחיות שכולים במוקדים שונים ברחבי הארץ ויספרו
+    לנו את סיפורם שהוא בעצם - הסיפור של כולנו.
+  </p>
+  <br />
+  <p>
+    אנחנו מזמינים אתכם לפתוח את ביתכם ולארח אח/ות שכולים ולשמוע את סיפורם - סיפור
+    של התמודדות, אהבה, חברות וכאב או להיות חלק מקהל השומעים ולתת מקום לזכרון
+    ולהנצחה ביום הזכרון הקרוב.
+  </p>
+  <br />
+  <p>
+    ואם אתם אח/ות שכולים - תהיו הקול בעבור עצמכם ובעבור האחים שלכם, ספרו את
+    סיפורכם המשותף.
+  </p>
+</section>
+<section class="participations-buttons">
   <app-participations-buttons [user]="user" [loading]="loadingUser"></app-participations-buttons>
-</div>
+</section>
 
-<div class="container meetings-container">
+<section class="container meetings-container">
   <app-meetings [user]="user" [meetings]="meetings" [mapShowGuide]="mapShowGuide" (joinMeeting)="onJoinMeeting($event)"
     (guideCompleted)="onMapGuideCompleted()">
   </app-meetings>
-</div>
+</section>
