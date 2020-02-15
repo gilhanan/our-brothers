@@ -1,4 +1,9 @@
-<app-flip-card [disabled]="loading || (user && !participationService.isUserCanHost(user))"
-  [frontImage]="'/assets/img/cardImgHost.png'" [frontTitle]="'אני רוצה לארח'"
-  [backText]="'מעוניין לפתוח את ביתך ולארח מפגש?'" [backButtonText]="'לפרטים נוספים'" [backButtonUrl]="">
+<app-flip-card
+  [disabled]="loading || (user && !participationService.isUserCanHost(user))"
+  [frontImage]="'/assets/img/cardImgHost.png'"
+  [frontTitle]="'אני רוצה לארח'"
+  [backText]="'מעוניין לפתוח את ביתך ולארח מפגש?'"
+  [backButtonText]="'לפרטים נוספים'"
+  [backButtonUrl]="'host'"
+>
 </app-flip-card>

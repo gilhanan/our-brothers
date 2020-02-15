@@ -65,6 +65,7 @@ import { BereavedProfileFormComponent } from './components/forms/bereaved-profil
 import { BereavedIntroComponent } from './components/bereaved-intro/bereaved-intro.component';
 import { BereavedGuidanceFormComponent } from './components/forms/bereaved-guidance-form/bereaved-guidance-form.component';
 import { RegistrationProgressBarComponent } from './components/registration-progress-bar/registration-progress-bar.component';
+import { HostIntroComponent } from './components/host-intro/host-intro.component';
 
 registerLocaleData(localeHe);
 
@@ -120,7 +121,8 @@ registerLocaleData(localeHe);
     BereavedProfileFormComponent,
     BereavedIntroComponent,
     BereavedGuidanceFormComponent,
-    RegistrationProgressBarComponent
+    RegistrationProgressBarComponent,
+    HostIntroComponent
   ],
   imports: [
     BrowserModule,
