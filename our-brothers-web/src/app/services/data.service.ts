@@ -11,7 +11,8 @@ import {
   BereavedGuidanceGeneral,
   BereavedGuidance,
   BereavedProfile,
-  UserRole
+  UserRole,
+  UserProfile
 } from '../model';
 
 export const MEMORIAL_YEAR = 2019;
@@ -99,6 +100,19 @@ export class DataService {
       this.angularFireDatabase
         .object<UserRole>(`users/${user.id}/role`)
         .set(role)
+    ).pipe(
+      catchError(error => {
+        console.log(error);
+        return throwError(error);
+      })
+    );
+  }
+
+  public setUserProfile(user: User, profile: UserProfile) {
+    return from(
+      this.angularFireDatabase
+        .object<UserProfile>(`users/${user.id}/profile`)
+        .set(profile)
     ).pipe(
       catchError(error => {
         console.log(error);

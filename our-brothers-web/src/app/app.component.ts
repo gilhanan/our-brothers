@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import * as AOS from 'aos';
 
 import { AuthService } from './services/auth.service';
-import { ParticipationsService } from './services/participations.service';
 
 @Component({
   selector: 'app-root',
@@ -10,24 +9,14 @@ import { ParticipationsService } from './services/participations.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  public needLogin = false;
+  public needLogin$ = this.authService.needLogin$;
   public user$ = this.authService.user;
-  public userHasAllDetails = false;
 
   constructor(
-    private authService: AuthService,
-    private participationsService: ParticipationsService
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
-    this.authService.user.subscribe(user => {
-      this.userHasAllDetails = user && this.participationsService.isUserHaveAllDetails(user)
-    });
-
-    this.authService.needLogin$.subscribe(() => {
-      this.needLogin = true;
-    });
-
     AOS.init();
   }
 

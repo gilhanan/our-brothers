@@ -30,7 +30,6 @@ import { LoginFormComponent } from './components/forms/login-form/login-form.com
 import { RegistrationFormComponent } from './components/forms/registration-form/registration-form.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { ProfileFormComponent } from './components/forms/profile-form/profile-form.component';
-import { ProfilePopupComponent } from './components/popups/profile-popup/profile-popup.component';
 import { MeetingsMapLegendComponent } from './components/meetings-map-legend/meetings-map-legend.component';
 import { MeetingsMapMeetingComponent } from './components/meetings-map-meeting/meetings-map-meeting.component';
 import { MeetingsMapNavigatorComponent } from './components/meetings-map-navigator/meetings-map-navigator.component';
@@ -61,6 +60,11 @@ import { TellButtonComponent } from './components/tell-button/tell-button.compon
 import { HostButtonComponent } from './components/host-button/host-button.component';
 import { ParticipateButtonComponent } from './components/participate-button/participate-button.component';
 import { ParticipationsButtonsComponent } from './components/participations-buttons/participations-buttons.component';
+import { SlainFormComponent } from './components/forms/slain-form/slain-form.component';
+import { BereavedProfileFormComponent } from './components/forms/bereaved-profile-form/bereaved-profile-form.component';
+import { BereavedIntroComponent } from './components/bereaved-intro/bereaved-intro.component';
+import { BereavedGuidanceFormComponent } from './components/forms/bereaved-guidance-form/bereaved-guidance-form.component';
+import { RegistrationProgressBarComponent } from './components/registration-progress-bar/registration-progress-bar.component';
 
 registerLocaleData(localeHe);
 
@@ -82,7 +86,6 @@ registerLocaleData(localeHe);
     RegistrationFormComponent,
     CheckboxComponent,
     ProfileFormComponent,
-    ProfilePopupComponent,
     MeetingsMapLegendComponent,
     MeetingsMapMeetingComponent,
     AdminBereavedsPageComponent,
@@ -112,7 +115,12 @@ registerLocaleData(localeHe);
     TellButtonComponent,
     HostButtonComponent,
     ParticipateButtonComponent,
-    ParticipationsButtonsComponent
+    ParticipationsButtonsComponent,
+    SlainFormComponent,
+    BereavedProfileFormComponent,
+    BereavedIntroComponent,
+    BereavedGuidanceFormComponent,
+    RegistrationProgressBarComponent
   ],
   imports: [
     BrowserModule,

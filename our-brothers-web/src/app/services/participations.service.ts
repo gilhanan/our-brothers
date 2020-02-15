@@ -138,13 +138,36 @@ export class ParticipationsService {
     }
 
     if (user.role === UserRole.bereaved) {
-      return !meeting.bereaved;
+      return this.isBereavedCanParticipatingEvent(user, meeting);
+    } else {
+      return this.isParticipateCanParticipatingEvent(user, meeting);
     }
-
-    return !meeting.invited && meeting.count <= meeting.capacity;
   }
 
-  isUserHaveAllDetails = (user: User) => {
+  isBereavedCanParticipatingEvent = (user: User, meeting: Meeting) => {
+    return this.isParticipateHaveAllDetails(user) &&
+      this.isBrotherHaveSlainDetails(user) &&
+      this.isBrotherAnsweredTrainingMeeting(user) &&
+      !meeting.bereaved
+  }
+
+  isParticipateCanParticipatingEvent = (user: User, meeting: Meeting) => {
+    return this.isParticipateHaveAllDetails(user) &&
+      !meeting.invited &&
+      meeting.count <= meeting.capacity
+  }
+
+  isParticipateHaveAllDetails = (user: User) => {
+    return (
+      user.profile &&
+      user.profile.email &&
+      user.profile.firstName &&
+      user.profile.lastName &&
+      user.profile.phoneNumber
+    );
+  };
+
+  isBereavedHaveAllDetails = (user: User) => {
     return (
       user.profile &&
       user.profile.address &&
@@ -152,8 +175,7 @@ export class ParticipationsService {
       user.profile.firstName &&
       user.profile.lastName &&
       user.profile.phoneNumber &&
-      user.profile.birthDay &&
-      user.profile.agree
+      user.profile.birthDay
     );
   };
 

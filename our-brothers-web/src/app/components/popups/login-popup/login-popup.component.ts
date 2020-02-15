@@ -6,7 +6,6 @@ import {
   ViewChildren,
   AfterViewInit
 } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
 import { LoginFormComponent } from '../../forms/login-form/login-form.component';
 import { startWith } from 'rxjs/operators';
 import { RegistrationFormComponent } from '../../forms/registration-form/registration-form.component';
@@ -28,9 +27,9 @@ export class LoginPopupComponent implements OnInit, AfterViewInit {
   private loginFormComponent: LoginFormComponent;
   private registrationFormComponent: RegistrationFormComponent;
 
-  constructor(private authService: AuthService) {}
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ngAfterViewInit() {
     this.loginFormQuery.changes.pipe(startWith(null)).subscribe(() => {

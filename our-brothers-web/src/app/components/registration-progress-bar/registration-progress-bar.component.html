@@ -1,0 +1,10 @@
+<div class="progressbar-container">
+  <div class="progressbar-item" *ngFor="let step of steps; index as i">
+    <div class="step-circle-container">
+      <div class="step-line" [class.done]="currentStep > i" [class.current]="currentStep === i"></div>
+      <div class="step-circle">{{i + 1}}</div>
+      <div class="step-line" [class.done]="currentStep > i" [class.current]="currentStep === i"></div>
+    </div>
+    <div class="step-name">{{step.title}}</div>
+  </div>
+</div>

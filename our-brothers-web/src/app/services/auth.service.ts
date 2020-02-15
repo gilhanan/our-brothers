@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, throwError, from, Subject } from 'rxjs';
-import { auth } from 'firebase/app';
-import { User } from '../model';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { switchMap, map, catchError, tap, first, retry } from 'rxjs/operators';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { Observable, of, from, Subject } from 'rxjs';
+import { switchMap, map, tap } from 'rxjs/operators';
+import { auth } from 'firebase/app';
+
+import { User } from '../model';
 import { DataService } from './data.service';
 
 export enum LoginMethod {
@@ -26,11 +26,10 @@ export interface LoginOptions {
 })
 export class AuthService {
   public user: Observable<User>;
-  public userId: string;
-  public currentUser: User;
-  public currentFirebaseUser: firebase.User;
+  public firebaseUser: Observable<firebase.User> = this.angularFireAuth.authState;
+  public needLogin$: Subject<boolean> = new Subject();
+
   private firstTimeGetUser = true;
-  public needLogin$: Subject<null> = new Subject();
 
   constructor(
     public angularFireAuth: AngularFireAuth,
@@ -40,11 +39,8 @@ export class AuthService {
       .pipe(
         switchMap(authRes => {
           if (authRes) {
-            this.userId = authRes.uid;
-            this.currentFirebaseUser = authRes;
             return this.dataService.getUserById(authRes.uid).pipe(
               switchMap(user => {
-                this.currentUser = user;
                 return from(
                   authRes.getIdTokenResult(this.firstTimeGetUser)
                 ).pipe(
@@ -117,48 +113,6 @@ export class AuthService {
   }
 
   public requestToLogin() {
-    this.needLogin$.next();
+    this.needLogin$.next(true);
   }
-
-  // public login(
-  //   loginMethod: LoginMethod,
-  //   loginOptions: LoginOptions
-  // ): Observable<User> {
-  //   return new Observable(subscriber => {
-  //     let userPromise: Promise<auth.UserCredential>;
-
-  //     switch (loginMethod) {
-  //       case LoginMethod.FACEBOOK:
-  //         userPromise = this.facebookLogin();
-  //         break;
-  //       case LoginMethod.GOOGLE:
-  //         userPromise = this.googleLogin();
-  //         break;
-  //       case LoginMethod.EMAIL_PASS:
-  //         userPromise = this.emailPassLogin(
-  //           loginOptions.credentials.email,
-  //           loginOptions.credentials.pass
-  //         );
-  //         break;
-  //     }
-
-  //     userPromise.then((userCredential: auth.UserCredential) => {
-  //       this.getUserWithUserCreds(userCredential.user).subscribe(user => {
-  //         subscriber.next(user);
-  //         subscriber.complete();
-  //       });
-  //     });
-  //   });
-  // }
-
-  // getUserWithUserCreds(firebaseUser: firebase.User): Observable<User> {
-  //   return this.getUser(firebaseUser.uid).pipe(
-  //     map((user: User) => {
-  //       return {
-  //         id: firebaseUser.uid,
-  //         profile: user.profile
-  //       };
-  //     })
-  //   );
-  // }
 }

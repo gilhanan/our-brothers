@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Output, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { User } from 'firebase';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -11,11 +12,5 @@ export class HeaderComponent {
   @Input()
   public user: User;
 
-  @Output()
-  public logIn = new EventEmitter<void>();
-
-  @Output()
-  public logOut = new EventEmitter<void>();
-
-  constructor() { }
+  constructor(public authService: AuthService) { }
 }

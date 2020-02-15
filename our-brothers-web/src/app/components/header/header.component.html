@@ -12,10 +12,10 @@
     </div>
     <div class="action-buttons">
       <div class="action-header-support-us site-button">תמיכה בעמותה</div>
-      <div *ngIf="!user" class="action-header-login site-button" (click)="logIn.emit()">
+      <div *ngIf="!user" class="action-header-login site-button" (click)="authService.requestToLogin()">
         התחבר/הרשם
       </div>
-      <div *ngIf="user" class="action-header-login site-button" (click)="logOut.emit()">
+      <div *ngIf="user" class="action-header-login site-button" (click)="authService.signOut()">
         התנתק
       </div>
     </div>

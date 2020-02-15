@@ -2,70 +2,14 @@
   פרטי משתמש
 </div>
 <ng-container [formGroup]="profileForm">
-  <input
-    type="text"
-    placeholder="אימייל"
-    class="login-form-input"
-    formControlName="email"
-    [class.invalid]="!email.valid && email.touched"
-  />
-  <input
-    type="text"
-    placeholder="שם פרטי"
-    class="login-form-input"
-    formControlName="firstName"
-    [class.invalid]="!firstName.valid && firstName.touched"
-  />
-  <input
-    type="text"
-    placeholder="שם משפחה"
-    class="login-form-input"
-    formControlName="lastName"
-    [class.invalid]="!lastName.valid && lastName.touched"
-  />
-  <input
-    type="text"
-    placeholder="טלפון"
-    class="login-form-input"
-    formControlName="phoneNumber"
-    [class.invalid]="!phoneNumber.valid && phoneNumber.touched"
-  />
-  <input
-    type="text"
-    placeholder="כתובת"
-    class="login-form-input"
-    formControlName="address"
-    [class.invalid]="!address.valid && address.touched"
-  />
-  <input
-    type="date"
-    placeholder="תאריך לידה"
-    class="login-form-input"
-    formControlName="birthDay"
-    [class.invalid]="!birthDay.valid && birthDay.touched"
-  />
-  <app-checkbox
-    [label]="'אני מסכים לתנאי השימוש'"
-    [checked]="agree.value"
-    [invalid]="!agree.valid && agree.touched"
-    (checkedChanged)="agree.setValue($event)"
-  ></app-checkbox>
-  <div class="other-lang-input">
-    <app-checkbox
-      [label]="'אני מספר גם בשפות אחרות'"
-      [checked]="canTellInOtherLang"
-      (checkedChanged)="canTellInOtherLang = $event"
-    ></app-checkbox>
-    <select
-      class="other-lang-select"
-      [value]="otherLang.value"
-      (change)="otherLang.setValue($event.target.value)"
-    >
-      <option value="english">אנגלית</option>
-      <option value="franch">צרפתית</option>
-      <option value="rusian">רוסית</option>
-      <option value="arabic">ערבית</option>
-      <option value="other">אחר</option>
-    </select>
-  </div>
+  <input type="text" placeholder="אימייל" class="login-form-input" formControlName="email"
+    [class.invalid]="!email.valid && email.touched" />
+  <input type="text" placeholder="שם פרטי" class="login-form-input" formControlName="firstName"
+    [class.invalid]="!firstName.valid && firstName.touched" />
+  <input type="text" placeholder="שם משפחה" class="login-form-input" formControlName="lastName"
+    [class.invalid]="!lastName.valid && lastName.touched" />
+  <input type="text" placeholder="טלפון" class="login-form-input" formControlName="phoneNumber"
+    [class.invalid]="!phoneNumber.valid && phoneNumber.touched" />
+  <app-checkbox [label]="'אני מסכים לתנאי השימוש'" [checked]="agree.value" [invalid]="!agree.valid && agree.touched"
+    (checkedChanged)="agree.setValue($event)"></app-checkbox>
 </ng-container>

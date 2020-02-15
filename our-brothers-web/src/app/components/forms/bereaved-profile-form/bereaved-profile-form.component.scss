@@ -1,0 +1,40 @@
+.form {
+  max-width: 770px;
+  margin: auto;
+
+  .form-items-container {
+    display: flex;
+    margin-bottom: 30px;
+
+    input {
+      flex: 1;
+      margin: 0 15px;
+    }
+
+    input:first-child {
+      margin-right: 0;
+    }
+
+    input:last-child {
+      margin-left: 0;
+    }
+  }
+
+  .other-lang-input {
+    font-size: 18px;
+    margin-bottom: 30px;
+
+    .other-lang-select {
+      font-size: 18px;
+    }
+  }
+
+  .agree-input {
+    font-size: 18px;
+  }
+
+  .sumbit-button {
+    margin-bottom: 40px;
+    margin-top: 40px;
+  }
+}

@@ -1,56 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Subject, combineLatest } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
-import { AuthService } from 'src/app/services/auth.service';
-import { ParticipationsService } from 'src/app/services/participations.service';
-import { DataService } from 'src/app/services/data.service';
+
 import {
   Meeting,
   User,
   BereavedProfile,
   Slain,
-  UserRole
+  UserRole,
+  BereavedGuidance
 } from 'src/app/model';
-import { Subject, combineLatest } from 'rxjs';
-
-interface TrainingMeeting {
-  text: string;
-  on: boolean;
-  value: string;
-}
-
-const traningMeetingsConst: TrainingMeeting[] = [
-  {
-    text: '24.3 יום שלישי, בין השעות 1700-2100, בWEWORK חיפה',
-    on: false,
-    value: 'm1'
-  },
-  {
-    text: '25.3 יום רביעי, בין השעות 1700-2100, בWEWORK ת"א',
-    on: false,
-    value: 'm2'
-  },
-  {
-    text: '26.3 יום חמישי, בין השעות 1700-2100, בWEWORK ירושלים',
-    on: false,
-    value: 'm3'
-  },
-  {
-    text: '29.3 יום ראשון, בין השעות 1700-2100, בWEWORK באר שבע ',
-    on: false,
-    value: 'm4'
-  },
-  {
-    text: '7.4 יום שלישי, 19:00-20:30 סדנה אינטרנטית',
-    on: false,
-    value: 'm5'
-  },
-  {
-    text: '18.4 יום שבת, 2030-2200 סדנה אינטרנטית',
-    on: false,
-    value: 'm6'
-  }
-];
+import { AuthService } from 'src/app/services/auth.service';
+import { ParticipationsService } from 'src/app/services/participations.service';
+import { DataService } from 'src/app/services/data.service';
+import { SlainForm } from 'src/app/components/forms/slain-form/slain-form.component';
+import { BereavedProfileForm } from 'src/app/components/forms/bereaved-profile-form/bereaved-profile-form.component';
 
 @Component({
   selector: 'app-tell-page',
@@ -59,28 +23,20 @@ const traningMeetingsConst: TrainingMeeting[] = [
 })
 export class TellPageComponent implements OnInit {
   public user: User;
+  public firebaseUser: firebase.User;
   public meetings: Meeting[];
   public currentStep: number = 0;
   public currentStep$ = new Subject<number>();
-  public casualtyDetailsFrom: FormGroup;
-  public trainingSession = false;
-  public trainingMeetings: TrainingMeeting[] = traningMeetingsConst;
-  public noTrainingMeeting = true;
 
   constructor(
-    private fb: FormBuilder,
     private authService: AuthService,
     private participationsService: ParticipationsService,
     private dataService: DataService
   ) { }
 
   ngOnInit() {
-    this.casualtyDetailsFrom = this.fb.group({
-      casualtyFname: ['', Validators.required],
-      casualtyLname: ['', Validators.required],
-      casualtyDate: ['', Validators.required],
-      casualtyStory: ['', Validators.required]
-    });
+
+    this.authService.firebaseUser.subscribe((firebaseUser) => this.firebaseUser = firebaseUser);
 
     combineLatest(
       this.authService.user,
@@ -96,15 +52,17 @@ export class TellPageComponent implements OnInit {
             this.dataService.setUserRole(user, UserRole.bereaved);
           }
 
-          if (!user || !this.participationsService.isUserHaveAllDetails(user)) {
+          if (!user) {
             this.currentStep$.next(1);
             this.authService.requestToLogin();
-          } else if (!this.participationsService.isBrotherHaveSlainDetails(user)) {
+          } else if (!this.participationsService.isBereavedHaveAllDetails(user)) {
             this.currentStep$.next(2);
-          } else if (!this.participationsService.isBrotherAnsweredTrainingMeeting(user)) {
+          } else if (!this.participationsService.isBrotherHaveSlainDetails(user)) {
             this.currentStep$.next(3);
-          } else {
+          } else if (!this.participationsService.isBrotherAnsweredTrainingMeeting(user)) {
             this.currentStep$.next(4);
+          } else {
+            this.currentStep$.next(5);
           }
         }
       });
@@ -114,85 +72,30 @@ export class TellPageComponent implements OnInit {
     });
   }
 
-  get casualtyFname() {
-    return this.casualtyDetailsFrom.get('casualtyFname');
+  onProfileSubmit(profileForm: BereavedProfileForm) {
+    this.dataService.setUserProfile(this.user, profileForm);
   }
 
-  get casualtyLname() {
-    return this.casualtyDetailsFrom.get('casualtyLname');
-  }
+  onSlainsSubmit(slainForm: SlainForm) {
 
-  get casualtyDate() {
-    return this.casualtyDetailsFrom.get('casualtyDate');
-  }
+    const slains: Slain[] = [{
+      firstName: slainForm.firstName,
+      lastName: slainForm.lastName,
+      deathDate: slainForm.deathDate
+    }];
 
-  get casualtyStory() {
-    return this.casualtyDetailsFrom.get('casualtyStory');
-  }
-
-  saveBereavedProfile() {
-    let slains: Slain[] = [];
-    if (
-      this.authService.currentUser.bereavedProfile &&
-      this.authService.currentUser.bereavedProfile.slains &&
-      this.authService.currentUser.bereavedProfile.slains.length > 0
-    ) {
-      slains = this.authService.currentUser.bereavedProfile.slains;
-    }
-
-    const deathDate = new Date(this.casualtyDetailsFrom.get('casualtyDate').value).getTime();
-
-    slains.push({
-      deathDate,
-      firstName: this.casualtyDetailsFrom.get('casualtyFname').value,
-      lastName: this.casualtyDetailsFrom.get('casualtyLname').value
-    });
+    const story = slainForm.story;
 
     const bereavedProfile: BereavedProfile = {
       slains,
-      story: this.casualtyDetailsFrom.get('casualtyStory').value
+      story
     };
 
-    this.dataService.setBereavedProfile(this.authService.currentUser, bereavedProfile);
+    this.dataService.setBereavedProfile(this.user, bereavedProfile);
   }
 
-  markedTraningMetting(traningMeeting: TrainingMeeting) {
-    if (traningMeeting.on) {
-      this.noTrainingMeeting = false;
-    } else {
-      if (
-        !this.trainingMeetings.some(trainingMeeting => {
-          return trainingMeeting.on;
-        })
-      ) {
-        this.noTrainingMeeting = true;
-      }
-    }
-  }
-
-  markedNoTraningMetting(noTrainingMeeting) {
-    if (noTrainingMeeting) {
-      this.trainingMeetings.forEach(trainingMeeting => {
-        trainingMeeting.on = false;
-      });
-    }
-  }
-
-  saveTraningAnswer() {
-    const onTrainingMeetings: string[] = [];
-    if (!this.noTrainingMeeting) {
-      this.trainingMeetings.forEach(trainingMeeting => {
-        if (trainingMeeting.on) {
-          onTrainingMeetings.push(trainingMeeting.value);
-        }
-      });
-    }
-
-    this.dataService
-      .setBereavedGuidanceAnswer(this.authService.currentUser, {
-        answered: true,
-        general: onTrainingMeetings
-      });
+  onGuidanceSubmit(bereavedGuidance: BereavedGuidance) {
+    this.dataService.setBereavedGuidanceAnswer(this.user, bereavedGuidance);
   }
 
   onJoinMeeting(meeting: Meeting) {

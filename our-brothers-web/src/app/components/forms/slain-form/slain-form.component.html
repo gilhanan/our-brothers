@@ -1,0 +1,19 @@
+<div class="form" [formGroup]="form">
+  <div class="form-items-container">
+    <input class="form-field" type="text" placeholder="שם פרטי" formControlName="firstName"
+      [class.invalid]="!firstName.valid && firstName.touched" />
+    <input class="form-field" type="text" placeholder="שם משפחה" formControlName="lastName"
+      [class.invalid]="!lastName.valid && lastName.touched" />
+  </div>
+  <div class="form-items-container">
+    <input class="form-field fallen-date-input" type="date" placeholder="תאריך נפילה:" formControlName="deathDate"
+      [class.invalid]="!deathDate.valid && deathDate.touched" />
+  </div>
+  <div class="story">
+    <textarea class="form-field" placeholder="תוכן הסיפור..." formControlName="story"
+      [class.invalid]="!story.valid && story.touched"></textarea>
+  </div>
+  <div (click)="onSubmit()" class="site-button primary-button submit-button">
+    המשך
+  </div>
+</div>

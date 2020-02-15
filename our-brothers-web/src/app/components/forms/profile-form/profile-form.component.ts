@@ -1,10 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { DataService } from 'src/app/services/data.service';
-import { AuthService } from 'src/app/services/auth.service';
-import { of } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { UserProfile } from 'src/app/model';
+import { User as FirebaseUser } from 'firebase';
+import { UserProfile, User } from 'src/app/model';
+
+export interface ProfileForm {
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  email: string;
+}
 
 @Component({
   selector: 'app-profile-form',
@@ -12,26 +16,28 @@ import { UserProfile } from 'src/app/model';
   styleUrls: ['./profile-form.component.scss']
 })
 export class ProfileFormComponent implements OnInit {
+
+  @Input()
+  public user: User;
+
+  @Input()
+  public firebaseUser: FirebaseUser;
+
+  @Output()
+  public submit = new EventEmitter<ProfileForm>();
+
   public profileForm: FormGroup;
-  public canTellInOtherLang = false;
 
   constructor(
-    private fb: FormBuilder,
-    private authService: AuthService,
-    private dataService: DataService
+    private fb: FormBuilder
   ) { }
 
   ngOnInit() {
-    const profile: UserProfile = this.authService.currentUser.profile || {} as UserProfile;
-
-    if (profile.otherLang) {
-      this.canTellInOtherLang = true;
-    }
+    const profile: UserProfile = this.user.profile || {} as UserProfile;
 
     this.profileForm = this.fb.group({
-      // type: ['', Validators.required],
       email: [
-        profile.email || this.authService.currentFirebaseUser.email,
+        profile.email || this.firebaseUser.email,
         [Validators.required, Validators.email]
       ],
       firstName: [
@@ -46,19 +52,8 @@ export class ProfileFormComponent implements OnInit {
         profile.phoneNumber,
         Validators.required
       ],
-      address: [
-        profile.address,
-        Validators.required
-      ],
-      birthDay: [
-        new Date(profile.birthDay),
-        Validators.required
-      ],
-      otherLang: [profile.otherLang],
       agree: [false, Validators.requiredTrue]
     });
-
-    console.log('birthDay', this.profileForm.get('birthDay').value);
   }
 
   get email() {
@@ -77,44 +72,22 @@ export class ProfileFormComponent implements OnInit {
     return this.profileForm.get('phoneNumber');
   }
 
-  get address() {
-    return this.profileForm.get('address');
-  }
-
-  get birthDay() {
-    return this.profileForm.get('birthDay');
-  }
-
-  get otherLang() {
-    return this.profileForm.get('otherLang');
-  }
-
   get agree() {
     return this.profileForm.get('agree');
   }
 
   public saveProfile() {
     if (this.profileForm.valid) {
-      const userData = {
-        profile: this.profileForm.value,
-        role: 'participate'
+      const parsedForm: ProfileForm = {
+        email: this.email.value,
+        firstName: this.firstName.value,
+        lastName: this.lastName.value,
+        phoneNumber: this.phoneNumber.value
       };
 
-      userData.profile.birthDay = new Date(userData.profile.birthDay).getTime();
-      if (!this.canTellInOtherLang) {
-        delete userData.profile.otherLang;
-      }
-
-      return this.dataService
-        .updateUserData(this.authService.userId, userData)
-        .pipe(
-          map(() => {
-            return true;
-          })
-        );
+      this.submit.emit(parsedForm);
     } else {
       this.profileForm.markAllAsTouched();
-      return of(false);
     }
   }
 }
