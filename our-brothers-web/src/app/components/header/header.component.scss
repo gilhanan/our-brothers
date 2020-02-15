@@ -153,6 +153,34 @@
     }
   }
 }
+
+.drop-down-list {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  flex-wrap: wrap;
+
+  .drop-down-menu-item {
+    background-color: white;
+    color: #00a099;
+    text-decoration: none;
+    padding-right: 0.5em;
+
+    &:hover {
+      background-color: #00a099;
+      color: white;
+    }
+  }
+
+  .drop-down-item-divider {
+    align-self: center;
+    width: 90%;
+    height: 1px;
+    background-color: lightgray;
+    opacity: 0.3;
+  }
+}
+
 @media only screen and (max-width: 1400px) {
   .links-header {
     .link-header {
