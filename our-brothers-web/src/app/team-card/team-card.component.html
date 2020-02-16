@@ -1,18 +1,19 @@
-<div class="card">
-  <div class="card-header" [style.background-image]="'url(' + memeber.frontImage + ')'">
-    <div class="card-header-mask" [style.background-image]="'url(' + memeber.backImage + ')'"></div>
-  </div>
-  <div class="card-body">
-    <div class="card-body-header{{memeber.frontBrotherAnd ? ' two-line' : ''}}">
-      <span class="card-body-text name">{{memeber.name}}</span>
-      <br>
-      <span class="card-body-text">{{memeber.title}}</span>
+<div class="card" (mouseenter)="hover = true" (mouseleave)="hover = false">
+  <div class="header">
+    <div class="image front-image" [style.background-image]="'url(' + member.frontImage + ')'">
     </div>
-    <p class="card-body-description{{memeber.frontBrotherAnd ? ' two-line' : ''}}">
-      <span class="card-body-text">{{memeber.frontGender}}</span><span class="card-body-text brother"><a
-          (click)="moveToPage()">{{memeber.frontBrother}}</a></span>
-      <span class="card-body-text{{memeber.frontBrotherAnd ? ' two-line' : ''}}">{{memeber.frontBrotherAnd}}</span><span
-        class="card-body-text brother"><a (click)="moveToPage2()">{{memeber.frontBrother2}}</a></span>
-    </p>
+    <div class="image back-image" [class.hover]="hover" [style.background-image]="'url(' + member.backImage + ')'">
+    </div>
   </div>
-</div>
+  <div [class]="'body'">
+    <div [class]="'member-details ' + ('slains-' + slains)" [class.hover]="hover">
+      <div class="member-name">{{member.name}}</div>
+      <div class="member-title">{{member.title}}</div>
+    </div>
+    <div class="slains" [class.hover]="hover">
+      <div class="slain" *ngFor="let slain of member.slains">
+        <span class="slain-pre">{{slain.pre}}</span>
+        <a class="slain-link" [href]="slain.link" target="_blank">{{slain.title}}</a>
+      </div>
+    </div>
+  </div>

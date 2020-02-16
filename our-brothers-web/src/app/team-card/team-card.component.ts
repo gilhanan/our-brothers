@@ -1,17 +1,17 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input, ChangeDetectionStrategy, ElementRef, HostListener, OnInit } from '@angular/core';
 
 export interface TeamMember {
   name: string;
   title: string;
   frontImage: string;
   backImage?: string;
-  frontGender?: string;
-  frontBrother?: string;
-  frontBrotherAnd?: string;
-  frontBrother2?: string;
-  frontBrotherLink?: string;
-  frontBrother2Link?: string;
+  slains?: TeamMemberSlain[]
+}
+
+interface TeamMemberSlain {
+  pre: string;
+  title: string;
+  link: string;
 }
 
 @Component({
@@ -22,17 +22,20 @@ export interface TeamMember {
 })
 export class TeamCardComponent implements OnInit {
 
-  @Input() memeber: TeamMember;
+  @Input() member: TeamMember;
 
-  constructor(private router: Router) { }
-
-  ngOnInit() { }
-
-  moveToPage() {
-    this.router.navigate([this.memeber.frontBrotherLink]);
+  @HostListener('document:click', ['$event'])
+  clickout(event) {
+    this.hover = !!this.elementRef.nativeElement.contains(event.target)
   }
 
-  moveToPage2() {
-    this.router.navigate([this.memeber.frontBrother2Link]);
+  public hover: boolean;
+
+  public slains: number = 0;
+
+  constructor(private elementRef: ElementRef) { }
+
+  ngOnInit(): void {
+    this.slains = this.member.slains && this.member.slains.length;
   }
 }
