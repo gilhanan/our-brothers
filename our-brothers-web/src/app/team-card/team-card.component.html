@@ -1,18 +1,18 @@
 <div class="card">
-  <div class="card-header" [style.background-image]="'url(' + frontImage + ')'">
-    <div class="card-header-mask" [style.background-image]="'url(' + frontImage2 + ')'"></div>
+  <div class="card-header" [style.background-image]="'url(' + memeber.frontImage + ')'">
+    <div class="card-header-mask" [style.background-image]="'url(' + memeber.backImage + ')'"></div>
   </div>
   <div class="card-body">
-    <div class="card-body-header{{frontBrotherAnd ? ' two-line' : ''}}">
-      <span class="card-body-text name">{{frontName}}</span>
+    <div class="card-body-header{{memeber.frontBrotherAnd ? ' two-line' : ''}}">
+      <span class="card-body-text name">{{memeber.name}}</span>
       <br>
-      <span class="card-body-text">{{frontTitle}}</span>
+      <span class="card-body-text">{{memeber.title}}</span>
     </div>
-    <p class="card-body-description{{frontBrotherAnd ? ' two-line' : ''}}">
-      <span class="card-body-text">{{frontGender}}</span><span class="card-body-text brother"><a
-          (click)="moveToPage()">{{frontBrother}}</a></span>
-      <span class="card-body-text{{frontBrotherAnd ? ' two-line' : ''}}">{{frontBrotherAnd}}</span><span
-        class="card-body-text brother"><a (click)="moveToPage2()">{{frontBrother2}}</a></span>
+    <p class="card-body-description{{memeber.frontBrotherAnd ? ' two-line' : ''}}">
+      <span class="card-body-text">{{memeber.frontGender}}</span><span class="card-body-text brother"><a
+          (click)="moveToPage()">{{memeber.frontBrother}}</a></span>
+      <span class="card-body-text{{memeber.frontBrotherAnd ? ' two-line' : ''}}">{{memeber.frontBrotherAnd}}</span><span
+        class="card-body-text brother"><a (click)="moveToPage2()">{{memeber.frontBrother2}}</a></span>
     </p>
   </div>
 </div>
