@@ -1,0 +1,131 @@
+.card {
+  cursor: default;
+  position: relative;
+  width: 235px;
+  top: 30%;
+  left: 50%;
+  margin-bottom: 50px;
+  transform: translate(-50%, -50%);
+
+  @media only screen and (max-width: 768px) {
+    width: 130px;
+    margin-bottom: 20px;
+  }
+
+  .card-header {
+    width: 235px;
+    height: 235px;
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover;
+    border-radius: 1px 1px 0 0;
+    transition: all 0.3s ease-in-out;
+
+    @media only screen and (max-width: 768px) {
+      width: 130px;
+      height: 130px;
+    }
+
+    .card-header-mask {
+      height: 100%;
+      opacity: 0;
+      background-repeat: no-repeat;
+      background-position: center top;
+      background-size: cover;
+      transition: all 0.3s ease-in-out;
+    }
+  }
+
+  .card-body {
+    .card-body-header {
+      position: absolute;
+      margin-top: -27px;
+      left: 0;
+      padding: 10px 0;
+      width: 100%;
+      text-align: center;
+      background-color: #fff;
+      color: #23282d;
+      font-size: 18px;
+      transition: all 0.3s ease-in-out;
+
+      @media only screen and (max-width: 768px) {
+        font-size: 10px;
+        margin-top: -25px;
+      }
+
+      .name {
+        font-weight: bold;
+      }
+    }
+
+    .card-body-description {
+      color: #757b82;
+      width: 100%;
+      background-color: #00a099;
+      text-align: center;
+      line-height: 50px;
+      font-size: 15px;
+      transition: all 0.2s ease-in-out;
+
+      @media only screen and (max-width: 768px) {
+        font-size: 8px;
+        line-height: 25px;
+      }
+
+      &.two-line {
+        line-height: 30px;
+        margin-top: -10px;
+
+        @media only screen and (max-width: 768px) {
+          line-height: 18px;
+        }
+      }
+
+      .brother {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .two-line {
+    display: inline-block;
+  }
+
+  &:hover .card-header .card-header-mask {
+    opacity: 1;
+    width: 235px;
+    height: 235px;
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover;
+
+    @media only screen and (max-width: 768px) {
+      width: 130px;
+      height: 130px;
+    }
+  }
+
+  &:hover .card-body .card-body-header {
+    margin-top: -53px;
+    background-color: #00a099;
+    padding: 10px 0 0 0;
+
+    @media only screen and (max-width: 768px) {
+      margin-top: -32px;
+    }
+  }
+
+  &:hover .card-body .card-body-header.two-line {
+    margin-top: -73px;
+
+    @media only screen and (max-width: 768px) {
+      margin-top: -47px;
+    }
+  }
+
+  &:hover .card-body-text {
+    color: #fff;
+  }
+}

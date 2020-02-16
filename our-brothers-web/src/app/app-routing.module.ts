@@ -4,6 +4,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { ContactPageComponent } from './pages/contact-page/contact-page.component';
 import { MeetingsPageComponent } from './pages/meetings-page/meetings-page.component';
 import { AboutPageComponent } from './pages/about-page/about-page.component';
+import { TeamPageComponent } from './pages/team-page/team-page.component';
 import { AdminBereavedsPageComponent } from './pages/admin-bereaveds-page/admin-bereaveds-page.component';
 import { TellPageComponent } from './pages/tell-page/tell-page.component';
 import { ParticipatePageComponent } from './pages/participate-page/participate-page.component';
@@ -33,6 +34,11 @@ const routes: Routes = [
   {
     path: 'about',
     component: AboutPageComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'team',
+    component: TeamPageComponent,
     pathMatch: 'full'
   },
   {
