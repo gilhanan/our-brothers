@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy, ElementRef, HostListener } from '@angular/core';
+import { Component, Input, ElementRef, HostListener, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,7 +7,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./flip-card.component.scss']
 })
 export class FlipCardComponent {
-  @Input() frontImage: string;
+
+  @Input() frontImage: TemplateRef<any>;
   @Input() frontTitle: string;
   @Input() backText: string;
   @Input() backButtonText: string;

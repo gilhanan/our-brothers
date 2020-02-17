@@ -1,0 +1,14 @@
+.image {
+  width: 100%;
+  height: 100%;
+
+  .person {
+    fill: #00a199;
+  }
+
+  &.disabled {
+    .person {
+      fill: grey;
+    }
+  }
+}
