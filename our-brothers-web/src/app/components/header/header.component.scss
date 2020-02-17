@@ -40,6 +40,10 @@
     background-repeat: no-repeat;
   }
 
+  .close-drawer-menu {
+    display: none;
+  }
+
   .links-header {
     flex: 0 0 auto;
     display: flex;
@@ -61,7 +65,7 @@
       margin-left: 20px;
 
       &.current-page {
-        font-weight: 600;
+        font-weight: bold;
       }
 
       &.link-header:hover:before,
@@ -140,33 +144,74 @@
 }
 
 @media only screen and (max-width: 1400px) {
-  .links-header {
-    .link-header {
-      &:not(:last-child) {
-        margin-left: 20px !important;
-      }
-    }
-  }
-  .logo-header {
-    background-repeat: no-repeat;
-    flex: 0 0 120px;
-    height: 50px;
-  }
-}
-
-@media only screen and (max-width: 700px) {
-  .header-out {
-    justify-content: center;
-  }
   .header {
-    justify-content: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 100%;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    padding: 1.5em;
+    box-shadow: -10px 0px 2px 0px rgba(0,160,153,0.75);
+
+    .close-drawer-menu {
+      display: block;
+      color: rgba(0,160,153);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10' enable-background='new 0 0 40 40'%3E%3Cline x1='0' y1='0' x2='10' y2='10' stroke='rgba(0,160,153)' stroke-width='1' stroke-linecap='round' stroke-miterlimit='10'%3E%3C/line%3E%3Cline x1='0' y1='10' x2='10' y2='0' stroke='rgba(0,160,153)' stroke-width='1' stroke-linecap='round' stroke-miterlimit='10'%3E%3C/line%3E%3C/svg%3E");
+      background-size: cover;
+      background-repeat: no-repeat;
+      width: 20px;
+      height: 20px;
+      background-color: transparent;
+      border: none;
+      outline: none;
+    }
+
+    .logo-header {
+      display: none;
+    }
 
     .links-header {
-      display: none;
-    }
+      flex-direction: column;
+      align-items: stretch;
+      margin: 1.5em 0;
 
+      li {
+        border-bottom: 1px solid rgba(0,160,153);
+        padding: 0.5em 0;
+
+        .link-header {
+          // display: flex;
+          // justify-content: space-between;
+          margin: 0;
+
+          &.link-header:hover:before,
+          &.current-page::before {
+            animation-name: none;
+            display: none;
+          }
+
+          &.link-header:hover:after,
+          &.current-page::after {
+            animation-name: none;
+            display: none;
+          }
+        }
+      }
+    }
     .action-buttons {
-      display: none;
+      flex-direction: column;
+
+      .action-header-support-us {
+        margin-left: 0;
+        margin-bottom: 1em;
+      }
+
+      .action-header-support-us, .action-header-login {
+        width: 75%;
+      }
     }
   }
 }
