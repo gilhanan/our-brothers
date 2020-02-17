@@ -20,10 +20,13 @@ export interface Meeting {
   audience?: MeetingAudience[];
 }
 
-export interface MeetingAddress {
+export interface Address {
   latitude: number;
   longitude: number;
   formattedAddress: string;
+}
+
+export interface MeetingAddress extends Address {
   notes?: string;
 }
 

@@ -6,16 +6,16 @@
     display: flex;
     margin-bottom: 30px;
 
-    input {
+    .form-field {
       flex: 1;
       margin: 0 15px;
     }
 
-    input:first-child {
+    .form-field:first-child {
       margin-right: 0;
     }
 
-    input:last-child {
+    .form-field:last-child {
       margin-left: 0;
     }
   }

@@ -6,8 +6,8 @@
       [class.invalid]="!lastName.valid && lastName.touched" />
   </div>
   <div class="form-items-container">
-    <input class="form-field fallen-date-input" type="date" placeholder="תאריך נפילה:" formControlName="deathDate"
-      [class.invalid]="!deathDate.valid && deathDate.touched" />
+    <input class="form-field" type="text" placeholder="תאריך נפילה:" formControlName="deathDate"
+      [class.invalid]="!deathDate.valid && deathDate.touched" onfocus="(this.type='date')" onblur="(this.type='text')" />
   </div>
   <div class="story">
     <textarea class="form-field" placeholder="תוכן הסיפור..." formControlName="story"
