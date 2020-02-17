@@ -1,13 +1,13 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { UserProfile, User } from 'src/app/model';
+import { UserProfile, User, Address } from 'src/app/model';
 
 export interface BereavedProfileForm {
   email: string;
   firstName: string;
   lastName: string;
   phoneNumber: string;
-  address: string;
+  address: Address;
   birthDay: number;
   otherLang: string;
 }

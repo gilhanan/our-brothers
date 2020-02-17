@@ -71,6 +71,7 @@ import { ParticipateIntroComponent } from './participate-intro/participate-intro
 import { HostFormComponent } from './components/forms/host-form/host-form.component';
 import { TeamPageComponent } from './pages/team-page/team-page.component';
 import { TeamCardComponent } from './team-card/team-card.component';
+import { PlacesSelectComponent } from './components/places-select/places-select.component';
 
 registerLocaleData(localeHe);
 
@@ -132,7 +133,8 @@ registerLocaleData(localeHe);
     ParticipateIntroComponent,
     HostFormComponent,
     TeamPageComponent,
-    TeamCardComponent
+    TeamCardComponent,
+    PlacesSelectComponent
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,7 @@ import {
   HostParticipation,
   BereavedParticipation
 } from './participations';
+import { Address } from './meeting';
 
 export interface User {
   id?: string;
@@ -21,11 +22,11 @@ export interface User {
 }
 
 export interface UserProfile {
-  address?: string;
   firstName: string;
   lastName: string;
-  phoneNumber?: string;
-  email?: string;
+  phoneNumber: string;
+  email: string;
+  address?: Address;
   birthDay?: number;
   otherLang?: string;
 }
