@@ -1,26 +1,28 @@
-<div class="header-out">
-  <div #headerElm class="header">
-    <div class="logo-header" routerLink="home"></div>
-    <div class="links-header">
-      <a class="link-header" routerLink="home" routerLinkActive="current-page">דף הבית</a>
+<nav class="header">
+  <div class="logo-header" routerLink="home"></div>
+  <ul class="links-header">
+    <li><a class="link-header" routerLink="home" routerLinkActive="current-page">דף הבית</a></li>
+    <li>
       <app-drop-down-menu [menuAnchor]="meetingsMenuAnchor" [menuContent]="meetingsMenuItems"></app-drop-down-menu>
+    </li>
+    <li>
       <app-drop-down-menu [menuAnchor]="aboutMenuAnchor" [menuContent]="aboutMenuItems"></app-drop-down-menu>
-      <a class="link-header" routerLink="info" routerLinkActive="current-page">מבנה הערב</a>
-      <a class="link-header" routerLink="questions" routerLinkActive="current-page">שאלות</a>
-      <a class="link-header" routerLink="gallery" routerLinkActive="current-page">גלריה</a>
-      <a class="link-header" routerLink="contact" routerLinkActive="current-page">צרו קשר</a>
+    </li>
+    <li><a class="link-header" routerLink="info" routerLinkActive="current-page">מבנה הערב</a></li>
+    <li><a class="link-header" routerLink="questions" routerLinkActive="current-page">שאלות</a></li>
+    <li><a class="link-header" routerLink="gallery" routerLinkActive="current-page">גלריה</a></li>
+    <li><a class="link-header" routerLink="contact" routerLinkActive="current-page">צרו קשר</a></li>
+  </ul>
+  <div class="action-buttons">
+    <div class="action-header-support-us site-button">תמיכה בעמותה</div>
+    <div *ngIf="!user" class="action-header-login site-button" (click)="authService.requestToLogin()">
+      התחבר/הרשם
     </div>
-    <div class="action-buttons">
-      <div class="action-header-support-us site-button">תמיכה בעמותה</div>
-      <div *ngIf="!user" class="action-header-login site-button" (click)="authService.requestToLogin()">
-        התחבר/הרשם
-      </div>
-      <div *ngIf="user" class="action-header-login site-button" (click)="authService.signOut()">
-        התנתק
-      </div>
+    <div *ngIf="user" class="action-header-login site-button" (click)="authService.signOut()">
+      התנתק
     </div>
   </div>
-</div>
+</nav>
 
 <ng-template #aboutMenuItems>
   <div class="drop-down-list">
@@ -35,7 +37,7 @@
 </ng-template>
 
 <ng-template #aboutMenuAnchor>
-  <a class="link-header" style="margin-left: 20px;" routerLinkActive="current-page">
+  <a class="link-header" routerLinkActive="current-page">
     אודותינו <i class="fas fa-caret-down"></i>
   </a>
 </ng-template>
@@ -53,7 +55,7 @@
 </ng-template>
 
 <ng-template #meetingsMenuAnchor>
-  <a class="link-header" style="margin-left: 20px;" routerLinkActive="current-page">
+  <a class="link-header" routerLinkActive="current-page">
     מפגשים <i class="fas fa-caret-down"></i>
   </a>
 </ng-template>
