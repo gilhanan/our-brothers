@@ -58,6 +58,7 @@ export class ContactFormComponent implements OnInit {
       subject: [
         '',
         [
+          Validators.required,
           Validators.maxLength(20),
           Validators.pattern(this.utilsService.sentencePattern)
         ]
