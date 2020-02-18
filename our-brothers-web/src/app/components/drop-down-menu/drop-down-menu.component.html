@@ -2,7 +2,7 @@
     <div class="drop-down-menu-anchor">
         <ng-container *ngTemplateOutlet="menuAnchor"></ng-container>
     </div>
-    <div class="drop-down-menu-content">
+    <div class="drop-down-menu-content" *ngIf="!disabled">
         <div class="drop-down-menu-triangle"></div>
         <ng-container *ngTemplateOutlet="menuContent"></ng-container>
     </div>

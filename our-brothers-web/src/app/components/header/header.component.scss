@@ -143,7 +143,7 @@
   }
 }
 
-@media only screen and (max-width: 1400px) {
+@media only screen and (max-width: 1200px) {
   .header {
     position: fixed;
     top: 0;
@@ -183,9 +183,8 @@
         padding: 0.5em 0;
 
         .link-header {
-          // display: flex;
-          // justify-content: space-between;
           margin: 0;
+          cursor: pointer;
 
           &.link-header:hover:before,
           &.current-page::before {
@@ -213,5 +212,11 @@
         width: 75%;
       }
     }
+  }
+}
+
+@media only screen and (max-width: 1400px) {
+  .header {
+    padding: 1em 50px;
   }
 }
