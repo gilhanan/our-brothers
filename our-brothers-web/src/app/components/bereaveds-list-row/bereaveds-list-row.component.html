@@ -7,6 +7,9 @@
       <button class="expand-button" *ngIf="!expanded" (click)="expanded = true">
         <div class="expand-icon"></div>
       </button>
+      <button class="collapse-button" *ngIf="expanded" (click)="expanded = false">
+        <div class="collapse-icon"></div>
+      </button>
     </div>
     <div class="col col-name">
       {{bereaved.profile?.firstName + ' ' + bereaved.profile?.lastName}}
@@ -74,9 +77,6 @@
       <div>
         בדיקה
       </div>
-      <button class="collapse-button" (click)="expanded = false">
-        <div class="collapse-icon"></div>
-      </button>
     </div>
     <div class="expanded-col col-comments">
       <div class="title">

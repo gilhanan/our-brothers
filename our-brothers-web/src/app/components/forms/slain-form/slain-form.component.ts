@@ -1,5 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UtilsService } from 'src/app/services/utils.service';
 
 export interface SlainForm {
   firstName: string;
@@ -19,14 +20,34 @@ export class SlainFormComponent implements OnInit {
   @Output()
   public submit = new EventEmitter<SlainForm>()
 
-  constructor(private fb: FormBuilder, ) { }
+  constructor(private fb: FormBuilder,
+    private utilsService: UtilsService) { }
 
   ngOnInit() {
     this.form = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      firstName: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(20),
+          Validators.pattern(this.utilsService.sentencePattern)
+        ]
+      ],
+      lastName: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(20),
+          Validators.pattern(this.utilsService.sentencePattern)
+        ]
+      ],
       deathDate: ['', Validators.required],
-      story: ['', Validators.required]
+      story: ['',
+        [
+          Validators.minLength(60),
+          Validators.maxLength(500)
+        ]
+      ]
     });
   }
 
@@ -49,10 +70,10 @@ export class SlainFormComponent implements OnInit {
   onSubmit() {
     if (this.form.valid) {
       const parsedForm: SlainForm = {
-        firstName: this.firstName.value,
-        lastName: this.lastName.value,
+        firstName: this.firstName.value.trim(),
+        lastName: this.lastName.value.trim(),
         deathDate: new Date(this.deathDate.value).getTime(),
-        story: this.story.value
+        story: this.story.value.trim()
       }
 
       this.submit.emit(parsedForm);

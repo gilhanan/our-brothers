@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserProfile, User, Address } from 'src/app/model';
+import { UtilsService } from 'src/app/services/utils.service';
 
 export interface BereavedProfileForm {
   email: string;
@@ -32,7 +33,8 @@ export class BereavedProfileFormComponent implements OnInit {
   public canTellInOtherLang = false;
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private utilsService: UtilsService
   ) { }
 
   ngOnInit() {
@@ -45,19 +47,33 @@ export class BereavedProfileFormComponent implements OnInit {
     this.form = this.fb.group({
       email: [
         profile.email || this.firebaseUser.email,
-        [Validators.required, Validators.email]
+        [
+          Validators.required,
+          Validators.email
+        ]
       ],
       firstName: [
         profile.firstName,
-        Validators.required
+        [
+          Validators.required,
+          Validators.maxLength(20),
+          Validators.pattern(this.utilsService.sentencePattern)
+        ]
       ],
       lastName: [
         profile.lastName,
-        Validators.required
+        [
+          Validators.required,
+          Validators.maxLength(20),
+          Validators.pattern(this.utilsService.sentencePattern)
+        ]
       ],
       phoneNumber: [
         profile.phoneNumber,
-        Validators.required
+        [
+          Validators.required,
+          Validators.pattern(this.utilsService.phonePattern)
+        ]
       ],
       address: [
         profile.address,
@@ -108,9 +124,9 @@ export class BereavedProfileFormComponent implements OnInit {
     if (this.form.valid) {
       const parsedForm: BereavedProfileForm = {
         email: this.email.value,
-        firstName: this.firstName.value,
-        lastName: this.lastName.value,
-        phoneNumber: this.phoneNumber.value,
+        firstName: this.firstName.value.trim(),
+        lastName: this.lastName.value.trim(),
+        phoneNumber: this.utilsService.toInternationalPhoneNumber(this.phoneNumber.value),
         address: this.address.value,
         birthDay: new Date(this.birthDay.value).getTime(),
         otherLang: this.otherLang.value

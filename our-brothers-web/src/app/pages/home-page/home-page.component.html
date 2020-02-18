@@ -99,5 +99,5 @@
   <div class="site-divider"></div>
   <div class="small-heading">צרו קשר</div>
   <div class="medium-heading">השאירו פרטים</div>
-  <app-contact-form></app-contact-form>
+  <app-contact-form [user]="user" [loading]="postingContact" (submit)="onContactSubmit($event)"></app-contact-form>
 </div>

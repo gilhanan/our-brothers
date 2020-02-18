@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-import { User } from 'src/app/model';
+import { DataService } from 'src/app/services/data.service';
+import { User, Contact } from 'src/app/model';
+import { ContactForm } from 'src/app/contact-form/contact-form.component';
 
 @Component({
   selector: 'app-home-page',
@@ -11,9 +13,11 @@ export class HomePageComponent implements OnInit {
   public videoMuted = true;
   public user: User;
   public loadingUser = true;
+  public postingContact = false;
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private dataService: DataService
   ) { }
 
   ngOnInit(): void {
@@ -23,4 +27,16 @@ export class HomePageComponent implements OnInit {
     });
   }
 
+  onContactSubmit(form: ContactForm) {
+    const parsedContact: Contact = {
+      ...form,
+      date: Date.now()
+    }
+
+    this.postingContact = true;
+    this.dataService.postContact(parsedContact, this.user)
+      .then(() => window.alert('שליחת הודעה בוצעה בהצלחה'))
+      .catch(() => window.alert('שליחת הודעה נכשלה'))
+      .finally(() => this.postingContact = false);
+  }
 }

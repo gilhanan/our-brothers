@@ -1,16 +1,21 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { UtilsService } from '../services/utils.service';
 
 @Pipe({
   name: 'phone'
 })
 export class PhonePipe implements PipeTransform {
 
+  constructor(
+    private utilsService: UtilsService
+  ) { }
+
   public transform(phoneNumber: string): any {
     if (!phoneNumber || phoneNumber.length < 9) {
       return phoneNumber;
     } else {
-      phoneNumber = phoneNumber.replace(/\+9720?/, '');
-      return `0${phoneNumber.substring(0, 2)}-${phoneNumber.substring(2, 5)}-${phoneNumber.substring(5)}`;
+      const local = this.utilsService.toLocalPhoneNumber(phoneNumber);
+      return `${local.substring(0, 3)}-${local.substring(3, 6)}-${local.substring(6)}`;
     }
   }
 
