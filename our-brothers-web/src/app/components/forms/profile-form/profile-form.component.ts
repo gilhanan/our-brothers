@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { User as FirebaseUser } from 'firebase';
 import { UserProfile, User } from 'src/app/model';
+import { UtilsService } from 'src/app/services/utils.service';
 
 export interface ProfileForm {
   firstName: string;
@@ -29,7 +30,8 @@ export class ProfileFormComponent implements OnInit {
   public form: FormGroup;
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private utilsService: UtilsService
   ) { }
 
   ngOnInit() {
@@ -82,7 +84,7 @@ export class ProfileFormComponent implements OnInit {
         email: this.email.value,
         firstName: this.firstName.value,
         lastName: this.lastName.value,
-        phoneNumber: this.phoneNumber.value
+        phoneNumber: this.utilsService.toInternationalPhoneNumber(this.phoneNumber.value)
       };
 
       this.submit.emit(parsedForm);

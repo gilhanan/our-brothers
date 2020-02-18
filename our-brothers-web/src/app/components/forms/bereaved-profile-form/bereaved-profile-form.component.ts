@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserProfile, User, Address } from 'src/app/model';
+import { UtilsService } from 'src/app/services/utils.service';
 
 export interface BereavedProfileForm {
   email: string;
@@ -32,7 +33,8 @@ export class BereavedProfileFormComponent implements OnInit {
   public canTellInOtherLang = false;
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private utilsService: UtilsService
   ) { }
 
   ngOnInit() {
@@ -110,7 +112,7 @@ export class BereavedProfileFormComponent implements OnInit {
         email: this.email.value,
         firstName: this.firstName.value,
         lastName: this.lastName.value,
-        phoneNumber: this.phoneNumber.value,
+        phoneNumber: this.utilsService.toInternationalPhoneNumber(this.phoneNumber.value),
         address: this.address.value,
         birthDay: new Date(this.birthDay.value).getTime(),
         otherLang: this.otherLang.value
