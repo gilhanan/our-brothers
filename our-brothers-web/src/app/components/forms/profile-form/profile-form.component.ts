@@ -44,15 +44,26 @@ export class ProfileFormComponent implements OnInit {
       ],
       firstName: [
         profile.firstName,
-        Validators.required
+        [
+          Validators.required,
+          Validators.maxLength(20),
+          Validators.pattern(this.utilsService.sentencePattern)
+        ]
       ],
       lastName: [
         profile.lastName,
-        Validators.required
+        [
+          Validators.required,
+          Validators.maxLength(20),
+          Validators.pattern(this.utilsService.sentencePattern)
+        ]
       ],
       phoneNumber: [
         profile.phoneNumber,
-        Validators.required
+        [
+          Validators.required,
+          Validators.pattern(this.utilsService.phonePattern)
+        ]
       ],
       agree: [false, Validators.requiredTrue]
     });
@@ -82,8 +93,8 @@ export class ProfileFormComponent implements OnInit {
     if (this.form.valid) {
       const parsedForm: ProfileForm = {
         email: this.email.value,
-        firstName: this.firstName.value,
-        lastName: this.lastName.value,
+        firstName: this.firstName.value.trim(),
+        lastName: this.lastName.value.trim(),
         phoneNumber: this.utilsService.toInternationalPhoneNumber(this.phoneNumber.value)
       };
 

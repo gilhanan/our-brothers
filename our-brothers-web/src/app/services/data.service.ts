@@ -12,7 +12,8 @@ import {
   BereavedGuidance,
   BereavedProfile,
   UserRole,
-  UserProfile
+  UserProfile,
+  Contact
 } from '../model';
 
 export const MEMORIAL_YEAR = 2019;
@@ -364,6 +365,20 @@ export class DataService {
           throw error;
         })
     );
+  }
+
+  public postContact(contactForm: Contact, user?: User) {
+    contactForm.date = (new Date()).getTime();
+
+    return this.angularFireDatabase
+      .list<Contact>(`contacts/${user ? user.id : 'anonymous'}`).push(contactForm)
+      .then((result) => {
+        console.log(result);
+        return result;
+      }, (error) => {
+        console.log(error);
+        throw error;
+      });
   }
 
   private parseUserMeetings(map: Object): UserParticipationMeeting[] {

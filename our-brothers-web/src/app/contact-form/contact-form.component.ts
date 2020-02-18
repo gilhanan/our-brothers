@@ -1,41 +1,103 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
+import { User } from '../model';
+import { UtilsService } from '../services/utils.service';
+
+export interface ContactForm {
+  fullName: string;
+  email: string;
+  phoneNumber: string;
+  subject: string;
+  body: string;
+}
 
 @Component({
   selector: 'app-contact-form',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './contact-form.component.html',
   styleUrls: ['./contact-form.component.scss']
 })
 export class ContactFormComponent implements OnInit {
 
-  public contactForm: FormGroup;
+  @Input()
+  public user: User;
 
-  constructor(private fb: FormBuilder) { }
+  @Input()
+  public loading: boolean
+
+  @Output()
+  public submit = new EventEmitter<ContactForm>();
+
+  public form: FormGroup;
+
+  constructor(private fb: FormBuilder,
+    private utilsService: UtilsService) { }
 
   ngOnInit() {
-    this.contactForm = this.fb.group({
-      fullName: ['', Validators.required],
-      phone: ['', Validators.required],
-      email: [''],
-      subject: ['', Validators.required],
-      message: ['']
+    this.form = this.fb.group({
+      fullName: [
+        this.user && this.user.profile ? `${this.user.profile.firstName} ${this.user.profile.lastName}` : '',
+        [
+          Validators.required,
+          Validators.maxLength(20),
+          Validators.pattern(this.utilsService.sentencePattern)
+        ]
+      ],
+      phoneNumber: [
+        this.user && this.user.profile && this.user.profile.phoneNumber || '',
+        [
+          Validators.required,
+          Validators.pattern(this.utilsService.phonePattern)
+        ]
+      ],
+      email: [
+        this.user && this.user.profile && this.user.profile.email || '',
+        [Validators.email]
+      ],
+      subject: [
+        '',
+        [
+          Validators.maxLength(20),
+          Validators.pattern(this.utilsService.sentencePattern)
+        ]
+      ],
+      body: [
+        '',
+        [Validators.maxLength(300)]
+      ]
     });
   }
 
   get fullName() {
-    return this.contactForm.get('fullName');
+    return this.form.get('fullName');
   }
-  get phone() {
-    return this.contactForm.get('phone');
+  get phoneNumber() {
+    return this.form.get('phoneNumber');
   }
   get email() {
-    return this.contactForm.get('email');
+    return this.form.get('email');
   }
   get subject() {
-    return this.contactForm.get('subject');
+    return this.form.get('subject');
   }
-  get message() {
-    return this.contactForm.get('message');
+  get body() {
+    return this.form.get('body');
   }
 
+  public onSubmit() {
+    if (this.form.valid) {
+      const parsedForm: ContactForm = {
+        fullName: this.fullName.value.trim(),
+        email: this.email.value,
+        phoneNumber: this.utilsService.toInternationalPhoneNumber(this.phoneNumber.value),
+        subject: this.subject.value.trim(),
+        body: this.body.value
+      };
+
+      this.submit.emit(parsedForm);
+    } else {
+      this.form.markAllAsTouched();
+    }
+  }
 }

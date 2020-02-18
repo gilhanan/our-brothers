@@ -7,6 +7,9 @@ import { MEMORIAL_YEAR } from './data.service';
 })
 export class UtilsService {
 
+  public phonePattern = /^05\d{8}$/;
+  public sentencePattern = /^([A-Za-zא-ת\- '"])+$/;
+
   private readonly ISRAEL_PHONE_PREFIX = '972';
 
   private readonly ISRAEL_PHONE_PREFIX_REGEX = new RegExp(`^(\\+${this.ISRAEL_PHONE_PREFIX})?(0)?`)

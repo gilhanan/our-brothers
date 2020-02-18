@@ -36,5 +36,5 @@
 
 <div class="contact-form">
   <div class="medium-heading">נשמח לשמוע מכם</div>
-  <app-contact-form></app-contact-form>
+  <app-contact-form [user]="user" [loading]="postingContact" (submit)="onContactSubmit($event)"></app-contact-form>
 </div>
