@@ -180,8 +180,8 @@ function buildMail(contact: Contact, userId: string): Mail.Options {
     cc: 'info@ourbrothers.org'
   };
 
-  mailOptions.subject = 'פנייתך לאחים שלנו - ' + contact.subject;
-  mailOptions.text = 'שלום, ' + contact.name + '.' + '\n\n' + 'קיבלנו בהצלחה את פניתך ונחזור אליך בהקדם האפשרי';
+  mailOptions.subject = 'האחים שלנו - ' + contact.subject;
+  mailOptions.text = 'שלום, ' + contact.name + '.' + '\n\n' + '.קיבלנו בהצלחה את פניתך ונחזור אליך בהקדם האפשרי';
 
   if (contact.body) {
     mailOptions.text += '\n\n' + 'תוכן פניתך:' + '\n' + contact.body;

@@ -9,22 +9,28 @@ import { AdminBereavedsPageComponent } from './pages/admin-bereaveds-page/admin-
 import { TellPageComponent } from './pages/tell-page/tell-page.component';
 import { ParticipatePageComponent } from './pages/participate-page/participate-page.component';
 import { HostPageComponent } from './pages/host-page/host-page.component';
+import { HostGuard } from './guards/host.guard';
+import { TellGuard } from './guards/tell.guard';
+import { ParticipateGuard } from './guards/participate.guard';
 
 const routes: Routes = [
   {
     path: 'host',
     component: HostPageComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [HostGuard]
   },
   {
     path: 'tell',
     component: TellPageComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [TellGuard]
   },
   {
     path: 'participate',
     component: ParticipatePageComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [ParticipateGuard]
   },
   {
     path: 'meetings',
@@ -64,7 +70,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'})],
+  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })],
+  providers: [
+    HostGuard,
+    TellGuard,
+    ParticipateGuard
+  ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
