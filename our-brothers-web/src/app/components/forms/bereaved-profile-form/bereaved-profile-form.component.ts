@@ -57,7 +57,7 @@ export class BereavedProfileFormComponent implements OnInit {
         [
           Validators.required,
           Validators.maxLength(20),
-          Validators.pattern(this.utilsService.sentencePattern)
+          Validators.pattern(this.utilsService.namePattern)
         ]
       ],
       lastName: [
@@ -65,7 +65,7 @@ export class BereavedProfileFormComponent implements OnInit {
         [
           Validators.required,
           Validators.maxLength(20),
-          Validators.pattern(this.utilsService.sentencePattern)
+          Validators.pattern(this.utilsService.namePattern)
         ]
       ],
       phoneNumber: [

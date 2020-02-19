@@ -8,7 +8,8 @@ import { MEMORIAL_YEAR } from './data.service';
 export class UtilsService {
 
   public phonePattern = /^05\d{8}$/;
-  public sentencePattern = /^([A-Za-zא-ת\- '"])+$/;
+  public namePattern = /^([A-Za-zא-ת\- '"])+$/;
+  public subjectPattern = /^([A-Za-zא-ת\- \?\!\(\)\[\]\#'"])+$/;
 
   private readonly ISRAEL_PHONE_PREFIX = '972';
 

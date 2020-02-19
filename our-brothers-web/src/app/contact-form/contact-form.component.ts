@@ -5,7 +5,7 @@ import { User } from '../model';
 import { UtilsService } from '../services/utils.service';
 
 export interface ContactForm {
-  fullName: string;
+  name: string;
   email: string;
   phoneNumber: string;
   subject: string;
@@ -36,12 +36,12 @@ export class ContactFormComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
-      fullName: [
+      name: [
         this.user && this.user.profile ? `${this.user.profile.firstName} ${this.user.profile.lastName}` : '',
         [
           Validators.required,
-          Validators.maxLength(20),
-          Validators.pattern(this.utilsService.sentencePattern)
+          Validators.maxLength(30),
+          Validators.pattern(this.utilsService.namePattern)
         ]
       ],
       phoneNumber: [
@@ -53,14 +53,17 @@ export class ContactFormComponent implements OnInit {
       ],
       email: [
         this.user && this.user.profile && this.user.profile.email || '',
-        [Validators.email]
+        [
+          Validators.required,
+          Validators.email
+        ]
       ],
       subject: [
         '',
         [
           Validators.required,
-          Validators.maxLength(20),
-          Validators.pattern(this.utilsService.sentencePattern)
+          Validators.maxLength(30),
+          Validators.pattern(this.utilsService.subjectPattern)
         ]
       ],
       body: [
@@ -70,8 +73,8 @@ export class ContactFormComponent implements OnInit {
     });
   }
 
-  get fullName() {
-    return this.form.get('fullName');
+  get name() {
+    return this.form.get('name');
   }
   get phoneNumber() {
     return this.form.get('phoneNumber');
@@ -89,7 +92,7 @@ export class ContactFormComponent implements OnInit {
   public onSubmit() {
     if (this.form.valid) {
       const parsedForm: ContactForm = {
-        fullName: this.fullName.value.trim(),
+        name: this.name.value.trim(),
         email: this.email.value,
         phoneNumber: this.utilsService.toInternationalPhoneNumber(this.phoneNumber.value),
         subject: this.subject.value.trim(),
@@ -97,6 +100,9 @@ export class ContactFormComponent implements OnInit {
       };
 
       this.submit.emit(parsedForm);
+
+      this.form.reset();
+
     } else {
       this.form.markAllAsTouched();
     }

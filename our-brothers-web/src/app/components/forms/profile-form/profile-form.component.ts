@@ -47,7 +47,7 @@ export class ProfileFormComponent implements OnInit {
         [
           Validators.required,
           Validators.maxLength(20),
-          Validators.pattern(this.utilsService.sentencePattern)
+          Validators.pattern(this.utilsService.namePattern)
         ]
       ],
       lastName: [
@@ -55,7 +55,7 @@ export class ProfileFormComponent implements OnInit {
         [
           Validators.required,
           Validators.maxLength(20),
-          Validators.pattern(this.utilsService.sentencePattern)
+          Validators.pattern(this.utilsService.namePattern)
         ]
       ],
       phoneNumber: [

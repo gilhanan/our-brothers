@@ -1,3 +1,5 @@
+/// <reference types="../../types/models" />
+
 import { BrowserModule } from '@angular/platform-browser';
 import { registerLocaleData } from '@angular/common';
 import { NgModule, LOCALE_ID } from '@angular/core';

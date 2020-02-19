@@ -2,6 +2,16 @@ import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import * as express from 'express';
 import * as cors from 'cors';
+import * as nodemailer from 'nodemailer';
+import Mail = require('nodemailer/lib/mailer');
+
+import { Contact } from 'models';
+import { mailCredentials } from '../config';
+
+const mailTransport = nodemailer.createTransport({
+  service: 'gmail',
+  auth: mailCredentials,
+});
 
 admin.initializeApp();
 
@@ -61,6 +71,8 @@ app.post('/sms/reply', (req: express.Request, res: express.Response) => {
 
 export const api = functions.https.onRequest(app);
 
+// ========================= Auth =========================
+
 export const removeUserFromDatabase = functions.auth.user()
   .onDelete((event, context) => {
     console.log(`Deleting user {${event.uid}} from database.`);
@@ -86,6 +98,8 @@ export const addUserToDatabase = functions.auth.user()
         console.error(`Failed to set user {${event.uid}} registered date {${now}} to database.`, error);
       });
   });
+
+// ========================= Database =========================
 
 export const updateUserVolunteer = functions.database.ref('/users/{userId}/isVolunteer')
   .onWrite((event, context) => {
@@ -129,3 +143,57 @@ export const smsReply = functions.database.ref('/sms/replies/{number}/{messageId
 
     return true;
   });
+
+export const onUserContactCreate = functions.database.ref('/contacts/{userId}/{contactId}')
+  .onCreate((event, context) => {
+
+    const contact: Contact = event.val();
+
+    const { email, name, subject } = contact;
+
+    const { userId, contactId } = context.params;
+
+    if (!(email && name && subject)) {
+
+      console.warn(`Missing requirement fields for contact id {${contactId}}. email {${email}}. name {${name}} subject {${subject}}`)
+
+      return false;
+
+    } else {
+
+      const mailOptions = buildMail(contact, userId);
+
+      console.log(`Sending email for contact id {${contactId}}.`);
+
+      return mailTransport.sendMail(mailOptions)
+        .then(() => console.log(`Successfully sent email for contact id {${contactId}}.`))
+        .catch((error) => console.error(`Failed to send email for contact id {${contactId}}.`, error));
+    }
+  });
+
+// ========================= Utils =========================
+
+function buildMail(contact: Contact, userId: string): Mail.Options {
+  const mailOptions: Mail.Options = {
+    from: '"האחים שלנו" <website@ourbrothers.org>',
+    to: contact.email,
+    cc: 'info@ourbrothers.org'
+  };
+
+  mailOptions.subject = 'פנייתך לאחים שלנו - ' + contact.subject;
+  mailOptions.text = 'שלום, ' + contact.name + '.' + '\n\n' + 'קיבלנו בהצלחה את פניתך ונחזור אליך בהקדם האפשרי';
+
+  if (contact.body) {
+    mailOptions.text += '\n\n' + 'תוכן פניתך:' + '\n' + contact.body;
+  }
+
+  if (contact.phoneNumber) {
+    mailOptions.text += '\n\n' + 'טלפון ליצירת קשר: ' + contact.phoneNumber;
+  }
+
+  if (userId) {
+    mailOptions.text += '\n\n' + 'מזהה משתמש: ' + userId;
+  }
+
+  return mailOptions
+}

@@ -12,9 +12,9 @@ import {
   BereavedGuidance,
   BereavedProfile,
   UserRole,
-  UserProfile,
-  Contact
+  UserProfile
 } from '../model';
+import { Contact } from 'models';
 
 export const MEMORIAL_YEAR = 2019;
 

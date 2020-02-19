@@ -30,7 +30,7 @@ export class SlainFormComponent implements OnInit {
         [
           Validators.required,
           Validators.maxLength(20),
-          Validators.pattern(this.utilsService.sentencePattern)
+          Validators.pattern(this.utilsService.namePattern)
         ]
       ],
       lastName: [
@@ -38,7 +38,7 @@ export class SlainFormComponent implements OnInit {
         [
           Validators.required,
           Validators.maxLength(20),
-          Validators.pattern(this.utilsService.sentencePattern)
+          Validators.pattern(this.utilsService.namePattern)
         ]
       ],
       deathDate: ['', Validators.required],

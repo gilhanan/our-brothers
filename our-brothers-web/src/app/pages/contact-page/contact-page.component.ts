@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { User, Contact } from 'src/app/model';
+import { User } from 'src/app/model';
 import { AuthService } from 'src/app/services/auth.service';
 import { DataService } from 'src/app/services/data.service';
 import { ContactForm } from 'src/app/contact-form/contact-form.component';
+import { Contact } from 'models';
 
 @Component({
   selector: 'app-contact-page',
