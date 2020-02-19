@@ -7,9 +7,9 @@
       <div class="col col-links">
         <div class="title">ניווט</div>
         <div class="links">
-          <div class="link" routerLink="home">דף הבית</div>
-          <div class="link" routerLink="meetings">מפגשים</div>
-          <div class="link" routerLink="about">אודותינו</div>
+          <a class="site-link link" routerLink="home">דף הבית</a>
+          <a class="site-link link" routerLink="meetings">מפגשים</a>
+          <a class="site-link link" routerLink="about">אודותינו</a>
           <div class="link">מבנה הערב</div>
         </div>
       </div>
@@ -18,7 +18,7 @@
         <div class="links">
           <div class="link">שאלות</div>
           <div class="link">גלריה</div>
-          <div class="link" routerLink="contact">צור קשר</div>
+          <a class="site-link link" routerLink="contact">צור קשר</a>
           <div class="link">מדיניות פרטיות</div>
         </div>
       </div>
@@ -26,9 +26,12 @@
         <div class="title">מפגשים</div>
         <div class="links">
           <div class="link" routerLink="meetings">מפת מפגשים</div>
-          <div class="link" routerLink="tell">אני רוצה לספר</div>
-          <div class="link" routerLink="host">אני רוצה לארח</div>
-          <div class="link" routerLink="participate">אני רוצה להשתתף</div>
+          <a class="site-link link" [routerLink]="participationsService.isUserCanTell(user) ? null : 'tell'">אני רוצה
+            לספר</a>
+          <a class="site-link link" [routerLink]="participationsService.isUserCanHost(user) ? null : 'host'">לארח רוצה
+            לספר</a>
+          <a class="site-link link"
+            [routerLink]="participationsService.isUserCanParticipate(user) ? null : 'participate'">לארח רוצה להשתתף</a>
         </div>
       </div>
       <div class="col col-links">
@@ -91,7 +94,7 @@
     </a>
   </div>
   <div class="social-box">
-    <a href="tel:+972584094624">
+    <a href="tel:+972584094624" class="phone-link">
       <i class="fas fa-phone"></i>
     </a>
   </div>

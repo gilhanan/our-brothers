@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ParticipationsService } from 'src/app/services/participations.service';
+import { User } from 'src/app/model';
 
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss']
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent {
 
-  constructor() { }
+  @Input() public user: User;
 
-  ngOnInit() {
-  }
+  constructor(public participationsService: ParticipationsService) { }
 
 }
