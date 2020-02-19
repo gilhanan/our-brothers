@@ -10,22 +10,22 @@
           <a class="site-link link" routerLink="home">דף הבית</a>
           <a class="site-link link" routerLink="meetings">מפגשים</a>
           <a class="site-link link" routerLink="about">אודותינו</a>
-          <div class="link">מבנה הערב</div>
+          <a class="site-link link">מבנה הערב</a>
         </div>
       </div>
       <div class="col col-links">
         <div class="title"></div>
         <div class="links">
-          <div class="link">שאלות</div>
-          <div class="link">גלריה</div>
+          <a class="site-link link">שאלות</a>
+          <a class="site-link link">גלריה</a>
           <a class="site-link link" routerLink="contact">צור קשר</a>
-          <div class="link">מדיניות פרטיות</div>
+          <a class="site-link link">מדיניות פרטיות</a>
         </div>
       </div>
       <div class="col col-links">
         <div class="title">מפגשים</div>
         <div class="links">
-          <div class="link" routerLink="meetings">מפת מפגשים</div>
+          <a class="site-link link" routerLink="meetings">מפת מפגשים</a>
           <a class="site-link link" [routerLink]="participationsService.isUserCanTell(user) ? null : 'tell'">אני רוצה
             לספר</a>
           <a class="site-link link" [routerLink]="participationsService.isUserCanHost(user) ? null : 'host'">לארח רוצה
@@ -37,10 +37,10 @@
       <div class="col col-links">
         <div class="title">אודותינו</div>
         <div class="links">
-          <div class="link">רקע</div>
-          <div class="link">השותפים שלנו</div>
-          <div class="link">עלינו בתקשורת</div>
-          <div class="link">כותבים עלינו</div>
+          <a class="site-link link">רקע</a>
+          <a class="site-link link">השותפים שלנו</a>
+          <a class="site-link link">עלינו בתקשורת</a>
+          <a class="site-link link">כותבים עלינו</a>
         </div>
       </div>
       <div class="col col-details">
@@ -50,13 +50,13 @@
             <span>
               טלפון:
             </span>
-            <a href="tel:+972584094624" class="phone-link">058-409-4624</a>
+            <a href="tel:+972584094624" class="site-link">058-409-4624</a>
           </div>
           <div>
             <span>
               אימייל:
             </span>
-            <a href="mailto:info@ourbrothers.org" class="email-link">info@ourbrothers.org</a>
+            <a href="mailto:info@ourbrothers.org" class="site-link">info@ourbrothers.org</a>
           </div>
         </div>
         <div class="socials">
@@ -89,14 +89,18 @@
 
 <div class="footer-mobile-sticky">
   <div class="social-box">
-    <a href="mailto:info@ourbrothers.org" class="email-link">
+    <a href="mailto:info@ourbrothers.org" class="site-link">
       <i class="far fa-envelope"></i>
     </a>
   </div>
   <div class="social-box">
-    <a href="tel:+972584094624" class="phone-link">
+    <a href="tel:+972584094624" class="site-link">
       <i class="fas fa-phone"></i>
     </a>
   </div>
-  <div class="social-box"><i class="fab fa-whatsapp"></i></div>
+  <div class="social-box">
+    <a href="javascript:void(0)" class="site-link">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+  </div>
 </div>
