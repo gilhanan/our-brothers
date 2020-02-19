@@ -1,3 +1,7 @@
+<div class="show-full-meetings-container">
+  <app-checkbox class="show-full-meetings" [checked]="showFullMeetings" (checkedChanged)="showFullMeetingsChanged($event)"
+    [label]="'הצג מפגשים מלאים'"></app-checkbox>
+</div>
 <app-list-header [(sort)]="sortedColumn" (sortChange)="sort()" class="list-header">
   <app-list-column [field]="'title'">
     שם מפגש

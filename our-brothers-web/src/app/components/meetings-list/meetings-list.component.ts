@@ -19,6 +19,8 @@ export class MeetingsListComponent implements OnChanges {
 
   @Output() joinMeeting = new EventEmitter<Meeting>();
 
+  showFullMeetings = false;
+  filteredMeetings: Meeting[] = [];
   sortedMeetings: Meeting[] = [];
   sortedColumn: SortedColumn = {
     column: 'title',
@@ -30,6 +32,7 @@ export class MeetingsListComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.meetings || changes.user) {
       this.meetings = this.meetings || [];
+      this.filter();
       this.sort();
     }
   }
@@ -38,8 +41,22 @@ export class MeetingsListComponent implements OnChanges {
     return item.id;
   }
 
+  showFullMeetingsChanged(showFullMeetings: boolean) {
+    this.showFullMeetings = showFullMeetings;
+
+    this.filter();
+  }
+
+  filter() {
+    this.filteredMeetings = this.showFullMeetings ?
+      this.meetings.slice() :
+      this.meetings.filter(meeting => this.participationsService.isUserCanParticipatingEvent(this.user, meeting));
+
+    this.sort();
+  }
+
   sort() {
-    this.sortedMeetings = this.meetings.slice();
+    this.sortedMeetings = this.filteredMeetings.slice();
 
     const column = this.sortedColumn.column;
 
