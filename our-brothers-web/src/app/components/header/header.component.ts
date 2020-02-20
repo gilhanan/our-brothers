@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, HostListener, OnInit } from '@angular/core';
 import { User } from 'firebase';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -12,7 +12,7 @@ class HeaderSubMenus {
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit, OnDestroy {
+export class HeaderComponent implements OnInit {
   isMobileView = false;
   subMenusStates: HeaderSubMenus = {
     meetings: false,
@@ -23,7 +23,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(public authService: AuthService) { }
 
-  updateMobileViewState = () => this.isMobileView = window.innerWidth <= 1400;
+  ngOnInit() {
+    this.updateMobileViewState(window.innerWidth);
+  }
+
+  @HostListener('window:resize', ['$event.target.innerWidth'])
+  updateMobileViewState(width) {
+    this.isMobileView = width <= 1400;
+  }
 
   toggleSubMenu(subMenu: keyof HeaderSubMenus): void {
     this.subMenusStates[subMenu] = !this.subMenusStates[subMenu];
@@ -34,14 +41,5 @@ export class HeaderComponent implements OnInit, OnDestroy {
         }
       }
     }
-  }
-
-  ngOnInit() {
-    this.updateMobileViewState();
-    window.addEventListener('resize', this.updateMobileViewState);
-  }
-
-  ngOnDestroy(): void {
-    window.removeEventListener('resize', this.updateMobileViewState);
   }
 }
