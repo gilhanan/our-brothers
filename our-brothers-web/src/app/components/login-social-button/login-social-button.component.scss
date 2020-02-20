@@ -1,0 +1,41 @@
+.button {
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+
+  .icon {
+    flex: 0 0 55px;
+    position: relative;
+
+    img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .divider {
+    flex: 0 0 1px;
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+
+  .text {
+    flex: 1;
+    color: white;
+    font-size: 18px;
+    line-height: 40px;
+    font-family: "Heebo";
+  }
+
+  &.google {
+    background-color: rgb(222, 75, 57);
+  }
+
+  &.facebook {
+    background-color: rgb(58, 90, 152);
+  }
+}

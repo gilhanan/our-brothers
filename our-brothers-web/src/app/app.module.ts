@@ -74,6 +74,8 @@ import { HostFormComponent } from './components/forms/host-form/host-form.compon
 import { TeamPageComponent } from './pages/team-page/team-page.component';
 import { TeamCardComponent } from './team-card/team-card.component';
 import { PlacesSelectComponent } from './components/places-select/places-select.component';
+import { ForgotPasswordFormComponent } from './components/forms/forgot-password-form/forgot-password-form.component';
+import { LoginSocialButtonComponent } from './components/login-social-button/login-social-button.component';
 
 registerLocaleData(localeHe);
 
@@ -136,7 +138,9 @@ registerLocaleData(localeHe);
     HostFormComponent,
     TeamPageComponent,
     TeamCardComponent,
-    PlacesSelectComponent
+    PlacesSelectComponent,
+    ForgotPasswordFormComponent,
+    LoginSocialButtonComponent
   ],
   imports: [
     BrowserModule,

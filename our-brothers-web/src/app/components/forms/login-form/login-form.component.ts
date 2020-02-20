@@ -1,6 +1,10 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+
+export interface LoginForm {
+  email: string;
+  password: string;
+}
 
 @Component({
   selector: 'app-login-form',
@@ -8,44 +12,49 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
   styleUrls: ['./login-form.component.scss']
 })
 export class LoginFormComponent implements OnInit {
-  @Output() haveNoUser = new EventEmitter<null>();
-  public loginForm: FormGroup;
 
-  constructor(private authService: AuthService, private fb: FormBuilder) {}
+  @Input() loading: boolean;
+
+  @Output() haveNoUser = new EventEmitter<void>();
+  @Output() forgotPassword = new EventEmitter<void>();
+  @Output() signInWithEmailAndPassword = new EventEmitter<LoginForm>();
+  @Output() signInWithGoogle = new EventEmitter<void>();
+  @Output() signInWithFacebook = new EventEmitter<void>();
+
+  public form: FormGroup;
+
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
-    this.loginForm = this.fb.group({
+    this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      pass: ['', Validators.required],
+      password: ['', Validators.required],
       rememberMe: [false]
     });
   }
 
   get email() {
-    return this.loginForm.get('email');
+    return this.form.get('email');
   }
 
-  get pass() {
-    return this.loginForm.get('pass');
+  get password() {
+    return this.form.get('password');
   }
 
   get rememberMe() {
-    return this.loginForm.get('rememberMe');
+    return this.form.get('rememberMe');
   }
 
-  signInWithGoogle() {
-    this.authService.googleLogin();
-  }
+  public onSubmit() {
+    if (this.form.valid) {
+      const parsedForm: LoginForm = {
+        email: this.email.value,
+        password: this.password.value
+      }
 
-  signInWithFacebook() {
-    this.authService.facebookLogin();
-  }
-
-  signInWithEmailAndPass() {
-    if (this.loginForm.valid) {
-      this.authService.emailPassLogin(this.email.value, this.pass.value);
+      this.signInWithEmailAndPassword.emit(parsedForm);
     } else {
-      this.loginForm.markAllAsTouched();
+      this.form.markAllAsTouched();
     }
   }
 }

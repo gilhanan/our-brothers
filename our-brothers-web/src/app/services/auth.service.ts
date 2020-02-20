@@ -78,17 +78,17 @@ export class AuthService {
     }
   }
 
-  public googleLogin(): Promise<auth.UserCredential> {
+  public signInWithGoogle(): Promise<auth.UserCredential> {
     const provider = new auth.GoogleAuthProvider();
     return this.socialSignIn(provider);
   }
 
-  public facebookLogin(): Promise<auth.UserCredential> {
+  public signInWithFacebook(): Promise<auth.UserCredential> {
     const provider = new auth.FacebookAuthProvider();
     return this.socialSignIn(provider);
   }
 
-  public emailPassLogin(
+  public signInWithEmailAndPassword(
     email: string,
     password: string
   ): Promise<auth.UserCredential> {
@@ -98,7 +98,7 @@ export class AuthService {
     );
   }
 
-  public emailPassRegistration(
+  public createUserWithEmailAndPassword(
     email: string,
     password: string
   ): Promise<auth.UserCredential> {
@@ -108,11 +108,23 @@ export class AuthService {
     );
   }
 
+  public resetPassword(email: string) {
+    return this.angularFireAuth.auth.sendPasswordResetEmail(email)
+      .catch((error) => {
+        console.log(error);
+        throw error;
+      });
+  }
+
   public signOut() {
     return this.angularFireAuth.auth.signOut();
   }
 
   public requestToLogin() {
     this.needLogin$.next(true);
+  }
+
+  public closeLogin() {
+    this.needLogin$.next(false);
   }
 }

@@ -1,58 +1,39 @@
-<div class="form-title">
-  התחברות
-</div>
-<div class="user-type-container"></div>
-<ng-container [formGroup]="loginForm">
-  <input
-    type="text"
-    placeholder="אימייל"
-    class="login-form-input"
-    formControlName="email"
-    [class.invalid]="!email.valid && email.touched"
-  />
-  <input
-    type="password"
-    placeholder="סיסמא"
-    class="login-form-input"
-    formControlName="pass"
-    [class.invalid]="!pass.valid && pass.touched"
-  />
-</ng-container>
-<div class="login-footer">
-  <div class="login-foorter-buttons-container">
-    <div class="login-foorter-button" (click)="haveNoUser.emit()">
-      אין לי משתמש
+<div class="login-form">
+  <div class="body">
+    <div class="title">
+      התחברות
     </div>
-    <div class="login-foorter-divider"></div>
-    <div class="login-foorter-button">
-      שכחתי סיסמא
+    <ng-container [formGroup]="form">
+      <input type="text" placeholder="אימייל" class="input" formControlName="email"
+        [class.invalid]="!email.valid && email.touched" />
+      <input type="password" placeholder="סיסמא" class="input" formControlName="password"
+        [class.invalid]="!password.valid && password.touched" />
+    </ng-container>
+    <div class="footer">
+      <div class="nav-buttons">
+        <button class="nav-button" (click)="haveNoUser.emit()">
+          אין לי משתמש
+        </button>
+        <div class="divider"></div>
+        <button class="nav-button" (click)="forgotPassword.emit()">
+          שכחתי סיסמא
+        </button>
+      </div>
+      <div class="remember-me-container">
+        <app-checkbox label="זכור אותי" [checked]="rememberMe.value" (checkedChanged)="rememberMe.setValue($event)">
+        </app-checkbox>
+      </div>
     </div>
-  </div>
-  <div class="remember-me-container">
-    <app-checkbox
-      label="זכור אותי"
-      [checked]="rememberMe.value"
-      (checkedChanged)="rememberMe.setValue($event)"
-    ></app-checkbox>
-  </div>
-</div>
-<div class="login-with-buttons">
-  <div class="login-with-button facebook" (click)="signInWithFacebook()">
-    <div class="login-with-button-icon">
-      <img src="../../../../assets/img/facebook-login-icon.png" />
-    </div>
-    <div class="login-with-button-divider"></div>
-    <div class="login-with-button-text">
-      <p>התחבר עם פייסבוק</p>
+    <div class="social-buttons">
+      <app-login-social-button class="social-button" [type]="'facebook'" (click)="signInWithFacebook.emit()">
+        התחבר עם פייסבוק
+      </app-login-social-button>
+      <app-login-social-button class="social-button" [type]="'google'" (click)="signInWithGoogle.emit()">
+        התחבר עם גוגל
+      </app-login-social-button>
     </div>
   </div>
-  <div class="login-with-button google" (click)="signInWithGoogle()">
-    <div class="login-with-button-icon">
-      <img src="../../../../assets/img/google-login-icon.png" />
-    </div>
-    <div class="login-with-button-divider"></div>
-    <div class="login-with-button-text">
-      <p>התחבר עם גוגל</p>
-    </div>
-  </div>
+  <button class="site-button main-button" tabindex="5" (click)="onSubmit()" [disabled]="loading">
+    התחבר
+  </button>
 </div>

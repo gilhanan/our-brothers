@@ -1,6 +1,10 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/services/auth.service';
+
+export interface RegistrationForm {
+  email: string;
+  password: string;
+}
 
 @Component({
   selector: 'app-registration-form',
@@ -8,54 +12,55 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./registration-form.component.scss']
 })
 export class RegistrationFormComponent implements OnInit {
-  @Output() haveUser = new EventEmitter<null>();
-  public registrationForm: FormGroup;
 
-  constructor(private authService: AuthService, private fb: FormBuilder) {}
+  @Input() loading: boolean;
+
+  @Output() haveUser = new EventEmitter<void>();
+  @Output() signUpWithEmailAndPassword = new EventEmitter<RegistrationForm>();
+  @Output() signUpWithGoogle = new EventEmitter<void>();
+  @Output() signUpWithFacebook = new EventEmitter<void>();
+
+  public form: FormGroup;
+
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
-    this.registrationForm = this.fb.group(
+    this.form = this.fb.group(
       {
         email: ['', [Validators.required, Validators.email]],
-        pass: ['', [Validators.required, Validators.minLength(6)]],
-        passConfirm: ['', Validators.required]
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        passwordConfirm: ['', Validators.required]
       },
       { validator: this.checkPasswords }
     );
   }
 
   checkPasswords(group: FormGroup) {
-    const pass = group.get('pass').value;
-    const confirmPass = group.get('passConfirm').value;
-
-    return pass === confirmPass ? null : { notSame: true };
+    return group.get('password').value === group.get('passwordConfirm').value ? null : { notSame: true };
   }
 
   get email() {
-    return this.registrationForm.get('email');
+    return this.form.get('email');
   }
 
-  get pass() {
-    return this.registrationForm.get('pass');
+  get password() {
+    return this.form.get('password');
   }
 
-  get passConfirm() {
-    return this.registrationForm.get('passConfirm');
+  get passwordConfirm() {
+    return this.form.get('passwordConfirm');
   }
 
-  signInWithGoogle() {
-    this.authService.googleLogin();
-  }
+  public onSubmit() {
+    if (this.form.valid) {
+      const parsedForm: RegistrationForm = {
+        email: this.email.value,
+        password: this.password.value
+      }
 
-  signInWithFacebook() {
-    this.authService.facebookLogin();
-  }
-
-  registerWithEmailAndPass() {
-    if (this.registrationForm.valid) {
-      this.authService.emailPassRegistration(this.email.value, this.pass.value);
+      this.signUpWithEmailAndPassword.emit(parsedForm);
     } else {
-      this.registrationForm.markAllAsTouched();
+      this.form.markAllAsTouched();
     }
   }
 }

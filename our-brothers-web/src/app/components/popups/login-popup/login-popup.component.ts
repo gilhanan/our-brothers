@@ -1,66 +1,63 @@
 import {
   Component,
-  OnInit,
   Input,
-  QueryList,
-  ViewChildren,
-  AfterViewInit
+  ViewChild
 } from '@angular/core';
-import { LoginFormComponent } from '../../forms/login-form/login-form.component';
-import { startWith } from 'rxjs/operators';
-import { RegistrationFormComponent } from '../../forms/registration-form/registration-form.component';
+import { LoginFormComponent, LoginForm } from '../../forms/login-form/login-form.component';
+import { RegistrationFormComponent, RegistrationForm } from '../../forms/registration-form/registration-form.component';
+import { ForgotPasswordFormComponent, ForgotPasswordForm } from '../../forms/forgot-password-form/forgot-password-form.component';
+import { AuthService } from 'src/app/services/auth.service';
+
+type Mode = 'Login' | 'Register' | 'Forgot';
 
 @Component({
   selector: 'app-login-popup',
   templateUrl: './login-popup.component.html',
   styleUrls: ['./login-popup.component.scss']
 })
-export class LoginPopupComponent implements OnInit, AfterViewInit {
-  @Input() mode = 'Login';
-  @ViewChildren(LoginFormComponent) loginFormQuery: QueryList<
-    LoginFormComponent
-  >;
-  @ViewChildren(RegistrationFormComponent) registrationFormQuery: QueryList<
-    RegistrationFormComponent
-  >;
+export class LoginPopupComponent {
+  @Input() mode: Mode = 'Login';
 
-  private loginFormComponent: LoginFormComponent;
-  private registrationFormComponent: RegistrationFormComponent;
+  @ViewChild(LoginFormComponent, { static: false }) loginForm: LoginFormComponent;
+  @ViewChild(RegistrationFormComponent, { static: false }) registrationForm: RegistrationFormComponent;
+  @ViewChild(ForgotPasswordFormComponent, { static: false }) forgotPasswordForm: ForgotPasswordFormComponent;
 
-  constructor() { }
+  loading: boolean;
 
-  ngOnInit() { }
+  constructor(public authService: AuthService) { }
 
-  ngAfterViewInit() {
-    this.loginFormQuery.changes.pipe(startWith(null)).subscribe(() => {
-      if (this.loginFormQuery.first) {
-        this.loginFormComponent = this.loginFormQuery.first;
-      }
-    });
-
-    this.registrationFormQuery.changes.pipe(startWith(null)).subscribe(() => {
-      if (this.registrationFormQuery.first) {
-        this.registrationFormComponent = this.registrationFormQuery.first;
-      }
-    });
+  signInWithEmailAndPassword(form: LoginForm) {
+    this.loading = true;
+    this.authService.signInWithEmailAndPassword(form.email, form.password).finally(() => this.loading = false);
   }
 
-  moveToLogin() {
-    this.mode = 'Login';
+  signInWithFacebook() {
+    this.loading = true;
+    this.authService.signInWithFacebook().finally(() => this.loading = false);
   }
 
-  moveToRegister() {
-    this.mode = 'Register';
+  signInWithGoogle() {
+    this.loading = true;
+    this.authService.signInWithGoogle().finally(() => this.loading = false);
   }
 
-  LoginOrRegister() {
-    switch (this.mode) {
-      case 'Login':
-        this.loginFormComponent.signInWithEmailAndPass();
-        break;
-      case 'Register':
-        this.registrationFormComponent.registerWithEmailAndPass();
-        break;
-    }
+  createUserWithEmailAndPassword(form: RegistrationForm) {
+    this.loading = true;
+    this.authService.createUserWithEmailAndPassword(form.email, form.password).finally(() => this.loading = false);
+  }
+
+  resetPassword(form: ForgotPasswordForm) {
+    this.loading = true;
+    this.authService.resetPassword(form.email)
+      .catch((error: any) => {
+        if (error.code === 'auth/user-not-found') {
+          return true;
+        } else {
+          alert('שגיאה');
+        }
+      })
+      .then(() => {
+        alert('נשלח בהצלחה מייל לאיפוס סיסמא.');
+      })
   }
 }

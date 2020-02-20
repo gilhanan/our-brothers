@@ -1,0 +1,9 @@
+<button [class]="'button ' + type">
+  <div class="icon">
+    <img [src]="icon()" />
+  </div>
+  <div class="divider"></div>
+  <div class="text">
+    <ng-content></ng-content>
+  </div>
+</button>
