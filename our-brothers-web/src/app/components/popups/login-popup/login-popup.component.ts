@@ -28,7 +28,9 @@ export class LoginPopupComponent {
 
   signInWithEmailAndPassword(form: LoginForm) {
     this.loading = true;
-    this.authService.signInWithEmailAndPassword(form.email, form.password).finally(() => this.loading = false);
+    this.authService.signInWithEmailAndPassword(form.email, form.password).catch((error) => {
+      alert('סיסמא לא נכונה.');
+    }).finally(() => this.loading = false);
   }
 
   signInWithFacebook() {

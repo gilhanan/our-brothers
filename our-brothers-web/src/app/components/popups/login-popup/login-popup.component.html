@@ -11,7 +11,7 @@
         הרשמה
       </button>
     </div>
-    <div class="popup-content-container">
+    <div class="content-container">
       <ng-container [ngSwitch]="mode">
         <app-login-form *ngSwitchCase="'Login'" [loading]="loading"
           (signInWithEmailAndPassword)="signInWithEmailAndPassword($event)" (signInWithFacebook)="signInWithFacebook()"

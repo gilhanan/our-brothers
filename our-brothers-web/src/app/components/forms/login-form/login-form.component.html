@@ -19,10 +19,6 @@
           שכחתי סיסמא
         </button>
       </div>
-      <div class="remember-me-container">
-        <app-checkbox label="זכור אותי" [checked]="rememberMe.value" (checkedChanged)="rememberMe.setValue($event)">
-        </app-checkbox>
-      </div>
     </div>
     <div class="social-buttons">
       <app-login-social-button class="social-button" [type]="'facebook'" (click)="signInWithFacebook.emit()">

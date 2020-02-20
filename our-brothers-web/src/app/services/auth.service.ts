@@ -13,14 +13,6 @@ export enum LoginMethod {
   GOOGLE
 }
 
-export interface LoginOptions {
-  credentials: {
-    email: string;
-    pass: string;
-  };
-  remember: boolean;
-}
-
 @Injectable({
   providedIn: 'root'
 })
