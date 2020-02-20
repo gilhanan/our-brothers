@@ -1,92 +1,57 @@
-.header-out {
-  height: 90px; /* 74 + 16 */
+.header {
   position: sticky;
-  top: -16px;
-  z-index: 1;
+  top: 0;
   width: 100%;
   background-color: white;
   z-index: 2;
-}
-
-.header-out::before,
-.header-out::after {
-  content: '';
-  display: block;
-  height: 16px;
-  position: sticky;
-}
-
-.header-out::before {
-  top: 58px; /* 84 - 16 */
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
-}
-
-.header-out::after {
-  background: linear-gradient(white, rgba(255, 255, 255, 0));
-  top: 0;
-  z-index: 2;
-}
-
-.header-out > div {
-  background: white;
-  height: 74px;
-  /*padding: 20px;*/
-  position: sticky;
-  top: 0;
-  margin-top: -16px;
-  z-index: 3;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-.header {
-  width: calc(100% - 200px);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  overflow: hidden;
+  padding: 1em 100px;
 
   .action-buttons {
     flex: 0 0 auto;
     display: flex;
+    align-items: center;
 
-    * {
+    %header-button {
+      border-radius: 4px;
+      height: 35px;
       cursor: pointer;
     }
-
     .action-header-support-us {
-      border-radius: 4px;
-      width: 144px;
-      height: 35px;
+      @extend %header-button;
       margin-left: 10px;
     }
 
     .action-header-login {
-      border-radius: 4px;
-      height: 35px;
+      @extend %header-button;
     }
   }
 
   .logo-header {
     cursor: pointer;
-    flex: 0 0 135px;
+    flex: 0 0 auto;
     height: 55px;
+    width: 135px;
     background-image: url(../../../assets/img/logo.png);
-    background-size: 100%;
+    background-size: contain;
     background-repeat: no-repeat;
   }
 
-  .links-header {
-    display: inline-flex;
-    justify-content: center;
-    padding-left: 40px;
-    padding-right: 40px;
-    flex: 0 0 auto;
+  .site-close-icon {
+    display: none;
+  }
 
-    button {
-      border: none;
-      background: none;
-      outline: none;
+  .links-header {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+
+    & li:last-of-type .link-header {
+      margin-left: 0;
     }
     
     .link-header {
@@ -97,13 +62,10 @@
       font-size: 19px;
       font-weight: 500;
       position: relative;
-
-      &:not(:last-child) {
-        margin-left: 45px;
-      }
+      margin-left: 20px;
 
       &.current-page {
-        font-weight: 600;
+        font-weight: bold;
       }
 
       &.link-header:hover:before,
@@ -181,34 +143,71 @@
   }
 }
 
-@media only screen and (max-width: 1400px) {
-  .links-header {
-    .link-header {
-      &:not(:last-child) {
-        margin-left: 20px !important;
+@media only screen and (max-width: 1200px) {
+  .header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 100%;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    padding: 1.5em;
+    box-shadow: -10px 0px 2px 0px rgba(0,160,153,0.75);
+
+    .site-close-icon {
+      display: block;
+    }
+
+    .logo-header {
+      display: none;
+    }
+
+    .links-header {
+      flex-direction: column;
+      align-items: stretch;
+      margin: 1.5em 0;
+
+      li {
+        border-bottom: 1px solid rgba(0,160,153);
+        padding: 0.5em 0;
+
+        .link-header {
+          margin: 0;
+          cursor: pointer;
+
+          &.link-header:hover:before,
+          &.current-page::before {
+            animation-name: none;
+            display: none;
+          }
+
+          &.link-header:hover:after,
+          &.current-page::after {
+            animation-name: none;
+            display: none;
+          }
+        }
+      }
+    }
+    .action-buttons {
+      flex-direction: column;
+
+      .action-header-support-us {
+        margin-left: 0;
+        margin-bottom: 1em;
+      }
+
+      .action-header-support-us, .action-header-login {
+        width: 75%;
       }
     }
   }
-  .logo-header {
-    background-repeat: no-repeat;
-    flex: 0 0 120px;
-    height: 50px;
-  }
 }
 
-@media only screen and (max-width: 700px) {
-  .header-out {
-    justify-content: center;
-  }
+@media only screen and (max-width: 1400px) {
   .header {
-    justify-content: center;
-
-    .links-header {
-      display: none;
-    }
-
-    .action-buttons {
-      display: none;
-    }
+    padding: 1em 50px;
   }
 }
