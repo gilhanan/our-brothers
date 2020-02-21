@@ -95,7 +95,7 @@ export class TellPageComponent implements OnInit {
   }
 
   onGuidanceSubmit(bereavedGuidance: BereavedGuidance) {
-    this.dataService.setBereavedGuidanceAnswer(this.user, bereavedGuidance);
+    this.dataService.setBereavedGuidance(this.user, bereavedGuidance);
   }
 
   onJoinMeeting(meeting: Meeting) {

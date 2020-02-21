@@ -40,9 +40,7 @@ export class MeetingsPageComponent implements OnInit {
   onMapGuideCompleted() {
     this.mapShowGuide = true;
     if (this.user && this.user.id) {
-      this.dataService.updateUserData(this.user.id, {
-        meetingMapGuideLastVisit: Date.now()
-      });
+      this.dataService.updateUserMapGuideLastVisit(this.user.id);
     }
   }
 

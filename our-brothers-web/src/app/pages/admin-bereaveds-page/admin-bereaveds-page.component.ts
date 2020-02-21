@@ -90,7 +90,7 @@ export class AdminBereavedsPageComponent implements OnInit {
 
   bereavedGuidance({ bereaved, guidance }: UpdateBereavedGuidance) {
     if (bereaved) {
-      this.dataService.setBereavedGuidance(bereaved, guidance);
+      this.dataService.setBereavedGuidanceGeneral(bereaved, guidance);
     }
   }
 }
