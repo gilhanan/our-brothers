@@ -3,22 +3,35 @@
 </div>
 <div class="form" [formGroup]="form">
   <div class="form-row">
-    <input type="text" placeholder="שם פרטי" class="form-field input" formControlName="firstName"
-      [class.invalid]="!firstName.valid && firstName.touched" />
-    <input type="text" placeholder="שם משפחה" class="form-field input" formControlName="lastName"
-      [class.invalid]="!lastName.valid && lastName.touched" />
+    <div class="col">
+      <input type="text" placeholder="שם פרטי" class="form-field" formControlName="firstName"
+        [class.invalid]="!firstName.valid && firstName.touched" />
+    </div>
+    <div class="col">
+      <input type="text" placeholder="שם משפחה" class="form-field" formControlName="lastName"
+        [class.invalid]="!lastName.valid && lastName.touched" />
+    </div>
   </div>
   <div class="form-row">
-    <input type="email" placeholder="אימייל" class="form-field input" formControlName="email"
-      [class.invalid]="!email.valid && email.touched" />
-    <input type="tel" placeholder="פלאפון" class="form-field input" pattern="[0-9]{10}" formControlName="phoneNumber"
-      [class.invalid]="!phoneNumber.valid && phoneNumber.touched" />
+    <div class="col">
+      <input type="email" placeholder="אימייל" class="form-field" formControlName="email"
+        [class.invalid]="!email.valid && email.touched" />
+    </div>
+    <div class="col">
+      <input type="tel" placeholder="פלאפון" class="form-field" pattern="[0-9]{10}" formControlName="phoneNumber"
+        [class.invalid]="!phoneNumber.valid && phoneNumber.touched" />
+    </div>
   </div>
   <div class="form-row">
-    <app-places-select class="input" [types]="['(cities)']" [placeholder]="'כתובת'" (change)="address.setValue($event)"
-      [invalid]="!address.valid && address.touched"></app-places-select>
-    <input type="text" placeholder="תאריך לידה" class="form-field input" formControlName="birthDay"
-      [class.invalid]="!birthDay.valid && birthDay.touched" onfocus="(this.type='date')" onblur="(this.type='text')" />
+    <div class="col">
+      <app-places-select [types]="['(cities)']" [placeholder]="'כתובת'" (change)="address.setValue($event)"
+        [invalid]="!address.valid && address.touched"></app-places-select>
+    </div>
+    <div class="col">
+      <input type="text" placeholder="תאריך לידה" class="form-field" formControlName="birthDay"
+        [class.invalid]="!birthDay.valid && birthDay.touched" onfocus="(this.type='date')"
+        onblur="(this.type='text')" />
+    </div>
   </div>
   <div class="other-lang-input">
     <span>

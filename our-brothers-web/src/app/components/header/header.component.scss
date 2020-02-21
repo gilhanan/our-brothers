@@ -1,7 +1,8 @@
 .header {
-  position: sticky;
+  position: fixed;
   top: 0;
-  width: 100%;
+  right: 0;
+  left: 0;
   background-color: white;
   z-index: 2;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
@@ -53,7 +54,7 @@
     & li:last-of-type .link-header {
       margin-left: 0;
     }
-    
+
     .link-header {
       cursor: pointer;
       text-decoration: none;
