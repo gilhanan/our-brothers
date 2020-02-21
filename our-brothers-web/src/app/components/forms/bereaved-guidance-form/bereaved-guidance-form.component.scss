@@ -1,0 +1,18 @@
+.training-container {
+  max-width: 770px;
+  margin: auto;
+  margin-bottom: 40px;
+
+  .training-text {
+    margin-bottom: 20px;
+  }
+
+  .training-option {
+    padding-bottom: 10px;
+    padding-top: 10px;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+  }
+}

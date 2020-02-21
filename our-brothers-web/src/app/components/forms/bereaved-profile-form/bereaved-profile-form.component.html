@@ -29,8 +29,8 @@
     </div>
     <div class="col">
       <input type="text" placeholder="תאריך לידה" class="form-field" formControlName="birthDay"
-        [class.invalid]="!birthDay.valid && birthDay.touched" onfocus="(this.type='date')"
-        onblur="(this.type='text')" />
+        [class.invalid]="!birthDay.valid && birthDay.touched" [max]="maxDate"
+        onfocus="(this.type='date')" onblur="(this.type='text')" />
     </div>
   </div>
   <div class="other-lang-input">

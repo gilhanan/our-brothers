@@ -20,6 +20,8 @@ export class SlainFormComponent implements OnInit {
   @Output()
   public submit = new EventEmitter<SlainForm>()
 
+  public maxDate = new Date().toISOString().split('T')[0];
+
   constructor(private fb: FormBuilder,
     private utilsService: UtilsService) { }
 

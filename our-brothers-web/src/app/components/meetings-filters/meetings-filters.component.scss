@@ -5,14 +5,20 @@
   .free-text-filter-col {
     flex: 1;
     padding: 15px;
+
+    @media only screen and (max-width: 650px) {
+      padding: 5px;
+    }
   }
 
   .view-toggle-col {
     flex: 0;
     padding: 15px;
 
-    .view-toggle.map {
-      @media only screen and (max-width: 650px) {
+    @media only screen and (max-width: 650px) {
+      padding: 5px;
+
+      .view-toggle.map {
         position: fixed;
         z-index: 9999999;
         bottom: 10px;

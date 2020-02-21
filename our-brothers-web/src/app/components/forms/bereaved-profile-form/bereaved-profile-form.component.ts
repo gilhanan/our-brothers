@@ -31,6 +31,7 @@ export class BereavedProfileFormComponent implements OnInit {
 
   public form: FormGroup;
   public canTellInOtherLang = false;
+  public maxDate = new Date().toISOString().split('T')[0];
 
   constructor(
     private fb: FormBuilder,
@@ -81,7 +82,9 @@ export class BereavedProfileFormComponent implements OnInit {
       ],
       birthDay: [
         profile.birthDay,
-        Validators.required
+        [
+          Validators.required
+        ]
       ],
       otherLang: [profile.otherLang],
       agree: [false, Validators.requiredTrue]

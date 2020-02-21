@@ -206,6 +206,10 @@ body {
   font-family: "Heebo";
   color: black;
 
+  &[type='date'] {
+    padding: 0;
+  }
+
   &.invalid {
     border: 1px solid red;
   }
