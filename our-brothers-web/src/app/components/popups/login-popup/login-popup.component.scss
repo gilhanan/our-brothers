@@ -52,7 +52,11 @@
 ::ng-deep {
   .login-form {
     .body {
-      padding: 35px 40px 45px 40px;
+      padding: 25px 30px 35px 30px;
+
+      @media only screen and (min-width: 768px) {
+        padding: 35px 40px 45px 40px;
+      }
 
       .title {
         font-size: 36px;

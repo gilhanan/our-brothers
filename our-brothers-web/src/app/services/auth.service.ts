@@ -13,6 +13,13 @@ export enum LoginMethod {
   GOOGLE
 }
 
+export enum AuthErrors {
+  UserNotFound = "auth/user-not-found",
+  WrongPassword = "auth/wrong-password",
+  CancelledPopupRequest = "auth/cancelled-popup-request",
+  EmailAlreadyInUse = "auth/email-already-in-use"
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -65,19 +72,25 @@ export class AuthService {
     try {
       return this.angularFireAuth.auth.signInWithPopup(provider);
     } catch (error) {
-      console.log(error);
+      console.error(error);
       throw error;
     }
   }
 
   public signInWithGoogle(): Promise<auth.UserCredential> {
     const provider = new auth.GoogleAuthProvider();
-    return this.socialSignIn(provider);
+    return this.socialSignIn(provider).catch((error) => {
+      console.error(error);
+      throw error;
+    });
   }
 
   public signInWithFacebook(): Promise<auth.UserCredential> {
     const provider = new auth.FacebookAuthProvider();
-    return this.socialSignIn(provider);
+    return this.socialSignIn(provider).catch((error) => {
+      console.error(error);
+      throw error;
+    });
   }
 
   public signInWithEmailAndPassword(
@@ -87,7 +100,10 @@ export class AuthService {
     return this.angularFireAuth.auth.signInWithEmailAndPassword(
       email,
       password
-    );
+    ).catch((error) => {
+      console.error(error);
+      throw error;
+    });
   }
 
   public createUserWithEmailAndPassword(
@@ -97,13 +113,16 @@ export class AuthService {
     return this.angularFireAuth.auth.createUserWithEmailAndPassword(
       email,
       password
-    );
+    ).catch((error) => {
+      console.error(error);
+      throw error;
+    });
   }
 
   public resetPassword(email: string) {
     return this.angularFireAuth.auth.sendPasswordResetEmail(email)
       .catch((error) => {
-        console.log(error);
+        console.error(error);
         throw error;
       });
   }

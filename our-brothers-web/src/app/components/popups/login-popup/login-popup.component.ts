@@ -6,7 +6,7 @@ import {
 import { LoginFormComponent, LoginForm } from '../../forms/login-form/login-form.component';
 import { RegistrationFormComponent, RegistrationForm } from '../../forms/registration-form/registration-form.component';
 import { ForgotPasswordFormComponent, ForgotPasswordForm } from '../../forms/forgot-password-form/forgot-password-form.component';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService, AuthErrors } from 'src/app/services/auth.service';
 
 type Mode = 'Login' | 'Register' | 'Forgot';
 
@@ -29,31 +29,57 @@ export class LoginPopupComponent {
   signInWithEmailAndPassword(form: LoginForm) {
     this.loading = true;
     this.authService.signInWithEmailAndPassword(form.email, form.password).catch((error) => {
-      alert('סיסמא לא נכונה.');
+      if (error.code === AuthErrors.UserNotFound) {
+        alert('אימייל לא קיים.');
+      } else if (error.code === AuthErrors.WrongPassword) {
+        alert('סיסמא לא נכונה.');
+      } else {
+        alert(error);
+      }
     }).finally(() => this.loading = false);
   }
 
   signInWithFacebook() {
     this.loading = true;
-    this.authService.signInWithFacebook().finally(() => this.loading = false);
+    this.authService.signInWithFacebook()
+      .catch((error) => {
+        if (error.code !== AuthErrors.CancelledPopupRequest) {
+          alert(error);
+        }
+      })
+      .finally(() => this.loading = false);
   }
 
   signInWithGoogle() {
     this.loading = true;
-    this.authService.signInWithGoogle().finally(() => this.loading = false);
+    this.authService.signInWithGoogle()
+      .catch((error) => {
+        if (error.code !== AuthErrors.CancelledPopupRequest) {
+          alert(error);
+        }
+      })
+      .finally(() => this.loading = false);
   }
 
   createUserWithEmailAndPassword(form: RegistrationForm) {
     this.loading = true;
-    this.authService.createUserWithEmailAndPassword(form.email, form.password).finally(() => this.loading = false);
+    this.authService.createUserWithEmailAndPassword(form.email, form.password)
+      .catch((error) => {
+        if (error.code !== AuthErrors.EmailAlreadyInUse) {
+          alert('אימייל תפוס.');
+        } else {
+          alert(error);
+        }
+      })
+      .finally(() => this.loading = false);
   }
 
   resetPassword(form: ForgotPasswordForm) {
     this.loading = true;
     this.authService.resetPassword(form.email)
       .catch((error: any) => {
-        if (error.code === 'auth/user-not-found') {
-          return true;
+        if (error.code === AuthErrors.UserNotFound) {
+          alert('אימייל לא קיים');
         } else {
           alert('שגיאה');
         }
