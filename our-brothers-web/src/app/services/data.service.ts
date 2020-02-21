@@ -251,7 +251,7 @@ export class DataService {
     );
   }
 
-  public getBereaveds(): Observable<User[]> {
+  public getBereaveds(year = MEMORIAL_YEAR): Observable<User[]> {
     return this.angularFireDatabase
       .list<User>(`users`)
       .snapshotChanges()
@@ -267,12 +267,10 @@ export class DataService {
             .map(user => {
               if (
                 user.bereavedParticipation &&
-                user.bereavedParticipation[MEMORIAL_YEAR]
+                user.bereavedParticipation[year]
               ) {
-                user.bereavedParticipation[
-                  MEMORIAL_YEAR
-                ].meetings = this.parseUserMeetings(
-                  user.bereavedParticipation[MEMORIAL_YEAR].meetings
+                user.bereavedParticipation[year].meetings = this.parseUserMeetings(
+                  user.bereavedParticipation[year].meetings
                 );
               }
 

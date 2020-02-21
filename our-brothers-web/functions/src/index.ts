@@ -101,6 +101,93 @@ export const addUserToDatabase = functions.auth.user()
 
 // ========================= Database =========================
 
+// ============ User => Meeting ============
+
+export const onParticipateParticipationDelete = functions.database.ref('/users/{userId}/participateParticipation/{year}/meetings/{hostId}/{meetingId}')
+  .onDelete((event, context) => {
+    const { userId, year, hostId, meetingId } = context.params;
+
+    console.log(`Removing participate {${userId}} from meeting {${meetingId} year {$${year}} of host {${hostId}}.`);
+    return admin.database()
+      .ref(`eventsParticipates/${year}/${hostId}/${meetingId}/${userId}`)
+      .remove()
+      .then(() => {
+        console.log(`Succesfully removed participate {${userId}} from meeting {${meetingId} year {$${year}} of host {${hostId}}.`);
+      }).catch((error) => {
+        console.error(`Failed to removed participate {${userId}} from meeting {${meetingId} year {$${year}} of host {${hostId}}.`, error);
+      });
+  });
+
+export const onBereavedParticipationDelete = functions.database.ref('/users/{userId}/bereavedParticipation/{year}/meetings/{hostId}/{meetingId}')
+  .onDelete((event, context) => {
+    const { userId, year, hostId, meetingId } = context.params;
+
+    console.log(`Removing bereaved {${userId}} from meeting {${meetingId}} year {$${year}} of host {${hostId}}.`);
+    return admin.database()
+      .ref(`events/${year}/${hostId}/${meetingId}/bereaved`)
+      .remove()
+      .then(() => {
+        console.log(`Succesfully removed bereaved {${userId}} from meeting {${meetingId} year {$${year}} of host {${hostId}}.`);
+      }).catch((error) => {
+        console.error(`Failed to removed bereaved {${userId}} from meeting {${meetingId} year {$${year}} of host {${hostId}}.`, error);
+      });
+  });
+
+export const onHostParticipationDelete = functions.database.ref('/users/{userId}/hostParticipation/{year}/meetings/{meetingId}')
+  .onDelete((event, context) => {
+    const { userId, year, meetingId } = context.params;
+
+    console.log(`Removing meeting {${meetingId}} year {$${year}} of host {${userId}}.`);
+    return admin.database()
+      .ref(`events/${year}/${userId}/${meetingId}`)
+      .remove()
+      .then(() => {
+        console.log(`Succesfully removed meeting {${meetingId}} year {$${year}} of host {${userId}}.`);
+      }).catch((error) => {
+        console.error(`Failed to remove meeting {${meetingId}} year {$${year}} of host {${userId}}.`, error);
+      });
+  });
+
+// ============ Meeting => User ============
+
+export const onMeetingCreate = functions.database.ref('/events/{year}/{hostId}/{meetingId}')
+  .onCreate((event, context) => {
+
+    const meeting = event.val();
+
+    const { year, hostId, meetingId } = context.params;
+
+    console.log(`Linked meeting {${meetingId}} year {$${year}} of host {${hostId}}.`);
+
+    return admin.database()
+      .ref(`/users/${hostId}/hostParticipation/${year}/meetings/${meetingId}`)
+      .set({ title: meeting.title })
+      .then(() => {
+        console.log(`Succesfully linked meeting {${meetingId}} year {$${year}} of host {${hostId}}.`);
+      }).catch((error) => {
+        console.error(`Failed to link meeting {${meetingId}} year {$${year}} of host {${hostId}}.`, error);
+      });
+  });
+
+export const onMeetingDelete = functions.database.ref('/events/{year}/{hostId}/{meetingId}')
+  .onDelete((event, context) => {
+
+    const { year, hostId, meetingId } = context.params;
+
+    console.log(`Removing meeting {${meetingId}} year {$${year}} of host {${hostId}} from host participation.`);
+
+    return admin.database()
+      .ref(`/users/${hostId}/hostParticipation/${year}/meetings/${meetingId}`)
+      .remove()
+      .then(() => {
+        console.log(`Succesfully removed meeting {${meetingId}} year {$${year}} of host {${hostId}} from host participation.`);
+      }).catch((error) => {
+        console.error(`Failed to remove meeting {${meetingId}} year {$${year}} of host {${hostId}} from host participation.`, error);
+      });
+  });
+
+// ========================= Volunteer Claims =========================
+
 export const updateUserVolunteer = functions.database.ref('/users/{userId}/isVolunteer')
   .onWrite((event, context) => {
 
@@ -116,6 +203,8 @@ export const updateUserVolunteer = functions.database.ref('/users/{userId}/isVol
         console.error(`Failed to set user {${userId}} volunteering value {${volunteer}} to claims.`, error);
       });
   });
+
+// ========================= SMS Reply =========================
 
 export const smsReply = functions.database.ref('/sms/replies/{number}/{messageId}')
   .onWrite((event, context) => {
@@ -143,6 +232,8 @@ export const smsReply = functions.database.ref('/sms/replies/{number}/{messageId
 
     return true;
   });
+
+// ========================= Contact =========================
 
 export const onUserContactCreate = functions.database.ref('/contacts/{userId}/{contactId}')
   .onCreate((event, context) => {
