@@ -28,64 +28,69 @@ export class LoginPopupComponent {
 
   signInWithEmailAndPassword(form: LoginForm) {
     this.loading = true;
-    this.authService.signInWithEmailAndPassword(form.email, form.password).catch((error) => {
-      if (error.code === AuthErrors.UserNotFound) {
-        alert('אימייל לא קיים.');
-      } else if (error.code === AuthErrors.WrongPassword) {
-        alert('סיסמא לא נכונה.');
-      } else {
-        alert(error);
-      }
-    }).finally(() => this.loading = false);
+    this.authService.signInWithEmailAndPassword(form.email, form.password).subscribe(
+      () => { },
+      error => {
+        if (error.code === AuthErrors.UserNotFound) {
+          alert('אימייל לא קיים.');
+        } else if (error.code === AuthErrors.WrongPassword) {
+          alert('סיסמא לא נכונה.');
+        } else {
+          alert(error);
+        }
+      },
+      () => this.loading = false);
   }
 
   signInWithFacebook() {
     this.loading = true;
-    this.authService.signInWithFacebook()
-      .catch((error) => {
+    this.authService.signInWithFacebook().subscribe(
+      () => { },
+      error => {
         if (error.code !== AuthErrors.CancelledPopupRequest) {
           alert(error);
         }
-      })
-      .finally(() => this.loading = false);
+      },
+      () => this.loading = false);
   }
 
   signInWithGoogle() {
     this.loading = true;
-    this.authService.signInWithGoogle()
-      .catch((error) => {
+    this.authService.signInWithGoogle().subscribe(
+      () => { },
+      error => {
         if (error.code !== AuthErrors.CancelledPopupRequest) {
           alert(error);
         }
-      })
-      .finally(() => this.loading = false);
+      },
+      () => this.loading = false);
   }
 
   createUserWithEmailAndPassword(form: RegistrationForm) {
     this.loading = true;
-    this.authService.createUserWithEmailAndPassword(form.email, form.password)
-      .catch((error) => {
+    this.authService.createUserWithEmailAndPassword(form.email, form.password).subscribe(
+      () => { },
+      error => {
         if (error.code !== AuthErrors.EmailAlreadyInUse) {
           alert('אימייל תפוס.');
         } else {
           alert(error);
         }
-      })
-      .finally(() => this.loading = false);
+      },
+      () => this.loading = false);
   }
 
   resetPassword(form: ForgotPasswordForm) {
     this.loading = true;
-    this.authService.resetPassword(form.email)
-      .catch((error: any) => {
+    this.authService.sendPasswordResetEmail(form.email).subscribe(
+      () => alert('נשלח בהצלחה מייל לאיפוס סיסמא.'),
+      error => {
         if (error.code === AuthErrors.UserNotFound) {
           alert('אימייל לא קיים');
         } else {
           alert('שגיאה');
         }
-      })
-      .then(() => {
-        alert('נשלח בהצלחה מייל לאיפוס סיסמא.');
-      })
+      },
+      () => this.loading = false);
   }
 }

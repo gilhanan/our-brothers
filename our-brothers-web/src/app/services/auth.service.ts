@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Observable, of, from, Subject } from 'rxjs';
-import { switchMap, map, tap } from 'rxjs/operators';
+import { Observable, of, from, Subject, throwError } from 'rxjs';
+import { switchMap, map, tap, catchError } from 'rxjs/operators';
 import { auth } from 'firebase/app';
 
 import { User } from '../model';
 import { DataService } from './data.service';
+import { AnalyticsService } from './analytics.service';
 
 export enum LoginMethod {
   EMAIL_PASS,
@@ -32,7 +33,8 @@ export class AuthService {
 
   constructor(
     public angularFireAuth: AngularFireAuth,
-    private dataService: DataService
+    private dataService: DataService,
+    private analyticsService: AnalyticsService
   ) {
     this.user = this.angularFireAuth.authState
       .pipe(
@@ -68,67 +70,79 @@ export class AuthService {
       );
   }
 
-  private async socialSignIn(provider): Promise<auth.UserCredential> {
-    try {
-      return this.angularFireAuth.auth.signInWithPopup(provider);
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
-  }
-
-  public signInWithGoogle(): Promise<auth.UserCredential> {
+  public signInWithGoogle(): Observable<auth.UserCredential> {
     const provider = new auth.GoogleAuthProvider();
-    return this.socialSignIn(provider).catch((error) => {
-      console.error(error);
-      throw error;
-    });
+    return this.socialSignIn(provider);
   }
 
-  public signInWithFacebook(): Promise<auth.UserCredential> {
+  public signInWithFacebook(): Observable<auth.UserCredential> {
     const provider = new auth.FacebookAuthProvider();
-    return this.socialSignIn(provider).catch((error) => {
-      console.error(error);
-      throw error;
-    });
+    return this.socialSignIn(provider);
   }
 
   public signInWithEmailAndPassword(
     email: string,
     password: string
-  ): Promise<auth.UserCredential> {
-    return this.angularFireAuth.auth.signInWithEmailAndPassword(
+  ): Observable<auth.UserCredential> {
+
+    this.analyticsService.logEvent('SignInWithEmailAndPassword', 'start');
+
+    return from(this.angularFireAuth.auth.signInWithEmailAndPassword(
       email,
       password
-    ).catch((error) => {
-      console.error(error);
-      throw error;
-    });
+    )).pipe(
+      tap(() => this.analyticsService.logEvent('SignInWithEmailAndPassword', 'end')),
+      catchError(error => {
+        this.analyticsService.logEvent('SignInWithEmailAndPassword', 'failed', { error: error.toString() });
+        console.error(error);
+        return throwError(error);
+      })
+    );
   }
 
   public createUserWithEmailAndPassword(
     email: string,
     password: string
-  ): Promise<auth.UserCredential> {
-    return this.angularFireAuth.auth.createUserWithEmailAndPassword(
+  ): Observable<auth.UserCredential> {
+    this.analyticsService.logEvent('CreateUserWithEmailAndPassword', 'start');
+
+    return from(this.angularFireAuth.auth.createUserWithEmailAndPassword(
       email,
       password
-    ).catch((error) => {
-      console.error(error);
-      throw error;
-    });
-  }
-
-  public resetPassword(email: string) {
-    return this.angularFireAuth.auth.sendPasswordResetEmail(email)
-      .catch((error) => {
+    )).pipe(
+      tap(() => this.analyticsService.logEvent('CreateUserWithEmailAndPassword', 'end')),
+      catchError(error => {
+        this.analyticsService.logEvent('CreateUserWithEmailAndPassword', 'failed', { error: error.toString() });
         console.error(error);
-        throw error;
-      });
+        return throwError(error);
+      })
+    );
   }
 
-  public signOut() {
-    return this.angularFireAuth.auth.signOut();
+  public sendPasswordResetEmail(email: string): Observable<void> {
+    this.analyticsService.logEvent('SendPasswordResetEmail', 'start');
+
+    return from(this.angularFireAuth.auth.sendPasswordResetEmail(email)).pipe(
+      tap(() => this.analyticsService.logEvent('SendPasswordResetEmail', 'end')),
+      catchError(error => {
+        this.analyticsService.logEvent('SendPasswordResetEmail', 'failed', { error: error.toString() });
+        console.error(error);
+        return throwError(error);
+      })
+    );
+  }
+
+  public signOut(): Observable<void> {
+    this.analyticsService.logEvent('SignOut', 'start');
+
+    return from(this.angularFireAuth.auth.signOut()).pipe(
+      tap(() => this.analyticsService.logEvent('SignOut', 'end')),
+      catchError(error => {
+        this.analyticsService.logEvent('SignOut', 'failed', { error: error.toString() });
+        console.error(error);
+        return throwError(error);
+      })
+    );
   }
 
   public requestToLogin() {
@@ -137,5 +151,21 @@ export class AuthService {
 
   public closeLogin() {
     this.needLogin$.next(false);
+  }
+
+  private socialSignIn(provider: firebase.auth.AuthProvider): Observable<auth.UserCredential> {
+    const telemetry = { provider: provider.providerId };
+
+    this.analyticsService.logEvent('SocialSignIn', 'start', telemetry);
+
+    return from(this.angularFireAuth.auth.signInWithPopup(provider))
+      .pipe(
+        tap(() => this.analyticsService.logEvent('SocialSignIn', 'end', telemetry)),
+        catchError(error => {
+          this.analyticsService.logEvent('SocialSignIn', 'failed', telemetry);
+          console.error(error);
+          return throwError(error);
+        })
+      );
   }
 }

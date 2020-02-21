@@ -101,7 +101,7 @@ export class DataService {
         this.analyticsService.logEvent('UserMapGuideLastVisit', 'end', telemetry);
       }),
       catchError(error => {
-        this.analyticsService.logEvent('UserMapGuideLastVisit', 'failed', telemetry);
+        this.analyticsService.logEvent('UserMapGuideLastVisit', 'failed', { ...telemetry, error: error.toString() });
         console.error(error);
         return throwError(error);
       })
@@ -119,7 +119,7 @@ export class DataService {
     ).pipe(
       tap(() => this.analyticsService.logEvent('SetUserRole', 'end', telemetry)),
       catchError(error => {
-        this.analyticsService.logEvent('SetUserRole', 'failed', telemetry);
+        this.analyticsService.logEvent('SetUserRole', 'failed', { ...telemetry, error: error.toString() });
         console.error(error);
         return throwError(error);
       })
@@ -137,7 +137,7 @@ export class DataService {
     ).pipe(
       tap(() => this.analyticsService.logEvent('SetUserProfile', 'end', telemetry)),
       catchError(error => {
-        this.analyticsService.logEvent('SetUserProfile', 'failed', telemetry);
+        this.analyticsService.logEvent('SetUserProfile', 'failed', { ...telemetry, error: error.toString() });
         console.error(error);
         return throwError(error);
       })
@@ -155,7 +155,7 @@ export class DataService {
     ).pipe(
       tap(() => this.analyticsService.logEvent('SetUserVolunteer', 'end', telemetry)),
       catchError(error => {
-        this.analyticsService.logEvent('SetUserVolunteer', 'failed', telemetry);
+        this.analyticsService.logEvent('SetUserVolunteer', 'failed', { ...telemetry, error: error.toString() });
         console.error(error);
         return throwError(error);
       })
@@ -179,7 +179,7 @@ export class DataService {
     ).pipe(
       tap(() => this.analyticsService.logEvent('SetBereavedStatus', 'end', telemetry)),
       catchError(error => {
-        this.analyticsService.logEvent('SetBereavedStatus', 'failed', telemetry);
+        this.analyticsService.logEvent('SetBereavedStatus', 'failed', { ...telemetry, error: error.toString() });
         console.error(error);
         return throwError(error);
       })
@@ -203,7 +203,7 @@ export class DataService {
     ).pipe(
       tap(() => this.analyticsService.logEvent('SetBereavedGuidanceGeneral', 'end', telemetry)),
       catchError(error => {
-        this.analyticsService.logEvent('SetBereavedGuidanceGeneral', 'failed', telemetry)
+        this.analyticsService.logEvent('SetBereavedGuidanceGeneral', 'failed', { ...telemetry, error: error.toString() })
         console.error(error);
         return throwError(error);
       })
@@ -244,7 +244,7 @@ export class DataService {
     ).pipe(
       tap(() => this.analyticsService.logEvent('SetBereavedGuidance', 'start', telemetry)),
       catchError(error => {
-        this.analyticsService.logEvent('SetBereavedGuidance', 'failed', telemetry);
+        this.analyticsService.logEvent('SetBereavedGuidance', 'failed', { ...telemetry, error: error.toString() });
         console.error(error);
         return throwError(error);
       })
@@ -351,7 +351,7 @@ export class DataService {
       tap(() => this.analyticsService.logEvent('BereavedRegisterHost', 'end', telemetry)),
       map(() => true),
       catchError(error => {
-        this.analyticsService.logEvent('BereavedRegisterHost', 'failed', telemetry);
+        this.analyticsService.logEvent('BereavedRegisterHost', 'failed', { ...telemetry, error: error.toString() });
         console.error(error);
         return throwError(error);
       })
@@ -389,7 +389,7 @@ export class DataService {
       tap(() => this.analyticsService.logEvent('ParticipateRegisterHost', 'end', telemetry)),
       map(() => true),
       catchError(error => {
-        this.analyticsService.logEvent('ParticipateRegisterHost', 'failed', telemetry);
+        this.analyticsService.logEvent('ParticipateRegisterHost', 'failed', { ...telemetry, error: error.toString() });
         console.error(error);
         return throwError(error);
       })
@@ -417,7 +417,7 @@ export class DataService {
       tap(() => this.analyticsService.logEvent('BereavedLeaveHost', 'end', telemetry)),
       map(() => true),
       catchError(error => {
-        this.analyticsService.logEvent('BereavedLeaveHost', 'failed', telemetry);
+        this.analyticsService.logEvent('BereavedLeaveHost', 'failed', { ...telemetry, error: error.toString() });
         console.error(error);
         return throwError(error);
       })
@@ -436,7 +436,7 @@ export class DataService {
       .then((result) => {
         this.analyticsService.logEvent('PostContact', 'end', telemetry);
       }, (error) => {
-        this.analyticsService.logEvent('PostContact', 'failed', telemetry);
+        this.analyticsService.logEvent('PostContact', 'failed', { ...telemetry, error: error.toString() });
         console.error(error);
         throw error;
       });
