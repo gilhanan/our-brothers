@@ -1,5 +1,6 @@
 import { Component, Input, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
 import { Meeting, MeetingAudience, MeetingAudienceLabels, User } from '../../../app/model';
+import { ParticipationsService } from 'src/app/services/participations.service';
 
 @Component({
   selector: 'app-meetings-map-meeting',
@@ -14,8 +15,9 @@ export class MeetingsMapMeetingComponent {
 
   @Output() joinMeeting = new EventEmitter<void>();
 
+  constructor(public participationsService: ParticipationsService) { }
+
   getAudienceLabel(meetingAudience: MeetingAudience[]) {
     return meetingAudience.map((audience: MeetingAudience) => MeetingAudienceLabels[audience]).join(', ');
   }
-
 }

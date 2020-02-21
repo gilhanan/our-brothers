@@ -1,4 +1,4 @@
-<div class="show-full-meetings-container">
+<div class="show-full-meetings-container" *ngIf="isUserHaveAllDetails">
   <app-checkbox class="show-full-meetings" [checked]="showFullMeetings" (checkedChanged)="showFullMeetingsChanged($event)"
     [label]="'הצג מפגשים מלאים'"></app-checkbox>
 </div>

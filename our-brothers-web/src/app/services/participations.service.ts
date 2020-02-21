@@ -157,8 +157,16 @@ export class ParticipationsService {
       meeting.count <= meeting.capacity
   }
 
+  isUserHaveAllDetails = (user: User) => {
+    if (user.role === UserRole.bereaved) {
+      return this.isBereavedHaveAllDetails(user);
+    } else {
+      return this.isParticipateHaveAllDetails(user);
+    }
+  }
+
   isParticipateHaveAllDetails = (user: User) => {
-    return (
+    return !!(
       user.profile &&
       user.profile.email &&
       user.profile.firstName &&
@@ -168,7 +176,7 @@ export class ParticipationsService {
   };
 
   isBereavedHaveAllDetails = (user: User) => {
-    return (
+    return !!(
       user.profile &&
       user.profile.address &&
       user.profile.email &&
