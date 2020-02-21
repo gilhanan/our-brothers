@@ -2,20 +2,20 @@
   max-width: 770px;
   margin: auto;
 
-  .form-items-container {
+  .form-row {
     display: flex;
     margin-bottom: 30px;
 
-    .form-field {
+    .input {
       flex: 1;
       margin: 0 15px;
     }
 
-    .form-field:first-child {
+    .input:first-child {
       margin-right: 0;
     }
 
-    .form-field:last-child {
+    .input:last-child {
       margin-left: 0;
     }
   }

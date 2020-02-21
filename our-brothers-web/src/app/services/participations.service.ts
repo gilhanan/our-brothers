@@ -9,15 +9,15 @@ export class ParticipationsService {
   constructor() { }
 
   isUserCanHost = (user: User) => {
-    return !(user && user.role && user.role !== UserRole.bereaved);
+    return !(user && user.role && user.role === UserRole.bereaved);
   }
 
   isUserCanParticipate = (user: User) => {
-    return !(user && user.role && user.role !== UserRole.bereaved);
+    return !(user && user.role && user.role === UserRole.bereaved);
   }
 
   isUserCanTell = (user: User) => {
-    return !(user && user.role && user.role === UserRole.bereaved);
+    return !(user && user.role && user.role !== UserRole.bereaved);
   }
 
   isParticipateParticipating = (user: User, year: number) => {

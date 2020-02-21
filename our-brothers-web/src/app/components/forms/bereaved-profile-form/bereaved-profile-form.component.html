@@ -2,22 +2,22 @@
   פרטי משתמש
 </div>
 <div class="form" [formGroup]="form">
-  <div class="form-items-container">
-    <input type="text" placeholder="שם פרטי" class="form-field" formControlName="firstName"
+  <div class="form-row">
+    <input type="text" placeholder="שם פרטי" class="form-field input" formControlName="firstName"
       [class.invalid]="!firstName.valid && firstName.touched" />
-    <input type="text" placeholder="שם משפחה" class="form-field" formControlName="lastName"
+    <input type="text" placeholder="שם משפחה" class="form-field input" formControlName="lastName"
       [class.invalid]="!lastName.valid && lastName.touched" />
   </div>
-  <div class="form-items-container">
-    <input type="email" placeholder="אימייל" class="form-field" formControlName="email"
+  <div class="form-row">
+    <input type="email" placeholder="אימייל" class="form-field input" formControlName="email"
       [class.invalid]="!email.valid && email.touched" />
-    <input type="tel" placeholder="פלאפון" class="form-field" pattern="[0-9]{10}" formControlName="phoneNumber"
+    <input type="tel" placeholder="פלאפון" class="form-field input" pattern="[0-9]{10}" formControlName="phoneNumber"
       [class.invalid]="!phoneNumber.valid && phoneNumber.touched" />
   </div>
-  <div class="form-items-container">
-    <app-places-select class="form-field" [types]="['(cities)']" [placeholder]="'כתובת'" (change)="address.setValue($event)"
+  <div class="form-row">
+    <app-places-select class="input" [types]="['(cities)']" [placeholder]="'כתובת'" (change)="address.setValue($event)"
       [invalid]="!address.valid && address.touched"></app-places-select>
-    <input type="text" placeholder="תאריך לידה" class="form-field" formControlName="birthDay"
+    <input type="text" placeholder="תאריך לידה" class="form-field input" formControlName="birthDay"
       [class.invalid]="!birthDay.valid && birthDay.touched" onfocus="(this.type='date')" onblur="(this.type='text')" />
   </div>
   <div class="other-lang-input">
