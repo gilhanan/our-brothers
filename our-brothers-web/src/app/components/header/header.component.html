@@ -1,8 +1,8 @@
-<nav class="header">
+<button *ngIf="isMobileView" (click)="openSideMenu()" class="site-bars-icon bars-positioning"><i
+    class="fas fa-bars"></i></button>
+<nav class="header" [ngClass]="{'closed': isSideMenuClosed}">
   <div class="logo-header" routerLink="home"></div>
-  <button class="site-close-icon">
-
-  </button>
+  <button class="site-close-icon" (click)="closeSideMenu()"></button>
   <ul class="links-header">
     <li><a class="link-header" routerLink="home" routerLinkActive="current-page">דף הבית</a></li>
     <li>
