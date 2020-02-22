@@ -1,0 +1,67 @@
+.host-options-container {
+  position: relative;
+  padding-right: 45px;
+  padding-left: 20px;
+  background-color: white;
+  min-height: 50px;
+  border: 1px solid rgb(229, 229, 229);
+  display: flex;
+  align-items: flex-start;
+
+  .input-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 45px;
+    height: 50px;
+    background-position: 50% 50%;
+    background-size: 24px 24px;
+    background-repeat: no-repeat;
+  }
+
+  .input-label {
+    margin-top: 15px;
+    flex: 0 0 190px;
+    font-size: 18px;
+    color: rgb(153, 153, 153);
+    font-family: 'Hebbo';
+  }
+
+  .options-container {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-right: 10px;
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+
+    .option {
+      cursor: pointer;
+      min-width: 33%;
+      max-width: 50%;
+      display: inline-flex;
+      align-items: center;
+
+      .option-mark {
+        width: 17px;
+        height: 17px;
+        border: 1px solid rgb(153, 153, 153);
+        border-radius: 50%;
+        margin-left: 20px;
+      }
+
+      .option-text {
+        font-size: 18px;
+        color: rgb(153, 153, 153);
+        font-family: 'Hebbo';
+      }
+
+      &.current-option {
+        .option-mark {
+          border-color: #3786b1;
+          background-color: #3786b1;
+        }
+      }
+    }
+  }
+}

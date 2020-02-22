@@ -34,13 +34,15 @@ export class HostFormComponent implements OnInit {
     this.form = this.fb.group({
       title: ['', Validators.required],
       date: [null, Validators.required],
+      hour: [null, Validators.required],
       address: this.fb.group({
         formattedAddress: ['', Validators.required],
         latitude: ['', Validators.required],
         longitude: ['', Validators.required],
         notes: ['', Validators.required]
       }),
-      capacity: [20, Validators.required],
+      capacity: [20, [Validators.required, Validators.min(2)]],
+      invited: [false, Validators.required],
       accessibility: [false],
       media: [false],
       reviewable: [false],
@@ -54,6 +56,14 @@ export class HostFormComponent implements OnInit {
 
   get date() {
     return this.form.get('date');
+  }
+
+  get hour() {
+    return this.form.get('hour');
+  }
+
+  get address() {
+    return this.form.get('address');
   }
 
   get formattedAddress() {
@@ -74,6 +84,10 @@ export class HostFormComponent implements OnInit {
 
   get capacity() {
     return this.form.get('capacity');
+  }
+
+  get invited() {
+    return this.form.get('invited');
   }
 
   get accessibility() {

@@ -1,0 +1,29 @@
+<div
+  *ngIf="formGroup"
+  (click)="focusInput()"
+  class="host-input-container"
+  [class.textarea-input]="textarea"
+  [formGroup]="formGroup"
+>
+  <div
+    *ngIf="iconUrl"
+    class="input-icon"
+    [style.background-image]="'url(' + iconUrl + ')'"
+  ></div>
+  <div class="input-label">
+    {{label}}
+  </div>
+  <input
+    #input
+    *ngIf="!textarea"
+    [type]="inputType"
+    [formControlName]="controlName"
+    [class.invalid]="!control.valid && control.touched"
+  />
+  <textarea
+    #input
+    *ngIf="textarea"
+    [formControlName]="controlName"
+    [class.invalid]="!control.valid && control.touched"
+  ></textarea>
+</div>

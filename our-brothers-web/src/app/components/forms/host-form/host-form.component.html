@@ -1,19 +1,77 @@
-<div class="form-title">
-  פרטי אירוח
-</div>
-<div class="form" [formGroup]="form">
-  <div class="form-items-container">
-    <input
-      type="text"
-      placeholder="שם פרטי"
-      class="form-field"
-      formControlName="firstName"
-    />
-    <input
-      type="text"
-      placeholder="שם משפחה"
-      class="form-field"
-      formControlName="lastName"
-    />
+<div class="host-form-container">
+  <div class="form" [formGroup]="form">
+    <div class="form-items-container">
+      <app-host-input-text
+        label="שם המפגש:"
+        controlName="title"
+        [formGroup]="form"
+      ></app-host-input-text>
+    </div>
+    <div class="form-items-container">
+      <app-host-input-text
+        label="תאריך:"
+        controlName="date"
+        iconUrl="assets/img/host_calendar.svg"
+        inputType="date"
+        [formGroup]="form"
+      ></app-host-input-text>
+      <app-host-input-text
+        label="שעה:"
+        controlName="hour"
+        iconUrl="assets/img/host_clock.svg"
+        inputType="time"
+        [formGroup]="form"
+      ></app-host-input-text>
+    </div>
+    <div class="form-items-container">
+      <app-host-input-text
+        label="כתובת:"
+        controlName="formattedAddress"
+        iconUrl="assets/img/host_location.svg"
+        [formGroup]="address"
+      ></app-host-input-text>
+    </div>
+    <div class="form-items-container">
+      <app-host-input-text
+        label="הערות לכתובת (קומה,כניסה):"
+        controlName="notes"
+        iconUrl="assets/img/host_location.svg"
+        [textarea]="true"
+        [formGroup]="address"
+      ></app-host-input-text>
+    </div>
+    <div class="address-map-container">
+      <div class="address-map">
+        <!-- Place the map component HERE! -->
+      </div>
+    </div>
+    <div class="form-items-container">
+      <app-host-input-text
+        label="כמות מוזמנים מקסימלית:"
+        inputType="number"
+        iconUrl="assets/img/host_users.svg"
+        controlName="capacity"
+        [formGroup]="form"
+      ></app-host-input-text>
+      <div class="empty-half"></div>
+    </div>
+    <div class="form-items-container">
+      <app-host-input-options
+        label="קהל מוזמנים:"
+        iconUrl="assets/img/host_users.svg"
+        [options]="[{text: 'פתוח לקהל הרחב', value: false}, {text: 'סגור למוזמנים בלבד', value: true}]"
+        [currentOption]="invited.value"
+        (optionSelected)="invited.setValue($event)"
+      ></app-host-input-options>
+    </div>
+    <div class="form-items-container">
+      <app-host-input-options
+        label="נגישות:"
+        iconUrl="assets/img/host_users.svg"
+        [options]="[{text: 'פתוח לקהל הרחב', value: false}, {text: 'סגור למוזמנים בלבד', value: true}]"
+        [currentOption]="invited.value"
+        (optionSelected)="invited.setValue($event)"
+      ></app-host-input-options>
+    </div>
   </div>
 </div>
