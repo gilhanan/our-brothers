@@ -1,3 +1,7 @@
+.bars-positioning {
+  display: none;
+}
+
 .header {
   position: fixed;
   top: 0;
@@ -145,6 +149,15 @@
 }
 
 @media only screen and (max-width: 1200px) {
+  .bars-positioning {
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+
+  $shadow-width: -10px;
+  $shadow-spread: 2px;
   .header {
     position: fixed;
     top: 0;
@@ -155,7 +168,11 @@
     justify-content: flex-start;
     align-items: stretch;
     padding: 1.5em;
-    box-shadow: -10px 0px 2px 0px rgba(0,160,153,0.75);
+    box-shadow: $shadow-width 0px $shadow-spread 0px rgba(0,160,153,0.75);
+
+    &.closed {
+      transform: translateX(calc(100% - #{$shadow-width} + #{$shadow-spread}));
+    }
 
     .site-close-icon {
       display: block;

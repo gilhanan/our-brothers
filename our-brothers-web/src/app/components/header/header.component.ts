@@ -1,4 +1,4 @@
-import { Component, Input, HostListener, OnInit } from '@angular/core';
+import { Component, Input, HostListener, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { User } from 'firebase';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -14,6 +14,7 @@ class HeaderSubMenus {
 })
 export class HeaderComponent implements OnInit {
   isMobileView = false;
+  isSideMenuClosed = false;
   subMenusStates: HeaderSubMenus = {
     meetings: false,
     about: false
@@ -29,7 +30,7 @@ export class HeaderComponent implements OnInit {
 
   @HostListener('window:resize', ['$event.target.innerWidth'])
   updateMobileViewState(width) {
-    this.isMobileView = width <= 1400;
+    this.isMobileView = width <= 1200;
   }
 
   toggleSubMenu(subMenu: keyof HeaderSubMenus): void {
@@ -41,5 +42,13 @@ export class HeaderComponent implements OnInit {
         }
       }
     }
+  }
+
+  closeSideMenu() {
+    this.isSideMenuClosed = true;
+  }
+
+  openSideMenu() {
+    this.isSideMenuClosed = false;
   }
 }
