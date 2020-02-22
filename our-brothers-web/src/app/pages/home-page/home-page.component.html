@@ -1,20 +1,10 @@
 <div class="video-background">
   <div class="video-show-box">
-    <video
-      class="home-page-video"
-      autoplay
-      loop
-      width="100%"
-      [muted]="videoMuted"
-      playsinline
-    >
+    <video class="home-page-video" autoplay loop width="100%" [muted]="videoMuted" playsinline>
       <source src="../../../assets/video/home-page.mp4" type="video/mp4" />
     </video>
     <button class="volume-button" (click)="videoMuted = !videoMuted">
-      <i
-        class="fas"
-        [ngClass]="{'fa-volume-mute': videoMuted, 'fa-volume-up': !videoMuted}"
-      ></i>
+      <i class="fas" [ngClass]="{'fa-volume-mute': videoMuted, 'fa-volume-up': !videoMuted}"></i>
     </button>
   </div>
   <div class="heading-talking big-heading">
@@ -41,10 +31,7 @@
   אנחנו מזמינים אתכם לקחת חלק.
 </div>
 <div class="participations-buttons">
-  <app-participations-buttons
-    [user]="user"
-    [loading]="loadingUser"
-  ></app-participations-buttons>
+  <app-participations-buttons [user]="user" [loading]="loadingUser"></app-participations-buttons>
 </div>
 <div class="see-more" data-aos="fade-left" data-aos-duration="1000">
   <a routerLink="/meetings">ראה עוד <i class="fas fa-angle-double-left"></i></a>
@@ -57,42 +44,19 @@
 </div>
 <div class="gallery-container" data-aos="fade-up" data-aos-duration="1000">
   <div class="gallery-images">
-    <img
-      class="gallery-image"
-      src="../../../assets/img/gallery_right.png"
-      alt="Metting Gallery Image 1"
-      data-aos="fade-right"
-      data-aos-duration="1000"
-    />
-    <img
-      class="gallery-image"
-      src="../../../assets/img/gallery_left.png"
-      alt="Metting Gallery Image 1"
-      data-aos="fade-left"
-      data-aos-duration="1000"
-    />
-    <img
-      class="gallery-image"
-      src="../../../assets/img/gallery_bottom.png"
-      alt="Metting Gallery Image 1"
-      data-aos="fade-up"
-      data-aos-duration="1000"
-    />
-    <img
-      class="circle-top-right"
-      src="../../../assets/img/gallery_top_right_circle.png"
-      alt=""
-    />
-    <img
-      class="circle-middle-left"
-      src="../../../assets/img/gallery_middle_left_circle.png"
-      alt=""
-    />
-    <img
-      class="circle-bottom-right"
-      src="../../../assets/img/gallery_bottom_right_circle.png"
-      alt=""
-    />
+    <div class="images-row">
+      <img class="image image-1" src="../../../assets/img/gallery_right.png" alt="Metting Gallery Image 1"
+        data-aos="fade-right" data-aos-duration="1000" />
+      <img class="image image-2" src="../../../assets/img/gallery_left.png" alt="Metting Gallery Image 1"
+        data-aos="fade-left" data-aos-duration="1000" />
+    </div>
+    <div class="images-row">
+      <img class="image image-3" src="../../../assets/img/gallery_bottom.png" alt="Metting Gallery Image 1"
+        data-aos="fade-up" data-aos-duration="1000" />
+    </div>
+    <img class="circle-top-right" src="../../../assets/img/gallery_top_right_circle.png" alt="" />
+    <img class="circle-middle-left" src="../../../assets/img/gallery_middle_left_circle.png" alt="" />
+    <img class="circle-bottom-right" src="../../../assets/img/gallery_bottom_right_circle.png" alt="" />
   </div>
 </div>
 <div class="contact-form">

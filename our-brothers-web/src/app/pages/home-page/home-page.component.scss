@@ -90,29 +90,36 @@
 }
 
 .gallery-container {
-  padding: 50px;
+  padding-top: 70px;
+  padding-bottom: 130px;
   overflow: hidden;
+  text-align: center;
 
   .gallery-images {
-    max-width: 1200px;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin: 0 auto;
     position: relative;
+    display: inline-block;
 
-    .gallery-image {
-      margin-left: 13px;
-      margin-right: 13px;
-      margin-bottom: 26px;
-      max-width: 100%;
+    .images-row {
+      text-align: center;
+
+      .image {
+        height: auto;
+        max-width: 100%;
+        margin: 10px;
+
+        @media only screen and (max-width: 1040px) {
+          width: 100%;
+          padding: 10px 15px;
+          margin: 0;
+        }
+      }
     }
 
     .circle-top-right {
       position: absolute;
       top: 0;
       right: 0;
-      transform: translateY(-35%);
+      transform: translate(40%, -40%);
 
       @media only screen and (max-width: 768px) {
         transform: translate(35%, -35%);
@@ -137,7 +144,7 @@
       bottom: 0;
       right: 0;
       z-index: -1;
-      transform: translate(10%, 10%);
+      transform: translate(30%, 30%);
 
       @media only screen and (max-width: 768px) {
         right: unset;
