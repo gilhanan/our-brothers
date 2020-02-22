@@ -14,7 +14,7 @@ class HeaderSubMenus {
 })
 export class HeaderComponent implements OnInit {
   isMobileView = false;
-  isSideMenuClosed = false;
+  isSideMenuClosed = true;
   subMenusStates: HeaderSubMenus = {
     meetings: false,
     about: false

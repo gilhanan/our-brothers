@@ -1,7 +1,3 @@
-.bars-positioning {
-  display: none;
-}
-
 .header {
   position: fixed;
   top: 0;
@@ -149,12 +145,32 @@
 }
 
 @media only screen and (max-width: 1200px) {
-  .bars-positioning {
-    display: block;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-  }
+  .mobile-header {
+    position: fixed;
+    width: 100%;
+    height: auto;
+    top: 0;
+    padding: 10px 0;
+    z-index: 5;
+    background-color: #f8f8f8;
+    box-shadow: 0px -10px 20px 0px rgba(0,0,0,0.75);
+
+    .bars-positioning {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 10px;
+    }
+
+    .logo-header {
+      margin: 0 auto;
+      height: 55px;
+      width: 135px;
+      background-image: url(../../../assets/img/logo.png);
+      background-size: contain;
+      background-repeat: no-repeat;
+    }  
+  }  
 
   $shadow-width: -10px;
   $shadow-spread: 2px;
