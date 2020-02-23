@@ -8,6 +8,10 @@
   display: flex;
   align-items: flex-start;
 
+  &.invalid {
+    border-color: red;
+  }
+
   .input-icon {
     position: absolute;
     top: 0;
@@ -29,18 +33,20 @@
 
   .options-container {
     margin-top: 15px;
-    margin-bottom: 15px;
     margin-right: 10px;
     flex: 1;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 
     .option {
       cursor: pointer;
+      margin-bottom: 15px;
       min-width: 33%;
       max-width: 50%;
       display: inline-flex;
       align-items: center;
+      margin-bottom: 15px;
 
       .option-mark {
         width: 17px;

@@ -3,6 +3,7 @@
   (click)="focusInput()"
   class="host-input-container"
   [class.textarea-input]="textarea"
+  [class.invalid]="!control.valid && control.touched"
   [formGroup]="formGroup"
 >
   <div
@@ -18,12 +19,6 @@
     *ngIf="!textarea"
     [type]="inputType"
     [formControlName]="controlName"
-    [class.invalid]="!control.valid && control.touched"
   />
-  <textarea
-    #input
-    *ngIf="textarea"
-    [formControlName]="controlName"
-    [class.invalid]="!control.valid && control.touched"
-  ></textarea>
+  <textarea #input *ngIf="textarea" [formControlName]="controlName"></textarea>
 </div>

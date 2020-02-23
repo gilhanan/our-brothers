@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { AudienceOptions } from 'src/app/model/host';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { HostInputOption } from '../host-input-options/host-input-options.component';
 
 export interface HostDetailsForm {
   title: string;
@@ -27,26 +28,54 @@ export class HostFormComponent implements OnInit {
   @Output() public submitMeetingDetails = new EventEmitter<HostDetailsForm>();
 
   public form: FormGroup;
+  public audienceOptions: HostInputOption[];
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
+    this.audienceOptions = [
+      {
+        text: 'כולם',
+        value: AudienceOptions.all
+      },
+      {
+        text: 'תלמידים',
+        value: AudienceOptions.schoolStudents
+      },
+      {
+        text: 'תנועות נוער',
+        value: AudienceOptions.youthMovement
+      },
+      {
+        text: 'חיילים',
+        value: AudienceOptions.soldiers
+      },
+      {
+        text: 'מכינות',
+        value: AudienceOptions.militaryPreparation
+      },
+      {
+        text: 'סטודנטים',
+        value: AudienceOptions.students
+      }
+    ];
+
     this.form = this.fb.group({
       title: ['', Validators.required],
       date: [null, Validators.required],
       hour: [null, Validators.required],
       address: this.fb.group({
         formattedAddress: ['', Validators.required],
-        latitude: ['', Validators.required],
-        longitude: ['', Validators.required],
-        notes: ['', Validators.required]
+        latitude: [],
+        longitude: [],
+        notes: ['']
       }),
-      capacity: [20, [Validators.required, Validators.min(2)]],
-      invited: [false, Validators.required],
-      accessibility: [false],
-      media: [false],
-      reviewable: [false],
-      audience: [AudienceOptions.all]
+      capacity: [30, [Validators.required, Validators.min(2)]],
+      invited: [null, Validators.required],
+      accessibility: [null, Validators.required],
+      media: [null, Validators.required],
+      reviewable: [null, Validators.required],
+      audience: [null, Validators.required]
     });
   }
 
@@ -110,8 +139,15 @@ export class HostFormComponent implements OnInit {
     if (this.form.valid) {
       const newMeetingDetails: HostDetailsForm = this.form.value;
 
-      newMeetingDetails.date = (this.date.value as Date).getTime();
+      newMeetingDetails.date = new Date(this.date.value).getTime();
+      let hour: string;
+      let minutes: string;
+      [hour, minutes] = this.hour.value.split(':');
+      newMeetingDetails.date += +hour * 60 * 60 * 1000;
+      newMeetingDetails.date +=
+        (+minutes + new Date().getTimezoneOffset()) * 60 * 1000;
 
+      delete (newMeetingDetails as any).hour;
       this.submitMeetingDetails.emit(newMeetingDetails);
     } else {
       this.form.markAllAsTouched();

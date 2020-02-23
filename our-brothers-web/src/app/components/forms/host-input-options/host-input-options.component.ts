@@ -16,6 +16,7 @@ export class HostInputOptionsComponent implements OnInit {
   @Input() label: string;
   @Input() options: HostInputOption[];
   @Input() currentOption: any;
+  @Input() invalid: boolean;
 
   @Output() optionSelected = new EventEmitter<any>();
 

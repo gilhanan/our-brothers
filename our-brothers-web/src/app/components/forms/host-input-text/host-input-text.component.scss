@@ -8,6 +8,10 @@
   display: flex;
   align-items: center;
 
+  &.invalid {
+    border-color: red;
+  }
+
   &.textarea-input {
     height: 126px;
     align-items: flex-start;

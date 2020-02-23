@@ -1,4 +1,4 @@
-<div *ngIf="options" class="host-options-container">
+<div *ngIf="options" class="host-options-container" [class.invalid]="invalid">
   <div
     *ngIf="iconUrl"
     class="input-icon"

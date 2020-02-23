@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { DataService } from 'src/app/services/data.service';
 import { ParticipationsService } from 'src/app/services/participations.service';
 import { ProfileForm } from '../../components/forms/profile-form/profile-form.component';
+import { HostDetailsForm } from 'src/app/components/forms/host-form/host-form.component';
 
 @Component({
   selector: 'app-host-page',
@@ -61,6 +62,11 @@ export class HostPageComponent implements OnInit, OnDestroy {
 
   onProfileSubmit(profileForm: ProfileForm) {
     this.dataService.setUserProfile(this.user, profileForm);
+  }
+
+  onNewMeeting(meetingDetails: HostDetailsForm) {
+    alert(JSON.stringify(meetingDetails, null, ' '));
+    console.log(meetingDetails);
   }
 
   ngOnDestroy() {

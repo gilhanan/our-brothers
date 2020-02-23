@@ -61,17 +61,75 @@
         iconUrl="assets/img/host_users.svg"
         [options]="[{text: 'פתוח לקהל הרחב', value: false}, {text: 'סגור למוזמנים בלבד', value: true}]"
         [currentOption]="invited.value"
+        [invalid]="!invited.valid && invited.touched"
         (optionSelected)="invited.setValue($event)"
       ></app-host-input-options>
     </div>
     <div class="form-items-container">
+      <div class="host-description-container">
+        <p>
+          <span class="host-description-title">פתוח לקהל הרחב-</span>
+          מארח יקר, שים לב. תודה שאתה פותח את ביתך לקהל השומעים הרחב, אך יש לקחת
+          בחשבון שלמרות זאת הינך מחויב להזמין לביתך מכרים, חברים וגכו׳
+        </p>
+      </div>
+    </div>
+    <div class="form-items-container">
+      <div class="host-description-container">
+        <p>
+          <span class="host-description-title">סגור למוזמנים בלבד-</span>
+          מארח יקר, שים לב. אירוח זה הוא אירוח סגור למוזמנייך בלבד ולא יוכלו
+          להצטרף אליו קהל שומעים רחב.
+        </p>
+      </div>
+    </div>
+    <div class="form-items-container">
       <app-host-input-options
         label="נגישות:"
-        iconUrl="assets/img/host_users.svg"
-        [options]="[{text: 'פתוח לקהל הרחב', value: false}, {text: 'סגור למוזמנים בלבד', value: true}]"
-        [currentOption]="invited.value"
-        (optionSelected)="invited.setValue($event)"
+        iconUrl="assets/img/host_accessibility.svg"
+        [options]="[{text: 'קיים', value: true}, {text: 'לא קיים', value: false}]"
+        [currentOption]="accessibility.value"
+        [invalid]="!accessibility.valid && accessibility.touched"
+        (optionSelected)="accessibility.setValue($event)"
       ></app-host-input-options>
+    </div>
+    <div class="form-items-container">
+      <app-host-input-options
+        label="אפשרות להקרנת מצגת:"
+        iconUrl="assets/img/host_tv.svg"
+        [options]="[{text: 'קיים', value: true}, {text: 'לא קיים', value: false}]"
+        [currentOption]="media.value"
+        [invalid]="!media.valid && media.touched"
+        (optionSelected)="media.setValue($event)"
+      ></app-host-input-options>
+    </div>
+    <div class="form-items-container">
+      <app-host-input-options
+        label="הסכמה לצילום במפגש:"
+        iconUrl="assets/img/host_camera.svg"
+        [options]="[{text: 'מסכים', value: true}, {text: 'לא מסכים', value: false}]"
+        [currentOption]="reviewable.value"
+        [invalid]="!reviewable.valid && reviewable.touched"
+        (optionSelected)="reviewable.setValue($event)"
+      ></app-host-input-options>
+    </div>
+    <div class="form-items-container">
+      <app-host-input-options
+        label="האם מדובר בקהל יעד מסוים?"
+        iconUrl="assets/img/host_users.svg"
+        [options]="audienceOptions"
+        [currentOption]="audience.value"
+        [invalid]="!audience.valid && audience.touched"
+        (optionSelected)="audience.setValue($event)"
+      ></app-host-input-options>
+    </div>
+  </div>
+  <div class="host-form-submit-container">
+    <div
+      (click)="onSubmit()"
+      class="host-form-submit-btn site-button primary-button"
+    >
+      צור אירוח >>
     </div>
   </div>
 </div>

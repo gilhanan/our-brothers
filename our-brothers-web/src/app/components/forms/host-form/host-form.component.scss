@@ -3,6 +3,16 @@
   justify-content: center;
 }
 
+.host-description-container {
+  padding: 0 60px;
+  color: rgb(153, 153, 153);
+
+  .host-description-title {
+    font-weight: bold;
+    color: rgb(53, 129, 171);
+  }
+}
+
 .host-form-container {
   width: 100%;
   max-width: 770px;
@@ -39,5 +49,14 @@
       height: 100%;
       background-color: red;
     }
+  }
+}
+
+.host-form-submit-container {
+  margin-top: 50px;
+  margin-bottom: 50px;
+
+  .host-form-submit-btn {
+    letter-spacing: 3px;
   }
 }
