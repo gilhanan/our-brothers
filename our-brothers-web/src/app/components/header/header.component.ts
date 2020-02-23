@@ -43,12 +43,4 @@ export class HeaderComponent implements OnInit {
       }
     }
   }
-
-  closeSideMenu() {
-    this.isSideMenuClosed = true;
-  }
-
-  openSideMenu() {
-    this.isSideMenuClosed = false;
-  }
 }

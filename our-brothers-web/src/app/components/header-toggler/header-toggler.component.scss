@@ -1,0 +1,58 @@
+:host {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+
+  %bar {
+    width: 30px;
+    height: 6px;
+    background-color: rgb(0, 160, 153);
+    display: block;
+  }
+
+  %edge-bar {
+    @extend %bar;
+    content: "";
+    position: absolute;
+    transition-property: transform, margin-top;
+    transition-duration: 0.2s;
+    transition-delay: 0s, 0.2s;
+  }
+
+  .bar {
+    @extend %bar;
+    position: relative;
+    top: 12px;
+    margin: 0 auto;
+
+    &::before {
+      @extend %edge-bar;
+      margin-top: -12px;
+    }
+
+    &::after {
+      @extend %edge-bar;
+      margin-top: 12px;
+    }
+
+    &.active {
+      background-color: rgba(0, 0, 0, 0);
+
+      &::before,
+      &::after {
+        margin-top: 0;
+        transition-delay: 0.2s, 0s;
+      }
+
+      &::before {
+        transform: rotate(45deg);
+      }
+
+      &::after {
+        transform: rotate(-45deg);
+      }
+    }
+  }
+}

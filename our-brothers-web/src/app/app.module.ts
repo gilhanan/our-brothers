@@ -79,6 +79,7 @@ import { ForgotPasswordFormComponent } from './components/forms/forgot-password-
 import { LoginSocialButtonComponent } from './components/login-social-button/login-social-button.component';
 import { HostInputTextComponent } from './components/forms/host-input-text/host-input-text.component';
 import { HostInputOptionsComponent } from './components/forms/host-input-options/host-input-options.component';
+import { HeaderTogglerComponent } from './components/header-toggler/header-toggler.component';
 
 registerLocaleData(localeHe);
 
@@ -145,7 +146,8 @@ registerLocaleData(localeHe);
     ForgotPasswordFormComponent,
     LoginSocialButtonComponent,
     HostInputTextComponent,
-    HostInputOptionsComponent
+    HostInputOptionsComponent,
+    HeaderTogglerComponent
   ],
   imports: [
     BrowserModule,
