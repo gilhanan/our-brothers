@@ -1,6 +1,8 @@
 import { Component, Input, HostListener, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { User } from 'firebase';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router, NavigationStart } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 class HeaderSubMenus {
   meetings: boolean;
@@ -22,10 +24,15 @@ export class HeaderComponent implements OnInit {
 
   @Input() public user: User;
 
-  constructor(public authService: AuthService) { }
+  constructor(public authService: AuthService,
+    private router: Router) { }
 
   ngOnInit() {
     this.updateMobileViewState(window.innerWidth);
+
+    this.router.events.pipe(filter(event => event instanceof NavigationStart)).subscribe(() => {
+      this.isSideMenuClosed = true;
+    })
   }
 
   @HostListener('window:resize', ['$event.target.innerWidth'])
