@@ -1,0 +1,45 @@
+.host-meeting-input-container {
+  position: relative;
+  padding-right: 65px;
+  padding-left: 20px;
+  background-color: white;
+  height: 50px;
+  border: 1px solid rgb(229, 229, 229);
+  display: flex;
+  align-items: center;
+  width: 370px;
+
+  .input-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 65px;
+    height: 50px;
+    background-position: 50% 50%;
+    background-size: 24px 24px;
+    background-repeat: no-repeat;
+  }
+
+  .input-label {
+    flex: 0 0 auto;
+    font-size: 18px;
+    color: rgb(153, 153, 153);
+    font-family: 'Hebbo';
+  }
+
+  .input-text {
+    flex: 0 0 auto;
+    margin-right: 10px;
+    font-size: 18px;
+    font-family: 'Hebbo';
+    color: rgb(153, 153, 153);
+  }
+
+  .input-info {
+    flex: 0 0 auto;
+    margin-right: 10px;
+    font-size: 18px;
+    font-family: 'Hebbo';
+    color: rgb(153, 153, 153);
+  }
+}

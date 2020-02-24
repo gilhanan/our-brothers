@@ -81,6 +81,8 @@ import { HostInputTextComponent } from './components/forms/host-input-text/host-
 import { HostInputOptionsComponent } from './components/forms/host-input-options/host-input-options.component';
 import { HeaderTogglerComponent } from './components/header-toggler/header-toggler.component';
 import { PlaceMapComponent } from './components/place-map/place-map.component';
+import { HostMeetingInfoComponent } from './components/host-meeting-info/host-meeting-info.component';
+import { HostMeetingInputTextComponent } from './components/host-meeting-input-text/host-meeting-input-text.component';
 
 registerLocaleData(localeHe);
 
@@ -149,7 +151,9 @@ registerLocaleData(localeHe);
     HostInputTextComponent,
     HostInputOptionsComponent,
     HeaderTogglerComponent,
-    PlaceMapComponent
+    PlaceMapComponent,
+    HostMeetingInfoComponent,
+    HostMeetingInputTextComponent
   ],
   imports: [
     BrowserModule,

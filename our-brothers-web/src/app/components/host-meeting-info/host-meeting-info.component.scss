@@ -1,0 +1,229 @@
+.host-meeting-heading-text {
+  position: relative;
+  font-size: 36px;
+  font-family: 'arbel';
+  color: rgb(55, 135, 177);
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 5px;
+  margin-bottom: 40px;
+}
+
+.host-meeting-heading {
+  display: flex;
+  justify-content: center;
+
+  .host-meeting-heading-text {
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: -85px;
+      width: 30px;
+      height: 30px;
+      background-image: url(../../../assets/img/host_event.svg);
+      background-size: 100% 100%;
+      transform: translateY(-50%);
+    }
+  }
+}
+
+.form-items-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+
+  * {
+    flex: 0 0 auto;
+    margin: 0 15px;
+  }
+
+  *:first-child {
+    margin-right: 0;
+  }
+
+  *:last-child {
+    margin-left: 0;
+  }
+}
+
+.edit-button {
+  position: relative;
+  padding-right: 55px;
+  padding-left: 20px;
+  background-color: rgb(55, 135, 177);
+  height: 50px;
+  display: flex;
+  align-items: center;
+  width: 170px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 55px;
+    height: 50px;
+    background-image: url(../../../assets/img/host_edit_white.svg);
+    background-position: 50% 50%;
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+  }
+
+  .edit-button-text {
+    flex: 0 0 auto;
+    font-size: 18px;
+    color: white;
+    font-family: 'Hebbo';
+  }
+}
+
+.delete-button {
+  position: relative;
+  padding-right: 65px;
+  padding-left: 20px;
+  background-color: rgb(55, 135, 177);
+  height: 50px;
+  display: flex;
+  align-items: center;
+  width: 170px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 65px;
+    height: 50px;
+    background-image: url(../../../assets/img/host_delete_white.svg);
+    background-position: 50% 50%;
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+  }
+
+  .delete-button-text {
+    flex: 0 0 auto;
+    font-size: 18px;
+    color: white;
+    font-family: 'Hebbo';
+  }
+}
+
+.share-container {
+  width: 370px;
+  display: flex;
+  align-items: center;
+
+  .share-text {
+    font-size: 18px;
+    color: rgb(153, 153, 153);
+    font-family: 'Hebbo';
+  }
+
+  .facebook-icon {
+    width: 16px;
+    height: 28px;
+    background-image: url(../../../assets/img/facebook.png);
+    background-size: 100% 100%;
+  }
+
+  .whatsapp-icon {
+    width: 25px;
+    height: 25px;
+    background-image: url(../../../assets/img/whatsapp.png);
+    background-size: 100% 100%;
+  }
+}
+
+.brother-heading {
+  margin-top: 80px;
+}
+
+.meeting-users-heading {
+  margin-top: 80px;
+  margin-bottom: 20px;
+}
+
+.meeting-users-list {
+  margin: 0 auto;
+  max-width: 770px;
+  margin-bottom: 50px;
+
+  .meeting-users-list-header {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    font-size: 19px;
+    font-family: 'Heebo';
+    color: rgb(129, 129, 129);
+
+    .meeting-users-list-header-name {
+      flex: 0 0 160px;
+    }
+
+    .meeting-users-list-header-capacity {
+      flex: 0 0 170px;
+      text-align: center;
+    }
+
+    .meeting-users-list-header-phone {
+      flex: 0 0 150px;
+      text-align: center;
+    }
+
+    .meeting-users-list-header-email {
+      flex: 1;
+      text-align: center;
+    }
+  }
+
+  .meeting-users-list-item {
+    display: flex;
+    align-items: center;
+    padding: 20px 0;
+    font-size: 19px;
+    font-family: 'Heebo';
+    color: rgb(129, 129, 129);
+    border-top: 1px solid #cccdce;
+
+    .meeting-users-list-item-name {
+      flex: 0 0 160px;
+      font-size: 23px;
+      font-family: 'arbel';
+      color: rgb(55, 135, 177);
+      font-weight: bold;
+    }
+
+    .meeting-users-list-item-capacity {
+      flex: 0 0 170px;
+      text-align: center;
+    }
+
+    .meeting-users-list-item-phone {
+      flex: 0 0 150px;
+      text-align: center;
+    }
+
+    .meeting-users-list-item-email {
+      flex: 1;
+      text-align: left;
+    }
+  }
+}
+
+.כמות_אנשים_ {
+  font-size: 19.494px;
+  font-family: 'Heebo';
+  color: rgb(129, 129, 129);
+  line-height: 1.667;
+  text-align: left;
+  -moz-transform: matrix(0.92336071301404, 0, 0, 0.92336071301403, 0, 0);
+  -webkit-transform: matrix(0.92336071301404, 0, 0, 0.92336071301403, 0, 0);
+  -ms-transform: matrix(0.92336071301404, 0, 0, 0.92336071301403, 0, 0);
+  position: absolute;
+  left: 1007.311px;
+  top: 1703.306px;
+  width: 95.468px;
+  height: 11.015px;
+  z-index: 52;
+}
