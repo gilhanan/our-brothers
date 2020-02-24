@@ -33,6 +33,10 @@
     *:last-child {
       margin-left: 0;
     }
+
+    .places-select ::ng-deep .form-field {
+      max-width: none;
+    }
   }
 
   .address-map-container {

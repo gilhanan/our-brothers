@@ -11,7 +11,12 @@
       <div class="small-heading">פרטים נוספים</div>
       <app-registration-progress-bar
         [currentStep]="currentStep - 1"
-        [steps]="[{title: 'התחברות'},{title: 'הרשמה'},{title: 'פרטי האירוח'}, {title: 'אישור האירוח'}]"
+        [steps]="[
+          { title: 'התחברות' },
+          { title: 'הרשמה' },
+          { title: 'פרטי האירוח' },
+          { title: 'אישור האירוח' }
+        ]"
       >
       </app-registration-progress-bar>
     </section>

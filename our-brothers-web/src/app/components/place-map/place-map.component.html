@@ -1,0 +1,24 @@
+<agm-map
+  class="map"
+  [usePanning]="true"
+  [latitude]="latitude || 31.6726"
+  [longitude]="longitude || 35.077028"
+  [minZoom]="7"
+  [maxZoom]="17"
+  [styles]="[{ featureType: 'poi', stylers: [{ visibility: 'off' }] }]"
+  [zoom]="latitude && latitude ? 18 : 8"
+  [mapDraggable]="false"
+>
+  <agm-marker
+    *ngIf="!!(latitude && latitude)"
+    [latitude]="latitude"
+    [longitude]="longitude"
+    [iconUrl]="{
+      url: '/assets/img/map/meetings-map-blue.svg',
+      scaledSize: { height: 40, width: 40 }
+    }"
+    [label]="''"
+    [markerDraggable]="false"
+  >
+  </agm-marker>
+</agm-map>

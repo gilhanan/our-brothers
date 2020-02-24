@@ -24,12 +24,8 @@
       ></app-host-input-text>
     </div>
     <div class="form-items-container">
-      <app-host-input-text
-        label="כתובת:"
-        controlName="formattedAddress"
-        iconUrl="assets/img/host_location.svg"
-        [formGroup]="address"
-      ></app-host-input-text>
+      <app-places-select class="places-select" [types]="['address']" [placeholder]="'כתובת'" (change)="address.patchValue($event)"
+        [invalid]="!address.valid && address.touched"></app-places-select>
     </div>
     <div class="form-items-container">
       <app-host-input-text
@@ -41,9 +37,7 @@
       ></app-host-input-text>
     </div>
     <div class="address-map-container">
-      <div class="address-map">
-        <!-- Place the map component HERE! -->
-      </div>
+      <app-place-map [longitude]="address.value?.longitude" [latitude]="address.value?.latitude"></app-place-map>>
     </div>
     <div class="form-items-container">
       <app-host-input-text
@@ -59,7 +53,10 @@
       <app-host-input-options
         label="קהל מוזמנים:"
         iconUrl="assets/img/host_users.svg"
-        [options]="[{text: 'פתוח לקהל הרחב', value: false}, {text: 'סגור למוזמנים בלבד', value: true}]"
+        [options]="[
+          { text: 'פתוח לקהל הרחב', value: false },
+          { text: 'סגור למוזמנים בלבד', value: true }
+        ]"
         [currentOption]="invited.value"
         [invalid]="!invited.valid && invited.touched"
         (optionSelected)="invited.setValue($event)"
@@ -87,7 +84,10 @@
       <app-host-input-options
         label="נגישות:"
         iconUrl="assets/img/host_accessibility.svg"
-        [options]="[{text: 'קיים', value: true}, {text: 'לא קיים', value: false}]"
+        [options]="[
+          { text: 'קיים', value: true },
+          { text: 'לא קיים', value: false }
+        ]"
         [currentOption]="accessibility.value"
         [invalid]="!accessibility.valid && accessibility.touched"
         (optionSelected)="accessibility.setValue($event)"
@@ -97,7 +97,10 @@
       <app-host-input-options
         label="אפשרות להקרנת מצגת:"
         iconUrl="assets/img/host_tv.svg"
-        [options]="[{text: 'קיים', value: true}, {text: 'לא קיים', value: false}]"
+        [options]="[
+          { text: 'קיים', value: true },
+          { text: 'לא קיים', value: false }
+        ]"
         [currentOption]="media.value"
         [invalid]="!media.valid && media.touched"
         (optionSelected)="media.setValue($event)"
@@ -107,7 +110,10 @@
       <app-host-input-options
         label="הסכמה לצילום במפגש:"
         iconUrl="assets/img/host_camera.svg"
-        [options]="[{text: 'מסכים', value: true}, {text: 'לא מסכים', value: false}]"
+        [options]="[
+          { text: 'מסכים', value: true },
+          { text: 'לא מסכים', value: false }
+        ]"
         [currentOption]="reviewable.value"
         [invalid]="!reviewable.valid && reviewable.touched"
         (optionSelected)="reviewable.setValue($event)"

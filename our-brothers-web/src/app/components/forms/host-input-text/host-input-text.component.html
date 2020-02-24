@@ -1,7 +1,7 @@
 <div
   *ngIf="formGroup"
   (click)="focusInput()"
-  class="host-input-container"
+  class="form-field"
   [class.textarea-input]="textarea"
   [class.invalid]="!control.valid && control.touched"
   [formGroup]="formGroup"
@@ -12,7 +12,7 @@
     [style.background-image]="'url(' + iconUrl + ')'"
   ></div>
   <div class="input-label">
-    {{label}}
+    {{ label }}
   </div>
   <input
     #input

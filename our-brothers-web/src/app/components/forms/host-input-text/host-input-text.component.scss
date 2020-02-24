@@ -1,20 +1,12 @@
-.host-input-container {
+.form-field {
   position: relative;
-  padding-right: 45px;
-  padding-left: 20px;
-  background-color: white;
-  height: 50px;
-  border: 1px solid rgb(229, 229, 229);
+  max-width: none;
   display: flex;
   align-items: center;
 
-  &.invalid {
-    border-color: red;
-  }
-
   &.textarea-input {
-    height: 126px;
     align-items: flex-start;
+    height: auto;
 
     .input-label {
       margin-top: 15px;
@@ -23,7 +15,7 @@
     textarea {
       margin-top: 15px;
       margin-bottom: 15px;
-      height: calc(100% - 30px);
+      height: 126px;
       resize: none;
     }
   }
@@ -33,9 +25,7 @@
   }
 
   .input-icon {
-    position: absolute;
-    top: 0;
-    right: 0;
+    flex: 0 0 auto;
     width: 45px;
     height: 50px;
     background-position: 50% 50%;
@@ -47,7 +37,7 @@
     flex: 0 0 auto;
     font-size: 18px;
     color: rgb(153, 153, 153);
-    font-family: 'Hebbo';
+    font-family: 'Heebo';
   }
 
   input,

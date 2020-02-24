@@ -80,6 +80,7 @@ import { LoginSocialButtonComponent } from './components/login-social-button/log
 import { HostInputTextComponent } from './components/forms/host-input-text/host-input-text.component';
 import { HostInputOptionsComponent } from './components/forms/host-input-options/host-input-options.component';
 import { HeaderTogglerComponent } from './components/header-toggler/header-toggler.component';
+import { PlaceMapComponent } from './components/place-map/place-map.component';
 
 registerLocaleData(localeHe);
 
@@ -147,7 +148,8 @@ registerLocaleData(localeHe);
     LoginSocialButtonComponent,
     HostInputTextComponent,
     HostInputOptionsComponent,
-    HeaderTogglerComponent
+    HeaderTogglerComponent,
+    PlaceMapComponent
   ],
   imports: [
     BrowserModule,

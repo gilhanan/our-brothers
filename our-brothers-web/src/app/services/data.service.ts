@@ -17,7 +17,7 @@ import {
 import { Contact } from 'models';
 import { AnalyticsService } from './analytics.service';
 
-export const MEMORIAL_YEAR = 2019;
+export const MEMORIAL_YEAR = 2020;
 
 export interface UserMeeting {
   meeting: Meeting;
