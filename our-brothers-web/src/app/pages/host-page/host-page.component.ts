@@ -23,7 +23,7 @@ export class HostPageComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private dataService: DataService,
     private participationsService: ParticipationsService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.authService.firebaseUser.subscribe(
@@ -65,8 +65,9 @@ export class HostPageComponent implements OnInit, OnDestroy {
   }
 
   onNewMeeting(meetingDetails: HostDetailsForm) {
-    alert(JSON.stringify(meetingDetails, null, ' '));
-    console.log(meetingDetails);
+    this.dataService.createMeeting(this.user, meetingDetails).subscribe(() => {
+      alert('נוצר מפגש בהצלחה!');
+    });
   }
 
   ngOnDestroy() {

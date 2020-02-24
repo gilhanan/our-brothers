@@ -16,6 +16,7 @@ import {
 } from '../model';
 import { Contact } from 'models';
 import { AnalyticsService } from './analytics.service';
+import { HostDetailsForm } from '../components/forms/host-form/host-form.component';
 
 export const MEMORIAL_YEAR = 2020;
 
@@ -56,31 +57,49 @@ export class DataService {
           ...user
         })),
         map(user => {
-          if (
-            user.bereavedParticipation &&
-            user.bereavedParticipation[MEMORIAL_YEAR]
-          ) {
-            user.bereavedParticipation[
-              MEMORIAL_YEAR
-            ].meetings = this.parseUserMeetings(
-              user.bereavedParticipation[MEMORIAL_YEAR].meetings
-            );
-          }
 
-          if (
-            user.participateParticipation &&
-            user.participateParticipation[MEMORIAL_YEAR]
-          ) {
-            user.participateParticipation[
-              MEMORIAL_YEAR
-            ].meetings = this.parseUserMeetings(
-              user.participateParticipation[MEMORIAL_YEAR].meetings
-            );
-          }
+          this.parseUserMeetings(user, 'bereavedParticipation');
+          this.parseUserMeetings(user, 'participateParticipation');
+          this.parseUserMeetings(user, 'hostParticipation');
 
           return user;
         }),
         catchError(error => {
+          console.error(error);
+          return throwError(error);
+        })
+      );
+  }
+
+  public createMeeting(user: User, meeting: HostDetailsForm, year = MEMORIAL_YEAR): Observable<boolean> {
+
+    const parsedMeeting: Meeting = {
+      ...meeting,
+      hostId: null,
+      id: null,
+      count: null,
+      contact: {
+        firstName: user.profile.firstName,
+        lastName: user.profile.lastName,
+        phoneNumber: user.profile.phoneNumber,
+        email: user.profile.email
+      }
+    };
+
+    const telemetry = { parsedMeeting };
+
+    this.analyticsService.logEvent('CreateMeeting', 'start', telemetry);
+
+    return from(this.angularFireDatabase
+      .list<Meeting>(`events/${year}/${user.id}`)
+      .push(parsedMeeting))
+      .pipe(
+        tap(() => {
+          this.analyticsService.logEvent('CreateMeeting', 'end', telemetry);
+        }),
+        map(() => true),
+        catchError(error => {
+          this.analyticsService.logEvent('CreateMeeting', 'failed', { ...telemetry, error: error.toString() });
           console.error(error);
           return throwError(error);
         })
@@ -265,15 +284,7 @@ export class DataService {
             .filter(user => user.role === 'bereaved' && !!user.profile)
             // .slice(0, 20)
             .map(user => {
-              if (
-                user.bereavedParticipation &&
-                user.bereavedParticipation[year]
-              ) {
-                user.bereavedParticipation[year].meetings = this.parseUserMeetings(
-                  user.bereavedParticipation[year].meetings
-                );
-              }
-
+              this.parseUserMeetings(user, 'bereavedParticipation', year);
               return user;
             })
         )
@@ -440,7 +451,9 @@ export class DataService {
       });
   }
 
-  private parseUserMeetings(map: Object): UserParticipationMeeting[] {
+  private parseUserMeetings(user: User, field: string, year = MEMORIAL_YEAR) {
+    const map = user[field] && user[field][year];
+
     if (map) {
       const participations: UserParticipationMeeting[] = [];
 
@@ -458,7 +471,7 @@ export class DataService {
         }
       );
 
-      return participations;
+      user[field][year] = participations;
     }
   }
 

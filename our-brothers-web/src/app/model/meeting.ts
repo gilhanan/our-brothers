@@ -3,16 +3,13 @@ import { UserProfile } from './user';
 export interface Meeting {
   hostId: string;
   id: string;
-  year: number;
   title: string;
   address: MeetingAddress;
   date: number;
-  time: { hour: number; minute: number };
   contact: UserProfile;
   capacity: number;
   count: number;
   invited: boolean;
-  open: boolean;
   accessibility: boolean;
   media: boolean;
   reviewable: boolean;

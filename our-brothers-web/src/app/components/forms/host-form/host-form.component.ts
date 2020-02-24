@@ -1,6 +1,8 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { AudienceOptions } from 'src/app/model/host';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
+import { AudienceOptions } from 'src/app/model/host';
+import { MeetingAudience } from 'src/app/model';
 import { HostInputOption } from '../host-input-options/host-input-options.component';
 
 export interface HostDetailsForm {
@@ -13,10 +15,11 @@ export interface HostDetailsForm {
     notes: string;
   };
   capacity: number;
+  invited: boolean;
   accessibility: boolean;
   media: boolean;
   reviewable: boolean;
-  audience: AudienceOptions[];
+  audience: MeetingAudience[];
 }
 
 @Component({
@@ -30,7 +33,7 @@ export class HostFormComponent implements OnInit {
   public form: FormGroup;
   public audienceOptions: HostInputOption[];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
     this.audienceOptions = [
