@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { User, UserRole } from '../../model/user';
+import { Router } from '@angular/router';
 import { Subject, combineLatest, Subscription } from 'rxjs';
+
+import { User, UserRole } from '../../model/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { DataService } from 'src/app/services/data.service';
 import { ParticipationsService } from 'src/app/services/participations.service';
@@ -20,6 +22,7 @@ export class HostPageComponent implements OnInit, OnDestroy {
   public subscriptions: Subscription[] = [];
 
   constructor(
+    private router: Router,
     private authService: AuthService,
     private dataService: DataService,
     private participationsService: ParticipationsService
@@ -67,6 +70,7 @@ export class HostPageComponent implements OnInit, OnDestroy {
   onNewMeeting(meetingDetails: HostDetailsForm) {
     this.dataService.createMeeting(this.user, meetingDetails).subscribe(() => {
       alert('נוצר מפגש בהצלחה!');
+      this.router.navigate(['meetings']);
     });
   }
 

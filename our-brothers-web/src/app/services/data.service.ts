@@ -114,7 +114,7 @@ export class DataService {
 
     this.analyticsService.logEvent('UserMapGuideLastVisit', 'start', telemetry);
     return from(
-      this.angularFireDatabase.object<number>(`users/${userId}/meetingMapGuideLastVisit`).update(Date.now())
+      this.angularFireDatabase.object<number>(`users/${userId}/meetingMapGuideLastVisit`).set(now)
     ).pipe(
       tap(() => {
         this.analyticsService.logEvent('UserMapGuideLastVisit', 'end', telemetry);

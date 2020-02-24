@@ -90,18 +90,13 @@ export class ParticipationsService {
     );
   };
 
-  // TODO: Replaced by user.id === meeting.hostId ?
   isHostParticipatingEvent = (
     user: User,
-    meeting: Meeting,
-    year = MEMORIAL_YEAR
+    meeting: Meeting
   ) => {
     return (
       !!user &&
-      !!user.hostParticipation &&
-      !!user.hostParticipation[year] &&
-      !!user.hostParticipation[year].meetings &&
-      user.hostParticipation[year].meetings.some(e => e.id === meeting.id)
+      user.id === meeting.hostId
     );
   };
 
