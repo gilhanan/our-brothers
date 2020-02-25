@@ -13,8 +13,8 @@ export interface Meeting {
   accessibility: boolean;
   media: boolean;
   reviewable: boolean;
+  audience: MeetingAudience;
   bereaved?: MeetingBereaved;
-  audience?: MeetingAudience[];
 }
 
 export interface MeetingParticipate {

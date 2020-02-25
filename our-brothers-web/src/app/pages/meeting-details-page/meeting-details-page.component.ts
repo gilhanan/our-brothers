@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { Meeting, MeetingParticipate } from 'src/app/model';
+import { Meeting, MeetingParticipate, MeetingAudienceLabels } from 'src/app/model';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -16,6 +16,8 @@ export class MeetingDetailsPageComponent implements OnInit {
 
   public loadingMeetingParticipates = true;
   public meetingParticipates: MeetingParticipate[];
+
+  public audienceLabels = MeetingAudienceLabels;
 
   private getMeeting$: Subscription;
   private getMeetingParticipates$: Subscription;

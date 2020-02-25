@@ -24,8 +24,13 @@
       ></app-host-input-text>
     </div>
     <div class="form-items-container">
-      <app-places-select class="places-select" [types]="['address']" [placeholder]="'כתובת'" (change)="address.patchValue($event)"
-        [invalid]="!address.valid && address.touched"></app-places-select>
+      <app-places-select
+        class="places-select"
+        [types]="['address']"
+        [placeholder]="'כתובת'"
+        (change)="address.patchValue($event)"
+        [invalid]="!address.valid && address.touched"
+      ></app-places-select>
     </div>
     <div class="form-items-container">
       <app-host-input-text
@@ -37,7 +42,11 @@
       ></app-host-input-text>
     </div>
     <div class="address-map-container">
-      <app-place-map [longitude]="address.value?.longitude" [latitude]="address.value?.latitude"></app-place-map>>
+      <app-place-map
+        [longitude]="address.value?.longitude"
+        [latitude]="address.value?.latitude"
+      ></app-place-map
+      >>
     </div>
     <div class="form-items-container">
       <app-host-input-text

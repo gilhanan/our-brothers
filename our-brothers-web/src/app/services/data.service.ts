@@ -17,7 +17,7 @@ import {
 } from '../model';
 import { Contact } from 'models';
 import { AnalyticsService } from './analytics.service';
-import { HostDetailsForm } from '../components/forms/host-form/host-form.component';
+import { MeetingForm } from '../components/forms/host-form/host-form.component';
 
 export const MEMORIAL_YEAR = 2020;
 
@@ -72,7 +72,7 @@ export class DataService {
       );
   }
 
-  public createMeeting(user: User, meeting: HostDetailsForm, year = MEMORIAL_YEAR): Observable<Meeting> {
+  public createMeeting(user: User, meeting: MeetingForm, year = MEMORIAL_YEAR): Observable<Meeting> {
 
     const parsedMeeting: Meeting = {
       ...meeting,

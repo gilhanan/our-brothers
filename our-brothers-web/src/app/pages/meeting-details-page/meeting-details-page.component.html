@@ -29,13 +29,13 @@
       <app-host-meeting-input-text
         iconUrl="assets/img/host_users.svg"
         label="קהל מוזמנים:"
-        [text]="meeting?.audience"
+        [text]="meeting ? audienceLabels[meeting.audience] : ''"
       ></app-host-meeting-input-text>
     </div>
     <div class="form-items-container">
       <app-host-meeting-input-text
         iconUrl="assets/img/host_users.svg"
-        [text]="meeting?.invited"
+        [text]="meeting?.invited ? 'מוזמנים בלבד' : 'פתוח לקהל הרחב'"
       ></app-host-meeting-input-text>
     </div>
     <!-- <div class="form-items-container">
@@ -69,16 +69,20 @@
         iconUrl="assets/img/host_user.svg"
         info="שם האח"
         [text]="
-          meeting?.bereaved?.firstName + ' ' + meeting?.bereaved?.lastName
+          meeting?.bereaved
+            ? meeting.bereaved.firstName + ' ' + meeting.bereaved.lastName
+            : ''
         "
       ></app-host-meeting-input-text>
       <app-host-meeting-input-text
         iconUrl="assets/img/host_user.svg"
         info="שם החלל"
         [text]="
-          (meeting?.bereaved?.slains)[0].firstName +
-          ' ' +
-          (meeting?.bereaved?.slains)[0].lastName
+          meeting?.bereaved?.slains
+            ? (meeting.bereaved.slains)[0].firstName +
+              ' ' +
+              (meeting.bereaved.slains)[0].lastName
+            : ''
         "
       ></app-host-meeting-input-text>
     </div>

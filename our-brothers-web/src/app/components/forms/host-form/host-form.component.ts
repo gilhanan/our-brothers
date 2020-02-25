@@ -1,11 +1,10 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { AudienceOptions } from 'src/app/model/host';
-import { MeetingAudience } from 'src/app/model';
+import { MeetingAudience, MeetingAudienceLabels } from 'src/app/model';
 import { HostInputOption } from '../host-input-options/host-input-options.component';
 
-export interface HostDetailsForm {
+export interface MeetingForm {
   title: string;
   date: number;
   address: {
@@ -19,7 +18,7 @@ export interface HostDetailsForm {
   accessibility: boolean;
   media: boolean;
   reviewable: boolean;
-  audience: MeetingAudience[];
+  audience: MeetingAudience;
 }
 
 @Component({
@@ -28,7 +27,7 @@ export interface HostDetailsForm {
   styleUrls: ['./host-form.component.scss']
 })
 export class HostFormComponent implements OnInit {
-  @Output() public submitMeetingDetailsPage = new EventEmitter<HostDetailsForm>();
+  @Output() public submitMeetingDetailsPage = new EventEmitter<MeetingForm>();
 
   public form: FormGroup;
   public audienceOptions: HostInputOption[];
@@ -38,28 +37,28 @@ export class HostFormComponent implements OnInit {
   ngOnInit() {
     this.audienceOptions = [
       {
-        text: 'כולם',
-        value: AudienceOptions.all
+        text: MeetingAudienceLabels.all,
+        value: MeetingAudience.all
       },
       {
-        text: 'תלמידים',
-        value: AudienceOptions.schoolStudents
+        text: MeetingAudienceLabels.schoolStudents,
+        value: MeetingAudience.schoolStudents
       },
       {
-        text: 'תנועות נוער',
-        value: AudienceOptions.youthMovement
+        text: MeetingAudienceLabels.youthMovement,
+        value: MeetingAudience.youthMovement
       },
       {
-        text: 'חיילים',
-        value: AudienceOptions.soldiers
+        text: MeetingAudienceLabels.soldiers,
+        value: MeetingAudience.soldiers
       },
       {
-        text: 'מכינות',
-        value: AudienceOptions.militaryPreparation
+        text: MeetingAudienceLabels.militaryPreparation,
+        value: MeetingAudience.militaryPreparation
       },
       {
-        text: 'סטודנטים',
-        value: AudienceOptions.students
+        text: MeetingAudienceLabels.students,
+        value: MeetingAudience.students
       }
     ];
 
@@ -73,7 +72,7 @@ export class HostFormComponent implements OnInit {
         longitude: [],
         notes: ['']
       }),
-      capacity: [30, [Validators.required, Validators.min(2)]],
+      capacity: [30, [Validators.required, Validators.min(2), Validators.max(300)]],
       invited: [null, Validators.required],
       accessibility: [null, Validators.required],
       media: [null, Validators.required],
@@ -140,18 +139,18 @@ export class HostFormComponent implements OnInit {
 
   public onSubmit() {
     if (this.form.valid) {
-      const newMeetingDetailsPage: HostDetailsForm = this.form.value;
+      const parsedMeeting: MeetingForm = this.form.value;
 
-      newMeetingDetailsPage.date = new Date(this.date.value).getTime();
+      parsedMeeting.date = new Date(this.date.value).getTime();
       let hour: string;
       let minutes: string;
       [hour, minutes] = this.hour.value.split(':');
-      newMeetingDetailsPage.date += +hour * 60 * 60 * 1000;
-      newMeetingDetailsPage.date +=
+      parsedMeeting.date += +hour * 60 * 60 * 1000;
+      parsedMeeting.date +=
         (+minutes + new Date().getTimezoneOffset()) * 60 * 1000;
 
-      delete (newMeetingDetailsPage as any).hour;
-      this.submitMeetingDetailsPage.emit(newMeetingDetailsPage);
+      delete (parsedMeeting as any).hour;
+      this.submitMeetingDetailsPage.emit(parsedMeeting);
     } else {
       this.form.markAllAsTouched();
     }

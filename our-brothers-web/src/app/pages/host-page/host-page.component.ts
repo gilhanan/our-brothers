@@ -7,7 +7,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { DataService, MEMORIAL_YEAR } from 'src/app/services/data.service';
 import { ParticipationsService } from 'src/app/services/participations.service';
 import { ProfileForm } from '../../components/forms/profile-form/profile-form.component';
-import { HostDetailsForm } from 'src/app/components/forms/host-form/host-form.component';
+import { MeetingForm } from 'src/app/components/forms/host-form/host-form.component';
 import { Meeting } from 'src/app/model';
 
 @Component({
@@ -69,7 +69,7 @@ export class HostPageComponent implements OnInit, OnDestroy {
     this.dataService.setUserProfile(this.user, profileForm);
   }
 
-  onNewMeeting(meetingDetails: HostDetailsForm) {
+  onNewMeeting(meetingDetails: MeetingForm) {
     this.dataService.createMeeting(this.user, meetingDetails).subscribe((meeting: Meeting) => {
       alert('נוצר מפגש בהצלחה!');
       this.router.navigate([`meetings/${this.year}/${meeting.hostId}/${meeting.id}`]);
