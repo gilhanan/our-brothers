@@ -1,3 +1,5 @@
+/* tslint:disable */
+
 export interface Meeting {
   hostId: string;
   id: string;
@@ -79,9 +81,9 @@ export interface UserProfile {
 }
 
 export enum UserRole {
-  bereaved = 'bereaved',
-  participate = 'participate',
-  host = 'host'
+  bereaved = "bereaved",
+  participate = "participate",
+  host = "host"
 }
 
 export interface BereavedProfile {
@@ -127,9 +129,9 @@ export interface ParticipateParticipationMeeting extends UserParticipationMeetin
 }
 
 export enum BereavedStatus {
-  done = 'done',
-  inactive = 'inactive',
-  waiting = 'waiting'
+  done = "done",
+  inactive = "inactive",
+  waiting = "waiting"
 }
 
 export interface BereavedGuidance {
@@ -138,9 +140,9 @@ export interface BereavedGuidance {
 }
 
 export enum BereavedGuidanceGeneral {
-  jerusalem = 'jerusalem',
-  telAviv = 'telAviv',
-  haifa = 'haifa'
+  jerusalem = "jerusalem",
+  telAviv = "telAviv",
+  haifa = "haifa"
 }
 
 export interface Contact {

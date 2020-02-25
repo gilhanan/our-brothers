@@ -5,7 +5,7 @@ import * as cors from 'cors';
 import * as nodemailer from 'nodemailer';
 import Mail = require('nodemailer/lib/mailer');
 
-import { Contact, MeetingBereaved, Meeting, MeetingParticipate, ParticipateParticipationMeeting, UserParticipationMeeting } from 'models';
+import { Contact, MeetingBereaved, Meeting, MeetingParticipate, ParticipateParticipationMeeting, UserParticipationMeeting } from '../../types/models';
 import { mailCredentials } from '../config';
 
 const mailTransport = nodemailer.createTransport({
@@ -501,5 +501,5 @@ function buildMail(contact: Contact, userId: string): Mail.Options {
 function calcParticipatesCount(participates: { [userId: string]: MeetingParticipate }): number {
   return Object.keys(participates)
     .map((id) => participates[id])
-    .reduce((acc, participation) => acc += 1 + (participation.accompanies || 0), 0)
+    .reduce((acc, participation) => acc + 1 + (participation.accompanies || 0), 0)
 }

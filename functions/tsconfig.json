@@ -1,9 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
-    "paths": {
-      "models": ["../types/models/index"]
-    },
     "module": "commonjs",
     "noImplicitReturns": true,
     "noUnusedLocals": true,
