@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MeetingAudience } from 'models';
 import { HostInputOption } from '../host-input-options/host-input-options.component';
 import { UtilsService } from 'src/app/services/utils.service';
+import { MEMORIAL_YEAR } from 'src/app/services/data.service';
 
 export interface MeetingForm {
   title: string;
@@ -32,6 +33,9 @@ export class HostFormComponent implements OnInit {
 
   public form: FormGroup;
   public audienceOptions: HostInputOption[];
+
+  public minDate = new Date(MEMORIAL_YEAR, 3, 22).toISOString().split('T')[0];
+  public maxDate = new Date(MEMORIAL_YEAR, 3, 28).toISOString().split('T')[0];
 
   constructor(private fb: FormBuilder,
     private utilsService: UtilsService) { }

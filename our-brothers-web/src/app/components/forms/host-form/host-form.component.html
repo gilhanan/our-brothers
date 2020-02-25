@@ -14,6 +14,8 @@
         iconUrl="assets/img/host_calendar.svg"
         inputType="date"
         [formGroup]="form"
+        [min]="minDate"
+        [max]="maxDate"
       ></app-host-input-text>
       <app-host-input-text
         label="שעה:"

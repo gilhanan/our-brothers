@@ -19,6 +19,8 @@
     *ngIf="!textarea"
     [type]="inputType"
     [formControlName]="controlName"
+    [min]="min"
+    [max]="max"
   />
   <textarea #input *ngIf="textarea" [formControlName]="controlName"></textarea>
 </div>

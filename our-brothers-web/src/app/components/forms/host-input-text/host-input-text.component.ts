@@ -13,6 +13,8 @@ export class HostInputTextComponent implements OnInit {
   @Input() formGroup: FormGroup;
   @Input() inputType = 'text';
   @Input() textarea = false;
+  @Input() min: string;
+  @Input() max: string;
 
   @ViewChild('input', { read: ElementRef, static: false }) inputElm: ElementRef;
 
