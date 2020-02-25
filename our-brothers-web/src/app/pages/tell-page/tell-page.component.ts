@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subject, combineLatest } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
 
@@ -12,7 +13,7 @@ import {
 } from 'src/app/model';
 import { AuthService } from 'src/app/services/auth.service';
 import { ParticipationsService } from 'src/app/services/participations.service';
-import { DataService } from 'src/app/services/data.service';
+import { DataService, MEMORIAL_YEAR } from 'src/app/services/data.service';
 import { SlainForm } from 'src/app/components/forms/slain-form/slain-form.component';
 import { BereavedProfileForm } from 'src/app/components/forms/bereaved-profile-form/bereaved-profile-form.component';
 
@@ -27,8 +28,10 @@ export class TellPageComponent implements OnInit {
   public meetings: Meeting[];
   public currentStep: number = 0;
   public currentStep$ = new Subject<number>();
+  public year = MEMORIAL_YEAR;
 
   constructor(
+    private router: Router,
     private authService: AuthService,
     private participationsService: ParticipationsService,
     private dataService: DataService
@@ -106,6 +109,7 @@ export class TellPageComponent implements OnInit {
           .subscribe(result => {
             if (result) {
               window.alert('שובצת בהצלחה!');
+              this.router.navigate([`meetings/${this.year}/${meeting.hostId}/${meeting.id}`]);
             }
           });
       }

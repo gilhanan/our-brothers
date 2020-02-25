@@ -2,7 +2,12 @@
   <div class="site-divider"></div>
   <div class="host-meeting-heading">
     <div class="host-meeting-heading-text">
-      מפגש: מתנ״ס הר חומה
+      <span>
+        מפגש:
+      </span>
+      <span>
+        {{ meeting?.title }}
+      </span>
     </div>
   </div>
   <div class="host-meeting-container">
@@ -10,30 +15,30 @@
       <app-host-meeting-input-text
         iconUrl="assets/img/host_location.svg"
         label="כתובת:"
-        [text]="meeting.address"
+        [text]="meeting?.address?.formattedAddress"
       ></app-host-meeting-input-text>
     </div>
     <div class="form-items-container">
       <app-host-meeting-input-text
         iconUrl="assets/img/host_users.svg"
         label="כמות מוזמנים:"
-        [text]="meeting.capacity"
+        [text]="meeting?.capacity"
       ></app-host-meeting-input-text>
     </div>
     <div class="form-items-container">
       <app-host-meeting-input-text
         iconUrl="assets/img/host_users.svg"
         label="קהל מוזמנים:"
-        [text]="meeting.audience"
+        [text]="meeting?.audience"
       ></app-host-meeting-input-text>
     </div>
     <div class="form-items-container">
       <app-host-meeting-input-text
         iconUrl="assets/img/host_users.svg"
-        [text]="meeting.invited"
+        [text]="meeting?.invited"
       ></app-host-meeting-input-text>
     </div>
-    <div class="form-items-container">
+    <!-- <div class="form-items-container">
       <div class="edit-button">
         <div class="edit-button-text">
           עריכת פרטים
@@ -44,8 +49,8 @@
           מחק מפגש
         </div>
       </div>
-    </div>
-    <div class="form-items-container">
+    </div> -->
+    <!-- <div class="form-items-container">
       <div class="share-container">
         <div class="share-text">
           שיתוף באמצעות :
@@ -53,7 +58,7 @@
         <div class="facebook-icon"></div>
         <div class="whatsapp-icon"></div>
       </div>
-    </div>
+    </div> -->
   </div>
   <div class="brother-heading host-meeting-heading-text">
     אח/ות שכול/ה
@@ -63,28 +68,34 @@
       <app-host-meeting-input-text
         iconUrl="assets/img/host_user.svg"
         info="שם האח"
-        [text]="meeting.brother.name"
+        [text]="
+          meeting?.bereaved?.firstName + ' ' + meeting?.bereaved?.lastName
+        "
       ></app-host-meeting-input-text>
       <app-host-meeting-input-text
         iconUrl="assets/img/host_user.svg"
         info="שם החלל"
-        [text]="meeting.brother.fallName"
+        [text]="
+          (meeting?.bereaved?.slains)[0].firstName +
+          ' ' +
+          (meeting?.bereaved?.slains)[0].lastName
+        "
       ></app-host-meeting-input-text>
     </div>
     <div class="form-items-container">
       <app-host-meeting-input-text
         iconUrl="assets/img/host_phone.svg"
         info="טלפון של האח"
-        [text]="meeting.brother.phone"
+        [text]="meeting?.bereaved?.phoneNumber | phone"
       ></app-host-meeting-input-text>
       <app-host-meeting-input-text
         iconUrl="assets/img/host_email.svg"
-        [text]="meeting.brother.email"
+        [text]="meeting?.bereaved?.email"
       ></app-host-meeting-input-text>
     </div>
   </div>
   <div class="meeting-users-heading host-meeting-heading-text">
-    משתתפים ({{meeting.usersCapacity + '/' + meeting.capacity}})
+    משתתפים ({{ meeting?.count + '/' + meeting?.capacity }})
   </div>
   <div class="meeting-users-list">
     <div class="meeting-users-list-header">
@@ -101,18 +112,21 @@
         מייל
       </div>
     </div>
-    <div class="meeting-users-list-item">
+    <div
+      class="meeting-users-list-item"
+      *ngFor="let participate of meetingParticipates"
+    >
       <div class="meeting-users-list-item-name">
-        {{meeting.users[0].name}}
+        {{ participate.firstName + ' ' + participate.lastName }}
       </div>
       <div class="meeting-users-list-item-capacity">
-        {{meeting.users[0].capacity}}
+        {{ participate.accompanies }}
       </div>
       <div class="meeting-users-list-item-phone">
-        {{meeting.users[0].phone}}
+        {{ participate.phoneNumber | phone }}
       </div>
       <div class="meeting-users-list-item-email">
-        {{meeting.users[0].email}}
+        {{ participate.email }}
       </div>
     </div>
   </div>

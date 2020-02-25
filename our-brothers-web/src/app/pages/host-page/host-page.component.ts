@@ -4,10 +4,11 @@ import { Subject, combineLatest, Subscription } from 'rxjs';
 
 import { User, UserRole } from '../../model/user';
 import { AuthService } from 'src/app/services/auth.service';
-import { DataService } from 'src/app/services/data.service';
+import { DataService, MEMORIAL_YEAR } from 'src/app/services/data.service';
 import { ParticipationsService } from 'src/app/services/participations.service';
 import { ProfileForm } from '../../components/forms/profile-form/profile-form.component';
 import { HostDetailsForm } from 'src/app/components/forms/host-form/host-form.component';
+import { Meeting } from 'src/app/model';
 
 @Component({
   selector: 'app-host-page',
@@ -20,6 +21,7 @@ export class HostPageComponent implements OnInit, OnDestroy {
   public currentStep = 0;
   public currentStep$ = new Subject<number>();
   public subscriptions: Subscription[] = [];
+  public year = MEMORIAL_YEAR;
 
   constructor(
     private router: Router,
@@ -68,9 +70,9 @@ export class HostPageComponent implements OnInit, OnDestroy {
   }
 
   onNewMeeting(meetingDetails: HostDetailsForm) {
-    this.dataService.createMeeting(this.user, meetingDetails).subscribe(() => {
+    this.dataService.createMeeting(this.user, meetingDetails).subscribe((meeting: Meeting) => {
       alert('נוצר מפגש בהצלחה!');
-      this.router.navigate(['meetings']);
+      this.router.navigate([`meetings/${this.year}/${meeting.hostId}/${meeting.id}`]);
     });
   }
 

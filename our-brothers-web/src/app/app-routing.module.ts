@@ -9,6 +9,7 @@ import { AdminBereavedsPageComponent } from './pages/admin-bereaveds-page/admin-
 import { TellPageComponent } from './pages/tell-page/tell-page.component';
 import { ParticipatePageComponent } from './pages/participate-page/participate-page.component';
 import { HostPageComponent } from './pages/host-page/host-page.component';
+import { MeetingDetailsPageComponent } from './pages/meeting-details-page/meeting-details-page.component';
 import { HostGuard } from './guards/host.guard';
 import { TellGuard } from './guards/tell.guard';
 import { ParticipateGuard } from './guards/participate.guard';
@@ -34,8 +35,15 @@ const routes: Routes = [
   },
   {
     path: 'meetings',
-    component: MeetingsPageComponent,
-    pathMatch: 'full'
+    children: [{
+      path: '',
+      component: MeetingsPageComponent,
+      pathMatch: 'full',
+    }, {
+      path: ':memorialYear/:hostId/:meetingId',
+      component: MeetingDetailsPageComponent,
+      pathMatch: 'full',
+    }]
   },
   {
     path: 'about',

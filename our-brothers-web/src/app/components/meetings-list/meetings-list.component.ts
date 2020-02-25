@@ -54,7 +54,8 @@ export class MeetingsListComponent implements OnChanges {
 
     if (!this.showFullMeetings && this.isUserHaveAllDetails) {
       this.filteredMeetings = this.meetings.filter(meeting => {
-        return this.participationsService.isUserParticipatingEvent(this.user, meeting) || this.participationsService.isUserCanParticipatingEvent(this.user, meeting);
+        return this.participationsService.isUserParticipatingEvent(this.user, meeting) ||
+          this.participationsService.isUserCanParticipatingEvent(this.user, meeting);
       });
     }
 

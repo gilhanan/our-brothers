@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input, EventEmitter, Output } from '@angular/core';
 import { Meeting, User } from 'src/app/model';
+import { MEMORIAL_YEAR } from 'src/app/services/data.service';
 import { ParticipationsService } from 'src/app/services/participations.service';
 
 @Component({
@@ -14,6 +15,8 @@ export class MeetingListRowComponent {
   @Input() meeting: Meeting;
 
   @Output() joinMeeting = new EventEmitter<Meeting>();
+
+  public year = MEMORIAL_YEAR;
 
   constructor(public participationsService: ParticipationsService) { }
 }

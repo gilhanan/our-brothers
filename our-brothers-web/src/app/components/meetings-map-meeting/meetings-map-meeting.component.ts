@@ -1,6 +1,7 @@
 import { Component, Input, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
 import { Meeting, MeetingAudience, MeetingAudienceLabels, User } from '../../../app/model';
 import { ParticipationsService } from 'src/app/services/participations.service';
+import { MEMORIAL_YEAR } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-meetings-map-meeting',
@@ -14,6 +15,8 @@ export class MeetingsMapMeetingComponent {
   @Input() user: User;
 
   @Output() joinMeeting = new EventEmitter<void>();
+
+  year = MEMORIAL_YEAR;
 
   constructor(public participationsService: ParticipationsService) { }
 

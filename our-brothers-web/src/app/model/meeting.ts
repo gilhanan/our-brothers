@@ -17,6 +17,15 @@ export interface Meeting {
   audience?: MeetingAudience[];
 }
 
+export interface MeetingParticipate {
+  id: string;
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  email: string;
+  accompanies: number;
+}
+
 export interface Address {
   latitude: number;
   longitude: number;

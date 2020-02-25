@@ -1,5 +1,7 @@
 <div class="title">
-  {{meeting.title}}
+  <a [routerLink]="'/meetings/' + year + '/' + meeting.hostId + '/' + meeting.id">
+    {{ meeting.title }}
+  </a>
 </div>
 <div class="body">
   <div class="row">

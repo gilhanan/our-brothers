@@ -12,7 +12,8 @@ import {
   BereavedGuidance,
   BereavedProfile,
   UserRole,
-  UserProfile
+  UserProfile,
+  MeetingParticipate
 } from '../model';
 import { Contact } from 'models';
 import { AnalyticsService } from './analytics.service';
@@ -71,7 +72,7 @@ export class DataService {
       );
   }
 
-  public createMeeting(user: User, meeting: HostDetailsForm, year = MEMORIAL_YEAR): Observable<boolean> {
+  public createMeeting(user: User, meeting: HostDetailsForm, year = MEMORIAL_YEAR): Observable<Meeting> {
 
     const parsedMeeting: Meeting = {
       ...meeting,
@@ -97,7 +98,11 @@ export class DataService {
         tap(() => {
           this.analyticsService.logEvent('CreateMeeting', 'end', telemetry);
         }),
-        map(() => true),
+        map((meetingSnapshot) => ({
+          ...parsedMeeting,
+          hostId: user.id,
+          id: meetingSnapshot.key
+        })),
         catchError(error => {
           this.analyticsService.logEvent('CreateMeeting', 'failed', { ...telemetry, error: error.toString() });
           console.error(error);
@@ -291,6 +296,32 @@ export class DataService {
       );
   }
 
+  public getMeeting(hostId: string, meetingId: string, year = MEMORIAL_YEAR): Observable<Meeting> {
+    return this.angularFireDatabase
+      .object<Meeting>(`events/${year}/${hostId}/${meetingId}`)
+      .snapshotChanges()
+      .pipe(
+        map(meetingSnapshot => ({
+          ...meetingSnapshot.payload.val(),
+          hostId,
+          id: meetingSnapshot.key
+        }))
+      );
+  }
+
+  public getMeetingParticipates(hostId: string, meetingId: string, year = MEMORIAL_YEAR): Observable<MeetingParticipate[]> {
+    return this.angularFireDatabase
+      .list<MeetingParticipate>(`eventsParticipates/${year}/${hostId}/${meetingId}`)
+      .snapshotChanges()
+      .pipe(
+        map((participates) => participates.map((participate) => ({ id: participate.key, ...participate.payload.val() }))),
+        catchError((error) => {
+          console.log(error);
+          return throwError(error);
+        })
+      );
+  }
+
   public getMeetings(year = MEMORIAL_YEAR): Observable<Meeting[]> {
     return this.angularFireDatabase
       .list<Meeting>(`events/${year}`)
@@ -308,6 +339,7 @@ export class DataService {
 
             for (const meeting of hostMeetings) {
               meeting.hostId = hostId;
+              meeting.count = meeting.count || 0;
 
               meetings.push(meeting);
             }
@@ -370,13 +402,15 @@ export class DataService {
   public participateRegisterHost(
     participate: User,
     meeting: Meeting,
+    accompanies: number,
     year = MEMORIAL_YEAR
   ): Observable<boolean> {
     const postObj = {
       firstName: participate.profile.firstName,
       lastName: participate.profile.lastName,
       email: participate.profile.email,
-      phoneNumber: participate.profile.phoneNumber
+      phoneNumber: participate.profile.phoneNumber,
+      accompanies
     };
 
     const telemetry = { userId: participate.id, hostId: meeting.hostId, id: meeting.id, year };

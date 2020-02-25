@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subject, combineLatest } from 'rxjs';
+
 import { User, Meeting, UserRole } from 'src/app/model';
 import { AuthService } from 'src/app/services/auth.service';
 import { ParticipationsService } from 'src/app/services/participations.service';
-import { DataService } from 'src/app/services/data.service';
+import { DataService, MEMORIAL_YEAR } from 'src/app/services/data.service';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { ProfileForm } from 'src/app/components/forms/profile-form/profile-form.component';
 
@@ -18,8 +20,10 @@ export class ParticipatePageComponent implements OnInit {
   public meetings: Meeting[];
   public currentStep: number = 0;
   public currentStep$ = new Subject<number>();
+  public year = MEMORIAL_YEAR;
 
   constructor(
+    private router: Router,
     private authService: AuthService,
     private participationsService: ParticipationsService,
     private dataService: DataService
@@ -65,15 +69,32 @@ export class ParticipatePageComponent implements OnInit {
 
   onJoinMeeting(meeting: Meeting) {
     if (window.confirm('האם ברצונך להשתבץ למפגש?')) {
-      if (this.user.role === UserRole.participate) {
+      if (this.user.role !== UserRole.bereaved) {
+
+        const accompanies = this.getAccompanies();
+
         this.dataService
-          .participateRegisterHost(this.user, meeting)
+          .participateRegisterHost(this.user, meeting, accompanies)
           .subscribe(result => {
             if (result) {
               window.alert('שובצת בהצלחה!');
+              this.router.navigate([`meetings/${this.year}/${meeting.hostId}/${meeting.id}`]);
             }
           });
       }
     }
+  }
+
+  getAccompanies(): number {
+    let accompaniesAnswer = window.prompt('כמות משתתפים?', '0')
+
+    let number = Number.parseInt(accompaniesAnswer);
+
+    while (!Number.isNaN(number) && number >= 0 && number <= 7) {
+      accompaniesAnswer = window.prompt('כמות משתתפים? מספר בין 0 ל-7', '0')
+      number = Number.parseInt(accompaniesAnswer);
+    }
+
+    return number;
   }
 }

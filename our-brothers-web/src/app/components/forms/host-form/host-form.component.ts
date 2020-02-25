@@ -28,7 +28,7 @@ export interface HostDetailsForm {
   styleUrls: ['./host-form.component.scss']
 })
 export class HostFormComponent implements OnInit {
-  @Output() public submitMeetingDetails = new EventEmitter<HostDetailsForm>();
+  @Output() public submitMeetingDetailsPage = new EventEmitter<HostDetailsForm>();
 
   public form: FormGroup;
   public audienceOptions: HostInputOption[];
@@ -140,18 +140,18 @@ export class HostFormComponent implements OnInit {
 
   public onSubmit() {
     if (this.form.valid) {
-      const newMeetingDetails: HostDetailsForm = this.form.value;
+      const newMeetingDetailsPage: HostDetailsForm = this.form.value;
 
-      newMeetingDetails.date = new Date(this.date.value).getTime();
+      newMeetingDetailsPage.date = new Date(this.date.value).getTime();
       let hour: string;
       let minutes: string;
       [hour, minutes] = this.hour.value.split(':');
-      newMeetingDetails.date += +hour * 60 * 60 * 1000;
-      newMeetingDetails.date +=
+      newMeetingDetailsPage.date += +hour * 60 * 60 * 1000;
+      newMeetingDetailsPage.date +=
         (+minutes + new Date().getTimezoneOffset()) * 60 * 1000;
 
-      delete (newMeetingDetails as any).hour;
-      this.submitMeetingDetails.emit(newMeetingDetails);
+      delete (newMeetingDetailsPage as any).hour;
+      this.submitMeetingDetailsPage.emit(newMeetingDetailsPage);
     } else {
       this.form.markAllAsTouched();
     }
