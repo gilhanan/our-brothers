@@ -14,7 +14,8 @@ import {
   UserRole,
   UserProfile,
   MeetingParticipate,
-  Contact } from 'models';
+  Contact
+} from 'models';
 import { AnalyticsService } from './analytics.service';
 import { MeetingForm } from '../components/forms/host-form/host-form.component';
 
@@ -404,7 +405,7 @@ export class DataService {
     accompanies: number,
     year = MEMORIAL_YEAR
   ): Observable<boolean> {
-    const postObj = {
+    const postObj: MeetingParticipate = {
       firstName: participate.profile.firstName,
       lastName: participate.profile.lastName,
       email: participate.profile.email,

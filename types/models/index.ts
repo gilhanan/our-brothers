@@ -16,7 +16,7 @@ export interface Meeting {
 }
 
 export interface MeetingParticipate {
-  id: string;
+  id?: string;
   firstName: string;
   lastName: string;
   phoneNumber: string;
@@ -102,7 +102,7 @@ export interface UserParticipation<T> {
 
 
 export interface ParticipateParticipation {
-  meetings: UserParticipationMeeting[];
+  meetings: ParticipateParticipationMeeting[];
 }
 
 export interface HostParticipation {
@@ -117,9 +117,13 @@ export interface BereavedParticipation {
 }
 
 export interface UserParticipationMeeting {
-  hostId: string;
-  id: string;
+  hostId?: string;
+  id?: string;
   title: string;
+}
+
+export interface ParticipateParticipationMeeting extends UserParticipationMeeting {
+  accompanies: number;
 }
 
 export enum BereavedStatus {
