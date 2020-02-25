@@ -14,7 +14,11 @@ import {
   UserRole,
   UserProfile,
   MeetingParticipate,
-  Contact
+  Contact,
+  HostParticipation,
+  ParticipateParticipation,
+  ParticipateParticipationMeeting,
+  BereavedParticipation
 } from 'models';
 import { AnalyticsService } from './analytics.service';
 import { MeetingForm } from '../components/forms/host-form/host-form.component';
@@ -59,9 +63,9 @@ export class DataService {
         })),
         map(user => {
 
-          this.parseUserMeetings(user, 'bereavedParticipation');
-          this.parseUserMeetings(user, 'participateParticipation');
-          this.parseUserMeetings(user, 'hostParticipation');
+          this.parseBereavedParticipation(user);
+          this.parseParticipateParticipation(user);
+          this.parseHostParticipation(user);
 
           return user;
         }),
@@ -289,7 +293,7 @@ export class DataService {
             .filter(user => user.role === 'bereaved' && !!user.profile)
             // .slice(0, 20)
             .map(user => {
-              this.parseUserMeetings(user, 'bereavedParticipation', year);
+              this.parseBereavedParticipation(user, year);
               return user;
             })
         )
@@ -485,36 +489,84 @@ export class DataService {
       });
   }
 
-  private parseUserMeetings(user: User, field: string, year = MEMORIAL_YEAR) {
-    const map = user[field] && user[field][year];
+  private parseHostParticipation(user: User, year = MEMORIAL_YEAR) {
+    if (user.hostParticipation && user.hostParticipation[year] && user.hostParticipation[year]) {
 
-    if (map) {
-      const participations: UserParticipationMeeting[] = [];
-
-      Array.from(Object.entries(map)).forEach(
-        ([hostId, meetings]: [string, Object]) => {
-          Array.from(Object.entries(meetings)).forEach(
-            ([id, meeting]: [string, { title: string }]) => {
-              participations.push({
-                id,
-                hostId,
-                title: meeting.title
-              });
-            }
-          );
-        }
+      const meetings: UserParticipationMeeting[] = this.firebaseMapToArray<UserParticipationMeeting>(
+        user.hostParticipation[year].meetings,
+        { hostId: user.id }
       );
 
-      user[field][year] = participations;
+      const hostParticipation: HostParticipation = {
+        meetings
+      };
+
+      user.hostParticipation[year] = hostParticipation;
     }
   }
 
-  private firebaseMapToArray<T>(map: Object): T[] {
+  private parseParticipateParticipation(user: User, year = MEMORIAL_YEAR) {
+    if (user.participateParticipation && user.participateParticipation[year] && user.participateParticipation[year]) {
+
+      const participateMeetings: ParticipateParticipationMeeting[] = [];
+
+      if (user.participateParticipation[year].meetings) {
+        Array.from(Object.entries(user.participateParticipation[year].meetings)).forEach(
+          ([hostId, meetings]: [string, Object]) => {
+            Array.from(Object.entries(meetings)).forEach(
+              ([id, meeting]: [string, ParticipateParticipationMeeting]) => {
+                participateMeetings.push({
+                  id,
+                  hostId,
+                  title: meeting.title,
+                  accompanies: meeting.accompanies
+                });
+              }
+            );
+          }
+        );
+      }
+
+      const participateParticipation: ParticipateParticipation = {
+        meetings: participateMeetings
+      };
+
+      user.participateParticipation[year] = participateParticipation;
+    }
+  }
+
+  private parseBereavedParticipation(user: User, year = MEMORIAL_YEAR) {
+    if (user.bereavedParticipation && user.bereavedParticipation[year] && user.bereavedParticipation[year]) {
+
+      const bereavedMeetings: UserParticipationMeeting[] = [];
+
+      if (user.bereavedParticipation[year].meetings) {
+        Array.from(Object.entries(user.bereavedParticipation[year].meetings)).forEach(
+          ([hostId, meetings]: [string, Object]) => {
+            Array.from(Object.entries(meetings)).forEach(
+              ([id, meeting]: [string, UserParticipationMeeting]) => {
+                bereavedMeetings.push({
+                  id,
+                  hostId,
+                  title: meeting.title
+                });
+              }
+            );
+          }
+        );
+
+        user.bereavedParticipation[year].meetings = bereavedMeetings;
+      }
+    }
+  }
+
+  private firebaseMapToArray<T>(map: Object, additionalData = {}): T[] {
     if (map) {
       return Array.from(Object.entries(map)).map(
         ([id, object]: [string, T]) => ({
           ...object,
-          id
+          id,
+          ...additionalData
         })
       );
     }
