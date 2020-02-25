@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { User, UserRole } from '../../../app/model';
+import { User, UserRole } from 'models';
 
 interface Legend {
   label: string;

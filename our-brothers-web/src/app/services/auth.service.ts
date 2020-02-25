@@ -4,7 +4,7 @@ import { Observable, of, from, Subject, throwError } from 'rxjs';
 import { switchMap, map, tap, catchError } from 'rxjs/operators';
 import { auth } from 'firebase/app';
 
-import { User } from '../model';
+import { User } from 'models';
 import { DataService } from './data.service';
 import { AnalyticsService } from './analytics.service';
 

@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { BereavedGuidanceGeneral } from 'src/app/model';
+import { BereavedGuidanceGeneral } from 'models';
 
 export interface BereavedGuidanceGeneralOption {
   value: BereavedGuidanceGeneral;

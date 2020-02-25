@@ -13,9 +13,8 @@ import {
   BereavedProfile,
   UserRole,
   UserProfile,
-  MeetingParticipate
-} from '../model';
-import { Contact } from 'models';
+  MeetingParticipate,
+  Contact } from 'models';
 import { AnalyticsService } from './analytics.service';
 import { MeetingForm } from '../components/forms/host-form/host-form.component';
 
@@ -78,7 +77,7 @@ export class DataService {
       ...meeting,
       hostId: null,
       id: null,
-      count: null,
+      count: 0,
       contact: {
         firstName: user.profile.firstName,
         lastName: user.profile.lastName,

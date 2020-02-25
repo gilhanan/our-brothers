@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { BereavedGuidance } from 'src/app/model';
+import { BereavedGuidance } from 'models';
 
 export interface GuidanceMeeting {
   label: string;

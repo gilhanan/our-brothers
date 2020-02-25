@@ -1,7 +1,8 @@
 import { Component, Input, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
-import { Meeting, MeetingAudience, MeetingAudienceLabels, User } from '../../../app/model';
+import { Meeting, MeetingAudience, User } from 'models';
 import { ParticipationsService } from 'src/app/services/participations.service';
 import { MEMORIAL_YEAR } from 'src/app/services/data.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-meetings-map-meeting',
@@ -18,9 +19,6 @@ export class MeetingsMapMeetingComponent {
 
   year = MEMORIAL_YEAR;
 
-  constructor(public participationsService: ParticipationsService) { }
-
-  getAudienceLabel(meetingAudience: MeetingAudience[]) {
-    return meetingAudience.map((audience: MeetingAudience) => MeetingAudienceLabels[audience]).join(', ');
-  }
+  constructor(public utilsService: UtilsService,
+    public participationsService: ParticipationsService) { }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User, Meeting, UserRole } from '../model';
+import { User, Meeting, UserRole } from 'models';
 import { MEMORIAL_YEAR } from './data.service';
 
 @Injectable({

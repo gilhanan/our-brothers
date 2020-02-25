@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
-import { Meeting } from 'src/app/model';
+import { Meeting } from 'models';
 import { User } from 'firebase';
 import { UtilsService } from 'src/app/services/utils.service';
 import { ViewOptions } from '../view-toggle/view-toggle.component';

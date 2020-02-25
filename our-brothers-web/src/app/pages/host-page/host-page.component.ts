@@ -2,13 +2,12 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject, combineLatest, Subscription } from 'rxjs';
 
-import { User, UserRole } from '../../model/user';
+import { User, UserRole, Meeting } from 'models';
 import { AuthService } from 'src/app/services/auth.service';
 import { DataService, MEMORIAL_YEAR } from 'src/app/services/data.service';
 import { ParticipationsService } from 'src/app/services/participations.service';
 import { ProfileForm } from '../../components/forms/profile-form/profile-form.component';
 import { MeetingForm } from 'src/app/components/forms/host-form/host-form.component';
-import { Meeting } from 'src/app/model';
 
 @Component({
   selector: 'app-host-page',

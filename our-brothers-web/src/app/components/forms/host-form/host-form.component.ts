@@ -1,8 +1,9 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { MeetingAudience, MeetingAudienceLabels } from 'src/app/model';
+import { MeetingAudience } from 'models';
 import { HostInputOption } from '../host-input-options/host-input-options.component';
+import { UtilsService } from 'src/app/services/utils.service';
 
 export interface MeetingForm {
   title: string;
@@ -32,32 +33,33 @@ export class HostFormComponent implements OnInit {
   public form: FormGroup;
   public audienceOptions: HostInputOption[];
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+    private utilsService: UtilsService) { }
 
   ngOnInit() {
     this.audienceOptions = [
       {
-        text: MeetingAudienceLabels.all,
+        text: this.utilsService.meetingAudienceLabels.all,
         value: MeetingAudience.all
       },
       {
-        text: MeetingAudienceLabels.schoolStudents,
+        text: this.utilsService.meetingAudienceLabels.schoolStudents,
         value: MeetingAudience.schoolStudents
       },
       {
-        text: MeetingAudienceLabels.youthMovement,
+        text: this.utilsService.meetingAudienceLabels.youthMovement,
         value: MeetingAudience.youthMovement
       },
       {
-        text: MeetingAudienceLabels.soldiers,
+        text: this.utilsService.meetingAudienceLabels.soldiers,
         value: MeetingAudience.soldiers
       },
       {
-        text: MeetingAudienceLabels.militaryPreparation,
+        text: this.utilsService.meetingAudienceLabels.militaryPreparation,
         value: MeetingAudience.militaryPreparation
       },
       {
-        text: MeetingAudienceLabels.students,
+        text: this.utilsService.meetingAudienceLabels.students,
         value: MeetingAudience.students
       }
     ];

@@ -10,7 +10,7 @@ import {
   Slain,
   UserRole,
   BereavedGuidance
-} from 'src/app/model';
+} from 'models';
 import { AuthService } from 'src/app/services/auth.service';
 import { ParticipationsService } from 'src/app/services/participations.service';
 import { DataService, MEMORIAL_YEAR } from 'src/app/services/data.service';

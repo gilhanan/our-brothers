@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
-import { User, Meeting } from '../../../app/model';
+import { User, Meeting } from 'models';
 import { ParticipationsService } from 'src/app/services/participations.service';
 
 interface SortedColumn {

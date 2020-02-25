@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { DataService } from 'src/app/services/data.service';
-import { User } from 'src/app/model';
+import { User } from 'models';
 import { Contact } from 'models';
 import { ContactForm } from 'src/app/contact-form/contact-form.component';
 

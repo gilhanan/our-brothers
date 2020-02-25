@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { BereavedStatus } from 'src/app/model';
+import { BereavedStatus } from 'models';
 
 export interface BereavedStatusOption {
   value: BereavedStatus;

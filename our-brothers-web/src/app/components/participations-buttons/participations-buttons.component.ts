@@ -1,5 +1,5 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
-import { User } from 'src/app/model';
+import { User } from 'models';
 
 @Component({
   selector: 'app-participations-buttons',

@@ -101,7 +101,7 @@ export const addUserToDatabase = functions.auth.user()
 
 // ========================= Database =========================
 
-// ============ User => Meeting ============
+// ============ User Participations ============
 
 export const onParticipateParticipationDelete = functions.database.ref('/users/{userId}/participateParticipation/{year}/meetings/{hostId}/{meetingId}')
   .onDelete((event, context) => {
@@ -148,7 +148,7 @@ export const onHostParticipationDelete = functions.database.ref('/users/{userId}
       });
   });
 
-// ============ Meeting => User ============
+// ============ Meetings ============
 
 export const onMeetingCreate = functions.database.ref('/events/{year}/{hostId}/{meetingId}')
   .onCreate((event, context) => {

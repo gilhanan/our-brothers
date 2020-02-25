@@ -1,15 +1,16 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "models": ["../types/models/index"]
+    },
     "module": "commonjs",
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "outDir": "lib",
     "sourceMap": true,
     "strict": true,
-    "target": "es2017",
-    "typeRoots": [
-      "../types"
-    ],
+    "target": "es2017"
   },
   "compileOnSave": true,
   "include": [

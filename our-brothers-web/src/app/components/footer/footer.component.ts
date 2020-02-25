@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ParticipationsService } from 'src/app/services/participations.service';
-import { User } from 'src/app/model';
+import { User } from 'models';
 
 @Component({
   selector: 'app-footer',

@@ -2,7 +2,7 @@
 
 import { Component, Input, Output, EventEmitter, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 import { MapsAPILoader } from '@agm/core';
-import { Address } from 'src/app/model';
+import { Address } from 'models';
 
 @Component({
   selector: 'app-places-select',

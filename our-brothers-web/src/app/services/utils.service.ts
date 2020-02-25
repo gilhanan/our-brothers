@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Meeting, User } from '../model';
+import { Meeting, MeetingAudience, User } from 'models';
 import { MEMORIAL_YEAR } from './data.service';
 
 @Injectable({
@@ -10,6 +10,15 @@ export class UtilsService {
   public phonePattern = /^05\d{8}$/;
   public namePattern = /^([A-Za-zא-ת\- '"])+$/;
   public subjectPattern = /^([A-Za-zא-ת\- \?\!\(\)\[\]\#'"])+$/;
+
+  public meetingAudienceLabels: { [audience in MeetingAudience]: string } = {
+    all: 'כולם',
+    schoolStudents: 'תלמידים',
+    youthMovement: 'תנועות נוער',
+    militaryPreparation: 'מכינות',
+    soldiers: 'חיילים',
+    students: 'סטודנטים'
+  }
 
   private readonly ISRAEL_PHONE_PREFIX = '972';
 

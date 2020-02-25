@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { User } from '../model';
+import { User } from 'models';
 import { UtilsService } from '../services/utils.service';
 
 export interface ContactForm {

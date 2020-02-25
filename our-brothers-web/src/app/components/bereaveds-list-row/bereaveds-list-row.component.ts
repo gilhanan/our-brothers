@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { User, BereavedStatus, BereavedGuidance, Meeting } from 'src/app/model';
+import { User, BereavedStatus, BereavedGuidance, Meeting } from 'models';
 import { MEMORIAL_YEAR } from 'src/app/services/data.service';
 import { ParticipationsService } from 'src/app/services/participations.service';
 

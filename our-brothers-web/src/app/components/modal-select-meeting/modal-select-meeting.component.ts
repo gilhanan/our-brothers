@@ -1,5 +1,5 @@
 import { Component, Input, EventEmitter, Output, OnChanges, SimpleChanges } from '@angular/core';
-import { Meeting, User } from 'src/app/model';
+import { Meeting, User } from 'models';
 import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({

@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { Meeting, MeetingParticipate, MeetingAudienceLabels } from 'src/app/model';
+import { Meeting, MeetingParticipate } from 'models';
 import { DataService } from 'src/app/services/data.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-meeting-details-page',
@@ -17,12 +18,11 @@ export class MeetingDetailsPageComponent implements OnInit {
   public loadingMeetingParticipates = true;
   public meetingParticipates: MeetingParticipate[];
 
-  public audienceLabels = MeetingAudienceLabels;
-
   private getMeeting$: Subscription;
   private getMeetingParticipates$: Subscription;
 
-  constructor(private activatedRoute: ActivatedRoute,
+  constructor(public utilsService: UtilsService,
+    private activatedRoute: ActivatedRoute,
     private dataService: DataService) {
   }
 

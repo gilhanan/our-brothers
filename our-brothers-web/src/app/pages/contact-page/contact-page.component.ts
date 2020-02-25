@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { User } from 'src/app/model';
+import { User } from 'models';
 import { AuthService } from 'src/app/services/auth.service';
 import { DataService } from 'src/app/services/data.service';
 import { ContactForm } from 'src/app/contact-form/contact-form.component';

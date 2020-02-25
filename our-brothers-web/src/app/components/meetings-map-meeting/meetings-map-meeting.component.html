@@ -14,7 +14,7 @@
   </div>
   <div class="row" *ngIf="meeting.audience?.length">
     <strong>קהל יעד: </strong>
-    <span>{{getAudienceLabel(meeting.audience)}}</span>
+    <span>{{utilsService.meetingAudienceLabels[meeting.audience]}}</span>
   </div>
   <div *ngIf="meeting.bereaved">
     <div class="row">

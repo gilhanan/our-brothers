@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject, combineLatest } from 'rxjs';
 
-import { User, Meeting, UserRole } from 'src/app/model';
+import { User, Meeting, UserRole } from 'models';
 import { AuthService } from 'src/app/services/auth.service';
 import { ParticipationsService } from 'src/app/services/participations.service';
 import { DataService, MEMORIAL_YEAR } from 'src/app/services/data.service';

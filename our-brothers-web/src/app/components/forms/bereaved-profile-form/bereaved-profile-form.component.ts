@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { UserProfile, User, Address } from 'src/app/model';
+import { UserProfile, User, Address } from 'models';
 import { UtilsService } from 'src/app/services/utils.service';
 
 export interface BereavedProfileForm {

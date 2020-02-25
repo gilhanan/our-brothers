@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { Meeting, User } from 'src/app/model';
+import { Meeting, User } from 'models';
 import { ParticipationsService } from 'src/app/services/participations.service';
 
 @Component({

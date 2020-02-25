@@ -1,5 +1,5 @@
 import { Component, OnChanges, Input, SimpleChanges, Output, EventEmitter } from '@angular/core';
-import { User, Meeting } from 'src/app/model';
+import { User, Meeting } from 'models';
 import { MEMORIAL_YEAR, UserMeeting, VolunteeringUser, UpdateBereavedStatus, UpdateBereavedGuidance } from '../../../app/services/data.service';
 import { SortedColumn } from '../list-header/list-header.component';
 

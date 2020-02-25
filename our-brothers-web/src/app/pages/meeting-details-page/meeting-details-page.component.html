@@ -29,7 +29,7 @@
       <app-host-meeting-input-text
         iconUrl="assets/img/host_users.svg"
         label="קהל מוזמנים:"
-        [text]="meeting ? audienceLabels[meeting.audience] : ''"
+        [text]="meeting ? utilsService.meetingAudienceLabels[meeting.audience] : ''"
       ></app-host-meeting-input-text>
     </div>
     <div class="form-items-container">
