@@ -2,7 +2,7 @@
   "hosting": [
     {
       "target": "beta",
-      "public": "dist/our-brothers-web",
+      "public": "our-brothers-web/dist/our-brothers-web",
       "rewrites": [
         {
           "source": "**",
