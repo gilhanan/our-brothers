@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Meeting, User } from 'models';
-import { DataService } from '../../services/data.service';
+import { DataService, MEMORIAL_YEAR } from '../../services/data.service';
 import { AuthService } from 'src/app/services/auth.service';
 
 const oneWeek = 1000 * 60 * 60 * 24 * 7;
@@ -16,8 +17,10 @@ export class MeetingsPageComponent implements OnInit {
   loadingUser = true;
   meetings: Meeting[];
   mapShowGuide = false;
+  year = MEMORIAL_YEAR;
 
   constructor(
+    private router: Router,
     private dataService: DataService,
     private authService: AuthService
   ) { }
@@ -50,9 +53,34 @@ export class MeetingsPageComponent implements OnInit {
         this.dataService.bereavedRegisterHost(this.user, meeting).subscribe((result) => {
           if (result) {
             window.alert('שובצת בהצלחה!');
+            this.router.navigate([`meetings/${this.year}/${meeting.hostId}/${meeting.id}`]);
           }
         })
+      } else {
+        const accompanies = this.getAccompanies();
+
+        this.dataService
+          .participateRegisterHost(this.user, meeting, accompanies)
+          .subscribe(result => {
+            if (result) {
+              window.alert('שובצת בהצלחה!');
+              this.router.navigate([`meetings/${this.year}/${meeting.hostId}/${meeting.id}`]);
+            }
+          });
       }
     }
+  }
+
+  getAccompanies(): number {
+    let accompaniesAnswer = window.prompt('כמות משתתפים?', '0')
+
+    let number = Number.parseInt(accompaniesAnswer);
+
+    while (!(!Number.isNaN(number) && number >= 0 && number <= 7)) {
+      accompaniesAnswer = window.prompt('כמות משתתפים? מספר בין 0 ל-7', '0')
+      number = Number.parseInt(accompaniesAnswer);
+    }
+
+    return number;
   }
 }

@@ -90,7 +90,7 @@ export class ParticipatePageComponent implements OnInit {
 
     let number = Number.parseInt(accompaniesAnswer);
 
-    while (!Number.isNaN(number) && number >= 0 && number <= 7) {
+    while (!(!Number.isNaN(number) && number >= 0 && number <= 7)) {
       accompaniesAnswer = window.prompt('כמות משתתפים? מספר בין 0 ל-7', '0')
       number = Number.parseInt(accompaniesAnswer);
     }
