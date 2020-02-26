@@ -16,7 +16,7 @@ export class PlacesSelectComponent implements AfterViewInit {
   @Input() invalid: boolean;
 
   @Output() change: EventEmitter<Address> = new EventEmitter();
-  @ViewChild('palcesInput', { static: false }) addresstext: ElementRef<HTMLInputElement>;
+  @ViewChild('palcesInput') addresstext: ElementRef<HTMLInputElement>;
 
   constructor(private mapsAPILoader: MapsAPILoader) { }
 

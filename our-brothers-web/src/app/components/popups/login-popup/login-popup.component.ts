@@ -1,11 +1,10 @@
 import {
   Component,
-  Input,
-  ViewChild
+  Input
 } from '@angular/core';
-import { LoginFormComponent, LoginForm } from '../../forms/login-form/login-form.component';
-import { RegistrationFormComponent, RegistrationForm } from '../../forms/registration-form/registration-form.component';
-import { ForgotPasswordFormComponent, ForgotPasswordForm } from '../../forms/forgot-password-form/forgot-password-form.component';
+import { LoginForm } from '../../forms/login-form/login-form.component';
+import { RegistrationForm } from '../../forms/registration-form/registration-form.component';
+import { ForgotPasswordForm } from '../../forms/forgot-password-form/forgot-password-form.component';
 import { AuthService, AuthErrors } from 'src/app/services/auth.service';
 
 type Mode = 'Login' | 'Register' | 'Forgot';
@@ -17,10 +16,6 @@ type Mode = 'Login' | 'Register' | 'Forgot';
 })
 export class LoginPopupComponent {
   @Input() mode: Mode = 'Login';
-
-  @ViewChild(LoginFormComponent, { static: false }) loginForm: LoginFormComponent;
-  @ViewChild(RegistrationFormComponent, { static: false }) registrationForm: RegistrationFormComponent;
-  @ViewChild(ForgotPasswordFormComponent, { static: false }) forgotPasswordForm: ForgotPasswordFormComponent;
 
   loading: boolean;
 

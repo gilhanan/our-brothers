@@ -16,7 +16,7 @@ export class HostInputTextComponent implements OnInit {
   @Input() min: string;
   @Input() max: string;
 
-  @ViewChild('input', { read: ElementRef, static: false }) inputElm: ElementRef;
+  @ViewChild('input', { read: ElementRef }) inputElm: ElementRef;
 
   constructor() {}
 

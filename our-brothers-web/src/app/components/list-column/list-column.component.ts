@@ -18,7 +18,7 @@ export class ListColumnComponent implements OnChanges, AfterViewInit {
   @HostBinding('class.empty') emptyClass: boolean = true;
   @HostBinding('class.sortable') sortableClass: boolean = !!this.field;
 
-  @ViewChild('title', { static: false }) title: ElementRef<HTMLElement>;
+  @ViewChild('title') title: ElementRef<HTMLElement>;
 
   sorted: '' | 'asc' | 'desc' = '';
 
