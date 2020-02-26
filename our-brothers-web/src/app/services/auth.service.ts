@@ -85,15 +85,15 @@ export class AuthService {
     password: string
   ): Observable<auth.UserCredential> {
 
-    this.analyticsService.logEvent('SignInWithEmailAndPassword', 'start');
+    this.analyticsService.logEvent('SignInWithEmailAndPassword');
 
     return from(this.angularFireAuth.auth.signInWithEmailAndPassword(
       email,
       password
     )).pipe(
-      tap(() => this.analyticsService.logEvent('SignInWithEmailAndPassword', 'end')),
+      tap(() => this.analyticsService.logEvent('SignInWithEmailAndPasswordSuccess')),
       catchError(error => {
-        this.analyticsService.logEvent('SignInWithEmailAndPassword', 'failed', { error: error.toString() });
+        this.analyticsService.logEvent('SignInWithEmailAndPasswordFailed', { error: error.toString() });
         console.error(error);
         return throwError(error);
       })
@@ -104,15 +104,15 @@ export class AuthService {
     email: string,
     password: string
   ): Observable<auth.UserCredential> {
-    this.analyticsService.logEvent('CreateUserWithEmailAndPassword', 'start');
+    this.analyticsService.logEvent('CreateUserWithEmailAndPassword');
 
     return from(this.angularFireAuth.auth.createUserWithEmailAndPassword(
       email,
       password
     )).pipe(
-      tap(() => this.analyticsService.logEvent('CreateUserWithEmailAndPassword', 'end')),
+      tap(() => this.analyticsService.logEvent('CreateUserWithEmailAndPasswordSuccess')),
       catchError(error => {
-        this.analyticsService.logEvent('CreateUserWithEmailAndPassword', 'failed', { error: error.toString() });
+        this.analyticsService.logEvent('CreateUserWithEmailAndPasswordFailed', { error: error.toString() });
         console.error(error);
         return throwError(error);
       })
@@ -120,12 +120,12 @@ export class AuthService {
   }
 
   public sendPasswordResetEmail(email: string): Observable<void> {
-    this.analyticsService.logEvent('SendPasswordResetEmail', 'start');
+    this.analyticsService.logEvent('SendPasswordResetEmail');
 
     return from(this.angularFireAuth.auth.sendPasswordResetEmail(email)).pipe(
-      tap(() => this.analyticsService.logEvent('SendPasswordResetEmail', 'end')),
+      tap(() => this.analyticsService.logEvent('SendPasswordResetEmailSuccess')),
       catchError(error => {
-        this.analyticsService.logEvent('SendPasswordResetEmail', 'failed', { error: error.toString() });
+        this.analyticsService.logEvent('SendPasswordResetEmailFailed', { error: error.toString() });
         console.error(error);
         return throwError(error);
       })
@@ -133,12 +133,12 @@ export class AuthService {
   }
 
   public signOut(): Observable<void> {
-    this.analyticsService.logEvent('SignOut', 'start');
+    this.analyticsService.logEvent('SignOut');
 
     return from(this.angularFireAuth.auth.signOut()).pipe(
-      tap(() => this.analyticsService.logEvent('SignOut', 'end')),
+      tap(() => this.analyticsService.logEvent('SignOutSuccess')),
       catchError(error => {
-        this.analyticsService.logEvent('SignOut', 'failed', { error: error.toString() });
+        this.analyticsService.logEvent('SignOutFailed', { error: error.toString() });
         console.error(error);
         return throwError(error);
       })
@@ -156,13 +156,13 @@ export class AuthService {
   private socialSignIn(provider: firebase.auth.AuthProvider): Observable<auth.UserCredential> {
     const telemetry = { provider: provider.providerId };
 
-    this.analyticsService.logEvent('SocialSignIn', 'start', telemetry);
+    this.analyticsService.logEvent('SocialSignIn', telemetry);
 
     return from(this.angularFireAuth.auth.signInWithPopup(provider))
       .pipe(
-        tap(() => this.analyticsService.logEvent('SocialSignIn', 'end', telemetry)),
+        tap(() => this.analyticsService.logEvent('SocialSignInSuccess', telemetry)),
         catchError(error => {
-          this.analyticsService.logEvent('SocialSignIn', 'failed', telemetry);
+          this.analyticsService.logEvent('SocialSignInFailed', telemetry);
           console.error(error);
           return throwError(error);
         })

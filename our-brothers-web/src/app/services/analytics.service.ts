@@ -11,9 +11,7 @@ export class AnalyticsService {
   constructor(private angularFireAnalytics: AngularFireAnalytics) { }
 
   public logEvent(eventName: string,
-    eventModifier: ActionModifier,
-    eventParams: { [key: string]: any; } = {}) {
-    eventParams.eventModifier = eventModifier;
+    eventParams?: { [key: string]: any; }) {
     this.angularFireAnalytics.logEvent(eventName, eventParams);
   }
 }
