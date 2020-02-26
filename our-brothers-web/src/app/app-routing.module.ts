@@ -5,6 +5,10 @@ import { ContactPageComponent } from './pages/contact-page/contact-page.componen
 import { MeetingsPageComponent } from './pages/meetings-page/meetings-page.component';
 import { AboutPageComponent } from './pages/about-page/about-page.component';
 import { TeamPageComponent } from './pages/team-page/team-page.component';
+import { ArticlesPageComponent } from './pages/articles-page/articles-page.component';
+import { AgendaPageComponent } from './pages/agenda-page/agenda-page.component';
+import { QuestionsPageComponent } from './pages/questions-page/questions-page.component';
+import { GalleryPageComponent } from './pages/gallery-page/gallery-page.component';
 import { AdminBereavedsPageComponent } from './pages/admin-bereaveds-page/admin-bereaveds-page.component';
 import { TellPageComponent } from './pages/tell-page/tell-page.component';
 import { ParticipatePageComponent } from './pages/participate-page/participate-page.component';
@@ -15,6 +19,11 @@ import { TellGuard } from './guards/tell.guard';
 import { ParticipateGuard } from './guards/participate.guard';
 
 const routes: Routes = [
+  {
+    path: 'home',
+    component: HomePageComponent,
+    pathMatch: 'full'
+  },
   {
     path: 'host',
     component: HostPageComponent,
@@ -56,8 +65,23 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'home',
-    component: HomePageComponent,
+    path: 'articles',
+    component: ArticlesPageComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'agenda',
+    component: AgendaPageComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'questions',
+    component: QuestionsPageComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'gallery',
+    component: GalleryPageComponent,
     pathMatch: 'full'
   },
   {

@@ -44,6 +44,18 @@ body {
   visibility: hidden;
 }
 
+.image-header {
+  width: 100%;
+  border-bottom: solid rgb(0, 160, 153) 6px;
+  margin-bottom: 50px;
+
+  @media only screen and (max-width: 768px) {
+    margin-bottom: 20px;
+    height: 135px;
+    object-fit: cover;
+  }
+}
+
 .card-container {
   font-family: "arbel";
 }
@@ -126,11 +138,11 @@ body {
   text-align: center;
   font-family: "arbel";
   letter-spacing: 5px;
-  margin-bottom: 50px;
+  margin-bottom: 70px;
 
   @media only screen and (max-width: 768px) {
     font-size: 32px;
-    margin-bottom: 20px;
+    margin-bottom: 45px;
   }
 }
 

@@ -81,6 +81,10 @@ import { HeaderTogglerComponent } from './components/header-toggler/header-toggl
 import { PlaceMapComponent } from './components/place-map/place-map.component';
 import { MeetingDetailsPageComponent } from './pages/meeting-details-page/meeting-details-page.component';
 import { HostMeetingInputTextComponent } from './components/host-meeting-input-text/host-meeting-input-text.component';
+import { AgendaPageComponent } from './pages/agenda-page/agenda-page.component';
+import { QuestionsPageComponent } from './pages/questions-page/questions-page.component';
+import { GalleryPageComponent } from './pages/gallery-page/gallery-page.component';
+import { ArticlesPageComponent } from './pages/articles-page/articles-page.component';
 
 registerLocaleData(localeHe);
 
@@ -151,7 +155,11 @@ registerLocaleData(localeHe);
     HeaderTogglerComponent,
     PlaceMapComponent,
     MeetingDetailsPageComponent,
-    HostMeetingInputTextComponent
+    HostMeetingInputTextComponent,
+    AgendaPageComponent,
+    QuestionsPageComponent,
+    GalleryPageComponent,
+    ArticlesPageComponent
   ],
   imports: [
     BrowserModule,
