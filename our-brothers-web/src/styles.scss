@@ -1,14 +1,14 @@
-@import "~@fortawesome/fontawesome-free/css/all.css";
+@import '~@fortawesome/fontawesome-free/css/all.css';
 
 @font-face {
-  font-family: "arbel";
+  font-family: 'arbel';
   src: url(assets/fonts/Arbel-Bold_0.otf);
 }
 
 /* heebo-regular */
 @font-face {
-  font-family: "Heebo";
-  src: url("assets/fonts/Heebo-Regular.ttf");
+  font-family: 'Heebo';
+  src: url('assets/fonts/Heebo-Regular.ttf');
 }
 
 *,
@@ -30,7 +30,7 @@ body {
 }
 
 body {
-  font-family: "Heebo";
+  font-family: 'Heebo';
   font-size: 18px;
   position: relative;
   min-height: 100%;
@@ -45,7 +45,7 @@ body {
 }
 
 .image-header {
-  width: 100%;
+  display: block;
   border-bottom: solid rgb(0, 160, 153) 6px;
   margin-bottom: 50px;
 
@@ -57,11 +57,11 @@ body {
 }
 
 .card-container {
-  font-family: "arbel";
+  font-family: 'arbel';
 }
 
 .site-button {
-  font-family: "arbel";
+  font-family: 'arbel';
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -91,26 +91,27 @@ body {
   height: 1px;
   width: calc(100% - 20%);
   max-width: 570px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 70px;
+  margin: 30px auto;
+
+  @media only screen and (min-width: 768px) {
+    margin: 40px auto;
+  }
+
+  @media only screen and (min-width: 1024px) {
+    margin: 60px auto;
+  }
 }
 
 .site-divider {
   width: 65px;
-  margin: auto;
-  padding: 10px 0;
-
-  @media only screen and (min-width: 768px) {
-    padding: 20px 0;
-  }
+  margin: 20px auto;
 
   @media only screen and (min-width: 1024px) {
-    padding: 40px 0;
+    margin: 40px auto;
   }
 
   &::after {
-    content: "";
+    content: '';
     display: block;
     height: 2px;
     background-color: #3787b1;
@@ -119,39 +120,51 @@ body {
 
 .small-heading {
   font-size: 22px;
-  color: rgb(153, 153, 153);
-  text-align: center;
-  font-family: "arbel";
+  margin-top: 25px;
   margin-bottom: 25px;
+  font-family: 'arbel';
+  text-align: center;
   letter-spacing: 15px;
+  color: rgb(153, 153, 153);
 
   @media only screen and (max-width: 768px) {
     font-size: 16px;
+    margin-top: 10px;
     margin-bottom: 10px;
     letter-spacing: 9px;
   }
 }
 
 .medium-heading {
-  color: rgb(55, 135, 177);
   font-size: 36px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-family: 'arbel';
   text-align: center;
-  font-family: "arbel";
   letter-spacing: 5px;
-  margin-bottom: 70px;
+  color: rgb(55, 135, 177);
 
   @media only screen and (max-width: 768px) {
     font-size: 32px;
-    margin-bottom: 45px;
+    margin-top: 15px;
+    margin-bottom: 15px;
   }
 }
 
 .big-heading {
-  font-size: 71px;
-  font-family: "arbel";
-  color: rgb(0, 115, 109);
-  text-align: center;
+  font-size: 72px;
+  margin-top: 40px;
   margin-bottom: 40px;
+  line-height: 0.7em;
+  font-family: 'arbel';
+  text-align: center;
+  color: rgb(0, 115, 109);
+
+  @media only screen and (max-width: 768px) {
+    font-size: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
 }
 
 .site-text {
@@ -168,13 +181,17 @@ body {
   padding: 110px 0 65px 0;
   text-align: center;
   font-size: 39px;
-  font-family: "arbel";
+  font-family: 'arbel';
   color: rgb(255, 255, 255);
   line-height: 1.1;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+
+  @media only screen and (max-width: 768px) {
+    font-size: 30px;
+  }
 
   .site-quote-text {
     max-width: 1000px;
@@ -185,7 +202,7 @@ body {
 
   &::before {
     position: absolute;
-    content: "";
+    content: '';
     top: 50px;
     left: 50%;
     transform: translateX(-50%);
@@ -203,10 +220,10 @@ body {
   height: 56px;
   padding: 15px;
   font-size: 18px;
-  font-family: "Heebo";
+  font-family: 'Heebo';
   color: black;
 
-  &[type="date"] {
+  &[type='date'] {
     padding: 0;
   }
 
@@ -234,7 +251,7 @@ textarea.form-field {
   max-width: 125px;
   height: 40px;
   font-size: 20px;
-  font-family: "arbel";
+  font-family: 'arbel';
   color: rgb(190, 0, 0);
   background-color: white;
   cursor: pointer;
@@ -310,6 +327,9 @@ textarea.form-field {
 }
 
 .site-link {
-  text-decoration: none;
   color: #818181;
+
+  &:not(.decoration) {
+    text-decoration: none;
+  }
 }

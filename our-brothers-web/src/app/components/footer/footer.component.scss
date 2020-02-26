@@ -60,7 +60,7 @@ $mobileBreakpoint: 1000px;
 
         &.col-links {
           .links {
-            .link {
+            .site-link {
               display: block;
               font-size: 14px;
               color: #999999;
@@ -168,6 +168,10 @@ $mobileBreakpoint: 1000px;
         text-align: center;
         background-color: white;
         color: #00a099;
+
+        .site-link {
+          display: block;
+        }
       }
     }
   }

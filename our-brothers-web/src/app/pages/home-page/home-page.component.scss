@@ -57,6 +57,10 @@
   }
 }
 
+.big-heading {
+  margin-top: 20px;
+}
+
 .talking-life {
   color: rgb(55, 135, 177);
 }
@@ -73,24 +77,29 @@
   text-decoration: none;
   margin-bottom: 70px;
 
+  @media only screen and (max-width: 768px) {
+    margin-bottom: 20px;
+    justify-content: center;
+  }
+
   a {
     cursor: pointer;
     min-width: 100px;
     margin-left: 200px;
     text-decoration: none;
     color: #818181;
+
+    @media only screen and (max-width: 768px) {
+      margin-left: 0px;
+    }
   }
   a:hover {
     text-decoration: underline;
   }
 }
 
-.mettings-quote {
-  margin-bottom: 50px;
-}
-
 .gallery-container {
-  padding-top: 70px;
+  padding-top: 90px;
   padding-bottom: 130px;
   overflow: hidden;
   text-align: center;
@@ -150,39 +159,6 @@
         right: unset;
         left: -50%;
       }
-    }
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .big-heading {
-    font-size: 40px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-  }
-  .site-hr {
-    margin-bottom: 20px;
-  }
-  .site-divider {
-    margin-bottom: 20px;
-  }
-  .small-heading {
-    margin-bottom: 20px;
-  }
-  .medium-heading {
-    margin-bottom: 20px;
-  }
-  .see-more {
-    margin-bottom: 20px;
-    justify-content: center;
-    a {
-      margin-left: 0px;
-    }
-  }
-  .site-quote.mettings-quote {
-    margin-bottom: 20px;
-    .site-quote-text {
-      font-size: 30px;
     }
   }
 }

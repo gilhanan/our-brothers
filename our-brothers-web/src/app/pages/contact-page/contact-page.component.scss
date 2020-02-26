@@ -12,11 +12,11 @@
   }
 
   .medium-heading {
-    margin-bottom: 10px;
     @media only screen and (min-width: 768px) {
       text-align: right;
     }
   }
+
   .details-text {
     text-align: right;
     @media only screen and (max-width: 768px) {
