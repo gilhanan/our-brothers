@@ -14,6 +14,21 @@
         "**/.*",
         "**/node_modules/**"
       ]
+    },
+    {
+      "target": "prod",
+      "public": "our-brothers-web/dist/our-brothers-web",
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ],
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ]
     }
   ],
   "functions": {

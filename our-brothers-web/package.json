@@ -8,6 +8,7 @@
     "build": "ng build --prod",
     "deploy": "npm run deploy:beta",
     "deploy:beta": "firebase deploy --only hosting:beta",
+    "deploy:prod": "firebase deploy --only hosting:prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
