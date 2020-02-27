@@ -153,3 +153,10 @@ export interface Contact {
   body: string;
   date: number;
 }
+
+export interface PayPalOrder {
+  payerId: string;
+  orderId: string;
+  amount: string;
+  userId?: string;
+}

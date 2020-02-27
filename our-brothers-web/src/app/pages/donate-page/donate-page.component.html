@@ -1,0 +1,17 @@
+<img class="image-header" src="../../../assets/img/aboutHeader.jpg" />
+<div class="container donate-container">
+  <div class="site-divider"></div>
+  <h1 class="small-heading" data-aos="fade-up" data-aos-duration="1000">
+    תמיכה בעמותה
+  </h1>
+  <div class="paypal-button-container" *ngIf="!loading">
+    <p class="paragraph">תרומה בסך {{ amount }}₪</p>
+    <app-paypal-button
+      [amount]="amount"
+      (createOrder)="onCreateOrder($event)"
+      (approve)="onApprove($event)"
+      (cancel)="onCancel($event)"
+      (error)="onError($event)"
+    ></app-paypal-button>
+  </div>
+</div>

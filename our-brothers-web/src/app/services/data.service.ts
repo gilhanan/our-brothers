@@ -108,7 +108,7 @@ export class DataService {
           id: meetingSnapshot.key
         })),
         catchError(error => {
-          this.analyticsService.logEvent('CreateMeetingFailed', { ...telemetry, error: error.toString() });
+          this.analyticsService.logEvent('CreateMeetingFailed', { ...telemetry, error });
           console.error(error);
           return throwError(error);
         })
@@ -129,7 +129,7 @@ export class DataService {
         this.analyticsService.logEvent('UserMapGuideLastVisitSuccess', telemetry);
       }),
       catchError(error => {
-        this.analyticsService.logEvent('UserMapGuideLastVisitFailed', { ...telemetry, error: error.toString() });
+        this.analyticsService.logEvent('UserMapGuideLastVisitFailed', { ...telemetry, error });
         console.error(error);
         return throwError(error);
       })
@@ -147,7 +147,7 @@ export class DataService {
     ).pipe(
       tap(() => this.analyticsService.logEvent('SetUserRoleSuccess', telemetry)),
       catchError(error => {
-        this.analyticsService.logEvent('SetUserRoleFailed', { ...telemetry, error: error.toString() });
+        this.analyticsService.logEvent('SetUserRoleFailed', { ...telemetry, error });
         console.error(error);
         return throwError(error);
       })
@@ -165,7 +165,7 @@ export class DataService {
     ).pipe(
       tap(() => this.analyticsService.logEvent('SetUserProfileSuccess', telemetry)),
       catchError(error => {
-        this.analyticsService.logEvent('SetUserProfileFailed', { ...telemetry, error: error.toString() });
+        this.analyticsService.logEvent('SetUserProfileFailed', { ...telemetry, error });
         console.error(error);
         return throwError(error);
       })
@@ -183,7 +183,7 @@ export class DataService {
     ).pipe(
       tap(() => this.analyticsService.logEvent('SetUserVolunteerSuccess', telemetry)),
       catchError(error => {
-        this.analyticsService.logEvent('SetUserVolunteerFailed', { ...telemetry, error: error.toString() });
+        this.analyticsService.logEvent('SetUserVolunteerFailed', { ...telemetry, error });
         console.error(error);
         return throwError(error);
       })
@@ -207,7 +207,7 @@ export class DataService {
     ).pipe(
       tap(() => this.analyticsService.logEvent('SetBereavedStatusSuccess', telemetry)),
       catchError(error => {
-        this.analyticsService.logEvent('SetBereavedStatusFailed', { ...telemetry, error: error.toString() });
+        this.analyticsService.logEvent('SetBereavedStatusFailed', { ...telemetry, error });
         console.error(error);
         return throwError(error);
       })
@@ -231,7 +231,7 @@ export class DataService {
     ).pipe(
       tap(() => this.analyticsService.logEvent('SetBereavedGuidanceGeneralSuccess', telemetry)),
       catchError(error => {
-        this.analyticsService.logEvent('SetBereavedGuidanceGeneralFailed', { ...telemetry, error: error.toString() })
+        this.analyticsService.logEvent('SetBereavedGuidanceGeneralFailed', { ...telemetry, error })
         console.error(error);
         return throwError(error);
       })
@@ -272,7 +272,7 @@ export class DataService {
     ).pipe(
       tap(() => this.analyticsService.logEvent('SetBereavedGuidanceSuccess', telemetry)),
       catchError(error => {
-        this.analyticsService.logEvent('SetBereavedGuidanceFailed', { ...telemetry, error: error.toString() });
+        this.analyticsService.logEvent('SetBereavedGuidanceFailed', { ...telemetry, error });
         console.error(error);
         return throwError(error);
       })
@@ -396,7 +396,7 @@ export class DataService {
       tap(() => this.analyticsService.logEvent('BereavedRegisterHostSuccess', telemetry)),
       map(() => true),
       catchError(error => {
-        this.analyticsService.logEvent('BereavedRegisterHostFailed', { ...telemetry, error: error.toString() });
+        this.analyticsService.logEvent('BereavedRegisterHostFailed', { ...telemetry, error });
         console.error(error);
         return throwError(error);
       })
@@ -436,7 +436,7 @@ export class DataService {
       tap(() => this.analyticsService.logEvent('ParticipateRegisterHostSuccess', telemetry)),
       map(() => true),
       catchError(error => {
-        this.analyticsService.logEvent('ParticipateRegisterHostFailed', { ...telemetry, error: error.toString() });
+        this.analyticsService.logEvent('ParticipateRegisterHostFailed', { ...telemetry, error });
         console.error(error);
         return throwError(error);
       })
@@ -464,7 +464,7 @@ export class DataService {
       tap(() => this.analyticsService.logEvent('BereavedLeaveHostSuccess', telemetry)),
       map(() => true),
       catchError(error => {
-        this.analyticsService.logEvent('BereavedLeaveHostFailed', { ...telemetry, error: error.toString() });
+        this.analyticsService.logEvent('BereavedLeaveHostFailed', { ...telemetry, error });
         console.error(error);
         return throwError(error);
       })
@@ -483,7 +483,7 @@ export class DataService {
       .then((result) => {
         this.analyticsService.logEvent('PostContactSuccess', telemetry);
       }, (error) => {
-        this.analyticsService.logEvent('PostContactFailed', { ...telemetry, error: error.toString() });
+        this.analyticsService.logEvent('PostContactFailed', { ...telemetry, error });
         console.error(error);
         throw error;
       });

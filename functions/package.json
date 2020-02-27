@@ -12,8 +12,9 @@
   "engines": {
     "node": "8"
   },
-  "main": "lib/src/index.js",
+  "main": "lib/functions/src/index.js",
   "dependencies": {
+    "@paypal/checkout-server-sdk": "^1.0.2",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "firebase-admin": "^8.6.0",

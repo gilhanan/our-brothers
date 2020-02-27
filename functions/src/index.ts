@@ -2,11 +2,14 @@ import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import * as express from 'express';
 import * as cors from 'cors';
+
+const checkoutNodeJssdk = require('@paypal/checkout-server-sdk');
 import * as nodemailer from 'nodemailer';
 import Mail = require('nodemailer/lib/mailer');
 
-import { Contact, MeetingBereaved, Meeting, MeetingParticipate, ParticipateParticipationMeeting, UserParticipationMeeting } from '../../types/models';
+import { Contact, MeetingBereaved, Meeting, MeetingParticipate, ParticipateParticipationMeeting, UserParticipationMeeting, PayPalOrder } from '../../types/models';
 import { mailCredentials } from '../config';
+import payPalClient from './paypal-client';
 
 const mailTransport = nodemailer.createTransport({
   service: 'gmail',
@@ -32,9 +35,87 @@ interface ParsedSms {
   timestamp: number;
 }
 
-app.post('/sms/reply', (req: express.Request, res: express.Response) => {
 
-  console.log('Storing SMS to database', req.body);
+// ========================= API =========================
+
+app.post('/order/capture', async (req: express.Request, res: express.Response) => {
+
+  const { orderId, amount, userId, payerId } = req.body as PayPalOrder;
+
+  if (!orderId) {
+
+    console.warn('Missing order id.');
+
+    return res.status(400).send({
+      code: 400,
+      message: 'Missing order id. Please add order id: {"orderId": "ABCDEF"}.'
+    });
+  }
+
+  if (!amount) {
+
+    console.warn('Missing amount value.');
+
+    return res.status(400).send({
+      code: 400,
+      message: 'Missing amount value. Please add amount value: {"amount": "220.00"}.'
+    });
+  }
+
+  console.log(`Generating Orders API request for order id {${orderId}}, amount {${amount}}, user id {${userId}}, payer id {${payerId}}.`);
+
+  const request = new checkoutNodeJssdk.orders.OrdersGetRequest(orderId);
+
+  let order;
+  try {
+    order = await payPalClient().execute(request);
+  } catch (error) {
+
+    console.error('Failed to execute orders request.', error);
+
+    return res.status(500).send({
+      code: 500,
+      message: 'Failed to execute orders request.'
+    });
+
+  }
+
+  if (order.result.purchase_units[0].amount.value !== amount) {
+    return res.status(400).send({
+      code: 400,
+      message: `Wrong amout value ${amount}.`
+    });
+  }
+
+  console.log(`Saving order id {${orderId}}, amount {${amount}}, user id {${userId}}, payer id {${payerId}} to database.`);
+
+  const path = userId ? `users/${userId}` : 'anonymous';
+
+  try {
+    await admin.database().ref(`/donations/${path}`).push({
+      payerId,
+      orderId,
+      amount
+    } as PayPalOrder);
+  } catch (error) {
+
+    console.error(`Failed to save order id {${orderId}}, amount {${amount}}, user id {${userId}}, payer id {${payerId}} to database.`, error);
+
+    return res.status(500).send({
+      code: 500,
+      message: 'Failed to save order to database.'
+    });
+  }
+
+  console.log(`Successfully saved order id {${orderId}}, amount {${amount}}, user id {${userId}}, payer id {${payerId}} to database.`);
+
+  return res.status(200).send({
+    code: 200,
+    message: `Successfully saved order id {${orderId}}, amount {${amount}}, user id {${userId}}, payer id {${payerId}} to database.`
+  });
+});
+
+app.post('/sms/reply', async (req: express.Request, res: express.Response) => {
 
   const body: TwilioWebhook = req.body;
 
@@ -46,30 +127,33 @@ app.post('/sms/reply', (req: express.Request, res: express.Response) => {
 
     console.warn('Missing SMS from or body or id');
 
-    return res.status(400).send({
-      code: 400,
-      message: `Missing SMS from or body or id.`
-    });
+    return res.status(400).send('Missing SMS from or body or id.');
 
-  } else {
+  }
 
-    const parsedSmsBody: ParsedSms = {
-      from: smsFrom,
-      body: smsBody,
-      timestamp: Date.now()
-    }
+  console.log('Storing SMS to database', req.body);
 
-    return admin.database()
+  const parsedSmsBody: ParsedSms = {
+    from: smsFrom,
+    body: smsBody,
+    timestamp: Date.now()
+  }
+
+  try {
+    await admin.database()
       .ref(`/sms/replies/${smsFrom}/${smsId}`)
       .set(parsedSmsBody)
-      .then(() => res.send({
-        code: 200,
-        message: 'Susccessfully stored SMS'
-      }));
+  } catch (error) {
+
+    console.log('Failed to store SMS to database.', error);
+
+    return res.status(500).send('Failed to store SMS to database.');
   }
+
+  return res.status(200).send('Susccessfully stored SMS');
 });
 
-export const api = functions.https.onRequest(app);
+export const api = functions.region('europe-west1').https.onRequest(app);
 
 // ========================= Auth =========================
 
@@ -100,6 +184,27 @@ export const addUserToDatabase = functions.auth.user()
   });
 
 // ========================= Database =========================
+
+// ============ Donations============
+
+export const onDonationCreate = functions.database.ref('/donations/users/{userId}/{donationId}')
+  .onCreate((event, context) => {
+
+    const donation: PayPalOrder = event.val();
+
+    const { userId, donationId } = context.params;
+
+    console.log(`Linking donation {${donationId}} user {${userId}}.`, donation);
+
+    return admin.database()
+      .ref(`/users/${userId}/donations/${donationId}`)
+      .set(donation)
+      .then(() => {
+        console.log(`Succesfully linked donation {${donationId}} user {${userId}}.`, donation);
+      }).catch((error) => {
+        console.error(`Failed to link donation {${donationId}} user {${userId}}.`, error);
+      });
+  });
 
 // ============ User Participations ============
 

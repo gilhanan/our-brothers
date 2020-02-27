@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { registerLocaleData } from '@angular/common';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import localeHe from '@angular/common/locales/he';
@@ -85,6 +86,8 @@ import { AgendaPageComponent } from './pages/agenda-page/agenda-page.component';
 import { QuestionsPageComponent } from './pages/questions-page/questions-page.component';
 import { GalleryPageComponent } from './pages/gallery-page/gallery-page.component';
 import { ArticlesPageComponent } from './pages/articles-page/articles-page.component';
+import { DonatePageComponent } from './pages/donate-page/donate-page.component';
+import { PaypalButtonComponent } from './components/paypal-button/paypal-button.component';
 
 registerLocaleData(localeHe);
 
@@ -159,10 +162,13 @@ registerLocaleData(localeHe);
     AgendaPageComponent,
     QuestionsPageComponent,
     GalleryPageComponent,
-    ArticlesPageComponent
+    ArticlesPageComponent,
+    DonatePageComponent,
+    PaypalButtonComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     ScrollingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,

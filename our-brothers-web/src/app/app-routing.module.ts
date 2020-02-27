@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomePageComponent } from './pages/home-page/home-page.component';
+import { DonatePageComponent } from './pages/donate-page/donate-page.component';
 import { ContactPageComponent } from './pages/contact-page/contact-page.component';
 import { MeetingsPageComponent } from './pages/meetings-page/meetings-page.component';
 import { AboutPageComponent } from './pages/about-page/about-page.component';
@@ -83,6 +84,15 @@ const routes: Routes = [
     path: 'gallery',
     component: GalleryPageComponent,
     pathMatch: 'full'
+  },
+  {
+    path: 'donate',
+    component: DonatePageComponent,
+    children: [{
+      path: '',
+      component: DonatePageComponent,
+      pathMatch: 'full'
+    }]
   },
   {
     path: 'contact',

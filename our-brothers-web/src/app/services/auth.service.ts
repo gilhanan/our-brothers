@@ -93,7 +93,7 @@ export class AuthService {
     )).pipe(
       tap(() => this.analyticsService.logEvent('SignInWithEmailAndPasswordSuccess')),
       catchError(error => {
-        this.analyticsService.logEvent('SignInWithEmailAndPasswordFailed', { error: error.toString() });
+        this.analyticsService.logEvent('SignInWithEmailAndPasswordFailed', { error });
         console.error(error);
         return throwError(error);
       })
@@ -112,7 +112,7 @@ export class AuthService {
     )).pipe(
       tap(() => this.analyticsService.logEvent('CreateUserWithEmailAndPasswordSuccess')),
       catchError(error => {
-        this.analyticsService.logEvent('CreateUserWithEmailAndPasswordFailed', { error: error.toString() });
+        this.analyticsService.logEvent('CreateUserWithEmailAndPasswordFailed', { error });
         console.error(error);
         return throwError(error);
       })
@@ -125,7 +125,7 @@ export class AuthService {
     return from(this.angularFireAuth.auth.sendPasswordResetEmail(email)).pipe(
       tap(() => this.analyticsService.logEvent('SendPasswordResetEmailSuccess')),
       catchError(error => {
-        this.analyticsService.logEvent('SendPasswordResetEmailFailed', { error: error.toString() });
+        this.analyticsService.logEvent('SendPasswordResetEmailFailed', { error });
         console.error(error);
         return throwError(error);
       })
@@ -138,7 +138,7 @@ export class AuthService {
     return from(this.angularFireAuth.auth.signOut()).pipe(
       tap(() => this.analyticsService.logEvent('SignOutSuccess')),
       catchError(error => {
-        this.analyticsService.logEvent('SignOutFailed', { error: error.toString() });
+        this.analyticsService.logEvent('SignOutFailed', { error });
         console.error(error);
         return throwError(error);
       })

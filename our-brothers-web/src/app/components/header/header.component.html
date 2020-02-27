@@ -28,7 +28,7 @@
         <li><a class="link-header" routerLink="contact" routerLinkActive="current-page">צרו קשר</a></li>
       </ul>
       <div class="action-buttons">
-        <div class="action-header-support-us site-button">תמיכה בעמותה</div>
+        <a class="action-header-support-us site-button" routerLink="donate">תמיכה בעמותה</a>
         <div *ngIf="!user" class="action-header-login site-button" (click)="authService.requestToLogin()">
           התחבר/הרשם
         </div>
