@@ -4,51 +4,49 @@
   alt="Meetings Page Header Image"
 />
 
-<section class="host-page-container">
-  <div class="container">
-    <section *ngIf="currentStep > 0" class="progress-container">
-      <div class="site-divider"></div>
-      <div class="small-heading">פרטים נוספים</div>
-      <app-registration-progress-bar
-        [currentStep]="currentStep - 1"
-        [steps]="[
-          { title: 'התחברות' },
-          { title: 'הרשמה' },
-          { title: 'פרטי האירוח' },
-          { title: 'אישור האירוח' }
-        ]"
-      >
-      </app-registration-progress-bar>
-    </section>
+<section class="registration-page">
+  <section *ngIf="currentStep > 0" >
+    <div class="site-divider"></div>
+    <div class="small-heading">פרטים נוספים</div>
+    <app-registration-progress-bar
+      [currentStep]="currentStep - 1"
+      [steps]="[
+        { title: 'התחברות' },
+        { title: 'הרשמה' },
+        { title: 'פרטי האירוח' },
+        { title: 'אישור האירוח' }
+      ]"
+    >
+    </app-registration-progress-bar>
+  </section>
 
-    <div class="steps-container">
-      <ng-container [ngSwitch]="currentStep">
-        <ng-container *ngSwitchCase="0">
-          <section class="step0">
-            <app-host-intro (nextStep)="currentStep$.next(1)"></app-host-intro>
-          </section>
-        </ng-container>
-        <ng-container *ngSwitchCase="1">
-          <!-- login -->
-        </ng-container>
-        <ng-container *ngSwitchCase="2">
-          <section class="step">
-            <app-profile-form
-              [user]="user"
-              [firebaseUser]="firebaseUser"
-              (submit)="onProfileSubmit($event)"
-            >
-            </app-profile-form>
-          </section>
-        </ng-container>
-        <ng-container *ngSwitchCase="3">
-          <section class="step">
-            <app-host-form
-              (submitMeetingDetailsPage)="onNewMeeting($event)"
-            ></app-host-form>
-          </section>
-        </ng-container>
+  <div class="registration-steps">
+    <ng-container [ngSwitch]="currentStep">
+      <ng-container *ngSwitchCase="0">
+        <section class="step0">
+          <app-host-intro (nextStep)="currentStep$.next(1)"></app-host-intro>
+        </section>
       </ng-container>
-    </div>
+      <ng-container *ngSwitchCase="1">
+        <!-- login -->
+      </ng-container>
+      <ng-container *ngSwitchCase="2">
+        <section class="registration-step">
+          <app-profile-form
+            [user]="user"
+            [firebaseUser]="firebaseUser"
+            (submit)="onProfileSubmit($event)"
+          >
+          </app-profile-form>
+        </section>
+      </ng-container>
+      <ng-container *ngSwitchCase="3">
+        <section class="registration-step">
+          <app-host-form
+            (submitMeetingDetailsPage)="onNewMeeting($event)"
+          ></app-host-form>
+        </section>
+      </ng-container>
+    </ng-container>
   </div>
 </section>

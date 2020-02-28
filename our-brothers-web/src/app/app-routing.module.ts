@@ -7,6 +7,7 @@ import { MeetingsPageComponent } from './pages/meetings-page/meetings-page.compo
 import { AboutPageComponent } from './pages/about-page/about-page.component';
 import { TeamPageComponent } from './pages/team-page/team-page.component';
 import { ArticlesPageComponent } from './pages/articles-page/articles-page.component';
+import { NewsPageComponent } from './pages/news-page/news-page.component';
 import { AgendaPageComponent } from './pages/agenda-page/agenda-page.component';
 import { QuestionsPageComponent } from './pages/questions-page/questions-page.component';
 import { GalleryPageComponent } from './pages/gallery-page/gallery-page.component';
@@ -68,6 +69,11 @@ const routes: Routes = [
   {
     path: 'articles',
     component: ArticlesPageComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'news',
+    component: NewsPageComponent,
     pathMatch: 'full'
   },
   {

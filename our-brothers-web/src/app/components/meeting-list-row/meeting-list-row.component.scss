@@ -1,11 +1,12 @@
 $textColor: rgb(129, 129, 129);
+$mobileBreakpoint: 1024px;
 
 .meeting-item {
   display: flex;
   flex-flow: row;
   border-bottom: 1px solid rgb(227, 229, 231);
 
-  @media only screen and (max-width: 650px) {
+  @media only screen and (max-width: $mobileBreakpoint) {
     display: grid;
     grid-template-rows: 50px repeat(4, 25px) 45px;
     border: 2px solid lightgray;
@@ -16,20 +17,21 @@ $textColor: rgb(129, 129, 129);
     flex: 1;
     display: flex;
     align-items: center;
-    margin: 45px 5px;
+    padding: 45px 5px;
     font-size: 18px;
     color: $textColor;
 
-    @media only screen and (max-width: 650px) {
+    @media only screen and (max-width: $mobileBreakpoint) {
       margin: 0 2px;
       padding-right: 20px;
       align-self: center;
     }
 
-    &.meeting-name {
+    .meeting-link {
       font-size: 22px;
-      font-family: "arbel";
+      font-family: 'arbel';
       color: rgb(0, 115, 109);
+      text-decoration: none;
     }
 
     .meeting-label {
@@ -39,20 +41,27 @@ $textColor: rgb(129, 129, 129);
     .mobile-label {
       display: none;
 
-      @media only screen and (max-width: 650px) {
+      @media only screen and (max-width: $mobileBreakpoint) {
         display: inline;
         margin-left: 2px;
       }
     }
 
-    &.meeting-address {
-      &::before {
-        content: "";
-        width: 12px;
-        height: 17px;
-        margin-left: 5px;
-        background-image: url(../../../assets/img/location.png);
-        background-size: cover;
+    &.meeting-address-col {
+      .meeting-address {
+        padding-right: 15px;
+        position: relative;
+
+        &::before {
+          content: '';
+          position: absolute;
+          width: 12px;
+          height: 17px;
+          right: 0;
+          top: 5px;
+          background-image: url(../../../assets/img/location.png);
+          background-size: cover;
+        }
       }
     }
 
@@ -60,17 +69,24 @@ $textColor: rgb(129, 129, 129);
       flex: 0 1 130px;
       justify-content: center;
 
-      @media only screen and (max-width: 650px) {
+      @media only screen and (max-width: $mobileBreakpoint) {
         justify-content: start;
       }
 
-      &::before {
-        content: "";
-        width: 14px;
-        height: 14px;
-        margin-left: 5px;
-        background-image: url(../../../assets/img/calend.png);
-        background-size: cover;
+      .date {
+        padding-right: 17px;
+        position: relative;
+
+        &::before {
+          content: '';
+          position: absolute;
+          width: 14px;
+          height: 14px;
+          right: 0;
+          top: 5px;
+          background-image: url(../../../assets/img/calend.png);
+          background-size: cover;
+        }
       }
     }
 
@@ -78,13 +94,13 @@ $textColor: rgb(129, 129, 129);
       flex: 0 1 140px;
       justify-content: center;
 
-      @media only screen and (max-width: 650px) {
+      @media only screen and (max-width: $mobileBreakpoint) {
         justify-content: start;
       }
     }
 
     &.meeting-button {
-      @media only screen and (max-width: 650px) {
+      @media only screen and (max-width: $mobileBreakpoint) {
         justify-content: flex-end;
 
         .join-button {

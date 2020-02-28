@@ -1,10 +1,9 @@
-import { Component, Input, HostListener, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { User } from 'firebase';
-import { AuthService } from 'src/app/services/auth.service';
+import { Component, Input, HostListener, OnInit, Output, EventEmitter, } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { User } from 'firebase';
 
-class HeaderSubMenus {
+interface HeaderSubMenus {
   meetings: boolean;
   about: boolean;
 }
@@ -15,17 +14,21 @@ class HeaderSubMenus {
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  isMobileView = false;
+
+  @Input() public user: User;
+  @Input() public loading = true;
+
+  @Output() login = new EventEmitter<void>();
+  @Output() logout = new EventEmitter<void>();
+
+  public isMobileView = false;
   isSideMenuClosed = true;
   subMenusStates: HeaderSubMenus = {
     meetings: false,
     about: false
   };
 
-  @Input() public user: User;
-
-  constructor(public authService: AuthService,
-    private router: Router) { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     this.updateMobileViewState(window.innerWidth);

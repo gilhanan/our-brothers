@@ -1,6 +1,10 @@
-<app-list-header [(sort)]="sortedColumn" (sortChange)="sort()" class="list-header">
-  <app-list-column class="col-row-state">
-  </app-list-column>
+<app-list-header
+  [scroll]="sortedBereaveds.length > 10"
+  [(sort)]="sortedColumn"
+  (sortChange)="sort()"
+  class="list-header"
+>
+  <app-list-column class="col-row-state"> </app-list-column>
   <app-list-column [field]="'name'">
     שם מלא
   </app-list-column>
@@ -25,11 +29,20 @@
 </app-list-header>
 <cdk-virtual-scroll-viewport itemSize="10" class="bereaved-items">
   <div *ngFor="let bereaved of sortedBereaveds; trackBy: trackByFn">
-    <app-bereaveds-list-row [bereaved]="bereaved" [user]="user"
+    <app-bereaveds-list-row
+      [bereaved]="bereaved"
+      [user]="user"
       (joinBereved)="joinBereved.emit(bereaved)"
-      (leaveBereaved)="leaveBereaved.emit({user: bereaved, meeting: $event})"
-      (volunteering)="volunteering.emit({user: bereaved, isVolunteer: $event})"
-      (bereavedStatus)="bereavedStatus.emit({bereaved: bereaved, status: $event})"
-      (bereavedGuidance)="bereavedGuidance.emit({bereaved: bereaved, guidance: $event})"></app-bereaveds-list-row>
+      (leaveBereaved)="leaveBereaved.emit({ user: bereaved, meeting: $event })"
+      (volunteering)="
+        volunteering.emit({ user: bereaved, isVolunteer: $event })
+      "
+      (bereavedStatus)="
+        bereavedStatus.emit({ bereaved: bereaved, status: $event })
+      "
+      (bereavedGuidance)="
+        bereavedGuidance.emit({ bereaved: bereaved, guidance: $event })
+      "
+    ></app-bereaveds-list-row>
   </div>
 </cdk-virtual-scroll-viewport>

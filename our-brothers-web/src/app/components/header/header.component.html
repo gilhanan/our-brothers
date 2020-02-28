@@ -29,12 +29,12 @@
       </ul>
       <div class="action-buttons">
         <a class="action-header-support-us site-button" routerLink="donate">תמיכה בעמותה</a>
-        <div *ngIf="!user" class="action-header-login site-button" (click)="authService.requestToLogin()">
-          התחבר/הרשם
-        </div>
-        <div *ngIf="user" class="action-header-login site-button" (click)="authService.signOut()">
+        <button *ngIf="!user" class="action-header-login site-button" [disabled]="loading" (click)="login.emit()">
+          התחבר
+        </button>
+        <button *ngIf="user" class="action-header-login site-button" [disabled]="loading" (click)="logout.emit()">
           התנתק
-        </div>
+        </button>
       </div>
     </div>
   </div>
@@ -46,7 +46,7 @@
     <div class="drop-down-item-divider"></div>
     <a class="drop-down-menu-item" routerLink="team">הצוות שלנו</a>
     <div class="drop-down-item-divider"></div>
-    <a class="drop-down-menu-item" routerLink="about">עלינו בתקשורת</a>
+    <a class="drop-down-menu-item" routerLink="news">עלינו בתקשורת</a>
     <div class="drop-down-item-divider"></div>
     <a class="drop-down-menu-item" routerLink="articles">כותבים עלינו</a>
   </div>

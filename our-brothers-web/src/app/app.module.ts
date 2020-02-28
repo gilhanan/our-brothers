@@ -88,6 +88,7 @@ import { GalleryPageComponent } from './pages/gallery-page/gallery-page.componen
 import { ArticlesPageComponent } from './pages/articles-page/articles-page.component';
 import { DonatePageComponent } from './pages/donate-page/donate-page.component';
 import { PaypalButtonComponent } from './components/paypal-button/paypal-button.component';
+import { NewsPageComponent } from './pages/news-page/news-page.component';
 
 registerLocaleData(localeHe);
 
@@ -164,7 +165,8 @@ registerLocaleData(localeHe);
     GalleryPageComponent,
     ArticlesPageComponent,
     DonatePageComponent,
-    PaypalButtonComponent
+    PaypalButtonComponent,
+    NewsPageComponent
   ],
   imports: [
     BrowserModule,

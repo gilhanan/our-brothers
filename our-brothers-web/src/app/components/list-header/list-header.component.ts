@@ -18,6 +18,7 @@ const SortedColumnInitialValue: SortedColumn = {
 })
 export class ListHeaderComponent implements AfterContentInit {
 
+  @Input() scroll = false;
   @Input('sort') _sort: SortedColumn = SortedColumnInitialValue;
   @Output() sortChange = new EventEmitter<SortedColumn>();
 

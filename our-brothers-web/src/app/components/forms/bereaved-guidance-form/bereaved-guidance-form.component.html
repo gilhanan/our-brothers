@@ -1,4 +1,4 @@
-<div class="form-title">מפגשי הדרכה</div>
+<div class="medium-heading">מפגשי הדרכה</div>
 <div class="training-container">
   <div class="training-text">
     אנו יודעים שמפגש כזה מעורר הרבה מחשבות ולכן אנו מציעים לך לקחת חלק במפגשי
@@ -12,16 +12,16 @@
         (checkedChanged)="onGuidanceChange(guidance.value, $event)"
       ></app-checkbox>
     </div>
-  </div>
-  <div class="training-options not-interseted">
-    <app-checkbox
-      [label]="'לא מעוניין בהדרכה'"
-      [checked]="notIntereseted"
-      (checkedChanged)="
-        notIntereseted = $event; $event && (selectedGuidances = {})
-      "
-    >
-    </app-checkbox>
+    <div class="training-option not-interseted">
+      <app-checkbox
+        [label]="'לא מעוניין בהדרכה'"
+        [checked]="notIntereseted"
+        (checkedChanged)="
+          notIntereseted = $event; $event && (selectedGuidances = {})
+        "
+      >
+      </app-checkbox>
+    </div>
   </div>
 </div>
 <div (click)="onSubmit()" class="site-button primary-button step-button">

@@ -1,16 +1,25 @@
 <div class="meeting-item">
   <div class="meeting-item-col meeting-name">
-    <a [routerLink]="'/meetings/' + year + '/' + meeting.hostId + '/' + meeting.id">
+    <a
+      class="meeting-link"
+      [routerLink]="
+        '/meetings/' + year + '/' + meeting.hostId + '/' + meeting.id
+      "
+    >
       {{ meeting.title }}
     </a>
   </div>
-  <div class="meeting-item-col meeting-address">
-    {{ meeting.address.formattedAddress }}
+  <div class="meeting-item-col meeting-address-col">
+    <div class="meeting-address">
+      {{ meeting.address.formattedAddress }}
+    </div>
   </div>
   <div class="meeting-item-col date-col">
-    {{ meeting.date | date: 'dd.MM.yyyy' }}
+    <div class="date">
+      {{ meeting.date | date: 'dd.MM.yyyy' }}
+    </div>
   </div>
-  <div class="meeting-item-col meeting-participants">
+  <div class="meeting-item-col participants-col">
     <span class="mobile-label">
       כמות משתתפים:
     </span>

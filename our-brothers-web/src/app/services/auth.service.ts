@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable, of, from, Subject, throwError } from 'rxjs';
 import { switchMap, map, tap, catchError } from 'rxjs/operators';
@@ -32,7 +33,8 @@ export class AuthService {
   private firstTimeGetUser = true;
 
   constructor(
-    public angularFireAuth: AngularFireAuth,
+    private router: Router,
+    private angularFireAuth: AngularFireAuth,
     private dataService: DataService,
     private analyticsService: AnalyticsService
   ) {
@@ -135,6 +137,8 @@ export class AuthService {
   public signOut(): Observable<void> {
     this.analyticsService.logEvent('SignOut');
 
+    this.needLogin$.next(false);
+
     return from(this.angularFireAuth.auth.signOut()).pipe(
       tap(() => this.analyticsService.logEvent('SignOutSuccess')),
       catchError(error => {
@@ -151,6 +155,7 @@ export class AuthService {
 
   public closeLogin() {
     this.needLogin$.next(false);
+    this.router.navigate(['/home'])
   }
 
   private socialSignIn(provider: firebase.auth.AuthProvider): Observable<auth.UserCredential> {

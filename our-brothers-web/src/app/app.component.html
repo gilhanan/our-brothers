@@ -1,4 +1,9 @@
-<app-header [user]="user$ | async"></app-header>
+<app-header
+  [loading]="loading"
+  [user]="user"
+  (login)="authService.requestToLogin()"
+  (logout)="authService.signOut()"
+></app-header>
 <router-outlet></router-outlet>
 <app-footer></app-footer>
-<app-login-popup *ngIf="(needLogin$ | async) && !(user$ | async)"></app-login-popup>
+<app-login-popup *ngIf="(needLogin$ | async) && !user"></app-login-popup>

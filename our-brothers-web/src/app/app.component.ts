@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as AOS from 'aos';
 
+import { User } from 'models';
 import { AuthService } from './services/auth.service';
 
 @Component({
@@ -10,14 +11,21 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent implements OnInit {
   public needLogin$ = this.authService.needLogin$;
-  public user$ = this.authService.user;
+
+  public loading = true;
+  public user: User;
 
   constructor(
-    private authService: AuthService
+    public authService: AuthService
   ) { }
 
   ngOnInit() {
     AOS.init();
+
+    this.authService.user.subscribe((user) => {
+      this.loading = false;
+      this.user = user;
+    });
   }
 
   logOut() {

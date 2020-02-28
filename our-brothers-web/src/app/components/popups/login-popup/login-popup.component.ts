@@ -17,7 +17,7 @@ type Mode = 'Login' | 'Register' | 'Forgot';
 export class LoginPopupComponent {
   @Input() mode: Mode = 'Login';
 
-  loading: boolean;
+  public loading: boolean;
 
   constructor(public authService: AuthService) { }
 
