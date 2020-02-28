@@ -13,19 +13,19 @@
   display: flex;
   justify-content: center;
 
-  .host-meeting-heading-text {
-    &::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      right: -85px;
-      width: 30px;
-      height: 30px;
-      background-image: url(../../../assets/img/host_event.svg);
-      background-size: 100% 100%;
-      transform: translateY(-50%);
-    }
-  }
+  // .host-meeting-heading-text {
+  //   &::before {
+  //     content: '';
+  //     position: absolute;
+  //     top: 50%;
+  //     right: -85px;
+  //     width: 30px;
+  //     height: 30px;
+  //     background-image: url(../../../assets/img/host_event.svg);
+  //     background-size: 100% 100%;
+  //     transform: translateY(-50%);
+  //   }
+  // }
 }
 
 .form-items-container {

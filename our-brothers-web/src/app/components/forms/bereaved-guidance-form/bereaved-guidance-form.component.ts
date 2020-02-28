@@ -56,13 +56,5 @@ const traningMeetingsConst: GuidanceMeeting[] = [
   {
     label: '29.3 יום ראשון, בין השעות 1700-2100, בWEWORK באר שבע ',
     value: 'm4'
-  },
-  {
-    label: '7.4 יום שלישי, 19:00-20:30 סדנה אינטרנטית',
-    value: 'm5'
-  },
-  {
-    label: '18.4 יום שבת, 2030-2200 סדנה אינטרנטית',
-    value: 'm6'
   }
 ];

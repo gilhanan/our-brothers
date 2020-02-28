@@ -4,50 +4,91 @@
 <div class="form" [formGroup]="form">
   <div class="form-row">
     <div class="col">
-      <input type="text" placeholder="שם פרטי" class="form-field" formControlName="firstName"
-        [class.invalid]="!firstName.valid && firstName.touched" />
+      <input
+        type="text"
+        placeholder="שם פרטי"
+        class="form-field"
+        formControlName="firstName"
+        [class.invalid]="!firstName.valid && firstName.touched"
+      />
     </div>
     <div class="col">
-      <input type="text" placeholder="שם משפחה" class="form-field" formControlName="lastName"
-        [class.invalid]="!lastName.valid && lastName.touched" />
+      <input
+        type="text"
+        placeholder="שם משפחה"
+        class="form-field"
+        formControlName="lastName"
+        [class.invalid]="!lastName.valid && lastName.touched"
+      />
     </div>
   </div>
   <div class="form-row">
     <div class="col">
-      <input type="email" placeholder="אימייל" class="form-field" formControlName="email"
-        [class.invalid]="!email.valid && email.touched" />
+      <input
+        type="email"
+        placeholder="אימייל"
+        class="form-field"
+        formControlName="email"
+        [class.invalid]="!email.valid && email.touched"
+      />
     </div>
     <div class="col">
-      <input type="tel" placeholder="פלאפון" class="form-field" pattern="[0-9]{10}" formControlName="phoneNumber"
-        [class.invalid]="!phoneNumber.valid && phoneNumber.touched" />
+      <input
+        type="tel"
+        placeholder="פלאפון"
+        class="form-field"
+        pattern="[0-9]{10}"
+        formControlName="phoneNumber"
+        [class.invalid]="!phoneNumber.valid && phoneNumber.touched"
+      />
     </div>
   </div>
   <div class="form-row">
     <div class="col">
-      <app-places-select [types]="['(cities)']" [placeholder]="'כתובת'" (change)="address.setValue($event)"
-        [invalid]="!address.valid && address.touched"></app-places-select>
+      <app-places-select
+        [types]="['(cities)']"
+        [placeholder]="'מקום מגורים'"
+        (change)="address.setValue($event)"
+        [invalid]="!address.valid && address.touched"
+      ></app-places-select>
     </div>
     <div class="col">
-      <input type="text" placeholder="תאריך לידה" class="form-field" formControlName="birthDay"
-        [class.invalid]="!birthDay.valid && birthDay.touched" [max]="maxDate"
-        onfocus="(this.type='date')" onblur="(this.type='text')" />
+      <input
+        type="text"
+        placeholder="תאריך לידה"
+        class="form-field"
+        formControlName="birthDay"
+        [class.invalid]="!birthDay.valid && birthDay.touched"
+        [max]="maxDate"
+        onfocus="(this.type='date')"
+        onblur="(this.type='text')"
+      />
     </div>
   </div>
   <div class="other-lang-input">
     <span>
       אני מספר גם בשפות אחרות:
     </span>
-    <select class="other-lang-select" [value]="otherLang.value" (change)="otherLang.setValue($event.target.value)">
+    <select
+      class="other-lang-select"
+      [value]="otherLang.value"
+      (change)="otherLang.setValue($event.target.value)"
+    >
       <option value="english">אנגלית</option>
+      <option value="spanish">ספרדית</option>
       <option value="franch">צרפתית</option>
-      <option value="rusian">רוסית</option>
       <option value="arabic">ערבית</option>
+      <option value="rusian">רוסית</option>
       <option value="other">אחר</option>
     </select>
   </div>
   <div class="agree-input">
-    <app-checkbox [label]="'אני מסכים לתנאי השימוש'" [checked]="agree.value" [invalid]="!agree.valid && agree.touched"
-      (checkedChanged)="agree.setValue($event)"></app-checkbox>
+    <app-checkbox
+      [label]="'אני מסכים לתנאי השימוש'"
+      [checked]="agree.value"
+      [invalid]="!agree.valid && agree.touched"
+      (checkedChanged)="agree.setValue($event)"
+    ></app-checkbox>
   </div>
   <div (click)="onSubmit()" class="site-button primary-button submit-button">
     המשך

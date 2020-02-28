@@ -1,26 +1,48 @@
+<div class="form-title">פרטי חלל</div>
 <div class="form" [formGroup]="form">
   <div class="form-row">
     <div class="col">
-      <input class="form-field" type="text" placeholder="שם פרטי" formControlName="firstName"
-        [class.invalid]="!firstName.valid && firstName.touched" />
+      <input
+        class="form-field"
+        type="text"
+        placeholder="שם פרטי"
+        formControlName="firstName"
+        [class.invalid]="!firstName.valid && firstName.touched"
+      />
     </div>
     <div class="col">
-      <input class="form-field" type="text" placeholder="שם משפחה" formControlName="lastName"
-        [class.invalid]="!lastName.valid && lastName.touched" />
+      <input
+        class="form-field"
+        type="text"
+        placeholder="שם משפחה"
+        formControlName="lastName"
+        [class.invalid]="!lastName.valid && lastName.touched"
+      />
     </div>
   </div>
   <div class="form-row">
     <div class="col">
-      <input class="form-field" type="text" placeholder="תאריך נפילה" formControlName="deathDate"
-        [class.invalid]="!deathDate.valid && deathDate.touched" [max]="maxDate" onfocus="(this.type='date')"
-        onblur="(this.type='text')" />
+      <input
+        class="form-field"
+        type="text"
+        placeholder="תאריך נפילה"
+        formControlName="deathDate"
+        [class.invalid]="!deathDate.valid && deathDate.touched"
+        [max]="maxDate"
+        onfocus="(this.type='date')"
+        onblur="(this.type='text')"
+      />
     </div>
     <div class="col"></div>
   </div>
   <div class="form-row">
     <div class="col">
-      <textarea class="form-field" placeholder="תוכן הסיפור..." formControlName="story"
-        [class.invalid]="!story.valid && story.touched"></textarea>
+      <textarea
+        class="form-field"
+        placeholder="הסיפור שלי - (100-500) תווים"
+        formControlName="story"
+        [class.invalid]="!story.valid && story.touched"
+      ></textarea>
     </div>
   </div>
   <div (click)="onSubmit()" class="site-button primary-button submit-button">

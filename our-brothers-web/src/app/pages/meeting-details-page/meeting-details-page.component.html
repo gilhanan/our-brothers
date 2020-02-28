@@ -28,14 +28,16 @@
     <div class="form-items-container">
       <app-host-meeting-input-text
         iconUrl="assets/img/host_users.svg"
-        label="קהל מוזמנים:"
-        [text]="meeting ? utilsService.meetingAudienceLabels[meeting.audience] : ''"
+        label="קהל יעד:"
+        [text]="
+          meeting ? utilsService.meetingAudienceLabels[meeting.audience] : ''
+        "
       ></app-host-meeting-input-text>
     </div>
     <div class="form-items-container">
       <app-host-meeting-input-text
         iconUrl="assets/img/host_users.svg"
-        [text]="meeting?.invited ? 'מוזמנים בלבד' : 'פתוח לקהל הרחב'"
+        [text]="meeting?.invited ? 'סגור למוזמנים בלבד' : 'פתוח לקהל הרחב'"
       ></app-host-meeting-input-text>
     </div>
     <!-- <div class="form-items-container">
@@ -60,10 +62,13 @@
       </div>
     </div> -->
   </div>
-  <div class="brother-heading host-meeting-heading-text">
+  <div
+    class="brother-heading host-meeting-heading-text"
+    *ngIf="meeting.bereaved"
+  >
     אח/ות שכול/ה
   </div>
-  <div class="host-brother-container">
+  <div class="host-brother-container" *ngIf="meeting.bereaved">
     <div class="form-items-container">
       <app-host-meeting-input-text
         iconUrl="assets/img/host_user.svg"
@@ -79,9 +84,9 @@
         info="שם החלל"
         [text]="
           meeting?.bereaved?.slains
-            ? (meeting.bereaved.slains)[0].firstName +
+            ? meeting.bereaved.slains[0].firstName +
               ' ' +
-              (meeting.bereaved.slains)[0].lastName
+              meeting.bereaved.slains[0].lastName
             : ''
         "
       ></app-host-meeting-input-text>
@@ -98,10 +103,13 @@
       ></app-host-meeting-input-text>
     </div>
   </div>
-  <div class="meeting-users-heading host-meeting-heading-text">
+  <div
+    class="meeting-users-heading host-meeting-heading-text"
+    *ngIf="!meeting.invited"
+  >
     משתתפים ({{ meeting?.count + '/' + meeting?.capacity }})
   </div>
-  <div class="meeting-users-list">
+  <div class="meeting-users-list" *ngIf="!meeting.invited">
     <div class="meeting-users-list-header">
       <div class="meeting-users-list-header-name">
         שם המשתתף

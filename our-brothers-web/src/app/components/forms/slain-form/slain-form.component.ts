@@ -46,7 +46,7 @@ export class SlainFormComponent implements OnInit {
       deathDate: ['', Validators.required],
       story: ['',
         [
-          Validators.minLength(60),
+          Validators.minLength(100),
           Validators.maxLength(500)
         ]
       ]
