@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -11,7 +11,7 @@ import { UtilsService } from 'src/app/services/utils.service';
   templateUrl: './meeting-details-page.component.html',
   styleUrls: ['./meeting-details-page.component.scss']
 })
-export class MeetingDetailsPageComponent implements OnInit {
+export class MeetingDetailsPageComponent implements OnInit, OnDestroy {
   public loadingMeeting = true;
   public meeting: Meeting;
 
@@ -21,10 +21,11 @@ export class MeetingDetailsPageComponent implements OnInit {
   private getMeeting$: Subscription;
   private getMeetingParticipates$: Subscription;
 
-  constructor(public utilsService: UtilsService,
+  constructor(
+    public utilsService: UtilsService,
     private activatedRoute: ActivatedRoute,
-    private dataService: DataService) {
-  }
+    private dataService: DataService
+  ) {}
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
@@ -33,19 +34,31 @@ export class MeetingDetailsPageComponent implements OnInit {
       if (this.getMeeting$) {
         this.getMeeting$.unsubscribe();
       }
-      this.getMeeting$ = this.dataService.getMeeting(hostId, meetingId).subscribe(meeting => {
-        this.loadingMeeting = false;
-        return this.meeting = meeting;
-      })
+      this.getMeeting$ = this.dataService
+        .getMeeting(hostId, meetingId)
+        .subscribe(meeting => {
+          this.loadingMeeting = false;
+          return (this.meeting = meeting);
+        });
 
       if (this.getMeetingParticipates$) {
         this.getMeetingParticipates$.unsubscribe();
       }
-      this.getMeetingParticipates$ = this.dataService.getMeetingParticipates(hostId, meetingId).subscribe(meetingParticipates => {
-        this.loadingMeetingParticipates = false;
-        return this.meetingParticipates = meetingParticipates;
-      })
+      this.getMeetingParticipates$ = this.dataService
+        .getMeetingParticipates(hostId, meetingId)
+        .subscribe(meetingParticipates => {
+          this.loadingMeetingParticipates = false;
+          return (this.meetingParticipates = meetingParticipates);
+        });
     });
+  }
 
+  ngOnDestroy() {
+    if (this.getMeeting$) {
+      this.getMeeting$.unsubscribe();
+    }
+    if (this.getMeetingParticipates$) {
+      this.getMeetingParticipates$.unsubscribe();
+    }
   }
 }

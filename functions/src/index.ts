@@ -206,20 +206,20 @@ export const onDonationCreate = functions.database.ref('/donations/users/{userId
       });
   });
 
-// ============ User Participations ============
+// ============ User Participations Deletion ============
 
 export const onParticipateParticipationDelete = functions.database.ref('/users/{userId}/participateParticipation/{year}/meetings/{hostId}/{meetingId}')
   .onDelete((event, context) => {
     const { userId, year, hostId, meetingId } = context.params;
 
-    console.log(`Removing participate {${userId}} from meeting {${meetingId} year {$${year}} host {${hostId}}.`);
+    console.log(`Removing participate {${userId}} from meeting {${meetingId} year {${year}} host {${hostId}}.`);
     return admin.database()
       .ref(`eventsParticipates/${year}/${hostId}/${meetingId}/${userId}`)
       .remove()
       .then(() => {
-        console.log(`Succesfully removed participate {${userId}} from meeting {${meetingId} year {$${year}} host {${hostId}}.`);
+        console.log(`Succesfully removed participate {${userId}} from meeting {${meetingId} year {${year}} host {${hostId}}.`);
       }).catch((error) => {
-        console.error(`Failed to removed participate {${userId}} from meeting {${meetingId} year {$${year}} host {${hostId}}.`, error);
+        console.error(`Failed to removed participate {${userId}} from meeting {${meetingId} year {${year}} host {${hostId}}.`, error);
       });
   });
 
@@ -227,14 +227,14 @@ export const onBereavedParticipationDelete = functions.database.ref('/users/{use
   .onDelete((event, context) => {
     const { userId, year, hostId, meetingId } = context.params;
 
-    console.log(`Removing bereaved {${userId}} from meeting {${meetingId}} year {$${year}} host {${hostId}}.`);
+    console.log(`Removing bereaved {${userId}} from meeting {${meetingId}} year {${year}} host {${hostId}}.`);
     return admin.database()
       .ref(`events/${year}/${hostId}/${meetingId}/bereaved`)
       .remove()
       .then(() => {
-        console.log(`Succesfully removed bereaved {${userId}} from meeting {${meetingId} year {$${year}} host {${hostId}}.`);
+        console.log(`Succesfully removed bereaved {${userId}} from meeting {${meetingId} year {${year}} host {${hostId}}.`);
       }).catch((error) => {
-        console.error(`Failed to removed bereaved {${userId}} from meeting {${meetingId} year {$${year}} host {${hostId}}.`, error);
+        console.error(`Failed to removed bereaved {${userId}} from meeting {${meetingId} year {${year}} host {${hostId}}.`, error);
       });
   });
 
@@ -242,14 +242,14 @@ export const onHostParticipationDelete = functions.database.ref('/users/{userId}
   .onDelete((event, context) => {
     const { userId, year, meetingId } = context.params;
 
-    console.log(`Removing meeting {${meetingId}} year {$${year}} host {${userId}}.`);
+    console.log(`Removing meeting {${meetingId}} year {${year}} host {${userId}}.`);
     return admin.database()
       .ref(`events/${year}/${userId}/${meetingId}`)
       .remove()
       .then(() => {
-        console.log(`Succesfully removed meeting {${meetingId}} year {$${year}} host {${userId}}.`);
+        console.log(`Succesfully removed meeting {${meetingId}} year {${year}} host {${userId}}.`);
       }).catch((error) => {
-        console.error(`Failed to remove meeting {${meetingId}} year {$${year}} host {${userId}}.`, error);
+        console.error(`Failed to remove meeting {${meetingId}} year {${year}} host {${userId}}.`, error);
       });
   });
 
@@ -266,15 +266,15 @@ export const onMeetingCreate = functions.database.ref('/events/{year}/{hostId}/{
       title: meeting.title
     }
 
-    console.log(`Linking meeting {${meetingId}} year {$${year}} host {${hostId}}.`, hostParticipationMeeting);
+    console.log(`Linking meeting {${meetingId}} year {${year}} host {${hostId}}.`, hostParticipationMeeting);
 
     return admin.database()
       .ref(`/users/${hostId}/hostParticipation/${year}/meetings/${meetingId}`)
       .set(hostParticipationMeeting)
       .then(() => {
-        console.log(`Succesfully linked meeting {${meetingId}} year {$${year}} host {${hostId}}.`);
+        console.log(`Succesfully linked meeting {${meetingId}} year {${year}} host {${hostId}}.`);
       }).catch((error) => {
-        console.error(`Failed to link meeting {${meetingId}} year {$${year}} host {${hostId}}.`, error);
+        console.error(`Failed to link meeting {${meetingId}} year {${year}} host {${hostId}}.`, error);
       });
   });
 
@@ -283,31 +283,31 @@ export const onMeetingDelete = functions.database.ref('/events/{year}/{hostId}/{
 
     const { year, hostId, meetingId } = context.params;
 
-    console.log(`Removing meeting {${meetingId}} year {$${year}} host {${hostId}} from host participation.`);
+    console.log(`Removing meeting {${meetingId}} year {${year}} host {${hostId}} from host participation.`);
 
     return admin.database()
       .ref(`/users/${hostId}/hostParticipation/${year}/meetings/${meetingId}`)
       .remove()
       .then(() => {
-        console.log(`Succesfully removed meeting {${meetingId}} year {$${year}} host {${hostId}} from host participation.`);
+        console.log(`Succesfully removed meeting {${meetingId}} year {${year}} host {${hostId}} from host participation.`);
 
-        console.log(`Removing meeting {${meetingId}} year {$${year}} host {${hostId}} participates.`);
+        console.log(`Removing meeting {${meetingId}} year {${year}} host {${hostId}} participates.`);
 
         return admin.database()
           .ref(`/eventsParticipates/${year}/${hostId}/${meetingId}`)
           .remove()
           .then(() => {
 
-            console.log(`Succesfully removed meeting {${meetingId}} year {$${year}} host {${hostId}} participates.`);
+            console.log(`Succesfully removed meeting {${meetingId}} year {${year}} host {${hostId}} participates.`);
 
           }).catch((error) => {
 
-            console.error(`Failed to remove meeting {${meetingId}} year {$${year}} host {${hostId}} participates.`, error);
+            console.error(`Failed to remove meeting {${meetingId}} year {${year}} host {${hostId}} participates.`, error);
 
           });
 
       }).catch((error) => {
-        console.error(`Failed to remove meeting {${meetingId}} year {$${year}} host {${hostId}} from host participation.`, error);
+        console.error(`Failed to remove meeting {${meetingId}} year {${year}} host {${hostId}} from host participation.`, error);
       });
   });
 
@@ -323,11 +323,11 @@ export const onMeetingBereavedWrite = functions.database.ref('/events/{year}/{ho
 
       if (!bereavedId) {
 
-        throw new Error(`Meeting {${meetingId}} year {$${year}} host {${hostId}} bereaved id was not found.`);
+        throw new Error(`Meeting {${meetingId}} year {${year}} host {${hostId}} bereaved id was not found.`);
 
       } else {
 
-        console.log(`Getting meeting {${meetingId}} year {$${year}} host {${hostId}}.`);
+        console.log(`Getting meeting {${meetingId}} year {${year}} host {${hostId}}.`);
 
         return event.after.ref.parent?.once('value').then(meetingSnapshot => {
 
@@ -335,27 +335,27 @@ export const onMeetingBereavedWrite = functions.database.ref('/events/{year}/{ho
 
           if (!meeting.title) {
 
-            throw new Error(`Failed to get meeting {${meetingId}} year {$${year}} host {${hostId}}.`);
+            throw new Error(`Failed to get meeting {${meetingId}} year {${year}} host {${hostId}}.`);
 
           } else {
 
-            console.log(`Successfully got meeting {${meetingId}} year {$${year}} host {${hostId}}.`);
+            console.log(`Successfully got meeting {${meetingId}} year {${year}} host {${hostId}}.`);
 
             const bereavedParticipationMeeting: UserParticipationMeeting = {
               title: meeting.title
             }
 
-            console.log(`Linking meeting {${meetingId}} year {$${year}} host {${hostId}} to bereaved {${bereavedParticipation.id}}`, bereavedParticipationMeeting);
+            console.log(`Linking meeting {${meetingId}} year {${year}} host {${hostId}} to bereaved {${bereavedParticipation.id}}`, bereavedParticipationMeeting);
 
             return admin.database()
               .ref(`/users/${bereavedId}/bereavedParticipation/${year}/meetings/${hostId}/${meetingId}`)
               .set(bereavedParticipationMeeting).then(() => {
 
-                console.log(`Successfully linked meeting {${meetingId}} year {$${year}} host {${hostId}} to bereaved {${bereavedParticipation.id}}`);
+                console.log(`Successfully linked meeting {${meetingId}} year {${year}} host {${hostId}} to bereaved {${bereavedParticipation.id}}`);
 
               }).catch((error) => {
 
-                console.error(`Failed to link meeting {${meetingId}} year {$${year}} host {${hostId}} to bereaved {${bereavedParticipation.id}}`, error);
+                console.error(`Failed to link meeting {${meetingId}} year {${year}} host {${hostId}} to bereaved {${bereavedParticipation.id}}`, error);
 
               });
           }
@@ -368,14 +368,14 @@ export const onMeetingBereavedWrite = functions.database.ref('/events/{year}/{ho
 
       const bereavedId = bereavedParticipation.id;
 
-      console.log(`Removing bereaved {${bereavedId}} from meeting {${meetingId}} year {$${year}} host {${hostId}}.`);
+      console.log(`Removing bereaved {${bereavedId}} from meeting {${meetingId}} year {${year}} host {${hostId}}.`);
       return admin.database()
         .ref(`/users/${bereavedId}/bereavedParticipation/${year}/meetings/${hostId}/${meetingId}`)
         .remove()
         .then(() => {
-          console.log(`Succesfully removed bereaved {${bereavedId}} from meeting {${meetingId} year {$${year}} host {${hostId}}.`);
+          console.log(`Succesfully removed bereaved {${bereavedId}} from meeting {${meetingId} year {${year}} host {${hostId}}.`);
         }).catch((error) => {
-          console.error(`Failed to removed bereaved {${bereavedId}} from meeting {${meetingId} year {$${year}} host {${hostId}}.`, error);
+          console.error(`Failed to removed bereaved {${bereavedId}} from meeting {${meetingId} year {${year}} host {${hostId}}.`, error);
         });
     }
   })
@@ -387,48 +387,48 @@ export const onEventParticipatesWrite = functions.database.ref('/eventsParticipa
 
     const { year, hostId, meetingId } = context.params;
 
-    console.log(`Getting meeting {${meetingId}} year {$${year}} host {${hostId}}.`);
+    console.log(`Getting meeting {${meetingId}} year {${year}} host {${hostId}}.`);
 
     return admin.database()
       .ref(`/events/${year}/${hostId}/${meetingId}`)
       .once('value')
       .then((meetingSnapshot) => {
 
-        console.log(`Succesfully got meeting {${meetingId}} year {$${year}} host {${hostId}}.`);
+        console.log(`Succesfully got meeting {${meetingId}} year {${year}} host {${hostId}}.`);
 
         if (!meetingSnapshot.exists()) {
 
-          console.log(`Meeting {${meetingId}} year {$${year}} host {${hostId}} is not exists, no need to caluclate participates count.`);
+          console.log(`Meeting {${meetingId}} year {${year}} host {${hostId}} is not exists, no need to caluclate participates count.`);
 
           return;
 
         } else {
-          console.log(`Meeting {${meetingId}} year {$${year}} host {${hostId}} is exists, caluclating participates count.`);
+          console.log(`Meeting {${meetingId}} year {${year}} host {${hostId}} is exists, caluclating participates count.`);
 
-          console.log(`Calculating meeting {${meetingId}} year {$${year}} host {${hostId}} participates count.`);
+          console.log(`Calculating meeting {${meetingId}} year {${year}} host {${hostId}} participates count.`);
 
           const participateParticipations: { [userId: string]: MeetingParticipate } = event.after.val() || {};
 
           const count = calcParticipatesCount(participateParticipations);
 
-          console.log(`Updating meeting {${meetingId}} year {$${year}} host {${hostId}} count to: ${count}.`);
+          console.log(`Updating meeting {${meetingId}} year {${year}} host {${hostId}} count to: ${count}.`);
 
           return admin.database()
             .ref(`/events/${year}/${hostId}/${meetingId}/count`)
             .set(count).then(() => {
 
-              console.log(`Succesfully updated meeting {${meetingId}} year {$${year}} host {${hostId}} count to: ${count}.`);
+              console.log(`Succesfully updated meeting {${meetingId}} year {${year}} host {${hostId}} count to: ${count}.`);
 
             }).catch((error) => {
 
-              console.error(`Failed to update meeting {${meetingId}} year {$${year}} host {${hostId}} count to: ${count}.`, error);
+              console.error(`Failed to update meeting {${meetingId}} year {${year}} host {${hostId}} count to: ${count}.`, error);
 
             });
 
         }
 
       }).catch((error) => {
-        console.error(`Failed to get meeting {${meetingId}} year {$${year}} host {${hostId}}.`, error);
+        console.error(`Failed to get meeting {${meetingId}} year {${year}} host {${hostId}}.`, error);
       });
   });
 
@@ -441,7 +441,7 @@ export const onEventParticipatesParticipationWrite = functions.database.ref('/ev
 
       const participateParticipation: ParticipateParticipationMeeting = event.after.val();
 
-      console.log(`Getting meeting {${meetingId}} year {$${year}} host {${hostId}}, in order to link meeting to participate id {${participateId}}.`);
+      console.log(`Getting meeting {${meetingId}} year {${year}} host {${hostId}}, in order to link meeting to participate id {${participateId}}.`);
 
       return admin.database()
         .ref(`/events/${year}/${hostId}/${meetingId}`)
@@ -449,31 +449,31 @@ export const onEventParticipatesParticipationWrite = functions.database.ref('/ev
         .then((meetingSnapshot) => {
           if (!meetingSnapshot.exists()) {
 
-            throw new Error(`Meeting {${meetingId}} year {$${year}} host {${hostId}} is not exists, failed to link participate id {${participateId}} to meeting.`);
+            throw new Error(`Meeting {${meetingId}} year {${year}} host {${hostId}} is not exists, failed to link participate id {${participateId}} to meeting.`);
 
           } else {
 
             const meeting: Meeting = meetingSnapshot.val();
 
-            console.log(`Succesfully got meeting {${meetingId}} year {$${year}} host {${hostId}}.`);
+            console.log(`Succesfully got meeting {${meetingId}} year {${year}} host {${hostId}}.`);
 
             const participateParticipationMeeting: ParticipateParticipationMeeting = {
               title: meeting.title,
               accompanies: participateParticipation.accompanies
             };
 
-            console.log(`Linking user id {${participateId}} to meeting {${meetingId}} year {$${year}} host {${hostId}}.`, participateParticipation);
+            console.log(`Linking user id {${participateId}} to meeting {${meetingId}} year {${year}} host {${hostId}}.`, participateParticipation);
 
             return admin.database()
               .ref(`/users/${participateId}/participateParticipation/${year}/meetings/${hostId}/${meetingId}`)
               .set(participateParticipationMeeting).then(() => {
 
-                console.log(`Succesfully linked meeting {${meetingId}} year {$${year}} host {${hostId}} to participate id ${participateId}.
+                console.log(`Succesfully linked meeting {${meetingId}} year {${year}} host {${hostId}} to participate id ${participateId}.
                 Meeting title {${meeting.title}} accompanies {${participateParticipation.accompanies}}`);
 
               }).catch((error) => {
 
-                console.error(`Failed to link meeting {${meetingId}} year {$${year}} host {${hostId}} to participate id ${participateId}.
+                console.error(`Failed to link meeting {${meetingId}} year {${year}} host {${hostId}} to participate id ${participateId}.
                 Meeting title {${meeting.title}} accompanies {${participateParticipation.accompanies}}`, error);
 
               });
@@ -483,18 +483,18 @@ export const onEventParticipatesParticipationWrite = functions.database.ref('/ev
 
     } else {
 
-      console.log(`Removing meeting {${meetingId}} year {$${year}} host {${hostId}} from participate id {${participateId}}.`);
+      console.log(`Removing meeting {${meetingId}} year {${year}} host {${hostId}} from participate id {${participateId}}.`);
 
       return admin.database()
         .ref(`/users/${participateId}/participateParticipation/${year}/meetings/${hostId}/${meetingId}`)
         .remove()
         .then(() => {
 
-          console.log(`Succesfully removed meeting {${meetingId}} year {$${year}} host {${hostId}} from participate id {${participateId}}.`);
+          console.log(`Succesfully removed meeting {${meetingId}} year {${year}} host {${hostId}} from participate id {${participateId}}.`);
 
         }).catch((error) => {
 
-          console.error(`Failed to remove meeting {${meetingId}} year {$${year}} host {${hostId}} from participate id {${participateId}}.`, error);
+          console.error(`Failed to remove meeting {${meetingId}} year {${year}} host {${hostId}} from participate id {${participateId}}.`, error);
 
         });
     }

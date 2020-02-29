@@ -5,42 +5,48 @@
       <span>
         מפגש:
       </span>
-      <span>
-        {{ meeting?.title }}
+      <span *ngIf="!loadingMeeting">
+        <span *ngIf="meeting">
+          {{ meeting?.title }}
+        </span>
+        <span *ngIf="!meeting">
+          {{ 'נמחק או לא קיים' }}
+        </span>
       </span>
     </div>
   </div>
-  <div class="host-meeting-container">
-    <div class="form-items-container">
-      <app-host-meeting-input-text
-        iconUrl="assets/img/host_location.svg"
-        label="כתובת:"
-        [text]="meeting?.address?.formattedAddress"
-      ></app-host-meeting-input-text>
-    </div>
-    <div class="form-items-container">
-      <app-host-meeting-input-text
-        iconUrl="assets/img/host_users.svg"
-        label="כמות מוזמנים:"
-        [text]="meeting?.capacity"
-      ></app-host-meeting-input-text>
-    </div>
-    <div class="form-items-container">
-      <app-host-meeting-input-text
-        iconUrl="assets/img/host_users.svg"
-        label="קהל יעד:"
-        [text]="
-          meeting ? utilsService.meetingAudienceLabels[meeting.audience] : ''
-        "
-      ></app-host-meeting-input-text>
-    </div>
-    <div class="form-items-container">
-      <app-host-meeting-input-text
-        iconUrl="assets/img/host_users.svg"
-        [text]="meeting?.invited ? 'סגור למוזמנים בלבד' : 'פתוח לקהל הרחב'"
-      ></app-host-meeting-input-text>
-    </div>
-    <!-- <div class="form-items-container">
+  <div *ngIf="loadingMeeting || meeting">
+    <div class="host-meeting-container">
+      <div class="form-items-container">
+        <app-host-meeting-input-text
+          iconUrl="assets/img/host_location.svg"
+          label="כתובת:"
+          [text]="meeting?.address?.formattedAddress"
+        ></app-host-meeting-input-text>
+      </div>
+      <div class="form-items-container">
+        <app-host-meeting-input-text
+          iconUrl="assets/img/host_users.svg"
+          label="כמות מוזמנים:"
+          [text]="meeting?.capacity"
+        ></app-host-meeting-input-text>
+      </div>
+      <div class="form-items-container">
+        <app-host-meeting-input-text
+          iconUrl="assets/img/host_users.svg"
+          label="קהל יעד:"
+          [text]="
+            meeting ? utilsService.meetingAudienceLabels[meeting.audience] : ''
+          "
+        ></app-host-meeting-input-text>
+      </div>
+      <div class="form-items-container">
+        <app-host-meeting-input-text
+          iconUrl="assets/img/host_users.svg"
+          [text]="meeting?.invited ? 'סגור למוזמנים בלבד' : 'פתוח לקהל הרחב'"
+        ></app-host-meeting-input-text>
+      </div>
+      <!-- <div class="form-items-container">
       <div class="edit-button">
         <div class="edit-button-text">
           עריכת פרטים
@@ -52,7 +58,7 @@
         </div>
       </div>
     </div> -->
-    <!-- <div class="form-items-container">
+      <!-- <div class="form-items-container">
       <div class="share-container">
         <div class="share-text">
           שיתוף באמצעות :
@@ -61,84 +67,85 @@
         <div class="whatsapp-icon"></div>
       </div>
     </div> -->
-  </div>
-  <div
-    class="brother-heading host-meeting-heading-text"
-    *ngIf="meeting?.bereaved"
-  >
-    אח/ות שכול/ה
-  </div>
-  <div class="host-brother-container" *ngIf="meeting?.bereaved">
-    <div class="form-items-container">
-      <app-host-meeting-input-text
-        iconUrl="assets/img/host_user.svg"
-        info="שם האח"
-        [text]="
-          meeting?.bereaved
-            ? meeting.bereaved.firstName + ' ' + meeting.bereaved.lastName
-            : ''
-        "
-      ></app-host-meeting-input-text>
-      <app-host-meeting-input-text
-        iconUrl="assets/img/host_user.svg"
-        info="שם החלל"
-        [text]="
-          meeting?.bereaved?.slains
-            ? meeting.bereaved.slains[0].firstName +
-              ' ' +
-              meeting.bereaved.slains[0].lastName
-            : ''
-        "
-      ></app-host-meeting-input-text>
     </div>
-    <div class="form-items-container">
-      <app-host-meeting-input-text
-        iconUrl="assets/img/host_phone.svg"
-        info="טלפון של האח"
-        [text]="meeting?.bereaved?.phoneNumber | phone"
-      ></app-host-meeting-input-text>
-      <app-host-meeting-input-text
-        iconUrl="assets/img/host_email.svg"
-        [text]="meeting?.bereaved?.email"
-      ></app-host-meeting-input-text>
+    <div
+      class="brother-heading host-meeting-heading-text"
+      *ngIf="meeting?.bereaved"
+    >
+      אח/ות שכול/ה
     </div>
-  </div>
-  <div
-    class="meeting-users-heading host-meeting-heading-text"
-    *ngIf="!meeting?.invited"
-  >
-    משתתפים ({{ meeting?.count + '/' + meeting?.capacity }})
-  </div>
-  <div class="meeting-users-list" *ngIf="!meeting.invited">
-    <div class="meeting-users-list-header">
-      <div class="meeting-users-list-header-name">
-        שם המשתתף
+    <div class="host-brother-container" *ngIf="meeting?.bereaved">
+      <div class="form-items-container">
+        <app-host-meeting-input-text
+          iconUrl="assets/img/host_user.svg"
+          info="שם האח"
+          [text]="
+            meeting?.bereaved
+              ? meeting.bereaved.firstName + ' ' + meeting.bereaved.lastName
+              : ''
+          "
+        ></app-host-meeting-input-text>
+        <app-host-meeting-input-text
+          iconUrl="assets/img/host_user.svg"
+          info="שם החלל"
+          [text]="
+            meeting?.bereaved?.slains
+              ? meeting.bereaved.slains[0].firstName +
+                ' ' +
+                meeting.bereaved.slains[0].lastName
+              : ''
+          "
+        ></app-host-meeting-input-text>
       </div>
-      <div class="meeting-users-list-header-capacity">
-        כמות אנשים
-      </div>
-      <div class="meeting-users-list-header-phone">
-        טלפון
-      </div>
-      <div class="meeting-users-list-header-email">
-        מייל
+      <div class="form-items-container">
+        <app-host-meeting-input-text
+          iconUrl="assets/img/host_phone.svg"
+          info="טלפון של האח"
+          [text]="meeting?.bereaved?.phoneNumber | phone"
+        ></app-host-meeting-input-text>
+        <app-host-meeting-input-text
+          iconUrl="assets/img/host_email.svg"
+          [text]="meeting?.bereaved?.email"
+        ></app-host-meeting-input-text>
       </div>
     </div>
     <div
-      class="meeting-users-list-item"
-      *ngFor="let participate of meetingParticipates"
+      class="meeting-users-heading host-meeting-heading-text"
+      *ngIf="!meeting?.invited"
     >
-      <div class="meeting-users-list-item-name">
-        {{ participate.firstName + ' ' + participate.lastName }}
+      משתתפים ({{ meeting?.count + '/' + meeting?.capacity }})
+    </div>
+    <div class="meeting-users-list" *ngIf="!meeting.invited">
+      <div class="meeting-users-list-header">
+        <div class="meeting-users-list-header-name">
+          שם המשתתף
+        </div>
+        <div class="meeting-users-list-header-capacity">
+          כמות אנשים
+        </div>
+        <div class="meeting-users-list-header-phone">
+          טלפון
+        </div>
+        <div class="meeting-users-list-header-email">
+          מייל
+        </div>
       </div>
-      <div class="meeting-users-list-item-capacity">
-        {{ participate.accompanies + 1 }}
-      </div>
-      <div class="meeting-users-list-item-phone">
-        {{ participate.phoneNumber | phone }}
-      </div>
-      <div class="meeting-users-list-item-email">
-        {{ participate.email }}
+      <div
+        class="meeting-users-list-item"
+        *ngFor="let participate of meetingParticipates"
+      >
+        <div class="meeting-users-list-item-name">
+          {{ participate.firstName + ' ' + participate.lastName }}
+        </div>
+        <div class="meeting-users-list-item-capacity">
+          {{ participate.accompanies + 1 }}
+        </div>
+        <div class="meeting-users-list-item-phone">
+          {{ participate.phoneNumber | phone }}
+        </div>
+        <div class="meeting-users-list-item-email">
+          {{ participate.email }}
+        </div>
       </div>
     </div>
   </div>
