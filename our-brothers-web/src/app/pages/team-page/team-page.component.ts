@@ -18,6 +18,7 @@ const members: TeamMember[] = [
     title: 'ועד מנהל ומייסד העמותה',
     frontImage: '/assets/img/about/b-1-1.jpg',
     backImage: '/assets/img/about/b-1-2.jpg',
+    email: 'mailto:elyasaf@ourbrothers.org',
     slains: [{
       pre: 'אחיהם של סמ"ר',
       title: 'אוריאל פרץ ז"ל',
@@ -33,6 +34,7 @@ const members: TeamMember[] = [
     title: 'ועד מנהל ומייסדת העמותה',
     frontImage: '/assets/img/about/b-2-1.jpg',
     backImage: '/assets/img/about/b-2-2.jpg',
+    email: 'mailto:noy@ourbrothers.org',
     slains: [{
       pre: 'אחות של סמ"ר',
       title: 'טל יפרח ז"ל',
@@ -48,6 +50,7 @@ const members: TeamMember[] = [
     name: 'רוני ארנהלט',
     title: 'מנהלת העמותה',
     frontImage: '/assets/img/about/b-4-1.jpg',
+    email: 'mailto:roni@ourbrothers.org',
   },
   {
     name: 'אמיר קלנגל',
@@ -93,37 +96,48 @@ const members: TeamMember[] = [
       link: 'https://www.izkor.gov.il/%D7%90%D7%99%D7%9C%D7%95%D7%9F-%D7%99%D7%A2%D7%A7%D7%91%20%D7%94%D7%95%D7%A8%D7%91%D7%99%D7%A5/en_0c1f91343a46d60dad38900be1d49151',
     }]
   },
+  // {
+  //   name: 'גילי מרמלשטיין',
+  //   title: 'חברת עמותה',
+  //   frontImage: '/assets/img/about/b-6-1.jpg',
+  //   backImage: '/assets/img/about/b-6-2.jpg',
+  //   slains: [{
+  //     pre: 'אחות של סרן',
+  //     title: 'הראל מרמלשטיין ז"ל',
+  //     link: 'https://www.izkor.gov.il/%D7%94%D7%A8%D7%90%D7%9C%20%D7%9E%D7%A8%D7%9E%D7%9C%D7%A9%D7%98%D7%99%D7%99%D7%9F/en_a82c4af6403d114af961ebad891dd927',
+  //   }]
+  // },
+  // {
+  //   name: 'עודד פרומוביץ',
+  //   title: 'חבר עמותה',
+  //   frontImage: '/assets/img/about/b-7-1.jpg',
+  //   backImage: '/assets/img/about/b-7-2.jpg',
+  //   slains: [{
+  //     pre: 'אחיו של סמל',
+  //     title: 'רז פרומוביץ ז"ל',
+  //     link: 'https://www.izkor.gov.il/%D7%A8%D7%96%20%D7%A4%D7%A8%D7%95%D7%9E%D7%95%D7%91%D7%99%D7%A5/en_2944f34e109efa1ce73b1a3e1e02fe00',
+  //   }]
+  // },
+  // {
+  //   name: 'ירין רובל',
+  //   title: 'חבר עמותה',
+  //   frontImage: '/assets/img/about/b-8-1.jpg',
+  //   backImage: '/assets/img/about/b-8-2.jpg',
+  //   slains: [{
+  //     pre: 'אחיו של סמ"ר ',
+  //     title: 'בניה רובל ז"ל',
+  //     link: 'https://www.izkor.gov.il/%D7%91%D7%A0%D7%99%D7%94-%D7%A0%D7%A4%D7%AA%D7%9C%D7%99%20%D7%A8%D7%95%D7%91%D7%9C/en_d161c395a28ef32b307c3af3c1e83113',
+  //   }]
+  // },
   {
-    name: 'גילי מרמלשטיין',
+    name: 'טל שרייבמן פולק',
     title: 'חברת עמותה',
-    frontImage: '/assets/img/about/b-6-1.jpg',
-    backImage: '/assets/img/about/b-6-2.jpg',
+    frontImage: '/assets/img/about/b-16-1.jpg',
+    backImage: '/assets/img/about/b-16-2.jpg',
     slains: [{
-      pre: 'אחות של סרן',
-      title: 'הראל מרמלשטיין ז"ל',
-      link: 'https://www.izkor.gov.il/%D7%94%D7%A8%D7%90%D7%9C%20%D7%9E%D7%A8%D7%9E%D7%9C%D7%A9%D7%98%D7%99%D7%99%D7%9F/en_a82c4af6403d114af961ebad891dd927',
-    }]
-  },
-  {
-    name: 'עודד פרומוביץ',
-    title: 'חבר עמותה',
-    frontImage: '/assets/img/about/b-7-1.jpg',
-    backImage: '/assets/img/about/b-7-2.jpg',
-    slains: [{
-      pre: 'אחיו של סמל',
-      title: 'רז פרומוביץ ז"ל',
-      link: 'https://www.izkor.gov.il/%D7%A8%D7%96%20%D7%A4%D7%A8%D7%95%D7%9E%D7%95%D7%91%D7%99%D7%A5/en_2944f34e109efa1ce73b1a3e1e02fe00',
-    }]
-  },
-  {
-    name: 'ירין רובל',
-    title: 'חבר עמותה',
-    frontImage: '/assets/img/about/b-8-1.jpg',
-    backImage: '/assets/img/about/b-8-2.jpg',
-    slains: [{
-      pre: 'אחיו של סמ"ר ',
-      title: 'בניה רובל ז"ל',
-      link: 'https://www.izkor.gov.il/%D7%91%D7%A0%D7%99%D7%94-%D7%A0%D7%A4%D7%AA%D7%9C%D7%99%20%D7%A8%D7%95%D7%91%D7%9C/en_d161c395a28ef32b307c3af3c1e83113',
+      pre: 'אחות של סגן ',
+      title: 'ניר שריימן ז"ל',
+      link: 'https://www.izkor.gov.il/%D7%A0%D7%99%D7%A8-%D7%9E%D7%A8%D7%93%D7%9B%D7%99%20%D7%A9%D7%A8%D7%99%D7%99%D7%91%D7%9E%D7%9F/en_ac806f2538c5ff4b7f8e084e1d4f7b6f',
     }]
   },
   {
@@ -137,12 +151,13 @@ const members: TeamMember[] = [
     frontImage: '/assets/img/about/b-13-1.jpg',
   },
   {
-    name: 'גיל חנן',
-    title: 'מנהל אתר',
-    frontImage: '/assets/img/about/b-14-1.jpg',
-  },
-  {
     name: 'נופית חי',
     title: 'מעצבת אתר',
     frontImage: '/assets/img/about/b-15-1.jpg',
-  }];
+  },
+  {
+    name: 'גיל חנן',
+    title: 'מנהל אתר',
+    frontImage: '/assets/img/about/b-14-1.jpg',
+  }
+];

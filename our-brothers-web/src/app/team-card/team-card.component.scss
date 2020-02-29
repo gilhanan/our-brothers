@@ -39,8 +39,9 @@
     .member-details {
       width: 100%;
       font-size: 18px;
+      padding-top: 1px;
       padding-bottom: 10px;
-      color: #23282d;
+      color: #999999;
       background-color: white;
       border-bottom: 3px solid #00a099;
       transition: all 0.3s ease-out;
@@ -50,6 +51,7 @@
       }
 
       .member-name {
+        margin-top: 7px;
         font-weight: bold;
       }
 
@@ -65,9 +67,9 @@
         &.slains-2 {
           transform: translateY(-44px);
 
-        @media only screen and (max-width: 768px) {
-          transform: translateY(-22px);
-        }
+          @media only screen and (max-width: 768px) {
+            transform: translateY(-22px);
+          }
         }
       }
     }
@@ -92,6 +94,21 @@
 
       &.hover {
         opacity: 1;
+      }
+
+      .member-email {
+        text-align: right;
+        margin-right: 20px;
+        .member-email-img {
+          height: 15px;
+          width: 15px;
+
+          @media only screen and (max-width: 768px) {
+            height: 8px;
+            width: 8px;
+          }
+
+        }
       }
 
       .slain {

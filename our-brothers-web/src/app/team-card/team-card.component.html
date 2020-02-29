@@ -15,5 +15,9 @@
         <span class="slain-pre">{{slain.pre}}</span>
         <a class="slain-link" [href]="slain.link" target="_blank">{{slain.title}}</a>
       </div>
+      <div class="member-email" *ngIf="member.email">
+        <a class="member-email-link" [href]="member.email"><img src="/assets/img/about/email.svg"
+            class="member-email-img" /></a>
+      </div>
     </div>
   </div>
