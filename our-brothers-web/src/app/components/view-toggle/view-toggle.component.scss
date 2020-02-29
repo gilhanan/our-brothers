@@ -1,25 +1,25 @@
 .view-toggle-container {
-  border: 10px solid rgb(0, 160, 153);
-  border-radius: 10px;
+  border: 3px solid rgb(0, 160, 153);
+  border-radius: 0;
 
   .view-button {
     display: inline-block;
     width: 60px;
     cursor: pointer;
-    background-color: rgb(255, 255, 255);
+    background-color: #E0E0E0;
     text-align: center;
 
     .map-icon,
     .list-icon {
-      width: 45px;
-      height: 45px;
+      width: 55px;
+      height: 55px;
       background-size: 100%;
       background-repeat: no-repeat;
       display: inline-block;
     }
 
     .map-icon {
-      background-image: url(../../../assets/img/map.svg);
+      background-image: url(../../../assets/img/mapGray.svg);
     }
 
     .list-icon {
