@@ -3,6 +3,7 @@ import * as AOS from 'aos';
 
 import { User } from 'models';
 import { AuthService } from './services/auth.service';
+import { LoginMode } from './components/popups/login-popup/login-popup.component';
 
 @Component({
   selector: 'app-root',
@@ -10,22 +11,23 @@ import { AuthService } from './services/auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  public needLogin$ = this.authService.needLogin$;
-
+  public loginMode: LoginMode;
   public loading = true;
   public user: User;
 
-  constructor(
-    public authService: AuthService
-  ) { }
+  constructor(public authService: AuthService) {}
 
   ngOnInit() {
     AOS.init();
 
-    this.authService.user.subscribe((user) => {
+    this.authService.user.subscribe(user => {
       this.loading = false;
       this.user = user;
     });
+
+    this.authService.needLogin$.subscribe(
+      loginMode => (this.loginMode = loginMode)
+    );
   }
 
   logOut() {

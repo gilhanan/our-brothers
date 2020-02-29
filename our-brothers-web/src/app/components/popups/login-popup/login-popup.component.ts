@@ -5,7 +5,7 @@ import { ForgotPasswordForm } from '../../forms/forgot-password-form/forgot-pass
 import { AuthService, AuthErrors } from 'src/app/services/auth.service';
 import { finalize } from 'rxjs/operators';
 
-type Mode = 'Login' | 'Register' | 'Forgot';
+export type LoginMode = 'Login' | 'Register' | 'Forgot';
 
 @Component({
   selector: 'app-login-popup',
@@ -13,7 +13,7 @@ type Mode = 'Login' | 'Register' | 'Forgot';
   styleUrls: ['./login-popup.component.scss']
 })
 export class LoginPopupComponent {
-  @Input() mode: Mode = 'Login';
+  @Input() mode: LoginMode = 'Login';
 
   public loading: boolean;
 

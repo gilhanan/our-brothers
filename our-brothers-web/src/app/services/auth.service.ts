@@ -8,6 +8,7 @@ import { auth } from 'firebase/app';
 import { User } from 'models';
 import { DataService } from './data.service';
 import { AnalyticsService } from './analytics.service';
+import { LoginMode } from '../components/popups/login-popup/login-popup.component';
 
 export enum LoginMethod {
   EMAIL_PASS,
@@ -29,7 +30,7 @@ export class AuthService {
   public user: Observable<User>;
   public firebaseUser: Observable<firebase.User> = this.angularFireAuth
     .authState;
-  public needLogin$: Subject<boolean> = new Subject();
+  public needLogin$: Subject<LoginMode> = new Subject();
 
   private firstTimeGetUser = true;
 
@@ -147,7 +148,7 @@ export class AuthService {
   public signOut(): Observable<void> {
     this.analyticsService.logEvent('SignOut');
 
-    this.needLogin$.next(false);
+    this.needLogin$.next(null);
 
     return from(this.angularFireAuth.auth.signOut()).pipe(
       tap(() => this.analyticsService.logEvent('SignOutSuccess')),
@@ -159,12 +160,12 @@ export class AuthService {
     );
   }
 
-  public requestToLogin() {
-    this.needLogin$.next(true);
+  public requestToLogin(mode: LoginMode = 'Register') {
+    this.needLogin$.next(mode);
   }
 
   public closeLogin() {
-    this.needLogin$.next(false);
+    this.needLogin$.next(null);
     this.router.navigate(['/home']);
   }
 

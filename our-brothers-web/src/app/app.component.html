@@ -1,9 +1,12 @@
 <app-header
   [loading]="loading"
   [user]="user"
-  (login)="authService.requestToLogin()"
+  (login)="authService.requestToLogin('Login')"
   (logout)="authService.signOut()"
 ></app-header>
 <router-outlet></router-outlet>
 <app-footer></app-footer>
-<app-login-popup *ngIf="(needLogin$ | async) && !user"></app-login-popup>
+<app-login-popup
+  *ngIf="loginMode && !user"
+  [mode]="loginMode"
+></app-login-popup>
