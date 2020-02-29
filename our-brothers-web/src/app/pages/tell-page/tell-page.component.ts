@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subject, combineLatest } from 'rxjs';
+import { Subject, combineLatest, Subscription } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
 
 import {
@@ -22,7 +22,7 @@ import { BereavedProfileForm } from 'src/app/components/forms/bereaved-profile-f
   templateUrl: './tell-page.component.html',
   styleUrls: ['./tell-page.component.scss']
 })
-export class TellPageComponent implements OnInit {
+export class TellPageComponent implements OnInit, OnDestroy {
   public user: User;
   public firebaseUser: firebase.User;
   public meetings: Meeting[];
@@ -30,22 +30,25 @@ export class TellPageComponent implements OnInit {
   public currentStep$ = new Subject<number>();
   public year = MEMORIAL_YEAR;
 
+  private subscriptions: Subscription[] = [];
+
   constructor(
     private router: Router,
     private authService: AuthService,
     private participationsService: ParticipationsService,
     private dataService: DataService
-  ) { }
+  ) {}
 
   ngOnInit() {
+    this.authService.firebaseUser.subscribe(
+      firebaseUser => (this.firebaseUser = firebaseUser)
+    );
 
-    this.authService.firebaseUser.subscribe((firebaseUser) => this.firebaseUser = firebaseUser);
-
-    combineLatest(
-      this.authService.user,
-      this.currentStep$.pipe(distinctUntilChanged()))
-      .subscribe(([user, currentStep]) => {
-
+    this.subscriptions.push(
+      combineLatest(
+        this.authService.user,
+        this.currentStep$.pipe(distinctUntilChanged())
+      ).subscribe(([user, currentStep]) => {
         this.user = user;
         this.currentStep = currentStep;
 
@@ -58,21 +61,30 @@ export class TellPageComponent implements OnInit {
           if (!user) {
             this.currentStep$.next(1);
             this.authService.requestToLogin();
-          } else if (!this.participationsService.isBereavedHaveAllDetails(user)) {
+          } else if (
+            !this.participationsService.isBereavedHaveAllDetails(user)
+          ) {
             this.currentStep$.next(2);
-          } else if (!this.participationsService.isBrotherHaveSlainDetails(user)) {
+          } else if (
+            !this.participationsService.isBrotherHaveSlainDetails(user)
+          ) {
             this.currentStep$.next(3);
-          } else if (!this.participationsService.isBrotherAnsweredTrainingMeeting(user)) {
+          } else if (
+            !this.participationsService.isBrotherAnsweredTrainingMeeting(user)
+          ) {
             this.currentStep$.next(4);
           } else {
             this.currentStep$.next(5);
           }
         }
-      });
+      })
+    );
 
-    this.dataService.getMeetings().subscribe(meetings => {
-      this.meetings = meetings;
-    });
+    this.subscriptions.push(
+      this.dataService.getMeetings().subscribe(meetings => {
+        this.meetings = meetings;
+      })
+    );
   }
 
   onProfileSubmit(profileForm: BereavedProfileForm) {
@@ -80,12 +92,13 @@ export class TellPageComponent implements OnInit {
   }
 
   onSlainsSubmit(slainForm: SlainForm) {
-
-    const slains: Slain[] = [{
-      firstName: slainForm.firstName,
-      lastName: slainForm.lastName,
-      deathDate: slainForm.deathDate
-    }];
+    const slains: Slain[] = [
+      {
+        firstName: slainForm.firstName,
+        lastName: slainForm.lastName,
+        deathDate: slainForm.deathDate
+      }
+    ];
 
     const story = slainForm.story;
 
@@ -109,10 +122,18 @@ export class TellPageComponent implements OnInit {
           .subscribe(result => {
             if (result) {
               window.alert('שובצת בהצלחה!');
-              this.router.navigate([`meetings/${this.year}/${meeting.hostId}/${meeting.id}`]);
+              this.router.navigate([
+                `meetings/${this.year}/${meeting.hostId}/${meeting.id}`
+              ]);
             }
           });
       }
     }
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(subscription => {
+      subscription.unsubscribe();
+    });
   }
 }
