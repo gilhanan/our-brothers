@@ -19,14 +19,24 @@ $textColor: rgb(129, 129, 129);
       &.col-row-state {
         flex: 0 1 30px;
 
-        .expand-button {
+        .expand-button,
+        .collapse-button {
           background-color: transparent;
           border: none;
           cursor: pointer;
 
-          .expand-icon {
+          .expand-icon,
+          .collapse-icon {
             border: 7px solid transparent;
+          }
+
+          .expand-icon {
+            margin-top: 7px;
             border-top: 7px solid rgb(0, 115, 109);
+          }
+
+          .collapse-icon {
+            border-bottom: 7px solid rgb(0, 115, 109);
           }
         }
 
@@ -55,7 +65,7 @@ $textColor: rgb(129, 129, 129);
       &.col-name {
         align-items: flex-start;
         font-size: 22px;
-        font-family: "arbel";
+        font-family: 'arbel';
         color: rgb(0, 115, 109);
       }
 
@@ -164,19 +174,6 @@ $textColor: rgb(129, 129, 129);
 
       &.col-dates {
         flex: 0 1 100px;
-      }
-
-      .collapse-button {
-        position: absolute;
-        bottom: 10px;
-        background-color: transparent;
-        border: none;
-        cursor: pointer;
-
-        .collapse-icon {
-          border: 7px solid transparent;
-          border-bottom: 7px solid rgb(0, 115, 109);
-        }
       }
     }
   }

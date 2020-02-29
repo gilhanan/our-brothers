@@ -55,11 +55,12 @@ export class DataService {
   ) {}
 
   public getUserById(userId: string): Observable<User> {
+    this.analyticsService.logEvent('getUserById');
     return this.angularFireDatabase
       .object<User>(`users/${userId}`)
       .valueChanges()
       .pipe(
-        tap(() => console.log('getUserById')),
+        tap(() => this.analyticsService.logEvent('getUserByIdSuccess')),
         map(user => ({
           id: userId,
           ...user
@@ -72,6 +73,7 @@ export class DataService {
           return user;
         }),
         catchError(error => {
+          this.analyticsService.logEvent('getUserByIdFailed');
           console.error(error);
           return throwError(error);
         })
@@ -336,24 +338,32 @@ export class DataService {
   }
 
   public getBereaveds(year = MEMORIAL_YEAR): Observable<User[]> {
+    this.analyticsService.logEvent('getBereaveds');
     return this.angularFireDatabase
-      .list<User>(`users`)
+      .list<User>(`users`, ref =>
+        ref.orderByChild('role').equalTo(UserRole.bereaved)
+      )
       .snapshotChanges()
       .pipe(
-        tap(() => console.log('getBereaveds')),
+        tap(() => this.analyticsService.logEvent('getBereavedsSuccess')),
         map(usersSnapshot =>
           usersSnapshot
             .map(usersSnapshot => ({
               id: usersSnapshot.key,
               ...usersSnapshot.payload.val()
             }))
-            .filter(user => user.role === 'bereaved' && !!user.profile)
+            .filter(user => !!user.profile)
             .slice(0, 20)
             .map(user => {
               this.parseBereavedParticipation(user, year);
               return user;
             })
-        )
+        ),
+        catchError(error => {
+          this.analyticsService.logEvent('getBereavedsFailed');
+          console.error(error);
+          return throwError(error);
+        })
       );
   }
 
@@ -362,15 +372,26 @@ export class DataService {
     meetingId: string,
     year = MEMORIAL_YEAR
   ): Observable<Meeting> {
+    const telemetry = { hostId, meetingId, year };
+
+    this.analyticsService.logEvent('getMeeting', telemetry);
     return this.angularFireDatabase
       .object<Meeting>(`events/${year}/${hostId}/${meetingId}`)
       .snapshotChanges()
       .pipe(
+        tap(() =>
+          this.analyticsService.logEvent('getMeetingSuccess', telemetry)
+        ),
         map(meetingSnapshot => ({
           ...meetingSnapshot.payload.val(),
           hostId,
           id: meetingSnapshot.key
-        }))
+        })),
+        catchError(error => {
+          this.analyticsService.logEvent('getMeetingFailed', telemetry);
+          console.error(error);
+          return throwError(error);
+        })
       );
   }
 
@@ -379,12 +400,21 @@ export class DataService {
     meetingId: string,
     year = MEMORIAL_YEAR
   ): Observable<MeetingParticipate[]> {
+    const telemetry = { hostId, meetingId, year };
+
+    this.analyticsService.logEvent('getMeetingParticipates', telemetry);
     return this.angularFireDatabase
       .list<MeetingParticipate>(
         `eventsParticipates/${year}/${hostId}/${meetingId}`
       )
       .snapshotChanges()
       .pipe(
+        tap(() =>
+          this.analyticsService.logEvent(
+            'getMeetingParticipatesSuccess',
+            telemetry
+          )
+        ),
         map(participates =>
           participates.map(participate => ({
             id: participate.key,
@@ -392,6 +422,10 @@ export class DataService {
           }))
         ),
         catchError(error => {
+          this.analyticsService.logEvent(
+            'getMeetingParticipatesFailed',
+            telemetry
+          );
           console.log(error);
           return throwError(error);
         })
@@ -399,11 +433,16 @@ export class DataService {
   }
 
   public getMeetings(year = MEMORIAL_YEAR): Observable<Meeting[]> {
+    const telemetry = { year };
+
+    this.analyticsService.logEvent('getMeetings', telemetry);
     return this.angularFireDatabase
       .list<Meeting>(`events/${year}`)
       .snapshotChanges()
       .pipe(
-        tap(() => console.log('getMeetings')),
+        tap(() =>
+          this.analyticsService.logEvent('getMeetingsSuccess', telemetry)
+        ),
         map(meetingsSnapshot => {
           const meetings: Meeting[] = [];
 
@@ -423,6 +462,11 @@ export class DataService {
           }
 
           return meetings;
+        }),
+        catchError(error => {
+          this.analyticsService.logEvent('getMeetingsFailed', telemetry);
+          console.log(error);
+          return throwError(error);
         })
       );
   }

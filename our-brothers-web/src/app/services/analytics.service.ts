@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAnalytics } from '@angular/fire/analytics';
+import { environment } from 'src/environments/environment';
 
 type ActionModifier = 'start' | 'end' | 'failed' | 'changed';
 
@@ -7,11 +8,12 @@ type ActionModifier = 'start' | 'end' | 'failed' | 'changed';
   providedIn: 'root'
 })
 export class AnalyticsService {
+  constructor(private angularFireAnalytics: AngularFireAnalytics) {}
 
-  constructor(private angularFireAnalytics: AngularFireAnalytics) { }
-
-  public logEvent(eventName: string,
-    eventParams?: { [key: string]: any; }) {
+  public logEvent(eventName: string, eventParams?: { [key: string]: any }) {
+    if (!environment.production) {
+      console.log(eventName);
+    }
     this.angularFireAnalytics.logEvent(eventName, eventParams);
   }
 }
