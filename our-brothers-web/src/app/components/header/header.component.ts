@@ -1,11 +1,19 @@
-import { Component, Input, HostListener, OnInit, Output, EventEmitter, } from '@angular/core';
+import {
+  Component,
+  Input,
+  HostListener,
+  OnInit,
+  Output,
+  EventEmitter
+} from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { User } from 'firebase';
+import { User } from 'models';
 
 interface HeaderSubMenus {
   meetings: boolean;
   about: boolean;
+  admin: boolean;
 }
 
 @Component({
@@ -14,7 +22,6 @@ interface HeaderSubMenus {
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
   @Input() public user: User;
   @Input() public loading = true;
 
@@ -25,17 +32,20 @@ export class HeaderComponent implements OnInit {
   isSideMenuClosed = true;
   subMenusStates: HeaderSubMenus = {
     meetings: false,
-    about: false
+    about: false,
+    admin: false
   };
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
   ngOnInit() {
     this.updateMobileViewState(window.innerWidth);
 
-    this.router.events.pipe(filter(event => event instanceof NavigationStart)).subscribe(() => {
-      this.isSideMenuClosed = true;
-    })
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationStart))
+      .subscribe(() => {
+        this.isSideMenuClosed = true;
+      });
   }
 
   @HostListener('window:resize', ['$event.target.innerWidth'])

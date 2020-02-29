@@ -49,11 +49,11 @@ const routes: Routes = [
     children: [{
       path: '',
       component: MeetingsPageComponent,
-      pathMatch: 'full',
+      pathMatch: 'full'
     }, {
       path: ':memorialYear/:hostId/:meetingId',
       component: MeetingDetailsPageComponent,
-      pathMatch: 'full',
+      pathMatch: 'full'
     }]
   },
   {
@@ -106,9 +106,16 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'admin-bereaveds',
-    component: AdminBereavedsPageComponent,
-    pathMatch: 'full'
+    path: 'admin',
+    children: [{
+      path: '',
+      component: AdminBereavedsPageComponent,
+      pathMatch: 'full'
+    }, {
+      path: 'bereaveds',
+      component: AdminBereavedsPageComponent,
+      pathMatch: 'full'
+    }]
   },
   {
     path: '',
