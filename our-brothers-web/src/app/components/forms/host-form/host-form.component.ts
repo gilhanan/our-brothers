@@ -1,10 +1,14 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { MeetingAudience } from 'models';
+import { MeetingAudience, User } from 'models';
 import { HostInputOption } from '../host-input-options/host-input-options.component';
 import { UtilsService } from 'src/app/services/utils.service';
-import { MEMORIAL_YEAR } from 'src/app/services/data.service';
+import {
+  MEMORIAL_YEAR,
+  MIN_DATE,
+  MAX_DATE
+} from 'src/app/services/data.service';
 
 export interface MeetingForm {
   title: string;
@@ -29,16 +33,17 @@ export interface MeetingForm {
   styleUrls: ['./host-form.component.scss']
 })
 export class HostFormComponent implements OnInit {
+  @Input() user: User;
+
   @Output() public submitMeetingDetailsPage = new EventEmitter<MeetingForm>();
 
   public form: FormGroup;
   public audienceOptions: HostInputOption[];
 
-  public minDate = new Date(MEMORIAL_YEAR, 3, 22).toISOString().split('T')[0];
-  public maxDate = new Date(MEMORIAL_YEAR, 3, 28).toISOString().split('T')[0];
+  public minDate = MIN_DATE.toISOString().split('T')[0];
+  public maxDate = MAX_DATE.toISOString().split('T')[0];
 
-  constructor(private fb: FormBuilder,
-    private utilsService: UtilsService) { }
+  constructor(private fb: FormBuilder, private utilsService: UtilsService) {}
 
   ngOnInit() {
     this.audienceOptions = [
@@ -69,16 +74,22 @@ export class HostFormComponent implements OnInit {
     ];
 
     this.form = this.fb.group({
-      title: ['', Validators.required],
-      date: [null, Validators.required],
-      hour: [null, Validators.required],
+      title: ['משפחת ' + this.user.profile.lastName, Validators.required],
+      date: [
+        new Date(Date.UTC(MEMORIAL_YEAR, 3, 26)).toISOString().split('T')[0],
+        [Validators.required, this.utilsService.validateMeetingDate]
+      ],
+      hour: ['20:00', Validators.required],
       address: this.fb.group({
         formattedAddress: ['', Validators.required],
         latitude: [],
         longitude: [],
         notes: ['']
       }),
-      capacity: [30, [Validators.required, Validators.min(2), Validators.max(300)]],
+      capacity: [
+        30,
+        [Validators.required, Validators.min(2), Validators.max(300)]
+      ],
       invited: [null, Validators.required],
       accessibility: [null, Validators.required],
       media: [null, Validators.required],

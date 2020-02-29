@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Meeting, MeetingAudience, User } from 'models';
-import { MEMORIAL_YEAR } from './data.service';
+import { MEMORIAL_YEAR, MAX_DATE, MIN_DATE } from './data.service';
+import { FormControl } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +37,19 @@ export class UtilsService {
 
   toLocalPhoneNumber(phoneNumber: string) {
     return phoneNumber.replace(this.ISRAEL_PHONE_PREFIX_REGEX, '0');
+  }
+
+  validateMeetingDate(control: FormControl) {
+    if (control.value) {
+      const date = Number.parseInt(control.value.split('-')[2]);
+      if (date <= MAX_DATE.getDate() && date >= MIN_DATE.getDate()) {
+        return null;
+      }
+    }
+
+    return {
+      dateInvalid: true
+    };
   }
 
   filteringMeetings(meetings: Meeting[], query: string): Meeting[] {

@@ -5,7 +5,7 @@
 />
 
 <section class="registration-page">
-  <section *ngIf="currentStep > 0" >
+  <section *ngIf="currentStep > 0">
     <div class="site-divider"></div>
     <div class="small-heading">פרטים נוספים</div>
     <app-registration-progress-bar
@@ -43,6 +43,7 @@
       <ng-container *ngSwitchCase="3">
         <section class="registration-step">
           <app-host-form
+            [user]="user"
             (submitMeetingDetailsPage)="onNewMeeting($event)"
           ></app-host-form>
         </section>
