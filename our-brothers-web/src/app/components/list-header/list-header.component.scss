@@ -3,6 +3,7 @@
     color: rgb(129, 129, 129);
     font-size: 22px;
     font-family: 'arbel';
+    margin-top: 15px;
 
     @media only screen and (max-width: 650px) {
       display: none;
@@ -14,6 +15,10 @@
     flex-flow: row;
     padding-bottom: 30px;
     border-bottom: 1px solid rgb(227, 229, 231);
+
+    @media only screen and (max-width: 650px) {
+      padding-bottom: 10px;
+    }
 
     &.scroll {
       margin-right: 23px;
