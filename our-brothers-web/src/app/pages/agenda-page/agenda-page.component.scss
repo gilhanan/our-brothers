@@ -1,0 +1,63 @@
+.kits-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3em;
+
+    .kit {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        height: 12em;
+        padding: 0 25px;
+    
+        .kit-icon {
+            width: 50px;
+            height: 50px;
+        }
+        .kit-heading {
+            color: var(--primary-color);
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .kit-description {
+            text-align: center;
+            margin: 0;
+        }
+        .download-button {
+            padding-top: 0.25em;
+            padding-bottom: 0.25em;
+        }
+    }
+}
+
+.videos-container {
+    background-color: var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 40px 60px 40px;
+
+    .divider::after {
+        background-color: white;
+    }
+
+    .videos-header {
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        letter-spacing: 6px;
+        margin-bottom: 2em;
+    }
+
+    .vidseos {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        grid-gap: 1em;
+        place-content: center;
+        width: 100%;
+
+    }
+}
