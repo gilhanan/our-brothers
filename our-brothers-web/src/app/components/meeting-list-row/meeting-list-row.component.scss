@@ -91,7 +91,7 @@ $mobileBreakpoint: 1024px;
     }
 
     &.participants-col {
-      flex: 0 1 140px;
+      flex: 0 1 175px;
       justify-content: center;
 
       @media only screen and (max-width: $mobileBreakpoint) {
@@ -99,7 +99,9 @@ $mobileBreakpoint: 1024px;
       }
     }
 
-    &.meeting-button {
+    &.meeting-join {
+      flex: 0 1 130px;
+
       @media only screen and (max-width: $mobileBreakpoint) {
         justify-content: flex-end;
 

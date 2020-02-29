@@ -16,10 +16,10 @@ export enum LoginMethod {
 }
 
 export enum AuthErrors {
-  UserNotFound = "auth/user-not-found",
-  WrongPassword = "auth/wrong-password",
-  CancelledPopupRequest = "auth/cancelled-popup-request",
-  EmailAlreadyInUse = "auth/email-already-in-use"
+  UserNotFound = 'auth/user-not-found',
+  WrongPassword = 'auth/wrong-password',
+  CancelledPopupRequest = 'auth/cancelled-popup-request',
+  EmailAlreadyInUse = 'auth/email-already-in-use'
 }
 
 @Injectable({
@@ -27,7 +27,8 @@ export enum AuthErrors {
 })
 export class AuthService {
   public user: Observable<User>;
-  public firebaseUser: Observable<firebase.User> = this.angularFireAuth.authState;
+  public firebaseUser: Observable<firebase.User> = this.angularFireAuth
+    .authState;
   public needLogin$: Subject<boolean> = new Subject();
 
   private firstTimeGetUser = true;
@@ -86,16 +87,18 @@ export class AuthService {
     email: string,
     password: string
   ): Observable<auth.UserCredential> {
-
     this.analyticsService.logEvent('SignInWithEmailAndPassword');
 
-    return from(this.angularFireAuth.auth.signInWithEmailAndPassword(
-      email,
-      password
-    )).pipe(
-      tap(() => this.analyticsService.logEvent('SignInWithEmailAndPasswordSuccess')),
+    return from(
+      this.angularFireAuth.auth.signInWithEmailAndPassword(email, password)
+    ).pipe(
+      tap(() =>
+        this.analyticsService.logEvent('SignInWithEmailAndPasswordSuccess')
+      ),
       catchError(error => {
-        this.analyticsService.logEvent('SignInWithEmailAndPasswordFailed', { error });
+        this.analyticsService.logEvent('SignInWithEmailAndPasswordFailed', {
+          error
+        });
         console.error(error);
         return throwError(error);
       })
@@ -108,13 +111,16 @@ export class AuthService {
   ): Observable<auth.UserCredential> {
     this.analyticsService.logEvent('CreateUserWithEmailAndPassword');
 
-    return from(this.angularFireAuth.auth.createUserWithEmailAndPassword(
-      email,
-      password
-    )).pipe(
-      tap(() => this.analyticsService.logEvent('CreateUserWithEmailAndPasswordSuccess')),
+    return from(
+      this.angularFireAuth.auth.createUserWithEmailAndPassword(email, password)
+    ).pipe(
+      tap(() =>
+        this.analyticsService.logEvent('CreateUserWithEmailAndPasswordSuccess')
+      ),
       catchError(error => {
-        this.analyticsService.logEvent('CreateUserWithEmailAndPasswordFailed', { error });
+        this.analyticsService.logEvent('CreateUserWithEmailAndPasswordFailed', {
+          error
+        });
         console.error(error);
         return throwError(error);
       })
@@ -125,9 +131,13 @@ export class AuthService {
     this.analyticsService.logEvent('SendPasswordResetEmail');
 
     return from(this.angularFireAuth.auth.sendPasswordResetEmail(email)).pipe(
-      tap(() => this.analyticsService.logEvent('SendPasswordResetEmailSuccess')),
+      tap(() =>
+        this.analyticsService.logEvent('SendPasswordResetEmailSuccess')
+      ),
       catchError(error => {
-        this.analyticsService.logEvent('SendPasswordResetEmailFailed', { error });
+        this.analyticsService.logEvent('SendPasswordResetEmailFailed', {
+          error
+        });
         console.error(error);
         return throwError(error);
       })
@@ -155,22 +165,25 @@ export class AuthService {
 
   public closeLogin() {
     this.needLogin$.next(false);
-    this.router.navigate(['/home'])
+    this.router.navigate(['/home']);
   }
 
-  private socialSignIn(provider: firebase.auth.AuthProvider): Observable<auth.UserCredential> {
+  private socialSignIn(
+    provider: firebase.auth.AuthProvider
+  ): Observable<auth.UserCredential> {
     const telemetry = { provider: provider.providerId };
 
     this.analyticsService.logEvent('SocialSignIn', telemetry);
 
-    return from(this.angularFireAuth.auth.signInWithPopup(provider))
-      .pipe(
-        tap(() => this.analyticsService.logEvent('SocialSignInSuccess', telemetry)),
-        catchError(error => {
-          this.analyticsService.logEvent('SocialSignInFailed', telemetry);
-          console.error(error);
-          return throwError(error);
-        })
-      );
+    return from(this.angularFireAuth.auth.signInWithPopup(provider)).pipe(
+      tap(() =>
+        this.analyticsService.logEvent('SocialSignInSuccess', telemetry)
+      ),
+      catchError(error => {
+        this.analyticsService.logEvent('SocialSignInFailed', telemetry);
+        console.error(error);
+        return throwError(error);
+      })
+    );
   }
 }

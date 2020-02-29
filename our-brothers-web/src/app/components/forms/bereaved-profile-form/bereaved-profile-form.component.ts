@@ -19,7 +19,6 @@ export interface BereavedProfileForm {
   styleUrls: ['./bereaved-profile-form.component.scss']
 })
 export class BereavedProfileFormComponent implements OnInit {
-
   @Input()
   public user: User;
 
@@ -33,13 +32,10 @@ export class BereavedProfileFormComponent implements OnInit {
   public canTellInOtherLang = false;
   public maxDate = new Date().toISOString().split('T')[0];
 
-  constructor(
-    private fb: FormBuilder,
-    private utilsService: UtilsService
-  ) { }
+  constructor(private fb: FormBuilder, private utilsService: UtilsService) {}
 
   ngOnInit() {
-    const profile: UserProfile = this.user.profile || {} as UserProfile;
+    const profile: UserProfile = this.user.profile || ({} as UserProfile);
 
     if (profile.otherLang) {
       this.canTellInOtherLang = true;
@@ -48,10 +44,7 @@ export class BereavedProfileFormComponent implements OnInit {
     this.form = this.fb.group({
       email: [
         profile.email || this.firebaseUser.email,
-        [
-          Validators.required,
-          Validators.email
-        ]
+        [Validators.required, Validators.email]
       ],
       firstName: [
         profile.firstName,
@@ -76,16 +69,8 @@ export class BereavedProfileFormComponent implements OnInit {
           Validators.pattern(this.utilsService.phonePattern)
         ]
       ],
-      address: [
-        profile.address,
-        Validators.required
-      ],
-      birthDay: [
-        profile.birthDay,
-        [
-          Validators.required
-        ]
-      ],
+      address: [profile.address, Validators.required],
+      birthDay: [profile.birthDay, [Validators.required]],
       otherLang: [profile.otherLang],
       agree: [false, Validators.requiredTrue]
     });
@@ -129,7 +114,9 @@ export class BereavedProfileFormComponent implements OnInit {
         email: this.email.value,
         firstName: this.firstName.value.trim(),
         lastName: this.lastName.value.trim(),
-        phoneNumber: this.utilsService.toInternationalPhoneNumber(this.phoneNumber.value),
+        phoneNumber: this.utilsService.toInternationalPhoneNumber(
+          this.phoneNumber.value.replace(/-/g, '')
+        ),
         address: this.address.value,
         birthDay: new Date(this.birthDay.value).getTime(),
         otherLang: this.otherLang.value
@@ -140,5 +127,4 @@ export class BereavedProfileFormComponent implements OnInit {
       this.form.markAllAsTouched();
     }
   }
-
 }

@@ -1,12 +1,19 @@
-import { Component, Input, Output, EventEmitter, HostListener, HostBinding, OnChanges, SimpleChanges, AfterContentInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  HostListener
+} from '@angular/core';
 
 @Component({
   selector: 'app-list-column',
   templateUrl: './list-column.component.html',
   styleUrls: ['./list-column.component.scss']
 })
-export class ListColumnComponent implements OnChanges, AfterViewInit {
+export class ListColumnComponent {
   @Input() field: string;
+  @Input() title: string;
   @Output() sort = new EventEmitter<void>();
 
   @HostListener('click') onClick() {
@@ -15,20 +22,5 @@ export class ListColumnComponent implements OnChanges, AfterViewInit {
     }
   }
 
-  @HostBinding('class.empty') emptyClass: boolean = true;
-  @HostBinding('class.sortable') sortableClass: boolean = !!this.field;
-
-  @ViewChild('title') title: ElementRef<HTMLElement>;
-
   sorted: '' | 'asc' | 'desc' = '';
-
-  ngOnChanges(changes: SimpleChanges): void {
-    this.sortableClass = !!this.field;
-  }
-
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.emptyClass = !this.title.nativeElement.innerHTML;
-    });
-  }
 }

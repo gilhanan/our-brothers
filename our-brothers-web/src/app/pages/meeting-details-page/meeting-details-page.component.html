@@ -64,11 +64,11 @@
   </div>
   <div
     class="brother-heading host-meeting-heading-text"
-    *ngIf="meeting.bereaved"
+    *ngIf="meeting?.bereaved"
   >
     אח/ות שכול/ה
   </div>
-  <div class="host-brother-container" *ngIf="meeting.bereaved">
+  <div class="host-brother-container" *ngIf="meeting?.bereaved">
     <div class="form-items-container">
       <app-host-meeting-input-text
         iconUrl="assets/img/host_user.svg"
@@ -105,7 +105,7 @@
   </div>
   <div
     class="meeting-users-heading host-meeting-heading-text"
-    *ngIf="!meeting.invited"
+    *ngIf="!meeting?.invited"
   >
     משתתפים ({{ meeting?.count + '/' + meeting?.capacity }})
   </div>

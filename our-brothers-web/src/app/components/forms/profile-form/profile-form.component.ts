@@ -17,7 +17,6 @@ export interface ProfileForm {
   styleUrls: ['./profile-form.component.scss']
 })
 export class ProfileFormComponent implements OnInit {
-
   @Input()
   public user: User;
 
@@ -29,13 +28,10 @@ export class ProfileFormComponent implements OnInit {
 
   public form: FormGroup;
 
-  constructor(
-    private fb: FormBuilder,
-    private utilsService: UtilsService
-  ) { }
+  constructor(private fb: FormBuilder, private utilsService: UtilsService) {}
 
   ngOnInit() {
-    const profile: UserProfile = this.user.profile || {} as UserProfile;
+    const profile: UserProfile = this.user.profile || ({} as UserProfile);
 
     this.form = this.fb.group({
       email: [
@@ -95,7 +91,9 @@ export class ProfileFormComponent implements OnInit {
         email: this.email.value,
         firstName: this.firstName.value.trim(),
         lastName: this.lastName.value.trim(),
-        phoneNumber: this.utilsService.toInternationalPhoneNumber(this.phoneNumber.value)
+        phoneNumber: this.utilsService.toInternationalPhoneNumber(
+          this.phoneNumber.value.replace(/-/g, '')
+        )
       };
 
       this.submit.emit(parsedForm);

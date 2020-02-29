@@ -4,27 +4,57 @@
 <div class="form" [formGroup]="form">
   <div class="form-row">
     <div class="col">
-      <input type="text" placeholder="שם פרטי" class="form-field" formControlName="firstName"
-        [class.invalid]="!firstName.valid && firstName.touched" />
+      <input
+        type="text"
+        placeholder="שם פרטי"
+        class="form-field"
+        formControlName="firstName"
+        [class.invalid]="!firstName.valid && firstName.touched"
+      />
     </div>
     <div class="col">
-      <input type="text" placeholder="שם משפחה" class="form-field" formControlName="lastName"
-        [class.invalid]="!lastName.valid && lastName.touched" />
+      <input
+        type="text"
+        placeholder="שם משפחה"
+        class="form-field"
+        formControlName="lastName"
+        [class.invalid]="!lastName.valid && lastName.touched"
+      />
     </div>
   </div>
   <div class="form-row">
     <div class="col">
-      <input type="email" placeholder="אימייל" class="form-field" formControlName="email"
-        [class.invalid]="!email.valid && email.touched" />
+      <input
+        type="email"
+        placeholder="אימייל"
+        class="form-field"
+        formControlName="email"
+        [class.invalid]="!email.valid && email.touched"
+      />
     </div>
     <div class="col">
-      <input type="tel" placeholder="פלאפון" class="form-field" pattern="[0-9]{10}" formControlName="phoneNumber"
-        [class.invalid]="!phoneNumber.valid && phoneNumber.touched" />
+      <input
+        type="tel"
+        placeholder="טלפון נייד"
+        class="form-field"
+        formControlName="phoneNumber"
+        [class.invalid]="!phoneNumber.valid && phoneNumber.touched"
+      />
     </div>
   </div>
   <div class="agree-input">
-    <app-checkbox [label]="'אני מסכים לתנאי השימוש'" [checked]="agree.value" [invalid]="!agree.valid && agree.touched"
-      (checkedChanged)="agree.setValue($event)"></app-checkbox>
+    <app-checkbox
+      [label]="'אני מסכים'"
+      [checked]="agree.value"
+      [invalid]="!agree.valid && agree.touched"
+      (checkedChanged)="agree.setValue($event)"
+    ></app-checkbox>
+    <a
+      class="site-link decoration"
+      href="/assets/docs/תנאי%20שימוש%20האחים%20שלנו.pdf"
+      target="_blank"
+      >לתנאי השימוש</a
+    >
   </div>
   <div (click)="onSubmit()" class="site-button primary-button submit-button">
     המשך

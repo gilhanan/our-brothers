@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy
+} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { User } from 'models';
@@ -19,25 +26,25 @@ export interface ContactForm {
   styleUrls: ['./contact-form.component.scss']
 })
 export class ContactFormComponent implements OnInit {
-
   @Input()
   public user: User;
 
   @Input()
-  public loading: boolean
+  public loading: boolean;
 
   @Output()
   public submit = new EventEmitter<ContactForm>();
 
   public form: FormGroup;
 
-  constructor(private fb: FormBuilder,
-    private utilsService: UtilsService) { }
+  constructor(private fb: FormBuilder, private utilsService: UtilsService) {}
 
   ngOnInit() {
     this.form = this.fb.group({
       name: [
-        this.user && this.user.profile ? `${this.user.profile.firstName} ${this.user.profile.lastName}` : '',
+        this.user && this.user.profile
+          ? `${this.user.profile.firstName} ${this.user.profile.lastName}`
+          : '',
         [
           Validators.required,
           Validators.maxLength(30),
@@ -45,18 +52,15 @@ export class ContactFormComponent implements OnInit {
         ]
       ],
       phoneNumber: [
-        this.user && this.user.profile && this.user.profile.phoneNumber || '',
+        (this.user && this.user.profile && this.user.profile.phoneNumber) || '',
         [
           Validators.required,
           Validators.pattern(this.utilsService.phonePattern)
         ]
       ],
       email: [
-        this.user && this.user.profile && this.user.profile.email || '',
-        [
-          Validators.required,
-          Validators.email
-        ]
+        (this.user && this.user.profile && this.user.profile.email) || '',
+        [Validators.required, Validators.email]
       ],
       subject: [
         '',
@@ -66,10 +70,7 @@ export class ContactFormComponent implements OnInit {
           Validators.pattern(this.utilsService.subjectPattern)
         ]
       ],
-      body: [
-        '',
-        [Validators.maxLength(300)]
-      ]
+      body: ['', [Validators.maxLength(300)]]
     });
   }
 
@@ -94,7 +95,9 @@ export class ContactFormComponent implements OnInit {
       const parsedForm: ContactForm = {
         name: this.name.value.trim(),
         email: this.email.value,
-        phoneNumber: this.utilsService.toInternationalPhoneNumber(this.phoneNumber.value),
+        phoneNumber: this.utilsService.toInternationalPhoneNumber(
+          this.phoneNumber.value.replace(/-/g, '')
+        ),
         subject: this.subject.value.trim(),
         body: this.body.value
       };
@@ -102,7 +105,6 @@ export class ContactFormComponent implements OnInit {
       this.submit.emit(parsedForm);
 
       this.form.reset();
-
     } else {
       this.form.markAllAsTouched();
     }

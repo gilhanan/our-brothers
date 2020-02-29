@@ -2,62 +2,65 @@ $textColor: rgb(129, 129, 129);
 
 :host {
   flex: 1;
-  display: flex;
-  justify-content: space-between;
-  position: relative;
-  margin: 10px 0 30px 5px;
-  padding: 0 2px;
-  font-size: 18px;
-  color: $textColor;
+  padding: 5px;
 
-  &:not(.empty) {
-    border: 1px solid rgb(135, 176, 173);
-  }
+  .column-container {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    padding: 0 2px;
+    font-size: 18px;
+    color: $textColor;
 
-  @media only screen and (max-width: 650px) {
-    display: none;
-  }
+    &:not(.empty) {
+      border: 1px solid rgb(135, 176, 173);
+    }
 
-  &.sortable {
-    cursor: pointer;
     @media only screen and (max-width: 650px) {
-      margin: auto 20px;
-    }
-  }
-
-  .title {
-    display: inline-block;
-  }
-
-  .sorting-indicator {
-    &::before,
-    &::after {
-      content: "";
-      position: absolute;
-      border-right: 5px solid transparent;
-      border-left: 5px solid transparent;
-      left: 3px;
+      display: none;
     }
 
-    &::before {
-      border-top: 5px solid $textColor;
-      border-bottom: 5px solid transparent;
-      top: 15px;
-    }
-    &::after {
-      border-top: 5px solid transparent;
-      border-bottom: 5px solid $textColor;
-      top: 3px;
-    }
-
-    &.sorted-asc {
-      &::before {
-        border-top: 5px solid transparent;
+    &.sortable {
+      cursor: pointer;
+      @media only screen and (max-width: 650px) {
+        margin: auto 20px;
       }
     }
-    &.sorted-desc {
+
+    .title {
+      display: inline-block;
+    }
+
+    .sorting-indicator {
+      &::before,
       &::after {
+        content: '';
+        position: absolute;
+        border-right: 5px solid transparent;
+        border-left: 5px solid transparent;
+        left: 3px;
+      }
+
+      &::before {
+        border-top: 5px solid $textColor;
         border-bottom: 5px solid transparent;
+        top: 15px;
+      }
+      &::after {
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid $textColor;
+        top: 3px;
+      }
+
+      &.sorted-asc {
+        &::before {
+          border-top: 5px solid transparent;
+        }
+      }
+      &.sorted-desc {
+        &::after {
+          border-bottom: 5px solid transparent;
+        }
       }
     }
   }

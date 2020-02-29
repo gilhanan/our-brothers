@@ -36,11 +36,10 @@
       {{ meeting.bereaved.firstName + ' ' + meeting.bereaved.lastName }}
     </span>
   </div>
-  <div
-    class="meeting-item-col meeting-button"
-    *ngIf="user && participationsService.isUserHaveAllDetails(user)"
-  >
+  <div class="meeting-item-col meeting-join">
     <app-join-button
+      class="join-button"
+      *ngIf="user && participationsService.isUserHaveAllDetails(user)"
       [user]="user"
       [meeting]="meeting"
       (joinMeeting)="joinMeeting.emit(meeting)"
