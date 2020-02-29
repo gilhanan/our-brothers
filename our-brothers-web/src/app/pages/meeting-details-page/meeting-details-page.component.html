@@ -111,11 +111,11 @@
     </div>
     <div
       class="meeting-users-heading host-meeting-heading-text"
-      *ngIf="!meeting?.invited"
+      *ngIf="meeting && !meeting.invited"
     >
       משתתפים ({{ meeting?.count + '/' + meeting?.capacity }})
     </div>
-    <div class="meeting-users-list" *ngIf="!meeting.invited">
+    <div class="meeting-users-list" *ngIf="!meeting?.invited">
       <div class="meeting-users-list-header">
         <div class="meeting-users-list-header-name">
           שם המשתתף

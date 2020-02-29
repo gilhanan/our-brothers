@@ -17,7 +17,8 @@ import {
   Contact,
   HostParticipation,
   ParticipateParticipation,
-  ParticipateParticipationMeeting
+  ParticipateParticipationMeeting,
+  MeetingBereaved
 } from 'models';
 import { AnalyticsService } from './analytics.service';
 import { MeetingForm } from '../components/forms/host-form/host-form.component';
@@ -58,6 +59,7 @@ export class DataService {
       .object<User>(`users/${userId}`)
       .valueChanges()
       .pipe(
+        tap(() => console.log('getUserById')),
         map(user => ({
           id: userId,
           ...user
@@ -401,6 +403,7 @@ export class DataService {
       .list<Meeting>(`events/${year}`)
       .snapshotChanges()
       .pipe(
+        tap(() => console.log('getMeetings')),
         map(meetingsSnapshot => {
           const meetings: Meeting[] = [];
 
@@ -437,13 +440,13 @@ export class DataService {
     meeting: Meeting,
     year = MEMORIAL_YEAR
   ): Observable<boolean> {
-    const postObj = {
+    const postObj: MeetingBereaved = {
       id: bereaved.id,
       firstName: bereaved.profile.firstName,
       lastName: bereaved.profile.lastName,
       email: bereaved.profile.email,
       phoneNumber: bereaved.profile.phoneNumber,
-      slain:
+      slains:
         (bereaved.bereavedProfile && bereaved.bereavedProfile.slains) || null
     };
 
