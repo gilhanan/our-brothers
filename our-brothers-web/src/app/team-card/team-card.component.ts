@@ -5,6 +5,7 @@ export interface TeamMember {
   title: string;
   frontImage: string;
   backImage?: string;
+  email?: string;
   slains?: TeamMemberSlain[]
 }
 
