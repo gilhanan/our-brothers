@@ -356,7 +356,7 @@ export class DataService {
               ...usersSnapshot.payload.val()
             }))
             .filter(user => !!user.profile)
-            .slice(0, 20)
+            // .slice(0, 20)
             .map(user => {
               this.parseBereavedParticipation(user, year);
               return user;
