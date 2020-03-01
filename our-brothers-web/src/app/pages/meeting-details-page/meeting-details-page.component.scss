@@ -1,5 +1,4 @@
-.host-meeting-heading-text {
-  position: relative;
+.heading {
   font-size: 36px;
   font-family: 'arbel';
   color: rgb(55, 135, 177);
@@ -9,41 +8,20 @@
   margin-bottom: 40px;
 }
 
-.host-meeting-heading {
+.row {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
 
-  // .host-meeting-heading-text {
-  //   &::before {
-  //     content: '';
-  //     position: absolute;
-  //     top: 50%;
-  //     right: -85px;
-  //     width: 30px;
-  //     height: 30px;
-  //     background-image: url(../../../assets/img/host_event.svg);
-  //     background-size: 100% 100%;
-  //     transform: translateY(-50%);
-  //   }
-  // }
-}
-
-.form-items-container {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 30px;
-
-  * {
+  .col {
     flex: 0 0 auto;
-    margin: 0 15px;
-  }
+    margin: 15px;
+    min-width: 350px;
+    max-width: 400px;
 
-  *:first-child {
-    margin-right: 0;
-  }
-
-  *:last-child {
-    margin-left: 0;
+    @media only screen and (max-width: 768px) {
+      margin: 10px;
+    }
   }
 }
 
@@ -137,17 +115,29 @@
 
 .brother-heading {
   margin-top: 80px;
+
+  @media only screen and (max-width: 768px) {
+    margin-top: 40px;
+  }
 }
 
 .meeting-users-heading {
   margin-top: 80px;
   margin-bottom: 20px;
+
+  @media only screen and (max-width: 768px) {
+    margin-top: 40px;
+  }
 }
 
 .meeting-users-list {
   margin: 0 auto;
   max-width: 770px;
   margin-bottom: 50px;
+
+  @media only screen and (max-width: 768px) {
+    display: none;
+  }
 
   .meeting-users-list-header {
     display: flex;

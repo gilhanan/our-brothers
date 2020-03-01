@@ -1,38 +1,43 @@
 <section class="meeting-info-section">
   <div class="site-divider"></div>
-  <div class="host-meeting-heading">
-    <div class="host-meeting-heading-text">
-      <span>
-        מפגש:
+  <div class="heading">
+    <span>
+      מפגש:
+    </span>
+    <span *ngIf="!loadingMeeting">
+      <span *ngIf="meeting">
+        {{ meeting?.title }}
       </span>
-      <span *ngIf="!loadingMeeting">
-        <span *ngIf="meeting">
-          {{ meeting?.title }}
-        </span>
-        <span *ngIf="!meeting">
-          {{ 'נמחק או לא קיים' }}
-        </span>
+      <span *ngIf="!meeting">
+        {{ 'נמחק או לא קיים' }}
       </span>
-    </div>
+    </span>
   </div>
-  <div *ngIf="loadingMeeting || meeting">
-    <div class="host-meeting-container">
-      <div class="form-items-container">
+  <div *ngIf="loadingMeeting || meeting" class="meeting-details">
+    <div class="row">
+      <div class="col">
         <app-host-meeting-input-text
+          class="input"
           iconUrl="assets/img/host_location.svg"
           label="כתובת:"
           [text]="meeting?.address?.formattedAddress"
         ></app-host-meeting-input-text>
       </div>
-      <div class="form-items-container">
+    </div>
+    <div class="row">
+      <div class="col">
         <app-host-meeting-input-text
+          class="input"
           iconUrl="assets/img/host_users.svg"
           label="כמות מוזמנים:"
           [text]="meeting?.capacity"
         ></app-host-meeting-input-text>
       </div>
-      <div class="form-items-container">
+    </div>
+    <div class="row">
+      <div class="col">
         <app-host-meeting-input-text
+          class="input"
           iconUrl="assets/img/host_users.svg"
           label="קהל יעד:"
           [text]="
@@ -40,13 +45,17 @@
           "
         ></app-host-meeting-input-text>
       </div>
-      <div class="form-items-container">
+    </div>
+    <div class="row">
+      <div class="col">
         <app-host-meeting-input-text
+          class="input"
           iconUrl="assets/img/host_users.svg"
           [text]="meeting?.invited ? 'סגור למוזמנים בלבד' : 'פתוח לקהל הרחב'"
         ></app-host-meeting-input-text>
       </div>
-      <!-- <div class="form-items-container">
+    </div>
+    <!-- <div class="col">
       <div class="edit-button">
         <div class="edit-button-text">
           עריכת פרטים
@@ -58,7 +67,7 @@
         </div>
       </div>
     </div> -->
-      <!-- <div class="form-items-container">
+    <!-- <div class="col">
       <div class="share-container">
         <div class="share-text">
           שיתוף באמצעות :
@@ -67,16 +76,13 @@
         <div class="whatsapp-icon"></div>
       </div>
     </div> -->
-    </div>
-    <div
-      class="brother-heading host-meeting-heading-text"
-      *ngIf="meeting?.bereaved"
-    >
+    <div class="brother-heading heading" *ngIf="meeting?.bereaved">
       אח/ות שכול/ה
     </div>
-    <div class="host-brother-container" *ngIf="meeting?.bereaved">
-      <div class="form-items-container">
+    <div class="row" *ngIf="meeting?.bereaved">
+      <div class="col">
         <app-host-meeting-input-text
+          class="input"
           iconUrl="assets/img/host_user.svg"
           info="שם האח"
           [text]="
@@ -85,7 +91,10 @@
               : ''
           "
         ></app-host-meeting-input-text>
+      </div>
+      <div class="col">
         <app-host-meeting-input-text
+          class="input"
           iconUrl="assets/img/host_user.svg"
           info="שם החלל"
           [text]="
@@ -97,20 +106,26 @@
           "
         ></app-host-meeting-input-text>
       </div>
-      <div class="form-items-container">
+    </div>
+    <div class="row">
+      <div class="col">
         <app-host-meeting-input-text
+          class="input"
           iconUrl="assets/img/host_phone.svg"
           info="טלפון של האח"
           [text]="meeting?.bereaved?.phoneNumber | phone"
         ></app-host-meeting-input-text>
+      </div>
+      <div class="col">
         <app-host-meeting-input-text
+          class="input"
           iconUrl="assets/img/host_email.svg"
           [text]="meeting?.bereaved?.email"
         ></app-host-meeting-input-text>
       </div>
     </div>
     <div
-      class="meeting-users-heading host-meeting-heading-text"
+      class="meeting-users-heading heading"
       *ngIf="meeting && !meeting.invited"
     >
       משתתפים ({{ meeting?.count + '/' + meeting?.capacity }})

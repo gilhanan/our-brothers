@@ -36,7 +36,7 @@ export class PlacesSelectComponent implements AfterViewInit {
         const place = autocomplete.getPlace();
 
         const parsedAddress: Address = {
-          formattedAddress: place.formatted_address,
+          formattedAddress: place.formatted_address.replace(', ישראל', ''),
           latitude: place.geometry.location.lat(),
           longitude: place.geometry.location.lng()
         }
