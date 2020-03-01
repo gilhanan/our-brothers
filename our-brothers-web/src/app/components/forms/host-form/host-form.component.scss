@@ -4,12 +4,20 @@
 }
 
 .host-description-container {
-  padding: 0 60px;
+  margin: 0 60px;
   color: rgb(153, 153, 153);
 
-  .host-description-title {
-    font-weight: bold;
-    color: rgb(53, 129, 171);
+  @media only screen and (max-width: 768px) {
+    margin: 0 15px;
+  }
+
+  .host-description {
+    margin: 15px;
+
+    .host-description-title {
+      font-weight: bold;
+      color: rgb(53, 129, 171);
+    }
   }
 }
 
@@ -19,19 +27,15 @@
 
   .form-items-container {
     display: flex;
-    margin-bottom: 30px;
+    flex-wrap: wrap;
 
-    * {
+    .input {
       flex: 1;
-      margin: 0 15px;
-    }
+      margin: 15px;
 
-    *:first-child {
-      margin-right: 0;
-    }
-
-    *:last-child {
-      margin-left: 0;
+      @media only screen and (max-width: 768px) {
+        margin: 10px;
+      }
     }
 
     .places-select ::ng-deep .form-field {
@@ -41,8 +45,8 @@
 
   .address-map-container {
     position: relative;
-    width: 100%;
     padding-top: 33%;
+    margin: 15px;
     margin-bottom: 30px;
 
     .address-map {

@@ -5,6 +5,7 @@
   <div class="form" [formGroup]="form">
     <div class="form-items-container">
       <app-host-input-text
+        class="input"
         label="שם המפגש:"
         controlName="title"
         [formGroup]="form"
@@ -12,6 +13,7 @@
     </div>
     <div class="form-items-container">
       <app-host-input-text
+        class="input"
         label="תאריך:"
         controlName="date"
         iconUrl="assets/img/host_calendar.svg"
@@ -21,6 +23,7 @@
         [max]="maxDate"
       ></app-host-input-text>
       <app-host-input-text
+        class="input"
         label="שעה:"
         controlName="hour"
         iconUrl="assets/img/host_clock.svg"
@@ -30,7 +33,7 @@
     </div>
     <div class="form-items-container">
       <app-places-select
-        class="places-select"
+        class="input places-select"
         [types]="['address']"
         [placeholder]="'כתובת'"
         (change)="address.patchValue($event)"
@@ -39,6 +42,7 @@
     </div>
     <div class="form-items-container">
       <app-host-input-text
+        class="input"
         label="הערות לכתובת (קומה,כניסה):"
         controlName="notes"
         iconUrl="assets/img/host_location.svg"
@@ -55,6 +59,7 @@
     </div>
     <div class="form-items-container">
       <app-host-input-text
+        class="input"
         label="כמות מוזמנים מקסימלית:"
         inputType="number"
         iconUrl="assets/img/host_users.svg"
@@ -65,6 +70,7 @@
     </div>
     <div class="form-items-container">
       <app-host-input-options
+        class="input"
         label="קהל מוזמנים:"
         iconUrl="assets/img/host_users.svg"
         [options]="[
@@ -76,26 +82,21 @@
         (optionSelected)="invited.setValue($event)"
       ></app-host-input-options>
     </div>
-    <div class="form-items-container">
-      <div class="host-description-container">
-        <p>
-          <span class="host-description-title">פתוח לקהל הרחב-</span>
-          מארח יקר, שים לב. תודה שאתה פותח את ביתך לקהל השומעים הרחב, אך יש לקחת
-          בחשבון שלמרות זאת הינך מחויב להזמין לביתך מכרים, חברים וגכו׳
-        </p>
-      </div>
-    </div>
-    <div class="form-items-container">
-      <div class="host-description-container">
-        <p>
-          <span class="host-description-title">סגור למוזמנים בלבד-</span>
-          מארח יקר, שים לב. אירוח זה הוא אירוח סגור למוזמנייך בלבד ולא יוכלו
-          להצטרף אליו קהל שומעים רחב.
-        </p>
-      </div>
+    <div class="host-description-container">
+      <p class="host-description">
+        <span class="host-description-title">פתוח לקהל הרחב - </span>
+        מארח יקר, שים לב. תודה שאתה פותח את ביתך לקהל השומעים הרחב, אך יש לקחת
+        בחשבון שלמרות זאת הינך מחויב להזמין לביתך מכרים, חברים וכו'.
+      </p>
+      <p class="host-description">
+        <span class="host-description-title">סגור למוזמנים בלבד - </span>
+        מארח יקר, שים לב. אירוח זה הוא אירוח סגור למוזמנייך בלבד ולא יוכלו
+        להצטרף אליו קהל שומעים רחב.
+      </p>
     </div>
     <div class="form-items-container">
       <app-host-input-options
+        class="input"
         label="נגישות:"
         iconUrl="assets/img/host_accessibility.svg"
         [options]="[
@@ -109,6 +110,7 @@
     </div>
     <div class="form-items-container">
       <app-host-input-options
+        class="input"
         label="אפשרות להקרנת מצגת:"
         iconUrl="assets/img/host_tv.svg"
         [options]="[
@@ -122,6 +124,7 @@
     </div>
     <div class="form-items-container">
       <app-host-input-options
+        class="input"
         label="הסכמה לצילום במפגש:"
         iconUrl="assets/img/host_camera.svg"
         [options]="[
@@ -135,6 +138,7 @@
     </div>
     <div class="form-items-container">
       <app-host-input-options
+        class="input"
         label="האם מדובר בקהל יעד מסוים?"
         iconUrl="assets/img/host_users.svg"
         [options]="audienceOptions"

@@ -1,52 +1,54 @@
 .host-options-container {
   position: relative;
-  padding-right: 45px;
-  padding-left: 20px;
+  padding: 15px;
   background-color: white;
   min-height: 50px;
   border: 1px solid rgb(229, 229, 229);
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+
+  @media only screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 
   &.invalid {
     border-color: red;
   }
 
-  .input-icon {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 45px;
-    height: 50px;
-    background-position: 50% 50%;
-    background-size: 24px 24px;
-    background-repeat: no-repeat;
-  }
+  .icon-label {
+    flex: 0 0 auto;
+    width: 270px;
+    display: flex;
+    align-self: flex-start;
+    align-items: center;
 
-  .input-label {
-    margin-top: 15px;
-    flex: 0 0 190px;
-    font-size: 18px;
-    color: rgb(153, 153, 153);
-    font-family: 'Heebo';
+    .input-icon {
+      width: 45px;
+      height: 50px;
+      background-position: 50% 50%;
+      background-size: 24px 24px;
+      background-repeat: no-repeat;
+    }
+
+    .input-label {
+      font-size: 18px;
+      color: rgb(153, 153, 153);
+      font-family: 'Heebo';
+    }
   }
 
   .options-container {
-    margin-top: 15px;
-    margin-right: 10px;
     flex: 1;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
 
     .option {
+      width: 190px;
       cursor: pointer;
-      margin-bottom: 15px;
-      min-width: 33%;
-      max-width: 50%;
       display: inline-flex;
       align-items: center;
-      margin-bottom: 15px;
+      margin: 5px;
 
       .option-mark {
         width: 17px;

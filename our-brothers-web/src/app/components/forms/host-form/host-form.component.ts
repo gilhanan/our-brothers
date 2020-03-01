@@ -43,7 +43,7 @@ export class HostFormComponent implements OnInit {
   public minDate = MIN_DATE.toISOString().split('T')[0];
   public maxDate = MAX_DATE.toISOString().split('T')[0];
 
-  constructor(private fb: FormBuilder, private utilsService: UtilsService) {}
+  constructor(private fb: FormBuilder, private utilsService: UtilsService) { }
 
   ngOnInit() {
     this.audienceOptions = [
@@ -84,7 +84,9 @@ export class HostFormComponent implements OnInit {
         formattedAddress: ['', Validators.required],
         latitude: [],
         longitude: [],
-        notes: ['']
+        notes: ['', [
+          Validators.maxLength(200)
+        ]]
       }),
       capacity: [
         30,
