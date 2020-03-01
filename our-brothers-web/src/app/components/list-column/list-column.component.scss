@@ -16,13 +16,13 @@ $textColor: rgb(129, 129, 129);
       border: 1px solid rgb(135, 176, 173);
     }
 
-    @media only screen and (max-width: 650px) {
+    @media only screen and (max-width: 1024px) {
       display: none;
     }
 
     &.sortable {
       cursor: pointer;
-      @media only screen and (max-width: 650px) {
+      @media only screen and (max-width: 1024px) {
         margin: auto 20px;
       }
     }

@@ -1,27 +1,30 @@
-:host {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  overflow: hidden;
+.show-full-meetings-container {
+  margin: 5px 0;
+}
 
-  .show-full-meetings-container {
-    margin: 5px 0;
+.list-header {
+  .date-col {
+    flex: 0 1 130px;
   }
 
-  .list-header {
-    .date-col {
-      flex: 0 1 130px;
-    }
+  .participants-col {
+    flex: 0 1 175px;
+  }
 
-    .participants-col {
-      flex: 0 1 175px;
-    }
+  .join-col {
+    flex: 0 1 130px;
+  }
+}
 
-    .join-col {
-      flex: 0 1 130px;
-    }
+.meeting-items-container {
+  height: 800px;
+
+  @media only screen and (max-width: 1000px) {
+    height: 700px;
+  }
+
+  @media only screen and (max-width: 650px) {
+    height: 450px;
   }
 
   .meeting-items {

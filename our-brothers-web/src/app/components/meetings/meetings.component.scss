@@ -1,15 +1,6 @@
 .meetings-container {
   margin-bottom: 50px;
-  height: 800px;
   position: relative;
-
-  @media only screen and (max-width: 1000px) {
-    height: 700px;
-  }
-
-  @media only screen and (max-width: 650px) {
-    height: 450px;
-  }
 
   .loading {
     position: absolute;

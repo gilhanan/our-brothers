@@ -30,6 +30,10 @@ $mobileBreakpoint: 1200px;
       background-image: url(../../../assets/img/logo.png);
       background-size: contain;
       background-repeat: no-repeat;
+
+      &:focus {
+        outline: none;
+      }
     }
 
     .nav-content {
@@ -50,7 +54,7 @@ $mobileBreakpoint: 1200px;
         .link-header {
           cursor: pointer;
           text-decoration: none;
-          font-family: "Heebo";
+          font-family: 'Heebo';
           color: rgb(0, 115, 109);
           font-size: 19px;
           font-weight: 500;
@@ -64,7 +68,7 @@ $mobileBreakpoint: 1200px;
           @media only screen and (min-width: $mobileBreakpoint) {
             &.link-header:hover:before,
             &.current-page::before {
-              content: "";
+              content: '';
               background-color: rgb(0, 160, 153);
               position: absolute;
               top: 3px;
@@ -86,7 +90,7 @@ $mobileBreakpoint: 1200px;
 
             &.link-header:hover:after,
             &.current-page::after {
-              content: "";
+              content: '';
               background-color: rgb(0, 115, 109);
               position: absolute;
               width: 33px;
@@ -187,7 +191,9 @@ $mobileBreakpoint: 1200px;
         background-color: white;
         box-shadow: $shadow-width 0px $shadow-spread 0px rgba(0, 160, 153, 0.75);
         transition: transform 0.2s;
-        transform: translateX(calc(100% - #{$shadow-width} + #{$shadow-spread}));
+        transform: translateX(
+          calc(100% - #{$shadow-width} + #{$shadow-spread})
+        );
 
         &.open {
           transform: translateX(0);
