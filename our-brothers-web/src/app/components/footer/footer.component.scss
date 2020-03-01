@@ -15,6 +15,7 @@ $mobileBreakpoint: 1000px;
 
     @media only screen and (max-width: $mobileBreakpoint) {
       display: flex;
+      margin-bottom: 55px;
     }
 
     .row {
@@ -35,7 +36,7 @@ $mobileBreakpoint: 1000px;
           font-size: 16px;
           min-height: 1.3em;
           color: #00a099;
-          font-family: "arbel";
+          font-family: 'arbel';
 
           @media only screen and (max-width: $mobileBreakpoint) {
             font-size: 14px;
@@ -152,26 +153,29 @@ $mobileBreakpoint: 1000px;
       }
     }
   }
+}
+.footer-mobile {
+  display: none;
 
-  .footer-mobile {
-    display: none;
+  @media only screen and (max-width: $mobileBreakpoint) {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 5px;
+    background-color: #00a099;
 
-    @media only screen and (max-width: $mobileBreakpoint) {
-      display: flex;
-      padding: 5px;
-      background-color: #00a099;
+    .social-box {
+      flex: 1;
+      margin: 5px;
+      padding: 4px 0;
+      text-align: center;
+      background-color: white;
+      color: #00a099;
 
-      .social-box {
-        flex: 1;
-        margin: 5px;
-        padding: 4px 0;
-        text-align: center;
-        background-color: white;
-        color: #00a099;
-
-        .site-link {
-          display: block;
-        }
+      .site-link {
+        display: block;
       }
     }
   }

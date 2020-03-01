@@ -39,7 +39,7 @@
     .member-details {
       width: 100%;
       font-size: 18px;
-      padding-top: 1px;
+      padding-top: 7px;
       padding-bottom: 10px;
       color: #999999;
       background-color: white;
@@ -51,7 +51,6 @@
       }
 
       .member-name {
-        margin-top: 7px;
         font-weight: bold;
       }
 
@@ -97,17 +96,20 @@
       }
 
       .member-email {
-        text-align: right;
-        margin-right: 20px;
         .member-email-img {
           height: 15px;
           width: 15px;
+          margin-left: 2px;
+          vertical-align: sub;
 
           @media only screen and (max-width: 768px) {
             height: 8px;
             width: 8px;
           }
+        }
 
+        .member-email-link {
+          color: white;
         }
       }
 
