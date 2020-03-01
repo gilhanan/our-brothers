@@ -1,34 +1,32 @@
 .kits-container {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(250px, 20%));
+    grid-gap: 1em;
+    place-content: center;
     margin-bottom: 3em;
+    justify-content: center;
 
-    .kit {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-        height: 12em;
-        padding: 0 25px;
-    
-        .kit-icon {
-            width: 50px;
-            height: 50px;
-        }
-        .kit-heading {
-            color: var(--primary-color);
-            font-size: 16px;
-            font-weight: bold;
-        }
+    .kit-icon {
+        width: 50px;
+        height: 50px;
+        justify-self: center;
+    }
+    .kit-heading {
+        color: var(--primary-color);
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+        justify-self: center;
+    }
 
-        .kit-description {
-            text-align: center;
-            margin: 0;
-        }
-        .download-button {
-            padding-top: 0.25em;
-            padding-bottom: 0.25em;
-        }
+    .kit-description {
+        text-align: center;
+        justify-self: center;
+        margin: 0;
+    }
+    .download-button {
+        padding-top: 0.25em;
+        padding-bottom: 0.25em;
     }
 }
 
@@ -46,9 +44,6 @@
 
     .videos-header {
         color: white;
-        font-size: 16px;
-        font-weight: bold;
-        letter-spacing: 6px;
         margin-bottom: 2em;
     }
 
@@ -59,5 +54,38 @@
         place-content: center;
         width: 100%;
 
+    }
+}
+
+.quotes-container {
+    .quotes {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        grid-gap: 1em;
+        place-content: center;
+        .quote {
+            background-color: lightgray;
+            padding: 1em;
+            width: 170px;
+            height: 200px;
+            display: grid;
+            grid-template-columns: 100%;
+
+            .apostrophy {}
+
+            .quote-text {
+                text-align: center;
+                justify-self: center;
+            }
+
+            .quote-divider {
+                justify-self: center;
+            }
+
+            .person-link {
+                text-align: center;
+                justify-self: center;
+            }
+        }
     }
 }
