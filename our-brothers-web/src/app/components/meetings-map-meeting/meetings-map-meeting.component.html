@@ -28,7 +28,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="user && participationsService.isUserHaveAllDetails(user)" class="row">
+  <div *ngIf="participationsService.isUserHaveAllDetails(user)" class="row">
     <app-join-button [user]="user" [meeting]="meeting" (joinMeeting)="joinMeeting.emit()"></app-join-button>
   </div>
 </div>

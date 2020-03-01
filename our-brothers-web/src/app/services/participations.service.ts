@@ -153,6 +153,10 @@ export class ParticipationsService {
   }
 
   isUserHaveAllDetails = (user: User) => {
+    if (!user) {
+      return false;
+    }
+
     if (user.role === UserRole.bereaved) {
       return this.isBereavedHaveAllDetails(user);
     } else {
@@ -162,6 +166,7 @@ export class ParticipationsService {
 
   isParticipateHaveAllDetails = (user: User) => {
     return !!(
+      user &&
       user.profile &&
       user.profile.email &&
       user.profile.firstName &&
@@ -172,6 +177,7 @@ export class ParticipationsService {
 
   isBereavedHaveAllDetails = (user: User) => {
     return !!(
+      user &&
       user.profile &&
       user.profile.address &&
       user.profile.email &&

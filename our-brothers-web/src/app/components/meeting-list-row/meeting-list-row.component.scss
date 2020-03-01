@@ -100,7 +100,7 @@ $mobileBreakpoint: 1024px;
     }
 
     &.meeting-join {
-      flex: 0 1 92px;
+      flex: 0 1 130px;
 
       @media only screen and (max-width: $mobileBreakpoint) {
         justify-content: flex-end;

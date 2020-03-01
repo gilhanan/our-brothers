@@ -32,7 +32,7 @@ export class MeetingsListComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.meetings || changes.user) {
-      this.isUserHaveAllDetails = this.user && this.participationsService.isUserHaveAllDetails(this.user);
+      this.isUserHaveAllDetails = this.participationsService.isUserHaveAllDetails(this.user);
       this.meetings = this.meetings || [];
       this.filter();
       this.sort();

@@ -7,9 +7,7 @@
   overflow: hidden;
 
   .show-full-meetings-container {
-    // position: absolute;
-    // left: 0;
-    padding: 5px;
+    margin: 5px 0;
   }
 
   .list-header {
@@ -22,7 +20,7 @@
     }
 
     .join-col {
-      flex: 0 1 92px;
+      flex: 0 1 130px;
     }
   }
 

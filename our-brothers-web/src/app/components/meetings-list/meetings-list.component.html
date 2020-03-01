@@ -25,7 +25,7 @@
   </app-list-column>
   <app-list-column [title]="'אח/ות'" [field]="'bereaveds'" class="col">
   </app-list-column>
-  <app-list-column class="col join-col"></app-list-column>
+  <app-list-column class="col join-col" *ngIf="participationsService.isUserHaveAllDetails(user)"></app-list-column>
 </app-list-header>
 <cdk-virtual-scroll-viewport itemSize="50" class="meeting-items">
   <app-meeting-list-row
