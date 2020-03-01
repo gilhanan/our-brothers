@@ -1,91 +1,90 @@
 .kits-container {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(250px, 20%));
-    grid-gap: 1em;
-    place-content: center;
-    margin-bottom: 3em;
-    justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(250px, 20%));
+  grid-gap: 1em;
+  place-content: center;
+  margin-bottom: 3em;
+  justify-content: center;
 
-    .kit-icon {
-        width: 50px;
-        height: 50px;
-        justify-self: center;
-    }
-    .kit-heading {
-        color: var(--primary-color);
-        font-size: 16px;
-        font-weight: bold;
-        text-align: center;
-        justify-self: center;
-    }
+  .kit-icon {
+    width: 50px;
+    height: 50px;
+    justify-self: center;
+  }
+  .kit-heading {
+    color: var(--primary-color);
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    justify-self: center;
+  }
 
-    .kit-description {
-        text-align: center;
-        justify-self: center;
-        margin: 0;
-    }
-    .download-button {
-        padding-top: 0.25em;
-        padding-bottom: 0.25em;
-    }
+  .kit-description {
+    text-align: center;
+    justify-self: center;
+    margin: 0;
+  }
+  .download-button {
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+  }
 }
 
 .videos-container {
-    background-color: var(--primary-color);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 0 40px 60px 40px;
+  background-color: var(--primary-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 40px 60px 40px;
 
-    .divider::after {
-        background-color: white;
-    }
+  .divider::after {
+    background-color: white;
+  }
 
-    .videos-header {
-        color: white;
-        margin-bottom: 2em;
-    }
+  .videos-header {
+    color: white;
+    margin-bottom: 2em;
+  }
 
-    .vidseos {
-        display: grid;
-        grid-template-columns: repeat(3, auto);
-        grid-gap: 1em;
-        place-content: center;
-        width: 100%;
-
-    }
+  .vidseos {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    grid-gap: 1em;
+    place-content: center;
+    width: 100%;
+  }
 }
 
 .quotes-container {
-    .quotes {
-        display: grid;
-        grid-template-columns: repeat(3, auto);
-        grid-gap: 1em;
-        place-content: center;
-        .quote {
-            background-color: lightgray;
-            padding: 1em;
-            width: 170px;
-            height: 200px;
-            display: grid;
-            grid-template-columns: 100%;
+  .quotes {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    grid-gap: 1em;
+    place-content: center;
+    .quote {
+      background-color: lightgray;
+      padding: 1em;
+      width: 200px;
+      display: grid;
+      grid-template-columns: 100%;
 
-            .apostrophy {}
+      .apostrophy {
+      }
 
-            .quote-text {
-                text-align: center;
-                justify-self: center;
-            }
+      .quote-text {
+        text-align: center;
+        justify-self: center;
+      }
 
-            .quote-divider {
-                justify-self: center;
-            }
+      .quote-divider {
+        justify-self: center;
+      }
 
-            .person-link {
-                text-align: center;
-                justify-self: center;
-            }
-        }
+      .person-link {
+        text-align: center;
+        justify-self: center;
+      }
     }
+  }
 }

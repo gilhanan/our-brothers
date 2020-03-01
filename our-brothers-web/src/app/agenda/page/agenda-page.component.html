@@ -79,20 +79,20 @@
     אחים כותבים על אחיהם
   </h2>
   <div class="quote-carousel">
-    <ng-container *ngFor="let page of pagedExcerpts">
-      <div class="quotes">
-        <ng-container *ngFor="let quote of page.page">
-          <div class="quote">
-            <img class="apostrophy" src="../../../assets/img/apostrophy.png" />
-            <div class="quote-text">{{ quote.excerpt }}</div>
-            <div class="quote-divider"></div>
-            <a class="person-link">{{ quote.writerName }}</a>
-            <a class="person-link" [href]="quote.recipientId">{{
-              quote.recipientName
-            }}</a>
-          </div>
-        </ng-container>
-      </div>
-    </ng-container>
+    <!-- <ng-container *ngFor="let page of pagedExcerpts"> -->
+    <div class="quotes">
+      <ng-container *ngFor="let quote of pagedExcerpts[0].page">
+        <div class="quote">
+          <img class="apostrophy" src="../../../assets/img/apostrophy.png" />
+          <div class="quote-text">{{ quote.excerpt }}</div>
+          <div class="quote-divider"></div>
+          <a class="person-link">{{ quote.writerName }}</a>
+          <a class="person-link" [href]="quote.recipientId">{{
+            quote.recipientName
+          }}</a>
+        </div>
+      </ng-container>
+    </div>
+    <!-- </ng-container> -->
   </div>
 </section>
