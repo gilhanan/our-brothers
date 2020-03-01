@@ -54,8 +54,12 @@ export class TellPageComponent implements OnInit, OnDestroy {
 
         // Auto navigations after the first step
         if (currentStep > 0) {
-          if (user && user.role !== UserRole.bereaved) {
-            this.dataService.setUserRole(user, UserRole.bereaved);
+          if (user) {
+            if (user.role && user.role !== UserRole.bereaved) {
+              this.router.navigate(['/home']);
+            } else if (user.role !== UserRole.bereaved) {
+              this.dataService.setUserRole(user, UserRole.bereaved);
+            }
           }
 
           if (!user) {

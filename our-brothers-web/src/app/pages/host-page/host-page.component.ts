@@ -42,8 +42,12 @@ export class HostPageComponent implements OnInit, OnDestroy {
 
           // Auto navigations after the first step
           if (this.currentStep > 0) {
-            if (user && user.role !== UserRole.host) {
-              this.dataService.setUserRole(user, UserRole.host);
+            if (user) {
+              if (user.role && user.role === UserRole.bereaved) {
+                this.router.navigate(['/home']);
+              } else if (user.role !== UserRole.host) {
+                this.dataService.setUserRole(user, UserRole.host);
+              }
             }
 
             if (!user) {
