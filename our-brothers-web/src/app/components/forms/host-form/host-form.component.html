@@ -149,11 +149,14 @@
     </div>
   </div>
   <div class="host-form-submit-container">
-    <div
+    <p class="form-invalid-message" *ngIf="form.touched && form.invalid">
+      אחד או יותר מהשדות אינם תקינים
+    </p>
+    <button
       (click)="onSubmit()"
       class="host-form-submit-btn site-button primary-button"
     >
       צור אירוח >>
-    </div>
+    </button>
   </div>
 </div>

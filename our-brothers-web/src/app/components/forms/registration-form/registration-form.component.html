@@ -52,6 +52,9 @@
       </app-login-social-button>
     </div>
   </div>
+  <p class="form-invalid-message" *ngIf="form.touched && form.invalid">
+    אחד או יותר מהשדות אינם תקינים
+  </p>
   <button
     class="site-button main-button"
     tabindex="5"

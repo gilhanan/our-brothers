@@ -242,6 +242,12 @@ textarea.form-field {
   resize: none;
 }
 
+.form-invalid-message {
+  color: red;
+  text-align: center;
+  margin: 10px;
+}
+
 .user-type-title {
   text-align: right;
 }

@@ -45,7 +45,10 @@
       ></textarea>
     </div>
   </div>
-  <div (click)="onSubmit()" class="site-button primary-button submit-button">
+  <p class="form-invalid-message" *ngIf="form.touched && form.invalid">
+    אחד או יותר מהשדות אינם תקינים
+  </p>
+  <button (click)="onSubmit()" class="site-button primary-button submit-button">
     המשך
-  </div>
+  </button>
 </div>

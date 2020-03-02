@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { BereavedGuidance } from 'models';
 
 export interface GuidanceMeeting {
@@ -11,8 +11,7 @@ export interface GuidanceMeeting {
   templateUrl: './bereaved-guidance-form.component.html',
   styleUrls: ['./bereaved-guidance-form.component.scss']
 })
-export class BereavedGuidanceFormComponent implements OnInit {
-
+export class BereavedGuidanceFormComponent {
   public guidances: GuidanceMeeting[] = traningMeetingsConst;
   public selectedGuidances = {};
   public notIntereseted = false;
@@ -20,23 +19,24 @@ export class BereavedGuidanceFormComponent implements OnInit {
   @Output()
   public submit = new EventEmitter<BereavedGuidance>();
 
-  constructor() { }
-
-  ngOnInit() {
-  }
+  constructor() {}
 
   onGuidanceChange(id: string, value: boolean) {
     this.selectedGuidances[id] = value;
-    this.notIntereseted = !Object.keys(this.selectedGuidances).filter(id => !!this.selectedGuidances[id]).length
+    this.notIntereseted = !Object.keys(this.selectedGuidances).filter(
+      id => !!this.selectedGuidances[id]
+    ).length;
   }
 
   onSubmit() {
-    const selectedGuidancesIds = Object.keys(this.selectedGuidances).filter(id => !!this.selectedGuidances[id]);
+    const selectedGuidancesIds = Object.keys(this.selectedGuidances).filter(
+      id => !!this.selectedGuidances[id]
+    );
 
     this.submit.emit({
       answered: true,
       general: selectedGuidancesIds.length ? selectedGuidancesIds : null
-    })
+    });
   }
 }
 
