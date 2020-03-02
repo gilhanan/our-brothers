@@ -29,7 +29,7 @@
         <app-host-meeting-input-text
           class="input"
           iconUrl="assets/img/host_users.svg"
-          label="כמות מוזמנים:"
+          label="מספר מוזמנים:"
           [text]="meeting?.capacity"
         ></app-host-meeting-input-text>
       </div>
@@ -76,7 +76,7 @@
         <div class="whatsapp-icon"></div>
       </div>
     </div> -->
-    <div class="brother-heading heading" *ngIf="meeting?.bereaved">
+    <div class="heading brother-heading" *ngIf="meeting?.bereaved">
       אח/ות שכול/ה
     </div>
     <div class="row" *ngIf="meeting?.bereaved">
@@ -124,44 +124,13 @@
         ></app-host-meeting-input-text>
       </div>
     </div>
-    <div
-      class="meeting-users-heading heading"
-      *ngIf="meeting && !meeting.invited"
-    >
-      משתתפים ({{ meeting?.count + '/' + meeting?.capacity }})
-    </div>
-    <div class="meeting-users-list" *ngIf="!meeting?.invited">
-      <div class="meeting-users-list-header">
-        <div class="meeting-users-list-header-name">
-          שם המשתתף
-        </div>
-        <div class="meeting-users-list-header-capacity">
-          כמות אנשים
-        </div>
-        <div class="meeting-users-list-header-phone">
-          טלפון
-        </div>
-        <div class="meeting-users-list-header-email">
-          מייל
-        </div>
+    <div *ngIf="!meeting?.invited && meetingParticipates?.length">
+      <div class="heading participates-heading">
+        משתתפים ({{ meeting.count + '/' + meeting.capacity }})
       </div>
-      <div
-        class="meeting-users-list-item"
-        *ngFor="let participate of meetingParticipates"
-      >
-        <div class="meeting-users-list-item-name">
-          {{ participate.firstName + ' ' + participate.lastName }}
-        </div>
-        <div class="meeting-users-list-item-capacity">
-          {{ participate.accompanies + 1 }}
-        </div>
-        <div class="meeting-users-list-item-phone">
-          {{ participate.phoneNumber | phone }}
-        </div>
-        <div class="meeting-users-list-item-email">
-          {{ participate.email }}
-        </div>
-      </div>
+      <app-meeting-participates-list
+        [meetingParticipates]="meetingParticipates"
+      ></app-meeting-participates-list>
     </div>
   </div>
 </section>

@@ -6,6 +6,26 @@
   text-align: center;
   letter-spacing: 5px;
   margin-bottom: 40px;
+
+  @media only screen and (max-width: 768px) {
+    margin-bottom: 20px;
+  }
+
+  &.bereaved-heading {
+    margin-top: 80px;
+
+    @media only screen and (max-width: 768px) {
+      margin-top: 40px;
+    }
+  }
+
+  &.participates-heading {
+    margin-top: 80px;
+
+    @media only screen and (max-width: 768px) {
+      margin-top: 40px;
+    }
+  }
 }
 
 .row {
@@ -110,89 +130,5 @@
     height: 25px;
     background-image: url(../../../assets/img/whatsapp.png);
     background-size: 100% 100%;
-  }
-}
-
-.brother-heading {
-  margin-top: 80px;
-
-  @media only screen and (max-width: 768px) {
-    margin-top: 40px;
-  }
-}
-
-.meeting-users-heading {
-  margin-top: 80px;
-  margin-bottom: 20px;
-
-  @media only screen and (max-width: 768px) {
-    margin-top: 40px;
-  }
-}
-
-.meeting-users-list {
-  margin: 0 auto;
-  max-width: 770px;
-  margin-bottom: 50px;
-
-  .meeting-users-list-header {
-    display: flex;
-    align-items: center;
-    height: 50px;
-    font-size: 19px;
-    font-family: 'Heebo';
-    color: rgb(129, 129, 129);
-
-    .meeting-users-list-header-name {
-      flex: 0 0 160px;
-    }
-
-    .meeting-users-list-header-capacity {
-      flex: 0 0 170px;
-      text-align: center;
-    }
-
-    .meeting-users-list-header-phone {
-      flex: 0 0 150px;
-      text-align: center;
-    }
-
-    .meeting-users-list-header-email {
-      flex: 1;
-      text-align: center;
-    }
-  }
-
-  .meeting-users-list-item {
-    display: flex;
-    align-items: center;
-    padding: 20px 0;
-    font-size: 19px;
-    font-family: 'Heebo';
-    color: rgb(129, 129, 129);
-    border-top: 1px solid #cccdce;
-
-    .meeting-users-list-item-name {
-      flex: 0 0 160px;
-      font-size: 23px;
-      font-family: 'arbel';
-      color: rgb(55, 135, 177);
-      font-weight: bold;
-    }
-
-    .meeting-users-list-item-capacity {
-      flex: 0 0 170px;
-      text-align: center;
-    }
-
-    .meeting-users-list-item-phone {
-      flex: 0 0 150px;
-      text-align: center;
-    }
-
-    .meeting-users-list-item-email {
-      flex: 1;
-      text-align: left;
-    }
   }
 }

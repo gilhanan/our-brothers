@@ -89,6 +89,7 @@ import { ArticlesPageComponent } from './pages/articles-page/articles-page.compo
 import { DonatePageComponent } from './pages/donate-page/donate-page.component';
 import { PaypalButtonComponent } from './components/paypal-button/paypal-button.component';
 import { NewsPageComponent } from './pages/news-page/news-page.component';
+import { MeetingParticipatesListComponent } from './meeting-participates-list/meeting-participates-list.component';
 
 registerLocaleData(localeHe);
 
@@ -166,7 +167,8 @@ registerLocaleData(localeHe);
     ArticlesPageComponent,
     DonatePageComponent,
     PaypalButtonComponent,
-    NewsPageComponent
+    NewsPageComponent,
+    MeetingParticipatesListComponent
   ],
   imports: [
     BrowserModule,
@@ -192,4 +194,4 @@ registerLocaleData(localeHe);
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
