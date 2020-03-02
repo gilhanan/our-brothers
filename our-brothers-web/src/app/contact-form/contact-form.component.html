@@ -1,15 +1,38 @@
 <form [formGroup]="form" class="contact-form-fields">
-  <input formControlName="name" class="form-field" placeholder="שם מלא*"
-    [class.invalid]="!name.valid && name.touched" />
-  <input formControlName="phoneNumber" class="form-field" placeholder="טלפון*"
-    [class.invalid]="!phoneNumber.valid && phoneNumber.touched" />
-  <input formControlName="email" class="form-field" placeholder="אימייל*"
-    [class.invalid]="!email.valid && email.touched" />
-  <input formControlName="subject" class="form-field" placeholder="נושא פנייה*"
-    [class.invalid]="!subject.valid && subject.touched" />
-  <textarea formControlName="body" class="form-field body" placeholder="תוכן הודעה"></textarea>
+  <input
+    formControlName="name"
+    class="form-field"
+    placeholder="שם מלא*"
+    [class.invalid]="!name.valid && name.touched"
+  />
+  <input
+    formControlName="phoneNumber"
+    class="form-field"
+    placeholder="טלפון*"
+    [class.invalid]="!phoneNumber.valid && phoneNumber.touched"
+  />
+  <input
+    formControlName="email"
+    class="form-field"
+    placeholder="אימייל*"
+    [class.invalid]="!email.valid && email.touched"
+  />
+  <input
+    formControlName="subject"
+    class="form-field"
+    placeholder="נושא פנייה*"
+    [class.invalid]="!subject.valid && subject.touched"
+  />
+  <textarea
+    formControlName="body"
+    class="form-field body"
+    placeholder="תוכן הודעה"
+  ></textarea>
 </form>
-<div class="site-button primary-button contact-send-button" [class.disabled]="!form.valid || loading"
-  (click)="onSubmit()">
+<div
+  class="site-button primary-button contact-send-button"
+  [class.disabled]="!form.valid || loading"
+  (click)="onSubmit()"
+>
   שלח
 </div>
