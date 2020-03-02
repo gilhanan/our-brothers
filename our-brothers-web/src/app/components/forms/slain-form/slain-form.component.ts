@@ -16,6 +16,7 @@ export interface SlainForm {
 })
 export class SlainFormComponent implements OnInit {
   public form: FormGroup;
+  public formInvalid = false;
 
   @Output()
   public submit = new EventEmitter<SlainForm>()
@@ -51,6 +52,10 @@ export class SlainFormComponent implements OnInit {
         ]
       ]
     });
+
+    this.form.valueChanges.subscribe(() => {
+      this.formInvalid = false;
+    });
   }
 
   get firstName() {
@@ -79,6 +84,9 @@ export class SlainFormComponent implements OnInit {
       }
 
       this.submit.emit(parsedForm);
+    } else {
+      this.formInvalid = true;
+      this.form.markAllAsTouched();
     }
   }
 }

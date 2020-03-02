@@ -21,6 +21,7 @@ export class RegistrationFormComponent implements OnInit {
   @Output() signUpWithFacebook = new EventEmitter<void>();
 
   public form: FormGroup;
+  public formInvalid = false;
 
   constructor(private fb: FormBuilder) { }
 
@@ -33,6 +34,10 @@ export class RegistrationFormComponent implements OnInit {
       },
       { validator: this.checkPasswords }
     );
+
+    this.form.valueChanges.subscribe(() => {
+      this.formInvalid = false;
+    });
   }
 
   checkPasswords(group: FormGroup) {
@@ -60,6 +65,7 @@ export class RegistrationFormComponent implements OnInit {
 
       this.signUpWithEmailAndPassword.emit(parsedForm);
     } else {
+      this.formInvalid = true;
       this.form.markAllAsTouched();
     }
   }

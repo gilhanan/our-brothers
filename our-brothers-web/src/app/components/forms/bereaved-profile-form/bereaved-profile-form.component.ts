@@ -29,6 +29,7 @@ export class BereavedProfileFormComponent implements OnInit {
   public submit = new EventEmitter<BereavedProfileForm>();
 
   public form: FormGroup;
+  public formInvalid = false;
   public canTellInOtherLang = false;
   public maxDate = new Date().toISOString().split('T')[0];
 
@@ -73,6 +74,10 @@ export class BereavedProfileFormComponent implements OnInit {
       birthDay: [profile.birthDay, [Validators.required]],
       otherLang: [profile.otherLang],
       agree: [false, Validators.requiredTrue]
+    });
+
+    this.form.valueChanges.subscribe(() => {
+      this.formInvalid = false;
     });
   }
 
@@ -124,6 +129,7 @@ export class BereavedProfileFormComponent implements OnInit {
 
       this.submit.emit(parsedForm);
     } else {
+      this.formInvalid = true;
       this.form.markAllAsTouched();
     }
   }

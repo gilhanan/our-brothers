@@ -38,6 +38,7 @@ export class HostFormComponent implements OnInit {
   @Output() public submitMeetingDetailsPage = new EventEmitter<MeetingForm>();
 
   public form: FormGroup;
+  public formInvalid = false;
   public audienceOptions: HostInputOption[];
 
   public minDate = MIN_DATE.toISOString().split('T')[0];
@@ -97,6 +98,10 @@ export class HostFormComponent implements OnInit {
       media: [null, Validators.required],
       reviewable: [null, Validators.required],
       audience: [null, Validators.required]
+    });
+
+    this.form.valueChanges.subscribe(() => {
+      this.formInvalid = false;
     });
   }
 
@@ -171,6 +176,7 @@ export class HostFormComponent implements OnInit {
       delete (parsedMeeting as any).hour;
       this.submitMeetingDetailsPage.emit(parsedMeeting);
     } else {
+      this.formInvalid = true;
       this.form.markAllAsTouched();
     }
   }

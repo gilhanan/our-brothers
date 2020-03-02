@@ -56,7 +56,7 @@
       >לתנאי השימוש</a
     >
   </div>
-  <p class="form-invalid-message" *ngIf="form.touched && form.invalid">
+  <p class="form-invalid-message" *ngIf="formInvalid">
     אחד או יותר מהשדות אינם תקינים
   </p>
   <button (click)="onSubmit()" class="site-button primary-button submit-button">

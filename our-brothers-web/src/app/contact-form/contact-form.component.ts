@@ -36,6 +36,7 @@ export class ContactFormComponent implements OnInit {
   public submit = new EventEmitter<ContactForm>();
 
   public form: FormGroup;
+  public formInvalid = false;
 
   constructor(private fb: FormBuilder, private utilsService: UtilsService) {}
 
@@ -72,6 +73,10 @@ export class ContactFormComponent implements OnInit {
       ],
       body: ['', [Validators.maxLength(300)]]
     });
+
+    this.form.valueChanges.subscribe(() => {
+      this.formInvalid = false;
+    });
   }
 
   get name() {
@@ -106,6 +111,7 @@ export class ContactFormComponent implements OnInit {
 
       this.form.reset();
     } else {
+      this.formInvalid = true;
       this.form.markAllAsTouched();
     }
   }

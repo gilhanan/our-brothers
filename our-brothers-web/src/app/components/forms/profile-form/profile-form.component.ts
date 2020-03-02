@@ -27,6 +27,7 @@ export class ProfileFormComponent implements OnInit {
   public submit = new EventEmitter<ProfileForm>();
 
   public form: FormGroup;
+  public formInvalid = false;
 
   constructor(private fb: FormBuilder, private utilsService: UtilsService) {}
 
@@ -63,6 +64,10 @@ export class ProfileFormComponent implements OnInit {
       ],
       agree: [false, Validators.requiredTrue]
     });
+
+    this.form.valueChanges.subscribe(() => {
+      this.formInvalid = false;
+    });
   }
 
   get email() {
@@ -98,6 +103,7 @@ export class ProfileFormComponent implements OnInit {
 
       this.submit.emit(parsedForm);
     } else {
+      this.formInvalid = true;
       this.form.markAllAsTouched();
     }
   }
