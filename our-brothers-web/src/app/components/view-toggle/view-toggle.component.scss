@@ -3,19 +3,18 @@
   border-radius: 0;
 
   .view-button {
-    display: inline-block;
     width: 60px;
-    cursor: pointer;
-    background-color: #E0E0E0;
+    background-color: white;
     text-align: center;
+    cursor: pointer;
 
     .map-icon,
     .list-icon {
-      width: 55px;
-      height: 55px;
+      width: 40px;
+      height: 40px;
+      margin: 0 auto;
       background-size: 100%;
       background-repeat: no-repeat;
-      display: inline-block;
     }
 
     .map-icon {
@@ -24,6 +23,10 @@
 
     .list-icon {
       background-image: url(../../../assets/img/list.svg);
+    }
+
+    .label {
+      line-height: 24px;
     }
   }
 }
