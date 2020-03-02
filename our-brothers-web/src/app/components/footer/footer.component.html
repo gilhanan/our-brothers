@@ -25,7 +25,7 @@
       <div class="col col-links">
         <div class="title">מפגשים</div>
         <div class="links">
-          <a class="site-link" routerLink="meetings">מפת מפגשים</a>
+          <a class="site-link" routerLink="meetings">מפגשים</a>
           <a class="site-link" [routerLink]="participationsService.isUserCanTell(user) ? null : 'tell'">אני רוצה
             לספר</a>
           <a class="site-link" [routerLink]="participationsService.isUserCanHost(user) ? null : 'host'">לארח רוצה
