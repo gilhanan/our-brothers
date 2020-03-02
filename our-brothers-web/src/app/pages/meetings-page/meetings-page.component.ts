@@ -72,12 +72,12 @@ export class MeetingsPageComponent implements OnInit {
   }
 
   getAccompanies(): number {
-    let accompaniesAnswer = window.prompt('כמות משתתפים?', '0')
+    let accompaniesAnswer = window.prompt('האם יגיעו איתך אנשים נוספים?', '0');
 
     let number = Number.parseInt(accompaniesAnswer);
 
     while (!(!Number.isNaN(number) && number >= 0 && number <= 7)) {
-      accompaniesAnswer = window.prompt('כמות משתתפים? מספר בין 0 ל-7', '0')
+      accompaniesAnswer = window.prompt('נא להזין מספר משתתפים בין 0 ל-7', '0');
       number = Number.parseInt(accompaniesAnswer);
     }
 

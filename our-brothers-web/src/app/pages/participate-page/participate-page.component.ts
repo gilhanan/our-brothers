@@ -111,7 +111,7 @@ export class ParticipatePageComponent implements OnInit, OnDestroy {
     let number = Number.parseInt(accompaniesAnswer);
 
     while (!(!Number.isNaN(number) && number >= 0 && number <= 7)) {
-      accompaniesAnswer = window.prompt('כמות משתתפים בין 0 ל-7', '0');
+      accompaniesAnswer = window.prompt('נא להזין מספר משתתפים בין 0 ל-7', '0');
       number = Number.parseInt(accompaniesAnswer);
     }
 
