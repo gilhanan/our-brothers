@@ -40,6 +40,10 @@ body {
   --primary-color: rgba(0, 160, 153);
 }
 
+p {
+  margin-bottom: 25px;
+}
+
 .hidden {
   visibility: hidden;
 }
@@ -377,7 +381,6 @@ textarea.form-field {
   }
 }
 
-
-h2{
+h2 {
   font-weight: normal;
 }

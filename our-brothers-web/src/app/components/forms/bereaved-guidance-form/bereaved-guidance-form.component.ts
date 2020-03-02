@@ -14,7 +14,7 @@ export interface GuidanceMeeting {
 export class BereavedGuidanceFormComponent {
   public guidances: GuidanceMeeting[] = traningMeetingsConst;
   public selectedGuidances = {};
-  public notIntereseted = false;
+  public notIntereseted = true;
 
   @Output()
   public submit = new EventEmitter<BereavedGuidance>();
@@ -42,19 +42,22 @@ export class BereavedGuidanceFormComponent {
 
 const traningMeetingsConst: GuidanceMeeting[] = [
   {
-    label: '24.3 יום שלישי, בין השעות 1700-2100, בWEWORK חיפה',
+    label:
+      "29.03.20 בבאר שבע בין השעות 17:30-21:30, משרדי WEWORK, רח' חלקיקי האור 16",
     value: 'm1'
   },
   {
-    label: '25.3 יום רביעי, בין השעות 1700-2100, בWEWORK ת"א',
+    label: "31.03.20 בתל אביב בין השעות 17:00-21:00, משרדי WEWORK, רח' שוקן 23",
     value: 'm2'
   },
   {
-    label: '26.3 יום חמישי, בין השעות 1700-2100, בWEWORK ירושלים',
+    label:
+      "01.04.20 בירושלים בין השעות 18:00-22:00, משרדי WEWORK, רח' קינג ג'ורג' 20",
     value: 'm3'
   },
   {
-    label: '29.3 יום ראשון, בין השעות 1700-2100, בWEWORK באר שבע ',
+    label:
+      "02.04.20 בחיפה בין השעות 17:00-21:00, משרדי WEWORK, רח' דרך העצמאות 45",
     value: 'm4'
   }
 ];

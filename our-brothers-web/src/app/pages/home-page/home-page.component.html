@@ -1,15 +1,26 @@
 <div class="video-background">
   <div class="video-show-box">
-    <video class="home-page-video" autoplay loop width="100%" [muted]="videoMuted" playsinline>
+    <video
+      class="home-page-video"
+      autoplay
+      loop
+      width="100%"
+      [muted]="videoMuted"
+      playsinline
+    >
       <source src="../../../assets/video/home-page.mp4" type="video/mp4" />
     </video>
     <button class="volume-button" (click)="videoMuted = !videoMuted">
-      <i class="fas" [ngClass]="{'fa-volume-mute': videoMuted, 'fa-volume-up': !videoMuted}"></i>
+      <i
+        class="fas"
+        [ngClass]="{
+          'fa-volume-mute': videoMuted,
+          'fa-volume-up': !videoMuted
+        }"
+      ></i>
     </button>
   </div>
-  <div class="big-heading">
-    מדברים <span class="talking-life">חיים</span>
-  </div>
+  <div class="big-heading">מדברים <span class="talking-life">חיים</span></div>
   <div class="site-hr"></div>
 </div>
 <div class="site-divider"></div>
@@ -20,18 +31,35 @@
   המפגשים
 </div>
 <div class="site-text" data-aos="fade-down" data-aos-duration="1000">
-  השנה, לקראת יום הזכרון (22.4-28.4), אתם הולכים לשמוע סיפור שעוד לא שמעתם,
-  סיפורם של האחים והאחיות השכולים. על אחים שלבשו מדים ויצאו לצבא ועל אלו שנשארו
-  בבית וחיכו להם. על משפחה שלמה שיום אחד התפרקה. זהו סיפור על חיים שנחצו ברגע.
-  הקול שלנו מספר סיפור אישי, משפחתי ולאומי. סיפורה של מדינת ישראל. אנחנו האחים,
-  בוחרים לשתף אתכם; בכאב ובשמחה, בהתמודדות, בתקווה ובגעגוע שאינו פוסק. בחרנו
-  להנציח אותם דרכם. במפגשים בכל רחבי הארץ, אתם תשמעו את הסיפור שלנו; על ספה, על
-  הדשא, במשרד, בחצר או בכל מקום שתבחרו. אחים יפתחו את ליבם, ישתפו אתכם ברגעים
-  הכי אינטימיים ואישיים שלהם ויספרו לכם על האחים שכל כך אהבו. האחים של כולנו.
-  אנחנו מזמינים אתכם לקחת חלק.
+  <p>
+    ביום ראשון ה-26.4 בשעה 20:00, אתם הולכים לשמוע סיפור שעוד לא שמעתם, סיפורם
+    של האחים והאחיות השכולים.
+  </p>
+  <p>
+    על אלו שלבשו מדים ויצאו לצבא ועל אלו שנשארו בבית וחיכו להם. על משפחה שלמה
+    שיום אחד התפרקה. זהו סיפור על חיים שנחצו ברגע.
+  </p>
+  <p>
+    הקול שלנו מספר סיפור אישי, משפחתי ולאומי. סיפורה של מדינת ישראל.
+  </p>
+  <p>
+    אנחנו האחים, בוחרים לשתף אתכם; בכאב ובשמחה, בהתמודדות, בתקווה ובגעגוע שאינו
+    פוסק. בחרנו להנציח אותם באמצעות מפגשים אלו.
+  </p>
+  <p>
+    במפגשים בכל רחבי הארץ, אתם תשמעו את הסיפור שלנו; על ספה, על הדשא, במשרד,
+    בחצר או בכל מקום שתבחרו. אחים יפתחו את ליבם, ישתפו אתכם ברגעים הכי אינטימיים
+    ואישיים שלהם ויספרו לכם על האחים שלהם, שהם כל כך אהבו. האחים של כולנו.
+  </p>
+  <p>
+    אנחנו מזמינים אתכם לקחת חלק.
+  </p>
 </div>
 <div class="participations-buttons">
-  <app-participations-buttons [user]="user" [loading]="loadingUser"></app-participations-buttons>
+  <app-participations-buttons
+    [user]="user"
+    [loading]="loadingUser"
+  ></app-participations-buttons>
 </div>
 <div class="see-more" data-aos="fade-left" data-aos-duration="1000">
   <a routerLink="/meetings">ראה עוד <i class="fas fa-angle-double-left"></i></a>
@@ -45,23 +73,54 @@
 <div class="gallery-container" data-aos="fade-up" data-aos-duration="1000">
   <div class="gallery-images">
     <div class="images-row">
-      <img class="image image-1" src="../../../assets/img/gallery_right.jpg" alt="Metting Gallery Image 1"
-        data-aos="fade-right" data-aos-duration="1000" />
-      <img class="image image-2" src="../../../assets/img/gallery_left.jpg" alt="Metting Gallery Image 1"
-        data-aos="fade-left" data-aos-duration="1000" />
+      <img
+        class="image image-1"
+        src="../../../assets/img/gallery_right.jpg"
+        alt="Metting Gallery Image 1"
+        data-aos="fade-right"
+        data-aos-duration="1000"
+      />
+      <img
+        class="image image-2"
+        src="../../../assets/img/gallery_left.jpg"
+        alt="Metting Gallery Image 1"
+        data-aos="fade-left"
+        data-aos-duration="1000"
+      />
     </div>
     <div class="images-row">
-      <img class="image image-3" src="../../../assets/img/gallery_bottom.jpg" alt="Metting Gallery Image 1"
-        data-aos="fade-up" data-aos-duration="1000" />
+      <img
+        class="image image-3"
+        src="../../../assets/img/gallery_bottom.jpg"
+        alt="Metting Gallery Image 1"
+        data-aos="fade-up"
+        data-aos-duration="1000"
+      />
     </div>
-    <img class="circle-top-right" src="../../../assets/img/gallery_top_right_circle.png" alt="" />
-    <img class="circle-middle-left" src="../../../assets/img/gallery_middle_left_circle.png" alt="" />
-    <img class="circle-bottom-right" src="../../../assets/img/gallery_bottom_right_circle.png" alt="" />
+    <img
+      class="circle-top-right"
+      src="../../../assets/img/gallery_top_right_circle.png"
+      alt=""
+    />
+    <img
+      class="circle-middle-left"
+      src="../../../assets/img/gallery_middle_left_circle.png"
+      alt=""
+    />
+    <img
+      class="circle-bottom-right"
+      src="../../../assets/img/gallery_bottom_right_circle.png"
+      alt=""
+    />
   </div>
 </div>
 <div class="contact-form">
   <div class="site-divider"></div>
   <div class="small-heading">צרו קשר</div>
   <div class="medium-heading">השאירו פרטים</div>
-  <app-contact-form [user]="user" [loading]="postingContact" (submit)="onContactSubmit($event)"></app-contact-form>
+  <app-contact-form
+    [user]="user"
+    [loading]="postingContact"
+    (submit)="onContactSubmit($event)"
+  ></app-contact-form>
 </div>
