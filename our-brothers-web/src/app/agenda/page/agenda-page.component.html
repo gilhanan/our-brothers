@@ -84,12 +84,15 @@
       <ng-container *ngFor="let quote of pagedExcerpts[0].page">
         <div class="quote">
           <img class="apostrophy" src="../../../assets/img/apostrophy.png" />
-          <div class="quote-text">{{ quote.excerpt }}</div>
+          <div class="site-text quote-text">{{ quote.excerpt }}</div>
           <div class="quote-divider"></div>
-          <a class="person-link">{{ quote.writerName }}</a>
-          <a class="person-link" [href]="quote.recipientId">{{
-            quote.recipientName
-          }}</a>
+          <a class="site-text person-link">{{ quote.writerName }}</a>
+          <a
+            class="site-text person-link"
+            target="_blank"
+            [href]="quote.recipientId"
+            >{{ quote.recipientName }}</a
+          >
         </div>
       </ng-container>
     </div>
