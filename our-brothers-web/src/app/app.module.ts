@@ -90,6 +90,9 @@ import { DonatePageComponent } from './pages/donate-page/donate-page.component';
 import { PaypalButtonComponent } from './components/paypal-button/paypal-button.component';
 import { NewsPageComponent } from './pages/news-page/news-page.component';
 import { MeetingParticipatesListComponent } from './meeting-participates-list/meeting-participates-list.component';
+import { QnaPageComponent } from './pages/qna-page/qna-page.component';
+import { QnaListComponent } from './components/qna-list/qna-list.component';
+import { QnaItemComponent } from './components/qna-item/qna-item.component';
 
 registerLocaleData(localeHe);
 
@@ -168,7 +171,10 @@ registerLocaleData(localeHe);
     DonatePageComponent,
     PaypalButtonComponent,
     NewsPageComponent,
-    MeetingParticipatesListComponent
+    MeetingParticipatesListComponent,
+    QnaPageComponent,
+    QnaListComponent,
+    QnaItemComponent
   ],
   imports: [
     BrowserModule,

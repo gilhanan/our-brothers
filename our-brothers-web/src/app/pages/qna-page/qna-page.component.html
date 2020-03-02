@@ -1,0 +1,58 @@
+<img
+  class="image-header"
+  src="../../../assets/img/qnaHeader.jpg.png"
+  alt="Questions and Answers Page Header Image"
+/>
+<div class="site-divider"></div>
+<h1 class="small-heading" data-aos="fade-up" data-aos-duration="1000">
+  שאלות ותשובות
+</h1>
+<h2 class="medium-heading" data-aos="fade-up" data-aos-duration="1000">
+  לפניכם שאלות ותשובות נפוצות
+</h2>
+<div class="qna-types-list-container">
+  <div class="qna-container">
+    <div
+      class="qna-type-item"
+      [class.current]="currentQType === 0"
+      (click)="currentQType = 0"
+    >
+      <div class="qna-type-text">
+        אחים
+      </div>
+    </div>
+    <div
+      class="qna-type-item"
+      [class.current]="currentQType === 1"
+      (click)="currentQType = 1"
+    >
+      <div class="qna-type-text">
+        מארחים
+      </div>
+    </div>
+    <div
+      class="qna-type-item"
+      [class.current]="currentQType === 2"
+      (click)="currentQType = 2"
+    >
+      <div class="qna-type-text">
+        משתתפים
+      </div>
+    </div>
+  </div>
+</div>
+<div class="qna-list-wrapper">
+  <div class="qna-container">
+    <ng-container [ngSwitch]="currentQType">
+      <ng-container *ngSwitchCase="0">
+        <app-qna-list [qnaList]="qnaBrothers"></app-qna-list>
+      </ng-container>
+      <ng-container *ngSwitchCase="1">
+        <app-qna-list [qnaList]="qnaHosts"></app-qna-list>
+      </ng-container>
+      <ng-container *ngSwitchCase="2">
+        <app-qna-list [qnaList]="qnaParticipates"></app-qna-list>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>

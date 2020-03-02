@@ -9,7 +9,7 @@ import { TeamPageComponent } from './pages/team-page/team-page.component';
 import { ArticlesPageComponent } from './pages/articles-page/articles-page.component';
 import { NewsPageComponent } from './pages/news-page/news-page.component';
 import { AgendaPageComponent } from './pages/agenda-page/agenda-page.component';
-import { QuestionsPageComponent } from './pages/questions-page/questions-page.component';
+import { QnaPageComponent } from './pages/qna-page/qna-page.component';
 import { GalleryPageComponent } from './pages/gallery-page/gallery-page.component';
 import { AdminBereavedsPageComponent } from './pages/admin-bereaveds-page/admin-bereaveds-page.component';
 import { TellPageComponent } from './pages/tell-page/tell-page.component';
@@ -46,15 +46,18 @@ const routes: Routes = [
   },
   {
     path: 'meetings',
-    children: [{
-      path: '',
-      component: MeetingsPageComponent,
-      pathMatch: 'full'
-    }, {
-      path: ':memorialYear/:hostId/:meetingId',
-      component: MeetingDetailsPageComponent,
-      pathMatch: 'full'
-    }]
+    children: [
+      {
+        path: '',
+        component: MeetingsPageComponent,
+        pathMatch: 'full'
+      },
+      {
+        path: ':memorialYear/:hostId/:meetingId',
+        component: MeetingDetailsPageComponent,
+        pathMatch: 'full'
+      }
+    ]
   },
   {
     path: 'about',
@@ -82,8 +85,8 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'questions',
-    component: QuestionsPageComponent,
+    path: 'qna',
+    component: QnaPageComponent,
     pathMatch: 'full'
   },
   {
@@ -94,11 +97,13 @@ const routes: Routes = [
   {
     path: 'donate',
     component: DonatePageComponent,
-    children: [{
-      path: '',
-      component: DonatePageComponent,
-      pathMatch: 'full'
-    }]
+    children: [
+      {
+        path: '',
+        component: DonatePageComponent,
+        pathMatch: 'full'
+      }
+    ]
   },
   {
     path: 'contact',
@@ -107,15 +112,18 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    children: [{
-      path: '',
-      component: AdminBereavedsPageComponent,
-      pathMatch: 'full'
-    }, {
-      path: 'bereaveds',
-      component: AdminBereavedsPageComponent,
-      pathMatch: 'full'
-    }]
+    children: [
+      {
+        path: '',
+        component: AdminBereavedsPageComponent,
+        pathMatch: 'full'
+      },
+      {
+        path: 'bereaveds',
+        component: AdminBereavedsPageComponent,
+        pathMatch: 'full'
+      }
+    ]
   },
   {
     path: '',
@@ -125,12 +133,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })],
-  providers: [
-    HostGuard,
-    TellGuard,
-    ParticipateGuard
+  imports: [
+    RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })
   ],
+  providers: [HostGuard, TellGuard, ParticipateGuard],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
