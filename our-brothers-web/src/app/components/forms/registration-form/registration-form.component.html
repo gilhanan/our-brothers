@@ -4,28 +4,60 @@
       הרשמה
     </div>
     <ng-container [formGroup]="form">
-      <input type="text" placeholder="אימייל" class="input" formControlName="email"
-        [class.invalid]="!email.valid && email.touched" />
-      <input type="password" placeholder="סיסמא (לפחות 6 תווים)" class="input" formControlName="password"
-        [class.invalid]="!password.valid && password.touched" />
-      <input type="password" placeholder="אישור סיסמא" class="input" formControlName="passwordConfirm"
-        [class.invalid]="(!password.valid || form.hasError('notSame')) && password.touched" />
+      <input
+        type="text"
+        placeholder="אימייל"
+        class="input"
+        formControlName="email"
+        [class.invalid]="!email.valid && email.touched"
+      />
+      <input
+        type="password"
+        placeholder="סיסמא (לפחות 6 תווים)"
+        class="input"
+        formControlName="password"
+        [class.invalid]="!password.valid && password.touched"
+      />
+      <input
+        type="password"
+        placeholder="אישור סיסמא"
+        class="input"
+        formControlName="passwordConfirm"
+        [class.invalid]="
+          (!password.valid || form.hasError('notSame')) && password.touched
+        "
+      />
     </ng-container>
     <div class="footer">
-      <button class="nav-button" (click)="haveUser.emit()">
-        יש לי כבר משתמש
-      </button>
+      <div class="nav-buttons">
+        <button class="nav-button" (click)="haveUser.emit()">
+          יש לי כבר משתמש
+        </button>
+      </div>
     </div>
     <div class="social-buttons">
-      <app-login-social-button class="social-button" [type]="'facebook'" (click)="signUpWithFacebook.emit()">
+      <app-login-social-button
+        class="social-button"
+        [type]="'facebook'"
+        (click)="signUpWithFacebook.emit()"
+      >
         הרשם עם פייסבוק
       </app-login-social-button>
-      <app-login-social-button class="social-button" [type]="'google'" (click)="signUpWithGoogle.emit()">
+      <app-login-social-button
+        class="social-button"
+        [type]="'google'"
+        (click)="signUpWithGoogle.emit()"
+      >
         הרשם עם גוגל
       </app-login-social-button>
     </div>
   </div>
-  <button class="site-button main-button" tabindex="5" (click)="onSubmit()" [disabled]="loading">
+  <button
+    class="site-button main-button"
+    tabindex="5"
+    (click)="onSubmit()"
+    [disabled]="loading"
+  >
     הרשם
   </button>
 </div>

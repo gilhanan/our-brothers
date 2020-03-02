@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject, combineLatest, Subscription } from 'rxjs';
-import { distinctUntilChanged } from 'rxjs/operators';
+import { distinctUntilChanged, tap } from 'rxjs/operators';
 
 import {
   Meeting,
@@ -47,7 +47,14 @@ export class TellPageComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       combineLatest(
         this.authService.user,
-        this.currentStep$.pipe(distinctUntilChanged())
+        this.currentStep$.pipe(
+          distinctUntilChanged(),
+          tap(() => {
+            if (window.scrollTo) {
+              window.scrollTo(0, 0);
+            }
+          })
+        )
       ).subscribe(([user, currentStep]) => {
         this.user = user;
         this.currentStep = currentStep;

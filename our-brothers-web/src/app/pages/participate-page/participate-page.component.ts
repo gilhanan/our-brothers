@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject, combineLatest, Subscription } from 'rxjs';
+import { distinctUntilChanged, tap } from 'rxjs/operators';
 
 import { User, Meeting, UserRole } from 'models';
 import { AuthService } from 'src/app/services/auth.service';
 import { ParticipationsService } from 'src/app/services/participations.service';
 import { DataService, MEMORIAL_YEAR } from 'src/app/services/data.service';
-import { distinctUntilChanged } from 'rxjs/operators';
 import { ProfileForm } from 'src/app/components/forms/profile-form/profile-form.component';
 
 @Component({
@@ -39,7 +39,14 @@ export class ParticipatePageComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       combineLatest(
         this.authService.user,
-        this.currentStep$.pipe(distinctUntilChanged())
+        this.currentStep$.pipe(
+          distinctUntilChanged(),
+          tap(() => {
+            if (window.scrollTo) {
+              window.scrollTo(0, 0);
+            }
+          })
+        )
       ).subscribe(([user, currentStep]) => {
         this.user = user;
         this.currentStep = currentStep;

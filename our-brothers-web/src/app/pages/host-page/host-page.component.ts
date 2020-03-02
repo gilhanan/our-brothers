@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject, combineLatest, Subscription } from 'rxjs';
+import { distinctUntilChanged, tap } from 'rxjs/operators';
 
 import { User, UserRole, Meeting } from 'models';
 import { AuthService } from 'src/app/services/auth.service';
@@ -27,7 +28,7 @@ export class HostPageComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private dataService: DataService,
     private participationsService: ParticipationsService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.authService.firebaseUser.subscribe(
@@ -35,34 +36,42 @@ export class HostPageComponent implements OnInit, OnDestroy {
     );
 
     this.subscriptions.push(
-      combineLatest(this.authService.user, this.currentStep$).subscribe(
-        ([user, currentStep]) => {
-          this.user = user;
-          this.currentStep = currentStep;
-
-          // Auto navigations after the first step
-          if (this.currentStep > 0) {
-            if (user) {
-              if (user.role && user.role === UserRole.bereaved) {
-                this.router.navigate(['/home']);
-              } else if (user.role !== UserRole.host) {
-                this.dataService.setUserRole(user, UserRole.host);
-              }
+      combineLatest(
+        this.authService.user,
+        this.currentStep$.pipe(
+          distinctUntilChanged(),
+          tap(() => {
+            if (window.scrollTo) {
+              window.scrollTo(0, 0);
             }
+          })
+        )
+      ).subscribe(([user, currentStep]) => {
+        this.user = user;
+        this.currentStep = currentStep;
 
-            if (!user) {
-              this.currentStep = 1;
-              this.authService.requestToLogin();
-            } else if (
-              !this.participationsService.isParticipateHaveAllDetails(user)
-            ) {
-              this.currentStep = 2;
-            } else {
-              this.currentStep = currentStep > 2 ? currentStep : 3;
+        // Auto navigations after the first step
+        if (this.currentStep > 0) {
+          if (user) {
+            if (user.role && user.role === UserRole.bereaved) {
+              this.router.navigate(['/home']);
+            } else if (user.role !== UserRole.host) {
+              this.dataService.setUserRole(user, UserRole.host);
             }
           }
+
+          if (!user) {
+            this.currentStep = 1;
+            this.authService.requestToLogin();
+          } else if (
+            !this.participationsService.isParticipateHaveAllDetails(user)
+          ) {
+            this.currentStep = 2;
+          } else {
+            this.currentStep = currentStep > 2 ? currentStep : 3;
+          }
         }
-      )
+      })
     );
 
     this.currentStep$.next(0);
@@ -73,10 +82,14 @@ export class HostPageComponent implements OnInit, OnDestroy {
   }
 
   onNewMeeting(meetingDetails: MeetingForm) {
-    this.dataService.createMeeting(this.user, meetingDetails).subscribe((meeting: Meeting) => {
-      alert('נוצר מפגש בהצלחה!');
-      this.router.navigate([`meetings/${this.year}/${meeting.hostId}/${meeting.id}`]);
-    });
+    this.dataService
+      .createMeeting(this.user, meetingDetails)
+      .subscribe((meeting: Meeting) => {
+        alert('נוצר מפגש בהצלחה!');
+        this.router.navigate([
+          `meetings/${this.year}/${meeting.hostId}/${meeting.id}`
+        ]);
+      });
   }
 
   ngOnDestroy() {

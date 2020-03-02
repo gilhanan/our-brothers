@@ -4,10 +4,20 @@
       התחברות
     </div>
     <ng-container [formGroup]="form">
-      <input type="text" placeholder="אימייל" class="input" formControlName="email"
-        [class.invalid]="!email.valid && email.touched" />
-      <input type="password" placeholder="סיסמא" class="input" formControlName="password"
-        [class.invalid]="!password.valid && password.touched" />
+      <input
+        type="text"
+        placeholder="אימייל"
+        class="input"
+        formControlName="email"
+        [class.invalid]="!email.valid && email.touched"
+      />
+      <input
+        type="password"
+        placeholder="סיסמא"
+        class="input"
+        formControlName="password"
+        [class.invalid]="!password.valid && password.touched"
+      />
     </ng-container>
     <div class="footer">
       <div class="nav-buttons">
@@ -21,15 +31,28 @@
       </div>
     </div>
     <div class="social-buttons">
-      <app-login-social-button class="social-button" [type]="'facebook'" (click)="signInWithFacebook.emit()">
+      <app-login-social-button
+        class="social-button"
+        [type]="'facebook'"
+        (click)="signInWithFacebook.emit()"
+      >
         התחבר עם פייסבוק
       </app-login-social-button>
-      <app-login-social-button class="social-button" [type]="'google'" (click)="signInWithGoogle.emit()">
+      <app-login-social-button
+        class="social-button"
+        [type]="'google'"
+        (click)="signInWithGoogle.emit()"
+      >
         התחבר עם גוגל
       </app-login-social-button>
     </div>
   </div>
-  <button class="site-button main-button" tabindex="5" (click)="onSubmit()" [disabled]="loading">
+  <button
+    class="site-button main-button"
+    tabindex="5"
+    (click)="onSubmit()"
+    [disabled]="loading"
+  >
     התחבר
   </button>
 </div>

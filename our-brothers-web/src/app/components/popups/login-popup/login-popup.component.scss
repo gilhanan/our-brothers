@@ -3,7 +3,7 @@
   margin: auto;
   top: 50%;
   transform: translateY(-50%);
-  max-width: 570px;
+  max-width: 500px;
 
   .close-button {
     position: absolute;
@@ -52,15 +52,15 @@
 ::ng-deep {
   .login-form {
     .body {
-      padding: 25px 30px 35px 30px;
+      padding: 15px;
 
       @media only screen and (min-width: 768px) {
-        padding: 35px 40px 45px 40px;
+        padding: 30px;
       }
 
       .title {
         font-size: 36px;
-        font-family: "arbel";
+        font-family: 'arbel';
         color: rgb(55, 135, 177);
         letter-spacing: 6px;
         margin-bottom: 20px;
@@ -71,7 +71,7 @@
       }
 
       .input {
-        font-family: "Heebo";
+        font-family: 'Heebo';
         padding: 10px;
         height: 50px;
         max-width: 490px;
@@ -99,15 +99,20 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 40px;
+      margin-bottom: 20px;
 
-      .nav-button {
-        cursor: pointer;
-        font-size: 16px;
-        font-family: "Heebo";
-        color: rgb(0, 160, 153);
-        background-color: transparent;
-        border: none;
+      .nav-buttons {
+        display: flex;
+        align-items: center;
+
+        .nav-button {
+          font-size: 16px;
+          font-family: 'Heebo';
+          color: rgb(0, 160, 153);
+          background-color: transparent;
+          border: none;
+          cursor: pointer;
+        }
       }
 
       .divider {
@@ -129,7 +134,7 @@
       }
 
       .social-button {
-        flex: 0 0 230px;
+        flex: 0 0 210px;
         margin-bottom: 5px;
       }
     }
