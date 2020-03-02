@@ -94,7 +94,7 @@
           *ngIf="!user"
           class="action-header-login site-button"
           [disabled]="loading"
-          (click)="login.emit()"
+          (click)="onLogin()"
         >
           התחבר
         </button>
@@ -102,7 +102,7 @@
           *ngIf="user"
           class="action-header-login site-button"
           [disabled]="loading"
-          (click)="logout.emit()"
+          (click)="onLogout()"
         >
           התנתק
         </button>

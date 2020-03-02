@@ -1,7 +1,11 @@
 .list-container {
   margin: 0 auto;
-  max-width: 770px;
+  max-width: 600px;
   margin-bottom: 50px;
+
+  &.extended {
+    max-width: 770px;
+  }
 
   .header {
     display: flex;
@@ -19,8 +23,7 @@
       text-align: center;
 
       &.col-name {
-        text-align: right;
-        flex: 0 0 160px;
+        flex: 1;
       }
 
       &.col-capacity {
@@ -54,7 +57,6 @@
     }
 
     .col {
-      flex: 0 0 auto;
       font-size: 19px;
       font-family: 'Heebo';
       color: rgb(129, 129, 129);
@@ -76,7 +78,7 @@
       }
 
       &.col-name {
-        width: 160px;
+        flex: 1;
 
         .name {
           font-size: 23px;
@@ -87,11 +89,13 @@
       }
 
       &.col-capacity {
+        flex: 0 0 auto;
         width: 170px;
         text-align: center;
       }
 
       &.col-phone {
+        flex: 0 0 auto;
         width: 150px;
         text-align: center;
       }

@@ -55,6 +55,45 @@
         ></app-host-meeting-input-text>
       </div>
     </div>
+    <div
+      *ngIf="user && ((user.id === meeting?.hostId) || meeting?.bereaved?.id === user.id)"
+    >
+      <div class="heading host-heading">
+        פרטי מארח/ת
+      </div>
+      <div class="row">
+        <div class="col">
+          <app-host-meeting-input-text
+            class="input"
+            iconUrl="assets/img/host_user.svg"
+            info="שם המארח/ת"
+            [text]="
+              meeting?.contact
+                ? meeting?.contact.firstName + ' ' + meeting?.contact.lastName
+                : ''
+            "
+          ></app-host-meeting-input-text>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <app-host-meeting-input-text
+            class="input"
+            iconUrl="assets/img/host_phone.svg"
+            [text]="meeting?.contact?.phoneNumber | phone"
+          ></app-host-meeting-input-text>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <app-host-meeting-input-text
+            class="input"
+            iconUrl="assets/img/host_email.svg"
+            [text]="meeting?.contact?.email"
+          ></app-host-meeting-input-text>
+        </div>
+      </div>
+    </div>
     <!-- <div class="col">
       <div class="edit-button">
         <div class="edit-button-text">
@@ -76,59 +115,62 @@
         <div class="whatsapp-icon"></div>
       </div>
     </div> -->
-    <div class="heading brother-heading" *ngIf="meeting?.bereaved">
-      אח/ות שכול/ה
+    <div *ngIf="meeting?.bereaved">
+      <div class="heading brother-heading">
+        אח/ות שכול/ה
+      </div>
+      <div class="row">
+        <div class="col">
+          <app-host-meeting-input-text
+            class="input"
+            iconUrl="assets/img/host_user.svg"
+            info="שם האח"
+            [text]="
+              meeting?.bereaved
+                ? meeting.bereaved.firstName + ' ' + meeting.bereaved.lastName
+                : ''
+            "
+          ></app-host-meeting-input-text>
+        </div>
+        <div class="col">
+          <app-host-meeting-input-text
+            class="input"
+            iconUrl="assets/img/host_user.svg"
+            info="שם החלל"
+            [text]="
+              meeting?.bereaved?.slains
+                ? meeting.bereaved.slains[0].firstName +
+                  ' ' +
+                  meeting.bereaved.slains[0].lastName
+                : ''
+            "
+          ></app-host-meeting-input-text>
+        </div>
+      </div>
+      <div class="row" *ngIf="meeting?.bereaved && user?.id === meeting.hostId">
+        <div class="col">
+          <app-host-meeting-input-text
+            class="input"
+            iconUrl="assets/img/host_phone.svg"
+            [text]="meeting?.bereaved?.phoneNumber | phone"
+          ></app-host-meeting-input-text>
+        </div>
+        <div class="col">
+          <app-host-meeting-input-text
+            class="input"
+            iconUrl="assets/img/host_email.svg"
+            [text]="meeting?.bereaved?.email"
+          ></app-host-meeting-input-text>
+        </div>
+      </div>
     </div>
-    <div class="row" *ngIf="meeting?.bereaved">
-      <div class="col">
-        <app-host-meeting-input-text
-          class="input"
-          iconUrl="assets/img/host_user.svg"
-          info="שם האח"
-          [text]="
-            meeting?.bereaved
-              ? meeting.bereaved.firstName + ' ' + meeting.bereaved.lastName
-              : ''
-          "
-        ></app-host-meeting-input-text>
-      </div>
-      <div class="col">
-        <app-host-meeting-input-text
-          class="input"
-          iconUrl="assets/img/host_user.svg"
-          info="שם החלל"
-          [text]="
-            meeting?.bereaved?.slains
-              ? meeting.bereaved.slains[0].firstName +
-                ' ' +
-                meeting.bereaved.slains[0].lastName
-              : ''
-          "
-        ></app-host-meeting-input-text>
-      </div>
-    </div>
-    <div class="row" *ngIf="meeting?.bereaved">
-      <div class="col">
-        <app-host-meeting-input-text
-          class="input"
-          iconUrl="assets/img/host_phone.svg"
-          info="טלפון של האח"
-          [text]="meeting?.bereaved?.phoneNumber | phone"
-        ></app-host-meeting-input-text>
-      </div>
-      <div class="col">
-        <app-host-meeting-input-text
-          class="input"
-          iconUrl="assets/img/host_email.svg"
-          [text]="meeting?.bereaved?.email"
-        ></app-host-meeting-input-text>
-      </div>
-    </div>
-    <div *ngIf="!meeting?.invited && meetingParticipates?.length">
+    <div *ngIf="user && !meeting?.invited && meetingParticipates?.length">
       <div class="heading participates-heading">
         משתתפים ({{ meeting.count + '/' + meeting.capacity }})
       </div>
       <app-meeting-participates-list
+        [user]="user"
+        [meeting]="meeting"
         [meetingParticipates]="meetingParticipates"
       ></app-meeting-participates-list>
     </div>

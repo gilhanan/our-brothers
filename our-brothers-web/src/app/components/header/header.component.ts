@@ -63,4 +63,14 @@ export class HeaderComponent implements OnInit {
       }
     }
   }
+
+  onLogin() {
+    this.isSideMenuClosed = true;
+    this.login.emit();
+  }
+
+  onLogout() {
+    this.isSideMenuClosed = true;
+    this.logout.emit();
+  }
 }

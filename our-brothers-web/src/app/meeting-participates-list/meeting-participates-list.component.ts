@@ -1,5 +1,5 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
-import { Meeting, MeetingParticipate } from 'models';
+import { MeetingParticipate, User, Meeting } from 'models';
 
 @Component({
   selector: 'app-meeting-participates-list',
@@ -8,5 +8,7 @@ import { Meeting, MeetingParticipate } from 'models';
   styleUrls: ['./meeting-participates-list.component.scss']
 })
 export class MeetingParticipatesListComponent {
-  @Input() public meetingParticipates: MeetingParticipate[];
+  @Input() user: User;
+  @Input() meeting: Meeting;
+  @Input() meetingParticipates: MeetingParticipate[];
 }

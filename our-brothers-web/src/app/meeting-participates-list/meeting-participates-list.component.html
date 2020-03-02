@@ -1,4 +1,4 @@
-<div class="list-container">
+<div class="list-container" [class.extended]="user.id === meeting.hostId">
   <div class="header">
     <div class="col col-name">
       שם המשתתף
@@ -6,10 +6,10 @@
     <div class="col col-capacity">
       מספר משתתפים
     </div>
-    <div class="col col-phone">
+    <div class="col col-phone" *ngIf="user.id === meeting.hostId">
       טלפון
     </div>
-    <div class="col col-email">
+    <div class="col col-email" *ngIf="user.id === meeting.hostId">
       מייל
     </div>
   </div>
@@ -25,11 +25,11 @@
         <span class="mobile-label">מספר משתתפים</span>
         {{ participate.accompanies + 1 }}
       </div>
-      <div class="col col-phone">
+      <div class="col col-phone" *ngIf="user.id === meeting.hostId">
         <span class="mobile-label">טלפון נייד</span>
         {{ participate.phoneNumber | phone }}
       </div>
-      <div class="col col-email">
+      <div class="col col-email" *ngIf="user.id === meeting.hostId">
         <span class="mobile-label">מייל</span>
         {{ participate.email }}
       </div>

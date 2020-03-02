@@ -2,9 +2,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { Meeting, MeetingParticipate } from 'models';
+import { Meeting, MeetingParticipate, User } from 'models';
 import { DataService } from 'src/app/services/data.service';
 import { UtilsService } from 'src/app/services/utils.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-meeting-details-page',
@@ -12,22 +13,28 @@ import { UtilsService } from 'src/app/services/utils.service';
   styleUrls: ['./meeting-details-page.component.scss']
 })
 export class MeetingDetailsPageComponent implements OnInit, OnDestroy {
+  public user: User;
+
   public loadingMeeting = true;
   public meeting: Meeting;
 
   public loadingMeetingParticipates = true;
   public meetingParticipates: MeetingParticipate[];
 
+  private user$: Subscription;
   private getMeeting$: Subscription;
   private getMeetingParticipates$: Subscription;
 
   constructor(
     public utilsService: UtilsService,
     private activatedRoute: ActivatedRoute,
+    private authService: AuthService,
     private dataService: DataService
   ) {}
 
   ngOnInit() {
+    this.authService.user.subscribe(user => (this.user = user));
+
     this.activatedRoute.params.subscribe(params => {
       const { hostId, meetingId } = params;
 
@@ -54,6 +61,9 @@ export class MeetingDetailsPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    if (this.user$) {
+      this.user$.unsubscribe();
+    }
     if (this.getMeeting$) {
       this.getMeeting$.unsubscribe();
     }
