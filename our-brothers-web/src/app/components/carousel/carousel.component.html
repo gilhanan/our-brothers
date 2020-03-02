@@ -1,0 +1,11 @@
+<div class="slider">
+  <ng-container *ngFor="let slide of slidesWithId">
+    <a [href]="'#' + slide.id"></a>
+  </ng-container>
+
+  <div class="slides">
+    <ng-container *ngFor="let slide of slidesWithId">
+      <div [id]="slide.id" *ngTemplateOutlet="slide.slide"></div>
+    </ng-container>
+  </div>
+</div>
