@@ -61,7 +61,7 @@ const members: TeamMember[] = [
   },
   {
     name: 'אמיר קלנגל',
-    title: 'חבר עמותה',
+    title: 'חבר עמותה ומייסד',
     frontImage: '/assets/img/about/b-5-1.jpg',
     backImage: '/assets/img/about/b-5-2.jpg',
     slains: [
@@ -150,7 +150,7 @@ const members: TeamMember[] = [
   // },
   {
     name: 'טל שרייבמן פולק',
-    title: 'חברת עמותה',
+    title: 'חברת עמותה ומייסדת',
     frontImage: '/assets/img/about/b-16-1.jpg',
     backImage: '/assets/img/about/b-16-2.jpg',
     slains: [
@@ -169,7 +169,7 @@ const members: TeamMember[] = [
   },
   {
     name: 'טלי לזניק',
-    title: 'חברת עמותה',
+    title: 'חברת עמותה ומייסדת',
     frontImage: '/assets/img/about/b-13-1.jpg'
   },
   {
