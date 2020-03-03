@@ -41,7 +41,7 @@ if (!client || !client.messages || !client.messages.create) {
           const message = {
             body: `אנחנו שמחים לעדכן על פתיחת ההרשמה של מפגשי 'האחים שלנו' לשנת 2020, הכנסו לאתר וקחו חלק> www.ourbrothers.co.il. להסרה השיבו "הסר"`,
             to: phone,
-            from: '+972525929213'
+            from: 'OurBrothers'
           };
           promises.push(
             client.messages
