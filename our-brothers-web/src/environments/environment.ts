@@ -11,8 +11,8 @@ export const environment = {
     projectId: "our-brothers",
     storageBucket: "our-brothers.appspot.com",
     messagingSenderId: "140734739420",
-    appId: "1:140734739420:web:9a51b356b893428505d519",
-    measurementId: "G-ZQNFNV8NWQ"
+    appId: "1:140734739420:web:edb00f9ae409a68005d519",
+    measurementId: "G-D74EB6EMZG"
   }
 };
 

@@ -6,10 +6,8 @@
     "firebase": "firebase",
     "start": "ng serve",
     "build": "ng build --prod",
-    "deploy": "npm run deploy:beta",
-    "deploy:all": "npm run deploy:beta && npm run deploy:prod",
-    "deploy:beta": "firebase deploy --only hosting:beta",
-    "deploy:prod": "firebase deploy --only hosting:prod",
+    "deploy:beta": "ng build && firebase deploy --only hosting:beta",
+    "deploy:prod": "ng build --prod && firebase deploy --only hosting:prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
