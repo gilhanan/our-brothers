@@ -1,15 +1,10 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {HomePageComponent} from './pages/home-page/home-page.component';
-import {DonatePageComponent} from './pages/donate-page/donate-page.component';
-import {MeetingsPageComponent} from './pages/meetings-page/meetings-page.component';
-import {TellPageComponent} from './pages/tell-page/tell-page.component';
-import {ParticipatePageComponent} from './pages/participate-page/participate-page.component';
-import {HostPageComponent} from './pages/host-page/host-page.component';
-import {MeetingDetailsPageComponent} from './pages/meeting-details-page/meeting-details-page.component';
+import {HomePageComponent} from './home/home-page.component';
 import {HostGuard} from './guards/host.guard';
 import {TellGuard} from './guards/tell.guard';
 import {ParticipateGuard} from './guards/participate.guard';
+import {HostPageModule} from "./host/page/host-page.module";
 
 const routes: Routes = [
   {
@@ -19,36 +14,22 @@ const routes: Routes = [
   },
   {
     path: 'host',
-    component: HostPageComponent,
-    pathMatch: 'full',
+    loadChildren: () => import('./host/page/host-page.module').then(({ HostPageModule }) => HostPageModule),
     canActivate: [HostGuard]
   },
   {
     path: 'tell',
-    component: TellPageComponent,
-    pathMatch: 'full',
+    loadChildren: () => import('./tell/page/tell-page.module').then(({ TellPageModule }) => TellPageModule),
     canActivate: [TellGuard]
   },
   {
     path: 'participate',
-    component: ParticipatePageComponent,
-    pathMatch: 'full',
+    loadChildren: () => import('./participate/page/participate-page.module').then(({ ParticipatePageModule }) => ParticipatePageModule),
     canActivate: [ParticipateGuard]
   },
   {
     path: 'meetings',
-    children: [
-      {
-        path: '',
-        component: MeetingsPageComponent,
-        pathMatch: 'full'
-      },
-      {
-        path: ':memorialYear/:hostId/:meetingId',
-        component: MeetingDetailsPageComponent,
-        pathMatch: 'full'
-      }
-    ]
+    loadChildren: () => import('./meetings/page/meetings-page.module').then(({MeetingsPageModule}) => MeetingsPageModule)
   },
   {
     path: 'about',
@@ -87,14 +68,7 @@ const routes: Routes = [
   },
   {
     path: 'donate',
-    component: DonatePageComponent,
-    children: [
-      {
-        path: '',
-        component: DonatePageComponent,
-        pathMatch: 'full'
-      }
-    ]
+    loadChildren: () => import('./donate/page/donate-page.module').then(({DonatePageModule}) => DonatePageModule)
   },
   {
     path: 'contact',

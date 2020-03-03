@@ -10,7 +10,7 @@ import {ListModule} from "../../shared/components/list/list.module";
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import {ModalSelectMeetingComponent} from "./modal-select-meeting/modal-select-meeting.component";
 import {FreeTextFilterModule} from "../../shared/components/free-text-filter/free-text-filter.module";
-import {MeetingsListModule} from "../../shared/components/meetings-list/meetings-list.module";
+import {MeetingsListModule} from "../../shared/components/meetings/meetings-list/meetings-list.module";
 import {JoinButtonModule} from "../../shared/components/join-button/join-button.module";
 
 const api = [SelectBereavedStatusComponent, SelectBereavedGuidanceComponent, BereavedsListRowComponent, BereavedsListComponent, ModalSelectMeetingComponent];

@@ -21,7 +21,7 @@ import {
   MeetingBereaved
 } from 'models';
 import { AnalyticsService } from './analytics.service';
-import { MeetingForm } from '../../components/forms/host-form/host-form.component';
+import { MeetingForm } from '../../host/host-form/host-form.component';
 
 export const MEMORIAL_YEAR = 2020;
 
