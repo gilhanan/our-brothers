@@ -19,7 +19,6 @@ import {AuthService} from './shared/services/auth.service';
 import {DataService} from './shared/services/data.service';
 import {HomePageComponent} from './pages/home-page/home-page.component';
 import {FlipCardComponent} from './components/flip-card/flip-card.component';
-import {ContactPageComponent} from './pages/contact-page/contact-page.component';
 import {MeetingsPageComponent} from './pages/meetings-page/meetings-page.component';
 import {LoginPopupComponent} from './components/popups/login-popup/login-popup.component';
 import {MeetingsMapComponent} from './components/meetings-map/meetings-map.component';
@@ -38,7 +37,6 @@ import {HeaderComponent} from './components/header/header.component';
 import {FooterComponent} from './components/footer/footer.component';
 import {MeetingsComponent} from './components/meetings/meetings.component';
 import {HostPageComponent} from './pages/host-page/host-page.component';
-import {ContactFormComponent} from './contact-form/contact-form.component';
 import {DropDownMenuComponent} from './components/drop-down-menu/drop-down-menu.component';
 import {TellButtonComponent} from './components/tell-button/tell-button.component';
 import {HostButtonComponent} from './components/host-button/host-button.component';
@@ -72,6 +70,7 @@ import {MeetingsListModule} from "./shared/components/meetings-list/meetings-lis
 import {JoinButtonModule} from "./shared/components/join-button/join-button.module";
 import {PipesModule} from "./shared/pipes/pipes.module";
 import {FreeTextFilterModule} from "./shared/components/free-text-filter/free-text-filter.module";
+import {ContactFormModule} from "./shared/components/contact-form/contact-form.module";
 
 registerLocaleData(localeHe);
 
@@ -81,7 +80,6 @@ registerLocaleData(localeHe);
     FlipCardComponent,
     HomePageComponent,
     FlipCardComponent,
-    ContactPageComponent,
     MeetingsPageComponent,
     LoginPopupComponent,
     MeetingsMapComponent,
@@ -100,7 +98,6 @@ registerLocaleData(localeHe);
     FooterComponent,
     MeetingsComponent,
     HostPageComponent,
-    ContactFormComponent,
     DropDownMenuComponent,
     TellButtonComponent,
     HostButtonComponent,
@@ -136,6 +133,7 @@ registerLocaleData(localeHe);
     MeetingsListModule,
     JoinButtonModule,
     FreeTextFilterModule,
+    ContactFormModule,
     /** ----- **/
     BrowserModule,
     HttpClientModule,

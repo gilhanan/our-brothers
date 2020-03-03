@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {HomePageComponent} from './pages/home-page/home-page.component';
 import {DonatePageComponent} from './pages/donate-page/donate-page.component';
-import {ContactPageComponent} from './pages/contact-page/contact-page.component';
 import {MeetingsPageComponent} from './pages/meetings-page/meetings-page.component';
 import {TellPageComponent} from './pages/tell-page/tell-page.component';
 import {ParticipatePageComponent} from './pages/participate-page/participate-page.component';
@@ -99,7 +98,7 @@ const routes: Routes = [
   },
   {
     path: 'contact',
-    component: ContactPageComponent,
+    loadChildren: () => import('./contact/page/contact-page.module').then(({ContactPageModule}) => ContactPageModule),
     pathMatch: 'full'
   },
   {

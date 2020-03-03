@@ -9,7 +9,7 @@ import {
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { User } from 'models';
-import { UtilsService } from '../shared/services/utils.service';
+import { UtilsService } from '../../services/utils.service';
 
 export interface ContactForm {
   name: string;

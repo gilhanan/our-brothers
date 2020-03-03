@@ -3,7 +3,7 @@ import { AuthService } from '../../shared/services/auth.service';
 import { DataService } from '../../shared/services/data.service';
 import { User } from 'models';
 import { Contact } from 'models';
-import { ContactForm } from '../../contact-form/contact-form.component';
+import { ContactForm } from '../../shared/components/contact-form/contact-form.component';
 import {ToastrService} from "ngx-toastr";
 
 @Component({
