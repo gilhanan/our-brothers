@@ -85,7 +85,7 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'qna',
+    path: 'questions',
     component: QnaPageComponent,
     pathMatch: 'full'
   },

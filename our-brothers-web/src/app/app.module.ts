@@ -83,7 +83,6 @@ import { PlaceMapComponent } from './components/place-map/place-map.component';
 import { MeetingDetailsPageComponent } from './pages/meeting-details-page/meeting-details-page.component';
 import { HostMeetingInputTextComponent } from './components/host-meeting-input-text/host-meeting-input-text.component';
 import { AgendaPageComponent } from './pages/agenda-page/agenda-page.component';
-import { QuestionsPageComponent } from './pages/questions-page/questions-page.component';
 import { GalleryPageComponent } from './pages/gallery-page/gallery-page.component';
 import { ArticlesPageComponent } from './pages/articles-page/articles-page.component';
 import { DonatePageComponent } from './pages/donate-page/donate-page.component';
@@ -165,7 +164,6 @@ registerLocaleData(localeHe);
     MeetingDetailsPageComponent,
     HostMeetingInputTextComponent,
     AgendaPageComponent,
-    QuestionsPageComponent,
     GalleryPageComponent,
     ArticlesPageComponent,
     DonatePageComponent,

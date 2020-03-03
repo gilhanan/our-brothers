@@ -8,49 +8,45 @@
   שאלות ותשובות
 </h1>
 <h2 class="medium-heading" data-aos="fade-up" data-aos-duration="1000">
-  לפניכם שאלות ותשובות נפוצות
+  עונים על הכל
 </h2>
 <div class="qna-types-list-container">
-  <div class="qna-container">
-    <div
-      class="qna-type-item"
-      [class.current]="currentQType === 0"
-      (click)="currentQType = 0"
-    >
-      <div class="qna-type-text">
+  <div class="container">
+    <div class="role-buttons">
+      <div
+        class="role-button"
+        [class.current]="currentQType === UserRole.bereaved"
+        (click)="currentQType = UserRole.bereaved"
+      >
         אחים
       </div>
-    </div>
-    <div
-      class="qna-type-item"
-      [class.current]="currentQType === 1"
-      (click)="currentQType = 1"
-    >
-      <div class="qna-type-text">
+      <div
+        class="role-button"
+        [class.current]="currentQType === UserRole.host"
+        (click)="currentQType = UserRole.host"
+      >
         מארחים
       </div>
-    </div>
-    <div
-      class="qna-type-item"
-      [class.current]="currentQType === 2"
-      (click)="currentQType = 2"
-    >
-      <div class="qna-type-text">
+      <div
+        class="role-button"
+        [class.current]="currentQType === UserRole.participate"
+        (click)="currentQType = UserRole.participate"
+      >
         משתתפים
       </div>
     </div>
   </div>
 </div>
 <div class="qna-list-wrapper">
-  <div class="qna-container">
+  <div class="container">
     <ng-container [ngSwitch]="currentQType">
-      <ng-container *ngSwitchCase="0">
+      <ng-container *ngSwitchCase="UserRole.bereaved">
         <app-qna-list [qnaList]="qnaBrothers"></app-qna-list>
       </ng-container>
-      <ng-container *ngSwitchCase="1">
+      <ng-container *ngSwitchCase="UserRole.host">
         <app-qna-list [qnaList]="qnaHosts"></app-qna-list>
       </ng-container>
-      <ng-container *ngSwitchCase="2">
+      <ng-container *ngSwitchCase="UserRole.participate">
         <app-qna-list [qnaList]="qnaParticipates"></app-qna-list>
       </ng-container>
     </ng-container>
