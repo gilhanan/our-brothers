@@ -4,10 +4,11 @@ import { Subject, combineLatest, Subscription } from 'rxjs';
 import { distinctUntilChanged, tap } from 'rxjs/operators';
 
 import { User, Meeting, UserRole } from 'models';
-import { AuthService } from 'src/app/services/auth.service';
-import { ParticipationsService } from 'src/app/services/participations.service';
-import { DataService, MEMORIAL_YEAR } from 'src/app/services/data.service';
-import { ProfileForm } from 'src/app/components/forms/profile-form/profile-form.component';
+import { AuthService } from '../../shared/services/auth.service';
+import { ParticipationsService } from '../../shared/services/participations.service';
+import { DataService, MEMORIAL_YEAR } from '../../shared/services/data.service';
+import { ProfileForm } from '../../components/forms/profile-form/profile-form.component';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-participate-page',
@@ -28,6 +29,7 @@ export class ParticipatePageComponent implements OnInit, OnDestroy {
     private router: Router,
     private authService: AuthService,
     private participationsService: ParticipationsService,
+    private toastr: ToastrService,
     private dataService: DataService
   ) {}
 
@@ -95,7 +97,7 @@ export class ParticipatePageComponent implements OnInit, OnDestroy {
           .participateRegisterHost(this.user, meeting, accompanies)
           .subscribe(result => {
             if (result) {
-              window.alert('שובצת בהצלחה!');
+              this.toastr.success('שובצת בהצלחה!');
               this.router.navigate([
                 `meetings/${this.year}/${meeting.hostId}/${meeting.id}`
               ]);

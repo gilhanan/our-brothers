@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { User as FirebaseUser } from 'firebase';
 import { UserProfile, User } from 'models';
-import { UtilsService } from 'src/app/services/utils.service';
+import { UtilsService } from '../../../shared/services/utils.service';
 
 export interface ProfileForm {
   firstName: string;

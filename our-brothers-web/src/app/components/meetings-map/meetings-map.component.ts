@@ -1,10 +1,10 @@
-import { Component, Input, TrackByFunction, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Meeting, User, UserRole } from 'models';
-import { MapRestriction } from '@agm/core/services/google-maps-types';
-import { ParticipationsService } from '../../../app/services/participations.service';
-import { NavigationDirection } from '../meetings-map-navigator/meetings-map-navigator.component';
-import { AgmMarker, AgmInfoWindow } from '@agm/core';
+import {Component, EventEmitter, Input, OnInit, Output, TrackByFunction} from '@angular/core';
+import {Observable} from 'rxjs';
+import {Meeting, User, UserRole} from 'models';
+import {MapRestriction} from '@agm/core/services/google-maps-types';
+import {ParticipationsService} from '../../shared/services/participations.service';
+import {NavigationDirection} from '../meetings-map-navigator/meetings-map-navigator.component';
+import {AgmInfoWindow, AgmMarker} from '@agm/core';
 
 @Component({
   selector: 'app-meetings-map',

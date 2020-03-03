@@ -1,24 +1,18 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { HomePageComponent } from './pages/home-page/home-page.component';
-import { DonatePageComponent } from './pages/donate-page/donate-page.component';
-import { ContactPageComponent } from './pages/contact-page/contact-page.component';
-import { MeetingsPageComponent } from './pages/meetings-page/meetings-page.component';
-import { AboutPageComponent } from './pages/about-page/about-page.component';
-import { TeamPageComponent } from './pages/team-page/team-page.component';
-import { ArticlesPageComponent } from './pages/articles-page/articles-page.component';
-import { NewsPageComponent } from './pages/news-page/news-page.component';
-import { AgendaPageComponent } from './pages/agenda-page/agenda-page.component';
-import { QnaPageComponent } from './pages/qna-page/qna-page.component';
-import { GalleryPageComponent } from './pages/gallery-page/gallery-page.component';
-import { AdminBereavedsPageComponent } from './pages/admin-bereaveds-page/admin-bereaveds-page.component';
-import { TellPageComponent } from './pages/tell-page/tell-page.component';
-import { ParticipatePageComponent } from './pages/participate-page/participate-page.component';
-import { HostPageComponent } from './pages/host-page/host-page.component';
-import { MeetingDetailsPageComponent } from './pages/meeting-details-page/meeting-details-page.component';
-import { HostGuard } from './guards/host.guard';
-import { TellGuard } from './guards/tell.guard';
-import { ParticipateGuard } from './guards/participate.guard';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {HomePageComponent} from './pages/home-page/home-page.component';
+import {DonatePageComponent} from './pages/donate-page/donate-page.component';
+import {ContactPageComponent} from './pages/contact-page/contact-page.component';
+import {MeetingsPageComponent} from './pages/meetings-page/meetings-page.component';
+import {QnaPageComponent} from './pages/qna-page/qna-page.component';
+import {GalleryPageComponent} from './pages/gallery-page/gallery-page.component';
+import {TellPageComponent} from './pages/tell-page/tell-page.component';
+import {ParticipatePageComponent} from './pages/participate-page/participate-page.component';
+import {HostPageComponent} from './pages/host-page/host-page.component';
+import {MeetingDetailsPageComponent} from './pages/meeting-details-page/meeting-details-page.component';
+import {HostGuard} from './guards/host.guard';
+import {TellGuard} from './guards/tell.guard';
+import {ParticipateGuard} from './guards/participate.guard';
 
 const routes: Routes = [
   {
@@ -61,27 +55,27 @@ const routes: Routes = [
   },
   {
     path: 'about',
-    component: AboutPageComponent,
+    loadChildren: () => import('./about/page/about-page.module').then(({ AboutPageModule }) => AboutPageModule),
     pathMatch: 'full'
   },
   {
     path: 'team',
-    component: TeamPageComponent,
+    loadChildren: () => import('./team/page/team-page.module').then(({ TeamPageModule }) => TeamPageModule),
     pathMatch: 'full'
   },
   {
     path: 'articles',
-    component: ArticlesPageComponent,
+    loadChildren: () => import('./articles/page/articles-page.module').then(({ ArticlesPageModule }) => ArticlesPageModule),
     pathMatch: 'full'
   },
   {
     path: 'news',
-    component: NewsPageComponent,
+    loadChildren: () => import('./news/page/news-page.module').then(({ NewsPageModule }) => NewsPageModule),
     pathMatch: 'full'
   },
   {
     path: 'agenda',
-    component: AgendaPageComponent,
+    loadChildren: () => import('./agenda/page/agenda-page.module').then(({ AgendaPageModule }) => AgendaPageModule),
     pathMatch: 'full'
   },
   {
@@ -112,18 +106,7 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    children: [
-      {
-        path: '',
-        component: AdminBereavedsPageComponent,
-        pathMatch: 'full'
-      },
-      {
-        path: 'bereaveds',
-        component: AdminBereavedsPageComponent,
-        pathMatch: 'full'
-      }
-    ]
+    loadChildren: () => import('./admin/bereaveds/page/admin-bereaveds-page.module').then(({ AdminBereavedsPageModule }) => AdminBereavedsPageModule),
   },
   {
     path: '',

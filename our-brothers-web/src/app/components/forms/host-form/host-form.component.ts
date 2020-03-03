@@ -3,12 +3,12 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { MeetingAudience, User } from 'models';
 import { HostInputOption } from '../host-input-options/host-input-options.component';
-import { UtilsService } from 'src/app/services/utils.service';
+import { UtilsService } from '../../../shared/services/utils.service';
 import {
   MEMORIAL_YEAR,
   MIN_DATE,
   MAX_DATE
-} from 'src/app/services/data.service';
+} from '../../../shared/services/data.service';
 
 export interface MeetingForm {
   title: string;

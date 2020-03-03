@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
-import { AnalyticsService } from 'src/app/services/analytics.service';
-import { PaypalService } from 'src/app/services/paypal.service';
+import { AuthService } from '../../shared/services/auth.service';
+import { AnalyticsService } from '../../shared/services/analytics.service';
+import { PaypalService } from '../../shared/services/paypal.service';
 import { User, PayPalOrder } from 'models';
-import { CreateOrder } from 'src/app/components/paypal-button/paypal-button.component';
+import { CreateOrder } from '../../components/paypal-button/paypal-button.component';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-donate-page',
@@ -18,6 +19,7 @@ export class DonatePageComponent implements OnInit {
 
   constructor(private authService: AuthService,
     private analyticsService: AnalyticsService,
+    private toastr: ToastrService,
     private paypalService: PaypalService) {
   }
 
@@ -47,7 +49,7 @@ export class DonatePageComponent implements OnInit {
         order: userOrder
       });
 
-      alert('תודה רבה, קיבלנו את תרומתך בהצלחה');
+      this.toastr.success('תודה רבה, קיבלנו את תרומתך בהצלחה');
 
     }, (error) => {
 
@@ -58,7 +60,7 @@ export class DonatePageComponent implements OnInit {
 
       console.error(error);
 
-      alert('שגיאה');
+      this.toastr.error('אירעה שגיאה');
     });
   }
 
@@ -72,6 +74,6 @@ export class DonatePageComponent implements OnInit {
       error: error.toString()
     });
     console.error(error);
-    alert('שגיאה');
+    this.toastr.error('אירעה שגיאה');
   }
 }

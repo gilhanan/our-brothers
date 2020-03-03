@@ -1,6 +1,6 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { User } from 'models';
-import { ParticipationsService } from 'src/app/services/participations.service';
+import { ParticipationsService } from '../../shared/services/participations.service';
 
 @Component({
   selector: 'app-host-button',

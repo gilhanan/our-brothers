@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { User } from 'models';
-import { AuthService } from 'src/app/services/auth.service';
-import { DataService } from 'src/app/services/data.service';
-import { ContactForm } from 'src/app/contact-form/contact-form.component';
+import { AuthService } from '../../shared/services/auth.service';
+import { DataService } from '../../shared/services/data.service';
+import { ContactForm } from '../../contact-form/contact-form.component';
 import { Contact } from 'models';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-contact-page',
@@ -16,7 +17,8 @@ export class ContactPageComponent {
 
   constructor(
     private authService: AuthService,
-    private dataService: DataService
+    private dataService: DataService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -29,12 +31,12 @@ export class ContactPageComponent {
     const parsedContact: Contact = {
       ...form,
       date: Date.now()
-    }
+    };
 
     this.postingContact = true;
     this.dataService.postContact(parsedContact, this.user)
-      .then(() => window.alert('שליחת הודעה בוצעה בהצלחה'))
-      .catch(() => window.alert('שליחת הודעה נכשלה'))
+      .then(() => this.toastr.success('שליחת הודעה בוצעה בהצלחה'))
+      .catch(() => this.toastr.error('שליחת הודעה נכשלה'))
       .finally(() => this.postingContact = false);
   }
 }

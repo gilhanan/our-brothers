@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UtilsService } from 'src/app/services/utils.service';
+import { UtilsService } from '../../../shared/services/utils.service';
 
 export interface SlainForm {
   firstName: string;

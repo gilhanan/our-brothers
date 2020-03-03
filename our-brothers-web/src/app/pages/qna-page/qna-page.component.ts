@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { UserRole } from 'models';
-import { AuthService } from 'src/app/services/auth.service';
-import { QNAItem } from 'src/app/components/qna-list/qna-list.component';
+import { AuthService } from '../../shared/services/auth.service';
+import { QNAItem } from '../../components/qna-list/qna-list.component';
 import { qnaBorthers, qnaHosts, qnaParticipates } from './qnas';
 
 @Component({

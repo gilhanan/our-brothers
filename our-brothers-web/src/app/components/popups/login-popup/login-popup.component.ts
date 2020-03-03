@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { LoginForm } from '../../forms/login-form/login-form.component';
 import { RegistrationForm } from '../../forms/registration-form/registration-form.component';
 import { ForgotPasswordForm } from '../../forms/forgot-password-form/forgot-password-form.component';
-import { AuthService, AuthErrors } from 'src/app/services/auth.service';
+import { AuthService, AuthErrors } from '../../../shared/services/auth.service';
 import { finalize } from 'rxjs/operators';
 
 export type LoginMode = 'Login' | 'Register' | 'Forgot';

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
-import { DataService } from 'src/app/services/data.service';
+import { AuthService } from '../../shared/services/auth.service';
+import { DataService } from '../../shared/services/data.service';
 import { User } from 'models';
 import { Contact } from 'models';
-import { ContactForm } from 'src/app/contact-form/contact-form.component';
+import { ContactForm } from '../../contact-form/contact-form.component';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-home-page',
@@ -18,7 +19,8 @@ export class HomePageComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private dataService: DataService
+    private dataService: DataService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -36,8 +38,8 @@ export class HomePageComponent implements OnInit {
 
     this.postingContact = true;
     this.dataService.postContact(parsedContact, this.user)
-      .then(() => window.alert('שליחת הודעה בוצעה בהצלחה'))
-      .catch(() => window.alert('שליחת הודעה נכשלה'))
+      .then(() => this.toastr.success('שליחת הודעה בוצעה בהצלחה'))
+      .catch(() => this.toastr.error('שליחת הודעה נכשלה'))
       .finally(() => this.postingContact = false);
   }
 }

@@ -4,11 +4,12 @@ import { Subject, combineLatest, Subscription } from 'rxjs';
 import { distinctUntilChanged, tap } from 'rxjs/operators';
 
 import { User, UserRole, Meeting } from 'models';
-import { AuthService } from 'src/app/services/auth.service';
-import { DataService, MEMORIAL_YEAR } from 'src/app/services/data.service';
-import { ParticipationsService } from 'src/app/services/participations.service';
+import { AuthService } from '../../shared/services/auth.service';
+import { DataService, MEMORIAL_YEAR } from '../../shared/services/data.service';
+import { ParticipationsService } from '../../shared/services/participations.service';
 import { ProfileForm } from '../../components/forms/profile-form/profile-form.component';
-import { MeetingForm } from 'src/app/components/forms/host-form/host-form.component';
+import { MeetingForm } from '../../components/forms/host-form/host-form.component';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-host-page',
@@ -27,6 +28,7 @@ export class HostPageComponent implements OnInit, OnDestroy {
     private router: Router,
     private authService: AuthService,
     private dataService: DataService,
+    private toastr: ToastrService,
     private participationsService: ParticipationsService
   ) {}
 
@@ -37,7 +39,7 @@ export class HostPageComponent implements OnInit, OnDestroy {
 
     this.subscriptions.push(
       combineLatest(
-        this.authService.user,
+        [this.authService.user,
         this.currentStep$.pipe(
           distinctUntilChanged(),
           tap(() => {
@@ -45,7 +47,7 @@ export class HostPageComponent implements OnInit, OnDestroy {
               window.scrollTo(0, 0);
             }
           })
-        )
+        )]
       ).subscribe(([user, currentStep]) => {
         this.user = user;
         this.currentStep = currentStep;
@@ -85,7 +87,7 @@ export class HostPageComponent implements OnInit, OnDestroy {
     this.dataService
       .createMeeting(this.user, meetingDetails)
       .subscribe((meeting: Meeting) => {
-        alert('נוצר מפגש בהצלחה!');
+        this.toastr.success('נוצר מפגש בהצלחה!');
         this.router.navigate([
           `meetings/${this.year}/${meeting.hostId}/${meeting.id}`
         ]);

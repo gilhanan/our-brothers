@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as AOS from 'aos';
 
 import { User } from 'models';
-import { AuthService } from './services/auth.service';
+import { AuthService } from './shared/services/auth.service';
 import { LoginMode } from './components/popups/login-popup/login-popup.component';
 
 @Component({

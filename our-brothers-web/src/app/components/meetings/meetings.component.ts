@@ -1,9 +1,9 @@
 import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { Meeting } from 'models';
 import { User } from 'firebase';
-import { UtilsService } from 'src/app/services/utils.service';
+import { UtilsService } from '../../shared/services/utils.service';
 import { ViewOptions } from '../view-toggle/view-toggle.component';
-import { UserMeeting } from 'src/app/services/data.service';
+import { UserMeeting } from '../../shared/services/data.service';
 
 @Component({
   selector: 'app-meetings',

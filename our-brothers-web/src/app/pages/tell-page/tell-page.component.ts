@@ -11,11 +11,12 @@ import {
   UserRole,
   BereavedGuidance
 } from 'models';
-import { AuthService } from 'src/app/services/auth.service';
-import { ParticipationsService } from 'src/app/services/participations.service';
-import { DataService, MEMORIAL_YEAR } from 'src/app/services/data.service';
-import { SlainForm } from 'src/app/components/forms/slain-form/slain-form.component';
-import { BereavedProfileForm } from 'src/app/components/forms/bereaved-profile-form/bereaved-profile-form.component';
+import { AuthService } from '../../shared/services/auth.service';
+import { ParticipationsService } from '../../shared/services/participations.service';
+import { DataService, MEMORIAL_YEAR } from '../../shared/services/data.service';
+import { SlainForm } from '../../components/forms/slain-form/slain-form.component';
+import { BereavedProfileForm } from '../../components/forms/bereaved-profile-form/bereaved-profile-form.component';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-tell-page',
@@ -36,6 +37,7 @@ export class TellPageComponent implements OnInit, OnDestroy {
     private router: Router,
     private authService: AuthService,
     private participationsService: ParticipationsService,
+    private toastr: ToastrService,
     private dataService: DataService
   ) {}
 
@@ -132,7 +134,7 @@ export class TellPageComponent implements OnInit, OnDestroy {
           .bereavedRegisterHost(this.user, meeting)
           .subscribe(result => {
             if (result) {
-              window.alert('שובצת בהצלחה!');
+              this.toastr.success('שובצת בהצלחה!');
               this.router.navigate([
                 `meetings/${this.year}/${meeting.hostId}/${meeting.id}`
               ]);

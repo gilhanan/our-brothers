@@ -1,8 +1,8 @@
-import { Component, Input, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
-import { Meeting, MeetingAudience, User } from 'models';
-import { ParticipationsService } from 'src/app/services/participations.service';
-import { MEMORIAL_YEAR } from 'src/app/services/data.service';
-import { UtilsService } from 'src/app/services/utils.service';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
+import {Meeting, User} from 'models';
+import {ParticipationsService} from '../../shared/services/participations.service';
+import {MEMORIAL_YEAR} from '../../shared/services/data.service';
+import {UtilsService} from '../../shared/services/utils.service';
 
 @Component({
   selector: 'app-meetings-map-meeting',

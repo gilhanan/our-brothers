@@ -3,9 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { Meeting, MeetingParticipate, User } from 'models';
-import { DataService } from 'src/app/services/data.service';
-import { UtilsService } from 'src/app/services/utils.service';
-import { AuthService } from 'src/app/services/auth.service';
+import { DataService } from '../../shared/services/data.service';
+import { UtilsService } from '../../shared/services/utils.service';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-meeting-details-page',

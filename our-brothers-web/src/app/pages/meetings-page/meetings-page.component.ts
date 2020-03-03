@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Meeting, User } from 'models';
-import { DataService, MEMORIAL_YEAR } from '../../services/data.service';
-import { AuthService } from 'src/app/services/auth.service';
+import { DataService, MEMORIAL_YEAR } from '../../shared/services/data.service';
+import { AuthService } from '../../shared/services/auth.service';
+import {ToastrService} from "ngx-toastr";
 
 const oneWeek = 1000 * 60 * 60 * 24 * 7;
 
@@ -22,6 +23,7 @@ export class MeetingsPageComponent implements OnInit {
   constructor(
     private router: Router,
     private dataService: DataService,
+    private toastr: ToastrService,
     private authService: AuthService
   ) { }
 
@@ -52,7 +54,7 @@ export class MeetingsPageComponent implements OnInit {
       if (this.user.role === 'bereaved') {
         this.dataService.bereavedRegisterHost(this.user, meeting).subscribe((result) => {
           if (result) {
-            window.alert('שובצת בהצלחה!');
+            this.toastr.success('שובצת בהצלחה!');
             this.router.navigate([`meetings/${this.year}/${meeting.hostId}/${meeting.id}`]);
           }
         })
@@ -63,7 +65,7 @@ export class MeetingsPageComponent implements OnInit {
           .participateRegisterHost(this.user, meeting, accompanies)
           .subscribe(result => {
             if (result) {
-              window.alert('שובצת בהצלחה!');
+              this.toastr.success('שובצת בהצלחה!');
               this.router.navigate([`meetings/${this.year}/${meeting.hostId}/${meeting.id}`]);
             }
           });
