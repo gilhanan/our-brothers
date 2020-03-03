@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ParticipationsService } from 'src/app/services/participations.service';
+import { ParticipationsService } from '../../shared/services/participations.service';
 import { User } from 'models';
 
 @Component({

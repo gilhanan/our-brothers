@@ -1,0 +1,42 @@
+<div class="list-container" [class.extended]="user.id === meeting.hostId">
+  <div class="header">
+    <div class="col col-name">
+      שם המשתתף
+    </div>
+    <div class="col col-capacity">
+      מספר משתתפים
+    </div>
+    <ng-container *ngIf="user.id === meeting.hostId">
+      <div class="col col-phone">
+        טלפון
+      </div>
+      <div class="col col-email">
+        מייל
+      </div>
+    </ng-container>
+  </div>
+  <div class="body">
+    <div class="row" *ngFor="let participate of meetingParticipates">
+      <div class="col col-name">
+        <span class="mobile-label">שם המשתתף</span>
+        <span class="name">
+          {{ participate.firstName + ' ' + participate.lastName }}
+        </span>
+      </div>
+      <div class="col col-capacity">
+        <span class="mobile-label">מספר משתתפים</span>
+        {{ participate.accompanies + 1 }}
+      </div>
+      <ng-container *ngIf="user.id === meeting.hostId">
+        <div class="col col-phone" >
+          <span class="mobile-label">טלפון נייד</span>
+          {{ participate.phoneNumber | phone }}
+        </div>
+        <div class="col col-email">
+          <span class="mobile-label">מייל</span>
+          {{ participate.email }}
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
