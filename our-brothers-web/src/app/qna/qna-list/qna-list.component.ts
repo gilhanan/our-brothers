@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 export interface QNAItem {
   question: string;
@@ -10,10 +10,6 @@ export interface QNAItem {
   templateUrl: './qna-list.component.html',
   styleUrls: ['./qna-list.component.scss']
 })
-export class QnaListComponent implements OnInit {
+export class QnaListComponent {
   @Input() qnaList: QNAItem[];
-
-  constructor() {}
-
-  ngOnInit(): void {}
 }

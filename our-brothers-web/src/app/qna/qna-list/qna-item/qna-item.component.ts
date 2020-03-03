@@ -5,7 +5,7 @@ import {
   SimpleChanges,
   OnChanges
 } from '@angular/core';
-import { QNAItem } from '../qna-list/qna-list.component';
+import { QNAItem } from '../qna-list.component';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({

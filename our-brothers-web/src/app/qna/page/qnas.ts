@@ -1,4 +1,4 @@
-import { QNAItem } from '../../components/qna-list/qna-list.component';
+import { QNAItem } from '../qna-list/qna-list.component';
 
 export const qnaBorthers: QNAItem[] = [
   {

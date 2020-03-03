@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { UserRole } from 'models';
 import { AuthService } from '../../shared/services/auth.service';
-import { QNAItem } from '../../components/qna-list/qna-list.component';
+import { QNAItem } from '../qna-list/qna-list.component';
 import { qnaBorthers, qnaHosts, qnaParticipates } from './qnas';
 
 @Component({
@@ -11,11 +11,11 @@ import { qnaBorthers, qnaHosts, qnaParticipates } from './qnas';
   styleUrls: ['./qna-page.component.scss']
 })
 export class QnaPageComponent implements OnInit {
-  public UserRole = UserRole;
-  public currentQType: UserRole;
-  public qnaBrothers: QNAItem[] = qnaBorthers;
-  public qnaHosts: QNAItem[] = qnaHosts;
-  public qnaParticipates: QNAItem[] = qnaParticipates;
+   UserRole = UserRole;
+   currentQType: UserRole;
+   qnaBrothers: QNAItem[] = qnaBorthers;
+   qnaHosts: QNAItem[] = qnaHosts;
+   qnaParticipates: QNAItem[] = qnaParticipates;
 
   constructor(private authService: AuthService) {}
 

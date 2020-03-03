@@ -66,9 +66,6 @@ import {GalleryPageComponent} from './pages/gallery-page/gallery-page.component'
 import {DonatePageComponent} from './pages/donate-page/donate-page.component';
 import {PaypalButtonComponent} from './components/paypal-button/paypal-button.component';
 import {MeetingParticipatesListComponent} from './meeting-participates-list/meeting-participates-list.component';
-import {QnaPageComponent} from './pages/qna-page/qna-page.component';
-import {QnaListComponent} from './components/qna-list/qna-list.component';
-import {QnaItemComponent} from './components/qna-item/qna-item.component';
 import {ToastrModule} from "ngx-toastr";
 import {CheckboxModule} from "./shared/components/checkbox/checkbox.module";
 import {ListModule} from "./shared/components/list/list.module";
@@ -132,9 +129,6 @@ registerLocaleData(localeHe);
     DonatePageComponent,
     PaypalButtonComponent,
     MeetingParticipatesListComponent,
-    QnaPageComponent,
-    QnaListComponent,
-    QnaItemComponent
   ],
   imports: [
     /** Need to remove **/
