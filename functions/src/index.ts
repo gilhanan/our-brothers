@@ -560,7 +560,7 @@ export const onUserContactCreate = functions.database.ref('/contacts/{userId}/{c
 
     if (!(email && name && subject)) {
 
-      console.warn(`Missing requirement fields for contact id {${contactId}}. email {${email}}. name {${name}} subject {${subject}}`)
+      console.warn(`Missing requirement fields for user id {${userId}} contact id {${contactId}}. email {${email}}. name {${name}} subject {${subject}}`)
 
       return false;
 
@@ -568,7 +568,7 @@ export const onUserContactCreate = functions.database.ref('/contacts/{userId}/{c
 
       const mailOptions = buildMail(contact, userId);
 
-      console.log(`Sending email for contact id {${contactId}}.`);
+      console.log(`Sending email for user id {${userId}} contact id {${contactId}}.`);
 
       return mailTransport.sendMail(mailOptions)
         .then(() => console.log(`Successfully sent email for contact id {${contactId}}.`))
@@ -582,7 +582,8 @@ function buildMail(contact: Contact, userId: string): Mail.Options {
   const mailOptions: Mail.Options = {
     from: '"האחים שלנו" <website@ourbrothers.org>',
     to: contact.email,
-    cc: 'info@ourbrothers.org'
+    cc: 'info@ourbrothers.org',
+    bcc: 'ourbrothers.noreply@gmail.com'
   };
 
   mailOptions.subject = 'האחים שלנו - ' + contact.subject;
