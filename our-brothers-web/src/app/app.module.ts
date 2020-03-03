@@ -62,7 +62,6 @@ import {HeaderTogglerComponent} from './components/header-toggler/header-toggler
 import {PlaceMapComponent} from './components/place-map/place-map.component';
 import {MeetingDetailsPageComponent} from './pages/meeting-details-page/meeting-details-page.component';
 import {HostMeetingInputTextComponent} from './components/host-meeting-input-text/host-meeting-input-text.component';
-import {GalleryPageComponent} from './pages/gallery-page/gallery-page.component';
 import {DonatePageComponent} from './pages/donate-page/donate-page.component';
 import {PaypalButtonComponent} from './components/paypal-button/paypal-button.component';
 import {MeetingParticipatesListComponent} from './meeting-participates-list/meeting-participates-list.component';
@@ -125,13 +124,12 @@ registerLocaleData(localeHe);
     PlaceMapComponent,
     MeetingDetailsPageComponent,
     HostMeetingInputTextComponent,
-    GalleryPageComponent,
     DonatePageComponent,
     PaypalButtonComponent,
     MeetingParticipatesListComponent,
   ],
   imports: [
-    /** Need to remove **/
+    /** Need to remove once everything is lazy loaded **/
     PipesModule,
     CheckboxModule,
     ListModule,
