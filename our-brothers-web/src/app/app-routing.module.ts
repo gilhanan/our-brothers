@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomePageComponent } from './home/home-page.component';
-import { HostGuard } from './guards/host.guard';
-import { TellGuard } from './guards/tell.guard';
-import { ParticipateGuard } from './guards/participate.guard';
 import { HostPageModule } from './host/page/host-page.module';
+import { RoleBasedGuard } from './guards/role-based.guard';
 
 const routes: Routes = [
   {
@@ -15,18 +13,27 @@ const routes: Routes = [
   {
     path: 'host',
     loadChildren: () => import('./host/page/host-page.module').then(({ HostPageModule }) => HostPageModule),
-    canActivate: [HostGuard]
+    data: {
+      role: 'host'
+    },
+    canActivate: [RoleBasedGuard]
   },
   {
     path: 'tell',
+    data: {
+      role: 'tell'
+    },
     loadChildren: () => import('./tell/page/tell-page.module').then(({ TellPageModule }) => TellPageModule),
-    canActivate: [TellGuard]
+    canActivate: [RoleBasedGuard]
   },
   {
     path: 'participate',
+    data: {
+      role: 'participate'
+    },
     loadChildren: () =>
       import('./participate/page/participate-page.module').then(({ ParticipatePageModule }) => ParticipatePageModule),
-    canActivate: [ParticipateGuard]
+    canActivate: [RoleBasedGuard]
   },
   {
     path: 'meetings',
@@ -94,7 +101,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })],
-  providers: [HostGuard, TellGuard, ParticipateGuard],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}
