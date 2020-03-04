@@ -23,7 +23,7 @@ export class AdminBereavedsPageComponent implements OnInit, OnDestroy {
   bereaveds: User[];
   noBerevedMeetings: Meeting[];
   filter: string = '';
-  filteredBereaveds: User[];
+  filteredBereavedsIds: Set<string>;
   year = MEMORIAL_YEAR;
   error = '';
   loading = true;
@@ -44,7 +44,7 @@ export class AdminBereavedsPageComponent implements OnInit, OnDestroy {
         bereaveds => {
           this.loading = false;
           this.bereaveds = bereaveds;
-          this.filterBereaveds();
+          this.filteredBereavedsIds = new Set(bereaveds.map(({ id }) => id));
         },
         error => {
           this.loading = false;
@@ -58,7 +58,8 @@ export class AdminBereavedsPageComponent implements OnInit, OnDestroy {
   }
 
   filterBereaveds() {
-    this.filteredBereaveds = this.utilsService.filteringBereaveds(this.bereaveds, this.filter);
+    const filteredBereavedsIds = this.utilsService.filteringBereaveds(this.bereaveds, this.filter).map(({ id }) => id);
+    this.filteredBereavedsIds = new Set(filteredBereavedsIds);
   }
 
   joinBereved(bereaved: User) {

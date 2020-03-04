@@ -12,6 +12,7 @@ import { ModalSelectMeetingComponent } from './modal-select-meeting/modal-select
 import { FreeTextFilterModule } from '../../shared/components/free-text-filter/free-text-filter.module';
 import { MeetingsListModule } from '../../shared/components/meetings/meetings-list/meetings-list.module';
 import { JoinButtonModule } from '../../shared/components/join-button/join-button.module';
+import { SortBereavedsPipe } from './sort-bereaveds/sort-bereaveds.pipe';
 
 const api = [
   SelectBereavedStatusComponent,
@@ -32,7 +33,7 @@ const api = [
     MeetingsListModule,
     JoinButtonModule
   ],
-  declarations: api,
+  declarations: [api, SortBereavedsPipe],
   exports: api
 })
 export class AdminBereavedsModule {}
