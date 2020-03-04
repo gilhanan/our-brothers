@@ -12,7 +12,6 @@ export interface LoginForm {
   styleUrls: ['./login-form.component.scss']
 })
 export class LoginFormComponent implements OnInit {
-
   @Input() loading: boolean;
 
   @Output() haveNoUser = new EventEmitter<void>();
@@ -23,7 +22,7 @@ export class LoginFormComponent implements OnInit {
 
   public form: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -45,7 +44,7 @@ export class LoginFormComponent implements OnInit {
       const parsedForm: LoginForm = {
         email: this.email.value,
         password: this.password.value
-      }
+      };
 
       this.signInWithEmailAndPassword.emit(parsedForm);
     } else {

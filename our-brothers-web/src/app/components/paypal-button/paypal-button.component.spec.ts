@@ -8,9 +8,8 @@ describe('PaypalButtonComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PaypalButtonComponent ]
-    })
-    .compileComponents();
+      declarations: [PaypalButtonComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

@@ -8,9 +8,8 @@ describe('FreeTextFilterComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FreeTextFilterComponent ]
-    })
-    .compileComponents();
+      declarations: [FreeTextFilterComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

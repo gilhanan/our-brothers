@@ -16,7 +16,7 @@ $barHeight: 5px;
 
   %edge-bar {
     @extend %bar;
-    content: "";
+    content: '';
     position: absolute;
     transition-property: transform, margin-top;
     transition-duration: 0.2s;

@@ -1,19 +1,11 @@
 <div class="view-toggle-container">
-  <div
-    *ngIf="view === 'list'"
-    class="view-button"
-    (click)="viewChange.emit('map')"
-  >
+  <div *ngIf="view === 'list'" class="view-button" (click)="viewChange.emit('map')">
     <div class="map-icon"></div>
     <div class="label">
       מפה
     </div>
   </div>
-  <div
-    *ngIf="view === 'map'"
-    class="view-button"
-    (click)="viewChange.emit('list')"
-  >
+  <div *ngIf="view === 'map'" class="view-button" (click)="viewChange.emit('list')">
     <div class="list-icon"></div>
     <div class="label">
       טבלה

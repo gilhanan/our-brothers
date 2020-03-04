@@ -1,4 +1,4 @@
-import {BereavedGuidanceGeneral} from "models";
+import { BereavedGuidanceGeneral } from 'models';
 
 export interface BereavedGuidanceGeneralOption {
   value: BereavedGuidanceGeneral;

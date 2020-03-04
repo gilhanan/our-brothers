@@ -1,10 +1,4 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  Input,
-  EventEmitter,
-  Output
-} from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, EventEmitter, Output } from '@angular/core';
 import { Meeting, User } from 'models';
 import { MEMORIAL_YEAR } from '../../../../services/data.service';
 import { ParticipationsService } from '../../../../services/participations.service';

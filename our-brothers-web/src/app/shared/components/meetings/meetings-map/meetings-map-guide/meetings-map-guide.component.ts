@@ -6,7 +6,6 @@ import { Component, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./meetings-map-guide.component.scss']
 })
 export class MeetingsMapGuideComponent {
-
   @Output() guideCompleted = new EventEmitter<void>();
 
   stage = 0;

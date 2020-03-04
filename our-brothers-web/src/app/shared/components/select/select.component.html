@@ -1,7 +1,7 @@
-<div class="select-container" [ngClass]="{'readonly': readonly, 'preview' : preview}">
-  <div class="value-container" (click)="isOpen = !readonly && !preview; preview = readonly;">
+<div class="select-container" [ngClass]="{ readonly: readonly, preview: preview }">
+  <div class="value-container" (click)="isOpen = !readonly && !preview; preview = readonly">
     <span class="value">
-      {{renderValue()}}
+      {{ renderValue() }}
     </span>
     <div>
       <span class="remove-icon" (click)="valueChange.emit('')">x</span>
@@ -11,7 +11,7 @@
   <div class="options" *ngIf="isOpen">
     <div *ngFor="let option of options">
       <div class="option" (click)="onSelectOption(option.value)">
-        {{option.label}}
+        {{ option.label }}
       </div>
     </div>
   </div>

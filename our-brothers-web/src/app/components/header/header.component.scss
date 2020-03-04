@@ -192,9 +192,7 @@ $mobileBreakpoint: 1200px;
         background-color: white;
         box-shadow: $shadow-width 0px $shadow-spread 0px rgba(0, 160, 153, 0.75);
         transition: transform 0.2s;
-        transform: translateX(
-          calc(100% - #{$shadow-width} + #{$shadow-spread})
-        );
+        transform: translateX(calc(100% - #{$shadow-width} + #{$shadow-spread}));
 
         &.open {
           transform: translateX(0);

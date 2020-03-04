@@ -3,20 +3,13 @@ import { Router } from '@angular/router';
 import { Subject, combineLatest, Subscription } from 'rxjs';
 import { distinctUntilChanged, tap } from 'rxjs/operators';
 
-import {
-  Meeting,
-  User,
-  BereavedProfile,
-  Slain,
-  UserRole,
-  BereavedGuidance
-} from 'models';
+import { Meeting, User, BereavedProfile, Slain, UserRole, BereavedGuidance } from 'models';
 import { AuthService } from '../../shared/services/auth.service';
 import { ParticipationsService } from '../../shared/services/participations.service';
 import { DataService, MEMORIAL_YEAR } from '../../shared/services/data.service';
 import { SlainForm } from '../slain-form/slain-form.component';
 import { BereavedProfileForm } from '../bereaved-profile-form/bereaved-profile-form.component';
-import {ToastrService} from "ngx-toastr";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-tell-page',
@@ -42,9 +35,7 @@ export class TellPageComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.authService.firebaseUser.subscribe(
-      firebaseUser => (this.firebaseUser = firebaseUser)
-    );
+    this.authService.firebaseUser.subscribe(firebaseUser => (this.firebaseUser = firebaseUser));
 
     this.subscriptions.push(
       combineLatest(
@@ -74,17 +65,11 @@ export class TellPageComponent implements OnInit, OnDestroy {
           if (!user) {
             this.currentStep$.next(1);
             this.authService.requestToLogin();
-          } else if (
-            !this.participationsService.isBereavedHaveAllDetails(user)
-          ) {
+          } else if (!this.participationsService.isBereavedHaveAllDetails(user)) {
             this.currentStep$.next(2);
-          } else if (
-            !this.participationsService.isBrotherHaveSlainDetails(user)
-          ) {
+          } else if (!this.participationsService.isBrotherHaveSlainDetails(user)) {
             this.currentStep$.next(3);
-          } else if (
-            !this.participationsService.isBrotherAnsweredTrainingMeeting(user)
-          ) {
+          } else if (!this.participationsService.isBrotherAnsweredTrainingMeeting(user)) {
             this.currentStep$.next(4);
           } else {
             this.currentStep$.next(5);
@@ -130,16 +115,12 @@ export class TellPageComponent implements OnInit, OnDestroy {
   onJoinMeeting(meeting: Meeting) {
     if (window.confirm('האם ברצונך להשתבץ למפגש?')) {
       if (this.user.role === UserRole.bereaved) {
-        this.dataService
-          .bereavedRegisterHost(this.user, meeting)
-          .subscribe(result => {
-            if (result) {
-              this.toastr.success('שובצת בהצלחה!');
-              this.router.navigate([
-                `meetings/${this.year}/${meeting.hostId}/${meeting.id}`
-              ]);
-            }
-          });
+        this.dataService.bereavedRegisterHost(this.user, meeting).subscribe(result => {
+          if (result) {
+            this.toastr.success('שובצת בהצלחה!');
+            this.router.navigate([`meetings/${this.year}/${meeting.hostId}/${meeting.id}`]);
+          }
+        });
       }
     }
   }

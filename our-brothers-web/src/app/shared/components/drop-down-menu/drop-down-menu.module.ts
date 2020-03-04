@@ -1,12 +1,10 @@
-import {NgModule} from "@angular/core";
-import {DropDownMenuComponent} from "./drop-down-menu.component";
-import {CommonModule} from "@angular/common";
+import { NgModule } from '@angular/core';
+import { DropDownMenuComponent } from './drop-down-menu.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [DropDownMenuComponent],
   exports: [DropDownMenuComponent],
-  imports: [
-    CommonModule
-  ]
+  imports: [CommonModule]
 })
 export class DropDownMenuModule {}

@@ -31,28 +31,15 @@
       </div>
     </div>
     <div class="social-buttons">
-      <app-login-social-button
-        class="social-button"
-        [type]="'facebook'"
-        (click)="signInWithFacebook.emit()"
-      >
+      <app-login-social-button class="social-button" [type]="'facebook'" (click)="signInWithFacebook.emit()">
         התחבר עם פייסבוק
       </app-login-social-button>
-      <app-login-social-button
-        class="social-button"
-        [type]="'google'"
-        (click)="signInWithGoogle.emit()"
-      >
+      <app-login-social-button class="social-button" [type]="'google'" (click)="signInWithGoogle.emit()">
         התחבר עם גוגל
       </app-login-social-button>
     </div>
   </div>
-  <button
-    class="site-button main-button"
-    tabindex="5"
-    (click)="onSubmit()"
-    [disabled]="loading"
-  >
+  <button class="site-button main-button" tabindex="5" (click)="onSubmit()" [disabled]="loading">
     התחבר
   </button>
 </div>

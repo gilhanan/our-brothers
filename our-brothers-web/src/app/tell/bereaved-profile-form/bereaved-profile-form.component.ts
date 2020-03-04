@@ -43,33 +43,16 @@ export class BereavedProfileFormComponent implements OnInit {
     }
 
     this.form = this.fb.group({
-      email: [
-        profile.email || this.firebaseUser.email,
-        [Validators.required, Validators.email]
-      ],
+      email: [profile.email || this.firebaseUser.email, [Validators.required, Validators.email]],
       firstName: [
         profile.firstName,
-        [
-          Validators.required,
-          Validators.maxLength(20),
-          Validators.pattern(this.utilsService.namePattern)
-        ]
+        [Validators.required, Validators.maxLength(20), Validators.pattern(this.utilsService.namePattern)]
       ],
       lastName: [
         profile.lastName,
-        [
-          Validators.required,
-          Validators.maxLength(20),
-          Validators.pattern(this.utilsService.namePattern)
-        ]
+        [Validators.required, Validators.maxLength(20), Validators.pattern(this.utilsService.namePattern)]
       ],
-      phoneNumber: [
-        profile.phoneNumber,
-        [
-          Validators.required,
-          Validators.pattern(this.utilsService.phonePattern)
-        ]
-      ],
+      phoneNumber: [profile.phoneNumber, [Validators.required, Validators.pattern(this.utilsService.phonePattern)]],
       address: [profile.address, Validators.required],
       birthDay: [profile.birthDay, [Validators.required]],
       otherLang: [profile.otherLang],
@@ -119,9 +102,7 @@ export class BereavedProfileFormComponent implements OnInit {
         email: this.email.value,
         firstName: this.firstName.value.trim(),
         lastName: this.lastName.value.trim(),
-        phoneNumber: this.utilsService.toInternationalPhoneNumber(
-          this.phoneNumber.value.replace(/-/g, '')
-        ),
+        phoneNumber: this.utilsService.toInternationalPhoneNumber(this.phoneNumber.value.replace(/-/g, '')),
         address: this.address.value,
         birthDay: new Date(this.birthDay.value).getTime(),
         otherLang: this.otherLang.value

@@ -9,11 +9,10 @@ import { ParticipationsService } from '../../services/participations.service';
   styleUrls: ['./join-button.component.scss']
 })
 export class JoinButtonComponent {
-
   @Input() user: User;
   @Input() meeting: Meeting;
 
   @Output() joinMeeting = new EventEmitter<void>();
 
-  constructor(public participationsService: ParticipationsService) { }
+  constructor(public participationsService: ParticipationsService) {}
 }

@@ -6,19 +6,19 @@ import { MEMORIAL_YEAR } from './data.service';
   providedIn: 'root'
 })
 export class ParticipationsService {
-  constructor() { }
+  constructor() {}
 
   isUserCanHost = (user: User) => {
     return !(user && user.role && user.role === UserRole.bereaved);
-  }
+  };
 
   isUserCanParticipate = (user: User) => {
     return !(user && user.role && user.role === UserRole.bereaved);
-  }
+  };
 
   isUserCanTell = (user: User) => {
     return !(user && user.role && user.role !== UserRole.bereaved);
-  }
+  };
 
   isParticipateParticipating = (user: User, year: number) => {
     return (
@@ -58,53 +58,31 @@ export class ParticipationsService {
     );
   };
 
-  isParticipateParticipatingEvent = (
-    user: User,
-    meeting: Meeting,
-    year = MEMORIAL_YEAR
-  ) => {
+  isParticipateParticipatingEvent = (user: User, meeting: Meeting, year = MEMORIAL_YEAR) => {
     return (
       !!user &&
       !!user.participateParticipation &&
       !!user.participateParticipation[year] &&
       !!user.participateParticipation[year].meetings &&
-      user.participateParticipation[year].meetings.some(
-        e => e.id === meeting.id && e.hostId === meeting.hostId
-      )
+      user.participateParticipation[year].meetings.some(e => e.id === meeting.id && e.hostId === meeting.hostId)
     );
   };
 
-  isBereavedParticipatingEvent = (
-    user: User,
-    meeting: Meeting,
-    year = MEMORIAL_YEAR
-  ) => {
+  isBereavedParticipatingEvent = (user: User, meeting: Meeting, year = MEMORIAL_YEAR) => {
     return (
       !!user &&
       !!user.bereavedParticipation &&
       !!user.bereavedParticipation[year] &&
       !!user.bereavedParticipation[year].meetings &&
-      user.bereavedParticipation[year].meetings.some(
-        e => e.id === meeting.id && e.hostId === meeting.hostId
-      )
+      user.bereavedParticipation[year].meetings.some(e => e.id === meeting.id && e.hostId === meeting.hostId)
     );
   };
 
-  isHostParticipatingEvent = (
-    user: User,
-    meeting: Meeting
-  ) => {
-    return (
-      !!user &&
-      user.id === meeting.hostId
-    );
+  isHostParticipatingEvent = (user: User, meeting: Meeting) => {
+    return !!user && user.id === meeting.hostId;
   };
 
-  isUserParticipatingEvent = (
-    user: User,
-    meeting: Meeting,
-    year = MEMORIAL_YEAR
-  ) => {
+  isUserParticipatingEvent = (user: User, meeting: Meeting, year = MEMORIAL_YEAR) => {
     if (!meeting) {
       return false;
     }
@@ -116,10 +94,7 @@ export class ParticipationsService {
     );
   };
 
-  isUserCanParticipatingEvent = (
-    user: User,
-    meeting: Meeting
-  ) => {
+  isUserCanParticipatingEvent = (user: User, meeting: Meeting) => {
     if (!user) {
       return false;
     }
@@ -137,20 +112,20 @@ export class ParticipationsService {
     } else {
       return this.isParticipateCanParticipatingEvent(user, meeting);
     }
-  }
+  };
 
   isBereavedCanParticipatingEvent = (user: User, meeting: Meeting) => {
-    return this.isBereavedHaveAllDetails(user) &&
+    return (
+      this.isBereavedHaveAllDetails(user) &&
       this.isBrotherHaveSlainDetails(user) &&
       this.isBrotherAnsweredTrainingMeeting(user) &&
       !meeting.bereaved
-  }
+    );
+  };
 
   isParticipateCanParticipatingEvent = (user: User, meeting: Meeting) => {
-    return this.isParticipateHaveAllDetails(user) &&
-      !meeting.invited &&
-      meeting.count <= meeting.capacity
-  }
+    return this.isParticipateHaveAllDetails(user) && !meeting.invited && meeting.count <= meeting.capacity;
+  };
 
   isUserHaveAllDetails = (user: User) => {
     if (!user) {
@@ -162,7 +137,7 @@ export class ParticipationsService {
     } else {
       return this.isParticipateHaveAllDetails(user);
     }
-  }
+  };
 
   isParticipateHaveAllDetails = (user: User) => {
     return !!(

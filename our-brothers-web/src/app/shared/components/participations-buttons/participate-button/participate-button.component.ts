@@ -9,10 +9,8 @@ import { ParticipationsService } from '../../../services/participations.service'
   styleUrls: ['./participate-button.component.scss']
 })
 export class ParticipateButtonComponent {
-
   @Input() user: User;
   @Input() loading: boolean;
 
-  constructor(public participationService: ParticipationsService) { }
-
+  constructor(public participationService: ParticipationsService) {}
 }

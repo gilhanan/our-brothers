@@ -6,25 +6,25 @@
 <div class="body">
   <div class="row">
     <strong>כתובת: </strong>
-    <span>{{meeting.address.formattedAddress}}</span>
+    <span>{{ meeting.address.formattedAddress }}</span>
   </div>
   <div class="row">
     <strong>מספר משתתפים: </strong>
-    <span>{{meeting.capacity}}</span>
+    <span>{{ meeting.capacity }}</span>
   </div>
   <div class="row" *ngIf="meeting.audience?.length">
     <strong>קהל יעד: </strong>
-    <span>{{utilsService.meetingAudienceLabels[meeting.audience]}}</span>
+    <span>{{ utilsService.meetingAudienceLabels[meeting.audience] }}</span>
   </div>
   <div *ngIf="meeting.bereaved">
     <div class="row">
       <strong>שם האח/ות: </strong>
-      <span>{{meeting.bereaved.firstName + ' ' + meeting.bereaved.lastName}}</span>
+      <span>{{ meeting.bereaved.firstName + ' ' + meeting.bereaved.lastName }}</span>
     </div>
     <div *ngFor="let slain of meeting.bereaved.slains">
       <div class="row">
         <strong>שם החלל: </strong>
-        <span>{{slain.firstName + ' ' + slain.lastName + ' ז"ל'}}</span>
+        <span>{{ slain.firstName + ' ' + slain.lastName + ' ז"ל' }}</span>
       </div>
     </div>
   </div>

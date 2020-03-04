@@ -7,6 +7,5 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./header-toggler.component.scss']
 })
 export class HeaderTogglerComponent {
-
   @Input() active: boolean;
 }

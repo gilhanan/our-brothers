@@ -9,10 +9,11 @@ import { PayPalOrder } from 'models';
   providedIn: 'root'
 })
 export class PaypalService {
-
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {}
 
   public captureOrder(payPalOrder: PayPalOrder): Observable<boolean> {
-    return this.httpClient.post('https://europe-west1-our-brothers.cloudfunctions.net/api/order/capture', payPalOrder).pipe(map(() => true));
+    return this.httpClient
+      .post('https://europe-west1-our-brothers.cloudfunctions.net/api/order/capture', payPalOrder)
+      .pipe(map(() => true));
   }
 }

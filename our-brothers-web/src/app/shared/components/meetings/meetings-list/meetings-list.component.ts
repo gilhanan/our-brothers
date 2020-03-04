@@ -13,7 +13,6 @@ interface SortedColumn {
   styleUrls: ['./meetings-list.component.scss']
 })
 export class MeetingsListComponent implements OnChanges {
-
   @Input() meetings: Meeting[];
   @Input() user: User;
 
@@ -28,7 +27,7 @@ export class MeetingsListComponent implements OnChanges {
     direction: 'asc'
   };
 
-  constructor(public participationsService: ParticipationsService) { }
+  constructor(public participationsService: ParticipationsService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.meetings || changes.user) {
@@ -54,8 +53,10 @@ export class MeetingsListComponent implements OnChanges {
 
     if (!this.showFullMeetings && this.isUserHaveAllDetails) {
       this.filteredMeetings = this.meetings.filter(meeting => {
-        return this.participationsService.isUserParticipatingEvent(this.user, meeting) ||
-          this.participationsService.isUserCanParticipatingEvent(this.user, meeting);
+        return (
+          this.participationsService.isUserParticipatingEvent(this.user, meeting) ||
+          this.participationsService.isUserCanParticipatingEvent(this.user, meeting)
+        );
       });
     }
 
@@ -85,8 +86,8 @@ export class MeetingsListComponent implements OnChanges {
         aValue = a.address.latitude;
         bValue = b.address.latitude;
       } else if (column === 'bereaved') {
-        aValue = a.bereaved && (a.bereaved.firstName + a.bereaved.lastName) || '';
-        bValue = b.bereaved && (b.bereaved.firstName + b.bereaved.lastName) || '';
+        aValue = (a.bereaved && a.bereaved.firstName + a.bereaved.lastName) || '';
+        bValue = (b.bereaved && b.bereaved.firstName + b.bereaved.lastName) || '';
       } else {
         aValue = a[column] || '';
         bValue = b[column] || '';

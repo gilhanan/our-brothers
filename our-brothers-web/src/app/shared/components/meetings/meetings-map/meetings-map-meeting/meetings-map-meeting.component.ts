@@ -1,8 +1,8 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
-import {Meeting, User} from 'models';
-import {ParticipationsService} from '../../../../services/participations.service';
-import {MEMORIAL_YEAR} from '../../../../services/data.service';
-import {UtilsService} from '../../../../services/utils.service';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { Meeting, User } from 'models';
+import { ParticipationsService } from '../../../../services/participations.service';
+import { MEMORIAL_YEAR } from '../../../../services/data.service';
+import { UtilsService } from '../../../../services/utils.service';
 
 @Component({
   selector: 'app-meetings-map-meeting',
@@ -11,7 +11,6 @@ import {UtilsService} from '../../../../services/utils.service';
   styleUrls: ['./meetings-map-meeting.component.scss']
 })
 export class MeetingsMapMeetingComponent {
-
   @Input() meeting: Meeting;
   @Input() user: User;
 
@@ -19,6 +18,5 @@ export class MeetingsMapMeetingComponent {
 
   year = MEMORIAL_YEAR;
 
-  constructor(public utilsService: UtilsService,
-    public participationsService: ParticipationsService) { }
+  constructor(public utilsService: UtilsService, public participationsService: ParticipationsService) {}
 }

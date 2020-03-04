@@ -1,9 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {User as FirebaseUser} from 'firebase';
-import {User, UserProfile} from 'models';
-import {UtilsService} from '../../services/utils.service';
-import {ProfileForm} from "./profile-form.types";
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { User as FirebaseUser } from 'firebase';
+import { User, UserProfile } from 'models';
+import { UtilsService } from '../../services/utils.service';
+import { ProfileForm } from './profile-form.types';
 
 @Component({
   selector: 'app-profile-form',
@@ -29,33 +29,16 @@ export class ProfileFormComponent implements OnInit {
     const profile: UserProfile = this.user.profile || ({} as UserProfile);
 
     this.form = this.fb.group({
-      email: [
-        profile.email || this.firebaseUser.email,
-        [Validators.required, Validators.email]
-      ],
+      email: [profile.email || this.firebaseUser.email, [Validators.required, Validators.email]],
       firstName: [
         profile.firstName,
-        [
-          Validators.required,
-          Validators.maxLength(20),
-          Validators.pattern(this.utilsService.namePattern)
-        ]
+        [Validators.required, Validators.maxLength(20), Validators.pattern(this.utilsService.namePattern)]
       ],
       lastName: [
         profile.lastName,
-        [
-          Validators.required,
-          Validators.maxLength(20),
-          Validators.pattern(this.utilsService.namePattern)
-        ]
+        [Validators.required, Validators.maxLength(20), Validators.pattern(this.utilsService.namePattern)]
       ],
-      phoneNumber: [
-        profile.phoneNumber,
-        [
-          Validators.required,
-          Validators.pattern(this.utilsService.phonePattern)
-        ]
-      ],
+      phoneNumber: [profile.phoneNumber, [Validators.required, Validators.pattern(this.utilsService.phonePattern)]],
       agree: [false, Validators.requiredTrue]
     });
 
@@ -90,9 +73,7 @@ export class ProfileFormComponent implements OnInit {
         email: this.email.value,
         firstName: this.firstName.value.trim(),
         lastName: this.lastName.value.trim(),
-        phoneNumber: this.utilsService.toInternationalPhoneNumber(
-          this.phoneNumber.value.replace(/-/g, '')
-        )
+        phoneNumber: this.utilsService.toInternationalPhoneNumber(this.phoneNumber.value.replace(/-/g, ''))
       };
 
       this.submit.emit(parsedForm);

@@ -3,6 +3,12 @@
 <div class="small-heading">אודות העמותה</div>
 <div class="medium-heading">הצוות שלנו</div>
 <div class="cards">
-  <app-team-card *ngFor="let member of members" class="card" [member]="member" data-aos="zoom-in" data-aos-duration="1500">
+  <app-team-card
+    *ngFor="let member of members"
+    class="card"
+    [member]="member"
+    data-aos="zoom-in"
+    data-aos-duration="1500"
+  >
   </app-team-card>
 </div>

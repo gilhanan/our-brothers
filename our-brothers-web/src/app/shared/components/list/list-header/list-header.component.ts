@@ -1,6 +1,6 @@
-import {AfterContentInit, Component, ContentChildren, EventEmitter, Input, Output, QueryList} from '@angular/core';
-import {ListColumnComponent} from '../list-column/list-column.component';
-import {SortedColumn} from "./list-header.types";
+import { AfterContentInit, Component, ContentChildren, EventEmitter, Input, Output, QueryList } from '@angular/core';
+import { ListColumnComponent } from '../list-column/list-column.component';
+import { SortedColumn } from './list-header.types';
 
 const SortedColumnInitialValue: SortedColumn = {
   column: '',
@@ -13,7 +13,6 @@ const SortedColumnInitialValue: SortedColumn = {
   styleUrls: ['./list-header.component.scss']
 })
 export class ListHeaderComponent implements AfterContentInit {
-
   @Input() scroll = false;
   @Input('sort') _sort: SortedColumn = SortedColumnInitialValue;
   @Output() sortChange = new EventEmitter<SortedColumn>();
@@ -30,7 +29,7 @@ export class ListHeaderComponent implements AfterContentInit {
     this.sortChange.emit(this.sort);
   }
 
-  constructor() { }
+  constructor() {}
 
   ngAfterContentInit(): void {
     this.listenColumnsClicks();

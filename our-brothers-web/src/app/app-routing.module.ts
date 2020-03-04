@@ -1,10 +1,10 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {HomePageComponent} from './home/home-page.component';
-import {HostGuard} from './guards/host.guard';
-import {TellGuard} from './guards/tell.guard';
-import {ParticipateGuard} from './guards/participate.guard';
-import {HostPageModule} from "./host/page/host-page.module";
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { HomePageComponent } from './home/home-page.component';
+import { HostGuard } from './guards/host.guard';
+import { TellGuard } from './guards/tell.guard';
+import { ParticipateGuard } from './guards/participate.guard';
+import { HostPageModule } from './host/page/host-page.module';
 
 const routes: Routes = [
   {
@@ -24,12 +24,14 @@ const routes: Routes = [
   },
   {
     path: 'participate',
-    loadChildren: () => import('./participate/page/participate-page.module').then(({ ParticipatePageModule }) => ParticipatePageModule),
+    loadChildren: () =>
+      import('./participate/page/participate-page.module').then(({ ParticipatePageModule }) => ParticipatePageModule),
     canActivate: [ParticipateGuard]
   },
   {
     path: 'meetings',
-    loadChildren: () => import('./meetings/page/meetings-page.module').then(({MeetingsPageModule}) => MeetingsPageModule)
+    loadChildren: () =>
+      import('./meetings/page/meetings-page.module').then(({ MeetingsPageModule }) => MeetingsPageModule)
   },
   {
     path: 'about',
@@ -43,7 +45,8 @@ const routes: Routes = [
   },
   {
     path: 'articles',
-    loadChildren: () => import('./articles/page/articles-page.module').then(({ ArticlesPageModule }) => ArticlesPageModule),
+    loadChildren: () =>
+      import('./articles/page/articles-page.module').then(({ ArticlesPageModule }) => ArticlesPageModule),
     pathMatch: 'full'
   },
   {
@@ -68,16 +71,19 @@ const routes: Routes = [
   },
   {
     path: 'donate',
-    loadChildren: () => import('./donate/page/donate-page.module').then(({DonatePageModule}) => DonatePageModule)
+    loadChildren: () => import('./donate/page/donate-page.module').then(({ DonatePageModule }) => DonatePageModule)
   },
   {
     path: 'contact',
-    loadChildren: () => import('./contact/page/contact-page.module').then(({ContactPageModule}) => ContactPageModule),
+    loadChildren: () => import('./contact/page/contact-page.module').then(({ ContactPageModule }) => ContactPageModule),
     pathMatch: 'full'
   },
   {
     path: 'admin',
-    loadChildren: () => import('./admin/bereaveds/page/admin-bereaveds-page.module').then(({ AdminBereavedsPageModule }) => AdminBereavedsPageModule),
+    loadChildren: () =>
+      import('./admin/bereaveds/page/admin-bereaveds-page.module').then(
+        ({ AdminBereavedsPageModule }) => AdminBereavedsPageModule
+      )
   },
   {
     path: '',
@@ -87,9 +93,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })
-  ],
+  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })],
   providers: [HostGuard, TellGuard, ParticipateGuard],
   exports: [RouterModule]
 })

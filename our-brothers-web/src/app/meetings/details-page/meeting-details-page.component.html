@@ -40,9 +40,7 @@
           class="input"
           iconUrl="assets/img/host_users.svg"
           label="קהל יעד:"
-          [text]="
-            meeting ? utilsService.meetingAudienceLabels[meeting.audience] : ''
-          "
+          [text]="meeting ? utilsService.meetingAudienceLabels[meeting.audience] : ''"
         ></app-host-meeting-input-text>
       </div>
     </div>
@@ -55,9 +53,7 @@
         ></app-host-meeting-input-text>
       </div>
     </div>
-    <div
-      *ngIf="user && ((user.id === meeting?.hostId) || meeting?.bereaved?.id === user.id)"
-    >
+    <div *ngIf="user && (user.id === meeting?.hostId || meeting?.bereaved?.id === user.id)">
       <div class="heading host-heading">
         פרטי מארח/ת
       </div>
@@ -67,11 +63,7 @@
             class="input"
             iconUrl="assets/img/host_user.svg"
             info="שם המארח/ת"
-            [text]="
-              meeting?.contact
-                ? meeting?.contact.firstName + ' ' + meeting?.contact.lastName
-                : ''
-            "
+            [text]="meeting?.contact ? meeting?.contact.firstName + ' ' + meeting?.contact.lastName : ''"
           ></app-host-meeting-input-text>
         </div>
       </div>
@@ -125,11 +117,7 @@
             class="input"
             iconUrl="assets/img/host_user.svg"
             info="שם האח"
-            [text]="
-              meeting?.bereaved
-                ? meeting.bereaved.firstName + ' ' + meeting.bereaved.lastName
-                : ''
-            "
+            [text]="meeting?.bereaved ? meeting.bereaved.firstName + ' ' + meeting.bereaved.lastName : ''"
           ></app-host-meeting-input-text>
         </div>
         <div class="col">
@@ -139,9 +127,7 @@
             info="שם החלל"
             [text]="
               meeting?.bereaved?.slains
-                ? meeting.bereaved.slains[0].firstName +
-                  ' ' +
-                  meeting.bereaved.slains[0].lastName
+                ? meeting.bereaved.slains[0].firstName + ' ' + meeting.bereaved.slains[0].lastName
                 : ''
             "
           ></app-host-meeting-input-text>
@@ -165,9 +151,7 @@
       </div>
     </div>
     <div *ngIf="user && !meeting?.invited && meetingParticipates?.length">
-      <div class="heading participates-heading">
-        משתתפים ({{ meeting.count + '/' + meeting.capacity }})
-      </div>
+      <div class="heading participates-heading">משתתפים ({{ meeting.count + '/' + meeting.capacity }})</div>
       <app-meeting-participates-list
         [user]="user"
         [meeting]="meeting"

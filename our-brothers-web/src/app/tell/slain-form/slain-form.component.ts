@@ -15,41 +15,26 @@ export interface SlainForm {
   styleUrls: ['./slain-form.component.scss']
 })
 export class SlainFormComponent implements OnInit {
-   form: FormGroup;
-   formInvalid = false;
-   maxDate = new Date().toISOString().split('T')[0];
+  form: FormGroup;
+  formInvalid = false;
+  maxDate = new Date().toISOString().split('T')[0];
 
   @Output() submit = new EventEmitter<SlainForm>();
 
-
-  constructor(private fb: FormBuilder,
-    private utilsService: UtilsService) { }
+  constructor(private fb: FormBuilder, private utilsService: UtilsService) {}
 
   ngOnInit() {
     this.form = this.fb.group({
       firstName: [
         '',
-        [
-          Validators.required,
-          Validators.maxLength(20),
-          Validators.pattern(this.utilsService.namePattern)
-        ]
+        [Validators.required, Validators.maxLength(20), Validators.pattern(this.utilsService.namePattern)]
       ],
       lastName: [
         '',
-        [
-          Validators.required,
-          Validators.maxLength(20),
-          Validators.pattern(this.utilsService.namePattern)
-        ]
+        [Validators.required, Validators.maxLength(20), Validators.pattern(this.utilsService.namePattern)]
       ],
       deathDate: ['', Validators.required],
-      story: ['',
-        [
-          Validators.minLength(100),
-          Validators.maxLength(500)
-        ]
-      ]
+      story: ['', [Validators.minLength(100), Validators.maxLength(500)]]
     });
 
     this.form.valueChanges.subscribe(() => {
@@ -80,7 +65,7 @@ export class SlainFormComponent implements OnInit {
         lastName: this.lastName.value.trim(),
         deathDate: new Date(this.deathDate.value).getTime(),
         story: this.story.value.trim()
-      }
+      };
 
       this.submit.emit(parsedForm);
     } else {

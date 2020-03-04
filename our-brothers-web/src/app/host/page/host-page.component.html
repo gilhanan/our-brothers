@@ -1,8 +1,4 @@
-<img
-  class="image-header"
-  src="../../../assets/img/hostHeader.jpg"
-  alt="Meetings Page Header Image"
-/>
+<img class="image-header" src="../../../assets/img/hostHeader.jpg" alt="Meetings Page Header Image" />
 
 <section class="registration-page">
   <section *ngIf="currentStep > 0">
@@ -10,12 +6,7 @@
     <div class="small-heading">פרטים נוספים</div>
     <app-registration-progress-bar
       [currentStep]="currentStep - 1"
-      [steps]="[
-        { title: 'התחברות' },
-        { title: 'הרשמה' },
-        { title: 'פרטי האירוח' },
-        { title: 'אישור האירוח' }
-      ]"
+      [steps]="[{ title: 'התחברות' }, { title: 'הרשמה' }, { title: 'פרטי האירוח' }, { title: 'אישור האירוח' }]"
     >
     </app-registration-progress-bar>
   </section>
@@ -32,20 +23,13 @@
       </ng-container>
       <ng-container *ngSwitchCase="2">
         <section class="registration-step">
-          <app-profile-form
-            [user]="user"
-            [firebaseUser]="firebaseUser"
-            (submit)="onProfileSubmit($event)"
-          >
+          <app-profile-form [user]="user" [firebaseUser]="firebaseUser" (submit)="onProfileSubmit($event)">
           </app-profile-form>
         </section>
       </ng-container>
       <ng-container *ngSwitchCase="3">
         <section class="registration-step">
-          <app-host-form
-            [user]="user"
-            (submitMeetingDetailsPage)="onNewMeeting($event)"
-          ></app-host-form>
+          <app-host-form [user]="user" (submitMeetingDetailsPage)="onNewMeeting($event)"></app-host-form>
         </section>
       </ng-container>
     </ng-container>

@@ -1,4 +1,4 @@
-import {BereavedStatus} from "models";
+import { BereavedStatus } from 'models';
 
 export interface BereavedStatusOption {
   value: BereavedStatus;

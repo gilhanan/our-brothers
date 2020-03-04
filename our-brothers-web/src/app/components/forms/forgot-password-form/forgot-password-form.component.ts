@@ -11,14 +11,13 @@ export interface ForgotPasswordForm {
   styleUrls: ['./forgot-password-form.component.scss']
 })
 export class ForgotPasswordFormComponent {
-
   @Input() loading: boolean;
 
   @Output() submit = new EventEmitter<ForgotPasswordForm>();
 
   public form: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -34,7 +33,7 @@ export class ForgotPasswordFormComponent {
     if (this.form.valid) {
       const parsedForm: ForgotPasswordForm = {
         email: this.email.value
-      }
+      };
 
       this.submit.emit(parsedForm);
       this.form.reset();

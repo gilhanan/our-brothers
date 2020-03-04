@@ -1,4 +1,4 @@
-import {TeamMember} from "../team-card/team-card.component";
+import { TeamMember } from '../team-card/team-card.component';
 
 export const members: TeamMember[] = [
   {

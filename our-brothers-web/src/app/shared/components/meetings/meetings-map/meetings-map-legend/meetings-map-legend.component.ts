@@ -12,20 +12,21 @@ interface Legend {
   styleUrls: ['./meetings-map-legend.component.scss']
 })
 export class MeetingsMapLegendComponent implements OnChanges {
-
   @Input() user: User;
 
   legends: Legend[] = [];
 
-  constructor() { }
+  constructor() {}
 
   ngOnChanges(changes: SimpleChanges): void {
     const isBereaved = this.user && this.user.role === UserRole.bereaved;
 
-    this.legends = [{
-      label: `אדום - ${isBereaved ? 'אח/ות משובץ' : 'תפוסה מלאה'}`,
-      iconUrl: '/assets/img/map/meetings-map-red.svg'
-    }]
+    this.legends = [
+      {
+        label: `אדום - ${isBereaved ? 'אח/ות משובץ' : 'תפוסה מלאה'}`,
+        iconUrl: '/assets/img/map/meetings-map-red.svg'
+      }
+    ];
 
     if (!isBereaved) {
       this.legends.push({
@@ -34,12 +35,15 @@ export class MeetingsMapLegendComponent implements OnChanges {
       });
     }
 
-    this.legends.push({
-      label: `ירוק - ${isBereaved ? 'פנוי' : 'פתוח לקהל'}`,
-      iconUrl: '/assets/img/map/meetings-map-green.svg'
-    }, {
-      label: 'כחול - השיבוץ שלי',
-      iconUrl: '/assets/img/map/meetings-map-blue.svg'
-    });
+    this.legends.push(
+      {
+        label: `ירוק - ${isBereaved ? 'פנוי' : 'פתוח לקהל'}`,
+        iconUrl: '/assets/img/map/meetings-map-green.svg'
+      },
+      {
+        label: 'כחול - השיבוץ שלי',
+        iconUrl: '/assets/img/map/meetings-map-blue.svg'
+      }
+    );
   }
 }

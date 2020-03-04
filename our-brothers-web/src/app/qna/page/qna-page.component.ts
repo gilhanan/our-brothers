@@ -11,11 +11,11 @@ import { qnaBorthers, qnaHosts, qnaParticipates } from './qnas';
   styleUrls: ['./qna-page.component.scss']
 })
 export class QnaPageComponent implements OnInit {
-   UserRole = UserRole;
-   currentQType: UserRole;
-   qnaBrothers: QNAItem[] = qnaBorthers;
-   qnaHosts: QNAItem[] = qnaHosts;
-   qnaParticipates: QNAItem[] = qnaParticipates;
+  UserRole = UserRole;
+  currentQType: UserRole;
+  qnaBrothers: QNAItem[] = qnaBorthers;
+  qnaHosts: QNAItem[] = qnaHosts;
+  qnaParticipates: QNAItem[] = qnaParticipates;
 
   constructor(private authService: AuthService) {}
 

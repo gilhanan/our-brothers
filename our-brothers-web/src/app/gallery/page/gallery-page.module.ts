@@ -1,11 +1,13 @@
-import {NgModule} from "@angular/core";
-import {GalleryPageComponent} from "./gallery-page.component";
-import {RouterModule} from "@angular/router";
+import { NgModule } from '@angular/core';
+import { GalleryPageComponent } from './gallery-page.component';
+import { RouterModule } from '@angular/router';
 
-const routes = [{
-  path: '',
-  component: GalleryPageComponent
-}];
+const routes = [
+  {
+    path: '',
+    component: GalleryPageComponent
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

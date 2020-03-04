@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Meeting, User } from 'models';
 import { DataService, MEMORIAL_YEAR } from '../../shared/services/data.service';
 import { AuthService } from '../../shared/services/auth.service';
-import {ToastrService} from "ngx-toastr";
+import { ToastrService } from 'ngx-toastr';
 
 const oneWeek = 1000 * 60 * 60 * 24 * 7;
 
@@ -25,14 +25,17 @@ export class MeetingsPageComponent implements OnInit {
     private dataService: DataService,
     private toastr: ToastrService,
     private authService: AuthService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.authService.user.subscribe(user => {
       this.user = user;
       this.loadingUser = false;
 
-      if (!this.mapShowGuide && !(user && user.meetingMapGuideLastVisit && (Date.now() - user.meetingMapGuideLastVisit) < oneWeek)) {
+      if (
+        !this.mapShowGuide &&
+        !(user && user.meetingMapGuideLastVisit && Date.now() - user.meetingMapGuideLastVisit < oneWeek)
+      ) {
         this.mapShowGuide = true;
       }
     });
@@ -52,23 +55,21 @@ export class MeetingsPageComponent implements OnInit {
   onJoinMeeting(meeting: Meeting) {
     if (window.confirm('האם ברצונך להשתבץ למפגש?')) {
       if (this.user.role === 'bereaved') {
-        this.dataService.bereavedRegisterHost(this.user, meeting).subscribe((result) => {
+        this.dataService.bereavedRegisterHost(this.user, meeting).subscribe(result => {
           if (result) {
             this.toastr.success('שובצת בהצלחה!');
             this.router.navigate([`meetings/${this.year}/${meeting.hostId}/${meeting.id}`]);
           }
-        })
+        });
       } else {
         const accompanies = this.getAccompanies();
 
-        this.dataService
-          .participateRegisterHost(this.user, meeting, accompanies)
-          .subscribe(result => {
-            if (result) {
-              this.toastr.success('שובצת בהצלחה!');
-              this.router.navigate([`meetings/${this.year}/${meeting.hostId}/${meeting.id}`]);
-            }
-          });
+        this.dataService.participateRegisterHost(this.user, meeting, accompanies).subscribe(result => {
+          if (result) {
+            this.toastr.success('שובצת בהצלחה!');
+            this.router.navigate([`meetings/${this.year}/${meeting.hostId}/${meeting.id}`]);
+          }
+        });
       }
     }
   }

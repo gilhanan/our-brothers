@@ -8,7 +8,6 @@ import { UtilsService } from '../../../shared/services/utils.service';
   styleUrls: ['./modal-select-meeting.component.scss']
 })
 export class ModalSelectMeetingComponent implements OnChanges {
-
   @Input() bereaved: User;
   @Input() meetings: Meeting[];
   @Output() selectMeeting = new EventEmitter<Meeting>();
@@ -16,14 +15,13 @@ export class ModalSelectMeetingComponent implements OnChanges {
   filter: string = '';
   filteredMeetings: Meeting[];
 
-  constructor(private utilsService: UtilsService) { }
+  constructor(private utilsService: UtilsService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.filterMeetings(this.filter)
+    this.filterMeetings(this.filter);
   }
 
   filterMeetings(filter: string) {
     this.filteredMeetings = this.utilsService.filteringMeetings(this.meetings, filter);
   }
-
 }

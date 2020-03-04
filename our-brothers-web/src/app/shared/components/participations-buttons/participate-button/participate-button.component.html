@@ -1,23 +1,42 @@
-<app-flip-card [disabled]="loading || (user && !participationService.isUserCanParticipate(user))"
-  [frontImage]="frontImage" [frontTitle]="'אני רוצה להשתתף'" [backText]="'מעוניין להתארח באחד המפגשים?'"
-  [backButtonText]="'לפרטים נוספים'" [backButtonUrl]="'participate'">
+<app-flip-card
+  [disabled]="loading || (user && !participationService.isUserCanParticipate(user))"
+  [frontImage]="frontImage"
+  [frontTitle]="'אני רוצה להשתתף'"
+  [backText]="'מעוניין להתארח באחד המפגשים?'"
+  [backButtonText]="'לפרטים נוספים'"
+  [backButtonUrl]="'participate'"
+>
 </app-flip-card>
 
 <ng-template #frontImage>
-  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 173 120"
-    xml:space="preserve" class="image"
-    [class.disabled]="loading || (user && !participationService.isUserCanParticipate(user))">
-    <svg:path class="person"
+  <svg
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    viewBox="0 0 173 120"
+    xml:space="preserve"
+    class="image"
+    [class.disabled]="loading || (user && !participationService.isUserCanParticipate(user))"
+  >
+    <svg:path
+      class="person"
       d="M76.2,50.38C83.38,47,88.36,39.69,88.36,31.23c0-11.69-9.47-21.16-21.16-21.16s-21.16,9.47-21.16,21.16
-          c0,8.47,4.98,15.77,12.16,19.15C44.3,54.3,34.1,67.07,34.1,82.23v28.29h66.19V82.23C100.29,67.07,90.1,54.3,76.2,50.38" />
-    <svg:path class="person"
+          c0,8.47,4.98,15.77,12.16,19.15C44.3,54.3,34.1,67.07,34.1,82.23v28.29h66.19V82.23C100.29,67.07,90.1,54.3,76.2,50.38"
+    />
+    <svg:path
+      class="person"
       d="M37.9,65.26c5.41-2.54,9.15-8.04,9.15-14.41c0-8.79-7.13-15.93-15.93-15.93S15.2,42.05,15.2,50.84
-          c0,6.37,3.74,11.87,9.15,14.41C13.89,68.21,6.22,77.82,6.22,89.23v21.29h49.82V89.23C56.03,77.82,48.36,68.21,37.9,65.26" />
-    <svg:path class="person"
+          c0,6.37,3.74,11.87,9.15,14.41C13.89,68.21,6.22,77.82,6.22,89.23v21.29h49.82V89.23C56.03,77.82,48.36,68.21,37.9,65.26"
+    />
+    <svg:path
+      class="person"
       d="M150.37,72.96c4.49-2.11,7.59-6.67,7.59-11.96c0-7.3-5.92-13.21-13.21-13.21c-7.3,0-13.21,5.92-13.21,13.21
-          c0,5.29,3.11,9.85,7.59,11.96c-8.68,2.45-15.05,10.42-15.05,19.89v17.66h41.34V92.85C165.42,83.38,159.05,75.41,150.37,72.96" />
-    <svg:path class="person"
+          c0,5.29,3.11,9.85,7.59,11.96c-8.68,2.45-15.05,10.42-15.05,19.89v17.66h41.34V92.85C165.42,83.38,159.05,75.41,150.37,72.96"
+    />
+    <svg:path
+      class="person"
       d="M123.38,50.38c7.19-3.38,12.16-10.68,12.16-19.15c0-11.69-9.47-21.16-21.16-21.16s-21.16,9.47-21.16,21.16
-          c0,8.47,4.98,15.77,12.16,19.15c-13.9,3.92-24.1,16.69-24.1,31.85v28.29h66.19V82.23C147.48,67.07,137.28,54.3,123.38,50.38" />
+          c0,8.47,4.98,15.77,12.16,19.15c-13.9,3.92-24.1,16.69-24.1,31.85v28.29h66.19V82.23C147.48,67.07,137.28,54.3,123.38,50.38"
+    />
   </svg>
 </ng-template>

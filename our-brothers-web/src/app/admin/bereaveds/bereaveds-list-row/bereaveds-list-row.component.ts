@@ -10,7 +10,6 @@ import { ParticipationsService } from '../../../shared/services/participations.s
   styleUrls: ['./bereaveds-list-row.component.scss']
 })
 export class BereavedsListRowComponent {
-
   @Input() user: User;
   @Input() bereaved: User;
   @Output() joinBereved = new EventEmitter<void>();
@@ -22,6 +21,5 @@ export class BereavedsListRowComponent {
   expanded = false;
   year = MEMORIAL_YEAR;
 
-  constructor(public participationsService: ParticipationsService) { }
-
+  constructor(public participationsService: ParticipationsService) {}
 }

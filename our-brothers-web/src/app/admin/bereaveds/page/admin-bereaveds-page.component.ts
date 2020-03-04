@@ -33,11 +33,7 @@ export class AdminBereavedsPageComponent implements OnInit, OnDestroy {
 
   private subscriptions: Subscription[] = [];
 
-  constructor(
-    private authService: AuthService,
-    private dataService: DataService,
-    private utilsService: UtilsService
-  ) {}
+  constructor(private authService: AuthService, private dataService: DataService, private utilsService: UtilsService) {}
 
   ngOnInit(): void {
     this.subscriptions.push(
@@ -62,10 +58,7 @@ export class AdminBereavedsPageComponent implements OnInit, OnDestroy {
   }
 
   filterBereaveds() {
-    this.filteredBereaveds = this.utilsService.filteringBereaveds(
-      this.bereaveds,
-      this.filter
-    );
+    this.filteredBereaveds = this.utilsService.filteringBereaveds(this.bereaveds, this.filter);
   }
 
   joinBereved(bereaved: User) {

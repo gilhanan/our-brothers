@@ -1,10 +1,10 @@
-import {Component, EventEmitter, Input, OnInit, Output, TrackByFunction} from '@angular/core';
-import {Observable} from 'rxjs';
-import {Meeting, User, UserRole} from 'models';
-import {MapRestriction} from '@agm/core/services/google-maps-types';
-import {ParticipationsService} from '../../../services/participations.service';
-import {NavigationDirection} from './meetings-map-navigator/meetings-map-navigator.component';
-import {AgmInfoWindow, AgmMarker} from '@agm/core';
+import { Component, EventEmitter, Input, OnInit, Output, TrackByFunction } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Meeting, User, UserRole } from 'models';
+import { MapRestriction } from '@agm/core/services/google-maps-types';
+import { ParticipationsService } from '../../../services/participations.service';
+import { NavigationDirection } from './meetings-map-navigator/meetings-map-navigator.component';
+import { AgmInfoWindow, AgmMarker } from '@agm/core';
 
 @Component({
   selector: 'app-meetings-map',
@@ -12,16 +12,15 @@ import {AgmInfoWindow, AgmMarker} from '@agm/core';
   styleUrls: ['./meetings-map.component.scss']
 })
 export class MeetingsMapComponent implements OnInit {
-
   @Input() meetings: Meeting[];
   @Input() user: User;
   @Input() isCenterCurrentLocation = true;
   @Input() showGuide = false;
 
   @Output() guideCompleted = new EventEmitter<void>();
-  @Output() joinMeeting = new EventEmitter<{ meeting: Meeting, user: User }>();
+  @Output() joinMeeting = new EventEmitter<{ meeting: Meeting; user: User }>();
 
-  mapLatitude = 31.672600;
+  mapLatitude = 31.6726;
   mapLongitude = 35.077028;
   mapZoom = 8;
   restriction: MapRestriction = {
@@ -31,15 +30,14 @@ export class MeetingsMapComponent implements OnInit {
       south: 29.4,
       west: 34
     }
-  }
+  };
   lastOpenMarker: AgmInfoWindow;
 
-  constructor(private participationsService: ParticipationsService) {
-  }
+  constructor(private participationsService: ParticipationsService) {}
 
   trackByFn: TrackByFunction<Meeting> = (index, item) => {
     return item.id;
-  }
+  };
 
   ngOnInit(): void {
     if (this.isCenterCurrentLocation) {
@@ -48,17 +46,19 @@ export class MeetingsMapComponent implements OnInit {
   }
 
   centerCurrentLocation() {
-    this.getLocation().subscribe((location) => {
-      // Israel borders
-      if (location.longitude > 34 && location.longitude < 36 &&
-        location.latitude > 29 && location.latitude < 33.4) {
-        this.mapLongitude = location.longitude;
-        this.mapLatitude = location.latitude;
-        this.mapZoom = 11;
+    this.getLocation().subscribe(
+      location => {
+        // Israel borders
+        if (location.longitude > 34 && location.longitude < 36 && location.latitude > 29 && location.latitude < 33.4) {
+          this.mapLongitude = location.longitude;
+          this.mapLatitude = location.latitude;
+          this.mapZoom = 11;
+        }
+      },
+      () => {
+        // Failed to get current location
       }
-    }, () => {
-      // Failed to get current location
-    });
+    );
   }
 
   getMeetingIconUrl(meeting: Meeting) {
@@ -104,10 +104,10 @@ export class MeetingsMapComponent implements OnInit {
     this.lastOpenMarker = lastOpenMarker;
 
     this.mapLongitude = marker.longitude;
-    this.mapLatitude = marker.latitude + .1;
+    this.mapLatitude = marker.latitude + 0.1;
   }
 
-  private getLocation(): Observable<{ latitude: number, longitude: number }> {
+  private getLocation(): Observable<{ latitude: number; longitude: number }> {
     const GEOLOCATION_ERRORS = [
       'Browser does not support location services',
       'You have rejected access to your location',
@@ -115,17 +115,18 @@ export class MeetingsMapComponent implements OnInit {
       'Service timeout has been reached'
     ];
 
-    return Observable.create((observer) => {
+    return Observable.create(observer => {
       if (window.navigator && window.navigator.geolocation) {
         window.navigator.geolocation.getCurrentPosition(
-          (position) => {
+          position => {
             observer.next({
               latitude: position.coords.latitude,
               longitude: position.coords.longitude
             });
             observer.complete();
           },
-          (error) => observer.error(GEOLOCATION_ERRORS[+error.code]));
+          error => observer.error(GEOLOCATION_ERRORS[+error.code])
+        );
       } else {
         observer.error(GEOLOCATION_ERRORS[0]);
       }

@@ -1,5 +1,9 @@
-<app-modal-select-meeting *ngIf="!!selectingBereaved" [meetings]="noBerevedMeetings" [bereaved]="selectingBereaved"
-  (selectMeeting)="selectedMeeting$.next($event)">
+<app-modal-select-meeting
+  *ngIf="!!selectingBereaved"
+  [meetings]="noBerevedMeetings"
+  [bereaved]="selectingBereaved"
+  (selectMeeting)="selectedMeeting$.next($event)"
+>
 </app-modal-select-meeting>
 <div class="container-fluid bereaveds-container">
   <app-free-text-filter class="free-text-filter" [(filter)]="filter" (filterChange)="filterBereaveds()">
@@ -10,12 +14,18 @@
     </div>
     <div *ngIf="!loading">
       <div class="error-message" *ngIf="error">
-        {{error}}
+        {{ error }}
       </div>
       <div *ngIf="!error">
-        <app-bereaveds-list [bereaveds]="filteredBereaveds" [user]="user" (joinBereved)="joinBereved($event)"
-          (leaveBereaved)="leaveBereaved($event)" (volunteering)="volunteering($event)"
-          (bereavedStatus)="bereavedStatus($event)" (bereavedGuidance)="bereavedGuidance($event)"></app-bereaveds-list>
+        <app-bereaveds-list
+          [bereaveds]="filteredBereaveds"
+          [user]="user"
+          (joinBereved)="joinBereved($event)"
+          (leaveBereaved)="leaveBereaved($event)"
+          (volunteering)="volunteering($event)"
+          (bereavedStatus)="bereavedStatus($event)"
+          (bereavedGuidance)="bereavedGuidance($event)"
+        ></app-bereaveds-list>
       </div>
     </div>
   </div>

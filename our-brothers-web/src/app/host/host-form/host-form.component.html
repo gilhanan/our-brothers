@@ -4,12 +4,7 @@
   </div>
   <div class="form" [formGroup]="form">
     <div class="form-items-container">
-      <app-host-input-text
-        class="input"
-        label="שם המפגש:"
-        controlName="title"
-        [formGroup]="form"
-      ></app-host-input-text>
+      <app-host-input-text class="input" label="שם המפגש:" controlName="title" [formGroup]="form"></app-host-input-text>
     </div>
     <div class="form-items-container">
       <app-host-input-text
@@ -51,11 +46,7 @@
       ></app-host-input-text>
     </div>
     <div class="address-map-container">
-      <app-place-map
-        [longitude]="address.value?.longitude"
-        [latitude]="address.value?.latitude"
-      ></app-place-map
-      >>
+      <app-place-map [longitude]="address.value?.longitude" [latitude]="address.value?.latitude"></app-place-map>>
     </div>
     <div class="form-items-container">
       <app-host-input-text
@@ -85,13 +76,12 @@
     <div class="host-description-container">
       <p class="host-description">
         <span class="host-description-title">פתוח לקהל הרחב - </span>
-        מארח יקר, שים לב. תודה שאתה פותח את ביתך לקהל השומעים הרחב, אך יש לקחת
-        בחשבון שלמרות זאת הינך מחויב להזמין לביתך מכרים, חברים וכו'.
+        מארח יקר, שים לב. תודה שאתה פותח את ביתך לקהל השומעים הרחב, אך יש לקחת בחשבון שלמרות זאת הינך מחויב להזמין לביתך
+        מכרים, חברים וכו'.
       </p>
       <p class="host-description">
         <span class="host-description-title">סגור למוזמנים בלבד - </span>
-        מארח יקר, שים לב. אירוח זה הוא אירוח סגור למוזמנייך בלבד ולא יוכלו
-        להצטרף אליו קהל שומעים רחב.
+        מארח יקר, שים לב. אירוח זה הוא אירוח סגור למוזמנייך בלבד ולא יוכלו להצטרף אליו קהל שומעים רחב.
       </p>
     </div>
     <div class="form-items-container">
@@ -152,10 +142,7 @@
     <p class="form-invalid-message" *ngIf="formInvalid">
       אחד או יותר מהשדות אינם תקינים
     </p>
-    <button
-      (click)="onSubmit()"
-      class="host-form-submit-btn site-button primary-button"
-    >
+    <button (click)="onSubmit()" class="host-form-submit-btn site-button primary-button">
       צור אירוח >>
     </button>
   </div>

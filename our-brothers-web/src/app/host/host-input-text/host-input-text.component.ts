@@ -1,5 +1,5 @@
-import {Component, ElementRef, Input, ViewChild} from '@angular/core';
-import {FormGroup} from '@angular/forms';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-host-input-text',

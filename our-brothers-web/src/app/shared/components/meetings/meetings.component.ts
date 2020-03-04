@@ -22,9 +22,7 @@ export class MeetingsComponent implements OnChanges {
   view: ViewOptions = 'list';
   filter: string = '';
 
-  constructor(
-    private utilsService: UtilsService
-  ) { }
+  constructor(private utilsService: UtilsService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.meetings) {
