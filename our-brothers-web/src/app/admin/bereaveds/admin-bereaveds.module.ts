@@ -7,7 +7,6 @@ import { SelectBereavedStatusComponent } from './select-bereaved-status/select-b
 import { CommonModule } from '@angular/common';
 import { PipesModule } from '../../shared/pipes/pipes.module';
 import { ListModule } from '../../shared/components/list/list.module';
-import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ModalSelectMeetingComponent } from './modal-select-meeting/modal-select-meeting.component';
 import { FreeTextFilterModule } from '../../shared/components/free-text-filter/free-text-filter.module';
 import { MeetingsListModule } from '../../shared/components/meetings/meetings-list/meetings-list.module';
@@ -28,7 +27,6 @@ const api = [
     CommonModule,
     PipesModule,
     ListModule,
-    ScrollingModule,
     FreeTextFilterModule,
     MeetingsListModule,
     JoinButtonModule

@@ -15,6 +15,8 @@ const valueGetter = {
   status: getStatus,
   meetings: getMeetings
 };
+const getValue = (user: User, year: number, column) =>
+  column in valueGetter ? valueGetter[column](user, year) : user[column] || '';
 
 @Pipe({
   name: 'sortBereaveds'
@@ -25,8 +27,8 @@ export class SortBereavedsPipe implements PipeTransform {
       return bereaveds;
     }
     return bereaveds.slice().sort((a, b) => {
-      let aValue = column in valueGetter ? valueGetter[column](a, year) : a[column] || '';
-      let bValue = column in valueGetter ? valueGetter[column](a, year) : a[column] || '';
+      let aValue = getValue(a, year, column);
+      let bValue = getValue(b, year, column);
 
       if (direction === 'desc') {
         [aValue, bValue] = [bValue, aValue];
