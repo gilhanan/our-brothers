@@ -1,9 +1,6 @@
-import { Component, EventEmitter, Output, Input } from '@angular/core';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-
-export interface ForgotPasswordForm {
-  email: string;
-}
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ForgotPasswordForm } from './forgot-password-form.types';
 
 @Component({
   selector: 'app-forgot-password-form',
@@ -15,7 +12,7 @@ export class ForgotPasswordFormComponent {
 
   @Output() submit = new EventEmitter<ForgotPasswordForm>();
 
-  public form: FormGroup;
+  form: FormGroup;
 
   constructor(private fb: FormBuilder) {}
 

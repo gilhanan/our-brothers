@@ -12,16 +12,21 @@ export class FreeTextFilterComponent implements OnInit, OnDestroy {
   @Input() filter: string;
   @Output() filterChange = new EventEmitter<string>();
 
-  filterDebounce$ = new Subject<string>();
+  private filterValue = new Subject<string>();
   private subscription: Subscription;
 
   ngOnInit() {
-    this.subscription = this.filterDebounce$
-      .pipe(debounceTime(200), distinctUntilChanged())
+    this.subscription = this.filterValue
+      .asObservable()
+      .pipe(debounceTime(300), distinctUntilChanged())
       .subscribe(value => this.filterChange.emit(value));
   }
 
   ngOnDestroy(): void {
     this.subscription && this.subscription.unsubscribe();
+  }
+
+  updateFilter(event) {
+    this.filterValue.next(event.target.value);
   }
 }

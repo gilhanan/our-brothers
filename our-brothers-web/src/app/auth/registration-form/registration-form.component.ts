@@ -1,10 +1,6 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
-export interface RegistrationForm {
-  email: string;
-  password: string;
-}
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { RegistrationForm } from './registration-form.types';
 
 @Component({
   selector: 'app-registration-form',
@@ -13,14 +9,13 @@ export interface RegistrationForm {
 })
 export class RegistrationFormComponent implements OnInit {
   @Input() loading: boolean;
-
   @Output() haveUser = new EventEmitter<void>();
   @Output() signUpWithEmailAndPassword = new EventEmitter<RegistrationForm>();
   @Output() signUpWithGoogle = new EventEmitter<void>();
   @Output() signUpWithFacebook = new EventEmitter<void>();
 
-  public form: FormGroup;
-  public formInvalid = false;
+  form: FormGroup;
+  formInvalid = false;
 
   constructor(private fb: FormBuilder) {}
 

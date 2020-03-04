@@ -25,24 +25,22 @@ export class PaypalButtonComponent implements AfterViewInit {
   @Output() cancel = new EventEmitter<any>();
   @Output() error = new EventEmitter<any>();
 
-  private orderAmmount: string;
-
-  constructor() {}
+  private orderAmount: string;
 
   ngAfterViewInit(): void {
     if (paypal) {
       paypal
         .Buttons({
           createOrder: (data, actions) => {
-            this.orderAmmount = this.amount;
-            this.createOrder.emit({ amount: this.orderAmmount });
+            this.orderAmount = this.amount;
+            this.createOrder.emit({ amount: this.orderAmount });
 
             return actions.order.create({
               intent: 'CAPTURE',
               purchase_units: [
                 {
                   amount: {
-                    value: this.orderAmmount,
+                    value: this.orderAmount,
                     currency_code: 'ILS'
                   }
                 }
@@ -53,7 +51,7 @@ export class PaypalButtonComponent implements AfterViewInit {
             this.approve.emit({
               payerId: data.payerID,
               orderId: data.orderID,
-              amount: this.orderAmmount
+              amount: this.orderAmount
             });
           },
           onCancel: data => {

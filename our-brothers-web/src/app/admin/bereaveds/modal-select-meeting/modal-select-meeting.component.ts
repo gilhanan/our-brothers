@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, EventEmitter, Output, OnChanges, SimpleChanges, HostListener } from '@angular/core';
 import { Meeting, User } from 'models';
 import { UtilsService } from '../../../shared/services/utils.service';
 
@@ -11,6 +11,11 @@ export class ModalSelectMeetingComponent implements OnChanges {
   @Input() bereaved: User;
   @Input() meetings: Meeting[];
   @Output() selectMeeting = new EventEmitter<Meeting>();
+
+  @HostListener('document:keydown.esc')
+  closeDialog() {
+    this.selectMeeting.emit(null);
+  }
 
   filter: string = '';
   filteredMeetings: Meeting[];

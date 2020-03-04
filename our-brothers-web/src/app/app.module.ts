@@ -18,37 +18,21 @@ import { AppComponent } from './app.component';
 import { AuthService } from './shared/services/auth.service';
 import { DataService } from './shared/services/data.service';
 import { HomePageComponent } from './home/home-page.component';
-import { LoginPopupComponent } from './components/popups/login-popup/login-popup.component';
-import { LoginFormComponent } from './components/forms/login-form/login-form.component';
-import { RegistrationFormComponent } from './components/forms/registration-form/registration-form.component';
-import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { ForgotPasswordFormComponent } from './components/forms/forgot-password-form/forgot-password-form.component';
-import { LoginSocialButtonComponent } from './components/login-social-button/login-social-button.component';
-import { HeaderTogglerComponent } from './components/header-toggler/header-toggler.component';
-import { PaypalButtonComponent } from './components/paypal-button/paypal-button.component';
 import { ToastrModule } from 'ngx-toastr';
 import { ContactFormModule } from './shared/components/contact-form/contact-form.module';
 import { DropDownMenuModule } from './shared/components/drop-down-menu/drop-down-menu.module';
 import { ParticipationsButtonsModule } from './shared/components/participations-buttons/participations-buttons.module';
+import { ShellModule } from './shell/shell.module';
+import { AuthModule } from './auth/auth.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 registerLocaleData(localeHe);
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomePageComponent,
-    LoginPopupComponent,
-    LoginFormComponent,
-    RegistrationFormComponent,
-    HeaderComponent,
-    FooterComponent,
-    ForgotPasswordFormComponent,
-    LoginSocialButtonComponent,
-    HeaderTogglerComponent,
-    PaypalButtonComponent
-  ],
+  declarations: [AppComponent, HomePageComponent],
   imports: [
+    ShellModule,
+    AuthModule,
     ParticipationsButtonsModule,
     ContactFormModule,
     DropDownMenuModule,
@@ -61,6 +45,7 @@ registerLocaleData(localeHe);
     AppRoutingModule,
     ReactiveFormsModule,
     ToastrModule.forRoot(),
+    BrowserAnimationsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBIQyGmuHzizv-MNxX4plVBLoErVopOEiE',
       language: 'iw',

@@ -72,7 +72,7 @@ export class UtilsService {
     }
 
     if (!query || !query.trim()) {
-      return bereaveds.slice();
+      return bereaveds;
     }
 
     query = query.replace(/-/g, '');

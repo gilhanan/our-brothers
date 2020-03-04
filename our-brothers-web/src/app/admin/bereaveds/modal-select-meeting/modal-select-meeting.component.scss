@@ -8,6 +8,8 @@
   max-width: calc(100% - 200px);
   width: 1170px;
   padding: 30px;
+  display: flex;
+  flex-direction: column;
 
   .modal-header {
     font-size: 30px;
@@ -31,5 +33,13 @@
     .cancel-button {
       display: inline-block;
     }
+  }
+
+  .close-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 20px;
+    cursor: pointer;
   }
 }

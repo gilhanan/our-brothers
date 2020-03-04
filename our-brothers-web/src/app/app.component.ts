@@ -3,7 +3,7 @@ import * as AOS from 'aos';
 
 import { User } from 'models';
 import { AuthService } from './shared/services/auth.service';
-import { LoginMode } from './components/popups/login-popup/login-popup.component';
+import { LoginMode } from './auth/login-popup/login-popup.component';
 
 @Component({
   selector: 'app-root',

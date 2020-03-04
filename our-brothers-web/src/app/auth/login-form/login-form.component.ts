@@ -1,10 +1,6 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-
-export interface LoginForm {
-  email: string;
-  password: string;
-}
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LoginForm } from './login-form.types';
 
 @Component({
   selector: 'app-login-form',

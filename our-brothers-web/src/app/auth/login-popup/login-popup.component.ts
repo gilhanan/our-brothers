@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { LoginForm } from '../../forms/login-form/login-form.component';
-import { RegistrationForm } from '../../forms/registration-form/registration-form.component';
-import { ForgotPasswordForm } from '../../forms/forgot-password-form/forgot-password-form.component';
-import { AuthService, AuthErrors } from '../../../shared/services/auth.service';
-import { finalize } from 'rxjs/operators';
+import { AuthService, AuthErrors } from '../../shared/services/auth.service';
+import { finalize, take } from 'rxjs/operators';
+import { RegistrationForm } from '../registration-form/registration-form.types';
+import { LoginForm } from '../login-form/login-form.types';
+import { ForgotPasswordForm } from '../forgot-password-form/forgot-password-form.types';
+import { ToastrService } from 'ngx-toastr';
 
 export type LoginMode = 'Login' | 'Register' | 'Forgot';
 
@@ -15,9 +16,9 @@ export type LoginMode = 'Login' | 'Register' | 'Forgot';
 export class LoginPopupComponent {
   @Input() mode: LoginMode = 'Login';
 
-  public loading: boolean;
+  loading: boolean;
 
-  constructor(public authService: AuthService) {}
+  constructor(public authService: AuthService, private toastr: ToastrService) {}
 
   signInWithEmailAndPassword(form: LoginForm) {
     this.loading = true;
@@ -25,14 +26,13 @@ export class LoginPopupComponent {
       .signInWithEmailAndPassword(form.email, form.password)
       .pipe(finalize(() => (this.loading = false)))
       .subscribe(
-        () => {},
+        () => this.loginSuccess(),
         error => {
-          if (error.code === AuthErrors.UserNotFound) {
-            alert('אימייל לא קיים.');
-          } else if (error.code === AuthErrors.WrongPassword) {
-            alert('סיסמא לא נכונה.');
+          const { code } = error;
+          if (code === AuthErrors.UserNotFound || code === AuthErrors.WrongPassword) {
+            this.toastr.error('אימייל או סיסמא לא נכונים.');
           } else {
-            alert(error);
+            this.handleError();
           }
         }
       );
@@ -44,10 +44,10 @@ export class LoginPopupComponent {
       .signInWithFacebook()
       .pipe(finalize(() => (this.loading = false)))
       .subscribe(
-        () => {},
+        () => this.loginSuccess(),
         error => {
           if (error.code !== AuthErrors.CancelledPopupRequest) {
-            alert(error);
+            this.handleError();
           }
         }
       );
@@ -59,10 +59,10 @@ export class LoginPopupComponent {
       .signInWithGoogle()
       .pipe(finalize(() => (this.loading = false)))
       .subscribe(
-        () => {},
+        () => this.loginSuccess(),
         error => {
           if (error.code !== AuthErrors.CancelledPopupRequest) {
-            alert(error);
+            this.handleError();
           }
         }
       );
@@ -74,12 +74,12 @@ export class LoginPopupComponent {
       .createUserWithEmailAndPassword(form.email, form.password)
       .pipe(finalize(() => (this.loading = false)))
       .subscribe(
-        () => {},
+        () => this.loginSuccess(),
         error => {
           if (error.code === AuthErrors.EmailAlreadyInUse) {
-            alert('אימייל תפוס.');
+            this.toastr.warning('כתובת האימייל הזו נמצאת כבר בשימוש.');
           } else {
-            alert(error);
+            this.handleError();
           }
         }
       );
@@ -89,16 +89,22 @@ export class LoginPopupComponent {
     this.loading = true;
     this.authService
       .sendPasswordResetEmail(form.email)
-      .pipe(finalize(() => (this.loading = false)))
-      .subscribe(
-        () => alert('נשלח בהצלחה מייל לאיפוס סיסמא.'),
-        error => {
-          if (error.code === AuthErrors.UserNotFound) {
-            alert('אימייל לא קיים');
-          } else {
-            alert('שגיאה');
-          }
-        }
-      );
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.toastr.success('נשלח בהצלחה מייל לאיפוס סיסמא.');
+        })
+      )
+      .subscribe();
+  }
+
+  private handleError() {
+    this.toastr.error('אירעה שגיאה, אנא נסה שנית.');
+  }
+
+  private loginSuccess() {
+    this.authService.user.pipe(take(1)).subscribe(() => {
+      this.toastr.success(`התחברת בהצלחה!`);
+    });
   }
 }

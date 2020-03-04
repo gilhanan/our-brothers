@@ -102,17 +102,15 @@ export interface UserParticipation<T> {
   [year: number]: T;
 }
 
-
-export interface ParticipateParticipation {
-  meetings: ParticipateParticipationMeeting[];
+export interface BaseParticipation<T = any> {
+  meetings: T[];
 }
 
-export interface HostParticipation {
-  meetings: UserParticipationMeeting[];
-}
+export interface ParticipateParticipation extends BaseParticipation<ParticipateParticipationMeeting> {}
 
-export interface BereavedParticipation {
-  meetings: UserParticipationMeeting[];
+export interface HostParticipation extends BaseParticipation<UserParticipationMeeting> {}
+
+export interface BereavedParticipation extends BaseParticipation<UserParticipationMeeting> {
   status: BereavedStatus;
   guidance: BereavedGuidance;
   notes: string;
