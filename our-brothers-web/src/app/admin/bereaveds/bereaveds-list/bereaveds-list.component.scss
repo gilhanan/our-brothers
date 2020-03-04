@@ -5,6 +5,10 @@
   left: 0;
   right: 0;
 
+  .hidden {
+    display: none;
+  }
+
   .list-header {
     .col-row-state {
       flex: 0 1 30px;
@@ -26,5 +30,6 @@
   .bereaved-items {
     height: 100%;
     direction: ltr;
+    overflow: auto;
   }
 }

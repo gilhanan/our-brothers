@@ -8,7 +8,7 @@ import { auth } from 'firebase/app';
 import { User } from 'models';
 import { DataService } from './data.service';
 import { AnalyticsService } from './analytics.service';
-import { LoginMode } from '../../components/popups/login-popup/login-popup.component';
+import { LoginMode } from '../../auth/login-popup/login-popup.component';
 
 export enum LoginMethod {
   EMAIL_PASS,

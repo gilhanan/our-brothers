@@ -7,11 +7,11 @@ import { SelectBereavedStatusComponent } from './select-bereaved-status/select-b
 import { CommonModule } from '@angular/common';
 import { PipesModule } from '../../shared/pipes/pipes.module';
 import { ListModule } from '../../shared/components/list/list.module';
-import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ModalSelectMeetingComponent } from './modal-select-meeting/modal-select-meeting.component';
 import { FreeTextFilterModule } from '../../shared/components/free-text-filter/free-text-filter.module';
 import { MeetingsListModule } from '../../shared/components/meetings/meetings-list/meetings-list.module';
 import { JoinButtonModule } from '../../shared/components/join-button/join-button.module';
+import { SortBereavedsPipe } from './sort-bereaveds/sort-bereaveds.pipe';
 
 const api = [
   SelectBereavedStatusComponent,
@@ -27,12 +27,11 @@ const api = [
     CommonModule,
     PipesModule,
     ListModule,
-    ScrollingModule,
     FreeTextFilterModule,
     MeetingsListModule,
     JoinButtonModule
   ],
-  declarations: api,
+  declarations: [api, SortBereavedsPipe],
   exports: api
 })
 export class AdminBereavedsModule {}

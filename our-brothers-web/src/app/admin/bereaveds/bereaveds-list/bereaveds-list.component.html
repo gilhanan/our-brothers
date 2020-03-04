@@ -1,21 +1,17 @@
-<app-list-header
-  [scroll]="sortedBereaveds.length > 10"
-  [(sort)]="sortedColumn"
-  (sortChange)="sort()"
-  class="list-header"
->
-  <app-list-column class="col-row-state"> </app-list-column>
-  <app-list-column [title]="'שם מלא'" [field]="'name'"> </app-list-column>
-  <app-list-column [title]="'פרטי התקשרות'"> </app-list-column>
-  <app-list-column [title]="'מקום מגורים'"> </app-list-column>
-  <app-list-column [title]="'ותק בשכול'" [field]="'seniority'" class="col-seniority"> </app-list-column>
-  <app-list-column [title]="'הדרכות'" [field]="'guidance'" class="col-guidance"> </app-list-column>
-  <app-list-column [title]="'סטטוס'" [field]="'status'" class="col-status"> </app-list-column>
-  <app-list-column [title]="'שיבוץ'" [field]="'meetings'"> </app-list-column>
+<app-list-header [scroll]="filteredBereaveds.size > 10" [(sort)]="sortedColumn" class="list-header">
+  <app-list-column class="col-row-state"></app-list-column>
+  <app-list-column title="שם מלא" field="name"></app-list-column>
+  <app-list-column title="פרטי התקשרות"></app-list-column>
+  <app-list-column title="מקום מגורים"></app-list-column>
+  <app-list-column title="ותק בשכול" field="seniority" class="col-seniority"></app-list-column>
+  <app-list-column title="הדרכות" field="guidance" class="col-guidance"></app-list-column>
+  <app-list-column title="סטטוס" field="status" class="col-status"></app-list-column>
+  <app-list-column title="שיבוץ" field="meetings"></app-list-column>
 </app-list-header>
-<cdk-virtual-scroll-viewport itemSize="10" class="bereaved-items">
-  <div *ngFor="let bereaved of sortedBereaveds; trackBy: trackByFn">
+<div class="bereaved-items">
+  <div *ngFor="let bereaved of bereaveds | sortBereaveds: sortedColumn:year">
     <app-bereaveds-list-row
+      [class.hidden]="!filteredBereaveds.has(bereaved.id)"
       [bereaved]="bereaved"
       [user]="user"
       (joinBereved)="joinBereved.emit(bereaved)"
@@ -25,4 +21,4 @@
       (bereavedGuidance)="bereavedGuidance.emit({ bereaved: bereaved, guidance: $event })"
     ></app-bereaveds-list-row>
   </div>
-</cdk-virtual-scroll-viewport>
+</div>

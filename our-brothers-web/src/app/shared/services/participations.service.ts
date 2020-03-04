@@ -1,88 +1,51 @@
 import { Injectable } from '@angular/core';
-import { User, Meeting, UserRole } from 'models';
+import { User, Meeting, UserRole, ParticipateParticipationMeeting, UserParticipation, BaseParticipation } from 'models';
 import { MEMORIAL_YEAR } from './data.service';
+
+const isUserPresentInMeeting = (meeting: Meeting) => ({ id, hostId }: ParticipateParticipationMeeting) =>
+  id === meeting.id && hostId === meeting.hostId;
+const isUserBereaved = (user: User) => user?.role === UserRole.bereaved;
 
 @Injectable({
   providedIn: 'root'
 })
 export class ParticipationsService {
-  constructor() {}
+  isUserCanHost(user: User) {
+    return !isUserBereaved(user);
+  }
 
-  isUserCanHost = (user: User) => {
-    return !(user && user.role && user.role === UserRole.bereaved);
-  };
+  isUserCanParticipate(user: User) {
+    return !isUserBereaved(user);
+  }
 
-  isUserCanParticipate = (user: User) => {
-    return !(user && user.role && user.role === UserRole.bereaved);
-  };
+  isUserCanTell(user: User) {
+    return isUserBereaved(user);
+  }
 
-  isUserCanTell = (user: User) => {
-    return !(user && user.role && user.role !== UserRole.bereaved);
-  };
+  isParticipating(participates: UserParticipation<BaseParticipation>[], year: number) {
+    return participates.some(p => !!p?.[year]?.meetings?.length);
+  }
 
-  isParticipateParticipating = (user: User, year: number) => {
-    return (
-      !!user &&
-      !!user.participateParticipation &&
-      !!user.participateParticipation[year] &&
-      !!user.participateParticipation[year].meetings &&
-      !!user.participateParticipation[year].meetings.length
+  isUserParticipating(user: User, year: number) {
+    return this.isParticipating(
+      [user?.participateParticipation, user?.bereavedParticipation, user?.hostParticipation],
+      year
     );
-  };
+  }
 
-  isBereavedParticipating = (user: User, year: number) => {
-    return (
-      !!user &&
-      !!user.bereavedParticipation &&
-      !!user.bereavedParticipation[year] &&
-      !!user.bereavedParticipation[year].meetings &&
-      !!user.bereavedParticipation[year].meetings.length
-    );
-  };
+  isParticipateParticipatingEvent(user: User, meeting: Meeting, year = MEMORIAL_YEAR) {
+    return user?.participateParticipation?.[year]?.meetings?.some(isUserPresentInMeeting(meeting));
+  }
 
-  isHostParticipating = (user: User, year: number) => {
-    return (
-      !!user &&
-      !!user.hostParticipation &&
-      !!user.hostParticipation[year] &&
-      !!user.hostParticipation[year].meetings &&
-      !!user.hostParticipation[year].meetings.length
-    );
-  };
+  isBereavedParticipatingEvent(user: User, meeting: Meeting, year = MEMORIAL_YEAR) {
+    return user?.bereavedParticipation?.[year]?.meetings?.some(isUserPresentInMeeting(meeting));
+  }
 
-  isUserParticipating = (user: User, year: number) => {
-    return (
-      this.isParticipateParticipating(user, year) ||
-      this.isBereavedParticipating(user, year) ||
-      this.isHostParticipating(user, year)
-    );
-  };
+  isHostParticipatingEvent(user: User, meeting: Meeting) {
+    return user?.id === meeting.hostId;
+  }
 
-  isParticipateParticipatingEvent = (user: User, meeting: Meeting, year = MEMORIAL_YEAR) => {
-    return (
-      !!user &&
-      !!user.participateParticipation &&
-      !!user.participateParticipation[year] &&
-      !!user.participateParticipation[year].meetings &&
-      user.participateParticipation[year].meetings.some(e => e.id === meeting.id && e.hostId === meeting.hostId)
-    );
-  };
-
-  isBereavedParticipatingEvent = (user: User, meeting: Meeting, year = MEMORIAL_YEAR) => {
-    return (
-      !!user &&
-      !!user.bereavedParticipation &&
-      !!user.bereavedParticipation[year] &&
-      !!user.bereavedParticipation[year].meetings &&
-      user.bereavedParticipation[year].meetings.some(e => e.id === meeting.id && e.hostId === meeting.hostId)
-    );
-  };
-
-  isHostParticipatingEvent = (user: User, meeting: Meeting) => {
-    return !!user && user.id === meeting.hostId;
-  };
-
-  isUserParticipatingEvent = (user: User, meeting: Meeting, year = MEMORIAL_YEAR) => {
+  isUserParticipatingEvent(user: User, meeting: Meeting, year = MEMORIAL_YEAR) {
     if (!meeting) {
       return false;
     }
@@ -92,9 +55,9 @@ export class ParticipationsService {
       this.isBereavedParticipatingEvent(user, meeting, year) ||
       this.isHostParticipatingEvent(user, meeting)
     );
-  };
+  }
 
-  isUserCanParticipatingEvent = (user: User, meeting: Meeting) => {
+  isUserCanParticipatingEvent(user: User, meeting: Meeting) {
     if (!user) {
       return false;
     }
@@ -112,22 +75,22 @@ export class ParticipationsService {
     } else {
       return this.isParticipateCanParticipatingEvent(user, meeting);
     }
-  };
+  }
 
-  isBereavedCanParticipatingEvent = (user: User, meeting: Meeting) => {
+  isBereavedCanParticipatingEvent(user: User, meeting: Meeting) {
     return (
+      !meeting.bereaved &&
       this.isBereavedHaveAllDetails(user) &&
       this.isBrotherHaveSlainDetails(user) &&
-      this.isBrotherAnsweredTrainingMeeting(user) &&
-      !meeting.bereaved
+      this.isBrotherAnsweredTrainingMeeting(user)
     );
-  };
+  }
 
-  isParticipateCanParticipatingEvent = (user: User, meeting: Meeting) => {
-    return this.isParticipateHaveAllDetails(user) && !meeting.invited && meeting.count <= meeting.capacity;
-  };
+  isParticipateCanParticipatingEvent(user: User, meeting: Meeting) {
+    return !meeting.invited && meeting.count <= meeting.capacity && this.isParticipateHaveAllDetails(user);
+  }
 
-  isUserHaveAllDetails = (user: User) => {
+  isUserHaveAllDetails(user: User) {
     if (!user) {
       return false;
     }
@@ -137,42 +100,26 @@ export class ParticipationsService {
     } else {
       return this.isParticipateHaveAllDetails(user);
     }
-  };
+  }
 
-  isParticipateHaveAllDetails = (user: User) => {
-    return !!(
-      user &&
-      user.profile &&
-      user.profile.email &&
-      user.profile.firstName &&
-      user.profile.lastName &&
-      user.profile.phoneNumber
-    );
-  };
+  isParticipateHaveAllDetails(user: User) {
+    if (user?.profile) {
+      const { email, firstName, lastName, phoneNumber } = user?.profile;
+      return !!(email && firstName && lastName && phoneNumber);
+    }
 
-  isBereavedHaveAllDetails = (user: User) => {
-    return !!(
-      user &&
-      user.profile &&
-      user.profile.address &&
-      user.profile.email &&
-      user.profile.firstName &&
-      user.profile.lastName &&
-      user.profile.phoneNumber &&
-      user.profile.birthDay
-    );
-  };
+    return false;
+  }
+
+  isBereavedHaveAllDetails(user: User) {
+    return user.profile.birthDay && this.isParticipateHaveAllDetails(user);
+  }
 
   isBrotherHaveSlainDetails = (user: User) => {
     return user.bereavedProfile;
   };
 
-  isBrotherAnsweredTrainingMeeting = (user: User, year = MEMORIAL_YEAR) => {
-    return (
-      user.bereavedParticipation &&
-      user.bereavedParticipation[year] &&
-      user.bereavedParticipation[year].guidance &&
-      user.bereavedParticipation[year].guidance.answered
-    );
-  };
+  isBrotherAnsweredTrainingMeeting(user: User, year = MEMORIAL_YEAR) {
+    return user?.bereavedParticipation?.[year]?.guidance?.answered;
+  }
 }

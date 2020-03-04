@@ -13,9 +13,10 @@
       </app-meetings-list>
     </div>
     <div class="cancel-button-container">
-      <button class="cancel-button" (click)="selectMeeting.emit(null)">
+      <button class="cancel-button" (click)="closeDialog()">
         ביטול
       </button>
     </div>
+    <div class="close-button fas fa-times" (click)="closeDialog()"></div>
   </div>
 </div>

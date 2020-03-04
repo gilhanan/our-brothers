@@ -13,12 +13,13 @@
       טוען..
     </div>
     <div *ngIf="!loading">
-      <div class="error-message" *ngIf="error">
+      <div class="error-message" *ngIf="error; else bereavedList">
         {{ error }}
       </div>
-      <div *ngIf="!error">
+      <ng-template #bereavedList>
         <app-bereaveds-list
-          [bereaveds]="filteredBereaveds"
+          [filteredBereaveds]="filteredBereavedsIds"
+          [bereaveds]="bereaveds"
           [user]="user"
           (joinBereved)="joinBereved($event)"
           (leaveBereaved)="leaveBereaved($event)"
@@ -26,7 +27,7 @@
           (bereavedStatus)="bereavedStatus($event)"
           (bereavedGuidance)="bereavedGuidance($event)"
         ></app-bereaveds-list>
-      </div>
+      </ng-template>
     </div>
   </div>
 </div>

@@ -24,8 +24,6 @@ export class UtilsService {
 
   private readonly ISRAEL_PHONE_PREFIX_REGEX = new RegExp(`^(\\+${this.ISRAEL_PHONE_PREFIX})?(0)?`);
 
-  constructor() {}
-
   toInternationalPhoneNumber(phoneNumber: string) {
     return phoneNumber.replace(this.ISRAEL_PHONE_PREFIX_REGEX, `+${this.ISRAEL_PHONE_PREFIX}`);
   }
@@ -74,30 +72,38 @@ export class UtilsService {
     }
 
     if (!query || !query.trim()) {
-      return bereaveds.slice();
+      return bereaveds;
     }
 
     query = query.replace(/-/g, '');
     const keywords = query.match(/([^\s]+)/g) || [];
-    return bereaveds.filter(bereaved =>
-      keywords.every(
-        keyword =>
-          bereaved.id.includes(keyword) ||
-          (bereaved.profile &&
-            (((bereaved.profile.firstName || '') + (bereaved.profile.lastName || '')).includes(keyword) ||
-              (bereaved.profile.email && bereaved.profile.email.includes(keyword)) ||
-              (bereaved.profile.phoneNumber &&
-                bereaved.profile.phoneNumber.replace(`^\+${this.ISRAEL_PHONE_PREFIX}`, '0').includes(keyword)))) ||
-          (bereaved.bereavedProfile &&
-            bereaved.bereavedProfile.slains &&
-            bereaved.bereavedProfile.slains.some(slain =>
-              ((slain.firstName || '') + (slain.lastName || '')).includes(keyword)
-            )) ||
-          (bereaved.bereavedParticipation &&
-            bereaved.bereavedParticipation[year] &&
-            bereaved.bereavedParticipation[year].meetings &&
-            bereaved.bereavedParticipation[year].meetings.some(meeting => meeting.title.includes(keyword)))
-      )
-    );
+    return bereaveds.filter(bereaved => {
+      return keywords.every(keyword => {
+        if (bereaved.id.includes(keyword)) {
+          return true;
+        } else if (bereaved.profile) {
+          const { firstName = '', lastName = '', email, phoneNumber } = bereaved.profile;
+          const fullName = firstName + lastName;
+          if (fullName.includes(keyword)) {
+            return true;
+          } else if (email?.includes(keyword)) {
+            return true;
+          }
+          const parsedNumber = phoneNumber?.replace(`^\+${this.ISRAEL_PHONE_PREFIX}`, '0');
+          if (parsedNumber?.includes(keyword)) {
+            return true;
+          }
+          const slain = bereaved.bereavedProfile?.slains?.some(slain =>
+            ((slain.firstName || '') + (slain.lastName || '')).includes(keyword)
+          );
+          if (slain) {
+            return true;
+          } else if (bereaved.bereavedParticipation?.[year]?.meetings?.some(({ title }) => title.includes(keyword))) {
+            return true;
+          }
+        }
+        return false;
+      });
+    });
   }
 }

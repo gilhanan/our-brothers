@@ -1,6 +1,1 @@
-<input
-  class="search-input"
-  placeholder="מילת חיפוש"
-  [value]="filter"
-  (input)="filterDebounce$.next($event.target.value)"
-/>
+<input class="search-input" placeholder="מילת חיפוש" [value]="filter" (input)="updateFilter($event)" />
