@@ -8,8 +8,8 @@ import { AuthService } from '../../shared/services/auth.service';
 import { DataService, MEMORIAL_YEAR } from '../../shared/services/data.service';
 import { ParticipationsService } from '../../shared/services/participations.service';
 import { MeetingForm } from '../host-form/host-form.component';
-import {ToastrService} from "ngx-toastr";
-import {ProfileForm} from "../../shared/components/profile-form/profile-form.types";
+import { ToastrService } from 'ngx-toastr';
+import { ProfileForm } from '../../shared/components/profile-form/profile-form.types';
 
 @Component({
   selector: 'app-host-page',
@@ -33,13 +33,11 @@ export class HostPageComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.authService.firebaseUser.subscribe(
-      firebaseUser => (this.firebaseUser = firebaseUser)
-    );
+    this.authService.firebaseUser.subscribe(firebaseUser => (this.firebaseUser = firebaseUser));
 
     this.subscriptions.push(
-      combineLatest(
-        [this.authService.user,
+      combineLatest([
+        this.authService.user,
         this.currentStep$.pipe(
           distinctUntilChanged(),
           tap(() => {
@@ -47,8 +45,8 @@ export class HostPageComponent implements OnInit, OnDestroy {
               window.scrollTo(0, 0);
             }
           })
-        )]
-      ).subscribe(([user, currentStep]) => {
+        )
+      ]).subscribe(([user, currentStep]) => {
         this.user = user;
         this.currentStep = currentStep;
 
@@ -65,9 +63,7 @@ export class HostPageComponent implements OnInit, OnDestroy {
           if (!user) {
             this.currentStep = 1;
             this.authService.requestToLogin();
-          } else if (
-            !this.participationsService.isParticipateHaveAllDetails(user)
-          ) {
+          } else if (!this.participationsService.isParticipateHaveAllDetails(user)) {
             this.currentStep = 2;
           } else {
             this.currentStep = currentStep > 2 ? currentStep : 3;
@@ -84,14 +80,10 @@ export class HostPageComponent implements OnInit, OnDestroy {
   }
 
   onNewMeeting(meetingDetails: MeetingForm) {
-    this.dataService
-      .createMeeting(this.user, meetingDetails)
-      .subscribe((meeting: Meeting) => {
-        this.toastr.success('נוצר מפגש בהצלחה!');
-        this.router.navigate([
-          `meetings/${this.year}/${meeting.hostId}/${meeting.id}`
-        ]);
-      });
+    this.dataService.createMeeting(this.user, meetingDetails).subscribe((meeting: Meeting) => {
+      this.toastr.success('נוצר מפגש בהצלחה!');
+      this.router.navigate([`meetings/${this.year}/${meeting.hostId}/${meeting.id}`]);
+    });
   }
 
   ngOnDestroy() {

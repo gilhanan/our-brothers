@@ -8,9 +8,7 @@ import { User } from 'models';
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent {
-
   @Input() public user: User;
 
-  constructor(public participationsService: ParticipationsService) { }
-
+  constructor(public participationsService: ParticipationsService) {}
 }

@@ -13,15 +13,29 @@
     </div>
     <div class="content-container">
       <ng-container [ngSwitch]="mode">
-        <app-login-form *ngSwitchCase="'Login'" [loading]="loading"
-          (signInWithEmailAndPassword)="signInWithEmailAndPassword($event)" (signInWithFacebook)="signInWithFacebook()"
-          (signInWithGoogle)="signInWithGoogle()" (haveNoUser)="mode = 'Register'" (forgotPassword)="mode ='Forgot'">
+        <app-login-form
+          *ngSwitchCase="'Login'"
+          [loading]="loading"
+          (signInWithEmailAndPassword)="signInWithEmailAndPassword($event)"
+          (signInWithFacebook)="signInWithFacebook()"
+          (signInWithGoogle)="signInWithGoogle()"
+          (haveNoUser)="mode = 'Register'"
+          (forgotPassword)="mode = 'Forgot'"
+        >
         </app-login-form>
-        <app-registration-form *ngSwitchCase="'Register'" [loading]="loading"
+        <app-registration-form
+          *ngSwitchCase="'Register'"
+          [loading]="loading"
           (signUpWithEmailAndPassword)="createUserWithEmailAndPassword($event)"
-          (signUpWithFacebook)="signInWithFacebook()" (signUpWithGoogle)="signInWithGoogle()"
-          (haveUser)="mode = 'Login'"></app-registration-form>
-        <app-forgot-password-form *ngSwitchCase="'Forgot'" [loading]="loading" (submit)="resetPassword($event)"></app-forgot-password-form>
+          (signUpWithFacebook)="signInWithFacebook()"
+          (signUpWithGoogle)="signInWithGoogle()"
+          (haveUser)="mode = 'Login'"
+        ></app-registration-form>
+        <app-forgot-password-form
+          *ngSwitchCase="'Forgot'"
+          [loading]="loading"
+          (submit)="resetPassword($event)"
+        ></app-forgot-password-form>
       </ng-container>
     </div>
   </div>

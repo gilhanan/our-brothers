@@ -1,9 +1,6 @@
 <div class="card" (mouseenter)="hover = true" (mouseleave)="hover = false">
   <div class="header">
-    <div
-      class="image front-image"
-      [style.background-image]="'url(' + member.frontImage + ')'"
-    ></div>
+    <div class="image front-image" [style.background-image]="'url(' + member.frontImage + ')'"></div>
     <div
       class="image back-image"
       [class.hover]="hover"
@@ -11,24 +8,19 @@
     ></div>
   </div>
   <div [class]="'body'">
-    <div
-      [class]="'member-details ' + ('slains-' + slains)"
-      [class.hover]="hover"
-    >
+    <div [class]="'member-details ' + ('slains-' + slains)" [class.hover]="hover">
       <div class="member-name">{{ member.name }}</div>
       <div class="member-title">{{ member.title }}</div>
     </div>
     <div class="slains" [class.hover]="hover">
       <div class="slain" *ngFor="let slain of member.slains">
         <span class="slain-pre">{{ slain.pre }}</span>
-        <a class="slain-link" [href]="slain.link" target="_blank">{{
-          slain.title
-        }}</a>
+        <a class="slain-link" [href]="slain.link" target="_blank">{{ slain.title }}</a>
       </div>
       <div class="member-email" *ngIf="member.email">
         <a class="member-email-link" [href]="'mailto:' + member.email"
-          ><img src="/assets/img/about/email.svg" class="member-email-img"
-        />{{member.email}}</a>
+          ><img src="/assets/img/about/email.svg" class="member-email-img" />{{ member.email }}</a
+        >
       </div>
     </div>
   </div>

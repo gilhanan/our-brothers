@@ -41,12 +41,10 @@ export class MeetingDetailsPageComponent implements OnInit, OnDestroy {
       if (this.getMeeting$) {
         this.getMeeting$.unsubscribe();
       }
-      this.getMeeting$ = this.dataService
-        .getMeeting(hostId, meetingId)
-        .subscribe(meeting => {
-          this.loadingMeeting = false;
-          return (this.meeting = meeting);
-        });
+      this.getMeeting$ = this.dataService.getMeeting(hostId, meetingId).subscribe(meeting => {
+        this.loadingMeeting = false;
+        return (this.meeting = meeting);
+      });
 
       if (this.getMeetingParticipates$) {
         this.getMeetingParticipates$.unsubscribe();

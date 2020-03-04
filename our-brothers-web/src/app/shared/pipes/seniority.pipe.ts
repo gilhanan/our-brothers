@@ -4,7 +4,6 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'seniority'
 })
 export class SeniorityPipe implements PipeTransform {
-
   transform(date: number): string {
     if (!date) {
       return '';
@@ -15,7 +14,7 @@ export class SeniorityPipe implements PipeTransform {
     const years = Math.abs(diff.getUTCFullYear() - 1970);
 
     if (!years) {
-      return '' + (!diff.getMonth() ? .1 : (diff.getMonth() / 12).toFixed(1));
+      return '' + (!diff.getMonth() ? 0.1 : (diff.getMonth() / 12).toFixed(1));
     } else {
       return years.toString();
     }

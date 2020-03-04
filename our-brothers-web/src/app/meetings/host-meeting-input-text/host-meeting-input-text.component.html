@@ -1,10 +1,6 @@
 <div class="input-container">
   <div class="icon-label">
-    <div
-      *ngIf="iconUrl"
-      class="input-icon"
-      [style.background-image]="'url(' + iconUrl + ')'"
-    ></div>
+    <div *ngIf="iconUrl" class="input-icon" [style.background-image]="'url(' + iconUrl + ')'"></div>
     <div class="input-label">
       {{ label }}
     </div>

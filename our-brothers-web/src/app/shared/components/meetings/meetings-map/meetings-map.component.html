@@ -1,16 +1,7 @@
 <div class="map-container">
-  <app-meetings-map-legend
-    *ngIf="!showGuide"
-    [user]="user"
-  ></app-meetings-map-legend>
-  <app-meetings-map-navigator
-    *ngIf="!showGuide"
-    (navigate)="navigate($event)"
-  ></app-meetings-map-navigator>
-  <app-meetings-map-guide
-    *ngIf="meetings && showGuide"
-    (guideCompleted)="showGuide = false; guideCompleted.emit()"
-  >
+  <app-meetings-map-legend *ngIf="!showGuide" [user]="user"></app-meetings-map-legend>
+  <app-meetings-map-navigator *ngIf="!showGuide" (navigate)="navigate($event)"></app-meetings-map-navigator>
+  <app-meetings-map-guide *ngIf="meetings && showGuide" (guideCompleted)="showGuide = false; guideCompleted.emit()">
   </app-meetings-map-guide>
   <agm-map
     class="map"
@@ -38,13 +29,7 @@
         }
       ]"
     >
-      <ng-template
-        ngFor
-        let-meeting
-        [ngForOf]="meetings"
-        let-i="index"
-        [ngForTrackBy]="trackByFn"
-      >
+      <ng-template ngFor let-meeting [ngForOf]="meetings" let-i="index" [ngForTrackBy]="trackByFn">
         <agm-marker
           [latitude]="meeting.address.latitude"
           [longitude]="meeting.address.longitude"

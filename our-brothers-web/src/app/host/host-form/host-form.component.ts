@@ -4,11 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MeetingAudience, User } from 'models';
 import { HostInputOption } from '../host-input-options/host-input-options.component';
 import { UtilsService } from '../../shared/services/utils.service';
-import {
-  MEMORIAL_YEAR,
-  MIN_DATE,
-  MAX_DATE
-} from '../../shared/services/data.service';
+import { MEMORIAL_YEAR, MIN_DATE, MAX_DATE } from '../../shared/services/data.service';
 
 export interface MeetingForm {
   title: string;
@@ -44,7 +40,7 @@ export class HostFormComponent implements OnInit {
   public minDate = MIN_DATE.toISOString().split('T')[0];
   public maxDate = MAX_DATE.toISOString().split('T')[0];
 
-  constructor(private fb: FormBuilder, private utilsService: UtilsService) { }
+  constructor(private fb: FormBuilder, private utilsService: UtilsService) {}
 
   ngOnInit() {
     this.audienceOptions = [
@@ -85,14 +81,9 @@ export class HostFormComponent implements OnInit {
         formattedAddress: ['', Validators.required],
         latitude: [],
         longitude: [],
-        notes: ['', [
-          Validators.maxLength(200)
-        ]]
+        notes: ['', [Validators.maxLength(200)]]
       }),
-      capacity: [
-        30,
-        [Validators.required, Validators.min(2), Validators.max(300)]
-      ],
+      capacity: [30, [Validators.required, Validators.min(2), Validators.max(300)]],
       invited: [null, Validators.required],
       accessibility: [null, Validators.required],
       media: [null, Validators.required],
@@ -170,8 +161,7 @@ export class HostFormComponent implements OnInit {
       let minutes: string;
       [hour, minutes] = this.hour.value.split(':');
       parsedMeeting.date += +hour * 60 * 60 * 1000;
-      parsedMeeting.date +=
-        (+minutes + new Date().getTimezoneOffset()) * 60 * 1000;
+      parsedMeeting.date += (+minutes + new Date().getTimezoneOffset()) * 60 * 1000;
 
       delete (parsedMeeting as any).hour;
       this.submitMeetingDetailsPage.emit(parsedMeeting);

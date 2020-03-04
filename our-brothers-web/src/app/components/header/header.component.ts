@@ -1,11 +1,4 @@
-import {
-  Component,
-  Input,
-  HostListener,
-  OnInit,
-  Output,
-  EventEmitter
-} from '@angular/core';
+import { Component, Input, HostListener, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { User } from 'models';
@@ -41,11 +34,9 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.updateMobileViewState(window.innerWidth);
 
-    this.router.events
-      .pipe(filter(event => event instanceof NavigationStart))
-      .subscribe(() => {
-        this.isSideMenuClosed = true;
-      });
+    this.router.events.pipe(filter(event => event instanceof NavigationStart)).subscribe(() => {
+      this.isSideMenuClosed = true;
+    });
   }
 
   @HostListener('window:resize', ['$event.target.innerWidth'])

@@ -1,24 +1,13 @@
 <div class="row-container">
   <div class="row">
     <div class="col col-row-state">
-      <button
-        class="volunteering-button"
-        *ngIf="user?.isAdmin"
-        (click)="volunteering.emit(!bereaved.isVolunteer)"
-      >
-        <div
-          class="key-icon"
-          [ngClass]="{ disabled: !bereaved.isVolunteer }"
-        ></div>
+      <button class="volunteering-button" *ngIf="user?.isAdmin" (click)="volunteering.emit(!bereaved.isVolunteer)">
+        <div class="key-icon" [ngClass]="{ disabled: !bereaved.isVolunteer }"></div>
       </button>
       <button class="expand-button" *ngIf="!expanded" (click)="expanded = true">
         <div class="expand-icon"></div>
       </button>
-      <button
-        class="collapse-button"
-        *ngIf="expanded"
-        (click)="expanded = false"
-      >
+      <button class="collapse-button" *ngIf="expanded" (click)="expanded = false">
         <div class="collapse-icon"></div>
       </button>
     </div>
@@ -49,29 +38,18 @@
     </div>
     <div class="col col-guidance">
       <app-select-bereaved-guidance
-        [value]="
-          bereaved.bereavedParticipation &&
-          bereaved.bereavedParticipation[year]?.guidance?.general
-        "
+        [value]="bereaved.bereavedParticipation && bereaved.bereavedParticipation[year]?.guidance?.general"
         (valueChange)="bereavedGuidance.emit($event)"
       ></app-select-bereaved-guidance>
     </div>
     <div class="col col-status">
       <app-select-bereaved-status
-        [value]="
-          bereaved.bereavedParticipation &&
-          bereaved.bereavedParticipation[year]?.status
-        "
+        [value]="bereaved.bereavedParticipation && bereaved.bereavedParticipation[year]?.status"
         (valueChange)="bereavedStatus.emit($event)"
       ></app-select-bereaved-status>
     </div>
     <div class="col bereaved-meetings">
-      <div
-        *ngFor="
-          let meeting of bereaved.bereavedParticipation &&
-            bereaved.bereavedParticipation[year]?.meetings
-        "
-      >
+      <div *ngFor="let meeting of bereaved.bereavedParticipation && bereaved.bereavedParticipation[year]?.meetings">
         <button class="leave-button" (click)="leaveBereaved.emit(meeting)">
           <div class="trash-icon"></div>
         </button>
@@ -79,10 +57,7 @@
           {{ meeting.title }}
         </div>
       </div>
-      <app-join-button
-        [user]="user"
-        (joinMeeting)="joinBereved.emit()"
-      ></app-join-button>
+      <app-join-button [user]="user" (joinMeeting)="joinBereved.emit()"></app-join-button>
     </div>
   </div>
   <div class="expanded-row" *ngIf="expanded">
@@ -97,11 +72,7 @@
         גיל:
       </div>
       <div>
-        {{
-          bereaved.profile?.birthDay
-            ? (bereaved.profile.birthDay | seniority)
-            : 'אין'
-        }}
+        {{ bereaved.profile?.birthDay ? (bereaved.profile.birthDay | seniority) : 'אין' }}
       </div>
       <div class="title">
         מתנדב:
@@ -116,10 +87,7 @@
       </div>
       <div class="content">
         <div class="scroll-container">
-          {{
-            bereaved.bereavedParticipation &&
-              bereaved.bereavedParticipation[year]?.notes
-          }}
+          {{ bereaved.bereavedParticipation && bereaved.bereavedParticipation[year]?.notes }}
         </div>
       </div>
     </div>

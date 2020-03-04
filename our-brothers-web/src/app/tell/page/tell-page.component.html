@@ -1,8 +1,4 @@
-<img
-  class="image-header"
-  src="../../../assets/img/tellHeader.jpg"
-  alt="Meetings Page Header Image"
-/>
+<img class="image-header" src="../../../assets/img/tellHeader.jpg" alt="Meetings Page Header Image" />
 <section class="registration-page">
   <section *ngIf="currentStep > 0">
     <div class="site-divider"></div>
@@ -23,20 +19,14 @@
   <div class="registration-steps">
     <ng-container [ngSwitch]="currentStep">
       <ng-container *ngSwitchCase="0">
-        <app-bereaved-intro
-          (submit)="currentStep$.next(1)"
-        ></app-bereaved-intro>
+        <app-bereaved-intro (submit)="currentStep$.next(1)"></app-bereaved-intro>
       </ng-container>
       <ng-container *ngSwitchCase="1">
         <!-- login -->
       </ng-container>
       <ng-container *ngSwitchCase="2">
         <section class="registration-step">
-          <app-bereaved-profile-form
-            [user]="user"
-            [firebaseUser]="firebaseUser"
-            (submit)="onProfileSubmit($event)"
-          >
+          <app-bereaved-profile-form [user]="user" [firebaseUser]="firebaseUser" (submit)="onProfileSubmit($event)">
           </app-bereaved-profile-form>
         </section>
       </ng-container>
@@ -47,18 +37,11 @@
       </ng-container>
       <ng-container *ngSwitchCase="4">
         <section class="registration-step">
-          <app-bereaved-guidance-form
-            (submit)="onGuidanceSubmit($event)"
-          ></app-bereaved-guidance-form>
+          <app-bereaved-guidance-form (submit)="onGuidanceSubmit($event)"></app-bereaved-guidance-form>
         </section>
       </ng-container>
       <ng-container *ngSwitchCase="5">
-        <app-meetings
-          [user]="user"
-          [meetings]="meetings"
-          (joinMeeting)="onJoinMeeting($event)"
-        >
-        </app-meetings>
+        <app-meetings [user]="user" [meetings]="meetings" (joinMeeting)="onJoinMeeting($event)"> </app-meetings>
       </ng-container>
     </ng-container>
   </div>

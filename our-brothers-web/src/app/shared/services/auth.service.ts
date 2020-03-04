@@ -28,8 +28,7 @@ export enum AuthErrors {
 })
 export class AuthService {
   public user: Observable<User>;
-  public firebaseUser: Observable<firebase.User> = this.angularFireAuth
-    .authState;
+  public firebaseUser: Observable<firebase.User> = this.angularFireAuth.authState;
   public needLogin$: Subject<LoginMode> = new Subject();
 
   private firstTimeGetUser = true;
@@ -40,29 +39,26 @@ export class AuthService {
     private dataService: DataService,
     private analyticsService: AnalyticsService
   ) {
-    this.user = this.angularFireAuth.authState
-      .pipe(
-        switchMap(authRes => {
-          if (authRes) {
-            return this.dataService.getUserById(authRes.uid).pipe(
-              switchMap(user => {
-                return from(
-                  authRes.getIdTokenResult(this.firstTimeGetUser)
-                ).pipe(
-                  tap(() => (this.firstTimeGetUser = false)),
-                  map(idTokenResult => ({
-                    ...user,
-                    isAdmin: !!idTokenResult.claims.admin,
-                    isVolunteer: !!idTokenResult.claims.volunteer
-                  }))
-                );
-              })
-            );
-          } else {
-            return of(null);
-          }
-        })
-      );
+    this.user = this.angularFireAuth.authState.pipe(
+      switchMap(authRes => {
+        if (authRes) {
+          return this.dataService.getUserById(authRes.uid).pipe(
+            switchMap(user => {
+              return from(authRes.getIdTokenResult(this.firstTimeGetUser)).pipe(
+                tap(() => (this.firstTimeGetUser = false)),
+                map(idTokenResult => ({
+                  ...user,
+                  isAdmin: !!idTokenResult.claims.admin,
+                  isVolunteer: !!idTokenResult.claims.volunteer
+                }))
+              );
+            })
+          );
+        } else {
+          return of(null);
+        }
+      })
+    );
   }
 
   public signInWithGoogle(): Observable<auth.UserCredential> {
@@ -75,18 +71,11 @@ export class AuthService {
     return this.socialSignIn(provider);
   }
 
-  public signInWithEmailAndPassword(
-    email: string,
-    password: string
-  ): Observable<auth.UserCredential> {
+  public signInWithEmailAndPassword(email: string, password: string): Observable<auth.UserCredential> {
     this.analyticsService.logEvent('SignInWithEmailAndPassword');
 
-    return from(
-      this.angularFireAuth.auth.signInWithEmailAndPassword(email, password)
-    ).pipe(
-      tap(() =>
-        this.analyticsService.logEvent('SignInWithEmailAndPasswordSuccess')
-      ),
+    return from(this.angularFireAuth.auth.signInWithEmailAndPassword(email, password)).pipe(
+      tap(() => this.analyticsService.logEvent('SignInWithEmailAndPasswordSuccess')),
       catchError(error => {
         this.analyticsService.logEvent('SignInWithEmailAndPasswordFailed', {
           error
@@ -97,18 +86,11 @@ export class AuthService {
     );
   }
 
-  public createUserWithEmailAndPassword(
-    email: string,
-    password: string
-  ): Observable<auth.UserCredential> {
+  public createUserWithEmailAndPassword(email: string, password: string): Observable<auth.UserCredential> {
     this.analyticsService.logEvent('CreateUserWithEmailAndPassword');
 
-    return from(
-      this.angularFireAuth.auth.createUserWithEmailAndPassword(email, password)
-    ).pipe(
-      tap(() =>
-        this.analyticsService.logEvent('CreateUserWithEmailAndPasswordSuccess')
-      ),
+    return from(this.angularFireAuth.auth.createUserWithEmailAndPassword(email, password)).pipe(
+      tap(() => this.analyticsService.logEvent('CreateUserWithEmailAndPasswordSuccess')),
       catchError(error => {
         this.analyticsService.logEvent('CreateUserWithEmailAndPasswordFailed', {
           error
@@ -123,9 +105,7 @@ export class AuthService {
     this.analyticsService.logEvent('SendPasswordResetEmail');
 
     return from(this.angularFireAuth.auth.sendPasswordResetEmail(email)).pipe(
-      tap(() =>
-        this.analyticsService.logEvent('SendPasswordResetEmailSuccess')
-      ),
+      tap(() => this.analyticsService.logEvent('SendPasswordResetEmailSuccess')),
       catchError(error => {
         this.analyticsService.logEvent('SendPasswordResetEmailFailed', {
           error
@@ -160,17 +140,13 @@ export class AuthService {
     this.router.navigate(['/home']);
   }
 
-  private socialSignIn(
-    provider: firebase.auth.AuthProvider
-  ): Observable<auth.UserCredential> {
+  private socialSignIn(provider: firebase.auth.AuthProvider): Observable<auth.UserCredential> {
     const telemetry = { provider: provider.providerId };
 
     this.analyticsService.logEvent('SocialSignIn', telemetry);
 
     return from(this.angularFireAuth.auth.signInWithPopup(provider)).pipe(
-      tap(() =>
-        this.analyticsService.logEvent('SocialSignInSuccess', telemetry)
-      ),
+      tap(() => this.analyticsService.logEvent('SocialSignInSuccess', telemetry)),
       catchError(error => {
         this.analyticsService.logEvent('SocialSignInFailed', telemetry);
         console.error(error);

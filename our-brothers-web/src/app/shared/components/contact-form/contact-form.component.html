@@ -23,11 +23,7 @@
     placeholder="נושא פנייה*"
     [class.invalid]="!subject.valid && subject.touched"
   />
-  <textarea
-    formControlName="body"
-    class="form-field body"
-    placeholder="תוכן הודעה"
-  ></textarea>
+  <textarea formControlName="body" class="form-field body" placeholder="תוכן הודעה"></textarea>
 </form>
 <p class="form-invalid-message" *ngIf="formInvalid">
   אחד או יותר מהשדות אינם תקינים

@@ -1,12 +1,13 @@
-import {NgModule} from "@angular/core";
-import {AboutPageComponent} from "./about-page.component";
-import {RouterModule} from "@angular/router";
+import { NgModule } from '@angular/core';
+import { AboutPageComponent } from './about-page.component';
+import { RouterModule } from '@angular/router';
 
-
-const routes = [{
-  path: '',
-  component: AboutPageComponent
-}];
+const routes = [
+  {
+    path: '',
+    component: AboutPageComponent
+  }
+];
 
 @NgModule({
   declarations: [AboutPageComponent],

@@ -1,11 +1,6 @@
 <div class="meeting-item">
   <div class="meeting-item-col meeting-name">
-    <a
-      class="meeting-link"
-      [routerLink]="
-        '/meetings/' + year + '/' + meeting.hostId + '/' + meeting.id
-      "
-    >
+    <a class="meeting-link" [routerLink]="'/meetings/' + year + '/' + meeting.hostId + '/' + meeting.id">
       {{ meeting.title }}
     </a>
   </div>
@@ -36,10 +31,7 @@
       {{ meeting.bereaved.firstName + ' ' + meeting.bereaved.lastName }}
     </span>
   </div>
-  <div
-    class="meeting-item-col meeting-join"
-    *ngIf="participationsService.isUserHaveAllDetails(user)"
-  >
+  <div class="meeting-item-col meeting-join" *ngIf="participationsService.isUserHaveAllDetails(user)">
     <app-join-button
       class="join-button"
       [user]="user"

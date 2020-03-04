@@ -1,5 +1,5 @@
-import {Component, Input} from '@angular/core';
-import {RegistrationProgressStep} from "./registration-progress-bar.types";
+import { Component, Input } from '@angular/core';
+import { RegistrationProgressStep } from './registration-progress-bar.types';
 
 @Component({
   selector: 'app-registration-progress-bar',

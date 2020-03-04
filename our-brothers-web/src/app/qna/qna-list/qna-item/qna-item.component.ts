@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  SimpleChanges,
-  OnChanges
-} from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
 import { QNAItem } from '../qna-list.component';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -25,9 +19,7 @@ export class QnaItemComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.qnaItem) {
-      this.answerSafeHtml = this.sanitizer.bypassSecurityTrustHtml(
-        this.qnaItem.answer
-      );
+      this.answerSafeHtml = this.sanitizer.bypassSecurityTrustHtml(this.qnaItem.answer);
     }
   }
 }

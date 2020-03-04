@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  Output,
-  EventEmitter,
-  ChangeDetectionStrategy
-} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { User } from 'models';
@@ -43,21 +36,12 @@ export class ContactFormComponent implements OnInit {
   ngOnInit() {
     this.form = this.fb.group({
       name: [
-        this.user && this.user.profile
-          ? `${this.user.profile.firstName} ${this.user.profile.lastName}`
-          : '',
-        [
-          Validators.required,
-          Validators.maxLength(30),
-          Validators.pattern(this.utilsService.namePattern)
-        ]
+        this.user && this.user.profile ? `${this.user.profile.firstName} ${this.user.profile.lastName}` : '',
+        [Validators.required, Validators.maxLength(30), Validators.pattern(this.utilsService.namePattern)]
       ],
       phoneNumber: [
         (this.user && this.user.profile && this.user.profile.phoneNumber) || '',
-        [
-          Validators.required,
-          Validators.pattern(this.utilsService.phonePattern)
-        ]
+        [Validators.required, Validators.pattern(this.utilsService.phonePattern)]
       ],
       email: [
         (this.user && this.user.profile && this.user.profile.email) || '',
@@ -65,11 +49,7 @@ export class ContactFormComponent implements OnInit {
       ],
       subject: [
         '',
-        [
-          Validators.required,
-          Validators.maxLength(30),
-          Validators.pattern(this.utilsService.subjectPattern)
-        ]
+        [Validators.required, Validators.maxLength(30), Validators.pattern(this.utilsService.subjectPattern)]
       ],
       body: ['', [Validators.maxLength(300)]]
     });
@@ -100,9 +80,7 @@ export class ContactFormComponent implements OnInit {
       const parsedForm: ContactForm = {
         name: this.name.value.trim(),
         email: this.email.value,
-        phoneNumber: this.utilsService.toInternationalPhoneNumber(
-          this.phoneNumber.value.replace(/-/g, '')
-        ),
+        phoneNumber: this.utilsService.toInternationalPhoneNumber(this.phoneNumber.value.replace(/-/g, '')),
         subject: this.subject.value.trim(),
         body: this.body.value
       };

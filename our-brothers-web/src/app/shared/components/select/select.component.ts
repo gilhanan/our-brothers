@@ -11,7 +11,6 @@ export interface SelectOption {
   styleUrls: ['./select.component.scss']
 })
 export class SelectComponent {
-
   @Input() value: string | string[];
   @Input() options: SelectOption[];
   @Input() multi: boolean = false;
@@ -31,7 +30,7 @@ export class SelectComponent {
   preview: boolean = true;
   isOpen: boolean = false;
 
-  constructor(private elementRef: ElementRef) { }
+  constructor(private elementRef: ElementRef) {}
 
   renderValue() {
     if (!this.value) {
@@ -42,8 +41,8 @@ export class SelectComponent {
 
     return values
       .map(value => {
-        const valueOption = this.options.find((option) => option.value === value);
-        return valueOption && valueOption.label || '';
+        const valueOption = this.options.find(option => option.value === value);
+        return (valueOption && valueOption.label) || '';
       })
       .join(', ');
   }

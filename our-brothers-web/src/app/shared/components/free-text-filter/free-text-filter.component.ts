@@ -1,6 +1,6 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {Subject, Subscription} from 'rxjs';
-import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Subject, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-free-text-filter',
@@ -9,7 +9,6 @@ import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
   styleUrls: ['./free-text-filter.component.scss']
 })
 export class FreeTextFilterComponent implements OnInit, OnDestroy {
-
   @Input() filter: string;
   @Output() filterChange = new EventEmitter<string>();
 
@@ -17,14 +16,12 @@ export class FreeTextFilterComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
   ngOnInit() {
-    this.subscription = this.filterDebounce$.pipe(
-      debounceTime(200),
-      distinctUntilChanged()
-    ).subscribe((value) => this.filterChange.emit(value));
+    this.subscription = this.filterDebounce$
+      .pipe(debounceTime(200), distinctUntilChanged())
+      .subscribe(value => this.filterChange.emit(value));
   }
 
   ngOnDestroy(): void {
     this.subscription && this.subscription.unsubscribe();
   }
-
 }

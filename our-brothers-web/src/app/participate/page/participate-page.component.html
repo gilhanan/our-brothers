@@ -1,8 +1,4 @@
-<img
-  class="image-header"
-  src="../../../assets/img/tellHeader.jpg"
-  alt="Meetings Page Header Image"
-/>
+<img class="image-header" src="../../../assets/img/tellHeader.jpg" alt="Meetings Page Header Image" />
 <section class="registration-page">
   <section *ngIf="currentStep > 0">
     <div class="site-divider"></div>
@@ -17,30 +13,19 @@
   <div class="registration-steps">
     <ng-container [ngSwitch]="currentStep">
       <ng-container *ngSwitchCase="0">
-        <app-participate-intro
-          (submit)="currentStep$.next(1)"
-        ></app-participate-intro>
+        <app-participate-intro (submit)="currentStep$.next(1)"></app-participate-intro>
       </ng-container>
       <ng-container *ngSwitchCase="1">
         <!-- login -->
       </ng-container>
       <ng-container *ngSwitchCase="2">
         <section class="registration-step">
-          <app-profile-form
-            [user]="user"
-            [firebaseUser]="firebaseUser"
-            (submit)="onProfileSubmit($event)"
-          >
+          <app-profile-form [user]="user" [firebaseUser]="firebaseUser" (submit)="onProfileSubmit($event)">
           </app-profile-form>
         </section>
       </ng-container>
       <ng-container *ngSwitchCase="3">
-        <app-meetings
-          [user]="user"
-          [meetings]="meetings"
-          (joinMeeting)="onJoinMeeting($event)"
-        >
-        </app-meetings>
+        <app-meetings [user]="user" [meetings]="meetings" (joinMeeting)="onJoinMeeting($event)"> </app-meetings>
       </ng-container>
     </ng-container>
   </div>

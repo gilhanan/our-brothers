@@ -1,10 +1,5 @@
 <div class="container">
-  <app-meetings-filters
-    [(view)]="view"
-    [(filter)]="filter"
-    (filterChange)="filterMeetings()"
-  >
-  </app-meetings-filters>
+  <app-meetings-filters [(view)]="view" [(filter)]="filter" (filterChange)="filterMeetings()"> </app-meetings-filters>
 </div>
 
 <div class="container meetings-container">
@@ -17,15 +12,13 @@
       [meetings]="filteredMeetings"
       [showGuide]="mapShowGuide"
       (joinMeeting)="joinMeeting.emit($event)"
-      (guideCompleted)="guideCompleted.emit()">
+      (guideCompleted)="guideCompleted.emit()"
+    >
     </app-meetings-map>
   </ng-container>
 
   <ng-template #meetingsList>
-    <app-meetings-list
-      [user]="user"
-      [meetings]="filteredMeetings"
-      (joinMeeting)="joinMeeting.emit($event)">
+    <app-meetings-list [user]="user" [meetings]="filteredMeetings" (joinMeeting)="joinMeeting.emit($event)">
     </app-meetings-list>
   </ng-template>
 </div>

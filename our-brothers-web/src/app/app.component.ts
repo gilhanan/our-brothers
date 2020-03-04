@@ -25,9 +25,7 @@ export class AppComponent implements OnInit {
       this.user = user;
     });
 
-    this.authService.needLogin$.subscribe(
-      loginMode => (this.loginMode = loginMode)
-    );
+    this.authService.needLogin$.subscribe(loginMode => (this.loginMode = loginMode));
   }
 
   logOut() {

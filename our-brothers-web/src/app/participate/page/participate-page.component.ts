@@ -7,8 +7,8 @@ import { User, Meeting, UserRole } from 'models';
 import { AuthService } from '../../shared/services/auth.service';
 import { ParticipationsService } from '../../shared/services/participations.service';
 import { DataService, MEMORIAL_YEAR } from '../../shared/services/data.service';
-import {ProfileForm} from "../../shared/components/profile-form/profile-form.types";
-import {ToastrService} from "ngx-toastr";
+import { ProfileForm } from '../../shared/components/profile-form/profile-form.types';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-participate-page',
@@ -34,9 +34,7 @@ export class ParticipatePageComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.authService.firebaseUser.subscribe(
-      firebaseUser => (this.firebaseUser = firebaseUser)
-    );
+    this.authService.firebaseUser.subscribe(firebaseUser => (this.firebaseUser = firebaseUser));
 
     this.subscriptions.push(
       combineLatest(
@@ -66,9 +64,7 @@ export class ParticipatePageComponent implements OnInit, OnDestroy {
           if (!user) {
             this.currentStep$.next(1);
             this.authService.requestToLogin();
-          } else if (
-            !this.participationsService.isParticipateHaveAllDetails(user)
-          ) {
+          } else if (!this.participationsService.isParticipateHaveAllDetails(user)) {
             this.currentStep$.next(2);
           } else {
             this.currentStep$.next(3);
@@ -93,16 +89,12 @@ export class ParticipatePageComponent implements OnInit, OnDestroy {
       if (this.user.role !== UserRole.bereaved) {
         const accompanies = this.getAccompanies();
 
-        this.dataService
-          .participateRegisterHost(this.user, meeting, accompanies)
-          .subscribe(result => {
-            if (result) {
-              this.toastr.success('שובצת בהצלחה!');
-              this.router.navigate([
-                `meetings/${this.year}/${meeting.hostId}/${meeting.id}`
-              ]);
-            }
-          });
+        this.dataService.participateRegisterHost(this.user, meeting, accompanies).subscribe(result => {
+          if (result) {
+            this.toastr.success('שובצת בהצלחה!');
+            this.router.navigate([`meetings/${this.year}/${meeting.hostId}/${meeting.id}`]);
+          }
+        });
       }
     }
   }

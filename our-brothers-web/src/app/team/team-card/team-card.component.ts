@@ -6,7 +6,7 @@ export interface TeamMember {
   frontImage: string;
   backImage?: string;
   email?: string;
-  slains?: TeamMemberSlain[]
+  slains?: TeamMemberSlain[];
 }
 
 interface TeamMemberSlain {
@@ -22,19 +22,18 @@ interface TeamMemberSlain {
   styleUrls: ['./team-card.component.scss']
 })
 export class TeamCardComponent implements OnInit {
-
   @Input() member: TeamMember;
 
   @HostListener('document:click', ['$event'])
   clickout(event) {
-    this.hover = !!this.elementRef.nativeElement.contains(event.target)
+    this.hover = !!this.elementRef.nativeElement.contains(event.target);
   }
 
   public hover: boolean;
 
   public slains: number = 0;
 
-  constructor(private elementRef: ElementRef) { }
+  constructor(private elementRef: ElementRef) {}
 
   ngOnInit(): void {
     this.slains = this.member.slains && this.member.slains.length;

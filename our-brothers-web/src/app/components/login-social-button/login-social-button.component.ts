@@ -7,7 +7,6 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./login-social-button.component.scss']
 })
 export class LoginSocialButtonComponent {
-
   @Input() type: 'facebook' | 'google';
 
   icon() {

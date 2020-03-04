@@ -5,10 +5,7 @@ import { UtilsService } from '../services/utils.service';
   name: 'phone'
 })
 export class PhonePipe implements PipeTransform {
-
-  constructor(
-    private utilsService: UtilsService
-  ) { }
+  constructor(private utilsService: UtilsService) {}
 
   public transform(phoneNumber: string): string {
     if (!phoneNumber || phoneNumber.length < 9) {
@@ -18,5 +15,4 @@ export class PhonePipe implements PipeTransform {
       return `${local.substring(0, 3)}-${local.substring(3, 6)}-${local.substring(6)}`;
     }
   }
-
 }

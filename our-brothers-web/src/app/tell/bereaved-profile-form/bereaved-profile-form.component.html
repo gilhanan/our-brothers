@@ -68,11 +68,7 @@
     <span>
       אני מספר גם בשפות אחרות:
     </span>
-    <select
-      class="other-lang-select"
-      [value]="otherLang.value"
-      (change)="otherLang.setValue($event.target.value)"
-    >
+    <select class="other-lang-select" [value]="otherLang.value" (change)="otherLang.setValue($event.target.value)">
       <option value="english">אנגלית</option>
       <option value="spanish">ספרדית</option>
       <option value="franch">צרפתית</option>
@@ -88,12 +84,7 @@
       [invalid]="!agree.valid && agree.touched"
       (checkedChanged)="agree.setValue($event)"
     ></app-checkbox>
-    <a
-      class="site-link decoration"
-      href="/assets/docs/תנאי%20שימוש%20האחים%20שלנו.pdf"
-      target="_blank"
-      >לתנאי השימוש</a
-    >
+    <a class="site-link decoration" href="/assets/docs/תנאי%20שימוש%20האחים%20שלנו.pdf" target="_blank">לתנאי השימוש</a>
   </div>
   <p class="form-invalid-message" *ngIf="formInvalid">
     אחד או יותר מהשדות אינם תקינים

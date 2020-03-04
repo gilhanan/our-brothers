@@ -12,7 +12,6 @@ export interface RegistrationForm {
   styleUrls: ['./registration-form.component.scss']
 })
 export class RegistrationFormComponent implements OnInit {
-
   @Input() loading: boolean;
 
   @Output() haveUser = new EventEmitter<void>();
@@ -23,7 +22,7 @@ export class RegistrationFormComponent implements OnInit {
   public form: FormGroup;
   public formInvalid = false;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
     this.form = this.fb.group(
@@ -61,7 +60,7 @@ export class RegistrationFormComponent implements OnInit {
       const parsedForm: RegistrationForm = {
         email: this.email.value,
         password: this.password.value
-      }
+      };
 
       this.signUpWithEmailAndPassword.emit(parsedForm);
     } else {

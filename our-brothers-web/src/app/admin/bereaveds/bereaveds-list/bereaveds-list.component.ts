@@ -1,8 +1,13 @@
 import { Component, OnChanges, Input, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { User } from 'models';
-import { MEMORIAL_YEAR, UserMeeting, VolunteeringUser, UpdateBereavedStatus, UpdateBereavedGuidance } from '../../../shared/services/data.service';
-import {SortedColumn} from "../../../shared/components/list/list-header/list-header.types";
-
+import {
+  MEMORIAL_YEAR,
+  UserMeeting,
+  VolunteeringUser,
+  UpdateBereavedStatus,
+  UpdateBereavedGuidance
+} from '../../../shared/services/data.service';
+import { SortedColumn } from '../../../shared/components/list/list-header/list-header.types';
 
 @Component({
   selector: 'app-bereaveds-list',
@@ -10,7 +15,6 @@ import {SortedColumn} from "../../../shared/components/list/list-header/list-hea
   styleUrls: ['./bereaveds-list.component.scss']
 })
 export class BereavedsListComponent implements OnChanges {
-
   @Input() user: User;
   @Input() bereaveds: User[];
   @Output() joinBereved = new EventEmitter<void>();
@@ -27,7 +31,7 @@ export class BereavedsListComponent implements OnChanges {
     direction: 'asc'
   };
 
-  constructor() { }
+  constructor() {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.bereaveds) {
@@ -51,20 +55,58 @@ export class BereavedsListComponent implements OnChanges {
         let bValue: any;
 
         if (column === 'name') {
-          aValue = (a.profile && (a.profile.firstName + a.profile.lastName)) || '';
-          bValue = (b.profile && (b.profile.firstName + b.profile.lastName)) || '';
+          aValue = (a.profile && a.profile.firstName + a.profile.lastName) || '';
+          bValue = (b.profile && b.profile.firstName + b.profile.lastName) || '';
         } else if (column === 'seniority') {
-          aValue = a.bereavedProfile && a.bereavedProfile.slains && a.bereavedProfile.slains[0] && a.bereavedProfile.slains[0].deathDate || Number.MAX_VALUE;
-          bValue = b.bereavedProfile && b.bereavedProfile.slains && b.bereavedProfile.slains[0] && b.bereavedProfile.slains[0].deathDate || Number.MAX_VALUE;
+          aValue =
+            (a.bereavedProfile &&
+              a.bereavedProfile.slains &&
+              a.bereavedProfile.slains[0] &&
+              a.bereavedProfile.slains[0].deathDate) ||
+            Number.MAX_VALUE;
+          bValue =
+            (b.bereavedProfile &&
+              b.bereavedProfile.slains &&
+              b.bereavedProfile.slains[0] &&
+              b.bereavedProfile.slains[0].deathDate) ||
+            Number.MAX_VALUE;
         } else if (column === 'guidance') {
-          aValue = a.bereavedParticipation && a.bereavedParticipation[this.year] && a.bereavedParticipation[this.year].guidance && a.bereavedParticipation[this.year].guidance.general || '';
-          bValue = b.bereavedParticipation && b.bereavedParticipation[this.year] && b.bereavedParticipation[this.year].guidance && b.bereavedParticipation[this.year].guidance.general || '';
+          aValue =
+            (a.bereavedParticipation &&
+              a.bereavedParticipation[this.year] &&
+              a.bereavedParticipation[this.year].guidance &&
+              a.bereavedParticipation[this.year].guidance.general) ||
+            '';
+          bValue =
+            (b.bereavedParticipation &&
+              b.bereavedParticipation[this.year] &&
+              b.bereavedParticipation[this.year].guidance &&
+              b.bereavedParticipation[this.year].guidance.general) ||
+            '';
         } else if (column === 'status') {
-          aValue = a.bereavedParticipation && a.bereavedParticipation[this.year] && a.bereavedParticipation[this.year].status || '';
-          bValue = b.bereavedParticipation && b.bereavedParticipation[this.year] && b.bereavedParticipation[this.year].status || '';
+          aValue =
+            (a.bereavedParticipation &&
+              a.bereavedParticipation[this.year] &&
+              a.bereavedParticipation[this.year].status) ||
+            '';
+          bValue =
+            (b.bereavedParticipation &&
+              b.bereavedParticipation[this.year] &&
+              b.bereavedParticipation[this.year].status) ||
+            '';
         } else if (column === 'meetings') {
-          aValue = a.bereavedParticipation && a.bereavedParticipation[this.year] && a.bereavedParticipation[this.year].meetings && a.bereavedParticipation[this.year].meetings.length || 0;
-          bValue = b.bereavedParticipation && b.bereavedParticipation[this.year] && b.bereavedParticipation[this.year].meetings && b.bereavedParticipation[this.year].meetings.length || 0;
+          aValue =
+            (a.bereavedParticipation &&
+              a.bereavedParticipation[this.year] &&
+              a.bereavedParticipation[this.year].meetings &&
+              a.bereavedParticipation[this.year].meetings.length) ||
+            0;
+          bValue =
+            (b.bereavedParticipation &&
+              b.bereavedParticipation[this.year] &&
+              b.bereavedParticipation[this.year].meetings &&
+              b.bereavedParticipation[this.year].meetings.length) ||
+            0;
         } else {
           aValue = a[column] || '';
           bValue = b[column] || '';

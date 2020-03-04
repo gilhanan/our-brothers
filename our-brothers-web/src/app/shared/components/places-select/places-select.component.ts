@@ -10,7 +10,6 @@ import { Address } from 'models';
   styleUrls: ['./places-select.component.scss']
 })
 export class PlacesSelectComponent implements AfterViewInit {
-
   @Input() types: string[];
   @Input() placeholder: string;
   @Input() invalid: boolean;
@@ -18,7 +17,7 @@ export class PlacesSelectComponent implements AfterViewInit {
   @Output() change: EventEmitter<Address> = new EventEmitter();
   @ViewChild('palcesInput') addresstext: ElementRef<HTMLInputElement>;
 
-  constructor(private mapsAPILoader: MapsAPILoader) { }
+  constructor(private mapsAPILoader: MapsAPILoader) {}
 
   ngAfterViewInit() {
     this.getPlaceAutocomplete();
@@ -26,11 +25,10 @@ export class PlacesSelectComponent implements AfterViewInit {
 
   private getPlaceAutocomplete() {
     this.mapsAPILoader.load().then(() => {
-      const autocomplete = new google.maps.places.Autocomplete(this.addresstext.nativeElement,
-        {
-          componentRestrictions: { country: ['IL', 'PS'] },
-          types: this.types.slice()
-        });
+      const autocomplete = new google.maps.places.Autocomplete(this.addresstext.nativeElement, {
+        componentRestrictions: { country: ['IL', 'PS'] },
+        types: this.types.slice()
+      });
 
       google.maps.event.addListener(autocomplete, 'place_changed', () => {
         const place = autocomplete.getPlace();
@@ -39,7 +37,7 @@ export class PlacesSelectComponent implements AfterViewInit {
           formattedAddress: place.formatted_address.replace(', ישראל', ''),
           latitude: place.geometry.location.lat(),
           longitude: place.geometry.location.lng()
-        }
+        };
 
         this.change.emit(parsedAddress);
       });

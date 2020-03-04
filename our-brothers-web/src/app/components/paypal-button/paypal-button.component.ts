@@ -19,7 +19,6 @@ interface OnApproveData {
   styleUrls: ['./paypal-button.component.scss']
 })
 export class PaypalButtonComponent implements AfterViewInit {
-
   @Input() amount: string;
   @Output() createOrder = new EventEmitter<CreateOrder>();
   @Output() approve = new EventEmitter<PayPalOrder>();
@@ -28,42 +27,43 @@ export class PaypalButtonComponent implements AfterViewInit {
 
   private orderAmmount: string;
 
-  constructor() { }
+  constructor() {}
 
   ngAfterViewInit(): void {
     if (paypal) {
-      paypal.Buttons({
-        createOrder: (data, actions) => {
-          this.orderAmmount = this.amount;
-          this.createOrder.emit({ amount: this.orderAmmount });
+      paypal
+        .Buttons({
+          createOrder: (data, actions) => {
+            this.orderAmmount = this.amount;
+            this.createOrder.emit({ amount: this.orderAmmount });
 
-          return actions.order.create({
-            intent: 'CAPTURE',
-            purchase_units: [
-              {
-                amount: {
-                  value: this.orderAmmount,
-                  currency_code: 'ILS'
+            return actions.order.create({
+              intent: 'CAPTURE',
+              purchase_units: [
+                {
+                  amount: {
+                    value: this.orderAmmount,
+                    currency_code: 'ILS'
+                  }
                 }
-              }
-            ]
-          });
-        },
-        onApprove: (data: OnApproveData, actions) => {
-          this.approve.emit({
-            payerId:  data.payerID,
-            orderId: data.orderID,
-            amount: this.orderAmmount
-          });
-        },
-        onCancel: (data) => {
-          this.cancel.emit(data);
-        },
-        onError: (error) => {
-          this.error.emit(error);
-        }
-      }).render('#paypal-button-container');
+              ]
+            });
+          },
+          onApprove: (data: OnApproveData, actions) => {
+            this.approve.emit({
+              payerId: data.payerID,
+              orderId: data.orderID,
+              amount: this.orderAmmount
+            });
+          },
+          onCancel: data => {
+            this.cancel.emit(data);
+          },
+          onError: error => {
+            this.error.emit(error);
+          }
+        })
+        .render('#paypal-button-container');
     }
   }
-
 }

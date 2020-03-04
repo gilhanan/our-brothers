@@ -6,23 +6,11 @@
     [label]="'הצג מפגשים מלאים'"
   ></app-checkbox>
 </div>
-<app-list-header
-  [(sort)]="sortedColumn"
-  (sortChange)="sort()"
-  class="list-header"
->
-  <app-list-column [title]="'שם מפגש'" [field]="'title'" class="col">
-  </app-list-column>
-  <app-list-column [title]="'כתובת'" [field]="'address'" class="col">
-  </app-list-column>
-  <app-list-column [title]="'תאריך'" [field]="'date'" class="col date-col">
-  </app-list-column>
-  <app-list-column
-    [title]="'משתתפים'"
-    [field]="'capacity'"
-    class="col participants-col"
-  >
-  </app-list-column>
+<app-list-header [(sort)]="sortedColumn" (sortChange)="sort()" class="list-header">
+  <app-list-column [title]="'שם מפגש'" [field]="'title'" class="col"> </app-list-column>
+  <app-list-column [title]="'כתובת'" [field]="'address'" class="col"> </app-list-column>
+  <app-list-column [title]="'תאריך'" [field]="'date'" class="col date-col"> </app-list-column>
+  <app-list-column [title]="'משתתפים'" [field]="'capacity'" class="col participants-col"> </app-list-column>
   <app-list-column
     [title]="'אח/ות'"
     [field]="'bereaved'"
@@ -30,10 +18,7 @@
     *ngIf="!(showFullMeetings && user.role === 'bereaved')"
   >
   </app-list-column>
-  <app-list-column
-    class="col join-col"
-    *ngIf="participationsService.isUserHaveAllDetails(user)"
-  ></app-list-column>
+  <app-list-column class="col join-col" *ngIf="participationsService.isUserHaveAllDetails(user)"></app-list-column>
 </app-list-header>
 <div class="meeting-items-container">
   <cdk-virtual-scroll-viewport itemSize="50" class="meeting-items">

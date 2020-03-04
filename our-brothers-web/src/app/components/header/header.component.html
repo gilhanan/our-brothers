@@ -1,21 +1,12 @@
 <nav class="header-container">
-  <app-header-toggler
-    (click)="isSideMenuClosed = !isSideMenuClosed"
-    [active]="!isSideMenuClosed"
-    class="nav-toggle"
-  >
+  <app-header-toggler (click)="isSideMenuClosed = !isSideMenuClosed" [active]="!isSideMenuClosed" class="nav-toggle">
   </app-header-toggler>
   <div class="header">
     <div class="logo-header" routerLink="home"></div>
     <div class="nav-content" [ngClass]="{ open: !isSideMenuClosed }">
       <ul class="links-header">
         <li>
-          <a
-            class="link-header"
-            routerLink="home"
-            routerLinkActive="current-page"
-            >דף הבית</a
-          >
+          <a class="link-header" routerLink="home" routerLinkActive="current-page">דף הבית</a>
         </li>
         <li>
           <app-drop-down-menu
@@ -42,36 +33,16 @@
           </ng-container>
         </li>
         <li>
-          <a
-            class="link-header"
-            routerLink="agenda"
-            routerLinkActive="current-page"
-            >מבנה הערב</a
-          >
+          <a class="link-header" routerLink="agenda" routerLinkActive="current-page">מבנה הערב</a>
         </li>
         <li>
-          <a
-            class="link-header"
-            routerLink="questions"
-            routerLinkActive="current-page"
-            >שאלות</a
-          >
+          <a class="link-header" routerLink="questions" routerLinkActive="current-page">שאלות</a>
         </li>
         <li>
-          <a
-            class="link-header"
-            routerLink="gallery"
-            routerLinkActive="current-page"
-            >גלריה</a
-          >
+          <a class="link-header" routerLink="gallery" routerLinkActive="current-page">גלריה</a>
         </li>
         <li>
-          <a
-            class="link-header"
-            routerLink="contact"
-            routerLinkActive="current-page"
-            >צרו קשר</a
-          >
+          <a class="link-header" routerLink="contact" routerLinkActive="current-page">צרו קשר</a>
         </li>
         <li *ngIf="user?.isAdmin || user?.isVolunteer">
           <app-drop-down-menu
@@ -87,23 +58,11 @@
         </li>
       </ul>
       <div class="action-buttons">
-        <a class="action-header-support-us site-button" routerLink="donate"
-          >תמיכה בעמותה</a
-        >
-        <button
-          *ngIf="!user"
-          class="action-header-login site-button"
-          [disabled]="loading"
-          (click)="onLogin()"
-        >
+        <a class="action-header-support-us site-button" routerLink="donate">תמיכה בעמותה</a>
+        <button *ngIf="!user" class="action-header-login site-button" [disabled]="loading" (click)="onLogin()">
           התחבר
         </button>
-        <button
-          *ngIf="user"
-          class="action-header-login site-button"
-          [disabled]="loading"
-          (click)="onLogout()"
-        >
+        <button *ngIf="user" class="action-header-login site-button" [disabled]="loading" (click)="onLogout()">
           התנתק
         </button>
       </div>
@@ -124,9 +83,7 @@
 </ng-template>
 
 <ng-template #aboutMenuAnchor>
-  <a class="link-header" routerLinkActive="current-page">
-    אודותינו <i class="fas fa-caret-down"></i>
-  </a>
+  <a class="link-header" routerLinkActive="current-page"> אודותינו <i class="fas fa-caret-down"></i> </a>
 </ng-template>
 
 <ng-template #meetingsMenuItems>
@@ -142,9 +99,7 @@
 </ng-template>
 
 <ng-template #meetingsMenuAnchor>
-  <a class="link-header" routerLinkActive="current-page">
-    מפגשים <i class="fas fa-caret-down"></i>
-  </a>
+  <a class="link-header" routerLinkActive="current-page"> מפגשים <i class="fas fa-caret-down"></i> </a>
 </ng-template>
 
 <ng-template #adminMenuItems>
@@ -154,7 +109,5 @@
 </ng-template>
 
 <ng-template #adminMenuAnchor>
-  <a class="link-header" routerLinkActive="current-page">
-    ניהול <i class="fas fa-caret-down"></i>
-  </a>
+  <a class="link-header" routerLinkActive="current-page"> ניהול <i class="fas fa-caret-down"></i> </a>
 </ng-template>

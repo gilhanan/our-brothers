@@ -26,7 +26,7 @@ $textColor: rgb(129, 129, 129);
       display: inline-block;
       position: relative;
       &::after {
-        content: "";
+        content: '';
         position: absolute;
         top: 50%;
         transform: translateY(-50%);

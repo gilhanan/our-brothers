@@ -8,9 +8,8 @@ describe('HeaderTogglerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HeaderTogglerComponent ]
-    })
-    .compileComponents();
+      declarations: [HeaderTogglerComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

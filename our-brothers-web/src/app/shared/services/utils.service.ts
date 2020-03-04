@@ -22,17 +22,12 @@ export class UtilsService {
 
   private readonly ISRAEL_PHONE_PREFIX = '972';
 
-  private readonly ISRAEL_PHONE_PREFIX_REGEX = new RegExp(
-    `^(\\+${this.ISRAEL_PHONE_PREFIX})?(0)?`
-  );
+  private readonly ISRAEL_PHONE_PREFIX_REGEX = new RegExp(`^(\\+${this.ISRAEL_PHONE_PREFIX})?(0)?`);
 
   constructor() {}
 
   toInternationalPhoneNumber(phoneNumber: string) {
-    return phoneNumber.replace(
-      this.ISRAEL_PHONE_PREFIX_REGEX,
-      `+${this.ISRAEL_PHONE_PREFIX}`
-    );
+    return phoneNumber.replace(this.ISRAEL_PHONE_PREFIX_REGEX, `+${this.ISRAEL_PHONE_PREFIX}`);
   }
 
   toLocalPhoneNumber(phoneNumber: string) {
@@ -68,19 +63,12 @@ export class UtilsService {
           meeting.title.includes(keyword) ||
           meeting.address.formattedAddress.includes(keyword) ||
           (meeting.bereaved &&
-            (
-              (meeting.bereaved.firstName || '') +
-              (meeting.bereaved.lastName || '')
-            ).includes(keyword))
+            ((meeting.bereaved.firstName || '') + (meeting.bereaved.lastName || '')).includes(keyword))
       )
     );
   }
 
-  filteringBereaveds(
-    bereaveds: User[],
-    query: string,
-    year = MEMORIAL_YEAR
-  ): User[] {
+  filteringBereaveds(bereaveds: User[], query: string, year = MEMORIAL_YEAR): User[] {
     if (!bereaveds) {
       return [];
     }
@@ -96,29 +84,19 @@ export class UtilsService {
         keyword =>
           bereaved.id.includes(keyword) ||
           (bereaved.profile &&
-            ((
-              (bereaved.profile.firstName || '') +
-              (bereaved.profile.lastName || '')
-            ).includes(keyword) ||
-              (bereaved.profile.email &&
-                bereaved.profile.email.includes(keyword)) ||
+            (((bereaved.profile.firstName || '') + (bereaved.profile.lastName || '')).includes(keyword) ||
+              (bereaved.profile.email && bereaved.profile.email.includes(keyword)) ||
               (bereaved.profile.phoneNumber &&
-                bereaved.profile.phoneNumber
-                  .replace(`^\+${this.ISRAEL_PHONE_PREFIX}`, '0')
-                  .includes(keyword)))) ||
+                bereaved.profile.phoneNumber.replace(`^\+${this.ISRAEL_PHONE_PREFIX}`, '0').includes(keyword)))) ||
           (bereaved.bereavedProfile &&
             bereaved.bereavedProfile.slains &&
             bereaved.bereavedProfile.slains.some(slain =>
-              ((slain.firstName || '') + (slain.lastName || '')).includes(
-                keyword
-              )
+              ((slain.firstName || '') + (slain.lastName || '')).includes(keyword)
             )) ||
           (bereaved.bereavedParticipation &&
             bereaved.bereavedParticipation[year] &&
             bereaved.bereavedParticipation[year].meetings &&
-            bereaved.bereavedParticipation[year].meetings.some(meeting =>
-              meeting.title.includes(keyword)
-            ))
+            bereaved.bereavedParticipation[year].meetings.some(meeting => meeting.title.includes(keyword)))
       )
     );
   }
