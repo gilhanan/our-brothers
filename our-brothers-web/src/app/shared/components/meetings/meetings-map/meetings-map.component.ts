@@ -66,7 +66,7 @@ export class MeetingsMapComponent implements OnInit {
 
     const isBereaved = this.user && this.user.role === UserRole.bereaved;
 
-    if (this.participationsService.isUserParticipatingEvent(this.user, meeting)) {
+    if (this.participationsService.isUserParticipatingMeeting(this.user, meeting)) {
       url = '/assets/img/map/meetings-map-blue.svg';
     } else if (!isBereaved && meeting.invited) {
       url = '/assets/img/map/meetings-map-grey.svg';

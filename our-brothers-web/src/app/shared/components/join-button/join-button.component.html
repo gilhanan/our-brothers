@@ -1,8 +1,8 @@
 <button
   class="join-button"
-  [ngClass]="{ joined: participationsService.isUserParticipatingEvent(user, meeting) }"
+  [ngClass]="{ joined: participationsService.isUserParticipatingMeeting(user, meeting) }"
   (click)="joinMeeting.emit()"
-  [disabled]="!participationsService.isUserCanParticipatingEvent(user, meeting)"
+  [disabled]="!participationsService.isUserCanParticipatingMeeting(user, meeting)"
 >
-  {{ participationsService.isUserParticipatingEvent(user, meeting) ? 'משובץ' : 'שיבוץ' }}
+  {{ participationsService.isUserParticipatingMeeting(user, meeting) ? 'משובץ' : 'שיבוץ' }}
 </button>

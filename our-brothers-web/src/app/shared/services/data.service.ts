@@ -404,7 +404,7 @@ export class DataService {
 
     return combineLatest([this.getUserById(bereaved.id), this.getMeeting(meeting.hostId, meeting.id, year)]).pipe(
       tap(([b, m]) => {
-        if (!this.participationsService.isBereavedCanParticipatingEvent(b, m)) {
+        if (!this.participationsService.isBereavedCanParticipatingMeeting(b, m)) {
           throw new Error("Bereaved can't participate meeting.");
         }
       }),
@@ -452,7 +452,7 @@ export class DataService {
 
     return combineLatest([this.getUserById(participate.id), this.getMeeting(meeting.hostId, meeting.id, year)]).pipe(
       tap(([p, m]) => {
-        if (!this.participationsService.isParticipateCanParticipatingEvent(p, m)) {
+        if (!this.participationsService.isParticipateCanParticipatingMeeting(p, m)) {
           throw new Error("Participate can't participate meeting.");
         }
       }),
