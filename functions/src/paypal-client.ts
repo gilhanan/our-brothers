@@ -1,6 +1,6 @@
 const checkoutNodeJssdk = require('@paypal/checkout-server-sdk');
 
-import { paypalCredentials } from '../config';
+import { paypalCredentials } from '../../config';
 
 function environment() {
     const clientId = paypalCredentials.client;

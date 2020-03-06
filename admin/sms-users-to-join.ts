@@ -1,15 +1,17 @@
 const twilio = require('twilio');
-const admin = require('firebase-admin');
-const serviceAccount = require('./config/our-brothers-firebase-adminsdk');
-const twilioAuth = require('./config/twilio');
+import * as admin from 'firebase-admin';
+import { firebaseAdmin, twilioCrendentials } from '../config';
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
+  credential: admin.credential.cert(firebaseAdmin as any),
   databaseURL: 'https://our-brothers.firebaseio.com'
 });
 
 const db = admin.database();
-const client = new twilio(twilioAuth.accountSid, twilioAuth.authToken);
+const client = new twilio(
+  twilioCrendentials.accountSid,
+  twilioCrendentials.authToken
+);
 
 if (!client || !client.messages || !client.messages.create) {
   console.warn('Failed to send SMS, failed to initialize twilio');

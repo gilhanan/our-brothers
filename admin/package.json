@@ -10,6 +10,10 @@
   "license": "ISC",
   "dependencies": {
     "firebase-admin": "^8.9.2",
+    "nodemailer": "^6.4.4",
     "twilio": "^3.39.5"
+  },
+  "devDependencies": {
+    "@types/nodemailer": "^6.4.0"
   }
 }
