@@ -1,4 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subject, Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
+
 import { User, Meeting } from 'models';
 import { AuthService } from '../../../shared/services/auth.service';
 import {
@@ -9,8 +13,6 @@ import {
   UpdateBereavedStatus,
   UpdateBereavedGuidance
 } from '../../../shared/services/data.service';
-import { Subject, Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
 import { UtilsService } from '../../../shared/services/utils.service';
 
 @Component({
@@ -33,7 +35,12 @@ export class AdminBereavedsPageComponent implements OnInit, OnDestroy {
 
   private subscriptions: Subscription[] = [];
 
-  constructor(private authService: AuthService, private dataService: DataService, private utilsService: UtilsService) {}
+  constructor(
+    private toastr: ToastrService,
+    private authService: AuthService,
+    private dataService: DataService,
+    private utilsService: UtilsService
+  ) {}
 
   ngOnInit(): void {
     this.subscriptions.push(
@@ -68,7 +75,14 @@ export class AdminBereavedsPageComponent implements OnInit, OnDestroy {
       this.selectedMeeting$.pipe(take(1)).subscribe(meeting => {
         this.selectingBereaved = null;
         if (meeting) {
-          this.dataService.bereavedRegisterHost(bereaved, meeting);
+          this.dataService.bereavedRegisterHost(bereaved, meeting).subscribe(
+            () => {
+              this.toastr.success('האח/ות שובץ בהצלחה');
+            },
+            () => {
+              this.toastr.error('שגיאה - לא ניתן לשבץ למפגש. נא ליצור קשר.');
+            }
+          );
         }
       });
     } else {

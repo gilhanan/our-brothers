@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { Observable, throwError, from } from 'rxjs';
-import { map, catchError, tap } from 'rxjs/operators';
+import { Observable, throwError, from, combineLatest } from 'rxjs';
+import { map, catchError, tap, switchMap } from 'rxjs/operators';
 
 import {
   User,
@@ -22,6 +22,7 @@ import {
 } from 'models';
 import { AnalyticsService } from './analytics.service';
 import { MeetingForm } from '../../host/host-form/host-form.component';
+import { ParticipationsService } from './participations.service';
 
 export const MEMORIAL_YEAR = 2020;
 
@@ -52,7 +53,11 @@ export interface UpdateBereavedGuidance {
   providedIn: 'root'
 })
 export class DataService {
-  constructor(private angularFireDatabase: AngularFireDatabase, private analyticsService: AnalyticsService) {}
+  constructor(
+    private angularFireDatabase: AngularFireDatabase,
+    private analyticsService: AnalyticsService,
+    private participationsService: ParticipationsService
+  ) {}
 
   public getUserById(userId: string): Observable<User> {
     this.analyticsService.logEvent('GetUserById');
@@ -94,7 +99,7 @@ export class DataService {
       }
     };
 
-    const telemetry = { parsedMeeting };
+    const telemetry = { parsedMeeting, userId: user.id };
 
     this.analyticsService.logEvent('CreateMeeting', telemetry);
 
@@ -392,15 +397,6 @@ export class DataService {
   }
 
   public bereavedRegisterHost(bereaved: User, meeting: Meeting, year = MEMORIAL_YEAR): Observable<boolean> {
-    const postObj: MeetingBereaved = {
-      id: bereaved.id,
-      firstName: bereaved.profile.firstName,
-      lastName: bereaved.profile.lastName,
-      email: bereaved.profile.email,
-      phoneNumber: bereaved.profile.phoneNumber,
-      slains: (bereaved.bereavedProfile && bereaved.bereavedProfile.slains) || null
-    };
-
     const telemetry = {
       userId: bereaved.id,
       hostId: meeting.hostId,
@@ -410,9 +406,26 @@ export class DataService {
 
     this.analyticsService.logEvent('BereavedRegisterHost', telemetry);
 
-    return from(
-      this.angularFireDatabase.object(`events/${year}/${meeting.hostId}/${meeting.id}/bereaved`).set(postObj)
-    ).pipe(
+    return combineLatest([this.getUserById(bereaved.id), this.getMeeting(meeting.hostId, meeting.id, year)]).pipe(
+      tap(([b, m]) => {
+        if (!this.participationsService.isBereavedCanParticipatingEvent(b, m)) {
+          throw new Error("Bereaved can't participate meeting.");
+        }
+      }),
+      switchMap(([b, m]) => {
+        const meetingBereaved: MeetingBereaved = {
+          id: b.id,
+          firstName: b.profile.firstName,
+          lastName: b.profile.lastName,
+          email: b.profile.email,
+          phoneNumber: b.profile.phoneNumber,
+          slains: b.bereavedProfile.slains
+        };
+
+        return from(
+          this.angularFireDatabase.object(`events/${year}/${m.hostId}/${m.id}/bereaved`).set(meetingBereaved)
+        );
+      }),
       tap(() => this.analyticsService.logEvent('BereavedRegisterHostSuccess', telemetry)),
       map(() => true),
       catchError(error => {
@@ -432,14 +445,6 @@ export class DataService {
     accompanies: number,
     year = MEMORIAL_YEAR
   ): Observable<boolean> {
-    const postObj: MeetingParticipate = {
-      firstName: participate.profile.firstName,
-      lastName: participate.profile.lastName,
-      email: participate.profile.email,
-      phoneNumber: participate.profile.phoneNumber,
-      accompanies
-    };
-
     const telemetry = {
       userId: participate.id,
       hostId: meeting.hostId,
@@ -449,11 +454,26 @@ export class DataService {
 
     this.analyticsService.logEvent('ParticipateRegisterHost', telemetry);
 
-    return from(
-      this.angularFireDatabase
-        .object(`eventsParticipates/${year}/${meeting.hostId}/${meeting.id}/${participate.id}`)
-        .set(postObj)
-    ).pipe(
+    return combineLatest([this.getUserById(participate.id), this.getMeeting(meeting.hostId, meeting.id, year)]).pipe(
+      tap(([p, m]) => {
+        if (!this.participationsService.isParticipateCanParticipatingEvent(p, m)) {
+          throw new Error("Participate can't participate meeting.");
+        }
+      }),
+      switchMap(([p, m]) => {
+        const meetingParticipate: MeetingParticipate = {
+          firstName: p.profile.firstName,
+          lastName: p.profile.lastName,
+          email: p.profile.email,
+          phoneNumber: p.profile.phoneNumber,
+          accompanies
+        };
+        return from(
+          this.angularFireDatabase
+            .object(`eventsParticipates/${year}/${m.hostId}/${m.id}/${p.id}`)
+            .set(meetingParticipate)
+        );
+      }),
       tap(() => this.analyticsService.logEvent('ParticipateRegisterHostSuccess', telemetry)),
       map(() => true),
       catchError(error => {

@@ -80,10 +80,15 @@ export class HostPageComponent implements OnInit, OnDestroy {
   }
 
   onNewMeeting(meetingDetails: MeetingForm) {
-    this.dataService.createMeeting(this.user, meetingDetails).subscribe((meeting: Meeting) => {
-      this.toastr.success('נוצר מפגש בהצלחה!');
-      this.router.navigate([`meetings/${this.year}/${meeting.hostId}/${meeting.id}`]);
-    });
+    this.dataService.createMeeting(this.user, meetingDetails).subscribe(
+      (meeting: Meeting) => {
+        this.toastr.success('נוצר מפגש בהצלחה!');
+        this.router.navigate([`meetings/${this.year}/${meeting.hostId}/${meeting.id}`]);
+      },
+      () => {
+        this.toastr.error('שגיאה - לא ניתן ליצור מפגש. נא ליצור קשר.');
+      }
+    );
   }
 
   ngOnDestroy() {

@@ -81,8 +81,8 @@ export class ParticipationsService {
     return (
       !meeting.bereaved &&
       this.isBereavedHaveAllDetails(user) &&
-      this.isBrotherHaveSlainDetails(user) &&
-      this.isBrotherAnsweredTrainingMeeting(user)
+      this.isBereavedHaveSlainDetails(user) &&
+      this.isBereavedAnsweredTrainingMeeting(user)
     );
   }
 
@@ -115,11 +115,11 @@ export class ParticipationsService {
     return user.profile.birthDay && this.isParticipateHaveAllDetails(user);
   }
 
-  isBrotherHaveSlainDetails = (user: User) => {
+  isBereavedHaveSlainDetails = (user: User) => {
     return user.bereavedProfile;
   };
 
-  isBrotherAnsweredTrainingMeeting(user: User, year = MEMORIAL_YEAR) {
+  isBereavedAnsweredTrainingMeeting(user: User, year = MEMORIAL_YEAR) {
     return user?.bereavedParticipation?.[year]?.guidance?.answered;
   }
 }

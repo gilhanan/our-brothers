@@ -67,9 +67,9 @@ export class TellPageComponent implements OnInit, OnDestroy {
             this.authService.requestToLogin();
           } else if (!this.participationsService.isBereavedHaveAllDetails(user)) {
             this.currentStep$.next(2);
-          } else if (!this.participationsService.isBrotherHaveSlainDetails(user)) {
+          } else if (!this.participationsService.isBereavedHaveSlainDetails(user)) {
             this.currentStep$.next(3);
-          } else if (!this.participationsService.isBrotherAnsweredTrainingMeeting(user)) {
+          } else if (!this.participationsService.isBereavedAnsweredTrainingMeeting(user)) {
             this.currentStep$.next(4);
           } else {
             this.currentStep$.next(5);
@@ -115,12 +115,15 @@ export class TellPageComponent implements OnInit, OnDestroy {
   onJoinMeeting(meeting: Meeting) {
     if (window.confirm('האם ברצונך להשתבץ למפגש?')) {
       if (this.user.role === UserRole.bereaved) {
-        this.dataService.bereavedRegisterHost(this.user, meeting).subscribe(result => {
-          if (result) {
+        this.dataService.bereavedRegisterHost(this.user, meeting).subscribe(
+          () => {
             this.toastr.success('שובצת בהצלחה!');
             this.router.navigate([`meetings/${this.year}/${meeting.hostId}/${meeting.id}`]);
+          },
+          () => {
+            this.toastr.error('שגיאה - לא ניתן להשתבץ למפגש. נא ליצור קשר.');
           }
-        });
+        );
       }
     }
   }
