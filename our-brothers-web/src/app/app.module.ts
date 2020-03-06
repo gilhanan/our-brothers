@@ -10,6 +10,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
 import { AgmCoreModule } from '@agm/core';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
+import { ToastrModule } from 'ngx-toastr';
 
 import { environment } from '../environments/environment';
 
@@ -18,7 +19,6 @@ import { AppComponent } from './app.component';
 import { AuthService } from './shared/services/auth.service';
 import { DataService } from './shared/services/data.service';
 import { HomePageComponent } from './home/home-page.component';
-import { ToastrModule } from 'ngx-toastr';
 import { ContactFormModule } from './shared/components/contact-form/contact-form.module';
 import { DropDownMenuModule } from './shared/components/drop-down-menu/drop-down-menu.module';
 import { ParticipationsButtonsModule } from './shared/components/participations-buttons/participations-buttons.module';

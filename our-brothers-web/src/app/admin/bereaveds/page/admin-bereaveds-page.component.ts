@@ -4,10 +4,10 @@ import { take } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 
 import { User, Meeting } from 'models';
+import { MEMORIAL_YEAR } from '../../../shared/constants';
 import { AuthService } from '../../../shared/services/auth.service';
 import {
   DataService,
-  MEMORIAL_YEAR,
   UserMeeting,
   VolunteeringUser,
   UpdateBereavedStatus,

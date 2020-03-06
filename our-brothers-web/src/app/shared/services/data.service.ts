@@ -3,6 +3,7 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable, throwError, from, combineLatest } from 'rxjs';
 import { map, catchError, tap, switchMap } from 'rxjs/operators';
 
+import { MEMORIAL_YEAR } from '../constants';
 import {
   User,
   Meeting,
@@ -23,11 +24,6 @@ import {
 import { AnalyticsService } from './analytics.service';
 import { MeetingForm } from '../../host/host-form/host-form.component';
 import { ParticipationsService } from './participations.service';
-
-export const MEMORIAL_YEAR = 2020;
-
-export const MIN_DATE = new Date(Date.UTC(MEMORIAL_YEAR, 3, 22));
-export const MAX_DATE = new Date(Date.UTC(MEMORIAL_YEAR, 3, 28));
 
 export interface UserMeeting {
   meeting: Meeting;

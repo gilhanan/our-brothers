@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User, Meeting, UserRole, ParticipateParticipationMeeting, UserParticipation, BaseParticipation } from 'models';
-import { MEMORIAL_YEAR } from './data.service';
+import { MEMORIAL_YEAR } from '../constants';
 
 const isUserPresentInMeeting = (meeting: Meeting) => ({ id, hostId }: ParticipateParticipationMeeting) =>
   id === meeting.id && hostId === meeting.hostId;

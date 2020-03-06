@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+
+import { User, Contact } from 'models';
 import { AuthService } from '../shared/services/auth.service';
 import { DataService } from '../shared/services/data.service';
-import { User } from 'models';
-import { Contact } from 'models';
 import { ContactForm } from '../shared/components/contact-form/contact-form.component';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home-page',

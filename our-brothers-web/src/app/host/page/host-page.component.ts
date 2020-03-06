@@ -2,13 +2,14 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject, combineLatest, Subscription } from 'rxjs';
 import { distinctUntilChanged, tap } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 
 import { User, UserRole, Meeting } from 'models';
+import { MEMORIAL_YEAR } from '../../shared/constants';
 import { AuthService } from '../../shared/services/auth.service';
-import { DataService, MEMORIAL_YEAR } from '../../shared/services/data.service';
+import { DataService } from '../../shared/services/data.service';
 import { ParticipationsService } from '../../shared/services/participations.service';
 import { MeetingForm } from '../host-form/host-form.component';
-import { ToastrService } from 'ngx-toastr';
 import { ProfileForm } from '../../shared/components/profile-form/profile-form.types';
 
 @Component({

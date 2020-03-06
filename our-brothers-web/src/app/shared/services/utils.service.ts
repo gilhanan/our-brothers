@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Meeting, MeetingAudience, User } from 'models';
-import { MEMORIAL_YEAR, MAX_DATE, MIN_DATE } from './data.service';
+import { MEMORIAL_YEAR, MAX_DATE, MIN_DATE } from '../constants';
 import { FormControl } from '@angular/forms';
 
 @Injectable({

@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { AuthService, AuthErrors } from '../../shared/services/auth.service';
 import { finalize, take } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
+
+import { AuthService, AuthErrors } from '../../shared/services/auth.service';
 import { RegistrationForm } from '../registration-form/registration-form.types';
 import { LoginForm } from '../login-form/login-form.types';
 import { ForgotPasswordForm } from '../forgot-password-form/forgot-password-form.types';
-import { ToastrService } from 'ngx-toastr';
 
 export type LoginMode = 'Login' | 'Register' | 'Forgot';
 

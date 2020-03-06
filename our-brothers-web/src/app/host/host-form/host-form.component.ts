@@ -2,9 +2,9 @@ import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { MeetingAudience, User } from 'models';
-import { HostInputOption } from '../host-input-options/host-input-options.component';
+import { MEMORIAL_YEAR, MIN_DATE, MAX_DATE } from '../../shared/constants';
 import { UtilsService } from '../../shared/services/utils.service';
-import { MEMORIAL_YEAR, MIN_DATE, MAX_DATE } from '../../shared/services/data.service';
+import { HostInputOption } from '../host-input-options/host-input-options.component';
 
 export interface MeetingForm {
   title: string;

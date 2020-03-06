@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+
+import { User, PayPalOrder } from 'models';
 import { AuthService } from '../../shared/services/auth.service';
 import { AnalyticsService } from '../../shared/services/analytics.service';
 import { PaypalService } from '../../shared/services/paypal.service';
-import { User, PayPalOrder } from 'models';
 import { CreateOrder } from '../paypal-button/paypal-button.component';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-donate-page',

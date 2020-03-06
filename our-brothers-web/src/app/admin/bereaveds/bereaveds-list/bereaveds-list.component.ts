@@ -1,12 +1,7 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
-import { BereavedGuidance, BereavedGuidanceGeneral, User } from 'models';
-import {
-  MEMORIAL_YEAR,
-  UpdateBereavedGuidance,
-  UpdateBereavedStatus,
-  UserMeeting,
-  VolunteeringUser
-} from '../../../shared/services/data.service';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { BereavedGuidance, User } from 'models';
+import { MEMORIAL_YEAR } from '../../../shared/constants';
+import { UpdateBereavedStatus, UserMeeting, VolunteeringUser } from '../../../shared/services/data.service';
 import { SortedColumn } from '../../../shared/components/list/list-header/list-header.types';
 
 @Component({

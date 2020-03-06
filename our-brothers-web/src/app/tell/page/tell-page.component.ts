@@ -2,14 +2,15 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject, combineLatest, Subscription } from 'rxjs';
 import { distinctUntilChanged, tap } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 
 import { Meeting, User, BereavedProfile, Slain, UserRole, BereavedGuidance } from 'models';
+import { MEMORIAL_YEAR } from '../../shared/constants';
 import { AuthService } from '../../shared/services/auth.service';
+import { DataService } from '../../shared/services/data.service';
 import { ParticipationsService } from '../../shared/services/participations.service';
-import { DataService, MEMORIAL_YEAR } from '../../shared/services/data.service';
 import { SlainForm } from '../slain-form/slain-form.component';
 import { BereavedProfileForm } from '../bereaved-profile-form/bereaved-profile-form.component';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-tell-page',

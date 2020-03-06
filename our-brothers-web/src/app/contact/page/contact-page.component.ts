@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { User } from 'models';
+import { ToastrService } from 'ngx-toastr';
+
+import { User, Contact } from 'models';
 import { AuthService } from '../../shared/services/auth.service';
 import { DataService } from '../../shared/services/data.service';
 import { ContactForm } from '../../shared/components/contact-form/contact-form.component';
-import { Contact } from 'models';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-contact-page',

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 import { Meeting, User } from 'models';
-import { DataService, MEMORIAL_YEAR } from '../../shared/services/data.service';
+import { MEMORIAL_YEAR } from '../../shared/constants';
+import { DataService } from '../../shared/services/data.service';
 import { AuthService } from '../../shared/services/auth.service';
-import { ToastrService } from 'ngx-toastr';
 
 const oneWeek = 1000 * 60 * 60 * 24 * 7;
 
