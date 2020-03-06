@@ -66,7 +66,7 @@ export class TellPageComponent implements OnInit, OnDestroy {
           if (!user) {
             this.currentStep$.next(1);
             this.authService.requestToLogin();
-          } else if (!this.participationsService.isBereavedHaveAllDetails(user)) {
+          } else if (!this.participationsService.isBereavedHaveProfileDetails(user)) {
             this.currentStep$.next(2);
           } else if (!this.participationsService.isBereavedHaveSlainDetails(user)) {
             this.currentStep$.next(3);

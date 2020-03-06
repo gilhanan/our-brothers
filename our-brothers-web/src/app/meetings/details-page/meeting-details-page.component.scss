@@ -21,12 +21,12 @@
 
   .col {
     flex: 0 0 auto;
-    margin: 15px;
+    margin: 10px;
     min-width: 350px;
     max-width: 400px;
 
     @media only screen and (max-width: 768px) {
-      margin: 10px;
+      margin: 5px;
     }
   }
 }

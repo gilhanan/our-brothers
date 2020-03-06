@@ -18,6 +18,26 @@
       <div class="col">
         <app-host-meeting-input-text
           class="input"
+          iconUrl="assets/img/host_calendar.svg"
+          label="תאריך:"
+          [text]="meeting?.date | date: 'dd.MM.yyyy'"
+        ></app-host-meeting-input-text>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <app-host-meeting-input-text
+          class="input"
+          iconUrl="assets/img/host_clock.svg"
+          label="שעה:"
+          [text]="meeting?.date | date: 'HH:mm'"
+        ></app-host-meeting-input-text>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <app-host-meeting-input-text
+          class="input"
           iconUrl="assets/img/host_location.svg"
           label="כתובת:"
           [text]="meeting?.address?.formattedAddress"

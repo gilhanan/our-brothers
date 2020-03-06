@@ -116,6 +116,18 @@ export class ParticipationsService {
   }
 
   isBereavedHaveAllDetails(user: User): boolean {
+    if (!user) {
+      return false;
+    }
+
+    return (
+      this.isBereavedHaveProfileDetails(user) &&
+      this.isBereavedHaveSlainDetails(user) &&
+      this.isBereavedAnsweredTrainingMeeting(user)
+    );
+  }
+
+  isBereavedHaveProfileDetails(user: User) {
     if (user?.profile) {
       const { birthDay, address } = user.profile;
       return birthDay && address && this.isParticipateHaveAllDetails(user);
