@@ -10,6 +10,7 @@ import { Address } from 'models';
   styleUrls: ['./places-select.component.scss']
 })
 export class PlacesSelectComponent implements AfterViewInit {
+  @Input() formattedAddress: string;
   @Input() types: string[];
   @Input() placeholder: string;
   @Input() invalid: boolean;

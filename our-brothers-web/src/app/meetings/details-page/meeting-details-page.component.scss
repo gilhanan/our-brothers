@@ -31,65 +31,58 @@
   }
 }
 
-.edit-button {
-  position: relative;
-  padding-right: 55px;
-  padding-left: 20px;
-  background-color: rgb(55, 135, 177);
-  height: 50px;
+.buttons {
   display: flex;
-  align-items: center;
-  width: 170px;
+  justify-content: space-between;
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 55px;
-    height: 50px;
-    background-image: url(../../../assets/img/host_edit_white.svg);
-    background-position: 50% 50%;
-    background-size: 20px 20px;
-    background-repeat: no-repeat;
-  }
-
-  .edit-button-text {
+  .edit-button {
     flex: 0 0 auto;
-    font-size: 18px;
-    color: white;
-    font-family: 'Heebo';
-  }
-}
+    background-color: rgb(55, 135, 177);
+    display: inline-flex;
+    align-items: center;
+    padding-right: 0;
 
-.delete-button {
-  position: relative;
-  padding-right: 65px;
-  padding-left: 20px;
-  background-color: rgb(55, 135, 177);
-  height: 50px;
-  display: flex;
-  align-items: center;
-  width: 170px;
+    &::before {
+      content: '';
+      width: 55px;
+      height: 50px;
+      background-image: url(../../../assets/img/host_edit_white.svg);
+      background-position: 50% 50%;
+      background-size: 20px 20px;
+      background-repeat: no-repeat;
+    }
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 65px;
-    height: 50px;
-    background-image: url(../../../assets/img/host_delete_white.svg);
-    background-position: 50% 50%;
-    background-size: 20px 20px;
-    background-repeat: no-repeat;
+    .edit-button-text {
+      flex: 0 0 auto;
+      font-size: 18px;
+      color: white;
+      font-family: 'Heebo';
+    }
   }
 
-  .delete-button-text {
+  .delete-button {
     flex: 0 0 auto;
-    font-size: 18px;
-    color: white;
-    font-family: 'Heebo';
+    background-color: rgb(55, 135, 177);
+    display: inline-flex;
+    align-items: center;
+    padding-right: 0;
+
+    &::before {
+      content: '';
+      width: 65px;
+      height: 50px;
+      background-image: url(../../../assets/img/host_delete_white.svg);
+      background-position: 50% 50%;
+      background-size: 20px 20px;
+      background-repeat: no-repeat;
+    }
+
+    .delete-button-text {
+      flex: 0 0 auto;
+      font-size: 18px;
+      color: white;
+      font-family: 'Heebo';
+    }
   }
 }
 

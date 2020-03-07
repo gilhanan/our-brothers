@@ -73,7 +73,7 @@
         ></app-host-meeting-input-text>
       </div>
     </div>
-    <div *ngIf="user && (user.id === meeting?.hostId || meeting?.bereaved?.id === user.id)">
+    <div *ngIf="user && (user.id === meeting?.hostId || meeting?.bereaved?.id === user.id || user.isAdmin)">
       <div class="heading host-heading">
         פרטי מארח/ת
       </div>
@@ -106,18 +106,22 @@
         </div>
       </div>
     </div>
-    <!-- <div class="col">
-      <div class="edit-button">
-        <div class="edit-button-text">
-          עריכת פרטים
+    <div class="row" *ngIf="user?.isAdmin && meeting">
+      <div class="col">
+        <div class="buttons">
+          <a class="site-button edit-button" [routerLink]="'/host/' + year + '/' + meeting.hostId + '/' + meeting.id">
+            <span class="edit-button-text">
+              עריכת פרטים
+            </span>
+          </a>
+          <button class="site-button delete-button" (click)="onDelete()">
+            <span class="delete-button-text">
+              מחק מפגש
+            </span>
+          </button>
         </div>
       </div>
-      <div class="delete-button">
-        <div class="delete-button-text">
-          מחק מפגש
-        </div>
-      </div>
-    </div> -->
+    </div>
     <!-- <div class="col">
       <div class="share-container">
         <div class="share-text">
@@ -153,7 +157,7 @@
           ></app-host-meeting-input-text>
         </div>
       </div>
-      <div class="row" *ngIf="meeting?.bereaved && user?.id === meeting.hostId">
+      <div class="row" *ngIf="meeting?.bereaved && (user?.id === meeting.hostId || user.isAdmin)">
         <div class="col">
           <app-host-meeting-input-text
             class="input"

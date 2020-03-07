@@ -81,11 +81,10 @@ export class DataService {
       );
   }
 
-  public createMeeting(user: User, meeting: MeetingForm, year = MEMORIAL_YEAR): Observable<Meeting> {
-    const parsedMeeting: Meeting = {
-      ...meeting,
-      hostId: null,
-      id: null,
+  public createMeeting(user: User, meetingForm: MeetingForm, year = MEMORIAL_YEAR): Observable<Meeting> {
+    const parsedMeeting: Partial<Meeting> = {
+      ...meetingForm,
+      date: Date.parse(`${meetingForm.date}T${meetingForm.hour}Z`),
       count: 0,
       contact: {
         firstName: user.profile.firstName,
@@ -95,21 +94,78 @@ export class DataService {
       }
     };
 
-    const telemetry = { parsedMeeting, userId: user.id };
+    const telemetry = { meeting: parsedMeeting, hostId: user.id, year };
 
     this.analyticsService.logEvent('CreateMeeting', telemetry);
 
-    return from(this.angularFireDatabase.list<Meeting>(`events/${year}/${user.id}`).push(parsedMeeting)).pipe(
+    return from(this.angularFireDatabase.list<Partial<Meeting>>(`events/${year}/${user.id}`).push(parsedMeeting)).pipe(
       tap(() => {
         this.analyticsService.logEvent('CreateMeetingSuccess', telemetry);
       }),
-      map(meetingSnapshot => ({
-        ...parsedMeeting,
-        hostId: user.id,
-        id: meetingSnapshot.key
-      })),
+      map(
+        meetingSnapshot =>
+          ({
+            ...parsedMeeting,
+            hostId: user.id,
+            id: meetingSnapshot.key
+          } as Meeting)
+      ),
       catchError(error => {
         this.analyticsService.logEvent('CreateMeetingFailed', {
+          ...telemetry,
+          error
+        });
+        console.error(error);
+        return throwError(error);
+      })
+    );
+  }
+
+  public updateMeeting(
+    hostId: string,
+    meetingId: string,
+    meetingForm: MeetingForm,
+    year = MEMORIAL_YEAR
+  ): Observable<boolean> {
+    const parsedMeeting: Partial<Meeting> = {
+      ...meetingForm,
+      date: Date.parse(`${meetingForm.date}T${meetingForm.hour}Z`)
+    };
+
+    const telemetry = { meeting: parsedMeeting, hostId, meetingId, year };
+
+    this.analyticsService.logEvent('UpdateMeeting', telemetry);
+
+    return from(
+      this.angularFireDatabase.object<Meeting>(`events/${year}/${hostId}/${meetingId}`).update(parsedMeeting)
+    ).pipe(
+      tap(() => {
+        this.analyticsService.logEvent('UpdateMeetingSuccess', telemetry);
+      }),
+      map(() => true),
+      catchError(error => {
+        this.analyticsService.logEvent('UpdateMeetingFailed', {
+          ...telemetry,
+          error
+        });
+        console.error(error);
+        return throwError(error);
+      })
+    );
+  }
+
+  public deleteMeeting(hostId: string, meetingId: string, year = MEMORIAL_YEAR): Observable<boolean> {
+    const telemetry = { hostId, meetingId, year };
+
+    this.analyticsService.logEvent('DeleteMeeting', telemetry);
+
+    return from(this.angularFireDatabase.object(`events/${year}/${hostId}/${meetingId}`).remove()).pipe(
+      tap(() => {
+        this.analyticsService.logEvent('DeleteMeetingSuccess', telemetry);
+      }),
+      map(() => true),
+      catchError(error => {
+        this.analyticsService.logEvent('DeleteMeetingFailed', {
           ...telemetry,
           error
         });

@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
-import { PlaceMapComponent } from './place-map.component';
+import { CommonModule } from '@angular/common';
 import { AgmCoreModule } from '@agm/core';
+
+import { PlaceMapComponent } from './place-map.component';
 
 @NgModule({
   declarations: [PlaceMapComponent],
-  imports: [AgmCoreModule],
+  imports: [CommonModule, AgmCoreModule],
   exports: [PlaceMapComponent]
 })
 export class PlaceMapModule {}

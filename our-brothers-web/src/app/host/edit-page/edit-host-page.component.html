@@ -1,0 +1,4 @@
+<img class="image-header" src="../../../assets/img/meetingsHeader.jpg" />
+<div class="site-divider"></div>
+<h1 class="small-heading" data-aos="fade-up" data-aos-duration="1000">עריכת מפגש</h1>
+<app-host-form *ngIf="meeting" [meeting]="meeting" (submitMeetingDetailsPage)="onUpdateMeeting($event)"></app-host-form>

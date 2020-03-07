@@ -29,6 +29,7 @@
     <div class="form-items-container">
       <app-places-select
         class="input places-select"
+        [formattedAddress]="address.value?.formattedAddress"
         [types]="['address']"
         [placeholder]="'כתובת'"
         (change)="address.patchValue($event)"

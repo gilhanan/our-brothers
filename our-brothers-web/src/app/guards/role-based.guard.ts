@@ -29,7 +29,7 @@ export class RoleBasedGuard implements CanActivate {
     return this.authService.user.pipe(
       take(1),
       map(user => {
-        return validate(user) ? true : this.router.parseUrl('home');
+        return user.isAdmin || validate(user) ? true : this.router.parseUrl('home');
       })
     );
   }

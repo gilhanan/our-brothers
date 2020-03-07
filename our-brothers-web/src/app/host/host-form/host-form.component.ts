@@ -1,14 +1,15 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { MeetingAudience, User } from 'models';
+import { MeetingAudience, User, Meeting } from 'models';
 import { MEMORIAL_YEAR, MIN_DATE, MAX_DATE } from '../../shared/constants';
 import { UtilsService } from '../../shared/services/utils.service';
 import { HostInputOption } from '../host-input-options/host-input-options.component';
 
 export interface MeetingForm {
   title: string;
-  date: number;
+  date: string;
+  hour: string;
   address: {
     formattedAddress: string;
     latitude: number;
@@ -30,6 +31,7 @@ export interface MeetingForm {
 })
 export class HostFormComponent implements OnInit {
   @Input() user: User;
+  @Input() meeting: Meeting;
 
   @Output() public submitMeetingDetailsPage = new EventEmitter<MeetingForm>();
 
@@ -71,25 +73,50 @@ export class HostFormComponent implements OnInit {
     ];
 
     this.form = this.fb.group({
-      title: ['משפחת ' + this.user.profile.lastName, Validators.required],
-      date: [
-        new Date(Date.UTC(MEMORIAL_YEAR, 3, 26)).toISOString().split('T')[0],
-        [Validators.required, this.utilsService.validateMeetingDate]
-      ],
-      hour: ['20:00', Validators.required],
+      title: [null, Validators.required],
+      date: [null, [Validators.required, this.utilsService.validateMeetingDate]],
+      hour: [null, Validators.required],
       address: this.fb.group({
-        formattedAddress: ['', Validators.required],
-        latitude: [],
-        longitude: [],
-        notes: ['', [Validators.maxLength(200)]]
+        formattedAddress: [null, Validators.required],
+        latitude: [null, Validators.required],
+        longitude: [null, Validators.required],
+        notes: [null, [Validators.maxLength(200)]]
       }),
-      capacity: [30, [Validators.required, Validators.min(2), Validators.max(300)]],
+      capacity: [null, [Validators.required, Validators.min(2), Validators.max(300)]],
       invited: [null, Validators.required],
       accessibility: [null, Validators.required],
       media: [null, Validators.required],
       reviewable: [null, Validators.required],
       audience: [null, Validators.required]
     });
+
+    if (this.meeting) {
+      const localDate = new Date(this.meeting.date);
+
+      const date = new Date(
+        Date.UTC(
+          localDate.getUTCFullYear(),
+          localDate.getUTCMonth(),
+          localDate.getUTCDate(),
+          localDate.getUTCHours(),
+          localDate.getUTCMinutes(),
+          localDate.getUTCSeconds()
+        )
+      );
+
+      this.form.reset({
+        ...this.meeting,
+        date: date.toISOString().split('T')[0],
+        hour: date.toTimeString().substring(0, 5)
+      } as MeetingForm);
+    } else {
+      this.form.reset({
+        title: 'משפחת ' + this.user.profile.lastName,
+        date: new Date(Date.UTC(MEMORIAL_YEAR, 3, 26)).toISOString().split('T')[0],
+        hour: '20:00',
+        capacity: 30
+      });
+    }
 
     this.form.valueChanges.subscribe(() => {
       this.formInvalid = false;
@@ -154,17 +181,7 @@ export class HostFormComponent implements OnInit {
 
   public onSubmit() {
     if (this.form.valid) {
-      const parsedMeeting: MeetingForm = this.form.value;
-
-      parsedMeeting.date = new Date(this.date.value).getTime();
-      let hour: string;
-      let minutes: string;
-      [hour, minutes] = this.hour.value.split(':');
-      parsedMeeting.date += +hour * 60 * 60 * 1000;
-      parsedMeeting.date += (+minutes + new Date().getTimezoneOffset()) * 60 * 1000;
-
-      delete (parsedMeeting as any).hour;
-      this.submitMeetingDetailsPage.emit(parsedMeeting);
+      this.submitMeetingDetailsPage.emit(this.form.value);
     } else {
       this.formInvalid = true;
       this.form.markAllAsTouched();
