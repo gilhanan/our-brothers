@@ -57,7 +57,7 @@
           {{ meeting.title }}
         </div>
       </div>
-      <app-join-button [user]="user" (joinMeeting)="joinBereved.emit()"></app-join-button>
+      <app-join-button [adminMode]="true" [user]="user" (joinMeeting)="joinBereved.emit()"></app-join-button>
     </div>
   </div>
   <div class="expanded-row" *ngIf="expanded">

@@ -11,6 +11,7 @@ import { ParticipationsService } from '../../services/participations.service';
 export class JoinButtonComponent {
   @Input() user: User;
   @Input() meeting: Meeting;
+  @Input() adminMode = false; // TODO: Another solution
 
   @Output() joinMeeting = new EventEmitter<void>();
 

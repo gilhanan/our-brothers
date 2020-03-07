@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
@@ -10,6 +10,7 @@ import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-meeting-details-page',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './meeting-details-page.component.html',
   styleUrls: ['./meeting-details-page.component.scss']
 })

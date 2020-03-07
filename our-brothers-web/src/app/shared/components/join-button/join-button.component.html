@@ -1,8 +1,8 @@
 <button
   class="join-button"
-  [ngClass]="{ joined: participationsService.isUserParticipatingMeeting(user, meeting) }"
+  [ngClass]="{ joined: !adminMode && participationsService.isUserParticipatingMeeting(user, meeting) }"
   (click)="joinMeeting.emit()"
-  [disabled]="!participationsService.isUserCanParticipatingMeeting(user, meeting)"
+  [disabled]="!adminMode && !participationsService.isUserCanParticipatingMeeting(user, meeting)"
 >
-  {{ participationsService.isUserParticipatingMeeting(user, meeting) ? 'משובץ' : 'שיבוץ' }}
+  {{ !adminMode && participationsService.isUserParticipatingMeeting(user, meeting) ? 'משובץ' : 'שיבוץ' }}
 </button>
