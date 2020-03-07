@@ -1,4 +1,85 @@
-<img class="image-header" src="../../../assets/img/aboutHeader.jpg" />
+<img class="image-header" src="../../../assets/img/agenda-header.jpg" />
 <div class="site-divider"></div>
-<h1 class="small-heading" data-aos="fade-up" data-aos-duration="1000">העמוד בבנייה</h1>
-<h2 class="medium-heading" data-aos="fade-up" data-aos-duration="1000">יעלה בקרוב</h2>
+<h1 class="small-heading" data-aos="fade-up" data-aos-duration="1000">
+  מבנה הערב
+</h1>
+<h2 class="medium-heading" data-aos="fade-up" data-aos-duration="1000">
+  הכלים לקיים ערב בלתי נשכח
+</h2>
+<section class="kits-container">
+  <img class="kit-icon" src="../../../assets/img/document.svg" />
+  <img class="kit-icon" src="../../../assets/img/open-letter.svg" />
+  <img class="kit-icon" src="../../../assets/img/house.svg" />
+  <img class="kit-icon" src="../../../assets/img/heart.svg" />
+  <div class="kit-heading">תעודת הוקרה</div>
+  <div class="kit-heading">הזמנה</div>
+  <div class="kit-heading">ערכת אירוח</div>
+  <div class="kit-heading">ערכת אח</div>
+  <div class="site-text kit-description">
+    בסוף הערב, יש הנוהגים להעניק לאח/ות המספרים תעודת הוקרה על השיתוף בסיפור ופתיחת הלב
+  </div>
+  <div class="site-text kit-description">
+    סוגים שונים של הזמנות לשיתוף והזמנת קהל השומעים למפגשי ׳האחים שלנו׳
+  </div>
+  <div class="site-text kit-description">
+    ערכה זו מותאמת במיוחד עבור הצרכים שלך. היא כוללת בתוכה טיפים, רעיונות, תיאום ציפיות וכלים טכניים לקראת הערב ואחריו
+  </div>
+  <div class="site-text kit-description">
+    ערכה זו תסייע לך בבניית הערב. היא כוללת בתוכה טיפים, רעיונות ומידע היעזרו לך לספר את הסיפור שלך בצורה הטובה ביותר
+  </div>
+  <button class="site-button download-button">להורדה&nbsp;<i class="fas fa-angle-double-left"></i></button>
+  <button class="site-button download-button">להורדה&nbsp;<i class="fas fa-angle-double-left"></i></button>
+  <button class="site-button download-button">להורדה&nbsp;<i class="fas fa-angle-double-left"></i></button>
+  <button class="site-button download-button">להורדה&nbsp;<i class="fas fa-angle-double-left"></i></button>
+</section>
+<section class="videos-container">
+  <div class="site-divider divider"></div>
+  <div class="small-heading videos-header">סרטונים</div>
+  <div class="vidseos">
+    <iframe
+      width="336"
+      height="189"
+      src="https://www.youtube.com/embed/eWZ1xA8cWKY"
+      frameborder="0"
+      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
+    <iframe
+      width="336"
+      height="189"
+      src="https://www.youtube.com/embed/JNpnqiGBrZk"
+      frameborder="0"
+      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
+    <iframe
+      width="336"
+      height="189"
+      src="https://www.youtube.com/embed/wJ-8oqZWUMw"
+      frameborder="0"
+      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
+  </div>
+</section>
+<section class="quotes-container">
+  <div class="site-divider"></div>
+  <h2 class="medium-heading" data-aos="fade-up" data-aos-duration="1000">
+    אחים כותבים על אחיהם
+  </h2>
+  <div class="quote-carousel">
+    <!-- <ng-container *ngFor="let page of pagedExcerpts"> -->
+    <div class="quotes">
+      <ng-container *ngFor="let quote of pagedExcerpts[0].page">
+        <div class="quote">
+          <img class="apostrophy" src="../../../assets/img/apostrophy.png" />
+          <div class="site-text quote-text">{{ quote.excerpt }}</div>
+          <div class="quote-divider"></div>
+          <a class="site-text person-link">{{ quote.writerName }}</a>
+          <a class="site-text person-link" target="_blank" [href]="quote.recipientId">{{ quote.recipientName }}</a>
+        </div>
+      </ng-container>
+    </div>
+    <!-- </ng-container> -->
+  </div>
+</section>
