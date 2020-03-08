@@ -10,7 +10,6 @@ import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-meeting-details-page',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './meeting-details-page.component.html',
   styleUrls: ['./meeting-details-page.component.scss']
 })
