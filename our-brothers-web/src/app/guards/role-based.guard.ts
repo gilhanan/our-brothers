@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { take, map } from 'rxjs/operators';
+
 import { AuthService } from '../shared/services/auth.service';
 import { ParticipationsService } from '../shared/services/participations.service';
 
@@ -29,7 +30,7 @@ export class RoleBasedGuard implements CanActivate {
     return this.authService.user.pipe(
       take(1),
       map(user => {
-        return user.isAdmin || validate(user) ? true : this.router.parseUrl('home');
+        return validate(user) ? true : this.router.parseUrl('home');
       })
     );
   }

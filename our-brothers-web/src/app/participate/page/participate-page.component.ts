@@ -55,7 +55,7 @@ export class ParticipatePageComponent implements OnInit, OnDestroy {
         // Auto navigations after the first step
         if (currentStep > 0) {
           if (user) {
-            if (user.role && user.role === UserRole.bereaved) {
+            if (user.role && user.role === UserRole.bereaved && !user.isAdmin) {
               this.router.navigate(['/home']);
             } else if (user.role !== UserRole.participate) {
               this.dataService.setUserRole(user, UserRole.participate);
