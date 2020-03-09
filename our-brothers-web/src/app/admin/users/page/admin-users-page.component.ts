@@ -1,10 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 import { User, Meeting } from 'models';
 import { UtilsService } from '../../../shared/services/utils.service';
 import { DataService, VolunteeringUser } from '../../../shared/services/data.service';
-import { AuthService } from 'src/app/shared/services/auth.service';
+import { AuthService } from '../../../shared/services/auth.service';
+import { HttpService } from '../../../shared/services/http.service';
 
 @Component({
   selector: 'app-admin-users-page',
@@ -24,7 +26,13 @@ export class AdminUsersPageComponent implements OnInit, OnDestroy {
 
   private subscriptions: Subscription[] = [];
 
-  constructor(private authService: AuthService, private dataService: DataService, private utilsService: UtilsService) {}
+  constructor(
+    private toastr: ToastrService,
+    private authService: AuthService,
+    private dataService: DataService,
+    private httpService: HttpService,
+    private utilsService: UtilsService
+  ) {}
 
   ngOnInit(): void {
     this.subscriptions.push(
@@ -62,6 +70,21 @@ export class AdminUsersPageComponent implements OnInit, OnDestroy {
         )
       ) {
         this.dataService.setUserVolunteer(user, isVolunteer);
+      }
+    }
+  }
+
+  deleting(user: User) {
+    if (user) {
+      if (window.confirm('האם ברצונך למחוק את ' + user.profile.firstName + ' ' + user.profile.lastName + '?')) {
+        this.httpService.deleteUser(user).subscribe(
+          () => {
+            this.toastr.success('המשתמש נמחק בהצלחה.');
+          },
+          () => {
+            this.toastr.error('שגיאה - לא ניתן למחוק משתמש. נא ליצור קשר.');
+          }
+        );
       }
     }
   }

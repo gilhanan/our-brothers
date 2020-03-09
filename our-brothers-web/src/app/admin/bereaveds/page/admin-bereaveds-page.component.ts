@@ -14,6 +14,7 @@ import {
   UpdateBereavedGuidance
 } from '../../../shared/services/data.service';
 import { UtilsService } from '../../../shared/services/utils.service';
+import { HttpService } from '../../../shared/services/http.service';
 
 @Component({
   selector: 'app-admin-bereaveds-page',
@@ -39,6 +40,7 @@ export class AdminBereavedsPageComponent implements OnInit, OnDestroy {
     private toastr: ToastrService,
     private authService: AuthService,
     private dataService: DataService,
+    private httpService: HttpService,
     private utilsService: UtilsService
   ) {}
 
@@ -121,7 +123,29 @@ export class AdminBereavedsPageComponent implements OnInit, OnDestroy {
             ' כמתנדב/ת?'
         )
       ) {
-        this.dataService.setUserVolunteer(user, isVolunteer);
+        this.dataService.setUserVolunteer(user, isVolunteer).subscribe(
+          () => {
+            this.toastr.success('המשתמש הוגדר כמתנדב בהצלחה.');
+          },
+          () => {
+            this.toastr.error('שגיאה - לא ניתן להגדיר משתמש כמתנדב. נא ליצור קשר.');
+          }
+        );
+      }
+    }
+  }
+
+  deleting(user: User) {
+    if (user) {
+      if (window.confirm('האם ברצונך למחוק את ' + user.profile.firstName + ' ' + user.profile.lastName + '?')) {
+        this.httpService.deleteUser(user).subscribe(
+          () => {
+            this.toastr.success('המשתמש נמחק בהצלחה.');
+          },
+          () => {
+            this.toastr.error('שגיאה - לא ניתן למחוק משתמש. נא ליצור קשר.');
+          }
+        );
       }
     }
   }

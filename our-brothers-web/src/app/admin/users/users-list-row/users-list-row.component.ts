@@ -11,6 +11,7 @@ export class UsersListRowComponent {
   @Input() currentUser: User;
   @Input() user: User;
 
+  @Output() deleting = new EventEmitter<void>();
   @Output() volunteering = new EventEmitter<boolean>();
 
   expanded = false;

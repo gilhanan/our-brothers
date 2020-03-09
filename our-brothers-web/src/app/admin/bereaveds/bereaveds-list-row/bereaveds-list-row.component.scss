@@ -60,6 +60,22 @@ $textColor: rgb(129, 129, 129);
             }
           }
         }
+
+        .trash-button {
+          margin-bottom: 5px;
+          background-color: transparent;
+          border: none;
+          cursor: pointer;
+
+          .trash-icon {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            background-image: url(../../../../assets/img/trash.svg);
+            background-size: 100%;
+            background-repeat: no-repeat;
+          }
+        }
       }
 
       &.col-name {

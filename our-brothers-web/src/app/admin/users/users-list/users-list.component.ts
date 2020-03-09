@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter } from '@angular/core';
+
 import { User } from 'models';
 import { SortedColumn } from '../../../shared/components/list/list-header/list-header.types';
 import { VolunteeringUser } from '../../../shared/services/data.service';
@@ -15,6 +16,7 @@ export class UsersListComponent {
   @Input() filteredUsers: Set<string>;
 
   @Output() volunteering = new EventEmitter<VolunteeringUser>();
+  @Output() deleting = new EventEmitter<User>();
 
   sortedColumn: SortedColumn = {
     column: 'name',

@@ -363,19 +363,22 @@ export class DataService {
   public getUsers(): Observable<User[]> {
     this.analyticsService.logEvent('GetUsers');
     return this.angularFireDatabase
-      .list<User>(`users`)
+      .list<User>(`users`, ref =>
+        ref
+          .orderByChild('profile')
+          .startAt('!')
+          .endAt('~')
+      )
       .snapshotChanges()
       .pipe(
         debounce(() => interval(1000)),
         tap(() => this.analyticsService.logEvent('GetUsersSuccess')),
         map(
           usersSnapshot =>
-            usersSnapshot
-              .map(usersSnapshot => ({
-                id: usersSnapshot.key,
-                ...usersSnapshot.payload.val()
-              }))
-              .filter(user => !!user.profile)
+            usersSnapshot.map(usersSnapshot => ({
+              id: usersSnapshot.key,
+              ...usersSnapshot.payload.val()
+            }))
           // .slice(0, 20)
         ),
         catchError(error => {

@@ -16,6 +16,7 @@
       [currentUser]="currentUser"
       (joinBereved)="joinBereved.emit(bereaved)"
       (leaveBereaved)="leaveBereaved.emit({ user: bereaved, meeting: $event })"
+      (deleting)="deleting.emit(bereaved)"
       (volunteering)="volunteering.emit({ user: bereaved, isVolunteer: $event })"
       (bereavedStatus)="bereavedStatus.emit({ bereaved: bereaved, status: $event })"
       (bereavedGuidance)="bereavedGuidance.emit({ bereaved: bereaved, guidance: $event })"

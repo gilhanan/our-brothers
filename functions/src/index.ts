@@ -45,6 +45,36 @@ interface ParsedSms {
 
 // ========================= API =========================
 
+// ============ Middlewares ============
+
+const validateFirebaseIdToken = async (req: express.Request, res: express.Response, next: Function) => {
+
+  if ((!req.headers.authorization || !req.headers.authorization.startsWith('Bearer '))) {
+    console.warn('Unauthorized request.');
+    return res.status(403).send();
+  }
+
+  let idToken;
+  if (req.headers.authorization && req.headers.authorization.startsWith('Bearer ')) {
+    idToken = req.headers.authorization.split('Bearer ')[1];
+  } else {
+    console.warn('Unauthorized request.');
+    return res.status(403).send();
+  }
+
+  try {
+    const decodedIdToken = await admin.auth().verifyIdToken(idToken);
+    console.log('ID Token correctly decoded', decodedIdToken);
+    req.user = decodedIdToken as any;
+    return next();
+  } catch (error) {
+    console.error('Error while verifying Firebase ID token:', error);
+    return res.status(403).send();
+  }
+};
+
+// ============ Controllers ============
+
 app.post(
   '/order/capture',
   async (req: express.Request, res: express.Response) => {
@@ -167,27 +197,46 @@ app.post('/sms/reply', async (req: express.Request, res: express.Response) => {
   return res.status(200).send('Susccessfully stored SMS');
 });
 
+app.delete('/user/:userId', validateFirebaseIdToken, async (req: express.Request, res: express.Response) => {
+
+  const { userId } = req.params;
+
+  if (!req.user?.admin) {
+    console.warn(`Unauthorized deleting request user id {${userId}} for admin id {${req.user?.user_id}}.`);
+    return res.status(403).send();
+  }
+
+  console.log(`Deleting user id {${userId}} for admin id {${req.user?.user_id}}.`);
+
+  try {
+
+    await admin.auth().deleteUser(userId);
+
+    console.log(`Susccessfully deleted user id {${userId}} for admin id {${req.user?.user_id}}.`);
+
+  } catch (error) {
+
+    if (error && error.code === 'auth/user-not-found') {
+      console.warn(`User id {${userId}} were not found.`, error);
+    } else {
+      console.error(`Failed to delete user id {${userId}} for admin id {${req.user?.user_id}}.`, error);
+      return res.status(500).send();
+    }
+  }
+
+  await removeUserFromDatabase(userId);
+
+  return res.status(200).send();
+})
+
 export const api = functions.region('europe-west1').https.onRequest(app);
 
 // ========================= Auth =========================
 
-export const removeUserFromDatabase = functions.auth
+export const onUserDeleted = functions.auth
   .user()
   .onDelete((event, context) => {
-    console.log(`Deleting user {${event.uid}} from database.`);
-    return admin
-      .database()
-      .ref(`/users/${event.uid}`)
-      .remove()
-      .then(() => {
-        console.log(`Succesfully deleted user {${event.uid}} from database.`);
-      })
-      .catch(error => {
-        console.error(
-          `Failed to delete user {${event.uid}} from database.`,
-          error
-        );
-      });
+    return removeUserFromDatabase(event.uid);
   });
 
 export const addUserToDatabase = functions.auth
@@ -663,7 +712,13 @@ export const updateUserVolunteer = functions.database
 
     return admin
       .auth()
-      .setCustomUserClaims(userId, { volunteer })
+      .getUser(userId)
+      .then((user) => admin
+        .auth()
+        .setCustomUserClaims(userId, {
+          ...(user.customClaims || {}),
+          volunteer
+        }))
       .then(() => {
         console.log(
           `Succesfully set user {${userId}} volunteering value {${volunteer}} to claims.`
@@ -807,4 +862,22 @@ function calcParticipatesCount(participates: {
       (acc, participation) => acc + 1 + (participation.accompanies || 0),
       0
     );
+}
+
+async function removeUserFromDatabase(userId: string) {
+  console.log(`Deleting user {${userId}} from database.`);
+
+  try {
+    await admin
+      .database()
+      .ref(`/users/${userId}`)
+      .remove()
+
+    console.log(`Succesfully deleted user {${userId}} from database.`);
+  } catch (error) {
+    console.error(
+      `Failed to delete user {${userId}} from database.`,
+      error
+    );
+  }
 }

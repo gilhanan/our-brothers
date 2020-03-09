@@ -18,6 +18,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthService } from './shared/services/auth.service';
 import { DataService } from './shared/services/data.service';
+import { HttpService } from './shared/services/http.service';
 import { HomePageComponent } from './home/home-page.component';
 import { ContactFormModule } from './shared/components/contact-form/contact-form.module';
 import { DropDownMenuModule } from './shared/components/drop-down-menu/drop-down-menu.module';
@@ -53,7 +54,7 @@ registerLocaleData(localeHe);
     }),
     AgmJsMarkerClustererModule
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'he-IL' }, AuthService, DataService],
+  providers: [{ provide: LOCALE_ID, useValue: 'he-IL' }, AuthService, DataService, HttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

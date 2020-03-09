@@ -14,6 +14,7 @@ export class BereavedsListRowComponent {
   @Input() bereaved: User;
   @Output() joinBereved = new EventEmitter<void>();
   @Output() leaveBereaved = new EventEmitter<Meeting>();
+  @Output() deleting = new EventEmitter<void>();
   @Output() volunteering = new EventEmitter<boolean>();
   @Output() bereavedStatus = new EventEmitter<BereavedStatus>();
   @Output() bereavedGuidance = new EventEmitter<BereavedGuidance>();

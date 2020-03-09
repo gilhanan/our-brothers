@@ -4,6 +4,9 @@
       <button class="volunteering-button" *ngIf="currentUser?.isAdmin" (click)="volunteering.emit(!user.isVolunteer)">
         <div class="key-icon" [ngClass]="{ disabled: !user.isVolunteer }"></div>
       </button>
+      <button class="trash-button" *ngIf="currentUser?.isAdmin" (click)="deleting.emit()">
+        <div class="trash-icon"></div>
+      </button>
       <button class="expand-button" *ngIf="!expanded" (click)="expanded = true">
         <div class="expand-icon"></div>
       </button>

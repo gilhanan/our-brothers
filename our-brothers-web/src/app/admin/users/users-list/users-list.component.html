@@ -11,6 +11,7 @@
       [class.hidden]="!filteredUsers.has(user.id)"
       [currentUser]="currentUser"
       [user]="user"
+      (deleting)="deleting.emit(user)"
       (volunteering)="volunteering.emit({ user: user, isVolunteer: $event })"
     ></app-users-list-row>
   </div>
