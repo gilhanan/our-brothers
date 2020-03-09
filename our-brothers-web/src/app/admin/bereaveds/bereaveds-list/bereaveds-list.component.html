@@ -13,7 +13,7 @@
     <app-bereaveds-list-row
       [class.hidden]="!filteredBereaveds.has(bereaved.id)"
       [bereaved]="bereaved"
-      [user]="user"
+      [currentUser]="currentUser"
       (joinBereved)="joinBereved.emit(bereaved)"
       (leaveBereaved)="leaveBereaved.emit({ user: bereaved, meeting: $event })"
       (volunteering)="volunteering.emit({ user: bereaved, isVolunteer: $event })"

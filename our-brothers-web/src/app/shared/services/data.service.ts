@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { Observable, throwError, from, combineLatest } from 'rxjs';
-import { map, catchError, tap, switchMap } from 'rxjs/operators';
+import { Observable, throwError, from, combineLatest, interval } from 'rxjs';
+import { map, catchError, tap, switchMap, debounce } from 'rxjs/operators';
 
 import { MEMORIAL_YEAR } from '../constants';
 import {
@@ -354,6 +354,32 @@ export class DataService {
         ),
         catchError(error => {
           this.analyticsService.logEvent('GetBereavedsFailed');
+          console.error(error);
+          return throwError(error);
+        })
+      );
+  }
+
+  public getUsers(): Observable<User[]> {
+    this.analyticsService.logEvent('GetUsers');
+    return this.angularFireDatabase
+      .list<User>(`users`)
+      .snapshotChanges()
+      .pipe(
+        debounce(() => interval(1000)),
+        tap(() => this.analyticsService.logEvent('GetUsersSuccess')),
+        map(
+          usersSnapshot =>
+            usersSnapshot
+              .map(usersSnapshot => ({
+                id: usersSnapshot.key,
+                ...usersSnapshot.payload.val()
+              }))
+              .filter(user => !!user.profile)
+          // .slice(0, 20)
+        ),
+        catchError(error => {
+          this.analyticsService.logEvent('GetUsersFailed');
           console.error(error);
           return throwError(error);
         })

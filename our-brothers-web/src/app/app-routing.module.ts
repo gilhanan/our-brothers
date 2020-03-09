@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomePageComponent } from './home/home-page.component';
-import { HostPageModule } from './host/page/host-page.module';
 import { RoleBasedGuard } from './guards/role-based.guard';
 
 const routes: Routes = [
@@ -86,11 +85,16 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'admin',
+    path: 'admin-bereaveds',
     loadChildren: () =>
       import('./admin/bereaveds/page/admin-bereaveds-page.module').then(
         ({ AdminBereavedsPageModule }) => AdminBereavedsPageModule
       )
+  },
+  {
+    path: 'admin-users',
+    loadChildren: () =>
+      import('./admin/users/page/admin-users-page.module').then(({ AdminUsersPageModule }) => AdminUsersPageModule)
   },
   {
     path: '',

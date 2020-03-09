@@ -1,0 +1,23 @@
+:host {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  .hidden {
+    display: none;
+  }
+
+  .list-header {
+    .col-row-state {
+      flex: 0 1 30px;
+    }
+  }
+
+  .users-items {
+    height: 100%;
+    direction: ltr;
+    overflow: auto;
+  }
+}

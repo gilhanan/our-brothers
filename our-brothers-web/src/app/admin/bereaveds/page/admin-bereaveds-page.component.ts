@@ -21,7 +21,7 @@ import { UtilsService } from '../../../shared/services/utils.service';
   styleUrls: ['./admin-bereaveds-page.component.scss']
 })
 export class AdminBereavedsPageComponent implements OnInit, OnDestroy {
-  user: User;
+  currentUser: User;
   bereaveds: User[];
   noBerevedMeetings: Meeting[];
   filter: string = '';
@@ -44,8 +44,8 @@ export class AdminBereavedsPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscriptions.push(
-      this.authService.user.subscribe(user => {
-        this.user = user;
+      this.authService.user.subscribe(currentUser => {
+        this.currentUser = currentUser;
       }),
       this.dataService.getBereaveds().subscribe(
         bereaveds => {

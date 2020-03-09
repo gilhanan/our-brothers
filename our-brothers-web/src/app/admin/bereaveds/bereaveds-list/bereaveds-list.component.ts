@@ -11,7 +11,7 @@ import { SortedColumn } from '../../../shared/components/list/list-header/list-h
   styleUrls: ['./bereaveds-list.component.scss']
 })
 export class BereavedsListComponent {
-  @Input() user: User;
+  @Input() currentUser: User;
   @Input() bereaveds: User[];
   @Input() filteredBereaveds: Set<string>;
   @Output() joinBereved = new EventEmitter<User>();

@@ -1,0 +1,63 @@
+<div class="row-container">
+  <div class="row">
+    <div class="col col-row-state">
+      <button class="volunteering-button" *ngIf="currentUser?.isAdmin" (click)="volunteering.emit(!user.isVolunteer)">
+        <div class="key-icon" [ngClass]="{ disabled: !user.isVolunteer }"></div>
+      </button>
+      <button class="expand-button" *ngIf="!expanded" (click)="expanded = true">
+        <div class="expand-icon"></div>
+      </button>
+      <button class="collapse-button" *ngIf="expanded" (click)="expanded = false">
+        <div class="collapse-icon"></div>
+      </button>
+    </div>
+    <div class="col col-name">
+      {{ user.profile?.firstName }}
+    </div>
+    <div class="col col-name">
+      {{ user.profile?.lastName }}
+    </div>
+    <div class="col col-communications">
+      <div class="user-email" *ngIf="user.profile?.email">
+        <div class="email-address">
+          {{ user.profile?.email }}
+        </div>
+        <div class="email-icon"></div>
+      </div>
+    </div>
+    <div class="col col-communications">
+      <div class="user-phone" *ngIf="user.profile?.phoneNumber">
+        <div class="phone-number">
+          {{ user.profile.phoneNumber | phone }}
+        </div>
+        <div class="phone-icon"></div>
+      </div>
+    </div>
+  </div>
+  <div class="expanded-row" *ngIf="expanded">
+    <div class="expanded-col col-info">
+      <div class="title">
+        מספר סידורי:
+      </div>
+      <div>
+        {{ user.id }}
+      </div>
+      <div class="title">
+        גיל:
+      </div>
+      <div>
+        {{ user.profile?.birthDay ? (user.profile.birthDay | seniority) : 'אין' }}
+      </div>
+    </div>
+    <div class="expanded-col col-dates">
+      <div>
+        <div class="title">כניסה:</div>
+        <div>{{ user.lastSignInDate | date: 'dd.MM.yyyy' }}</div>
+      </div>
+      <div>
+        <div class="title">הרשמה:</div>
+        <div>{{ user.registered | date: 'dd.MM.yyyy' }}</div>
+      </div>
+    </div>
+  </div>
+</div>

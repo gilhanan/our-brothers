@@ -82,11 +82,13 @@ export class UtilsService {
         if (bereaved.id.includes(keyword)) {
           return true;
         } else if (bereaved.profile) {
-          const { firstName = '', lastName = '', email, phoneNumber } = bereaved.profile;
+          const { firstName = '', lastName = '', address, email, phoneNumber } = bereaved.profile;
           const fullName = firstName + lastName;
           if (fullName.includes(keyword)) {
             return true;
           } else if (email?.includes(keyword)) {
+            return true;
+          } else if (address?.formattedAddress?.includes(keyword)) {
             return true;
           }
           const parsedNumber = phoneNumber?.replace(`^\+${this.ISRAEL_PHONE_PREFIX}`, '0');
@@ -99,6 +101,40 @@ export class UtilsService {
           if (slain) {
             return true;
           } else if (bereaved.bereavedParticipation?.[year]?.meetings?.some(({ title }) => title.includes(keyword))) {
+            return true;
+          }
+        }
+        return false;
+      });
+    });
+  }
+
+  // TODO: Reuse with filteringBereaveds
+  filteringUsers(users: User[], query: string, year = MEMORIAL_YEAR): User[] {
+    if (!users) {
+      return [];
+    }
+
+    if (!query || !query.trim()) {
+      return users;
+    }
+
+    query = query.replace(/-/g, '');
+    const keywords = query.match(/([^\s]+)/g) || [];
+    return users.filter(bereaved => {
+      return keywords.every(keyword => {
+        if (bereaved.id.includes(keyword)) {
+          return true;
+        } else if (bereaved.profile) {
+          const { firstName = '', lastName = '', email, phoneNumber } = bereaved.profile;
+          const fullName = firstName + lastName;
+          if (fullName.includes(keyword)) {
+            return true;
+          } else if (email?.includes(keyword)) {
+            return true;
+          }
+          const parsedNumber = phoneNumber?.replace(`^\+${this.ISRAEL_PHONE_PREFIX}`, '0');
+          if (parsedNumber?.includes(keyword)) {
             return true;
           }
         }

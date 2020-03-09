@@ -1,0 +1,22 @@
+<div class="container users-container">
+  <app-free-text-filter class="free-text-filter" [(filter)]="filter" (filterChange)="filterUsers()">
+  </app-free-text-filter>
+  <div class="users-list-container">
+    <div *ngIf="loading" class="loading">
+      טוען..
+    </div>
+    <div *ngIf="!loading">
+      <div class="error-message" *ngIf="error; else userList">
+        {{ error }}
+      </div>
+      <ng-template #userList>
+        <app-users-list
+          [filteredUsers]="filteredUsersIds"
+          [currentUser]="currentUser"
+          [users]="users"
+          (volunteering)="volunteering($event)"
+        ></app-users-list>
+      </ng-template>
+    </div>
+  </div>
+</div>

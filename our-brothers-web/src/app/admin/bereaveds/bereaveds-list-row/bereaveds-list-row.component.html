@@ -1,7 +1,11 @@
 <div class="row-container">
   <div class="row">
     <div class="col col-row-state">
-      <button class="volunteering-button" *ngIf="user?.isAdmin" (click)="volunteering.emit(!bereaved.isVolunteer)">
+      <button
+        class="volunteering-button"
+        *ngIf="currentUser?.isAdmin"
+        (click)="volunteering.emit(!bereaved.isVolunteer)"
+      >
         <div class="key-icon" [ngClass]="{ disabled: !bereaved.isVolunteer }"></div>
       </button>
       <button class="expand-button" *ngIf="!expanded" (click)="expanded = true">
@@ -57,7 +61,7 @@
           {{ meeting.title }}
         </div>
       </div>
-      <app-join-button [adminMode]="true" [user]="user" (joinMeeting)="joinBereved.emit()"></app-join-button>
+      <app-join-button [adminMode]="true" [user]="bereaved" (joinMeeting)="joinBereved.emit()"></app-join-button>
     </div>
   </div>
   <div class="expanded-row" *ngIf="expanded">

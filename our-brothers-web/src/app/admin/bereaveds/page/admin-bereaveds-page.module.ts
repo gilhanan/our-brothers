@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 
 const routes = [
   {
-    path: 'bereaveds',
+    path: '',
     component: AdminBereavedsPageComponent
   }
 ];

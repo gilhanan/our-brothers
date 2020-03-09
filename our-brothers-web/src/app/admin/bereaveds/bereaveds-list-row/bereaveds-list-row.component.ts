@@ -10,7 +10,7 @@ import { ParticipationsService } from '../../../shared/services/participations.s
   styleUrls: ['./bereaveds-list-row.component.scss']
 })
 export class BereavedsListRowComponent {
-  @Input() user: User;
+  @Input() currentUser: User;
   @Input() bereaved: User;
   @Output() joinBereved = new EventEmitter<void>();
   @Output() leaveBereaved = new EventEmitter<Meeting>();

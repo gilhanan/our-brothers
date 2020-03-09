@@ -1,0 +1,17 @@
+<app-list-header [scroll]="filteredUsers.size > 10" [(sort)]="sortedColumn" class="list-header">
+  <app-list-column class="col-row-state"></app-list-column>
+  <app-list-column title="שם פרטי" field="firstName"></app-list-column>
+  <app-list-column title="שם משפחה" field="lastName"></app-list-column>
+  <app-list-column title="מייל" field="email"></app-list-column>
+  <app-list-column title="טלפון נייד" field="phoneNumber"></app-list-column>
+</app-list-header>
+<div class="users-items">
+  <div *ngFor="let user of users | sortUsers: sortedColumn">
+    <app-users-list-row
+      [class.hidden]="!filteredUsers.has(user.id)"
+      [currentUser]="currentUser"
+      [user]="user"
+      (volunteering)="volunteering.emit({ user: user, isVolunteer: $event })"
+    ></app-users-list-row>
+  </div>
+</div>
