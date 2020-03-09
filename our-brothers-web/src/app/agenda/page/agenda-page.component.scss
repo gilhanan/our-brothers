@@ -6,9 +6,18 @@
   margin-bottom: 3em;
   justify-content: center;
 
+  @media only screen and (max-width: 768px) {
+    grid-template-columns: repeat(1, auto);
+  }
+  .kit-card {
+    width: 100%;
+    text-align: center;
+  }
+
   .kit-icon {
     width: 50px;
     height: 50px;
+    margin-bottom: 0.5em;
     justify-self: center;
   }
   .kit-heading {
@@ -17,12 +26,13 @@
     font-weight: bold;
     text-align: center;
     justify-self: center;
+    margin-bottom: 0.5em;
   }
 
   .kit-description {
     text-align: center;
     justify-self: center;
-    margin: 0;
+    margin-bottom: 0.5em;
   }
   .download-button {
     padding-top: 0.25em;
@@ -53,6 +63,10 @@
     grid-gap: 1em;
     place-content: center;
     width: 100%;
+
+    @media only screen and (max-width: 768px) {
+      grid-template-columns: repeat(1, auto);
+    }
   }
 }
 
@@ -67,6 +81,9 @@
     max-width: 1000px;
     margin: auto;
 
+    @media only screen and (max-width: 768px) {
+      grid-template-columns: repeat(1, auto);
+    }
     .quote {
       background-color: #efefef;
       width: 100%;
