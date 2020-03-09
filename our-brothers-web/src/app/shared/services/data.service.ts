@@ -81,6 +81,27 @@ export class DataService {
       );
   }
 
+  public updateUserLastSignIn(user: User) {
+    const telemetry = { userId: user.id };
+
+    this.analyticsService.logEvent('UpdateUserLastSignIn', telemetry);
+
+    return from(this.angularFireDatabase.object(`users/${user.id}/lastSignInDate`).set(Date.now())).pipe(
+      tap(() => {
+        this.analyticsService.logEvent('UpdateUserLastSignInSuccess', telemetry);
+      }),
+      map(() => true),
+      catchError(error => {
+        this.analyticsService.logEvent('UpdateUserLastSignInFailed', {
+          ...telemetry,
+          error
+        });
+        console.error(error);
+        return throwError(error);
+      })
+    );
+  }
+
   public createMeeting(user: User, meetingForm: MeetingForm, year = MEMORIAL_YEAR): Observable<Meeting> {
     const parsedMeeting: Partial<Meeting> = {
       ...meetingForm,

@@ -3,6 +3,7 @@ import * as AOS from 'aos';
 
 import { User } from 'models';
 import { AuthService } from './shared/services/auth.service';
+import { DataService } from './shared/services/data.service';
 import { LoginMode } from './auth/login-popup/login-popup.component';
 
 @Component({
@@ -15,7 +16,9 @@ export class AppComponent implements OnInit {
   public loading = true;
   public user: User;
 
-  constructor(public authService: AuthService) {}
+  private updatedLastSignIn = false;
+
+  constructor(public authService: AuthService, private dataService: DataService) {}
 
   ngOnInit() {
     AOS.init();
@@ -23,6 +26,11 @@ export class AppComponent implements OnInit {
     this.authService.user.subscribe(user => {
       this.loading = false;
       this.user = user;
+
+      if (!this.updatedLastSignIn) {
+        this.updatedLastSignIn = false;
+        this.dataService.updateUserLastSignIn(this.user).subscribe();
+      }
     });
 
     this.authService.needLogin$.subscribe(loginMode => (this.loginMode = loginMode));
