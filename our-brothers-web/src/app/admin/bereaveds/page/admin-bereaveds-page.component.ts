@@ -53,7 +53,7 @@ export class AdminBereavedsPageComponent implements OnInit, OnDestroy {
         bereaveds => {
           this.loading = false;
           this.bereaveds = bereaveds;
-          this.filteredBereavedsIds = new Set(bereaveds.map(({ id }) => id));
+          this.filterBereaveds();
         },
         error => {
           this.loading = false;
@@ -105,7 +105,14 @@ export class AdminBereavedsPageComponent implements OnInit, OnDestroy {
             '?'
         )
       ) {
-        this.dataService.bereavedLeaveHost(user, meeting);
+        this.dataService.bereavedLeaveHost(user, meeting).subscribe(
+          () => {
+            this.toastr.success('המשתמש הוסר בהצלחה.');
+          },
+          () => {
+            this.toastr.error('שגיאה - לא ניתן להסיר משתמש. נא ליצור קשר.');
+          }
+        );
       }
     }
   }

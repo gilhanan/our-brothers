@@ -41,7 +41,7 @@ export class AdminUsersPageComponent implements OnInit, OnDestroy {
         users => {
           this.loading = false;
           this.users = users;
-          this.filteredUsersIds = new Set(users.map(({ id }) => id));
+          this.filterUsers();
         },
         error => {
           this.loading = false;
@@ -69,7 +69,14 @@ export class AdminUsersPageComponent implements OnInit, OnDestroy {
             ' כמתנדב/ת?'
         )
       ) {
-        this.dataService.setUserVolunteer(user, isVolunteer);
+        this.dataService.setUserVolunteer(user, isVolunteer).subscribe(
+          () => {
+            this.toastr.success('המשתמש הוגדר כמתנדב בהצלחה.');
+          },
+          () => {
+            this.toastr.error('שגיאה - לא ניתן להגדיר משתמש כמתנדב. נא ליצור קשר.');
+          }
+        );
       }
     }
   }

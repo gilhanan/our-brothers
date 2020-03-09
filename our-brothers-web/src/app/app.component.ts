@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
       this.user = user;
 
       if (!this.updatedLastSignIn) {
-        this.updatedLastSignIn = false;
+        this.updatedLastSignIn = true;
         this.dataService.updateUserLastSignIn(this.user).subscribe();
       }
     });
