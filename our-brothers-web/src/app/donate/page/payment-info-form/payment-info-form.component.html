@@ -1,0 +1,50 @@
+<h2 class="medium-heading right-position" data-aos="fade-up" data-aos-duration="1000">
+  פרטים אישיים
+</h2>
+
+<form [formGroup]="form" class="contact-form-fields">
+  <input
+    formControlName="name"
+    class="form-field"
+    placeholder="שם\חברה*"
+    [class.invalid]="!name.valid && name.touched"
+  />
+  <input
+    formControlName="phoneNumber"
+    class="form-field"
+    placeholder="טלפון*"
+    [class.invalid]="!phoneNumber.valid && phoneNumber.touched"
+  />
+  <input
+    formControlName="email"
+    class="form-field"
+    placeholder="אימייל*"
+    [class.invalid]="!email.valid && email.touched"
+  />
+  <input formControlName="country" class="form-field" placeholder="מדינה" />
+  <input formControlName="city" class="form-field" placeholder="עיר" />
+  <input formControlName="street" class="form-field" placeholder="רחוב ומס' בית" />
+</form>
+<p class="form-invalid-message" *ngIf="formInvalid">
+  אחד או יותר מהשדות אינם תקינים
+</p>
+
+<br />
+<p class="payment-method">צורת תשלום:</p>
+<div>
+  <input class="payment-method-radio" type="radio" id="creditCard" name="paymentMethod" value="creditCard" />
+  <label class="payment-method-radio-label" for="creditCard">כרטיס אשראי</label>
+  <input class="payment-method-radio" type="radio" id="payPal" name="paymentMethod" value="payPal" />
+  <label class="payment-method-radio-label" for="payPal">PayPal</label><br />
+</div>
+
+<br class="br-payment" />
+<hr />
+
+<button
+  class="site-button primary-button payment-send-button"
+  [class.disabled]="!form.valid || loading"
+  (click)="onSubmit()"
+>
+  להמשך תרומה
+</button>
