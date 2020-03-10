@@ -105,7 +105,7 @@ export class DataService {
   public createMeeting(user: User, meetingForm: MeetingForm, year = MEMORIAL_YEAR): Observable<Meeting> {
     const parsedMeeting: Partial<Meeting> = {
       ...meetingForm,
-      date: Date.parse(`${meetingForm.date}T${meetingForm.hour}Z`),
+      date: Date.parse(`${meetingForm.date}T${meetingForm.hour}`),
       count: 0,
       contact: {
         firstName: user.profile.firstName,
@@ -150,7 +150,7 @@ export class DataService {
   ): Observable<boolean> {
     const parsedMeeting: Partial<Meeting> = {
       ...meetingForm,
-      date: Date.parse(`${meetingForm.date}T${meetingForm.hour}Z`)
+      date: Date.parse(`${meetingForm.date}T${meetingForm.hour}`)
     };
 
     const telemetry = { meeting: parsedMeeting, hostId, meetingId, year };

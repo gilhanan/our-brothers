@@ -73,7 +73,7 @@
         ></app-host-meeting-input-text>
       </div>
     </div>
-    <div *ngIf="user && (user.id === meeting?.hostId || meeting?.bereaved?.id === user.id || user.isAdmin)">
+    <div *ngIf="user?.id === meeting?.hostId || meeting?.bereaved?.id === user?.id || user?.isAdmin">
       <div class="heading host-heading">
         פרטי מארח/ת
       </div>
@@ -157,7 +157,7 @@
           ></app-host-meeting-input-text>
         </div>
       </div>
-      <div class="row" *ngIf="meeting?.bereaved && (user?.id === meeting.hostId || user.isAdmin)">
+      <div class="row" *ngIf="meeting?.bereaved && (user?.id === meeting.hostId || user?.isAdmin)">
         <div class="col">
           <app-host-meeting-input-text
             class="input"
