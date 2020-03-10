@@ -2,10 +2,10 @@ import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import * as express from 'express';
 import * as cors from 'cors';
-
-const checkoutNodeJssdk = require('@paypal/checkout-server-sdk');
+import * as twilio from 'twilio';
 import * as nodemailer from 'nodemailer';
 import Mail = require('nodemailer/lib/mailer');
+const checkoutNodeJssdk = require('@paypal/checkout-server-sdk');
 
 import {
   Contact,
@@ -14,10 +14,13 @@ import {
   MeetingParticipate,
   ParticipateParticipationMeeting,
   UserParticipationMeeting,
-  PayPalOrder
+  PayPalOrder,
+  UserProfile
 } from '../../types/models';
-import { mailCredentials } from '../../config';
+import { mailCredentials, twilioCrendentials } from '../../config';
 import payPalClient from './paypal-client';
+
+const twilioClient = twilio(twilioCrendentials.accountSid, twilioCrendentials.authToken);
 
 const mailTransport = nodemailer.createTransport({
   service: 'gmail',
@@ -466,89 +469,174 @@ export const onMeetingBereavedWrite = functions.database
     if (event.after.exists()) {
       const bereavedParticipation: MeetingBereaved = event.after.val();
 
-      const bereavedId = bereavedParticipation.id;
+      return onBereavedJoinMeeting(year, hostId, meetingId, bereavedParticipation.id);
 
-      if (!bereavedId) {
-        throw new Error(
-          `Meeting {${meetingId}} year {${year}} host {${hostId}} bereaved id was not found.`
-        );
-      } else {
-        console.log(
-          `Getting meeting {${meetingId}} year {${year}} host {${hostId}}.`
-        );
-
-        return event.after.ref.parent?.once('value').then(meetingSnapshot => {
-          const meeting: Meeting = meetingSnapshot.val();
-
-          if (!meeting.title) {
-            throw new Error(
-              `Failed to get meeting {${meetingId}} year {${year}} host {${hostId}}.`
-            );
-          } else {
-            console.log(
-              `Successfully got meeting {${meetingId}} year {${year}} host {${hostId}}.`
-            );
-
-            const bereavedParticipationMeeting: UserParticipationMeeting = {
-              title: meeting.title
-            };
-
-            console.log(
-              `Linking meeting {${meetingId}} year {${year}} host {${hostId}} to bereaved {${bereavedParticipation.id}}`,
-              bereavedParticipationMeeting
-            );
-
-            return admin
-              .database()
-              .ref(
-                `/users/${bereavedId}/bereavedParticipation/${year}/meetings/${hostId}/${meetingId}`
-              )
-              .set(bereavedParticipationMeeting)
-              .then(() => {
-                console.log(
-                  `Successfully linked meeting {${meetingId}} year {${year}} host {${hostId}} to bereaved {${bereavedParticipation.id}}`
-                );
-              })
-              .catch(error => {
-                console.error(
-                  `Failed to link meeting {${meetingId}} year {${year}} host {${hostId}} to bereaved {${bereavedParticipation.id}}`,
-                  error
-                );
-              });
-          }
-        });
-      }
     } else {
       const bereavedParticipation: MeetingBereaved = event.before.val();
 
-      const bereavedId = bereavedParticipation.id;
-
-      console.log(
-        `Removing bereaved {${bereavedId}} from meeting {${meetingId}} year {${year}} host {${hostId}}.`
-      );
-      return admin
-        .database()
-        .ref(
-          `/users/${bereavedId}/bereavedParticipation/${year}/meetings/${hostId}/${meetingId}`
-        )
-        .remove()
-        .then(() => {
-          console.log(
-            `Succesfully removed bereaved {${bereavedId}} from meeting {${meetingId} year {${year}} host {${hostId}}.`
-          );
-        })
-        .catch(error => {
-          console.error(
-            `Failed to removed bereaved {${bereavedId}} from meeting {${meetingId} year {${year}} host {${hostId}}.`,
-            error
-          );
-        });
+      return onBereavedLeaveMeeting(year, hostId, meetingId, bereavedParticipation.id)
     }
   });
 
+async function onBereavedJoinMeeting(year: string, hostId: string, meetingId: string, bereavedId: string) {
+  try {
+    console.log(`Linking meeting {${meetingId}} year {${year}} host {${hostId}} to bereaved id {${bereavedId}}.`);
+
+    await linkBereavedToMeeting(year, hostId, meetingId, bereavedId);
+
+    console.log(`Succesfully linked meeting {${meetingId}} year {${year}} host {${hostId}} to bereaved id {${bereavedId}}.`);
+
+  } catch (error) {
+    console.error(`Failed to link meeting {${meetingId}} year {${year}} host {${hostId}} to bereaved id {${bereavedId}}.`, error);
+  }
+
+  try {
+    console.log(`SMS meeting {${meetingId}} year {${year}} host {${hostId}} for bereaved id {${bereavedId}} joining.`);
+
+    await smsHostOnBereaved(hostId, bereavedId, 'join');
+
+    console.log(`Succesfully SMS meeting {${meetingId}} year {${year}} host {${hostId}} for bereaved id {${bereavedId}} joining.`);
+
+  } catch (error) {
+    console.error(`Failed to SMS meeting {${meetingId}} year {${year}} host {${hostId}} for bereaved id {${bereavedId}} joining.`, error);
+  }
+}
+
+async function onBereavedLeaveMeeting(year: string, hostId: string, meetingId: string, bereavedId: string) {
+
+  try {
+    await removeBereavedFromMeeting(year, hostId, meetingId, bereavedId);
+  } catch (error) {
+    console.error(`Failed to remove meeting {${meetingId}} year {${year}} host {${hostId}} from bereaved id {${bereavedId}}.`, error);
+  }
+
+  try {
+    console.log(`SMS meeting {${meetingId}} year {${year}} host {${hostId}} for bereaved id {${bereavedId}} leaving.`);
+
+    await smsHostOnBereaved(hostId, bereavedId, 'leave');
+
+    console.log(`Succesfully SMS meeting {${meetingId}} year {${year}} host {${hostId}} for bereaved id {${bereavedId}} leaving.`);
+
+  } catch (error) {
+    console.error(`Failed to SMS meeting {${meetingId}} year {${year}} host {${hostId}} for bereaved id {${bereavedId}} leaving.`, error);
+  }
+}
+
+async function smsHostOnBereaved(hostId: string, bereavedId: string, status: 'join' | 'leave') {
+
+  console.log(`Getting host id {${hostId}} profile data.`);
+
+  let hostProfile: UserProfile;
+
+  try {
+    hostProfile = (await admin.database().ref(`/users/${hostId}/profile`).once('value')).val();
+  } catch (error) {
+    throw new Error(`Failed to get host id {${hostId}} profile data. ${error}`);
+  }
+
+  if (!hostProfile.phoneNumber) {
+    throw new Error(`Host phone number is missing {${hostProfile.phoneNumber}}.`);
+  }
+
+  console.log(`Getting bereaved id {${bereavedId}} profile data.`);
+
+  let bereavedProfile: UserProfile;
+
+  try {
+    bereavedProfile = (await admin.database().ref(`/users/${bereavedId}/profile`).once('value')).val();
+  } catch (error) {
+    throw new Error(`Failed to get bereaved id {${hostId}} profile data. ${error}`);
+  }
+
+  const { firstName, lastName, phoneNumber } = (bereavedProfile || {});
+  if (!firstName || !lastName || !phoneNumber) {
+    throw new Error(`Failed to send SMS, bereaved profile details were not found. firstName {${firstName}} lastName {${lastName}} phoneNumber {${phoneNumber}}.`);
+  }
+
+  const body = (
+    status === 'join' ?
+      (
+        'שמחים להודיע כי נרשמו לביתכם. נא צרו קשר עם האח/ות השכול/ה, ' +
+        firstName + ' ' + lastName + ', ' + 'טלפון: ' + phoneNumber + '.'
+      ) : (
+        'שים לב כי האח/ות השכול/ה ' + firstName + ' ' + lastName +
+        'עזב/ה את האירוח בביתך. המתן לשיבוץ חדש או פנה אלינו לתמיכה.'
+      )
+  ) + 'כאן בשבילכם, האחים שלנו.';
+
+  const message = {
+    body,
+    to: hostProfile.phoneNumber,
+    from: 'OurBrothers'
+  };
+
+  console.log(`Sending SMS message`, message);
+
+  try {
+
+    const messageInstance = await twilioClient.messages.create(message);
+
+    console.log(`Succesfully sent SMS message`, message, messageInstance);
+
+  } catch (error) {
+    throw new Error(`Failed to send SMS message ${JSON.stringify(message)}. ${error}`);
+  }
+}
+
+async function linkBereavedToMeeting(year: string, hostId: string, meetingId: string, bereavedId: string) {
+  if (!bereavedId) {
+    throw new Error(`Meeting {${meetingId}} year {${year}} host {${hostId}} bereaved id {${bereavedId}} was not found.`);
+  }
+
+  console.log(`Getting meeting {${meetingId}} year {${year}} host {${hostId}}.`);
+
+  let meeting: Meeting
+
+  try {
+    meeting = (await admin.database().ref(`/events/${year}/${hostId}/${meetingId}`).once('value')).val();
+  } catch (error) {
+    throw new Error(`Failed to get meeting {${meetingId}} year {${year}} host {${hostId}}: ${error}`);
+  }
+
+  console.log(`Successfully got meeting {${meetingId}} year {${year}} host {${hostId}}.`);
+
+  const bereavedParticipationMeeting: UserParticipationMeeting = {
+    title: meeting.title
+  };
+
+  console.log(`Linking meeting {${meetingId}} year {${year}} host {${hostId}} to bereaved {${bereavedId}}`, bereavedParticipationMeeting);
+
+  try {
+    await admin
+      .database()
+      .ref(`/users/${bereavedId}/bereavedParticipation/${year}/meetings/${hostId}/${meetingId}`)
+      .set(bereavedParticipationMeeting);
+  } catch (error) {
+    throw new Error(`Failed to link meeting {${meetingId}} year {${year}} host {${hostId}} to bereaved {${bereavedId}}: ${error}`);
+  }
+
+  console.log(`Successfully linked meeting {${meetingId}} year {${year}} host {${hostId}} to bereaved {${bereavedId}}`);
+}
+
+async function removeBereavedFromMeeting(year: string, hostId: string, meetingId: string, bereavedId: string) {
+
+  console.log(`Removing meeting {${meetingId}} year {${year}} host {${hostId}} from bereaved id {${bereavedId}}.`);
+
+  try {
+    await admin
+      .database()
+      .ref(`/users/${bereavedId}/bereavedParticipation/${year}/meetings/${hostId}/${meetingId}`)
+      .remove();
+  } catch (error) {
+    throw new Error(`Failed to remove meeting {${meetingId}} year {${year}} host {${hostId}} to bereaved {${bereavedId}}: ${error}`);
+  }
+  console.log(`Succesfully removed meeting {${meetingId}} year {${year}} host {${hostId}} from bereaved id {${bereavedId}}.`);
+}
+
+
 // ========================= Meetings Participates =========================
 
-export const onEventParticipatesWrite = functions.database
+export const onMeetingParticipatesWrite = functions.database
   .ref('/eventsParticipates/{year}/{hostId}/{meetingId}')
   .onWrite((event, context) => {
     const { year, hostId, meetingId } = context.params;
@@ -616,7 +704,7 @@ export const onEventParticipatesWrite = functions.database
       });
   });
 
-export const onEventParticipatesParticipationWrite = functions.database
+export const onMeetingParticipatesParticipationWrite = functions.database
   .ref('/eventsParticipates/{year}/{hostId}/{meetingId}/{participateId}')
   .onWrite((event, context) => {
     const { year, hostId, meetingId, participateId } = context.params;

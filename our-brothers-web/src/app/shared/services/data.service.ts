@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable, throwError, from, combineLatest, interval } from 'rxjs';
-import { map, catchError, tap, switchMap, debounce } from 'rxjs/operators';
+import { map, catchError, tap, switchMap, debounce, take } from 'rxjs/operators';
 
 import { MEMORIAL_YEAR } from '../constants';
 import {
@@ -506,8 +506,9 @@ export class DataService {
     this.analyticsService.logEvent('BereavedRegisterHost', telemetry);
 
     return combineLatest([this.getUserById(bereaved.id), this.getMeeting(meeting.hostId, meeting.id, year)]).pipe(
-      tap(([b, m]) => {
-        if (!this.participationsService.isBereavedCanParticipatingMeeting(b, m)) {
+      take(1),
+      tap(([bereaved, meeting]) => {
+        if (!this.participationsService.isBereavedCanParticipatingMeeting(bereaved, meeting)) {
           throw new Error("Bereaved can't participate meeting.");
         }
       }),
@@ -554,6 +555,7 @@ export class DataService {
     this.analyticsService.logEvent('ParticipateRegisterHost', telemetry);
 
     return combineLatest([this.getUserById(participate.id), this.getMeeting(meeting.hostId, meeting.id, year)]).pipe(
+      take(1),
       tap(([p, m]) => {
         if (!this.participationsService.isParticipateCanParticipatingMeeting(p, m)) {
           throw new Error("Participate can't participate meeting.");
