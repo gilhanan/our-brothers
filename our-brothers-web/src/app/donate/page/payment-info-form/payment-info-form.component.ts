@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { User } from 'models';
@@ -77,7 +77,6 @@ export class PaymentInfoFormComponent implements OnInit {
   }
 
   public onSubmit() {
-    console.log(this.form);
     if (this.form.valid) {
       const parsedForm: PaymentForm = {
         name: this.name.value.trim(),

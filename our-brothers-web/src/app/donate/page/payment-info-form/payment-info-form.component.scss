@@ -1,6 +1,59 @@
 .right-position {
   text-align: right;
   font-size: 1.5em;
+  width: 100%;
+}
+
+.payment-amount-container {
+  font-size: 25px;
+  font-family: 'arbel';
+  background-color: #00a099;
+}
+
+.payment-amount {
+  font-size: 25px;
+  font-family: 'arbel';
+  color: white;
+}
+
+.alternative-donate {
+  text-align: center;
+  font-size: 25px;
+  font-family: 'arbel';
+  background-color: #00a099;
+  color: white;
+}
+
+.payment-amount-radio {
+  font-family: 'arbel';
+  margin: 0 10px;
+  color: #00a099;
+}
+
+.payment-amount-radio-label {
+  font-family: 'arbel';
+  margin: 20px 5px 0 150px;
+  font-size: 30px;
+  color: white;
+}
+
+.label-for-others {
+  font-family: 'arbel';
+  margin: 20px 5px 0 5px;
+  font-size: 30px;
+  color: white;
+}
+
+.other-amout-text-input {
+  font-size: 25px;
+  border-radius: 10px;
+}
+
+.new-sheckel {
+  font-family: 'arbel';
+  font-size: 40px;
+  color: white;
+  margin: 20px 5px 0 5px;
 }
 
 .contact-form-fields {
