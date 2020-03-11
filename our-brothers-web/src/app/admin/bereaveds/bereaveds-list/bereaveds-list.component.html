@@ -20,6 +20,7 @@
       (volunteering)="volunteering.emit({ user: bereaved, isVolunteer: $event })"
       (bereavedStatus)="bereavedStatus.emit({ bereaved: bereaved, status: $event })"
       (bereavedGuidance)="bereavedGuidance.emit({ bereaved: bereaved, guidance: $event })"
+      (bereavedNotes)="bereavedNotes.emit({ bereaved: bereaved, notes: $event })"
     ></app-bereaveds-list-row>
   </div>
 </div>

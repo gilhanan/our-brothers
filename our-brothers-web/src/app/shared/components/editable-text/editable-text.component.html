@@ -1,0 +1,13 @@
+<div class="text-container">
+  <div class="value-container" *ngIf="!editable">
+    <span class="value">
+      {{ value || 'אין' }}
+    </span>
+  </div>
+  <div class="input-container" *ngIf="editable">
+    <input type="text" *ngIf="!multilines; else multiLines" [value]="value" (input)="newValue = $event.target.value" />
+    <ng-template #multiLines>
+      <textarea class="form-field" [value]="value" (input)="newValue = $event.target.value"></textarea>
+    </ng-template>
+  </div>
+</div>

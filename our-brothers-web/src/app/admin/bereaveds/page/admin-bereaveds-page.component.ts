@@ -11,7 +11,8 @@ import {
   UserMeeting,
   VolunteeringUser,
   UpdateBereavedStatus,
-  UpdateBereavedGuidance
+  UpdateBereavedGuidance,
+  UpdateBereavedNotes
 } from '../../../shared/services/data.service';
 import { UtilsService } from '../../../shared/services/utils.service';
 import { HttpService } from '../../../shared/services/http.service';
@@ -166,6 +167,12 @@ export class AdminBereavedsPageComponent implements OnInit, OnDestroy {
   bereavedGuidance({ bereaved, guidance }: UpdateBereavedGuidance) {
     if (bereaved) {
       this.dataService.setBereavedGuidanceGeneral(bereaved, guidance);
+    }
+  }
+
+  bereavedNotes({ bereaved, notes }: UpdateBereavedNotes) {
+    if (bereaved) {
+      this.dataService.setBereavedNotes(bereaved, notes);
     }
   }
 

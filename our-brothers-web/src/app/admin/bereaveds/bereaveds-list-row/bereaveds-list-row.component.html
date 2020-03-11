@@ -61,7 +61,9 @@
           <div class="trash-icon"></div>
         </button>
         <div class="bereaved-meeting-title">
-          {{ meeting.title }}
+          <a [routerLink]="'/meetings/' + year + '/' + meeting.hostId + '/' + meeting.id">
+            {{ meeting.title }}
+          </a>
         </div>
       </div>
       <app-join-button [adminMode]="true" [user]="bereaved" (joinMeeting)="joinBereved.emit()"></app-join-button>
@@ -94,7 +96,11 @@
       </div>
       <div class="content">
         <div class="scroll-container">
-          {{ bereaved.bereavedParticipation && bereaved.bereavedParticipation[year]?.notes }}
+          <app-editable-text
+            [value]="bereaved.bereavedParticipation && bereaved.bereavedParticipation[year]?.notes"
+            (valueChange)="bereavedNotes.emit($event)"
+            [multilines]="true"
+          ></app-editable-text>
         </div>
       </div>
     </div>

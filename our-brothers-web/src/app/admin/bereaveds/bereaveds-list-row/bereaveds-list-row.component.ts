@@ -18,6 +18,7 @@ export class BereavedsListRowComponent {
   @Output() volunteering = new EventEmitter<boolean>();
   @Output() bereavedStatus = new EventEmitter<BereavedStatus>();
   @Output() bereavedGuidance = new EventEmitter<BereavedGuidance>();
+  @Output() bereavedNotes = new EventEmitter<string>();
 
   expanded = false;
   year = MEMORIAL_YEAR;

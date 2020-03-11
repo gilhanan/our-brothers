@@ -45,6 +45,11 @@ export interface UpdateBereavedGuidance {
   guidance: BereavedGuidanceGeneral;
 }
 
+export interface UpdateBereavedNotes {
+  bereaved: User;
+  notes: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -301,6 +306,25 @@ export class DataService {
       tap(() => this.analyticsService.logEvent('SetBereavedGuidanceGeneralSuccess', telemetry)),
       catchError(error => {
         this.analyticsService.logEvent('SetBereavedGuidanceGeneralFailed', {
+          ...telemetry,
+          error
+        });
+        console.error(error);
+        return throwError(error);
+      })
+    );
+  }
+
+  public setBereavedNotes(bereaved: User, notes: string, year = MEMORIAL_YEAR) {
+    const telemetry = { userId: bereaved.id, notes, year };
+
+    this.analyticsService.logEvent('SetBereavedNotes', telemetry);
+    return from(
+      this.angularFireDatabase.object<string>(`users/${bereaved.id}/bereavedParticipation/${year}/notes`).set(notes)
+    ).pipe(
+      tap(() => this.analyticsService.logEvent('SetBereavedNotesSuccess', telemetry)),
+      catchError(error => {
+        this.analyticsService.logEvent('SetBereavedNotesFailed', {
           ...telemetry,
           error
         });
