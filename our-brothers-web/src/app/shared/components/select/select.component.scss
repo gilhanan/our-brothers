@@ -1,50 +1,53 @@
 $textColor: rgb(129, 129, 129);
 
 .select-container {
-  width: 100px;
-  border: 1px solid rgb(135, 176, 173);
+  border: none;
   color: $textColor;
 
   .value-container {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
     padding: 0 2px;
-    cursor: pointer;
 
-    .value {
-      min-height: 1em;
+    .values {
       flex: 1;
+      display: flex;
+      flex-direction: column;
+
+      .value {
+        flex: 1;
+        min-height: 1em;
+        cursor: pointer;
+      }
     }
 
-    .remove-icon {
-      font-size: 12px;
-      margin-left: 5px;
-    }
+    .controls {
+      flex: 0 0 auto;
+      padding: 0 2px;
 
-    .triangle-icon {
-      width: 15px;
-      display: inline-block;
-      position: relative;
-      &::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        border: 5px solid transparent;
-        border-top: 5px solid $textColor;
+      .remove-icon {
+        font-size: 12px;
+        margin-left: 5px;
+      }
+
+      .triangle-icon {
+        width: 15px;
+        display: inline-block;
+        position: relative;
+        &::after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          border: 5px solid transparent;
+          border-top: 5px solid $textColor;
+        }
       }
     }
   }
 
-  &.preview {
-    border: none;
-
-    .value-container {
-      .triangle-icon,
-      .remove-icon {
-        display: none;
-      }
-    }
+  &.editable {
+    border: 1px solid rgb(0, 160, 153);
   }
 
   &.readonly {
@@ -59,9 +62,13 @@ $textColor: rgb(129, 129, 129);
     background-color: white;
 
     .option {
-      padding: 0 2px 0 10px;
+      padding: 5px 10px;
       border-top: 1px solid $textColor;
       cursor: pointer;
+
+      &.active {
+        background-color: rgba(0, 160, 152, 0.3);
+      }
     }
   }
 }

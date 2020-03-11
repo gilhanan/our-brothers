@@ -12,18 +12,18 @@
     </p>
   </div>
   <div class="training-options">
-    <div *ngFor="let guidance of guidances" class="training-option">
+    <div *ngFor="let option of options" class="training-option">
       <app-checkbox
-        [label]="guidance.label"
-        [checked]="selectedGuidances[guidance.value]"
-        (checkedChanged)="onGuidanceChange(guidance.value, $event)"
+        [label]="option.details"
+        [checked]="selected[option.value]"
+        (checkedChanged)="onGuidanceChange(option.value, $event)"
       ></app-checkbox>
     </div>
     <div class="training-option not-interseted">
       <app-checkbox
         [label]="'לא מעוניין בהדרכה'"
         [checked]="notIntereseted"
-        (checkedChanged)="notIntereseted = $event; $event && (selectedGuidances = {})"
+        (checkedChanged)="onNotInterestedChange($event)"
       >
       </app-checkbox>
     </div>

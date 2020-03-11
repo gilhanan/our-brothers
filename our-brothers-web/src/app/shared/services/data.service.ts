@@ -42,7 +42,7 @@ export interface UpdateBereavedStatus {
 
 export interface UpdateBereavedGuidance {
   bereaved: User;
-  guidance: BereavedGuidanceGeneral;
+  guidance: BereavedGuidanceGeneral[];
 }
 
 export interface UpdateBereavedNotes {
@@ -294,13 +294,13 @@ export class DataService {
     );
   }
 
-  public setBereavedGuidanceGeneral(bereaved: User, guidanceGeneral: BereavedGuidanceGeneral, year = MEMORIAL_YEAR) {
+  public setBereavedGuidanceGeneral(bereaved: User, guidanceGeneral: BereavedGuidanceGeneral[], year = MEMORIAL_YEAR) {
     const telemetry = { userId: bereaved.id, guidanceGeneral, year };
 
     this.analyticsService.logEvent('SetBereavedGuidanceGeneral', telemetry);
     return from(
       this.angularFireDatabase
-        .object<BereavedGuidanceGeneral>(`users/${bereaved.id}/bereavedParticipation/${year}/guidance/general`)
+        .object<BereavedGuidanceGeneral[]>(`users/${bereaved.id}/bereavedParticipation/${year}/guidance/general`)
         .set(guidanceGeneral)
     ).pipe(
       tap(() => this.analyticsService.logEvent('SetBereavedGuidanceGeneralSuccess', telemetry)),

@@ -1,18 +1,29 @@
-<div class="select-container" [ngClass]="{ readonly: readonly, preview: preview }">
-  <div class="value-container" (click)="isOpen = !readonly && !preview; preview = readonly">
-    <span class="value">
-      {{ renderValue() }}
-    </span>
-    <div>
-      <span class="remove-icon" (click)="valueChange.emit('')">x</span>
+<div class="select-container" [ngClass]="{ readonly: readonly, editable: editable }">
+  <div class="value-container" (click)="open = !readonly && editable; editable = !readonly">
+    <div class="values">
+      <ng-template [ngIf]="values.length" [ngIfElse]="empty">
+        <div class="value" *ngFor="let v of values" [title]="optionsMap[v].details || ''">
+          {{ optionsMap[v].label }}
+        </div>
+      </ng-template>
+      <ng-template #empty>
+        <div class="value">{{ placeholder }}</div>
+      </ng-template>
+    </div>
+    <div *ngIf="editable" class="controls">
+      <span class="remove-icon" (click)="valueChange.emit(null)">x</span>
       <span class="triangle-icon"></span>
     </div>
   </div>
-  <div class="options" *ngIf="isOpen">
-    <div *ngFor="let option of options">
-      <div class="option" (click)="onSelectOption(option.value)">
-        {{ option.label }}
-      </div>
+  <div class="options" *ngIf="open">
+    <div
+      *ngFor="let option of options"
+      class="option"
+      [class.active]="selectedMap[option.value]"
+      (click)="onSelectOption(option.value)"
+      [title]="option.details || ''"
+    >
+      {{ option.label }}
     </div>
   </div>
 </div>

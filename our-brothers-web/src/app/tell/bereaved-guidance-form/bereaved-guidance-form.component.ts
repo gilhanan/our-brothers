@@ -1,10 +1,9 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { BereavedGuidance } from 'models';
+import { BereavedGuidance, BereavedGuidanceGeneral, guidanceOptions, GuidanceOption } from 'models';
 
-export interface GuidanceMeeting {
-  label: string;
-  value: string;
-}
+type GuidanceMap = {
+  [id in BereavedGuidanceGeneral]: boolean;
+};
 
 @Component({
   selector: 'app-bereaved-guidance-form',
@@ -12,8 +11,8 @@ export interface GuidanceMeeting {
   styleUrls: ['./bereaved-guidance-form.component.scss']
 })
 export class BereavedGuidanceFormComponent {
-  public guidances: GuidanceMeeting[] = traningMeetingsConst;
-  public selectedGuidances = {};
+  public options: GuidanceOption[] = guidanceOptions;
+  public selected: GuidanceMap = { ...initSelected };
   public notIntereseted = true;
 
   @Output()
@@ -21,36 +20,33 @@ export class BereavedGuidanceFormComponent {
 
   constructor() {}
 
-  onGuidanceChange(id: string, value: boolean) {
-    this.selectedGuidances[id] = value;
-    this.notIntereseted = !Object.keys(this.selectedGuidances).filter(id => !!this.selectedGuidances[id]).length;
+  onGuidanceChange(id: BereavedGuidanceGeneral, value: boolean) {
+    this.selected[id] = value;
+    this.notIntereseted = !Object.keys(this.selected).filter(id => !!this.selected[id]).length;
+  }
+
+  onNotInterestedChange(value: boolean) {
+    this.notIntereseted = value;
+    if (this.notIntereseted) {
+      this.selected = {
+        ...initSelected
+      };
+    }
   }
 
   onSubmit() {
-    const selectedGuidancesIds = Object.keys(this.selectedGuidances).filter(id => !!this.selectedGuidances[id]);
+    const selectedIds = Object.keys(this.selected).filter(id => !!this.selected[id]) as BereavedGuidanceGeneral[];
 
     this.submit.emit({
       answered: true,
-      general: selectedGuidancesIds.length ? selectedGuidancesIds : null
+      general: selectedIds.length ? selectedIds : null
     });
   }
 }
 
-const traningMeetingsConst: GuidanceMeeting[] = [
-  {
-    label: "29.03.20 בבאר שבע בין השעות 17:30-21:30, משרדי WEWORK, רח' חלקיקי האור 16",
-    value: 'm1'
-  },
-  {
-    label: "31.03.20 בתל אביב בין השעות 17:00-21:00, משרדי WEWORK, רח' שוקן 23",
-    value: 'm2'
-  },
-  {
-    label: "01.04.20 בירושלים בין השעות 18:00-22:00, משרדי WEWORK, רח' קינג ג'ורג' 20",
-    value: 'm3'
-  },
-  {
-    label: "02.04.20 בחיפה בין השעות 17:00-21:00, משרדי WEWORK, רח' דרך העצמאות 45",
-    value: 'm4'
-  }
-];
+const initSelected: GuidanceMap = {
+  m1: false,
+  m2: false,
+  m3: false,
+  m4: false
+};
