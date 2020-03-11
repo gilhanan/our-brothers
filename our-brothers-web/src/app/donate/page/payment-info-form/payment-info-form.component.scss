@@ -16,18 +16,13 @@
   color: white;
 }
 
-.alternative-donate {
-  text-align: center;
-  font-size: 25px;
-  font-family: 'arbel';
-  background-color: #00a099;
-  color: white;
-}
-
 .payment-amount-radio {
   font-family: 'arbel';
   margin: 0 10px;
   color: #00a099;
+  border: 0px;
+  width: 5%;
+  height: 1.3em;
 }
 
 .payment-amount-radio-label {
@@ -124,4 +119,12 @@
 
 .br-payment {
   color: #999999;
+}
+
+.alternative-donate {
+  text-align: center;
+  font-size: 25px;
+  font-family: 'arbel';
+  background-color: #00a099;
+  color: white;
 }
