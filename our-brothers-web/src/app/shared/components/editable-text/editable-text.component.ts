@@ -26,7 +26,7 @@ export class EditableTextComponent {
     return this._value;
   }
 
-  @Input() type: 'text' | 'textarea' | 'cities';
+  @Input() type: 'text' | 'textarea' | 'date' | 'cities';
 
   @Output() valueChange = new EventEmitter<any>();
 
@@ -39,9 +39,13 @@ export class EditableTextComponent {
     if (this.elementRef.nativeElement.contains(event.target)) {
       this.editable = true;
     } else {
-      this.editable = false;
-      if (this.value !== this.newValue) {
-        this.valueChange.emit(this.newValue);
+      if (this.editable) {
+        this.editable = false;
+        if (!this.newValue) {
+          this.valueChange.emit(null);
+        } else {
+          this.valueChange.emit(this.type === 'date' ? Date.parse(this.newValue) : this.newValue);
+        }
       }
     }
   }

@@ -85,7 +85,11 @@
         גיל:
       </div>
       <div>
-        {{ bereaved.profile?.birthDay ? (bereaved.profile.birthDay | seniority) : 'אין' }}
+        <app-editable-text
+          [value]="bereaved.profile?.birthDay ? (bereaved.profile.birthDay | seniority) : ''"
+          (valueChange)="bereavedBirthDate.emit($event)"
+          [type]="'date'"
+        ></app-editable-text>
       </div>
       <div class="title">
         מתנדב:

@@ -45,6 +45,11 @@ export interface UpdateBereavedGuidance {
   guidance: BereavedGuidance;
 }
 
+export interface UpdateUserBirthDate {
+  user: User;
+  birthDate: number;
+}
+
 export interface UpdateBereavedNotes {
   bereaved: User;
   notes: string;
@@ -318,14 +323,31 @@ export class DataService {
     );
   }
 
-  public setUserAddress(user: User, address: Address, year = MEMORIAL_YEAR) {
-    const telemetry = { userId: user.id, address, year };
+  public setUserAddress(user: User, address: Address) {
+    const telemetry = { userId: user.id, address };
 
     this.analyticsService.logEvent('setUserAddress', telemetry);
     return from(this.angularFireDatabase.object<Address>(`users/${user.id}/profile/address`).set(address)).pipe(
       tap(() => this.analyticsService.logEvent('setUserAddressSuccess', telemetry)),
       catchError(error => {
         this.analyticsService.logEvent('setUserAddressFailed', {
+          ...telemetry,
+          error
+        });
+        console.error(error);
+        return throwError(error);
+      })
+    );
+  }
+
+  public setUserBirthDate(user: User, birthDate: number) {
+    const telemetry = { userId: user.id, birthDate };
+
+    this.analyticsService.logEvent('setUserBirthDate', telemetry);
+    return from(this.angularFireDatabase.object<number>(`users/${user.id}/profile/birthDay`).set(birthDate)).pipe(
+      tap(() => this.analyticsService.logEvent('setUserBirthDateSuccess', telemetry)),
+      catchError(error => {
+        this.analyticsService.logEvent('setUserBirthDateFailed', {
           ...telemetry,
           error
         });
