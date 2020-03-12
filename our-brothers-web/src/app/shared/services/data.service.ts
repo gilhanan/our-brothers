@@ -19,7 +19,8 @@ import {
   ParticipateParticipation,
   ParticipateParticipationMeeting,
   MeetingBereaved,
-  Address
+  Address,
+  VolunteerProfile
 } from 'models';
 import { AnalyticsService } from './analytics.service';
 import { MeetingForm } from '../../host/host-form/host-form.component';
@@ -33,6 +34,11 @@ export interface UserMeeting {
 export interface VolunteeringUser {
   user: User;
   isVolunteer: boolean;
+}
+
+export interface BereavedVolunteer {
+  user: User;
+  bereaved: User;
 }
 
 export interface UpdateBereavedStatus {
@@ -274,6 +280,46 @@ export class DataService {
       tap(() => this.analyticsService.logEvent('SetUserVolunteerSuccess', telemetry)),
       catchError(error => {
         this.analyticsService.logEvent('SetUserVolunteerFailed', {
+          ...telemetry,
+          error
+        });
+        console.error(error);
+        return throwError(error);
+      })
+    );
+  }
+
+  public bereavedVolunteer(volunteer: User, bereaved: User) {
+    const telemetry = { volunteerId: volunteer.id, bereavedId: bereaved.id };
+
+    this.analyticsService.logEvent('BereavedVolunteer', telemetry);
+    return from(
+      this.angularFireDatabase.object<VolunteerProfile>(`users/${bereaved.id}/volunteer`).set({
+        id: volunteer.id,
+        firstName: volunteer.profile.firstName,
+        lastName: volunteer.profile.lastName
+      })
+    ).pipe(
+      tap(() => this.analyticsService.logEvent('BereavedVolunteerSuccess', telemetry)),
+      catchError(error => {
+        this.analyticsService.logEvent('BereavedVolunteerFailed', {
+          ...telemetry,
+          error
+        });
+        console.error(error);
+        return throwError(error);
+      })
+    );
+  }
+
+  public removeVolunteer(bereaved: User) {
+    const telemetry = { bereavedId: bereaved.id };
+
+    this.analyticsService.logEvent('RemoveVolunteer', telemetry);
+    return from(this.angularFireDatabase.object<VolunteerProfile>(`users/${bereaved.id}/volunteer`).remove()).pipe(
+      tap(() => this.analyticsService.logEvent('RemoveVolunteerSuccess', telemetry)),
+      catchError(error => {
+        this.analyticsService.logEvent('RemoveVolunteerFailed', {
           ...telemetry,
           error
         });

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { BereavedGuidance, User } from 'models';
+import { User } from 'models';
 import { MEMORIAL_YEAR } from '../../../shared/constants';
 import {
   UpdateBereavedStatus,
@@ -8,7 +8,8 @@ import {
   UpdateBereavedNotes,
   UpdateUserAddress,
   UpdateBereavedGuidance,
-  UpdateUserBirthDate
+  UpdateUserBirthDate,
+  BereavedVolunteer
 } from '../../../shared/services/data.service';
 import { SortedColumn } from '../../../shared/components/list/list-header/list-header.types';
 
@@ -31,6 +32,8 @@ export class BereavedsListComponent {
   @Output() bereavedBirthDate = new EventEmitter<UpdateUserBirthDate>();
   @Output() bereavedNotes = new EventEmitter<UpdateBereavedNotes>();
   @Output() bereavedAddress = new EventEmitter<UpdateUserAddress>();
+  @Output() bereavedVolunteer = new EventEmitter<BereavedVolunteer>();
+  @Output() removeVolunteer = new EventEmitter<User>();
 
   year = MEMORIAL_YEAR;
   sortedColumn: SortedColumn = {

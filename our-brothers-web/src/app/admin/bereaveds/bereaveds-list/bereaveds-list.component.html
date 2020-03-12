@@ -23,6 +23,8 @@
       (bereavedBirthDate)="bereavedBirthDate.emit({ user: bereaved, birthDate: $event })"
       (bereavedNotes)="bereavedNotes.emit({ bereaved: bereaved, notes: $event })"
       (bereavedAddress)="bereavedAddress.emit({ user: bereaved, address: $event })"
+      (bereavedVolunteer)="bereavedVolunteer.emit({ user: currentUser, bereaved: bereaved })"
+      (removeVolunteer)="removeVolunteer.emit(bereaved)"
     ></app-bereaveds-list-row>
   </div>
 </div>

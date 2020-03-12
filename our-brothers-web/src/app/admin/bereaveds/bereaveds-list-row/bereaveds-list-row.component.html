@@ -92,10 +92,29 @@
         ></app-editable-text>
       </div>
       <div class="title">
+        שפות:
+      </div>
+      <div>
+        {{ bereaved.profile.otherLang || 'אין' }}
+      </div>
+      <div class="title">
         מתנדב:
       </div>
       <div>
-        בדיקה
+        <ng-template [ngIf]="bereaved.volunteer" [ngIfElse]="volunteerJoin">
+          <div>
+            {{ bereaved.volunteer.firstName + ' ' + bereaved.volunteer.lastName }}
+          </div>
+          <div>
+            {{ bereaved.volunteer.id }}
+          </div>
+          <div *ngIf="currentUser?.isAdmin || currentUser?.id === bereaved.volunteer.id">
+            <app-remove-button (remove)="removeVolunteer.emit()"></app-remove-button>
+          </div>
+        </ng-template>
+        <ng-template #volunteerJoin>
+          <app-join-button [adminMode]="true" (joinMeeting)="bereavedVolunteer.emit()"></app-join-button>
+        </ng-template>
       </div>
     </div>
     <div class="expanded-col col-comments">

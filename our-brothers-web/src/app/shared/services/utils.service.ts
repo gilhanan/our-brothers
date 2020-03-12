@@ -86,13 +86,21 @@ export class UtilsService {
           const fullName = firstName + lastName;
           if (fullName.includes(keyword)) {
             return true;
-          } else if (email?.includes(keyword)) {
+          }
+          if (email?.includes(keyword)) {
             return true;
-          } else if (address?.formattedAddress?.includes(keyword)) {
+          }
+          if (address?.formattedAddress?.includes(keyword)) {
             return true;
           }
           const parsedNumber = phoneNumber?.replace(`^\+${this.ISRAEL_PHONE_PREFIX}`, '0');
           if (parsedNumber?.includes(keyword)) {
+            return true;
+          }
+          if (bereaved.volunteer?.id.includes(keyword)) {
+            return true;
+          }
+          if (((bereaved.volunteer?.firstName || '') + (bereaved.volunteer?.lastName || '')).includes(keyword)) {
             return true;
           }
           const slain = bereaved.bereavedProfile?.slains?.some(slain =>
@@ -100,7 +108,8 @@ export class UtilsService {
           );
           if (slain) {
             return true;
-          } else if (bereaved.bereavedParticipation?.[year]?.meetings?.some(({ title }) => title.includes(keyword))) {
+          }
+          if (bereaved.bereavedParticipation?.[year]?.meetings?.some(({ title }) => title.includes(keyword))) {
             return true;
           }
         }
@@ -130,7 +139,8 @@ export class UtilsService {
           const fullName = firstName + lastName;
           if (fullName.includes(keyword)) {
             return true;
-          } else if (email?.includes(keyword)) {
+          }
+          if (email?.includes(keyword)) {
             return true;
           }
           const parsedNumber = phoneNumber?.replace(`^\+${this.ISRAEL_PHONE_PREFIX}`, '0');

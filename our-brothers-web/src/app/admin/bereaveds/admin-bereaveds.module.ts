@@ -13,6 +13,7 @@ import { ModalSelectMeetingComponent } from './modal-select-meeting/modal-select
 import { FreeTextFilterModule } from '../../shared/components/free-text-filter/free-text-filter.module';
 import { MeetingsListModule } from '../../shared/components/meetings/meetings-list/meetings-list.module';
 import { JoinButtonModule } from '../../shared/components/join-button/join-button.module';
+import { RemoveButtonModule } from 'src/app/shared/components/remove-button/remove-button.module';
 import { SortBereavedsPipe } from './sort-bereaveds/sort-bereaveds.pipe';
 import { EditableTextModule } from 'src/app/shared/components/editable-text/editable-text.module';
 
@@ -34,7 +35,8 @@ const api = [
     FreeTextFilterModule,
     EditableTextModule,
     MeetingsListModule,
-    JoinButtonModule
+    JoinButtonModule,
+    RemoveButtonModule
   ],
   declarations: [api, SortBereavedsPipe],
   exports: api
