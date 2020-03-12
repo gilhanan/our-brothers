@@ -42,7 +42,7 @@ export interface UpdateBereavedStatus {
 
 export interface UpdateBereavedGuidance {
   bereaved: User;
-  guidance: BereavedGuidanceGeneral[];
+  guidance: BereavedGuidance;
 }
 
 export interface UpdateBereavedNotes {
@@ -285,27 +285,6 @@ export class DataService {
       tap(() => this.analyticsService.logEvent('SetBereavedStatusSuccess', telemetry)),
       catchError(error => {
         this.analyticsService.logEvent('SetBereavedStatusFailed', {
-          ...telemetry,
-          error
-        });
-        console.error(error);
-        return throwError(error);
-      })
-    );
-  }
-
-  public setBereavedGuidanceGeneral(bereaved: User, guidanceGeneral: BereavedGuidanceGeneral[], year = MEMORIAL_YEAR) {
-    const telemetry = { userId: bereaved.id, guidanceGeneral, year };
-
-    this.analyticsService.logEvent('SetBereavedGuidanceGeneral', telemetry);
-    return from(
-      this.angularFireDatabase
-        .object<BereavedGuidanceGeneral[]>(`users/${bereaved.id}/bereavedParticipation/${year}/guidance/general`)
-        .set(guidanceGeneral)
-    ).pipe(
-      tap(() => this.analyticsService.logEvent('SetBereavedGuidanceGeneralSuccess', telemetry)),
-      catchError(error => {
-        this.analyticsService.logEvent('SetBereavedGuidanceGeneralFailed', {
           ...telemetry,
           error
         });

@@ -46,7 +46,7 @@
     <div class="col col-guidance">
       <app-select-bereaved-guidance
         [value]="bereaved.bereavedParticipation && bereaved.bereavedParticipation[year]?.guidance?.general"
-        (valueChange)="bereavedGuidance.emit($event)"
+        (valueChange)="bereavedGuidance.emit({ answered: true, general: $event })"
       ></app-select-bereaved-guidance>
     </div>
     <div class="col col-status">

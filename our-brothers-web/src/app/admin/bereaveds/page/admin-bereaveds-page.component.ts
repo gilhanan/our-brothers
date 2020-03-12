@@ -166,7 +166,7 @@ export class AdminBereavedsPageComponent implements OnInit, OnDestroy {
 
   bereavedGuidance({ bereaved, guidance }: UpdateBereavedGuidance) {
     if (bereaved) {
-      this.dataService.setBereavedGuidanceGeneral(bereaved, guidance);
+      this.dataService.setBereavedGuidance(bereaved, guidance);
     }
   }
 
