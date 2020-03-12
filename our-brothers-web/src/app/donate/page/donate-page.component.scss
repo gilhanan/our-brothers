@@ -146,9 +146,18 @@
 }
 
 .alternative-donate {
+  padding: 30px;
   text-align: center;
-  font-size: 25px;
-  font-family: 'arbel';
-  background-color: #00a099;
   color: white;
+  background-color: #00a099;
+  font-family: 'arbel';
+
+  .instructions {
+    font-size: 25px;
+  }
+
+  .notes {
+    margin-top: 20px;
+    font-size: 18px;
+  }
 }
