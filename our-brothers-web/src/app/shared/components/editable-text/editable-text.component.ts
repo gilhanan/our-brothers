@@ -5,14 +5,8 @@ import {
   EventEmitter,
   HostListener,
   ElementRef,
-  ChangeDetectionStrategy,
-  OnInit
+  ChangeDetectionStrategy
 } from '@angular/core';
-
-export interface SelectOption {
-  value: string;
-  label: string;
-}
 
 @Component({
   selector: 'app-editable-text',
@@ -20,11 +14,21 @@ export interface SelectOption {
   templateUrl: './editable-text.component.html',
   styleUrls: ['./editable-text.component.scss']
 })
-export class EditableTextComponent implements OnInit {
-  @Input() value: string;
-  @Input() multilines: boolean = false;
+export class EditableTextComponent {
+  _value: string;
+  @Input()
+  set value(value: string) {
+    this._value = value;
+    this.newValue = this.value;
+  }
 
-  @Output() valueChange = new EventEmitter<string>();
+  get value(): string {
+    return this._value;
+  }
+
+  @Input() type: 'text' | 'textarea' | 'cities';
+
+  @Output() valueChange = new EventEmitter<any>();
 
   editable = false;
 
@@ -43,8 +47,4 @@ export class EditableTextComponent implements OnInit {
   }
 
   constructor(private elementRef: ElementRef) {}
-
-  ngOnInit(): void {
-    this.newValue = this.value;
-  }
 }

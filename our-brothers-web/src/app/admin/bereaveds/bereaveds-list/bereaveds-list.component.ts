@@ -5,7 +5,9 @@ import {
   UpdateBereavedStatus,
   UserMeeting,
   VolunteeringUser,
-  UpdateBereavedNotes
+  UpdateBereavedNotes,
+  UpdateUserAddress,
+  UpdateBereavedGuidance
 } from '../../../shared/services/data.service';
 import { SortedColumn } from '../../../shared/components/list/list-header/list-header.types';
 
@@ -24,8 +26,9 @@ export class BereavedsListComponent {
   @Output() volunteering = new EventEmitter<VolunteeringUser>();
   @Output() deleting = new EventEmitter<User>();
   @Output() bereavedStatus = new EventEmitter<UpdateBereavedStatus>();
-  @Output() bereavedGuidance = new EventEmitter<{ bereaved: User; guidance: BereavedGuidance }>();
+  @Output() bereavedGuidance = new EventEmitter<UpdateBereavedGuidance>();
   @Output() bereavedNotes = new EventEmitter<UpdateBereavedNotes>();
+  @Output() bereavedAddress = new EventEmitter<UpdateUserAddress>();
 
   year = MEMORIAL_YEAR;
   sortedColumn: SortedColumn = {

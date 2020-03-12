@@ -36,7 +36,11 @@
       </div>
     </div>
     <div class="col col-address">
-      {{ bereaved?.profile?.address?.formattedAddress }}
+      <app-editable-text
+        [value]="bereaved?.profile?.address?.formattedAddress || ''"
+        (valueChange)="bereavedAddress.emit($event)"
+        [type]="'cities'"
+      ></app-editable-text>
     </div>
     <div class="col col-seniority">
       <div *ngFor="let slain of bereaved?.bereavedProfile?.slains">
@@ -99,7 +103,7 @@
           <app-editable-text
             [value]="bereaved.bereavedParticipation && bereaved.bereavedParticipation[year]?.notes"
             (valueChange)="bereavedNotes.emit($event)"
-            [multilines]="true"
+            [type]="'textarea'"
           ></app-editable-text>
         </div>
       </div>

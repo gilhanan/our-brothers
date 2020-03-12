@@ -9,7 +9,6 @@ import {
   Meeting,
   UserParticipationMeeting,
   BereavedStatus,
-  BereavedGuidanceGeneral,
   BereavedGuidance,
   BereavedProfile,
   UserRole,
@@ -19,7 +18,8 @@ import {
   HostParticipation,
   ParticipateParticipation,
   ParticipateParticipationMeeting,
-  MeetingBereaved
+  MeetingBereaved,
+  Address
 } from 'models';
 import { AnalyticsService } from './analytics.service';
 import { MeetingForm } from '../../host/host-form/host-form.component';
@@ -48,6 +48,11 @@ export interface UpdateBereavedGuidance {
 export interface UpdateBereavedNotes {
   bereaved: User;
   notes: string;
+}
+
+export interface UpdateUserAddress {
+  user: User;
+  address: Address;
 }
 
 @Injectable({
@@ -304,6 +309,23 @@ export class DataService {
       tap(() => this.analyticsService.logEvent('SetBereavedNotesSuccess', telemetry)),
       catchError(error => {
         this.analyticsService.logEvent('SetBereavedNotesFailed', {
+          ...telemetry,
+          error
+        });
+        console.error(error);
+        return throwError(error);
+      })
+    );
+  }
+
+  public setUserAddress(user: User, address: Address, year = MEMORIAL_YEAR) {
+    const telemetry = { userId: user.id, address, year };
+
+    this.analyticsService.logEvent('setUserAddress', telemetry);
+    return from(this.angularFireDatabase.object<Address>(`users/${user.id}/profile/address`).set(address)).pipe(
+      tap(() => this.analyticsService.logEvent('setUserAddressSuccess', telemetry)),
+      catchError(error => {
+        this.analyticsService.logEvent('setUserAddressFailed', {
           ...telemetry,
           error
         });
