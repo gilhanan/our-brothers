@@ -93,10 +93,10 @@ p {
   }
 
   &.primary-button {
-    min-width: 275px;
     font-size: 36px;
+    padding: 8px 60px;
+    display: block;
     margin: auto;
-    display: flex;
   }
 
   &.disabled,
