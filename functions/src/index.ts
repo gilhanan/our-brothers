@@ -557,12 +557,12 @@ async function smsHostOnBereaved(hostId: string, bereavedId: string, status: 'jo
     status === 'join' ?
       (
         'שמחים להודיע כי נרשמו לביתכם. נא צרו קשר עם האח/ות השכול/ה, ' +
-        firstName + ' ' + lastName + ', ' + 'טלפון: ' + phoneNumber + '.'
+        firstName + ' ' + lastName + ', ' + 'טלפון: ' + phoneNumber
       ) : (
         'שים לב כי האח/ות השכול/ה ' + firstName + ' ' + lastName +
-        'עזב/ה את האירוח בביתך. המתן לשיבוץ חדש או פנה אלינו לתמיכה.'
+        ' עזב/ה את האירוח בביתך. המתן לשיבוץ חדש או פנה אלינו לתמיכה.'
       )
-  ) + 'כאן בשבילכם, האחים שלנו.';
+  ) + ' כאן בשבילכם, האחים שלנו.';
 
   const message = {
     body,

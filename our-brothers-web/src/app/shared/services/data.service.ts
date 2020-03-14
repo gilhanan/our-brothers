@@ -588,7 +588,7 @@ export class DataService {
     return this.getMeetings(year).pipe(map((meetings: Meeting[]) => meetings.filter(meeting => !meeting.bereaved)));
   }
 
-  public bereavedRegisterHost(bereaved: User, meeting: Meeting, year = MEMORIAL_YEAR): Observable<boolean> {
+  public bereavedJoinMeeting(bereaved: User, meeting: Meeting, year = MEMORIAL_YEAR): Observable<boolean> {
     const telemetry = {
       userId: bereaved.id,
       hostId: meeting.hostId,
@@ -596,7 +596,7 @@ export class DataService {
       year
     };
 
-    this.analyticsService.logEvent('BereavedRegisterHost', telemetry);
+    this.analyticsService.logEvent('BereavedJoinMeeting', telemetry);
 
     return combineLatest([this.getUserById(bereaved.id), this.getMeeting(meeting.hostId, meeting.id, year)]).pipe(
       take(1),
@@ -619,10 +619,10 @@ export class DataService {
           this.angularFireDatabase.object(`events/${year}/${m.hostId}/${m.id}/bereaved`).set(meetingBereaved)
         );
       }),
-      tap(() => this.analyticsService.logEvent('BereavedRegisterHostSuccess', telemetry)),
+      tap(() => this.analyticsService.logEvent('BereavedJoinMeetingSuccess', telemetry)),
       map(() => true),
       catchError(error => {
-        this.analyticsService.logEvent('BereavedRegisterHostFailed', {
+        this.analyticsService.logEvent('BereavedJoinMeetingFailed', {
           ...telemetry,
           error
         });
@@ -632,7 +632,7 @@ export class DataService {
     );
   }
 
-  public participateRegisterHost(
+  public participateJoinMeeting(
     participate: User,
     meeting: Meeting,
     accompanies: number,
@@ -645,7 +645,7 @@ export class DataService {
       year
     };
 
-    this.analyticsService.logEvent('ParticipateRegisterHost', telemetry);
+    this.analyticsService.logEvent('ParticipateJoinMeeting', telemetry);
 
     return combineLatest([this.getUserById(participate.id), this.getMeeting(meeting.hostId, meeting.id, year)]).pipe(
       take(1),
@@ -668,10 +668,10 @@ export class DataService {
             .set(meetingParticipate)
         );
       }),
-      tap(() => this.analyticsService.logEvent('ParticipateRegisterHostSuccess', telemetry)),
+      tap(() => this.analyticsService.logEvent('ParticipateJoinMeetingSuccess', telemetry)),
       map(() => true),
       catchError(error => {
-        this.analyticsService.logEvent('ParticipateRegisterHostFailed', {
+        this.analyticsService.logEvent('ParticipateJoinMeetingFailed', {
           ...telemetry,
           error
         });
@@ -681,7 +681,33 @@ export class DataService {
     );
   }
 
-  public bereavedLeaveHost(bereaved: User, meeting: Meeting, year = MEMORIAL_YEAR): Observable<boolean> {
+  public participateLeaveMeeting(user: User, meeting: Meeting, year = MEMORIAL_YEAR): Observable<boolean> {
+    const telemetry = {
+      userId: user.id,
+      hostId: meeting.hostId,
+      id: meeting.id,
+      year
+    };
+
+    this.analyticsService.logEvent('ParticipateLeaveMeeting', telemetry);
+
+    return from(
+      this.angularFireDatabase.object(`eventsParticipates/${year}/${meeting.hostId}/${meeting.id}/${user.id}`).remove()
+    ).pipe(
+      tap(() => this.analyticsService.logEvent('ParticipateLeaveMeetingSuccess', telemetry)),
+      map(() => true),
+      catchError(error => {
+        this.analyticsService.logEvent('ParticipateLeaveMeetingFailed', {
+          ...telemetry,
+          error
+        });
+        console.error(error);
+        return throwError(error);
+      })
+    );
+  }
+
+  public bereavedLeaveMeeting(bereaved: User, meeting: Meeting, year = MEMORIAL_YEAR): Observable<boolean> {
     const telemetry = {
       userId: bereaved.id,
       hostId: meeting.hostId,
@@ -689,15 +715,15 @@ export class DataService {
       year
     };
 
-    this.analyticsService.logEvent('BereavedLeaveHost', telemetry);
+    this.analyticsService.logEvent('BereavedLeaveMeeting', telemetry);
 
     return from(
       this.angularFireDatabase.object(`events/${year}/${meeting.hostId}/${meeting.id}/bereaved`).remove()
     ).pipe(
-      tap(() => this.analyticsService.logEvent('BereavedLeaveHostSuccess', telemetry)),
+      tap(() => this.analyticsService.logEvent('BereavedLeaveMeetingSuccess', telemetry)),
       map(() => true),
       catchError(error => {
-        this.analyticsService.logEvent('BereavedLeaveHostFailed', {
+        this.analyticsService.logEvent('BereavedLeaveMeetingFailed', {
           ...telemetry,
           error
         });

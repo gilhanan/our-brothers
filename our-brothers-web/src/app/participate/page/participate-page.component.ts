@@ -90,7 +90,7 @@ export class ParticipatePageComponent implements OnInit, OnDestroy {
       if (this.user.role !== UserRole.bereaved) {
         const accompanies = this.getAccompanies();
 
-        this.dataService.participateRegisterHost(this.user, meeting, accompanies).subscribe(
+        this.dataService.participateJoinMeeting(this.user, meeting, accompanies).subscribe(
           () => {
             this.toastr.success('שובצת בהצלחה!');
             this.router.navigate([`meetings/${this.year}/${meeting.hostId}/${meeting.id}`]);

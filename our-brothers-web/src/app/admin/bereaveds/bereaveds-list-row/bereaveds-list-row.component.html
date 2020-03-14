@@ -70,7 +70,7 @@
           </a>
         </div>
       </div>
-      <app-join-button [adminMode]="true" [user]="bereaved" (joinMeeting)="joinBereved.emit()"></app-join-button>
+      <app-join-button (join)="joinBereved.emit()"></app-join-button>
     </div>
   </div>
   <div class="expanded-row" *ngIf="expanded">
@@ -113,7 +113,7 @@
           </div>
         </ng-template>
         <ng-template #volunteerJoin>
-          <app-join-button [adminMode]="true" (joinMeeting)="bereavedVolunteer.emit()"></app-join-button>
+          <app-join-button (join)="bereavedVolunteer.emit()"></app-join-button>
         </ng-template>
       </div>
     </div>

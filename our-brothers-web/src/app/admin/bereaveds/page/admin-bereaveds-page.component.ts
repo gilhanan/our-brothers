@@ -81,7 +81,7 @@ export class AdminBereavedsPageComponent implements OnInit, OnDestroy {
       this.selectedMeeting$.pipe(take(1)).subscribe(meeting => {
         this.selectingBereaved = null;
         if (meeting) {
-          this.dataService.bereavedRegisterHost(bereaved, meeting).subscribe(
+          this.dataService.bereavedJoinMeeting(bereaved, meeting).subscribe(
             () => {
               this.toastr.success('האח/ות שובץ בהצלחה');
             },
@@ -109,7 +109,7 @@ export class AdminBereavedsPageComponent implements OnInit, OnDestroy {
             '?'
         )
       ) {
-        this.dataService.bereavedLeaveHost(user, meeting).subscribe(
+        this.dataService.bereavedLeaveMeeting(user, meeting).subscribe(
           () => {
             this.toastr.success('המשתמש הוסר בהצלחה.');
           },

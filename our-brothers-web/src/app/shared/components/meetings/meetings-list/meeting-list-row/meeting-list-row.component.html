@@ -32,11 +32,11 @@
     </span>
   </div>
   <div class="meeting-item-col meeting-join" *ngIf="participationsService.isUserHaveAllDetails(user)">
-    <app-join-button
+    <app-meeting-join-button
       class="join-button"
       [user]="user"
       [meeting]="meeting"
-      (joinMeeting)="joinMeeting.emit(meeting)"
-    ></app-join-button>
+      (join)="joinMeeting.emit(meeting)"
+    ></app-meeting-join-button>
   </div>
 </div>

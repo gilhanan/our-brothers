@@ -5,31 +5,25 @@
   display: flex;
   align-items: center;
 
-  .icon-label {
+  .input-icon {
     flex: 0 0 auto;
-    display: flex;
-    align-items: center;
+    width: 65px;
+    height: 50px;
+    background-position: 50% 50%;
+    background-size: 24px 24px;
+    background-repeat: no-repeat;
+  }
 
-    .input-icon {
-      flex: 0 0 auto;
-      width: 65px;
-      height: 50px;
-      background-position: 50% 50%;
-      background-size: 24px 24px;
-      background-repeat: no-repeat;
-    }
-
-    .input-label {
-      flex: 0 0 auto;
-      font-size: 18px;
-      color: rgb(153, 153, 153);
-      font-family: 'Heebo';
-    }
+  .input-label {
+    flex: 0 0 auto;
+    font-size: 18px;
+    margin-left: 10px;
+    color: rgb(153, 153, 153);
+    font-family: 'Heebo';
   }
 
   .input-text {
     flex: 0 0 auto;
-    margin-right: 10px;
     font-size: 18px;
     font-family: 'Heebo';
     color: rgb(153, 153, 153);

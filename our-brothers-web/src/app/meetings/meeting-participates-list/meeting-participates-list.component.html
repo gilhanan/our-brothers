@@ -1,7 +1,7 @@
 <div class="list-container" [class.extended]="user.id === meeting.hostId || user.isAdmin">
   <div class="header">
     <div class="col col-name">
-      שם המשתתף
+      שם מלא
     </div>
     <div class="col col-capacity">
       מספר משתתפים
@@ -18,7 +18,7 @@
   <div class="body">
     <div class="row" *ngFor="let participate of meetingParticipates">
       <div class="col col-name">
-        <span class="mobile-label">שם המשתתף</span>
+        <span class="mobile-label">שם מלא</span>
         <span class="name">
           {{ participate.firstName + ' ' + participate.lastName }}
         </span>

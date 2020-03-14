@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { MeetingsPageComponent } from './meetings-page.component';
 import { ParticipationsButtonsModule } from '../../shared/components/participations-buttons/participations-buttons.module';
 import { MeetingsComponentsModule } from '../../shared/components/meetings/meetings-components.module';
-import { RouterModule } from '@angular/router';
 import { MeetingDetailsPageComponent } from '../details-page/meeting-details-page.component';
-import { CommonModule } from '@angular/common';
 import { PipesModule } from '../../shared/pipes/pipes.module';
 import { MeetingsModule } from '../meetings.module';
+import { RemoveButtonModule } from '../../shared/components/remove-button/remove-button.module';
+import { MeetingJoinButtonModule } from '../../shared/components/meeting-join-button/meeting-join-button.module';
 
 const routes = [
   {
@@ -24,6 +26,8 @@ const routes = [
     MeetingsModule,
     ParticipationsButtonsModule,
     MeetingsComponentsModule,
+    RemoveButtonModule,
+    MeetingJoinButtonModule,
     RouterModule.forChild(routes),
     CommonModule,
     PipesModule

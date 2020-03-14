@@ -74,8 +74,12 @@ export class ParticipationsService {
     }
   }
 
-  isBereavedCanParticipatingMeeting(user: User, meeting: Meeting): boolean {
-    if (!user || !meeting) {
+  isBereavedCanParticipatingMeeting(user: User, meeting: Meeting, year = MEMORIAL_YEAR): boolean {
+    if (!user || !meeting || user.role !== UserRole.bereaved) {
+      return false;
+    }
+
+    if (this.isBereavedParticipatingEvent(user, meeting, year)) {
       return false;
     }
 
@@ -87,8 +91,12 @@ export class ParticipationsService {
     );
   }
 
-  isParticipateCanParticipatingMeeting(user: User, meeting: Meeting): boolean {
-    if (!user || !meeting) {
+  isParticipateCanParticipatingMeeting(user: User, meeting: Meeting, year = MEMORIAL_YEAR): boolean {
+    if (!user || !meeting || user.role === UserRole.bereaved) {
+      return false;
+    }
+
+    if (this.isParticipateParticipatingEvent(user, meeting, year)) {
       return false;
     }
 
