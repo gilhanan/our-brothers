@@ -1,0 +1,25 @@
+<div class="small-heading">משתמשים רשומים</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th>שנה</th>
+      <th>משתמשים</th>
+      <th>אחים</th>
+      <th>מארחים</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let year of yearlyRegisteredUsers">
+      <td>{{ year.year }}</td>
+      <td>{{ year.registeredUsers.participate }}</td>
+      <td>{{ year.registeredUsers.bereaved }}</td>
+      <td>{{ year.registeredUsers.host }}</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td>סה"כ</td>
+      <td>{{ total }}</td>
+    </tr>
+  </tfoot>
+</table>

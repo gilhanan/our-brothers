@@ -1,0 +1,34 @@
+<div class="small-heading">משתמשים פעילים</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th colspan="2">משתמשים</th>
+      <th colspan="2">אחים</th>
+      <th colspan="2">מארחים</th>
+    </tr>
+    <tr>
+      <th>חדשים</th>
+      <th>חוזרים</th>
+      <th>חדשים</th>
+      <th>חוזרים</th>
+      <th>חדשים</th>
+      <th>חוזרים</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{ activeUsers.participate.new }}</td>
+      <td>{{ activeUsers.participate.old }}</td>
+      <td>{{ activeUsers.bereaved.new }}</td>
+      <td>{{ activeUsers.bereaved.old }}</td>
+      <td>{{ activeUsers.host.new }}</td>
+      <td>{{ activeUsers.host.old }}</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td>סה"כ</td>
+      <td>{{ total }}</td>
+    </tr>
+  </tfoot>
+</table>

@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="medium-heading">סטטיסטיקות</div>
+  <div *ngIf="loadingUsers || loadingBereaveds || loadingMeetings" class="loading">
+    טוען..
+  </div>
+  <div *ngIf="!(loadingUsers || loadingBereaveds || loadingMeetings)">
+    <div class="error-message" *ngIf="error; else statisticsTables">
+      {{ error }}
+    </div>
+    <ng-template #statisticsTables>
+      <app-active-users-statistics [users]="users"></app-active-users-statistics>
+      <div class="site-divider"></div>
+      <app-registrations-statistics [users]="users"></app-registrations-statistics>
+    </ng-template>
+  </div>
+</div>
