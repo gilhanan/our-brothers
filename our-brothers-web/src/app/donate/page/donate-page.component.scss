@@ -5,3 +5,159 @@
     margin-bottom: 10px;
   }
 }
+.payment-info-page {
+  align-content: center;
+  width: 100%;
+}
+.payment-amounts-options-container {
+  background-color: #00a099;
+  font-family: 'arbel';
+
+  .payment-amount {
+    font-size: 25px;
+    font-family: 'arbel';
+    color: white;
+  }
+
+  .payment-amount-container {
+    display: flex;
+    justify-content: right;
+    flex-wrap: wrap;
+    margin-bottom: 3em;
+    font-family: 'arbel';
+    @media only screen and (max-width: 768px) {
+      padding: 0;
+      width: calc(100% - 10px);
+    }
+
+    .payment-amount-option {
+      .payment-amount-radio {
+        font-family: 'arbel';
+        margin: 0 10px;
+        color: #00a099;
+        border: 0px;
+        width: 5%;
+        height: 1.3em;
+      }
+
+      .payment-amount-radio-label {
+        font-family: 'arbel';
+        margin: 20px 10px;
+        font-size: 30px;
+        color: white;
+      }
+
+      .label-for-others {
+        font-family: 'arbel';
+        margin: 20px 5px 0 5px;
+        font-size: 30px;
+        color: white;
+      }
+
+      .other-amout-text-input {
+        font-size: 25px;
+        border-radius: 10px;
+      }
+
+      .new-sheckel {
+        font-family: 'arbel';
+        font-size: 40px;
+        color: white;
+        margin: 20px 5px 0 5px;
+      }
+    }
+  }
+}
+
+.right-position {
+  text-align: right;
+  font-size: 1.5em;
+  width: 100%;
+}
+
+.contact-form-fields {
+  max-width: 800px;
+  display: flex;
+  justify-content: right;
+  flex-wrap: wrap;
+
+  @media only screen and (max-width: 768px) {
+    padding: 0;
+    width: calc(100% - 10px);
+  }
+
+  .form-field {
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 25px;
+    width: 27%;
+
+    @media only screen and (max-width: 768px) {
+      width: 45%;
+      margin-left: 7px;
+      margin-right: 7px;
+      margin-bottom: 14px;
+    }
+  }
+
+  .body {
+    @media only screen and (max-width: 768px) {
+      width: calc(100% - 20px);
+    }
+  }
+}
+
+.payment-send-button {
+  width: 250px;
+  height: 40px;
+  font-size: 25px;
+  font-family: 'arbel';
+  margin-top: 15px;
+  background-color: #00a099;
+
+  @media only screen and (max-width: 768px) {
+    width: 200px;
+    height: 45px;
+    font-size: 25px;
+    margin-top: 7px;
+  }
+}
+
+.payment-method {
+  text-align: right;
+  font-family: 'arbel';
+  color: #999999;
+}
+
+.payment-method-radio {
+  font-family: 'arbel';
+  margin: 0 10px;
+  color: #999999;
+}
+
+.payment-method-radio-label {
+  font-family: 'arbel';
+  margin: 0 5px 0 15px;
+  color: #999999;
+}
+
+.br-payment {
+  color: #999999;
+}
+
+.alternative-donate {
+  padding: 30px;
+  text-align: center;
+  color: white;
+  background-color: #00a099;
+  font-family: 'arbel';
+
+  .instructions {
+    font-size: 25px;
+  }
+
+  .notes {
+    margin-top: 20px;
+    font-size: 18px;
+  }
+}

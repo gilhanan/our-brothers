@@ -42,16 +42,16 @@ export interface MeetingBereaved {
   lastName: string;
   phoneNumber: string;
   email: string;
-  slains: { firstName: string; lastName: string; }[];
+  slains: { firstName: string; lastName: string }[];
 }
 
 export enum MeetingAudience {
-  all = "all",
-  schoolStudents = "schoolStudents",
-  youthMovement = "youthMovement",
-  militaryPreparation = "militaryPreparation",
-  soldiers = "soldiers",
-  students = "students"
+  all = 'all',
+  schoolStudents = 'schoolStudents',
+  youthMovement = 'youthMovement',
+  militaryPreparation = 'militaryPreparation',
+  soldiers = 'soldiers',
+  students = 'students'
 }
 
 export interface User {
@@ -61,6 +61,7 @@ export interface User {
   photoURL?: string;
   isAdmin?: boolean;
   isVolunteer?: boolean;
+  volunteer?: VolunteerProfile;
   bereavedProfile?: BereavedProfile;
   participateParticipation?: UserParticipation<ParticipateParticipation>;
   hostParticipation?: UserParticipation<HostParticipation>;
@@ -81,9 +82,15 @@ export interface UserProfile {
 }
 
 export enum UserRole {
-  bereaved = "bereaved",
-  participate = "participate",
-  host = "host"
+  bereaved = 'bereaved',
+  participate = 'participate',
+  host = 'host'
+}
+
+export interface VolunteerProfile {
+  firstName: string;
+  lastName: string;
+  id: string;
 }
 
 export interface BereavedProfile {
@@ -106,11 +113,14 @@ export interface BaseParticipation<T = any> {
   meetings: T[];
 }
 
-export interface ParticipateParticipation extends BaseParticipation<ParticipateParticipationMeeting> {}
+export interface ParticipateParticipation
+  extends BaseParticipation<ParticipateParticipationMeeting> {}
 
-export interface HostParticipation extends BaseParticipation<UserParticipationMeeting> {}
+export interface HostParticipation
+  extends BaseParticipation<UserParticipationMeeting> {}
 
-export interface BereavedParticipation extends BaseParticipation<UserParticipationMeeting> {
+export interface BereavedParticipation
+  extends BaseParticipation<UserParticipationMeeting> {
   status: BereavedStatus;
   guidance: BereavedGuidance;
   notes: string;
@@ -122,26 +132,61 @@ export interface UserParticipationMeeting {
   title: string;
 }
 
-export interface ParticipateParticipationMeeting extends UserParticipationMeeting {
+export interface ParticipateParticipationMeeting
+  extends UserParticipationMeeting {
   accompanies: number;
 }
 
 export enum BereavedStatus {
-  done = "done",
-  inactive = "inactive",
-  waiting = "waiting"
+  done = 'done',
+  inactive = 'inactive',
+  waiting = 'waiting'
 }
 
 export interface BereavedGuidance {
   answered: boolean;
-  general: string[];
+  general: BereavedGuidanceGeneral[];
 }
 
 export enum BereavedGuidanceGeneral {
-  jerusalem = "jerusalem",
-  telAviv = "telAviv",
-  haifa = "haifa"
+  m1 = 'm1',
+  m2 = 'm2',
+  m3 = 'm3',
+  m4 = 'm4'
 }
+
+export interface GuidanceOption {
+  label: string;
+  details: string;
+  value: BereavedGuidanceGeneral;
+}
+
+export const guidanceOptions: GuidanceOption[] = [
+  {
+    label: 'באר שבע',
+    details:
+      "29.03.20 בבאר שבע בין השעות 17:30-21:30, משרדי WEWORK, רח' חלקיקי האור 16",
+    value: BereavedGuidanceGeneral.m1
+  },
+  {
+    label: 'תל אביב',
+    details:
+      "31.03.20 בתל אביב בין השעות 17:00-21:00, משרדי WEWORK, רח' שוקן 23",
+    value: BereavedGuidanceGeneral.m2
+  },
+  {
+    label: 'ירושלים',
+    details:
+      "01.04.20 בירושלים בין השעות 18:00-22:00, משרדי WEWORK, רח' קינג ג'ורג' 20",
+    value: BereavedGuidanceGeneral.m3
+  },
+  {
+    label: 'חיפה',
+    details:
+      "02.04.20 בחיפה בין השעות 17:00-21:00, משרדי WEWORK, רח' דרך העצמאות 45",
+    value: BereavedGuidanceGeneral.m4
+  }
+];
 
 export interface Contact {
   name: string;

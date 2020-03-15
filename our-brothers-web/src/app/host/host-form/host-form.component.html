@@ -144,7 +144,7 @@
       אחד או יותר מהשדות אינם תקינים
     </p>
     <button (click)="onSubmit()" class="host-form-submit-btn site-button primary-button">
-      צור אירוח >>
+      {{ meeting ? 'עדכן אירוח >>' : 'צור אירוח >>' }}
     </button>
   </div>
 </div>

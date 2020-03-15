@@ -1,17 +1,5 @@
-.heading {
-  font-size: 36px;
-  font-family: 'arbel';
-  color: rgb(55, 135, 177);
-  font-weight: bold;
-  text-align: center;
-  letter-spacing: 5px;
-  margin-top: 40px;
-  margin-bottom: 40px;
-
-  @media only screen and (max-width: 768px) {
-    margin-top: 20px;
-    margin-bottom: 20px;
-  }
+.medium-heading {
+  min-height: 1em;
 }
 
 .row {
@@ -33,55 +21,37 @@
 
 .buttons {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 
-  .edit-button {
-    flex: 0 0 auto;
-    background-color: rgb(55, 135, 177);
-    display: inline-flex;
-    align-items: center;
-    padding-right: 0;
+  .site-button {
+    margin: 10px;
 
-    &::before {
-      content: '';
-      width: 55px;
-      height: 50px;
-      background-image: url(../../../assets/img/host_edit_white.svg);
-      background-position: 50% 50%;
-      background-size: 20px 20px;
-      background-repeat: no-repeat;
-    }
-
-    .edit-button-text {
+    &.edit-button {
       flex: 0 0 auto;
-      font-size: 18px;
-      color: white;
-      font-family: 'Heebo';
-    }
-  }
 
-  .delete-button {
-    flex: 0 0 auto;
-    background-color: rgb(55, 135, 177);
-    display: inline-flex;
-    align-items: center;
-    padding-right: 0;
-
-    &::before {
-      content: '';
-      width: 65px;
-      height: 50px;
-      background-image: url(../../../assets/img/host_delete_white.svg);
-      background-position: 50% 50%;
-      background-size: 20px 20px;
-      background-repeat: no-repeat;
+      &::before {
+        content: '';
+        width: 55px;
+        height: 50px;
+        background-image: url(../../../assets/img/host_edit_white.svg);
+        background-position: 50% 50%;
+        background-size: 20px 20px;
+        background-repeat: no-repeat;
+      }
     }
 
-    .delete-button-text {
+    &.delete-button {
       flex: 0 0 auto;
-      font-size: 18px;
-      color: white;
-      font-family: 'Heebo';
+
+      &::before {
+        content: '';
+        width: 65px;
+        height: 50px;
+        background-image: url(../../../assets/img/host_delete_white.svg);
+        background-position: 50% 50%;
+        background-size: 20px 20px;
+        background-repeat: no-repeat;
+      }
     }
   }
 }

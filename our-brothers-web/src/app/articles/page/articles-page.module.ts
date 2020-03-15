@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ArticlesPageComponent } from './articles-page.component';
+import { CommonModule } from '@angular/common';
 
 const routes = [
   {
@@ -11,6 +12,6 @@ const routes = [
 
 @NgModule({
   declarations: [ArticlesPageComponent],
-  imports: [RouterModule.forChild(routes)]
+  imports: [CommonModule, RouterModule.forChild(routes)]
 })
 export class ArticlesPageModule {}

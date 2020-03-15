@@ -1,12 +1,13 @@
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 
-import { Meeting, MeetingParticipate, User } from 'models';
+import { Meeting, MeetingParticipate, User, UserRole } from 'models';
 import { DataService } from '../../shared/services/data.service';
 import { UtilsService } from '../../shared/services/utils.service';
 import { AuthService } from '../../shared/services/auth.service';
+import { ParticipationsService } from 'src/app/shared/services/participations.service';
 
 @Component({
   selector: 'app-meeting-details-page',
@@ -23,21 +24,27 @@ export class MeetingDetailsPageComponent implements OnInit, OnDestroy {
   public loadingMeetingParticipates = true;
   public meetingParticipates: MeetingParticipate[];
 
+  public extraData = false;
+
   private user$: Subscription;
   private getMeeting$: Subscription;
   private getMeetingParticipates$: Subscription;
 
   constructor(
+    public router: Router,
+    public activatedRoute: ActivatedRoute,
+    public toastr: ToastrService,
+    public authService: AuthService,
+    public dataService: DataService,
     public utilsService: UtilsService,
-    private activatedRoute: ActivatedRoute,
-    private router: Router,
-    private toastr: ToastrService,
-    private authService: AuthService,
-    private dataService: DataService
+    public participationsService: ParticipationsService
   ) {}
 
   ngOnInit() {
-    this.authService.user.subscribe(user => (this.user = user));
+    this.authService.user.subscribe(user => {
+      this.extraData = this.extraData || user.isAdmin;
+      return (this.user = user);
+    });
 
     this.activatedRoute.params.subscribe(params => {
       const { hostId, meetingId, memorialYear } = params;
@@ -50,6 +57,7 @@ export class MeetingDetailsPageComponent implements OnInit, OnDestroy {
 
       this.getMeeting$ = this.dataService.getMeeting(hostId, meetingId, this.year).subscribe(meeting => {
         this.loadingMeeting = false;
+        this.extraData = this.user?.id === hostId || this.user?.id === meeting.bereaved?.id;
         return (this.meeting = meeting);
       });
 
@@ -77,6 +85,79 @@ export class MeetingDetailsPageComponent implements OnInit, OnDestroy {
         }
       );
     }
+  }
+
+  onBereavedLeaveMeeting() {
+    if (this.meeting && this.user) {
+      if (window.confirm('האם ברצונך לצאת מהמפגש?')) {
+        this.dataService.bereavedLeaveMeeting(this.user, this.meeting).subscribe(
+          () => {
+            this.toastr.success('הוסרת מהמפגש בהצלחה');
+          },
+          () => {
+            this.toastr.error('שגיאה - לא ניתן לצאת מהמפגש. נא ליצור קשר');
+          }
+        );
+      }
+    }
+  }
+
+  onParticipateLeaveMeeting() {
+    if (this.meeting && this.user) {
+      if (window.confirm('האם ברצונך לצאת מהמפגש?')) {
+        this.dataService.participateLeaveMeeting(this.user, this.meeting).subscribe(
+          () => {
+            this.toastr.success('הוסרת מהמפגש בהצלחה');
+          },
+          () => {
+            this.toastr.error('שגיאה - לא ניתן לצאת מהמפגש. נא ליצור קשר');
+          }
+        );
+      }
+    }
+  }
+
+  onBereavedJoinMeeting() {
+    if (this.meeting && this.user) {
+      if (window.confirm('האם ברצונך להשתבץ למפגש?')) {
+        this.dataService.bereavedJoinMeeting(this.user, this.meeting).subscribe(
+          () => {
+            this.toastr.success('שובצת בהצלחה');
+          },
+          () => {
+            this.toastr.error('שגיאה - לא ניתן להשתבץ למפגש. נא ליצור קשר');
+          }
+        );
+      }
+    }
+  }
+
+  onParticipateJoinMeeting() {
+    if (this.meeting && this.user) {
+      if (window.confirm('האם ברצונך להשתבץ למפגש?')) {
+        this.dataService.participateJoinMeeting(this.user, this.meeting, this.getAccompanies()).subscribe(
+          () => {
+            this.toastr.success('שובצת בהצלחה');
+          },
+          () => {
+            this.toastr.error('שגיאה - לא ניתן להשתבץ למפגש. נא ליצור קשר');
+          }
+        );
+      }
+    }
+  }
+
+  getAccompanies(): number {
+    let accompaniesAnswer = window.prompt('האם יגיעו איתך אנשים נוספים?', '0');
+
+    let number = Number.parseInt(accompaniesAnswer);
+
+    while (!(!Number.isNaN(number) && number >= 0 && number <= 7)) {
+      accompaniesAnswer = window.prompt('נא להזין מספר משתתפים בין 0 ל-7', '0');
+      number = Number.parseInt(accompaniesAnswer);
+    }
+
+    return number;
   }
 
   ngOnDestroy() {

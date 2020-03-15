@@ -1,0 +1,24 @@
+<div class="value-container" *ngIf="!editable">
+  <span class="value">
+    {{ value || 'אין' }}
+  </span>
+</div>
+<div class="input-container" *ngIf="editable">
+  <ng-container [ngSwitch]="type">
+    <input *ngSwitchCase="'text'" type="text" [value]="value" (input)="newValue = $event.target.value" />
+    <input *ngSwitchCase="'date'" type="date" [value]="value" (input)="newValue = $event.target.value" />
+    <textarea
+      *ngSwitchCase="'textarea'"
+      class="form-field"
+      [value]="value"
+      (input)="newValue = $event.target.value"
+    ></textarea>
+    <app-places-select
+      *ngSwitchCase="'cities'"
+      [types]="['(cities)']"
+      [formattedAddress]="value"
+      [placeholder]="'מקום מגורים'"
+      (change)="newValue = $event"
+    ></app-places-select>
+  </ng-container>
+</div>

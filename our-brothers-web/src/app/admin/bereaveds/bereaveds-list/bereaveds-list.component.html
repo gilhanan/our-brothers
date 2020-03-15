@@ -2,7 +2,7 @@
   <app-list-column class="col-row-state"></app-list-column>
   <app-list-column title="שם מלא" field="name"></app-list-column>
   <app-list-column title="פרטי התקשרות"></app-list-column>
-  <app-list-column title="מקום מגורים"></app-list-column>
+  <app-list-column title="מקום מגורים" field="address"></app-list-column>
   <app-list-column title="ותק בשכול" field="seniority" class="col-seniority"></app-list-column>
   <app-list-column title="הדרכות" field="guidance" class="col-guidance"></app-list-column>
   <app-list-column title="סטטוס" field="status" class="col-status"></app-list-column>
@@ -20,6 +20,11 @@
       (volunteering)="volunteering.emit({ user: bereaved, isVolunteer: $event })"
       (bereavedStatus)="bereavedStatus.emit({ bereaved: bereaved, status: $event })"
       (bereavedGuidance)="bereavedGuidance.emit({ bereaved: bereaved, guidance: $event })"
+      (bereavedBirthDate)="bereavedBirthDate.emit({ user: bereaved, birthDate: $event })"
+      (bereavedNotes)="bereavedNotes.emit({ bereaved: bereaved, notes: $event })"
+      (bereavedAddress)="bereavedAddress.emit({ user: bereaved, address: $event })"
+      (bereavedVolunteer)="bereavedVolunteer.emit({ user: currentUser, bereaved: bereaved })"
+      (removeVolunteer)="removeVolunteer.emit(bereaved)"
     ></app-bereaveds-list-row>
   </div>
 </div>

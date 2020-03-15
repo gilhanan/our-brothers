@@ -8,26 +8,20 @@
 </h2>
 <div class="articles-contianer">
   <div class="articles-list-contianer">
-    <div class="article-item">
+    <div *ngFor="let articleItem of articles" class="article-item">
       <div class="article-item-img-container">
-        <img class="article-item-img" src="https://img.mako.co.il/2019/03/24/WI0324_i.jpg" />
+        <img class="article-item-img" [attr.src]="articleItem.imgUrl" />
       </div>
       <div class="article-item-date">
-        28 במרס, 2019
+        {{ articleItem.publishDate | date: 'mediumDate':null:'he' }}
       </div>
       <div class="article-item-title">
-        המיזם שמזמין אתכם לארח אח שכול: "פתחו את ביתכם ושמעו את סיפורים"
+        {{ articleItem.title }}
       </div>
       <div class="article-item-desc">
-        במיזם שיצרו האחים השכולים הם מאפשרים לציבור הרחב להזמין אותם לבתים, למרכזים קהילתיים ותנועות נוער כדי לשתף
-        בסיפור החיים של האחים שאיבדו, הצחוקים, החלומות והחיים שלהם עם השכול. "המפגשים מפילים חומות ומקרבים, בואו לשמוע
-        אותנו"
+        {{ articleItem.desc }}
       </div>
-      <a
-        class="article-item-link"
-        href="https://www.mako.co.il/pzm-magazine/Article-ea95eddf6ffa961006.htm"
-        target="_blank"
-      >
+      <a class="article-item-link" [attr.href]="articleItem.href" target="_blank">
         לכתבה המלאה
       </a>
     </div>

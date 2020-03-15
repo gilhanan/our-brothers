@@ -1,7 +1,16 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { BereavedGuidance, User } from 'models';
+import { User } from 'models';
 import { MEMORIAL_YEAR } from '../../../shared/constants';
-import { UpdateBereavedStatus, UserMeeting, VolunteeringUser } from '../../../shared/services/data.service';
+import {
+  UpdateBereavedStatus,
+  UserMeeting,
+  VolunteeringUser,
+  UpdateBereavedNotes,
+  UpdateUserAddress,
+  UpdateBereavedGuidance,
+  UpdateUserBirthDate,
+  BereavedVolunteer
+} from '../../../shared/services/data.service';
 import { SortedColumn } from '../../../shared/components/list/list-header/list-header.types';
 
 @Component({
@@ -19,7 +28,12 @@ export class BereavedsListComponent {
   @Output() volunteering = new EventEmitter<VolunteeringUser>();
   @Output() deleting = new EventEmitter<User>();
   @Output() bereavedStatus = new EventEmitter<UpdateBereavedStatus>();
-  @Output() bereavedGuidance = new EventEmitter<{ bereaved: User; guidance: BereavedGuidance }>();
+  @Output() bereavedGuidance = new EventEmitter<UpdateBereavedGuidance>();
+  @Output() bereavedBirthDate = new EventEmitter<UpdateUserBirthDate>();
+  @Output() bereavedNotes = new EventEmitter<UpdateBereavedNotes>();
+  @Output() bereavedAddress = new EventEmitter<UpdateUserAddress>();
+  @Output() bereavedVolunteer = new EventEmitter<BereavedVolunteer>();
+  @Output() removeVolunteer = new EventEmitter<User>();
 
   year = MEMORIAL_YEAR;
   sortedColumn: SortedColumn = {

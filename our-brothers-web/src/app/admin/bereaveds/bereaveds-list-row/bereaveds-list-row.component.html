@@ -36,7 +36,11 @@
       </div>
     </div>
     <div class="col col-address">
-      {{ bereaved?.profile?.address?.formattedAddress }}
+      <app-editable-text
+        [value]="bereaved?.profile?.address?.formattedAddress || ''"
+        (valueChange)="bereavedAddress.emit($event)"
+        [type]="'cities'"
+      ></app-editable-text>
     </div>
     <div class="col col-seniority">
       <div *ngFor="let slain of bereaved?.bereavedProfile?.slains">
@@ -46,7 +50,7 @@
     <div class="col col-guidance">
       <app-select-bereaved-guidance
         [value]="bereaved.bereavedParticipation && bereaved.bereavedParticipation[year]?.guidance?.general"
-        (valueChange)="bereavedGuidance.emit($event)"
+        (valueChange)="bereavedGuidance.emit({ answered: true, general: $event })"
       ></app-select-bereaved-guidance>
     </div>
     <div class="col col-status">
@@ -61,10 +65,12 @@
           <div class="trash-icon"></div>
         </button>
         <div class="bereaved-meeting-title">
-          {{ meeting.title }}
+          <a [routerLink]="'/meetings/' + year + '/' + meeting.hostId + '/' + meeting.id">
+            {{ meeting.title }}
+          </a>
         </div>
       </div>
-      <app-join-button [adminMode]="true" [user]="bereaved" (joinMeeting)="joinBereved.emit()"></app-join-button>
+      <app-join-button (join)="joinBereved.emit()"></app-join-button>
     </div>
   </div>
   <div class="expanded-row" *ngIf="expanded">
@@ -79,13 +85,36 @@
         גיל:
       </div>
       <div>
-        {{ bereaved.profile?.birthDay ? (bereaved.profile.birthDay | seniority) : 'אין' }}
+        <app-editable-text
+          [value]="bereaved.profile?.birthDay ? (bereaved.profile.birthDay | seniority) : ''"
+          (valueChange)="bereavedBirthDate.emit($event)"
+          [type]="'date'"
+        ></app-editable-text>
+      </div>
+      <div class="title">
+        שפות:
+      </div>
+      <div>
+        {{ bereaved.profile.otherLang || 'אין' }}
       </div>
       <div class="title">
         מתנדב:
       </div>
       <div>
-        בדיקה
+        <ng-template [ngIf]="bereaved.volunteer" [ngIfElse]="volunteerJoin">
+          <div>
+            {{ bereaved.volunteer.firstName + ' ' + bereaved.volunteer.lastName }}
+          </div>
+          <div>
+            {{ bereaved.volunteer.id }}
+          </div>
+          <div *ngIf="currentUser?.isAdmin || currentUser?.id === bereaved.volunteer.id">
+            <app-remove-button (remove)="removeVolunteer.emit()"></app-remove-button>
+          </div>
+        </ng-template>
+        <ng-template #volunteerJoin>
+          <app-join-button (join)="bereavedVolunteer.emit()"></app-join-button>
+        </ng-template>
       </div>
     </div>
     <div class="expanded-col col-comments">
@@ -94,7 +123,11 @@
       </div>
       <div class="content">
         <div class="scroll-container">
-          {{ bereaved.bereavedParticipation && bereaved.bereavedParticipation[year]?.notes }}
+          <app-editable-text
+            [value]="bereaved.bereavedParticipation && bereaved.bereavedParticipation[year]?.notes"
+            (valueChange)="bereavedNotes.emit($event)"
+            [type]="'textarea'"
+          ></app-editable-text>
         </div>
       </div>
     </div>

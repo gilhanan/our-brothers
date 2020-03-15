@@ -116,7 +116,7 @@ export class TellPageComponent implements OnInit, OnDestroy {
   onJoinMeeting(meeting: Meeting) {
     if (window.confirm('האם ברצונך להשתבץ למפגש?')) {
       if (this.user.role === UserRole.bereaved) {
-        this.dataService.bereavedRegisterHost(this.user, meeting).subscribe(
+        this.dataService.bereavedJoinMeeting(this.user, meeting).subscribe(
           () => {
             this.toastr.success('שובצת בהצלחה!');
             this.router.navigate([`meetings/${this.year}/${meeting.hostId}/${meeting.id}`]);

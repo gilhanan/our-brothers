@@ -3,6 +3,7 @@ import { User } from 'models';
 import { SortedColumn } from '../../../shared/components/list/list-header/list-header.types';
 
 const getFullName = (user: User, year: number) => (user.profile ? user.profile.firstName + user.profile.lastName : '');
+const getAddress = (user: User, year: number) => user?.profile?.address?.latitude || Number.MIN_VALUE;
 const getSeniority = (user: User, year: number) => user.bereavedProfile?.slains?.[0]?.deathDate || Number.MAX_VALUE;
 const getGuidance = (user: User, year: number) => user.bereavedParticipation?.[year]?.guidance?.general || '';
 const getStatus = (user: User, year: number) => user.bereavedParticipation?.[year]?.status || '';
@@ -10,6 +11,7 @@ const getMeetings = (user: User, year: number) => user.bereavedParticipation?.[y
 
 const valueGetter = {
   name: getFullName,
+  address: getAddress,
   seniority: getSeniority,
   guidance: getGuidance,
   status: getStatus,

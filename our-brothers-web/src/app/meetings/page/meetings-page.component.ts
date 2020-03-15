@@ -54,27 +54,18 @@ export class MeetingsPageComponent implements OnInit {
   }
 
   onJoinMeeting(meeting: Meeting) {
-    if (window.confirm('האם ברצונך להשתבץ למפגש?')) {
-      if (this.user.role === 'bereaved') {
-        this.dataService.bereavedRegisterHost(this.user, meeting).subscribe(
+    if (meeting && this.user) {
+      if (window.confirm('האם ברצונך להשתבץ למפגש?')) {
+        (this.user.role === 'bereaved'
+          ? this.dataService.bereavedJoinMeeting(this.user, meeting)
+          : this.dataService.participateJoinMeeting(this.user, meeting, this.getAccompanies())
+        ).subscribe(
           () => {
-            this.toastr.success('שובצת בהצלחה!');
+            this.toastr.success('שובצת בהצלחה');
             this.router.navigate([`meetings/${this.year}/${meeting.hostId}/${meeting.id}`]);
           },
           () => {
-            this.toastr.error('שגיאה - לא ניתן להשתבץ למפגש. נא ליצור קשר.');
-          }
-        );
-      } else {
-        const accompanies = this.getAccompanies();
-
-        this.dataService.participateRegisterHost(this.user, meeting, accompanies).subscribe(
-          () => {
-            this.toastr.success('שובצת בהצלחה!');
-            this.router.navigate([`meetings/${this.year}/${meeting.hostId}/${meeting.id}`]);
-          },
-          () => {
-            this.toastr.error('שגיאה - לא ניתן להשתבץ למפגש. נא ליצור קשר.');
+            this.toastr.error('שגיאה - לא ניתן להשתבץ למפגש. נא ליצור קשר');
           }
         );
       }

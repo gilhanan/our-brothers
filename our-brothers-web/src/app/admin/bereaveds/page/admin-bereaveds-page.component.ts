@@ -11,7 +11,11 @@ import {
   UserMeeting,
   VolunteeringUser,
   UpdateBereavedStatus,
-  UpdateBereavedGuidance
+  UpdateBereavedGuidance,
+  UpdateBereavedNotes,
+  UpdateUserAddress,
+  UpdateUserBirthDate,
+  BereavedVolunteer
 } from '../../../shared/services/data.service';
 import { UtilsService } from '../../../shared/services/utils.service';
 import { HttpService } from '../../../shared/services/http.service';
@@ -77,7 +81,7 @@ export class AdminBereavedsPageComponent implements OnInit, OnDestroy {
       this.selectedMeeting$.pipe(take(1)).subscribe(meeting => {
         this.selectingBereaved = null;
         if (meeting) {
-          this.dataService.bereavedRegisterHost(bereaved, meeting).subscribe(
+          this.dataService.bereavedJoinMeeting(bereaved, meeting).subscribe(
             () => {
               this.toastr.success('האח/ות שובץ בהצלחה');
             },
@@ -105,7 +109,7 @@ export class AdminBereavedsPageComponent implements OnInit, OnDestroy {
             '?'
         )
       ) {
-        this.dataService.bereavedLeaveHost(user, meeting).subscribe(
+        this.dataService.bereavedLeaveMeeting(user, meeting).subscribe(
           () => {
             this.toastr.success('המשתמש הוסר בהצלחה.');
           },
@@ -165,7 +169,37 @@ export class AdminBereavedsPageComponent implements OnInit, OnDestroy {
 
   bereavedGuidance({ bereaved, guidance }: UpdateBereavedGuidance) {
     if (bereaved) {
-      this.dataService.setBereavedGuidanceGeneral(bereaved, guidance);
+      this.dataService.setBereavedGuidance(bereaved, guidance);
+    }
+  }
+
+  bereavedBirthDate({ user, birthDate }: UpdateUserBirthDate) {
+    if (user) {
+      this.dataService.setUserBirthDate(user, birthDate);
+    }
+  }
+
+  bereavedNotes({ bereaved, notes }: UpdateBereavedNotes) {
+    if (bereaved) {
+      this.dataService.setBereavedNotes(bereaved, notes);
+    }
+  }
+
+  bereavedAddress({ user, address }: UpdateUserAddress) {
+    if (user) {
+      this.dataService.setUserAddress(user, address);
+    }
+  }
+
+  bereavedVolunteer({ user, bereaved }: BereavedVolunteer) {
+    if (user) {
+      this.dataService.bereavedVolunteer(user, bereaved);
+    }
+  }
+
+  removeVolunteer(bereaved: User) {
+    if (bereaved) {
+      this.dataService.removeVolunteer(bereaved);
     }
   }
 

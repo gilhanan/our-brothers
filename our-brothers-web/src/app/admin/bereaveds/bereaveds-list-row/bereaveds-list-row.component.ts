@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { User, BereavedStatus, BereavedGuidance, Meeting } from 'models';
+import { User, BereavedStatus, BereavedGuidance, Meeting, Address } from 'models';
 import { MEMORIAL_YEAR } from '../../../shared/constants';
 import { ParticipationsService } from '../../../shared/services/participations.service';
 
@@ -18,6 +18,11 @@ export class BereavedsListRowComponent {
   @Output() volunteering = new EventEmitter<boolean>();
   @Output() bereavedStatus = new EventEmitter<BereavedStatus>();
   @Output() bereavedGuidance = new EventEmitter<BereavedGuidance>();
+  @Output() bereavedBirthDate = new EventEmitter<number>();
+  @Output() bereavedNotes = new EventEmitter<string>();
+  @Output() bereavedAddress = new EventEmitter<Address>();
+  @Output() bereavedVolunteer = new EventEmitter<void>();
+  @Output() removeVolunteer = new EventEmitter<void>();
 
   expanded = false;
   year = MEMORIAL_YEAR;

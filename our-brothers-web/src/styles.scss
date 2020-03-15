@@ -69,28 +69,40 @@ p {
 
 .site-button {
   font-size: 17px;
+  padding: 8px 20px;
+  border: 2px solid rgb(0, 160, 153);
   font-family: 'arbel';
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
   color: white;
-  cursor: pointer;
   background-color: rgb(0, 160, 153);
-  padding: 0 20px;
-  border: none;
   text-decoration: none;
+  cursor: pointer;
+
+  &.invert {
+    color: rgb(0, 160, 153);
+    background-color: white;
+  }
+
+  &.danger {
+    background-color: rgb(160, 0, 0);
+    border-color: rgb(160, 0, 0);
+
+    &.invert {
+      color: rgb(160, 0, 0);
+      background-color: white;
+    }
+  }
 
   &.primary-button {
-    width: 250px;
-    height: 55px;
     font-size: 36px;
+    padding: 8px 60px;
+    display: block;
     margin: auto;
-    display: flex;
   }
 
   &.disabled,
   &:disabled {
     background-color: rgb(146, 177, 175);
+    border-color: rgb(146, 177, 175);
     cursor: auto;
   }
 }
