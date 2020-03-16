@@ -179,7 +179,7 @@
     </div>
   </ng-container>
   <ng-container *ngIf="user && !meeting?.invited && meetingParticipates?.length">
-    <div class="medium-heading">משתתפים ({{ meeting.count + '/' + meeting.capacity }})</div>
+    <div class="medium-heading">משתתפים ({{ (meeting.count || 0) + '/' + meeting.capacity }})</div>
     <app-meeting-participates-list
       [user]="user"
       [meeting]="meeting"

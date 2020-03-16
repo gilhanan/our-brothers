@@ -564,20 +564,53 @@ export class DataService {
           for (const hostMeetingsSnapshot of meetingsSnapshot) {
             const hostId = hostMeetingsSnapshot.key;
 
-            const hostMeetings = this.firebaseMapToArray<Meeting>(hostMeetingsSnapshot.payload.val());
+            const hostMeetings = this.firebaseMapToArray<Meeting>(hostMeetingsSnapshot.payload.val(), { hostId });
 
-            for (const meeting of hostMeetings) {
-              meeting.hostId = hostId;
-              meeting.count = meeting.count || 0;
-
-              meetings.push(meeting);
-            }
+            meetings.push(...hostMeetings);
           }
 
           return meetings;
         }),
         catchError(error => {
           this.analyticsService.logEvent('GetMeetingsFailed', telemetry);
+          console.log(error);
+          return throwError(error);
+        })
+      );
+  }
+
+  public getAllMeetings(): Observable<Meeting[]> {
+    const telemetry = {};
+
+    this.analyticsService.logEvent('GetAllMeetings', telemetry);
+    return this.angularFireDatabase
+      .list<{ [year: string]: { [hostId: string]: { [meetingId: string]: Meeting } } }>(`events`)
+      .snapshotChanges()
+      .pipe(
+        tap(() => this.analyticsService.logEvent('GetAllMeetingsSuccess', telemetry)),
+        map(meetingsSnapshot => {
+          const meetings: Meeting[] = [];
+
+          for (const yearlyMeetingsSnapshot of meetingsSnapshot) {
+            const yearlyMeetings = this.firebaseMapToArray<{ [hostId: string]: { [meetingId: string]: Meeting } }>(
+              yearlyMeetingsSnapshot.payload.val()
+            );
+
+            for (const hostMeetingsMap of yearlyMeetings) {
+              const hostId = hostMeetingsMap.id;
+
+              delete hostMeetingsMap.id;
+
+              const hostMeetings = this.firebaseMapToArray<Meeting>(hostMeetingsMap, { hostId });
+
+              meetings.push(...hostMeetings);
+            }
+          }
+
+          return meetings;
+        }),
+        catchError(error => {
+          this.analyticsService.logEvent('GetAllMeetingsFailed', telemetry);
           console.log(error);
           return throwError(error);
         })

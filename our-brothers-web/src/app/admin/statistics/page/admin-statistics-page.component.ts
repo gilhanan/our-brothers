@@ -49,7 +49,7 @@ export class AdminStatisticsPageComponent implements OnInit {
         }
       );
     this.dataService
-      .getMeetings()
+      .getAllMeetings()
       .pipe(take(1))
       .subscribe(
         meetings => {
