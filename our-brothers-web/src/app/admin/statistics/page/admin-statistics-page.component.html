@@ -10,9 +10,11 @@
     <ng-template #statisticsTables>
       <app-active-users-statistics [users]="users"></app-active-users-statistics>
       <div class="site-divider"></div>
-      <app-registrations-statistics [users]="users"></app-registrations-statistics>
+      <app-bereaveds-statistics [bereaveds]="bereaveds"></app-bereaveds-statistics>
       <div class="site-divider"></div>
       <app-meetings-statistics [meetings]="meetings"></app-meetings-statistics>
+      <div class="site-divider"></div>
+      <app-registrations-statistics [users]="users"></app-registrations-statistics>
     </ng-template>
   </div>
 </div>
