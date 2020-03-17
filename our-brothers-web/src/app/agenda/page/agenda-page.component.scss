@@ -12,31 +12,36 @@
   .kit-card {
     width: 100%;
     text-align: center;
-  }
+    padding: 1em;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 50px 20px auto 30px;
 
-  .kit-icon {
-    width: 50px;
-    height: 50px;
-    margin-bottom: 0.5em;
-    justify-self: center;
-  }
-  .kit-heading {
-    color: var(--primary-color);
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-    justify-self: center;
-    margin-bottom: 0.5em;
-  }
+    .kit-icon {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 0.5em;
+      justify-self: center;
+    }
 
-  .kit-description {
-    text-align: center;
-    justify-self: center;
-    margin-bottom: 0.5em;
-  }
-  .download-button {
-    padding-top: 0.25em;
-    padding-bottom: 0.25em;
+    .kit-heading {
+      color: var(--primary-color);
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+      justify-self: center;
+      margin-bottom: 0.5em;
+    }
+
+    .kit-description {
+      text-align: center;
+    }
+
+    .download-button {
+      padding-top: 0.25em;
+      padding-bottom: 0.25em;
+      position: relative;
+    }
   }
 }
 
@@ -72,7 +77,6 @@
 
 .quotes-container {
   .quotes {
-    display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 1em;
     place-content: center;
@@ -80,6 +84,7 @@
     padding: 0 100px;
     max-width: 1000px;
     margin: auto;
+    display: none;
 
     @media only screen and (max-width: 768px) {
       grid-template-columns: repeat(1, auto);
@@ -91,6 +96,7 @@
       display: grid;
       grid-template-columns: 100%;
       grid-template-rows: auto 1fr auto 30px 50px;
+      visibility: visible;
 
       .apostrophy {
       }
