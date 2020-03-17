@@ -57,7 +57,10 @@ export class MeetingDetailsPageComponent implements OnInit, OnDestroy {
 
       this.getMeeting$ = this.dataService.getMeeting(hostId, meetingId, this.year).subscribe(meeting => {
         this.loadingMeeting = false;
-        this.extraData = this.user?.id === hostId || this.user?.id === meeting.bereaved?.id;
+        this.extraData =
+          this.extraData ||
+          this.participationsService.isHostParticipatingMeeting(this.user, meeting) ||
+          this.participationsService.isBereavedParticipatingMeeting(this.user, meeting);
         return (this.meeting = meeting);
       });
 
