@@ -57,8 +57,8 @@
   </div>
 </section>
 <section class="videos-container">
-  <div class="site-divider divider"></div>
-  <div class="small-heading videos-header">סרטונים</div>
+  <div class="site-divider divider" data-aos="fade-left" data-aos-duration="1000"></div>
+  <div class="small-heading videos-header" data-aos="fade-left" data-aos-duration="2000">סרטונים</div>
   <div class="vidseos">
     <iframe
       width="336"
@@ -67,6 +67,8 @@
       frameborder="0"
       allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen
+      data-aos="fade-right"
+      data-aos-duration="3000"
     ></iframe>
     <iframe
       width="336"
@@ -75,6 +77,8 @@
       frameborder="0"
       allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen
+      data-aos="fade-down"
+      data-aos-duration="3000"
     ></iframe>
     <iframe
       width="336"
@@ -83,6 +87,8 @@
       frameborder="0"
       allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen
+      data-aos="fade-left"
+      data-aos-duration="3000"
     ></iframe>
   </div>
 </section>
@@ -92,18 +98,19 @@
     אחים כותבים על אחיהם
   </h2>
   <div class="quote-carousel">
-    <!-- <ng-container *ngFor="let page of pagedExcerpts"> -->
-    <div class="quotes">
-      <ng-container *ngFor="let quote of pagedExcerpts[0].page">
-        <div class="quote">
-          <img class="apostrophy" src="../../../assets/img/apostrophy.png" />
-          <div class="site-text quote-text">{{ quote.excerpt }}</div>
-          <div class="quote-divider"></div>
-          <a class="site-text person-link">{{ quote.writerName }}</a>
-          <a class="site-text person-link" target="_blank" [href]="quote.recipientId">{{ quote.recipientName }}</a>
-        </div>
-      </ng-container>
-    </div>
-    <!-- </ng-container> -->
+    <ng-container *ngFor="let page of pagedExcerpts; index as i">
+      <div class="quotes">
+        <ng-container *ngFor="let quote of page.page" data-aos="fade-up" data-aos-duration="1000">
+          <div class="quote">
+            <img class="apostrophy" src="../../../assets/img/apostrophy.png" />
+            <div class="site-text quote-text">{{ quote.excerpt }}</div>
+            <div class="quote-divider"></div>
+            <a class="site-text person-link">{{ quote.writerName }}</a>
+            <a class="site-text person-link" target="_blank" [href]="quote.recipientId">{{ quote.recipientName }}</a>
+          </div>
+        </ng-container>
+      </div>
+      <span class="dot" onclick="currentSlide(i)"></span>
+    </ng-container>
   </div>
 </section>
