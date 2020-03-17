@@ -20,13 +20,9 @@ export class AgendaPageComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.pagedExcerpts = this.quotesService.pagedQuotes;
 
-    const seconds = interval(10000);
-    seconds.pipe(timeInterval()).subscribe(
-      () => {
-        this.plusSlides(1);
-      },
-      err => console.log(err)
-    );
+    interval(10000).subscribe(() => {
+      this.plusSlides(1);
+    });
   }
 
   ngAfterViewInit(): void {
@@ -38,18 +34,20 @@ export class AgendaPageComponent implements OnInit, AfterViewInit {
   }
 
   public showSlides(n) {
-    let i;
     const slides: NodeListOf<HTMLElement> = document.querySelectorAll('.quotes');
+
     if (n > slides.length) {
       this.slideIndex = 1;
     }
+
     if (n < 1) {
       this.slideIndex = slides.length;
     }
 
-    for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = 'none';
-    }
+    slides.forEach(slide => {
+      slide.style.display = 'none';
+    });
+
     slides[this.slideIndex - 1].style.display = 'grid';
   }
 }
