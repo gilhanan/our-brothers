@@ -1,13 +1,13 @@
 import { Component, AfterViewInit, Output, EventEmitter, Input } from '@angular/core';
-import { PayPalOrder } from 'models';
+import { PayPalDonation } from 'models';
 
 declare var paypal: any;
 
-export interface CreateOrder {
+export interface CreateDonation {
   amount: string;
 }
 
-interface OnApproveData {
+interface PayPalApproveData {
   orderID: string;
   payerID: string;
   facilitatorAccessToken: string;
@@ -20,38 +20,38 @@ interface OnApproveData {
 })
 export class PaypalButtonComponent implements AfterViewInit {
   @Input() amount: string;
-  @Output() createOrder = new EventEmitter<CreateOrder>();
-  @Output() approve = new EventEmitter<PayPalOrder>();
+  @Output() createDonation = new EventEmitter<CreateDonation>();
+  @Output() approve = new EventEmitter<PayPalDonation>();
   @Output() cancel = new EventEmitter<any>();
   @Output() error = new EventEmitter<any>();
 
-  private orderAmount: string;
+  private donationAmount: string;
 
   ngAfterViewInit(): void {
     if (paypal) {
       paypal
         .Buttons({
           createOrder: (data, actions) => {
-            this.orderAmount = this.amount;
-            this.createOrder.emit({ amount: this.orderAmount });
+            this.donationAmount = this.amount;
+            this.createDonation.emit({ amount: this.donationAmount });
 
             return actions.order.create({
               intent: 'CAPTURE',
               purchase_units: [
                 {
                   amount: {
-                    value: this.orderAmount,
+                    value: this.donationAmount,
                     currency_code: 'ILS'
                   }
                 }
               ]
             });
           },
-          onApprove: (data: OnApproveData, actions) => {
+          onApprove: (data: PayPalApproveData, actions) => {
             this.approve.emit({
               payerId: data.payerID,
-              orderId: data.orderID,
-              amount: this.orderAmount
+              donationId: data.orderID,
+              amount: this.donationAmount
             });
           },
           onCancel: data => {

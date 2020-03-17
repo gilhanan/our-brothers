@@ -11,7 +11,6 @@ import { interval, Subscription } from 'rxjs';
 export class AgendaPageComponent implements OnInit, AfterViewInit {
   pagedExcerpts: { page: Quote[] }[];
   public slideIndex: number;
-  public sub: Subscription;
 
   constructor(private quotesService: QuotesService) {
     this.slideIndex = 1;
@@ -19,6 +18,36 @@ export class AgendaPageComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.pagedExcerpts = this.quotesService.pagedQuotes;
+
+    interval(10000).subscribe(() => {
+      this.plusSlides(1);
+    });
+  }
+
+  ngAfterViewInit(): void {
+    this.showSlides(1);
+  }
+
+  public plusSlides(n: number) {
+    this.showSlides((this.slideIndex += n));
+  }
+
+  public showSlides(n) {
+    const slides: NodeListOf<HTMLElement> = document.querySelectorAll('.quotes');
+
+    if (n > slides.length) {
+      this.slideIndex = 1;
+    }
+
+    if (n < 1) {
+      this.slideIndex = slides.length;
+    }
+
+    slides.forEach(slide => {
+      slide.style.display = 'none';
+    });
+
+    slides[this.slideIndex - 1].style.display = 'grid';
   }
 
   ngAfterViewInit(): void {

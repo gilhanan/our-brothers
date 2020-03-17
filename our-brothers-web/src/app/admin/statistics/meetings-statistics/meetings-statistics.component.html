@@ -1,0 +1,25 @@
+<div class="small-heading">מפגשים</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th>שנה</th>
+      <th>מפגשים</th>
+      <th>רשומים</th>
+      <th>אחוז</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let year of yearlyMeetingsStatistics">
+      <td>{{ year.year }}</td>
+      <td>{{ year.meetingStatistics.count }}</td>
+      <td>{{ year.meetingStatistics.registered }}</td>
+      <td>{{ year.meetingStatistics.registered / year.meetingStatistics.count | percent }}</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td>סה"כ</td>
+      <td>{{ total }}</td>
+    </tr>
+  </tfoot>
+</table>

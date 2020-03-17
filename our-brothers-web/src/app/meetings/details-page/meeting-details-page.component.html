@@ -156,7 +156,7 @@
     <div
       class="row"
       *ngIf="
-        participationsService.isBereavedParticipatingEvent(user, meeting) ||
+        participationsService.isBereavedParticipatingMeeting(user, meeting) ||
         participationsService.isBereavedCanParticipatingMeeting(user, meeting)
       "
     >
@@ -164,7 +164,7 @@
         <div class="buttons">
           <app-remove-button
             class="button"
-            *ngIf="participationsService.isBereavedParticipatingEvent(user, meeting)"
+            *ngIf="participationsService.isBereavedParticipatingMeeting(user, meeting)"
             (remove)="onBereavedLeaveMeeting()"
           ></app-remove-button>
           <app-meeting-join-button
@@ -179,7 +179,7 @@
     </div>
   </ng-container>
   <ng-container *ngIf="user && !meeting?.invited && meetingParticipates?.length">
-    <div class="medium-heading">משתתפים ({{ meeting.count + '/' + meeting.capacity }})</div>
+    <div class="medium-heading">משתתפים ({{ (meeting.count || 0) + '/' + meeting.capacity }})</div>
     <app-meeting-participates-list
       [user]="user"
       [meeting]="meeting"
@@ -188,7 +188,7 @@
     <div
       class="row"
       *ngIf="
-        participationsService.isParticipateParticipatingEvent(user, meeting) ||
+        participationsService.isParticipateParticipatingMeeting(user, meeting) ||
         participationsService.isParticipateCanParticipatingMeeting(user, meeting)
       "
     >
@@ -196,7 +196,7 @@
         <div class="buttons">
           <app-remove-button
             class="button"
-            *ngIf="participationsService.isParticipateParticipatingEvent(user, meeting)"
+            *ngIf="participationsService.isParticipateParticipatingMeeting(user, meeting)"
             (remove)="onParticipateLeaveMeeting()"
           ></app-remove-button>
           <app-meeting-join-button

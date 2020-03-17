@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 
-import { User, PayPalOrder } from 'models';
+import { User, PayPalDonation, ClientDonation } from 'models';
 import { AuthService } from '../../shared/services/auth.service';
 import { AnalyticsService } from '../../shared/services/analytics.service';
-import { PaypalService } from '../../shared/services/paypal.service';
-import { CreateOrder } from '../paypal-button/paypal-button.component';
+import { DonationService } from '../../shared/services/donation.service';
+import { CreateDonation } from '../paypal-button/paypal-button.component';
 import { Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UtilsService } from 'src/app/shared/services/utils.service';
@@ -39,7 +39,7 @@ export class DonatePageComponent implements OnInit {
     private authService: AuthService,
     private analyticsService: AnalyticsService,
     private toastr: ToastrService,
-    private paypalService: PaypalService,
+    private donationService: DonationService,
     private fb: FormBuilder,
     private utilsService: UtilsService
   ) {}
@@ -115,29 +115,29 @@ export class DonatePageComponent implements OnInit {
     }
   }
 
-  onCreateOrder(order: CreateOrder) {
-    this.analyticsService.logEvent('PayPalCreatingOrder', {
-      ammout: order.amount
+  onCreateDonation(donation: CreateDonation) {
+    this.analyticsService.logEvent('PayPalCreatingDonation', {
+      ammout: donation.amount
     });
   }
 
-  onApprove(order: PayPalOrder) {
-    const userOrder: PayPalOrder = {
-      ...order,
-      userId: this.user && this.user.id
+  onApprove(donation: PayPalDonation) {
+    const userDonation: ClientDonation = {
+      ...donation,
+      userId: this.user?.id
     };
 
-    this.paypalService.captureOrder(userOrder).subscribe(
+    this.donationService.captureDonation(userDonation).subscribe(
       () => {
-        this.analyticsService.logEvent('PayPalCaptureOrderSuccess', {
-          order: userOrder
+        this.analyticsService.logEvent('PayPalCaptureDonationSuccess', {
+          donation: userDonation
         });
 
         this.toastr.success('תודה רבה, קיבלנו את תרומתך בהצלחה');
       },
       error => {
-        this.analyticsService.logEvent('PayPalCaptureOrderFailed', {
-          order: userOrder,
+        this.analyticsService.logEvent('PayPalCaptureDonationFailed', {
+          donation: userDonation,
           error
         });
 
@@ -149,12 +149,12 @@ export class DonatePageComponent implements OnInit {
   }
 
   onCancel(data: any) {
-    this.analyticsService.logEvent('PayPalOrderCanceled', data);
+    this.analyticsService.logEvent('PayPalDonationCanceled', data);
     console.warn(data);
   }
 
   onError(error: any) {
-    this.analyticsService.logEvent('PayPalOrderFailed', {
+    this.analyticsService.logEvent('PayPalDonationFailed', {
       error: error.toString()
     });
     console.error(error);

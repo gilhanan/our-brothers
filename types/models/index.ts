@@ -197,9 +197,26 @@ export interface Contact {
   date: number;
 }
 
-export interface PayPalOrder {
-  payerId: string;
-  orderId: string;
+export interface Donation {
   amount: string;
-  userId?: string;
+  date: number;
+}
+
+export interface PayPalDonation {
+  amount: string;
+  payerId: string;
+  donationId: string;
+}
+
+export interface ClientDonation extends PayPalDonation {
+  userId: string;
+}
+
+export interface ServerDonation extends ClientDonation {
+  date: number;
+}
+
+export interface SMSMessage {
+  body: string;
+  date: number;
 }

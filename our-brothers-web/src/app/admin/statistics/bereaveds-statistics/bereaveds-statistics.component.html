@@ -1,0 +1,15 @@
+<div class="small-heading">אחים</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th>אחים</th>
+      <th>רשומים</th>
+      <th>אחוז</th>
+    </tr>
+  </thead>
+  <tbody>
+    <td>{{ bereavedsStatistics.count }}</td>
+    <td>{{ bereavedsStatistics.registered }}</td>
+    <td>{{ bereavedsStatistics.registered / bereavedsStatistics.count | percent }}</td>
+  </tbody>
+</table>
