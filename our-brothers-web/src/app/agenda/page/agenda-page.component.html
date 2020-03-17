@@ -99,7 +99,7 @@
   </h2>
   <div class="quote-carousel">
     <ng-container *ngFor="let page of pagedExcerpts; index as i">
-      <div class="quotes">
+      <div class="quotes" (mouseenter)="pauseCarousel()" (mouseleave)="resumeCarousel()">
         <ng-container *ngFor="let quote of page.page" data-aos="fade-up" data-aos-duration="1000">
           <div class="quote">
             <img class="apostrophy" src="../../../assets/img/apostrophy.png" />

@@ -1,7 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy, ElementRef, AfterViewInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnInit } from '@angular/core';
 import { Quote, QuotesService } from './quotes.service';
-import { timeInterval } from 'rxjs/operators';
-import { interval } from 'rxjs';
+import { interval, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-agenda-page',
@@ -12,21 +11,34 @@ import { interval } from 'rxjs';
 export class AgendaPageComponent implements OnInit, AfterViewInit {
   pagedExcerpts: { page: Quote[] }[];
   public slideIndex: number;
+  public sub: Subscription;
 
-  constructor(private quotesService: QuotesService, private elementRef: ElementRef) {
+  constructor(private quotesService: QuotesService) {
     this.slideIndex = 1;
   }
 
   ngOnInit() {
     this.pagedExcerpts = this.quotesService.pagedQuotes;
-
-    interval(10000).subscribe(() => {
-      this.plusSlides(1);
-    });
   }
 
   ngAfterViewInit(): void {
     this.showSlides(1);
+    this.startCarousel();
+  }
+
+  public pauseCarousel() {
+    this.sub.unsubscribe();
+  }
+
+  public resumeCarousel() {
+    this.sub.unsubscribe();
+    this.startCarousel();
+  }
+
+  private startCarousel() {
+    this.sub = interval(10000).subscribe(() => {
+      this.plusSlides(1);
+    });
   }
 
   public plusSlides(n: number) {
