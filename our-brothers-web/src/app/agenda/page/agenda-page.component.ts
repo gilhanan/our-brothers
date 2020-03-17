@@ -37,10 +37,6 @@ export class AgendaPageComponent implements OnInit, AfterViewInit {
     this.showSlides((this.slideIndex += n));
   }
 
-  public currentSlide(n: number) {
-    this.showSlides((this.slideIndex = n));
-  }
-
   public showSlides(n) {
     let i;
     const slides: NodeListOf<HTMLElement> = document.querySelectorAll('.quotes');
