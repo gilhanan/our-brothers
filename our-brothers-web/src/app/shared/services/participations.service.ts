@@ -34,15 +34,15 @@ export class ParticipationsService {
     );
   }
 
-  isParticipateParticipatingEvent(user: User, meeting: Meeting, year = MEMORIAL_YEAR): boolean {
+  isParticipateParticipatingMeeting(user: User, meeting: Meeting, year = MEMORIAL_YEAR): boolean {
     return user?.participateParticipation?.[year]?.meetings?.some(isUserPresentInMeeting(meeting));
   }
 
-  isBereavedParticipatingEvent(user: User, meeting: Meeting, year = MEMORIAL_YEAR): boolean {
+  isBereavedParticipatingMeeting(user: User, meeting: Meeting, year = MEMORIAL_YEAR): boolean {
     return user?.bereavedParticipation?.[year]?.meetings?.some(isUserPresentInMeeting(meeting));
   }
 
-  isHostParticipatingEvent(user: User, meeting: Meeting): boolean {
+  isHostParticipatingMeeting(user: User, meeting: Meeting): boolean {
     return user?.id === meeting.hostId;
   }
 
@@ -52,9 +52,9 @@ export class ParticipationsService {
     }
 
     return (
-      this.isParticipateParticipatingEvent(user, meeting, year) ||
-      this.isBereavedParticipatingEvent(user, meeting, year) ||
-      this.isHostParticipatingEvent(user, meeting)
+      this.isParticipateParticipatingMeeting(user, meeting, year) ||
+      this.isBereavedParticipatingMeeting(user, meeting, year) ||
+      this.isHostParticipatingMeeting(user, meeting)
     );
   }
 
@@ -79,7 +79,7 @@ export class ParticipationsService {
       return false;
     }
 
-    if (this.isBereavedParticipatingEvent(user, meeting, year)) {
+    if (this.isBereavedParticipatingMeeting(user, meeting, year)) {
       return false;
     }
 
@@ -96,7 +96,7 @@ export class ParticipationsService {
       return false;
     }
 
-    if (this.isParticipateParticipatingEvent(user, meeting, year)) {
+    if (this.isParticipateParticipatingMeeting(user, meeting, year)) {
       return false;
     }
 

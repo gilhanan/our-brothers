@@ -397,3 +397,25 @@ textarea.form-field {
 h2 {
   font-weight: normal;
 }
+
+.table {
+  margin: 0 auto;
+  border-collapse: collapse;
+
+  th {
+    font-weight: bold;
+  }
+
+  td,
+  th {
+    padding: 2px 10px;
+  }
+
+  tbody,
+  thead {
+    td,
+    th {
+      border: 1px solid rgba(0, 0, 0, 0.2);
+    }
+  }
+}

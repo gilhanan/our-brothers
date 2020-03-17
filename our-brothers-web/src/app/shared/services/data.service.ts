@@ -77,12 +77,14 @@ export class DataService {
   ) {}
 
   public getUserById(userId: string): Observable<User> {
-    this.analyticsService.logEvent('GetUserById');
+    const telemetry = { userId };
+
+    this.analyticsService.logEvent('GetUserById', telemetry);
     return this.angularFireDatabase
       .object<User>(`users/${userId}`)
       .valueChanges()
       .pipe(
-        tap(() => this.analyticsService.logEvent('GetUserByIdSuccess')),
+        tap(() => this.analyticsService.logEvent('GetUserByIdSuccess', telemetry)),
         map(user => ({
           id: userId,
           ...user
@@ -95,7 +97,10 @@ export class DataService {
           return user;
         }),
         catchError(error => {
-          this.analyticsService.logEvent('GetUserByIdFailed');
+          this.analyticsService.logEvent('GetUserByIdFailed', {
+            ...telemetry,
+            error
+          });
           console.error(error);
           return throwError(error);
         })
@@ -447,27 +452,36 @@ export class DataService {
   }
 
   public getBereaveds(year = MEMORIAL_YEAR): Observable<User[]> {
-    this.analyticsService.logEvent('GetBereaveds');
+    const telemetry = { year };
+
+    this.analyticsService.logEvent('GetBereaveds', telemetry);
     return this.angularFireDatabase
       .list<User>(`users`, ref => ref.orderByChild('role').equalTo(UserRole.bereaved))
-      .snapshotChanges()
+      .snapshotChanges(['child_changed', 'child_removed']) // TODO: Workaround for loop
       .pipe(
-        tap(() => this.analyticsService.logEvent('GetBereavedsSuccess')),
         map(usersSnapshot =>
           usersSnapshot
-            .map(usersSnapshot => ({
-              id: usersSnapshot.key,
-              ...usersSnapshot.payload.val()
+            .map(userSnapshot => ({
+              id: userSnapshot.key,
+              ...userSnapshot.payload.val()
             }))
             .filter(user => !!user.profile)
-            // .slice(0, 20)
             .map(user => {
               this.parseBereavedParticipation(user, year);
               return user;
             })
         ),
+        tap(bereaveds =>
+          this.analyticsService.logEvent('GetBereavedsSuccess', {
+            ...telemetry,
+            count: bereaveds.length
+          })
+        ),
         catchError(error => {
-          this.analyticsService.logEvent('GetBereavedsFailed');
+          this.analyticsService.logEvent('GetBereavedsFailed', {
+            ...telemetry,
+            error
+          });
           console.error(error);
           return throwError(error);
         })
@@ -475,22 +489,26 @@ export class DataService {
   }
 
   public getUsers(): Observable<User[]> {
+    const telemetry = {};
+
     this.analyticsService.logEvent('GetUsers');
     return this.angularFireDatabase
       .list<User>(`users`)
-      .snapshotChanges()
+      .snapshotChanges(['child_changed', 'child_removed']) // TODO: Workaround for loop
       .pipe(
-        debounce(() => interval(1000)),
-        tap(() => this.analyticsService.logEvent('GetUsersSuccess')),
-        map(
-          usersSnapshot =>
-            usersSnapshot
-              .map(usersSnapshot => ({
-                id: usersSnapshot.key,
-                ...usersSnapshot.payload.val()
-              }))
-              .filter(user => !!user.profile)
-          // .slice(0, 20)
+        map(usersSnapshot =>
+          usersSnapshot
+            .map(userSnapshot => ({
+              id: userSnapshot.key,
+              ...userSnapshot.payload.val()
+            }))
+            .filter(user => !!user.profile)
+        ),
+        tap(users =>
+          this.analyticsService.logEvent('GetUsersSuccess', {
+            ...telemetry,
+            count: users.length
+          })
         ),
         catchError(error => {
           this.analyticsService.logEvent('GetUsersFailed');
@@ -564,20 +582,53 @@ export class DataService {
           for (const hostMeetingsSnapshot of meetingsSnapshot) {
             const hostId = hostMeetingsSnapshot.key;
 
-            const hostMeetings = this.firebaseMapToArray<Meeting>(hostMeetingsSnapshot.payload.val());
+            const hostMeetings = this.firebaseMapToArray<Meeting>(hostMeetingsSnapshot.payload.val(), { hostId });
 
-            for (const meeting of hostMeetings) {
-              meeting.hostId = hostId;
-              meeting.count = meeting.count || 0;
-
-              meetings.push(meeting);
-            }
+            meetings.push(...hostMeetings);
           }
 
           return meetings;
         }),
         catchError(error => {
           this.analyticsService.logEvent('GetMeetingsFailed', telemetry);
+          console.log(error);
+          return throwError(error);
+        })
+      );
+  }
+
+  public getAllMeetings(): Observable<Meeting[]> {
+    const telemetry = {};
+
+    this.analyticsService.logEvent('GetAllMeetings', telemetry);
+    return this.angularFireDatabase
+      .list<{ [year: string]: { [hostId: string]: { [meetingId: string]: Meeting } } }>(`events`)
+      .snapshotChanges()
+      .pipe(
+        tap(() => this.analyticsService.logEvent('GetAllMeetingsSuccess', telemetry)),
+        map(meetingsSnapshot => {
+          const meetings: Meeting[] = [];
+
+          for (const yearlyMeetingsSnapshot of meetingsSnapshot) {
+            const yearlyMeetings = this.firebaseMapToArray<{ [hostId: string]: { [meetingId: string]: Meeting } }>(
+              yearlyMeetingsSnapshot.payload.val()
+            );
+
+            for (const hostMeetingsMap of yearlyMeetings) {
+              const hostId = hostMeetingsMap.id;
+
+              delete hostMeetingsMap.id;
+
+              const hostMeetings = this.firebaseMapToArray<Meeting>(hostMeetingsMap, { hostId });
+
+              meetings.push(...hostMeetings);
+            }
+          }
+
+          return meetings;
+        }),
+        catchError(error => {
+          this.analyticsService.logEvent('GetAllMeetingsFailed', telemetry);
           console.log(error);
           return throwError(error);
         })

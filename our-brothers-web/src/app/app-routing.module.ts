@@ -97,6 +97,13 @@ const routes: Routes = [
       import('./admin/users/page/admin-users-page.module').then(({ AdminUsersPageModule }) => AdminUsersPageModule)
   },
   {
+    path: 'admin-statistics',
+    loadChildren: () =>
+      import('./admin/statistics/page/admin-statistics-page.module').then(
+        ({ AdminStatisticsPageModule }) => AdminStatisticsPageModule
+      )
+  },
+  {
     path: '',
     redirectTo: '/home',
     pathMatch: 'full'

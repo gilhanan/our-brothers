@@ -12,7 +12,7 @@ export class AnalyticsService {
 
   public logEvent(eventName: string, eventParams?: { [key: string]: any }) {
     if (!environment.production) {
-      console.log(eventName);
+      console.log(eventName, eventParams);
     }
     this.angularFireAnalytics.logEvent(eventName, eventParams);
   }
