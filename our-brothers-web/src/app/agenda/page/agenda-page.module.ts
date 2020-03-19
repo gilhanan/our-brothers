@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 
 import { QuotesService } from './quotes.service';
 import { AgendaPageComponent } from './agenda-page.component';
+import { PipesModule } from '../../shared/pipes/pipes.module';
 
 const routes = [
   {
@@ -13,7 +14,7 @@ const routes = [
 ];
 
 @NgModule({
-  imports: [CommonModule, RouterModule.forChild(routes)],
+  imports: [CommonModule, RouterModule.forChild(routes), PipesModule],
   providers: [QuotesService],
   declarations: [AgendaPageComponent]
 })

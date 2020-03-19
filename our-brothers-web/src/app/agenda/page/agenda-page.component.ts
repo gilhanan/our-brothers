@@ -1,6 +1,8 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnInit } from '@angular/core';
 import { Quote, QuotesService } from './quotes.service';
 import { interval, Subscription } from 'rxjs';
+import { Video, VideosService } from './videos.service';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-agenda-page',
@@ -10,56 +12,93 @@ import { interval, Subscription } from 'rxjs';
 })
 export class AgendaPageComponent implements OnInit, AfterViewInit {
   pagedExcerpts: { page: Quote[] }[];
-  public slideIndex: number;
+  pagedVideos: { page: Video[] }[];
+  public quotesSlideIndex: number;
+  public videosSlideIndex: number;
   public sub: Subscription;
 
-  constructor(private quotesService: QuotesService) {
-    this.slideIndex = 1;
+  constructor(private quotesService: QuotesService, private videosService: VideosService) {
+    this.quotesSlideIndex = 1;
+    this.videosSlideIndex = 1;
   }
 
   ngOnInit() {
-    this.pagedExcerpts = this.quotesService.pagedQuotes;
+    if (window.innerWidth <= 768) {
+      this.pagedExcerpts = this.quotesService.smallPagePagedQuotes;
+    } else {
+      this.pagedExcerpts = this.quotesService.pagedQuotes;
+    }
+    this.pagedVideos = this.videosService.pagedVideos;
   }
 
   ngAfterViewInit(): void {
-    this.showSlides(1);
-    this.startCarousel();
+    this.showSlides(this.quotesSlideIndex, '.quotes');
+    this.showSlides(this.videosSlideIndex, '.videos');
+    this.startQuotesCarousel();
   }
 
-  public pauseCarousel() {
+  public pauseQuoteCarousel() {
     this.sub.unsubscribe();
   }
 
-  public resumeCarousel() {
+  public resumeQuoteCarousel() {
     this.sub.unsubscribe();
-    this.startCarousel();
+    this.startQuotesCarousel();
   }
 
-  private startCarousel() {
+  private startQuotesCarousel() {
     this.sub = interval(10000).subscribe(() => {
-      this.plusSlides(1);
+      this.plusSlides(1, '.quotes');
     });
   }
 
-  public plusSlides(n: number) {
-    this.showSlides((this.slideIndex += n));
+  public plusSlides(n: number, className: string) {
+    switch (className) {
+      case '.quotes':
+        this.showSlides((this.quotesSlideIndex += n), className);
+        break;
+      case '.videos':
+        this.showSlides((this.videosSlideIndex += n), className);
+        break;
+    }
   }
 
-  public showSlides(n) {
-    const slides: NodeListOf<HTMLElement> = document.querySelectorAll('.quotes');
+  public showSlides(n: number, className: string) {
+    const slides: NodeListOf<HTMLElement> = document.querySelectorAll(className);
 
     if (n > slides.length) {
-      this.slideIndex = 1;
+      switch (className) {
+        case '.quotes':
+          this.quotesSlideIndex = 1;
+          break;
+        case '.videos':
+          this.videosSlideIndex = 1;
+          break;
+      }
     }
 
     if (n < 1) {
-      this.slideIndex = slides.length;
+      switch (className) {
+        case '.quotes':
+          this.quotesSlideIndex = slides.length;
+          break;
+        case '.videos':
+          this.videosSlideIndex = slides.length;
+          break;
+      }
     }
 
     slides.forEach(slide => {
       slide.style.display = 'none';
     });
 
-    slides[this.slideIndex - 1].style.display = 'grid';
+    switch (className) {
+      case '.quotes':
+        slides[this.quotesSlideIndex - 1].style.display = 'grid';
+        break;
+      case '.videos':
+        slides[this.videosSlideIndex - 1].style.display = 'grid';
+        break;
+    }
   }
 }
