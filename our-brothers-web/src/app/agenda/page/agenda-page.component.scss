@@ -62,12 +62,31 @@
     margin-bottom: 2em;
   }
 
-  .vidseos {
-    display: grid;
+  .videos-button {
+    background: transparent;
+    margin: 0 10px;
+    border: none;
+
+    .icon {
+      display: inline-block;
+      width: 25px;
+      height: 25px;
+      vertical-align: middle;
+
+      margin: 0 12px;
+      background: transparent;
+    }
+  }
+  .pages-numbers-text {
+    color: #515151;
+  }
+
+  .videos {
     grid-template-columns: repeat(3, auto);
     grid-gap: 1em;
     place-content: center;
     width: 100%;
+    display: none;
 
     @media only screen and (max-width: 768px) {
       grid-template-columns: repeat(1, auto);
