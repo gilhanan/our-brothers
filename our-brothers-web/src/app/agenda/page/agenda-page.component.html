@@ -115,7 +115,12 @@
         <ng-container *ngFor="let quote of page.page" data-aos="fade-up" data-aos-duration="1000">
           <div class="quote">
             <img class="apostrophy" src="../../../assets/img/apostrophy.png" />
-            <div class="site-text quote-text">{{ quote.excerpt }}</div>
+            <a
+              class="site-text quote-text"
+              target="_blank"
+              [href]="'../../../assets/texts/' + quote.writerId + '.pdf'"
+              >{{ quote.excerpt }}</a
+            >
             <div class="quote-divider"></div>
             <a class="site-text person-link">{{ quote.writerName }}</a>
             <a class="site-text person-link" target="_blank" [href]="quote.recipientId">{{ quote.recipientName }}</a>
@@ -123,5 +128,15 @@
         </ng-container>
       </div>
     </ng-container>
+  </div>
+  <div class="pages-number-container">
+    <br />
+    <button class="quotes-button" (click)="plusSlides(1, '.quotes')">
+      <img src="../../../assets/img/left_arrow.svg" class="icon" />
+    </button>
+    <span class="pages-numbers-text-quote"> {{ pagedExcerpts.length }} / {{ quotesSlideIndex }} </span>
+    <button class="quotes-button" (click)="plusSlides(-1, '.quotes')">
+      <img src="../../../assets/img/right_arrow.svg" class="icon" />
+    </button>
   </div>
 </section>
