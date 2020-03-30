@@ -12,7 +12,7 @@ const isUserBereaved = (user: User) => user.role === UserRole.bereaved;
 })
 export class ParticipationsService {
   isUserCanHost(user: User): boolean {
-    return !user?.role || !isUserBereaved(user) || user?.isAdmin;
+    return false && (!user?.role || !isUserBereaved(user) || user?.isAdmin);
   }
 
   isUserCanParticipate(user: User): boolean {
