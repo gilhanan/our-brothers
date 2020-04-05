@@ -1,3 +1,10 @@
 .participations-buttons {
   margin-top: 60px;
 }
+
+.medium-heading {
+  @media only screen and (max-width: 768px) {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}

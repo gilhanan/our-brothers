@@ -12,7 +12,7 @@ $mobileBreakpoint: 1200px;
 
     %bar {
       width: 30px;
-      height: $barHeight;
+      height: 3px;
       background-color: rgb(0, 160, 153);
       display: block;
     }
@@ -181,7 +181,6 @@ $mobileBreakpoint: 1200px;
         align-items: center;
 
         %header-button {
-          border-radius: 4px;
           cursor: pointer;
         }
         .action-header-support-us {

@@ -5,7 +5,7 @@
       <input
         class="form-field"
         type="text"
-        placeholder="שם פרטי"
+        placeholder="שם פרטי*"
         formControlName="firstName"
         [class.invalid]="!firstName.valid && firstName.touched"
       />
@@ -14,7 +14,7 @@
       <input
         class="form-field"
         type="text"
-        placeholder="שם משפחה"
+        placeholder="שם משפחה*"
         formControlName="lastName"
         [class.invalid]="!lastName.valid && lastName.touched"
       />
@@ -25,7 +25,7 @@
       <input
         class="form-field"
         type="text"
-        placeholder="תאריך נפילה"
+        placeholder="תאריך נפילה*"
         formControlName="deathDate"
         [class.invalid]="!deathDate.valid && deathDate.touched"
         [max]="maxDate"
@@ -48,7 +48,7 @@
   <p class="form-invalid-message" *ngIf="formInvalid">
     אחד או יותר מהשדות אינם תקינים
   </p>
-  <button (click)="onSubmit()" class="site-button primary-button">
+  <button (click)="onSubmit()" class="sumbit-button site-button primary-button">
     המשך
   </button>
 </div>

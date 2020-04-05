@@ -4,7 +4,10 @@
 
   .form-row {
     display: flex;
-    margin-bottom: 30px;
+
+    @media only screen and (max-width: 768px) {
+      padding: 5px;
+    }
 
     .col {
       flex: 1;
@@ -18,11 +21,19 @@
       @media only screen and (min-width: 1024px) {
         padding-top: 15px;
       }
+
+      @media only screen and (max-width: 768px) {
+        margin: 0;
+        padding: 0 5px;
+      }
     }
   }
 
   .sumbit-button {
-    margin-bottom: 40px;
     margin-top: 40px;
+
+    @media only screen and (max-width: 768px) {
+      margin-top: 10px;
+    }
   }
 }

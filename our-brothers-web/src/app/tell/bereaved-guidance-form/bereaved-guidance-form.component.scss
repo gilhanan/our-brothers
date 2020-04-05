@@ -3,20 +3,30 @@
   margin: auto;
   margin-bottom: 40px;
 
-  .training-text {
-    margin-bottom: 20px;
+  @media only screen and (max-width: 768px) {
+    padding: 0 15px;
   }
 
-  .training-option {
-    padding-bottom: 10px;
-    padding-top: 10px;
+  .training-text {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #818181;
+  }
 
-    &:not(:last-child) {
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    }
+  .training-options {
+    color: #818181;
 
-    &.not-interseted {
-      margin-top: 20px;
+    .training-option {
+      padding-bottom: 10px;
+      padding-top: 10px;
+
+      &:not(:last-child) {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      &.not-interseted {
+        margin-top: 20px;
+      }
     }
   }
 }

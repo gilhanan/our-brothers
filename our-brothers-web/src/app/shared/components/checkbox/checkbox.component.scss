@@ -7,7 +7,7 @@
     width: 18px;
     height: 18px;
     border: 1px solid rgb(180, 180, 180);
-    margin: 0 5px;
+    margin-left: 13px;
     position: relative;
 
     &.invalid {
@@ -17,7 +17,8 @@
 
   .site-checkbox-label {
     font-family: 'Heebo';
-    color: rgb(17, 17, 17);
+    color: #818181;
+    width: 100%;
   }
 
   &.checked {

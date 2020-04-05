@@ -1,7 +1,7 @@
 <div class="qna-item" [class.open]="open">
   <div class="question-container">
     <div class="question-mark"></div>
-    <div class="question-text">
+    <div class="question-text" [class.font-bold]="open">
       {{ qnaItem.question }}
     </div>
     <div class="question-collapse-btn" (click)="open = !open">

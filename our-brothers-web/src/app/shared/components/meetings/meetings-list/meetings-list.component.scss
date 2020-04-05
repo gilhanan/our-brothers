@@ -1,5 +1,9 @@
 .show-full-meetings-container {
   margin: 5px 0;
+
+  @media only screen and (max-width: 750px) {
+    margin-right: 20px;
+  }
 }
 
 .list-header {
@@ -13,6 +17,15 @@
 
   .join-col {
     flex: 0 1 130px;
+  }
+
+  .col {
+    &:first-child {
+      padding-right: 0;
+    }
+    &:last-child {
+      padding-left: 0;
+    }
   }
 }
 

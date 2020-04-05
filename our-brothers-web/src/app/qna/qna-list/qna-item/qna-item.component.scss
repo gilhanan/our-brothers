@@ -27,13 +27,17 @@
     .question-text {
       flex: 1 1 300px;
       font-size: 18px;
-      font-family: 'arbel';
+      font-family: 'heebo';
       color: rgb(129, 129, 129);
+
+      &.font-bold {
+        font-weight: bold;
+      }
     }
 
     .question-collapse-btn {
       cursor: pointer;
-      flex: 0 0 175px;
+      flex: 0 0 160px;
       border-width: 2px;
       border-color: rgb(0, 160, 153);
       border-style: solid;
@@ -49,12 +53,11 @@
       }
 
       .question-collapse-btn-text {
-        font-size: 36px;
+        font-size: 28px;
         font-family: 'arbel';
         color: rgb(0, 160, 153);
-        font-weight: bold;
         letter-spacing: 4px;
-        margin-left: 20px;
+        margin-left: 14px;
 
         @media only screen and (max-width: 768px) {
           font-size: 26px;
@@ -62,7 +65,7 @@
       }
 
       .fa-angle-double-down {
-        font-size: 26px;
+        font-size: 20px;
         color: rgb(0, 160, 153);
       }
     }
@@ -72,10 +75,6 @@
     box-shadow: 4.5px 5.362px 10px 0px rgba(4, 26, 55, 0.1);
 
     .question-container {
-      .question-text {
-        font-weight: bold;
-      }
-
       .question-collapse-btn {
         background-color: rgb(0, 160, 153);
 
@@ -84,7 +83,8 @@
         }
 
         .fa-angle-double-up {
-          font-size: 26px;
+          margin-right: 18px;
+          font-size: 20px;
           color: white;
         }
       }
@@ -94,7 +94,7 @@
   .answer-container {
     padding: 10px 65px 75px 250px;
     font-size: 18px;
-    font-family: 'arbel';
+    font-family: 'heebo';
     color: rgb(129, 129, 129);
 
     @media only screen and (max-width: 768px) {
