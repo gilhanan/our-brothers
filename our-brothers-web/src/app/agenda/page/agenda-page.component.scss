@@ -78,7 +78,7 @@
     }
   }
   .pages-numbers-text {
-    color: #515151;
+    color: white;
   }
 
   .videos {
@@ -123,6 +123,8 @@
       .quote-text {
         text-align: center;
         justify-self: center;
+        text-decoration: none;
+        font-weight: bold;
       }
 
       .quote-divider {
@@ -139,6 +141,33 @@
         font-size: 14px;
         text-decoration: none;
       }
+    }
+  }
+
+  .pages-number-container {
+    padding-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .quotes-button {
+      align-self: center;
+      background: transparent;
+      margin: 0 25px;
+      border: none;
+
+      .icon {
+        display: inline-block;
+        width: 25px;
+        height: 25px;
+        vertical-align: middle;
+
+        margin: 0 12px;
+        background: transparent;
+      }
+    }
+
+    .pages-numbers-text-quote {
+      color: #3787b1;
     }
   }
 }
