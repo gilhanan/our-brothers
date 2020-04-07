@@ -6,7 +6,7 @@
   background-color: white;
 
   @media only screen and (min-width: 1024px) {
-    top: 100px;
+    top: 65px;
     max-width: 1000px;
   }
 
@@ -14,14 +14,16 @@
     position: absolute;
     top: 0;
     right: 0;
-    padding: 10px 15px;
-    font-size: 40px;
+    padding: 10px;
+    font-size: 20px;
     border: none;
     color: rgb(29, 42, 77);
     background-color: transparent;
     cursor: pointer;
 
     @media only screen and (min-width: 1024px) {
+      padding: 15px;
+      font-size: 20px;
       color: white;
     }
   }
@@ -51,20 +53,33 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 60px;
+      padding: 10px 50px;
+
+      @media only screen and (min-width: 1024px) {
+        padding: 20px 35px;
+      }
 
       .our-brothers-icon {
-        height: 55px;
+        height: 30px;
+
+        @media only screen and (min-width: 1024px) {
+          height: 45px;
+        }
       }
 
       .connect-2-care-icon {
-        height: 70px;
+        height: 33px;
+
+        @media only screen and (min-width: 1024px) {
+          height: 53px;
+        }
       }
     }
 
     .promotion {
-      padding: 40px;
-      font-size: 40px;
+      padding: 10px;
+      text-align: center;
+      font-size: 25px;
       font-family: 'arbel';
       line-height: 1em;
       background-color: rgb(29, 42, 77);
@@ -73,7 +88,9 @@
       align-items: center;
 
       @media only screen and (min-width: 1024px) {
-        font-size: 82px;
+        text-align: right;
+        padding: 40px;
+        font-size: 60px;
         min-width: 470px;
       }
 
@@ -88,6 +105,11 @@
 
         .third {
           color: rgb(255, 255, 255);
+          margin-right: 30px;
+
+          @media only screen and (min-width: 1024px) {
+            margin-right: 0;
+          }
 
           .third-text {
             display: inline-block;
@@ -105,25 +127,56 @@
     }
 
     .content {
-      font-size: 17px;
-      padding: 20px;
+      font-size: 13px;
+      padding: 0;
       text-align: center;
+      background-image: url('../../assets/img/candle_background.jpg');
+      background-repeat: no-repeat;
+      background-position: bottom left;
+      background-size: 30%;
+
+      @media only screen and (min-width: 1024px) {
+        font-size: 14px;
+      }
 
       .text {
         padding: 0 20px;
 
+        @media only screen and (min-width: 1024px) {
+          padding: 0 80px;
+        }
+
         .heading {
-          margin: 20px auto;
+          margin: 13px auto;
           color: rgb(52, 54, 74);
           font-weight: bold;
+
+          @media only screen and (min-width: 1024px) {
+            margin: 20px auto;
+          }
         }
       }
 
       .registration-button {
-        margin: 40px auto;
-        font-size: 30px;
+        margin: 15px auto;
+        font-size: 20px;
         background-color: rgb(29, 42, 77);
         border-color: rgb(29, 42, 77);
+
+        .fa-angle-double-left {
+          font-size: 15px;
+
+          @media only screen and (min-width: 1024px) {
+            margin-right: 5px;
+            font-size: 19px;
+          }
+        }
+
+        @media only screen and (min-width: 1024px) {
+          margin: 40px auto;
+          padding: 8px 45px;
+          font-size: 24px;
+        }
       }
     }
   }
