@@ -1,42 +1,40 @@
-<div class="blocker blocker-fixed">
-  <div class="login-popup-container">
-    <button class="close-button" (click)="authService.closeLogin()">
-      <i class="fas fa-times"></i>
+<div class="login-popup-container">
+  <button class="close-button" (click)="authService.closeLogin()">
+    <i class="fas fa-times"></i>
+  </button>
+  <div class="tabs">
+    <button class="site-button tab" [class.current]="mode === 'Login'" (click)="mode = 'Login'">
+      התחברות
     </button>
-    <div class="tabs">
-      <button class="site-button tab" [class.current]="mode === 'Login'" (click)="mode = 'Login'">
-        התחברות
-      </button>
-      <button class="site-button tab" [class.current]="mode === 'Register'" (click)="mode = 'Register'">
-        הרשמה
-      </button>
-    </div>
-    <div class="content-container">
-      <ng-container [ngSwitch]="mode">
-        <app-login-form
-          *ngSwitchCase="'Login'"
-          [loading]="loading"
-          (signInWithEmailAndPassword)="signInWithEmailAndPassword($event)"
-          (signInWithFacebook)="signInWithFacebook()"
-          (signInWithGoogle)="signInWithGoogle()"
-          (haveNoUser)="mode = 'Register'"
-          (forgotPassword)="mode = 'Forgot'"
-        >
-        </app-login-form>
-        <app-registration-form
-          *ngSwitchCase="'Register'"
-          [loading]="loading"
-          (signUpWithEmailAndPassword)="createUserWithEmailAndPassword($event)"
-          (signUpWithFacebook)="signInWithFacebook()"
-          (signUpWithGoogle)="signInWithGoogle()"
-          (haveUser)="mode = 'Login'"
-        ></app-registration-form>
-        <app-forgot-password-form
-          *ngSwitchCase="'Forgot'"
-          [loading]="loading"
-          (submit)="resetPassword($event)"
-        ></app-forgot-password-form>
-      </ng-container>
-    </div>
+    <button class="site-button tab" [class.current]="mode === 'Register'" (click)="mode = 'Register'">
+      הרשמה
+    </button>
+  </div>
+  <div class="content-container">
+    <ng-container [ngSwitch]="mode">
+      <app-login-form
+        *ngSwitchCase="'Login'"
+        [loading]="loading"
+        (signInWithEmailAndPassword)="signInWithEmailAndPassword($event)"
+        (signInWithFacebook)="signInWithFacebook()"
+        (signInWithGoogle)="signInWithGoogle()"
+        (haveNoUser)="mode = 'Register'"
+        (forgotPassword)="mode = 'Forgot'"
+      >
+      </app-login-form>
+      <app-registration-form
+        *ngSwitchCase="'Register'"
+        [loading]="loading"
+        (signUpWithEmailAndPassword)="createUserWithEmailAndPassword($event)"
+        (signUpWithFacebook)="signInWithFacebook()"
+        (signUpWithGoogle)="signInWithGoogle()"
+        (haveUser)="mode = 'Login'"
+      ></app-registration-form>
+      <app-forgot-password-form
+        *ngSwitchCase="'Forgot'"
+        [loading]="loading"
+        (submit)="resetPassword($event)"
+      ></app-forgot-password-form>
+    </ng-container>
   </div>
 </div>

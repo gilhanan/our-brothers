@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
   public loginMode: LoginMode;
   public loading = true;
   public user: User;
+  public showConnectToCare = true;
 
   private updatedLastSignIn = false;
 

@@ -26,6 +26,7 @@ import { ParticipationsButtonsModule } from './shared/components/participations-
 import { ShellModule } from './shell/shell.module';
 import { AuthModule } from './auth/auth.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ConnectToCarePopupModule } from './connect-to-care-popup/connect-to-care-popup.module';
 
 registerLocaleData(localeHe);
 
@@ -34,6 +35,7 @@ registerLocaleData(localeHe);
   imports: [
     ShellModule,
     AuthModule,
+    ConnectToCarePopupModule,
     ParticipationsButtonsModule,
     ContactFormModule,
     DropDownMenuModule,

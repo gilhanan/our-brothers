@@ -1,3 +1,7 @@
+<div *ngIf="showConnectToCare || loginMode" class="modal-blocker">
+  <app-login-popup *ngIf="loginMode && !user" [mode]="loginMode"></app-login-popup>
+  <app-connect-to-care-popup *ngIf="showConnectToCare" (close)="showConnectToCare = false"></app-connect-to-care-popup>
+</div>
 <app-header
   [loading]="loading"
   [user]="user"
@@ -6,4 +10,3 @@
 ></app-header>
 <router-outlet></router-outlet>
 <app-footer></app-footer>
-<app-login-popup *ngIf="loginMode && !user" [mode]="loginMode"></app-login-popup>

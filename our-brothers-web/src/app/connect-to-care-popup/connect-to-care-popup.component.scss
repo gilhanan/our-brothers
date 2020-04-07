@@ -1,0 +1,130 @@
+.connect-to-care-popup-container {
+  position: relative;
+  margin: auto;
+  top: 20px;
+  max-width: 90%;
+  background-color: white;
+
+  @media only screen and (min-width: 1024px) {
+    top: 100px;
+    max-width: 1000px;
+  }
+
+  .close-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px 15px;
+    font-size: 40px;
+    border: none;
+    color: rgb(29, 42, 77);
+    background-color: transparent;
+    cursor: pointer;
+
+    @media only screen and (min-width: 1024px) {
+      color: white;
+    }
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    .desktop-header {
+      display: none;
+
+      @media only screen and (min-width: 1024px) {
+        display: block;
+      }
+    }
+
+    @media only screen and (min-width: 1024px) {
+      flex-direction: row;
+
+      .mobile-header {
+        display: none;
+      }
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+
+      .our-brothers-icon {
+        height: 55px;
+      }
+
+      .connect-2-care-icon {
+        height: 70px;
+      }
+    }
+
+    .promotion {
+      padding: 40px;
+      font-size: 40px;
+      font-family: 'arbel';
+      line-height: 1em;
+      background-color: rgb(29, 42, 77);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      @media only screen and (min-width: 1024px) {
+        font-size: 82px;
+        min-width: 470px;
+      }
+
+      .promotion-content {
+        .first {
+          color: rgb(22, 157, 151);
+        }
+
+        .second {
+          color: rgb(49, 130, 185);
+        }
+
+        .third {
+          color: rgb(255, 255, 255);
+
+          .third-text {
+            display: inline-block;
+          }
+
+          .icon {
+            width: 40px;
+
+            @media only screen and (min-width: 1024px) {
+              width: 80px;
+            }
+          }
+        }
+      }
+    }
+
+    .content {
+      font-size: 17px;
+      padding: 20px;
+      text-align: center;
+
+      .text {
+        padding: 0 20px;
+
+        .heading {
+          margin: 20px auto;
+          color: rgb(52, 54, 74);
+          font-weight: bold;
+        }
+      }
+
+      .registration-button {
+        margin: 40px auto;
+        font-size: 30px;
+        background-color: rgb(29, 42, 77);
+        border-color: rgb(29, 42, 77);
+      }
+    }
+  }
+}

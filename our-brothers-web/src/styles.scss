@@ -78,6 +78,7 @@ p {
 }
 
 .site-button {
+  display: inline-block;
   font-size: 17px;
   padding: 8px 20px;
   border: 2px solid rgb(0, 160, 153);
@@ -320,11 +321,10 @@ textarea.form-field {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 1;
+  z-index: 2;
   background: rgba(0, 0, 0, 0.5);
 
   &.blocker-fixed {
-    z-index: 2;
     position: fixed;
   }
 }
