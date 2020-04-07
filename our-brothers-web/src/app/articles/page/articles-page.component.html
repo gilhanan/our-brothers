@@ -8,6 +8,9 @@
 </h2>
 <div class="articles-contianer">
   <div class="articles-list-contianer">
+    <img class="circle-top-right" src="../../assets/img/gallery_top_right_circle.png" alt="" />
+    <img class="circle-middle-left" src="../../assets/img/gallery_middle_left_circle.png" alt="" />
+
     <div *ngFor="let articleItem of articles" class="article-item">
       <div class="article-item-img-container">
         <img class="article-item-img" [attr.src]="articleItem.imgUrl" />

@@ -12,10 +12,13 @@ $mobileBreakpoint: 1000px;
   .footer {
     display: inline-flex;
     flex-direction: column;
+    text-align: right;
+    margin-top: 10px;
 
     @media only screen and (max-width: $mobileBreakpoint) {
       display: flex;
       margin-bottom: 55px;
+      text-align: center;
     }
 
     .row {
@@ -129,6 +132,7 @@ $mobileBreakpoint: 1000px;
     .bottom-line {
       font-size: 12px;
       margin: 20px;
+      margin-top: 0;
       position: relative;
 
       .copyrights {

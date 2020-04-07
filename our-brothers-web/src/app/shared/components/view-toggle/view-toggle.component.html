@@ -1,14 +1,31 @@
+<!-- TODO: Angular templates optimizations -->
 <div class="view-toggle-container">
   <div *ngIf="view === 'list'" class="view-button" (click)="viewChange.emit('map')">
-    <div class="map-icon"></div>
-    <div class="label">
-      מפה
+    <div class="view-toggle-button disable-color">
+      <div class="map-icon"></div>
+      <div class="label">
+        מפה
+      </div>
+    </div>
+    <div class="view-toggle-button">
+      <div class="list-icon"></div>
+      <div class="label blackfont">
+        טבלה
+      </div>
     </div>
   </div>
-  <div *ngIf="view === 'map'" class="view-button" (click)="viewChange.emit('list')">
-    <div class="list-icon"></div>
-    <div class="label">
-      טבלה
+  <div *ngIf="view === 'map'" class="view-button one-box" (click)="viewChange.emit('list')">
+    <div class="view-toggle-button disable-mobile">
+      <div class="map-icon"></div>
+      <div class="label">
+        מפה
+      </div>
+    </div>
+    <div class="view-toggle-button disable-color">
+      <div class="list-icon"></div>
+      <div class="label blackfont">
+        טבלה
+      </div>
     </div>
   </div>
 </div>

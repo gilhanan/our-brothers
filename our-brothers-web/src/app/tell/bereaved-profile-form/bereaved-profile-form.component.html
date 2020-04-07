@@ -6,7 +6,7 @@
     <div class="col">
       <input
         type="text"
-        placeholder="שם פרטי"
+        placeholder="שם פרטי*"
         class="form-field"
         formControlName="firstName"
         [class.invalid]="!firstName.valid && firstName.touched"
@@ -15,7 +15,7 @@
     <div class="col">
       <input
         type="text"
-        placeholder="שם משפחה"
+        placeholder="שם משפחה*"
         class="form-field"
         formControlName="lastName"
         [class.invalid]="!lastName.valid && lastName.touched"
@@ -26,7 +26,7 @@
     <div class="col">
       <input
         type="email"
-        placeholder="אימייל"
+        placeholder="אימייל*"
         class="form-field"
         formControlName="email"
         [class.invalid]="!email.valid && email.touched"
@@ -35,7 +35,7 @@
     <div class="col">
       <input
         type="tel"
-        placeholder="טלפון נייד"
+        placeholder="טלפון נייד*"
         class="form-field"
         formControlName="phoneNumber"
         [class.invalid]="!phoneNumber.valid && phoneNumber.touched"
@@ -46,7 +46,7 @@
     <div class="col">
       <app-places-select
         [types]="['(cities)']"
-        [placeholder]="'מקום מגורים'"
+        [placeholder]="'מקום מגורים*'"
         (change)="address.setValue($event)"
         [invalid]="!address.valid && address.touched"
       ></app-places-select>
@@ -54,7 +54,7 @@
     <div class="col">
       <input
         type="text"
-        placeholder="תאריך לידה"
+        placeholder="תאריך לידה*"
         class="form-field"
         formControlName="birthDay"
         [class.invalid]="!birthDay.valid && birthDay.touched"

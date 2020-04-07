@@ -4,7 +4,10 @@
 
   .form-row {
     display: flex;
-    margin-bottom: 30px;
+
+    @media only screen and (max-width: 768px) {
+      padding: 5px;
+    }
 
     .col {
       flex: 1;
@@ -18,12 +21,21 @@
       @media only screen and (min-width: 1024px) {
         padding-top: 15px;
       }
+
+      @media only screen and (max-width: 768px) {
+        margin: 0;
+        padding: 0 5px;
+      }
     }
   }
 
   .other-lang-input {
     font-size: 18px;
-    margin-bottom: 30px;
+    margin: 20px 0;
+
+    @media only screen and (max-width: 768px) {
+      text-align: center;
+    }
 
     .other-lang-select {
       font-size: 18px;
@@ -32,6 +44,11 @@
 
   .agree-input {
     font-size: 18px;
+    margin: 20px 0;
+
+    @media only screen and (max-width: 768px) {
+      text-align: center;
+    }
 
     .site-link {
       margin-right: 4px;

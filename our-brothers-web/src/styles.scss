@@ -3,7 +3,13 @@
 
 @font-face {
   font-family: 'arbel';
-  src: url(assets/fonts/Arbel-Bold_0.otf);
+  src: url('assets/fonts/Arbel-Medium_0.otf');
+}
+
+@font-face {
+  font-family: 'arbel';
+  src: url('assets/fonts/Arbel-Bold_0.otf');
+  font-weight: 900;
 }
 
 /* heebo-regular */
@@ -36,13 +42,17 @@ body {
   position: relative;
   min-height: 100%;
   padding-top: 90px;
-  padding-bottom: 260px;
-  background-color: #fff;
+  padding-bottom: 235px;
   --primary-color: rgba(0, 160, 153);
+
+  @media only screen and (max-width: 768px) {
+    padding-bottom: 235px;
+  }
 }
 
 p {
-  margin-bottom: 25px;
+  margin-bottom: 20px;
+  line-height: 1.5em;
 }
 
 .hidden {
@@ -75,6 +85,7 @@ p {
   color: white;
   background-color: rgb(0, 160, 153);
   text-decoration: none;
+  text-align: center;
   cursor: pointer;
 
   &.invert {
@@ -93,8 +104,9 @@ p {
   }
 
   &.primary-button {
-    font-size: 36px;
-    padding: 8px 60px;
+    font-size: 26px;
+    padding: 5px 40px;
+    letter-spacing: 3px;
     display: block;
     margin: auto;
   }
@@ -141,8 +153,8 @@ p {
 
 .small-heading {
   font-size: 22px;
-  margin-top: 25px;
-  margin-bottom: 25px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   font-family: 'arbel';
   text-align: center;
   letter-spacing: 15px;
@@ -151,14 +163,14 @@ p {
   @media only screen and (max-width: 768px) {
     font-size: 16px;
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     letter-spacing: 9px;
   }
 }
 
 .medium-heading {
   font-size: 36px;
-  margin-top: 30px;
+  margin-top: 0;
   margin-bottom: 30px;
   font-family: 'arbel';
   text-align: center;
@@ -167,7 +179,7 @@ p {
 
   @media only screen and (max-width: 768px) {
     font-size: 32px;
-    margin-top: 15px;
+    margin-top: 5px;
     margin-bottom: 15px;
   }
 }
@@ -178,6 +190,7 @@ p {
   margin-bottom: 40px;
   line-height: 0.7em;
   font-family: 'arbel';
+  font-weight: 900;
   text-align: center;
   color: rgb(0, 115, 109);
 
@@ -250,6 +263,10 @@ p {
 
   &.invalid {
     border: 1px solid red;
+  }
+
+  @media only screen and (max-width: 768px) {
+    font-size: 14px;
   }
 }
 

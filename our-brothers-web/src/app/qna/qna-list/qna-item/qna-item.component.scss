@@ -11,6 +11,7 @@
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    justify-content: flex-end;
 
     .question-mark {
       width: 23px;
@@ -20,20 +21,26 @@
       margin-left: 40px;
 
       @media only screen and (max-width: 768px) {
-        margin-left: 20px;
+        margin-left: 0;
+        margin-top: 10px;
+        margin-bottom: 20px;
       }
     }
 
     .question-text {
       flex: 1 1 300px;
       font-size: 18px;
-      font-family: 'arbel';
+      font-family: 'heebo';
       color: rgb(129, 129, 129);
+
+      &.font-bold {
+        font-weight: bold;
+      }
     }
 
     .question-collapse-btn {
       cursor: pointer;
-      flex: 0 0 175px;
+      flex: 0 0 160px;
       border-width: 2px;
       border-color: rgb(0, 160, 153);
       border-style: solid;
@@ -44,27 +51,37 @@
       align-items: center;
 
       @media only screen and (max-width: 768px) {
+        flex: 0 0 140px;
         height: 45px;
-        margin-right: auto;
+        margin: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
       }
 
       .question-collapse-btn-text {
-        font-size: 36px;
+        font-size: 28px;
         font-family: 'arbel';
         color: rgb(0, 160, 153);
-        font-weight: bold;
         letter-spacing: 4px;
-        margin-left: 20px;
+        margin-left: 14px;
 
         @media only screen and (max-width: 768px) {
-          font-size: 26px;
+          font-size: 22px;
         }
       }
 
       .fa-angle-double-down {
-        font-size: 26px;
+        font-size: 20px;
         color: rgb(0, 160, 153);
+
+        @media only screen and (max-width: 768px) {
+          font-size: 14px;
+        }
       }
+    }
+
+    @media only screen and (max-width: 768px) {
+      justify-content: center;
     }
   }
 
@@ -72,10 +89,6 @@
     box-shadow: 4.5px 5.362px 10px 0px rgba(4, 26, 55, 0.1);
 
     .question-container {
-      .question-text {
-        font-weight: bold;
-      }
-
       .question-collapse-btn {
         background-color: rgb(0, 160, 153);
 
@@ -84,17 +97,22 @@
         }
 
         .fa-angle-double-up {
-          font-size: 26px;
+          margin-right: 18px;
+          font-size: 20px;
           color: white;
+
+          @media only screen and (max-width: 768px) {
+            font-size: 14px;
+          }
         }
       }
     }
   }
 
   .answer-container {
-    padding: 10px 65px 75px 250px;
+    padding: 10px 65px 25px 290px;
     font-size: 18px;
-    font-family: 'arbel';
+    font-family: 'heebo';
     color: rgb(129, 129, 129);
 
     @media only screen and (max-width: 768px) {
