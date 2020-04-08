@@ -1,0 +1,15 @@
+<div class="article-item-img-container">
+  <img class="article-item-img" [attr.src]="articleItem.imgUrl" />
+</div>
+<div class="article-item-date">
+  {{ articleItem.publishDate | date: 'mediumDate':null:'he' }}
+</div>
+<div class="article-item-title">
+  {{ articleItem.title }}
+</div>
+<div class="article-item-desc">
+  {{ articleItem.desc }}
+</div>
+<a class="article-item-link" [attr.href]="articleItem.href" target="_blank">
+  לכתבה המלאה
+</a>

@@ -51,8 +51,7 @@ const routes: Routes = [
   },
   {
     path: 'articles',
-    loadChildren: () =>
-      import('./articles/page/articles-page.module').then(({ ArticlesPageModule }) => ArticlesPageModule),
+    loadChildren: () => import('./articles/articles.module').then(({ ArticlesModule }) => ArticlesModule),
     pathMatch: 'full'
   },
   {

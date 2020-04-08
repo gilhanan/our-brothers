@@ -1,0 +1,12 @@
+<button class="item" (click)="handlePreviousItemSelected()">{{ endMarker }}</button>
+<ng-container *ngFor="let item of counter(maxNumber + 1); let i = index">
+  <button
+    *ngIf="i !== 0"
+    class="item"
+    [ngStyle]="{ color: i === selectedNumber ? '#00a099' : 'gray' }"
+    (click)="handleItemClick(i)"
+  >
+    0{{ i }}
+  </button>
+</ng-container>
+<button class="item" (click)="handleNextItemSelected()">{{ startMarker }}</button>
