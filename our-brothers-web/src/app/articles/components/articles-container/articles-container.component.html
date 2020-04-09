@@ -1,0 +1,22 @@
+<img class="image-header" src="../../../assets/img/articlesHeader.jpg.png" />
+<div class="site-divider"></div>
+<h1 class="small-heading" data-aos="fade-up" data-aos-duration="1000">
+  אודות העמותה
+</h1>
+<h2 class="medium-heading" data-aos="fade-up" data-aos-duration="1000">
+  עלינו בתקשורת
+</h2>
+<div class="articles-container">
+  <div class="articles-list-container" *ngIf="articles.length > 0">
+    <img class="circle-top-right" src="../../assets/img/gallery_top_right_circle.png" alt="" />
+    <img class="circle-middle-left" src="../../assets/img/gallery_middle_left_circle.png" alt="" />
+    <ng-container *ngFor="let articleItem of articles">
+      <article [articleItem]="articleItem"></article>
+    </ng-container>
+  </div>
+  <articles-switcher
+    [initialNumber]="initialArticlesPage"
+    [maxNumber]="maxArticlesPages"
+    (selectedNumberUpdate)="handleSelectedNumberUpdate($event)"
+  ></articles-switcher>
+</div>
