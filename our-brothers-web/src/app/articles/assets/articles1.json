@@ -1,11 +1,67 @@
 {
   "articles": [
     {
-      "imgUrl": "https://img.mako.co.il/2019/03/24/WI0324_i.jpg",
-      "publishDate": "2019-02-28",
+      "imgUrl": "../../../../assets/img/articles/brothersMeeting.jpg",
+      "publishDate": "2019-03-28",
       "title": "המיזם שמזמין אתכם לארח אח שכול: \"פתחו את ביתכם ושמעו את סיפורים\"",
       "desc": "במיזם שיצרו האחים השכולים הם מאפשרים לציבור הרחב להזמין אותם לבתים, למרכזים קהילתיים ותנועות נוער כדי לשתף בסיפור החיים של האחים שאיבדו, הצחוקים, החלומות והחיים שלהם עם השכול. \"המפגשים מפילים חומות ומקרבים, בואו לשמוע אותנו\"",
-      "href": "http://google.com"
+      "href": "https://www.mako.co.il/pzm-magazine/Article-ea95eddf6ffa961006.htm"
+    },
+    {
+      "imgUrl": "../../../../assets/img/articles/nir.png",
+      "publishDate": "2017-04-24",
+      "title": "ניר בן עמרם מתארח בתכנית המוסף",
+      "desc": "ניר בן עמרם אחיו של טוראי חנן בן עמרם ז\"ל מתארח בתכנית המוסף מספר על חייו ועל ההתמודדות.",
+      "href": "https://www.youtube.com/watch?v=78w4nU84n44"
+    },
+    {
+      "imgUrl": "../../../../assets/img/articles/channel20.png",
+      "publishDate": "2019-04-01",
+      "title": "אליסף פרץ, מייסד מיזם \"האחים שלנו\" מתארח בערוץ 20",
+      "desc": "אליסף פרץ, מייסד מיזם \"האחים שלנו\" מתארח בערוץ 20",
+      "href": "https://www.youtube.com/watch?v=XEhJLuqhBz0"
+    },
+    {
+      "imgUrl": "../../../../assets/img/articles/alisafKeshet.png",
+      "publishDate": "2019-03-29",
+      "title": "אליסף פרץ, מייסד מיזם \"האחים שלנו\" מתארח ב'הבוקר של קשת'",
+      "desc": "אליסף פרץ, מייסד מיזם \"האחים שלנו\" מתארח ב'הבוקר של קשת'",
+      "href": "https://www.youtube.com/watch?v=1RfvSEf3FSY&t=23s"
+    },
+    {
+      "imgUrl": "../../../../assets/img/articles/alisafYnet.png",
+      "publishDate": "2019-04-01",
+      "title": "אליסף פרץ, מייסד מיזם \"האחים שלנו\" מתארח באולפן Ynet",
+      "desc": "אליסף פרץ, מייסד מיזם \"האחים שלנו\" מתארח באולפן Ynet",
+      "href": "https://www.youtube.com/watch?v=rn8vVLTE384&t=6s"
+    },
+    {
+      "imgUrl": "../../../../assets/img/articles/sharonRani.png",
+      "publishDate": "2014-04-01",
+      "title": "אליסף פרץ, מייסד \"האחים שלנו\" והגב' מרים פרץ מתארחים בתכנית שרון ורני בעם",
+      "desc": "אליסף פרץ, מייסד \"האחים שלנו\" והגב' מרים פרץ מתארחים בתכנית שרון ורני בעם",
+      "href": "https://www.youtube.com/watch?v=7f8Glqy8bKA"
+    },
+    {
+      "imgUrl": "../../../../assets/img/articles/chen.png",
+      "publishDate": "2019-04-29",
+      "title": "חן שגב מספרת על אחיה טל שגב ז\"ל בתכנית אלף בית בפוליטיקה",
+      "desc": "חן שגב מספרת על אחיה טל שגב ז\"ל בתכנית אלף בית בפוליטיקה.",
+      "href": "https://www.youtube.com/watch?v=RXTe5sMC8-M"
+    },
+    {
+      "imgUrl": "../../../../assets/img/articles/untilTen.png",
+      "publishDate": "2018-04-15",
+      "title": "נוי פרי וחי אדיב מתארחים ב\"עד 10\" עם דני רופ",
+      "desc": "נוי פרי, אחות של טל יפרח ז\"ל וחי אדיב, ראש עיריית הוד השרון ואחיו של שמוליק אדיב ז\"ל מספרים על ההתמודדות שלהם בשכול.",
+      "href": "https://www.youtube.com/watch?v=cc5K7lay4ME"
+    },
+    {
+      "imgUrl": "../../../../assets/img/articles/13.png",
+      "publishDate": "2018-03-25",
+      "title": "להיות אח שכול זה להיות שקוף",
+      "desc": "להיות אח שכול זה להיות שקוף- אליסף פרץ חושף ברגישות ובכנות נוגעת ללב איך זה מרגיש להיות אח שכול",
+      "href": "https://13tv.co.il/item/news/specials/talk/lc1yx-627402/"
     }
   ]
 }

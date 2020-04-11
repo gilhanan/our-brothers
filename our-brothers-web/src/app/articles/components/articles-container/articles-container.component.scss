@@ -8,12 +8,12 @@
     grid-template-columns: repeat(3, 400px);
     justify-content: center;
 
-    @media only screen and (max-width: 1000px) {
-      grid-template-columns: repeat(2, 400px);
+    @media only screen and (max-width: 1200px) {
+      grid-template-columns: repeat(3, 300px);
     }
 
-    @media only screen and (max-width: 768px) {
-      grid-template-columns: repeat(1, 400px);
+    @media only screen and (max-width: 1000px) {
+      grid-template-columns: repeat(2, 200px);
     }
 
     .circle-top-right {
@@ -21,19 +21,14 @@
       right: 30%;
       transform: translate(40%, -40%);
 
-      @media only screen and (max-width: 1600px) {
-        top: 24%;
-        right: 7%;
-      }
-
-      @media only screen and (max-width: 768px) {
+      @media only screen and (max-width: 1200px) {
         display: none;
       }
     }
 
     .circle-middle-left {
       position: absolute;
-      top: 65%;
+      top: 70%;
       right: 57%;
       left: 105px;
       z-index: -1;
@@ -44,7 +39,7 @@
         left: 20px;
       }
 
-      @media only screen and (max-width: 768px) {
+      @media only screen and (max-width: 1200px) {
         display: none;
       }
     }
