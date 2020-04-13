@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { filter } from 'rxjs/operators';
 import * as AOS from 'aos';
 
 import { User } from 'models';
@@ -15,14 +17,23 @@ export class AppComponent implements OnInit {
   public loginMode: LoginMode;
   public loading = true;
   public user: User;
-  public showConnectToCare = true;
+  public showConnectToCare = false;
 
   private updatedLastSignIn = false;
 
-  constructor(public authService: AuthService, private dataService: DataService) {}
+  constructor(private route: ActivatedRoute, public authService: AuthService, private dataService: DataService) {}
 
   ngOnInit() {
     AOS.init();
+
+    this.route.queryParams
+      .pipe(
+        // https://github.com/angular/angular/issues/12157
+        filter(queryParams => Object.keys(queryParams).length > 0 === window.location.href.includes('?'))
+      )
+      .subscribe(queryParams => {
+        this.showConnectToCare = queryParams.referer !== 'connect-2-care';
+      });
 
     this.authService.user.subscribe(user => {
       this.loading = false;
