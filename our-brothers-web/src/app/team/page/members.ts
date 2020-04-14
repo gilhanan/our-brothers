@@ -9,7 +9,7 @@ export const members: TeamMember[] = [
     email: 'elyasaf@ourbrothers.org',
     slains: [
       {
-        pre: 'אחיהם של סמ"ר',
+        pre: 'אחיהם של סגן',
         title: 'אוריאל פרץ ז"ל',
         link:
           'https://www.izkor.gov.il/%D7%90%D7%95%D7%A8%D7%99%D7%90%D7%9C%20%D7%A4%D7%A8%D7%A5/en_9311332ca81acef28a7b72d240cf7ac2'
