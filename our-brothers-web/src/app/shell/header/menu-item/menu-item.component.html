@@ -1,0 +1,28 @@
+<a *ngIf="!menu.subMenues" class="menu" [routerLink]="menu.route" routerLinkActive="active">{{ menu.title }}</a>
+
+<div *ngIf="menu.subMenues" class="drop-down-menu" (mouseenter)="active = true" (mouseleave)="active = false">
+  <div class="anchor" (click)="active = !active">
+    <span class="menu">
+      {{ menu.title }}
+      <i
+        class="fas"
+        [ngClass]="{
+          'fa-caret-up': active,
+          'fa-caret-down': !active
+        }"
+      ></i>
+    </span>
+  </div>
+  <div class="content" *ngIf="active">
+    <div class="content-triangle"></div>
+    <div class="menu-items">
+      <a
+        class="menu-item"
+        *ngFor="let subMenu of menu.subMenues"
+        [routerLink]="subMenu.route"
+        [routerLinkActive]="'active'"
+        >{{ subMenu.title }}</a
+      >
+    </div>
+  </div>
+</div>

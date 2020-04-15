@@ -1,4 +1,4 @@
-$mobileBreakpoint: 1200px;
+@import '~src/variables.scss';
 
 .header-container {
   .header-toggler {
@@ -108,70 +108,8 @@ $mobileBreakpoint: 1200px;
         justify-content: center;
         list-style-type: none;
 
-        & li:last-of-type .link-header {
-          margin-left: 0;
-        }
-
-        .link-header {
-          cursor: pointer;
-          text-decoration: none;
-          font-family: 'Heebo';
-          color: rgb(0, 115, 109);
-          font-size: 19px;
-          font-weight: 500;
-          position: relative;
+        .link-header:not(:last-of-type) {
           margin-left: 20px;
-
-          &.current-page {
-            font-weight: bold;
-          }
-
-          @media only screen and (min-width: $mobileBreakpoint) {
-            &.link-header:hover:before,
-            &.current-page::before {
-              content: '';
-              background-color: rgb(0, 160, 153);
-              position: absolute;
-              top: 3px;
-              width: 33px;
-              height: 1px;
-              animation-name: currentPageBefore;
-              animation-duration: 1s;
-              animation-iteration-count: 1;
-            }
-
-            @keyframes currentPageBefore {
-              0% {
-                transform: translateX(-100%);
-              }
-              100% {
-                transform: translateX(0%);
-              }
-            }
-
-            &.link-header:hover:after,
-            &.current-page::after {
-              content: '';
-              background-color: rgb(0, 115, 109);
-              position: absolute;
-              width: 33px;
-              height: 1px;
-              bottom: 3px;
-              left: 0;
-              animation-name: currentPageAfter;
-              animation-duration: 1s;
-              animation-iteration-count: 1;
-            }
-
-            @keyframes currentPageAfter {
-              0% {
-                transform: translateX(100%);
-              }
-              100% {
-                transform: translateX(0%);
-              }
-            }
-          }
         }
       }
 
@@ -196,34 +134,7 @@ $mobileBreakpoint: 1200px;
   }
 }
 
-.drop-down-list {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  flex-wrap: wrap;
-
-  .drop-down-menu-item {
-    background-color: white;
-    color: #00a099;
-    text-decoration: none;
-    padding-right: 0.5em;
-
-    &:hover {
-      background-color: #00a099;
-      color: white;
-    }
-  }
-
-  .drop-down-item-divider {
-    align-self: center;
-    width: 90%;
-    height: 1px;
-    background-color: lightgray;
-    opacity: 0.3;
-  }
-}
-
-@media only screen and (max-width: $mobileBreakpoint) {
+@media only screen and (max-width: $header-mobile-breakpoint) {
   .header-container {
     padding: 1em 25px;
 
@@ -263,13 +174,10 @@ $mobileBreakpoint: 1200px;
           align-items: stretch;
           margin: 1.5em 0;
 
-          li {
+          .link-header {
             border-bottom: 1px solid rgba(0, 160, 153);
             padding: 0.5em 0;
-
-            .link-header {
-              margin: 0;
-            }
+            margin: 0;
           }
         }
 

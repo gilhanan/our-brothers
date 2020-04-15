@@ -1,61 +1,13 @@
 <nav class="header-container">
-  <div class="nav-toggle header-toggler" (click)="isSideMenuClosed = !isSideMenuClosed">
-    <span class="bar" [class.active]="!isSideMenuClosed"></span>
+  <div class="nav-toggle header-toggler" (click)="sideMenuOpen = !sideMenuOpen">
+    <span class="bar" [class.active]="sideMenuOpen"></span>
   </div>
   <div class="header">
-    <div class="logo-header" routerLink="home"></div>
-    <div class="nav-content" [ngClass]="{ open: !isSideMenuClosed }">
+    <a class="logo-header" routerLink="home"></a>
+    <div class="nav-content" [class.open]="sideMenuOpen">
       <ul class="links-header">
-        <li>
-          <a class="link-header" routerLink="home" routerLinkActive="current-page">דף הבית</a>
-        </li>
-        <li>
-          <app-drop-down-menu
-            [menuAnchor]="meetingsMenuAnchor"
-            [menuContent]="meetingsMenuItems"
-            [disabled]="isMobileView"
-            (click)="toggleSubMenu('meetings')"
-          >
-          </app-drop-down-menu>
-          <ng-container *ngIf="isMobileView && subMenusStates.meetings">
-            <ng-container *ngTemplateOutlet="meetingsMenuItems"></ng-container>
-          </ng-container>
-        </li>
-        <li>
-          <app-drop-down-menu
-            [menuAnchor]="aboutMenuAnchor"
-            [menuContent]="aboutMenuItems"
-            [disabled]="isMobileView"
-            (click)="toggleSubMenu('about')"
-          >
-          </app-drop-down-menu>
-          <ng-container *ngIf="isMobileView && subMenusStates.about">
-            <ng-container *ngTemplateOutlet="aboutMenuItems"></ng-container>
-          </ng-container>
-        </li>
-        <li>
-          <a class="link-header" routerLink="agenda" routerLinkActive="current-page">מבנה הערב</a>
-        </li>
-        <li>
-          <a class="link-header" routerLink="questions" routerLinkActive="current-page">שאלות</a>
-        </li>
-        <li>
-          <a class="link-header" routerLink="gallery" routerLinkActive="current-page">גלריה</a>
-        </li>
-        <li>
-          <a class="link-header" routerLink="contact" routerLinkActive="current-page">צרו קשר</a>
-        </li>
-        <li *ngIf="user?.isAdmin || user?.isVolunteer">
-          <app-drop-down-menu
-            [menuAnchor]="adminMenuAnchor"
-            [menuContent]="adminMenuItems"
-            [disabled]="isMobileView"
-            (click)="toggleSubMenu('admin')"
-          >
-          </app-drop-down-menu>
-          <ng-container *ngIf="isMobileView && subMenusStates.admin">
-            <ng-container *ngTemplateOutlet="adminMenuItems"></ng-container>
-          </ng-container>
+        <li class="link-header" *ngFor="let menu of menues; trackBy: trackByFn">
+          <app-menu-item [menu]="menu"> </app-menu-item>
         </li>
       </ul>
       <div class="action-buttons">
@@ -70,47 +22,3 @@
     </div>
   </div>
 </nav>
-
-<ng-template #aboutMenuItems>
-  <div class="drop-down-list">
-    <a class="drop-down-menu-item" routerLink="about">רקע</a>
-    <div class="drop-down-item-divider"></div>
-    <a class="drop-down-menu-item" routerLink="team">הצוות שלנו</a>
-    <div class="drop-down-item-divider"></div>
-    <a class="drop-down-menu-item" routerLink="articles">עלינו בתקשורת</a>
-    <div class="drop-down-item-divider"></div>
-    <a class="drop-down-menu-item" routerLink="news">כותבים עלינו</a>
-  </div>
-</ng-template>
-
-<ng-template #aboutMenuAnchor>
-  <a class="link-header" routerLinkActive="current-page"> אודותינו <i class="fas fa-caret-down"></i> </a>
-</ng-template>
-
-<ng-template #meetingsMenuItems>
-  <div class="drop-down-list">
-    <a class="drop-down-menu-item" routerLink="meetings">מפגשים</a>
-    <div class="drop-down-item-divider"></div>
-    <a class="drop-down-menu-item" routerLink="tell">אני רוצה לספר</a>
-    <div class="drop-down-item-divider"></div>
-    <a class="drop-down-menu-item" routerLink="host">אני רוצה לארח</a>
-    <div class="drop-down-item-divider"></div>
-    <a class="drop-down-menu-item" routerLink="participate">אני רוצה להשתתף</a>
-  </div>
-</ng-template>
-
-<ng-template #meetingsMenuAnchor>
-  <a class="link-header" routerLinkActive="current-page"> מפגשים <i class="fas fa-caret-down"></i> </a>
-</ng-template>
-
-<ng-template #adminMenuItems>
-  <div class="drop-down-list">
-    <a class="drop-down-menu-item" routerLink="admin-statistics">סטטיסטיקות</a>
-    <a class="drop-down-menu-item" routerLink="admin-bereaveds">ניהול אחים</a>
-    <a class="drop-down-menu-item" routerLink="admin-users">ניהול משתמשים</a>
-  </div>
-</ng-template>
-
-<ng-template #adminMenuAnchor>
-  <a class="link-header" routerLinkActive="current-page"> ניהול <i class="fas fa-caret-down"></i> </a>
-</ng-template>

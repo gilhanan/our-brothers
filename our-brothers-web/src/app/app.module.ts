@@ -21,7 +21,6 @@ import { DataService } from './shared/services/data.service';
 import { HttpService } from './shared/services/http.service';
 import { HomePageComponent } from './home/home-page.component';
 import { ContactFormModule } from './shared/components/contact-form/contact-form.module';
-import { DropDownMenuModule } from './shared/components/drop-down-menu/drop-down-menu.module';
 import { ParticipationsButtonsModule } from './shared/components/participations-buttons/participations-buttons.module';
 import { ShellModule } from './shell/shell.module';
 import { AuthModule } from './auth/auth.module';
@@ -38,7 +37,6 @@ registerLocaleData(localeHe);
     ConnectToCarePopupModule,
     ParticipationsButtonsModule,
     ContactFormModule,
-    DropDownMenuModule,
     BrowserModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
