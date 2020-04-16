@@ -9,10 +9,12 @@
     margin-bottom: 10px;
   }
 }
+
 .payment-info-page {
   align-content: center;
   width: 100%;
 }
+
 .payment-amounts-options-container {
   background-color: #00a099;
   font-family: 'arbel';
@@ -25,8 +27,8 @@
 
   .payment-amount-container {
     display: flex;
+    flex-direction: column;
     justify-content: right;
-    flex-wrap: wrap;
     margin-bottom: 3em;
     font-family: 'arbel';
     @media only screen and (max-width: 768px) {
@@ -35,6 +37,7 @@
     }
 
     .payment-amount-option {
+      width: 40%;
       .payment-amount-radio {
         font-family: 'arbel';
         margin: 0 10px;
@@ -46,7 +49,7 @@
 
       .payment-amount-radio-label {
         font-family: 'arbel';
-        margin: 20px 10px;
+        margin: 5px 10px;
         font-size: 30px;
         color: white;
       }
