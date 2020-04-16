@@ -94,7 +94,6 @@ export class DonatePageComponent implements OnInit {
   }
 
   public onSubmit() {
-    console.log(this.amount.value);
     if (this.form.valid) {
       const parsedForm: PaymentForm = {
         name: this.name.value,
@@ -107,7 +106,7 @@ export class DonatePageComponent implements OnInit {
       };
 
       this.submit.emit(parsedForm);
-
+      this.donationService.creditCardDonation(parsedForm);
       this.form.reset();
     } else {
       this.formInvalid = true;
