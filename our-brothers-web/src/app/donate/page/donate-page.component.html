@@ -10,6 +10,14 @@
     אבל כל תרומה תאפשר לזכור את האחים שלנו
   </h2>
   <br />
+  <a
+    class="paybox-button"
+    href="https://pb-idb-prod-web.payboxapp.com/?v=donation&donationId=41&_branch_match_id=694082758312467552#/"
+    target="_blank"
+  >
+    <img class="paybox-logo" src="../../../assets/img/paybox.png" alt="" />
+  </a>
+  <!--
   <div class="payment-amounts-options-container">
     <div class="site-divider"></div>
     <h2 class="medium-heading right-position payment-amount" data-aos="fade-up" data-aos-duration="1000">
@@ -122,6 +130,7 @@
 
   <br class="br-payment" />
   <hr />
+  -->
 
   <!-- <div class="paypal-button-container" *ngIf="!loading">
           <p class="paragraph">תרומה בסך {{ amount }}₪</p>
@@ -133,20 +142,19 @@
             (error)="onError($event)"
           ></app-paypal-button>
         </div> -->
-  <span class="terms-of-use">*התרומה בהתאם ל <a href="../../../assets/docs/תקנון%20אתר.pdf">תקנון האתר</a></span>
-  <button
+  <!-- <button
     class="site-button primary-button payment-send-button"
     [class.disabled]="!form.valid || loading"
     (click)="onSubmit()"
   >
     להמשך תרומה
   </button>
-  <br />
+  <br /> -->
   <br />
   <div class="alternative-donate">
     <div class="instructions">
       <div>
-        ניתן להעביר לחשבוננו
+        ניתן גם להעביר לחשבוננו
       </div>
       <div>
         בבנק הפועלים, סניף 538
@@ -157,6 +165,10 @@
     </div>
     <div class="notes">
       התרומה מוכרת לצרכי מס לפי סעיף 46
+      <div>
+        <span>*התרומה בהתאם ל-</span>
+        <a class="site-link" href="../../../assets/docs/תקנון אתר.pdf" target="_blank">תקנון האתר</a>
+      </div>
     </div>
   </div>
 </div>

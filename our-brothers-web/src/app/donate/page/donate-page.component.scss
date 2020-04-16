@@ -1,5 +1,6 @@
 .donate-container {
   margin-bottom: 50px;
+  text-align: center;
 }
 
 .paypal-button-container {
@@ -7,6 +8,15 @@
 
   .paragraph {
     margin-bottom: 10px;
+  }
+}
+
+.paybox-button {
+  display: inline-block;
+  margin: 20px auto;
+
+  .paybox-logo {
+    width: 160px;
   }
 }
 
@@ -115,8 +125,7 @@
 }
 
 .terms-of-use {
-  font-family: 'arbel';
-  color: #999999;
+  color: white;
 }
 
 .payment-send-button {
