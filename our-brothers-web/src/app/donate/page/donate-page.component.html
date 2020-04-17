@@ -10,143 +10,154 @@
     אבל כל תרומה תאפשר לזכור את האחים שלנו
   </h2>
   <br />
-  <!--  <div class="payment-amounts-options-container">-->
-  <!--    <div class="site-divider"></div>-->
-  <!--    <h2 class="medium-heading right-position payment-amount" data-aos="fade-up" data-aos-duration="1000">-->
-  <!--      סכום התרומה-->
-  <!--    </h2>-->
-  <!--    <section class="payment-amount-container">-->
-  <!--      <form [formGroup]="form">-->
-  <!--        <br />-->
-  <!--        <div class="payment-amount-option">-->
-  <!--          <input formControlName="amount" class="payment-amount-radio" type="radio" id="60" name="amount" value="60" />-->
-  <!--          <label class="payment-amount-radio-label" for="60">60</label>-->
-  <!--        </div>-->
-  <!--        <div class="payment-amount-option">-->
-  <!--          <input-->
-  <!--            formControlName="amount"-->
-  <!--            class="payment-amount-radio"-->
-  <!--            type="radio"-->
-  <!--            id="180"-->
-  <!--            name="amount"-->
-  <!--            value="180"-->
-  <!--          />-->
-  <!--          <label class="payment-amount-radio-label" for="180">180</label>-->
-  <!--        </div>-->
-  <!--        <div class="payment-amount-option">-->
-  <!--          <input-->
-  <!--            formControlName="amount"-->
-  <!--            class="payment-amount-radio"-->
-  <!--            type="radio"-->
-  <!--            id="240"-->
-  <!--            name="amount"-->
-  <!--            value="240"-->
-  <!--          />-->
-  <!--          <label class="payment-amount-radio-label" for="240">240</label>-->
-  <!--        </div>-->
-  <!--        <div class="payment-amount-option">-->
-  <!--          <input-->
-  <!--            formControlName="amount"-->
-  <!--            class="payment-amount-radio"-->
-  <!--            type="radio"-->
-  <!--            id="380"-->
-  <!--            name="amount"-->
-  <!--            value="380"-->
-  <!--          />-->
-  <!--          <label class="payment-amount-radio-label" for="380">380</label>-->
-  <!--        </div>-->
-  <!--        <div class="payment-amount-option">-->
-  <!--          <input-->
-  <!--            formControlName="amount"-->
-  <!--            class="payment-amount-radio"-->
-  <!--            type="radio"-->
-  <!--            id="500"-->
-  <!--            name="amount"-->
-  <!--            value="500"-->
-  <!--          />-->
-  <!--          <label class="payment-amount-radio-label" for="500">500</label>-->
-  <!--        </div>-->
-  <!--        <div class="payment-amount-option">-->
-  <!--          <input class="payment-amount-radio" type="radio" id="other" name="amount" value="" /><label-->
-  <!--            class="label-for-others"-->
-  <!--            for="other"-->
-  <!--            >אחר</label-->
-  <!--          >-->
-  <!--          <input formControlName="amount" class="other-amout-text-input" type="number" name="other_reason" />-->
-  <!--          <span class="new-sheckel">₪</span>-->
-  <!--        </div>-->
-  <!--      </form>-->
-  <!--    </section>-->
-  <!--    <div class="site-divider"></div>-->
-  <!--  </div>-->
+  <div class="payments-title">
+    ניתן לתרום דרך:
+  </div>
+  <a
+    class="paybox-button"
+    href="https://pb-idb-prod-web.payboxapp.com/?v=donation&donationId=41&_branch_match_id=694082758312467552#/"
+    target="_blank"
+  >
+    <img class="paybox-logo" src="../../../assets/img/paybox.png" alt="" />
+  </a>
+  <!--
+  <div class="payment-amounts-options-container">
+    <div class="site-divider"></div>
+    <h2 class="medium-heading right-position payment-amount" data-aos="fade-up" data-aos-duration="1000">
+      סכום התרומה
+    </h2>
+    <section class="payment-amount-container">
+      <form [formGroup]="form">
+        <br />
+        <div class="payment-amount-option">
+          <input formControlName="amount" class="payment-amount-radio" type="radio" id="60" name="amount" value="60" />
+          <label class="payment-amount-radio-label" for="60">60</label>
+        </div>
+        <div class="payment-amount-option">
+          <input
+            formControlName="amount"
+            class="payment-amount-radio"
+            type="radio"
+            id="180"
+            name="amount"
+            value="180"
+          />
+          <label class="payment-amount-radio-label" for="180">180</label>
+        </div>
+        <div class="payment-amount-option">
+          <input
+            formControlName="amount"
+            class="payment-amount-radio"
+            type="radio"
+            id="240"
+            name="amount"
+            value="240"
+          />
+          <label class="payment-amount-radio-label" for="240">240</label>
+        </div>
+        <div class="payment-amount-option">
+          <input
+            formControlName="amount"
+            class="payment-amount-radio"
+            type="radio"
+            id="380"
+            name="amount"
+            value="380"
+          />
+          <label class="payment-amount-radio-label" for="380">380</label>
+        </div>
+        <div class="payment-amount-option">
+          <input
+            formControlName="amount"
+            class="payment-amount-radio"
+            type="radio"
+            id="500"
+            name="amount"
+            value="500"
+          />
+          <label class="payment-amount-radio-label" for="500">500</label>
+        </div>
+        <div class="payment-amount-option">
+          <input class="payment-amount-radio" type="radio" id="other" name="amount" value="" /><label
+            class="label-for-others"
+            for="other"
+            >אחר</label
+          >
+          <input formControlName="amount" class="other-amout-text-input" type="number" name="other_reason" />
+          <span class="new-sheckel">₪</span>
+        </div>
+      </form>
+    </section>
+    <div class="site-divider"></div>
+  </div>
 
-  <!--  <h2 class="medium-heading right-position" data-aos="fade-up" data-aos-duration="1000">-->
-  <!--    פרטים אישיים-->
-  <!--  </h2>-->
+  <h2 class="medium-heading right-position" data-aos="fade-up" data-aos-duration="1000">
+    פרטים אישיים
+  </h2>
 
-  <!--  <form [formGroup]="form" class="contact-form-fields">-->
-  <!--    <input-->
-  <!--      formControlName="name"-->
-  <!--      class="form-field"-->
-  <!--      placeholder="שם\חברה*"-->
-  <!--      [class.invalid]="!name.valid && name.touched"-->
-  <!--    />-->
-  <!--    <input-->
-  <!--      formControlName="phoneNumber"-->
-  <!--      class="form-field"-->
-  <!--      placeholder="טלפון*"-->
-  <!--      [class.invalid]="!phoneNumber.valid && phoneNumber.touched"-->
-  <!--    />-->
-  <!--    <input-->
-  <!--      formControlName="email"-->
-  <!--      class="form-field"-->
-  <!--      placeholder="אימייל*"-->
-  <!--      [class.invalid]="!email.valid && email.touched"-->
-  <!--    />-->
-  <!--    <input formControlName="country" class="form-field" placeholder="מדינה" />-->
-  <!--    <input formControlName="city" class="form-field" placeholder="עיר" />-->
-  <!--    <input formControlName="street" class="form-field" placeholder="רחוב ומס' בית" />-->
-  <!--  </form>-->
-  <!--  <p class="form-invalid-message" *ngIf="formInvalid">-->
-  <!--    אחד או יותר מהשדות אינם תקינים-->
-  <!--  </p>-->
+  <form [formGroup]="form" class="contact-form-fields">
+    <input
+      formControlName="name"
+      class="form-field"
+      placeholder="שם\חברה*"
+      [class.invalid]="!name.valid && name.touched"
+    />
+    <input
+      formControlName="phoneNumber"
+      class="form-field"
+      placeholder="טלפון*"
+      [class.invalid]="!phoneNumber.valid && phoneNumber.touched"
+    />
+    <input
+      formControlName="email"
+      class="form-field"
+      placeholder="אימייל*"
+      [class.invalid]="!email.valid && email.touched"
+    />
+    <input formControlName="country" class="form-field" placeholder="מדינה" />
+    <input formControlName="city" class="form-field" placeholder="עיר" />
+    <input formControlName="street" class="form-field" placeholder="רחוב ומס' בית" />
+  </form>
+  <p class="form-invalid-message" *ngIf="formInvalid">
+    אחד או יותר מהשדות אינם תקינים
+  </p>
 
-  <!--  <br />-->
-  <!--  <p class="payment-method">צורת תשלום:</p>-->
-  <!--  <div>-->
-  <!--    <input class="payment-method-radio" type="radio" id="creditCard" name="paymentMethod" value="creditCard" />-->
-  <!--    <label class="payment-method-radio-label" for="creditCard">כרטיס אשראי</label>-->
-  <!--    <input class="payment-method-radio" type="radio" id="payPal" name="paymentMethod" value="payPal" />-->
-  <!--    <label class="payment-method-radio-label" for="payPal">PayPal</label><br />-->
-  <!--  </div>-->
+  <br />
+  <p class="payment-method">צורת תשלום:</p>
+  <div>
+    <input class="payment-method-radio" type="radio" id="creditCard" name="paymentMethod" value="creditCard" />
+    <label class="payment-method-radio-label" for="creditCard">כרטיס אשראי</label>
+    <input class="payment-method-radio" type="radio" id="payPal" name="paymentMethod" value="payPal" />
+    <label class="payment-method-radio-label" for="payPal">PayPal</label><br />
+  </div>
 
-  <!--  <br class="br-payment" />-->
-  <!--  <hr />-->
+  <br class="br-payment" />
+  <hr />
+  -->
 
-  <!--  &lt;!&ndash; <div class="paypal-button-container" *ngIf="!loading">-->
-  <!--        <p class="paragraph">תרומה בסך {{ amount }}₪</p>-->
-  <!--        <app-paypal-button-->
-  <!--          [amount]="amount"-->
-  <!--          (createDonation)="onCreateDonation($event)"-->
-  <!--          (approve)="onApprove($event)"-->
-  <!--          (cancel)="onCancel($event)"-->
-  <!--          (error)="onError($event)"-->
-  <!--        ></app-paypal-button>-->
-  <!--      </div> &ndash;&gt;-->
-
-  <!--  <button-->
-  <!--    class="site-button primary-button payment-send-button"-->
-  <!--    [class.disabled]="!form.valid || loading"-->
-  <!--    (click)="onSubmit()"-->
-  <!--  >-->
-  <!--    להמשך תרומה-->
-  <!--  </button>-->
-  <!--  <br />-->
-  <!--  <br />-->
+  <!-- <div class="paypal-button-container" *ngIf="!loading">
+          <p class="paragraph">תרומה בסך {{ amount }}₪</p>
+          <app-paypal-button
+            [amount]="amount"
+            (createDonation)="onCreateDonation($event)"
+            (approve)="onApprove($event)"
+            (cancel)="onCancel($event)"
+            (error)="onError($event)"
+          ></app-paypal-button>
+        </div> -->
+  <!-- <button
+    class="site-button primary-button payment-send-button"
+    [class.disabled]="!form.valid || loading"
+    (click)="onSubmit()"
+  >
+    להמשך תרומה
+  </button>
+  <br /> -->
+  <br />
   <div class="alternative-donate">
     <div class="instructions">
       <div>
-        ניתן להעביר לחשבוננו
+        ניתן גם להעביר לחשבוננו
       </div>
       <div>
         בבנק הפועלים, סניף 538
@@ -157,6 +168,10 @@
     </div>
     <div class="notes">
       התרומה מוכרת לצרכי מס לפי סעיף 46
+      <div>
+        <span>*התרומה בהתאם ל-</span>
+        <a class="site-link" href="../../../assets/docs/תקנון אתר.pdf" target="_blank">תקנון האתר</a>
+      </div>
     </div>
   </div>
 </div>

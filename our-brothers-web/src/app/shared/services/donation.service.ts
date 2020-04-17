@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { ClientDonation } from 'models';
+import { PaymentForm } from '../../donate/page/donate-page.component';
 
 @Injectable({
   providedIn: 'root'
@@ -16,4 +17,5 @@ export class DonationService {
       .post('https://europe-west1-our-brothers.cloudfunctions.net/api/donation', donation)
       .pipe(map(() => true));
   }
+  public creditCardDonation(paymentForm: PaymentForm) {}
 }
