@@ -11,12 +11,19 @@
   }
 }
 
+.payments-title {
+  font-family: 'arbel';
+}
+
 .paybox-button {
   display: inline-block;
+  padding: 5px;
   margin: 20px auto;
+  border: 1px solid #22a7f0;
 
   .paybox-logo {
     width: 160px;
+    vertical-align: middle;
   }
 }
 
