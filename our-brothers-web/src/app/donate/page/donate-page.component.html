@@ -11,15 +11,23 @@
   </h2>
   <br />
   <div class="payments-title">
-    ניתן לתרום דרך:
+    ניתן לתרום באפליקצייה בנייד:
   </div>
   <a
-    class="paybox-button"
+    *ngIf="utilsService.isMobile()"
     href="https://pb-idb-prod-web.payboxapp.com/?v=donation&donationId=41&_branch_match_id=694082758312467552#/"
     target="_blank"
   >
-    <img class="paybox-logo" src="../../../assets/img/paybox.png" alt="" />
+    <ng-container [ngTemplateOutlet]="payboxLogo"></ng-container>
   </a>
+  <div *ngIf="!utilsService.isMobile()">
+    <ng-container [ngTemplateOutlet]="payboxLogo"></ng-container>
+  </div>
+  <ng-template #payboxLogo>
+    <div class="paybox-button">
+      <img class="paybox-logo" src="../../../assets/img/paybox.png" alt="" />
+    </div>
+  </ng-template>
   <!--
   <div class="payment-amounts-options-container">
     <div class="site-divider"></div>

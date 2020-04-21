@@ -41,7 +41,7 @@ export class DonatePageComponent implements OnInit {
     private toastr: ToastrService,
     private donationService: DonationService,
     private fb: FormBuilder,
-    private utilsService: UtilsService
+    public utilsService: UtilsService
   ) {}
 
   ngOnInit() {
