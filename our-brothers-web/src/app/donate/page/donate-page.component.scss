@@ -22,7 +22,19 @@
   border: 1px solid #22a7f0;
 
   .paybox-logo {
-    width: 160px;
+    height: 40px;
+    vertical-align: middle;
+  }
+}
+
+.jgive-button {
+  display: inline-block;
+  padding: 5px;
+  margin: 20px auto;
+  border: 1px solid #22a7f0;
+
+  .jgive-logo {
+    height: 40px;
     vertical-align: middle;
   }
 }
