@@ -1,5 +1,11 @@
+import * as versions from './versions.json';
+
 export const environment = {
   production: true,
+  versions: {
+    version: versions.version,
+    revision: versions.revision
+  },
   firebase: {
     apiKey: 'AIzaSyBIQyGmuHzizv-MNxX4plVBLoErVopOEiE',
     authDomain: 'our-brothers.firebaseapp.com',

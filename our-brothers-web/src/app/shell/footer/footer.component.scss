@@ -130,22 +130,14 @@ $mobileBreakpoint: 1000px;
     }
 
     .bottom-line {
+      display: flex;
+      justify-content: space-between;
       font-size: 12px;
       margin: 20px;
       margin-top: 0;
-      position: relative;
-
-      .copyrights {
-        text-align: center;
-        @media only screen and (max-width: $mobileBreakpoint) {
-          text-align: right;
-        }
-      }
+      color: #999999;
 
       .publisher {
-        position: absolute;
-        left: 0;
-
         .publisher-link {
           text-decoration: none;
           color: #999999;
@@ -153,6 +145,17 @@ $mobileBreakpoint: 1000px;
 
         .fa-heart {
           color: #00a099;
+        }
+      }
+
+      .version {
+        @media only screen and (max-width: 600px) {
+          display: none;
+        }
+
+        .version-link {
+          text-decoration: none;
+          color: #999999;
         }
       }
     }
