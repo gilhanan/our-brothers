@@ -105,6 +105,7 @@ export class LoginPopupComponent {
 
   private loginSuccess() {
     this.authService.user.pipe(take(1)).subscribe(() => {
+      this.authService.closeLogin();
       this.toastr.success(`התחברת בהצלחה!`);
     });
   }
